@@ -17,6 +17,7 @@ __screenshots__
 
 # misc
 .DS_Store
+.secrets/
 .env.local
 .env.production
 .env.development.local
@@ -49,3 +50,7 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+
+# Artefakty sesji i deployu
+*.zip
+.q.json

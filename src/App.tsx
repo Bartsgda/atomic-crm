@@ -1,29 +1,27 @@
 import { CRM } from "@/components/atomic-crm/root/CRM";
+import V1App from "./legacy-v1/App";
+import EncryptionGate from "./legacy-v1/components/EncryptionGate";
 
 /**
- * Application entry point
+ * Entry point — path split:
+ *   /v1  -> legacy V1 (CRM-ALINA insurance app, localStorage-based)
+ *   /    -> Atomic CRM (Supabase-based, target V2)
  *
- * Customize Atomic CRM by passing props to the CRM component:
- *  - companySectors
- *  - darkTheme
- *  - dealCategories
- *  - dealPipelineStatuses
- *  - dealStages
- *  - lightTheme
- *  - logo
- *  - noteStatuses
- *  - taskTypes
- *  - title
- * ... as well as all the props accepted by shadcn-admin-kit's <Admin> component.
- *
- * @example
- * const App = () => (
- *    <CRM
- *       logo="./img/logo.png"
- *       title="Acme CRM"
- *    />
- * );
+ * Hybrid mode: V1 lives as an "island" under /v1 so we can port modules
+ * one-by-one into Atomic without breaking the working V1.
  */
-const App = () => <CRM />;
+const App = () => {
+  const isV2 = typeof window !== "undefined" && window.location.pathname.startsWith("/v2");
+
+  if (isV2) {
+    return <CRM />;
+  }
+
+  return (
+    <EncryptionGate>
+      <V1App />
+    </EncryptionGate>
+  );
+};
 
 export default App;

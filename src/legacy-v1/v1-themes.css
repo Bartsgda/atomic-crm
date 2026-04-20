@@ -1,0 +1,172 @@
+/* =========================================================
+   V1 Theme System — 2 skórki inspirowane Claude design
+   Użycie: atrybut data-v1-skin="warm" | "midnight" na <aside>
+   ========================================================= */
+
+/* ── Skin: Claude Warm (jasny krem) ── */
+[data-v1-skin="warm"] {
+  --v1-bg:          #FDFAF6;
+  --v1-border:      #EAE0CF;
+  --v1-text:        #44403C;
+  --v1-text-muted:  #A8A29E;
+  --v1-text-label:  #78716C;
+  --v1-accent:      #D97706;
+  --v1-accent-fg:   #FFFFFF;
+  --v1-hover-bg:    #F5EDD9;
+  --v1-active-bg:   #FEF3C7;
+  --v1-active-text: #92400E;
+  --v1-active-border: #D97706;
+  --v1-sep:         #E7DDD0;
+  --v1-header-logo-bg: #D97706;
+  --v1-btn-icon:    #A78BFA;
+  --v1-shadow:      0 1px 3px 0 rgba(120,100,60,.08), 0 1px 2px -1px rgba(120,100,60,.06);
+  --v1-radius:      12px;
+  --v1-radius-sm:   8px;
+  --v1-badge-bg:    #FDE68A;
+  --v1-badge-text:  #92400E;
+}
+
+[data-v1-skin="warm"] {
+  background: var(--v1-bg);
+  border-color: var(--v1-border) !important;
+  color: var(--v1-text);
+  box-shadow: 2px 0 16px rgba(180,150,100,.07);
+}
+
+[data-v1-skin="warm"] .v1-logo-wrap {
+  background: linear-gradient(135deg, #D97706, #B45309);
+  border-radius: var(--v1-radius-sm);
+  box-shadow: 0 2px 8px rgba(217,119,6,.35);
+}
+
+[data-v1-skin="warm"] .v1-nav-btn {
+  color: var(--v1-text-muted);
+  border-radius: var(--v1-radius);
+  transition: all .15s ease;
+}
+
+[data-v1-skin="warm"] .v1-nav-btn:hover {
+  background: var(--v1-hover-bg);
+  color: var(--v1-text);
+}
+
+[data-v1-skin="warm"] .v1-nav-btn.active {
+  background: var(--v1-active-bg);
+  color: var(--v1-active-text);
+  border-left: 3px solid var(--v1-active-border);
+  font-weight: 600;
+}
+
+[data-v1-skin="warm"] .v1-sep {
+  border-color: var(--v1-sep);
+}
+
+[data-v1-skin="warm"] .v1-label {
+  color: var(--v1-text-label);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+[data-v1-skin="warm"] .v1-badge {
+  background: var(--v1-badge-bg);
+  color: var(--v1-badge-text);
+  border-radius: 99px;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 0 6px;
+}
+
+[data-v1-skin="warm"] .v1-icon-btn {
+  border-radius: var(--v1-radius-sm);
+  color: var(--v1-text-muted);
+}
+[data-v1-skin="warm"] .v1-icon-btn:hover {
+  background: var(--v1-hover-bg);
+  color: var(--v1-text);
+}
+
+/* ── Skin: Claude Midnight (ciepły dark) ── */
+[data-v1-skin="midnight"] {
+  --v1-bg:          #1C1917;
+  --v1-border:      #292524;
+  --v1-text:        #E7E0D8;
+  --v1-text-muted:  #78716C;
+  --v1-text-label:  #57534E;
+  --v1-accent:      #FB923C;
+  --v1-accent-fg:   #1C1917;
+  --v1-hover-bg:    rgba(251,146,60,.08);
+  --v1-active-bg:   rgba(251,146,60,.15);
+  --v1-active-text: #FB923C;
+  --v1-active-border: #FB923C;
+  --v1-sep:         #292524;
+  --v1-header-logo-bg: #EA580C;
+  --v1-shadow:      0 0 0 1px rgba(251,146,60,.05);
+  --v1-radius:      16px;
+  --v1-radius-sm:   10px;
+  --v1-badge-bg:    rgba(251,146,60,.2);
+  --v1-badge-text:  #FB923C;
+}
+
+[data-v1-skin="midnight"] {
+  background: var(--v1-bg);
+  border-color: var(--v1-border) !important;
+  color: var(--v1-text);
+  box-shadow: 2px 0 24px rgba(0,0,0,.4);
+}
+
+[data-v1-skin="midnight"] .v1-logo-wrap {
+  background: linear-gradient(135deg, #EA580C, #C2410C);
+  border-radius: var(--v1-radius-sm);
+  box-shadow: 0 2px 12px rgba(234,88,12,.4);
+}
+
+[data-v1-skin="midnight"] .v1-nav-btn {
+  color: var(--v1-text-muted);
+  border-radius: var(--v1-radius);
+  transition: all .15s ease;
+}
+
+[data-v1-skin="midnight"] .v1-nav-btn:hover {
+  background: var(--v1-hover-bg);
+  color: var(--v1-text);
+}
+
+[data-v1-skin="midnight"] .v1-nav-btn.active {
+  background: var(--v1-active-bg);
+  color: var(--v1-active-text);
+  border-left: 3px solid var(--v1-active-border);
+  font-weight: 600;
+  box-shadow: inset 0 0 20px rgba(251,146,60,.06);
+}
+
+[data-v1-skin="midnight"] .v1-sep {
+  border-color: var(--v1-sep);
+}
+
+[data-v1-skin="midnight"] .v1-label {
+  color: var(--v1-text-label);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+[data-v1-skin="midnight"] .v1-badge {
+  background: var(--v1-badge-bg);
+  color: var(--v1-badge-text);
+  border-radius: 99px;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 0 6px;
+}
+
+[data-v1-skin="midnight"] .v1-icon-btn {
+  border-radius: var(--v1-radius-sm);
+  color: var(--v1-text-muted);
+}
+[data-v1-skin="midnight"] .v1-icon-btn:hover {
+  background: var(--v1-hover-bg);
+  color: var(--v1-text);
+}

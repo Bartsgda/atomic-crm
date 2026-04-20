@@ -12,7 +12,7 @@ export default defineConfig({
     react(),
     tailwindcss(),
     visualizer({
-      open: process.env.NODE_ENV !== "CI",
+      open: false,
       filename: "./dist/stats.html",
     }),
     createHtmlPlugin({
@@ -28,36 +28,36 @@ export default defineConfig({
       workbox: {
         globPatterns: ["**/*.{js,css,html,ico,png,svg,woff,woff2}"],
         maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, // 5 MiB
+        navigateFallback: null,           // SPA fallback przez .htaccess, nie SW
+        cleanupOutdatedCaches: true,
       },
-      manifest: false, // Use existing manifest.json from public/
+      manifest: false,
+      // Wyłącz PWA w produkcji na podfolderze /alina/ — hash-fragment auth
+      // flow Supabase nie współgra z service workerem na subpath.
+      disable: true,
     }),
   ],
-  define:
-    process.env.NODE_ENV === "production" && process.env.VITE_SUPABASE_URL
+  define: {
+    // Shim for legacy-v1 (CRM-ALINA) which reads process.env.API_KEY for Gemini.
+    // Leave undefined → V1 code has `if (!process.env.API_KEY) return null` fallback.
+    "process.env.API_KEY": JSON.stringify(process.env.GEMINI_API_KEY || ""),
+    "process.env.GEMINI_API_KEY": JSON.stringify(process.env.GEMINI_API_KEY || ""),
+    ...(process.env.NODE_ENV === "production" && process.env.VITE_SUPABASE_URL
       ? {
-          "import.meta.env.VITE_IS_DEMO": JSON.stringify(
-            process.env.VITE_IS_DEMO,
-          ),
-          "import.meta.env.VITE_SUPABASE_URL": JSON.stringify(
-            process.env.VITE_SUPABASE_URL,
-          ),
-          "import.meta.env.VITE_SB_PUBLISHABLE_KEY": JSON.stringify(
-            process.env.VITE_SB_PUBLISHABLE_KEY,
-          ),
-          "import.meta.env.VITE_INBOUND_EMAIL": JSON.stringify(
-            process.env.VITE_INBOUND_EMAIL,
-          ),
-          "import.meta.env.VITE_ATTACHMENTS_BUCKET": JSON.stringify(
-            process.env.VITE_ATTACHMENTS_BUCKET,
-          ),
+          "import.meta.env.VITE_IS_DEMO": JSON.stringify(process.env.VITE_IS_DEMO),
+          "import.meta.env.VITE_SUPABASE_URL": JSON.stringify(process.env.VITE_SUPABASE_URL),
+          "import.meta.env.VITE_SB_PUBLISHABLE_KEY": JSON.stringify(process.env.VITE_SB_PUBLISHABLE_KEY),
+          "import.meta.env.VITE_INBOUND_EMAIL": JSON.stringify(process.env.VITE_INBOUND_EMAIL),
+          "import.meta.env.VITE_ATTACHMENTS_BUCKET": JSON.stringify(process.env.VITE_ATTACHMENTS_BUCKET),
         }
-      : undefined,
-  base: "./",
+      : {}),
+  },
+  base: process.env.VITE_BASE_PATH || "/",
   esbuild: {
     keepNames: true,
   },
   build: {
-    sourcemap: true,
+    sourcemap: false,
   },
   resolve: {
     preserveSymlinks: true,

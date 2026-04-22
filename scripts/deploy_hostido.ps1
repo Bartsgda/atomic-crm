@@ -89,7 +89,7 @@ if ($confirm -ne "tak") {
 }
 
 # ── Upload FTP (curl.exe) ─────────────────────────────────────
-$ftpUrl = "ftp://$($env:HOSTIDO_FTP_HOST)/$ZIP_NAME"
+$ftpUrl = $env:FTPURL  # z rrv vault
 Write-Host ""
 Write-Host "Upload FTP → $ftpUrl ..." -ForegroundColor Yellow
 
@@ -123,7 +123,7 @@ $sshHost = if ($env:HOSTIDO_SSH_HOST) { $env:HOSTIDO_SSH_HOST } else { $env:HOST
 Write-Host ""
 Write-Host "Próba rozpakowywania przez SSH ($sshHost)..." -ForegroundColor Yellow
 
-$sshCmd = "cd $REMOTE_PATH && unzip -o $ZIP_NAME && rm $ZIP_NAME && echo 'OK: rozpakowano'"
+$sshCmd = $env:SSHCMD  # z rrv vault
 
 try {
     $result = & ssh.exe "$($env:HOSTIDO_FTP_USER)@$sshHost" $sshCmd 2>&1

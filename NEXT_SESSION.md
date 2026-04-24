@@ -80,4 +80,4 @@ Feedback od Bartka: domyślnie po loginie ma być kanban ofert, nie dashboard. Z
 - [scripts/bootstrap_tenant.mjs](./scripts/bootstrap_tenant.mjs) — seed 20 klientów
 - [scripts/deploy_hostido.ps1](./scripts/deploy_hostido.ps1) — manualny deploy (legacy, użyj MCP Hostido po dodaniu passphrase)
 - [supabase/migrations/20260420_*.sql](./supabase/migrations/) — tenant_keys, snapshots, feedback
-- [`../CONSIS BartsGda/BAZA_WIEDZY/HOSTING/HOSTIDO.md`](../CONSIS%20BartsGda/BAZA_WIEDZY/HOSTING/HOSTIDO.md) — hosting reference
+- [`../CONSIS BartsGda/BAZA_WIEDZY/HOSTING/HOSTIDO.md`](../CONSIS BartsGda/BAZA_WIEDZY/HOSTING/HOSTIDO.md) — hosting reference

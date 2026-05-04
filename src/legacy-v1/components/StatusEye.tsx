@@ -73,6 +73,67 @@ export default function StatusEye() {
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
+  // lista zgloszen (sesja 2026-05-04)
+  const [listOpen, setListOpen] = useState(false);
+  const [feedbackList, setFeedbackList] = useState<FeedbackItem[]>([]);
+  const [loadingList, setLoadingList] = useState(false);
+  const [listError, setListError] = useState<string | null>(null);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [replyDrafts, setReplyDrafts] = useState<Record<string, string>>({});
+  const [savingReply, setSavingReply] = useState<Record<string, boolean>>({});
+
+  const reloadList = useCallback(async () => {
+    setLoadingList(true);
+    setListError(null);
+    try {
+      const items = await listFeedback();
+      setFeedbackList(items);
+    } catch (err: unknown) {
+      setListError(err instanceof Error ? err.message : 'Nieznany błąd');
+    } finally {
+      setLoadingList(false);
+    }
+  }, []);
+
+  // Sprawdz czy jestes adminem (raz przy zalogowaniu)
+  useEffect(() => {
+    if (!user) { setIsAdmin(false); return; }
+    isInsuranceAdmin().then(setIsAdmin).catch(() => setIsAdmin(false));
+  }, [user]);
+
+  // Load list gdy user otworzy panel/modal
+  useEffect(() => {
+    if (expanded || listOpen) reloadList();
+  }, [expanded, listOpen, reloadList]);
+
+  const handleToggleResolved = async (id: string) => {
+    try {
+      await toggleMyFeedbackResolved(id);
+      reloadList();
+    } catch (err: unknown) {
+      setListError(err instanceof Error ? err.message : 'Nieznany błąd');
+    }
+  };
+
+  const handleSaveReply = async (id: string) => {
+    const text = replyDrafts[id] ?? '';
+    setSavingReply((s) => ({ ...s, [id]: true }));
+    try {
+      await setFeedbackAdminReply(id, text);
+      setReplyDrafts((d) => { const n = { ...d }; delete n[id]; return n; });
+      reloadList();
+    } catch (err: unknown) {
+      setListError(err instanceof Error ? err.message : 'Nieznany błąd');
+    } finally {
+      setSavingReply((s) => { const n = { ...s }; delete n[id]; return n; });
+    }
+  };
+
+  // licznik nieprzeczytanych otwartych dla user-a (jego wlasne open + bez admin_reply)
+  const myOpenCount = feedbackList.filter(f =>
+    f.user_id === user?.id && f.status !== 'done'
+  ).length;
+
   // ── efekt 1: sesja Supabase / user ────────────────────────────────────────
   useEffect(() => {
     const sb = getSupabaseClient();
@@ -291,7 +352,7 @@ export default function StatusEye() {
             <div className="border-t border-white/10" />
 
             {/* przycisk zgłoś problem */}
-            <div className="px-4 py-3">
+            <div className="px-4 py-3 space-y-2">
               <button
                 onClick={handleReportClick}
                 className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 text-white text-sm font-medium transition-colors"
@@ -299,6 +360,19 @@ export default function StatusEye() {
               >
                 <Target className="w-4 h-4" />
                 Zgłoś problem
+              </button>
+              <button
+                onClick={() => { setExpanded(false); setListOpen(true); }}
+                className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-gray-200 text-sm font-medium transition-colors"
+                data-feedback-ui="true"
+              >
+                <MessageSquare className="w-4 h-4" />
+                {isAdmin ? 'Wszystkie zgłoszenia' : 'Moje zgłoszenia'}
+                {myOpenCount > 0 && (
+                  <span className="ml-1 px-1.5 py-0.5 rounded-full bg-indigo-500/30 border border-indigo-400/30 text-[10px] font-semibold text-indigo-200">
+                    {myOpenCount}
+                  </span>
+                )}
               </button>
             </div>
 
@@ -456,6 +530,138 @@ export default function StatusEye() {
                 )}
                 Wyślij
               </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── modal lista zgłoszeń ─────────────────────────────────────────────── */}
+      {listOpen && (
+        <div
+          className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+          data-feedback-ui="true"
+        >
+          <div
+            className="w-full max-w-2xl max-h-[85vh] flex flex-col rounded-2xl border border-white/10 bg-[#111318] shadow-2xl overflow-hidden"
+            data-feedback-ui="true"
+          >
+            <div className="flex items-center justify-between px-5 py-4 border-b border-white/10">
+              <h2 className="text-sm font-semibold text-white flex items-center gap-2">
+                <MessageSquare className="w-4 h-4 text-indigo-400" />
+                {isAdmin ? 'Wszystkie zgłoszenia' : 'Moje zgłoszenia'}
+                <span className="text-xs text-gray-500 font-normal">({feedbackList.length})</span>
+              </h2>
+              <button
+                onClick={() => setListOpen(false)}
+                className="text-gray-500 hover:text-white transition-colors"
+                data-feedback-ui="true"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            <div className="flex-1 overflow-y-auto p-4 space-y-3">
+              {loadingList && (
+                <div className="flex items-center justify-center py-8">
+                  <Loader2 className="w-5 h-5 animate-spin text-gray-500" />
+                </div>
+              )}
+              {listError && (
+                <p className="text-xs text-red-400 bg-red-500/10 rounded-xl px-3 py-2">
+                  Błąd: {listError}
+                </p>
+              )}
+              {!loadingList && feedbackList.length === 0 && (
+                <p className="text-sm text-gray-500 text-center py-8">
+                  Brak zgłoszeń.
+                </p>
+              )}
+              {feedbackList.map((f) => {
+                const isMine = f.user_id === user?.id;
+                const sevColor =
+                  f.severity === 'blocker' ? 'bg-red-500/20 text-red-300 border-red-500/30' :
+                  f.severity === 'bug' ? 'bg-amber-500/20 text-amber-300 border-amber-500/30' :
+                  f.severity === 'idea' ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30' :
+                  'bg-blue-500/20 text-blue-300 border-blue-500/30';
+                const isDone = f.status === 'done';
+                const date = new Date(f.created_at).toLocaleString('pl-PL', {
+                  day: '2-digit', month: '2-digit', year: 'numeric',
+                  hour: '2-digit', minute: '2-digit',
+                });
+                return (
+                  <div
+                    key={f.id}
+                    className={`rounded-xl border ${isDone ? 'border-emerald-500/20 bg-emerald-500/5' : 'border-white/10 bg-white/5'} p-3 space-y-2`}
+                  >
+                    <div className="flex items-start gap-2">
+                      <button
+                        onClick={() => isMine && handleToggleResolved(f.id)}
+                        disabled={!isMine}
+                        title={isMine ? 'Kliknij aby oznaczyć jako rozwiązane / otwarte' : 'Tylko autor zgłoszenia może zmienić status'}
+                        className={`mt-0.5 w-5 h-5 rounded border flex-shrink-0 flex items-center justify-center transition-colors ${
+                          isDone
+                            ? 'bg-emerald-500 border-emerald-500 text-white'
+                            : 'border-gray-500 ' + (isMine ? 'hover:border-emerald-400 cursor-pointer' : 'opacity-50 cursor-not-allowed')
+                        }`}
+                        data-feedback-ui="true"
+                      >
+                        {isDone && <Check className="w-3 h-3" />}
+                      </button>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-1 flex-wrap">
+                          <span className={`text-[10px] uppercase font-semibold px-1.5 py-0.5 rounded border ${sevColor}`}>
+                            {f.severity}
+                          </span>
+                          <span className="text-[10px] text-gray-500">{date}</span>
+                          {isAdmin && f.user_email && (
+                            <span className="text-[10px] text-gray-400 font-mono">{f.user_email}</span>
+                          )}
+                        </div>
+                        <p className={`text-sm ${isDone ? 'text-gray-400 line-through' : 'text-gray-200'}`}>
+                          {f.message}
+                        </p>
+                        {f.element_label && (
+                          <p className="text-[10px] text-gray-600 font-mono mt-1 truncate">
+                            {f.element_label}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* admin_reply: czytanie dla wszystkich, edycja tylko dla admina */}
+                    {f.admin_reply && !isAdmin && (
+                      <div className="rounded-lg border border-indigo-500/20 bg-indigo-500/5 px-3 py-2">
+                        <p className="text-[10px] uppercase font-semibold text-indigo-300 mb-1">Odpowiedź</p>
+                        <p className="text-sm text-gray-200 whitespace-pre-wrap">{f.admin_reply}</p>
+                      </div>
+                    )}
+                    {isAdmin && (
+                      <div className="space-y-1">
+                        <label className="text-[10px] uppercase font-semibold text-indigo-300">Odpowiedź admina</label>
+                        <textarea
+                          rows={2}
+                          value={replyDrafts[f.id] ?? f.admin_reply ?? ''}
+                          onChange={(e) => setReplyDrafts((d) => ({ ...d, [f.id]: e.target.value }))}
+                          placeholder="Napisz odpowiedź…"
+                          className="w-full rounded-lg border border-white/10 bg-white/5 text-sm text-gray-200 px-2 py-1.5 resize-none focus:outline-none focus:ring-1 focus:ring-indigo-500 placeholder:text-gray-600"
+                          data-feedback-ui="true"
+                        />
+                        <div className="flex justify-end">
+                          <button
+                            onClick={() => handleSaveReply(f.id)}
+                            disabled={savingReply[f.id]}
+                            className="flex items-center gap-1.5 px-2 py-1 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-medium transition-colors disabled:opacity-40"
+                            data-feedback-ui="true"
+                          >
+                            {savingReply[f.id] ? <Loader2 className="w-3 h-3 animate-spin" /> : <Send className="w-3 h-3" />}
+                            Zapisz
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>

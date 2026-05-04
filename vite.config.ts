@@ -52,7 +52,7 @@ export default defineConfig({
         }
       : {}),
   },
-  base: process.env.VITE_BASE_PATH || "/",
+  base: "./",
   esbuild: {
     keepNames: true,
   },

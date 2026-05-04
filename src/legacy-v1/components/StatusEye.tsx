@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
-import { Eye, LogOut, Clock, Target, Send, X, Loader2, Bug, Sparkles, MessageSquare, Check } from 'lucide-react';
+import { Eye, LogOut, Clock, Target, Send, X, Loader2, Bug, Sparkles, MessageSquare, Check, Lock } from 'lucide-react';
 import { getSupabaseClient } from '../../components/atomic-crm/providers/supabase/supabase';
 import {
   pickElement,
@@ -48,7 +48,7 @@ function timeAgo(date: Date): string {
 }
 
 // ─── główny komponent ─────────────────────────────────────────────────────────
-export default function StatusEye() {
+export default function StatusEye({ isUnlocked = false }: { isUnlocked?: boolean }) {
   // połączenie
   const [status, setStatus] = useState<ConnectionStatus>('checking');
   const [lastPing, setLastPing] = useState<Date | null>(null);
@@ -83,6 +83,7 @@ export default function StatusEye() {
   const [savingReply, setSavingReply] = useState<Record<string, boolean>>({});
 
   const reloadList = useCallback(async () => {
+    if (!isUnlocked) return; // NIE pobieraj danych przed odszyfrowaniem
     setLoadingList(true);
     setListError(null);
     try {
@@ -93,7 +94,7 @@ export default function StatusEye() {
     } finally {
       setLoadingList(false);
     }
-  }, []);
+  }, [isUnlocked]);
 
   // Sprawdz czy jestes adminem (raz przy zalogowaniu)
   useEffect(() => {
@@ -163,6 +164,13 @@ export default function StatusEye() {
 
     return () => subscription.unsubscribe();
   }, []);
+
+  // ── efekt: reload list when unlocked ──
+  useEffect(() => {
+    if (isUnlocked) {
+      reloadList();
+    }
+  }, [isUnlocked, reloadList]);
 
   // ── efekt 2: ping Supabase co 30s ─────────────────────────────────────────
   useEffect(() => {
@@ -362,13 +370,18 @@ export default function StatusEye() {
                 Zgłoś problem
               </button>
               <button
-                onClick={() => { setExpanded(false); setListOpen(true); }}
-                className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-gray-200 text-sm font-medium transition-colors"
+                onClick={() => { if (isUnlocked) { setExpanded(false); setListOpen(true); } }}
+                disabled={!isUnlocked}
+                className={`w-full flex items-center justify-center gap-2 px-3 py-2 rounded-xl border border-white/10 text-sm font-medium transition-colors ${
+                  isUnlocked
+                    ? 'bg-white/5 hover:bg-white/10 text-gray-200'
+                    : 'bg-white/5 text-gray-500 opacity-50 cursor-not-allowed'
+                }`}
                 data-feedback-ui="true"
               >
                 <MessageSquare className="w-4 h-4" />
                 {isAdmin ? 'Wszystkie zgłoszenia' : 'Moje zgłoszenia'}
-                {myOpenCount > 0 && (
+                {isUnlocked && myOpenCount > 0 && (
                   <span className="ml-1 px-1.5 py-0.5 rounded-full bg-indigo-500/30 border border-indigo-400/30 text-[10px] font-semibold text-indigo-200">
                     {myOpenCount}
                   </span>
@@ -380,18 +393,28 @@ export default function StatusEye() {
             <div className="border-t border-white/10" />
             <div className="px-4 py-3 flex gap-2">
               <button
-                onClick={() => { setExpanded(false); window.dispatchEvent(new CustomEvent('crm:open-tester')); }}
-                className="flex-1 flex items-center justify-center gap-1.5 px-2 py-2 rounded-lg bg-yellow-500/10 hover:bg-yellow-500/20 border border-yellow-500/30 text-yellow-300 text-xs font-medium transition-colors"
+                onClick={() => { if (isUnlocked) { setExpanded(false); window.dispatchEvent(new CustomEvent('crm:open-tester')); } }}
+                disabled={!isUnlocked}
+                className={`flex-1 flex items-center justify-center gap-1.5 px-2 py-2 rounded-lg border text-xs font-medium transition-colors ${
+                  isUnlocked
+                    ? 'bg-yellow-500/10 hover:bg-yellow-500/20 border-yellow-500/30 text-yellow-300'
+                    : 'bg-gray-500/10 border-white/5 text-gray-600 opacity-50 cursor-not-allowed'
+                }`}
                 data-feedback-ui="true"
-                title="Tester / demo generator"
+                title={isUnlocked ? "Tester / demo generator" : "Zablokowane (wymagane hasło)"}
               >
                 <Bug className="w-3.5 h-3.5" /> Tester
               </button>
               <button
-                onClick={() => { setExpanded(false); window.dispatchEvent(new CustomEvent('crm:open-agent')); }}
-                className="flex-1 flex items-center justify-center gap-1.5 px-2 py-2 rounded-lg bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/30 text-purple-300 text-xs font-medium transition-colors"
+                onClick={() => { if (isUnlocked) { setExpanded(false); window.dispatchEvent(new CustomEvent('crm:open-agent')); } }}
+                disabled={!isUnlocked}
+                className={`flex-1 flex items-center justify-center gap-1.5 px-2 py-2 rounded-lg border text-xs font-medium transition-colors ${
+                  isUnlocked
+                    ? 'bg-purple-500/10 hover:bg-purple-500/20 border-purple-500/30 text-purple-300'
+                    : 'bg-gray-500/10 border-white/5 text-gray-600 opacity-50 cursor-not-allowed'
+                }`}
                 data-feedback-ui="true"
-                title="Agent AI (Karateka)"
+                title={isUnlocked ? "Agent AI (Karateka)" : "Zablokowane (wymagane hasło)"}
               >
                 <Sparkles className="w-3.5 h-3.5" /> Agent AI
               </button>
@@ -403,16 +426,20 @@ export default function StatusEye() {
         <div className="relative group">
           <button
             onClick={() => setExpanded(v => !v)}
-            className="w-14 h-14 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 shadow-xl flex items-center justify-center text-white hover:scale-105 active:scale-95 transition-transform"
+            className={`w-14 h-14 rounded-full shadow-xl flex items-center justify-center text-white hover:scale-105 active:scale-95 transition-transform ${
+              isUnlocked 
+                ? 'bg-gradient-to-br from-indigo-500 to-purple-600' 
+                : 'bg-gradient-to-br from-gray-600 to-gray-800 border border-white/10'
+            }`}
             data-feedback-ui="true"
             aria-label="Status i zgłoś problem"
           >
-            <Eye className="w-6 h-6" />
+            {isUnlocked ? <Eye className="w-6 h-6" /> : <Lock className="w-6 h-6 text-gray-400" />}
           </button>
           {/* tooltip */}
           {!expanded && (
             <div className="pointer-events-none absolute bottom-full right-0 mb-2 whitespace-nowrap rounded-lg bg-[#1a1d24] border border-white/10 px-3 py-1.5 text-xs text-gray-300 shadow-lg opacity-0 group-hover:opacity-100 transition-opacity">
-              Status + Zgłoś problem
+              {isUnlocked ? 'Status + Zgłoś problem' : 'Zablokowane (Podaj hasło)'}
             </div>
           )}
         </div>

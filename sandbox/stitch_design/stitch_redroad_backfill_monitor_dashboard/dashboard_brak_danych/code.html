@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RedRoad Monitoring Dashboard - Empty State</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Eb+Garamond:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed": "#341100",
+                        "primary": "#9e4200",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#ffede6",
+                        "outline": "#8a7267",
+                        "on-secondary": "#ffffff",
+                        "primary-container": "#c15814",
+                        "tertiary-fixed": "#cde5ff",
+                        "on-tertiary-container": "#fdfcff",
+                        "surface-variant": "#f3ded6",
+                        "on-tertiary-fixed": "#001d32",
+                        "surface": "#fff8f6",
+                        "secondary-container": "#fdb794",
+                        "on-secondary-container": "#78462a",
+                        "primary-fixed-dim": "#ffb691",
+                        "tertiary-fixed-dim": "#95ccff",
+                        "secondary": "#865135",
+                        "on-error-container": "#93000a",
+                        "inverse-surface": "#3a2e28",
+                        "surface-container": "#ffeae1",
+                        "on-primary-container": "#0e0200",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed": "#ffdbcb",
+                        "on-secondary-fixed": "#341100",
+                        "inverse-primary": "#ffb691",
+                        "surface-container-high": "#f9e4db",
+                        "error": "#ba1a1a",
+                        "background": "#fff8f6",
+                        "surface-container-highest": "#f3ded6",
+                        "on-background": "#241914",
+                        "tertiary-container": "#007abc",
+                        "on-primary-fixed-variant": "#793100",
+                        "secondary-fixed-dim": "#fdb794",
+                        "on-surface": "#241914",
+                        "on-surface-variant": "#574239",
+                        "on-tertiary": "#ffffff",
+                        "surface-tint": "#9e4200",
+                        "error-container": "#ffdad6",
+                        "outline-variant": "#dec1b4",
+                        "on-secondary-fixed-variant": "#6a3a20",
+                        "tertiary": "#006195",
+                        "surface-bright": "#fff8f6",
+                        "surface-dim": "#ead6cd",
+                        "on-tertiary-fixed-variant": "#004a75",
+                        "surface-container-low": "#fff1eb",
+                        "primary-fixed": "#ffdbcb"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "sm": "12px",
+                        "xl": "64px",
+                        "md": "24px",
+                        "lg": "40px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Eb Garamond"],
+                        "label-sm": ["Manrope"],
+                        "headline-lg": ["Eb Garamond"],
+                        "body-md": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["32px", { "lineHeight": "1.2", "fontWeight": "500" }],
+                        "label-sm": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg": ["48px", { "lineHeight": "1.1", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md text-body-md antialiased flex h-screen overflow-hidden">
+<!-- SideNavBar (Shared Component) -->
+<nav class="hidden md:flex flex-col h-full py-8 w-64 border-r border-stone-200 dark:border-stone-800 bg-stone-50 dark:bg-stone-950 flex-shrink-0 z-50">
+<div class="px-8 mb-xl">
+<h1 class="text-2xl font-serif text-orange-700 dark:text-orange-500 tracking-tight">Sahara AI</h1>
+<p class="font-serif italic text-stone-900 dark:text-stone-100 mt-xs text-sm">Desert Operations v2.1</p>
+</div>
+<ul class="flex flex-col gap-sm px-4 flex-grow">
+<!-- Active Tab: Dashboard -->
+<li>
+<a class="flex items-center gap-md px-4 py-3 rounded-lg text-orange-700 dark:text-orange-500 font-semibold border-r-2 border-orange-700 dark:border-orange-500 bg-stone-100 dark:bg-stone-900 transition-colors duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined fill">dashboard</span>
+<span>Dashboard</span>
+</a>
+</li>
+<!-- Inactive Tabs -->
+<li>
+<a class="flex items-center gap-md px-4 py-3 rounded-lg text-stone-500 dark:text-stone-400 font-sans hover:bg-stone-100 dark:hover:bg-stone-900 transition-colors duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined">smart_toy</span>
+<span>Agents</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-4 py-3 rounded-lg text-stone-500 dark:text-stone-400 font-sans hover:bg-stone-100 dark:hover:bg-stone-900 transition-colors duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined">account_tree</span>
+<span>Projects</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-4 py-3 rounded-lg text-stone-500 dark:text-stone-400 font-sans hover:bg-stone-100 dark:hover:bg-stone-900 transition-colors duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined">assignment_ind</span>
+<span>Human Tasks</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-4 py-3 rounded-lg text-stone-500 dark:text-stone-400 font-sans hover:bg-stone-100 dark:hover:bg-stone-900 transition-colors duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+</li>
+</ul>
+<div class="px-8 mt-auto">
+<button class="w-full bg-primary-container text-on-primary-container py-3 rounded-lg font-semibold flex items-center justify-center gap-xs hover:bg-primary transition-colors">
+<span class="material-symbols-outlined">add</span>
+                New Agent
+            </button>
+<div class="mt-md flex items-center gap-sm">
+<img alt="MLOps Administrator Profile" class="w-10 h-10 rounded-full border border-outline-variant" data-alt="A close up portrait of an MLOps Administrator. The person is looking slightly off camera, lit with warm, soft sunlight typical of a high-end editorial style. The background is a clean, minimal, sun-baked desert tone, seamlessly blending with the warm minimalism UI aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQpExHYP6f4NoSmEbFNsYp3lx4l4_3kJ8SHdHRNfRlxsoqX6eTSIlBHe5BCjvyDrz1K7RGH5q5v7YrR9loZJLd_tQ_Ne-OiVQ44X-by8AqqKldg5DWN-TAJfbNI-wTD9es3EhqmnzuC5GeUU4B3zUY8_YkHVtOjGPFiIybtfwOPxAzjL5b4sU3NxRpbTahyLWNHm_sdJ9TFGGXEqtIoULgqas3-_X9iUjq12bxPCqVj1ypZkaV5Jteu5R2ltSNnjNJmN5hFpYRNGrt"/>
+<div class="text-sm">
+<p class="font-semibold text-on-surface">Admin</p>
+<p class="text-on-surface-variant text-xs">admin@sahara.ai</p>
+</div>
+</div>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col relative w-full bg-surface">
+<!-- TopAppBar (Shared Component) -->
+<header class="flex justify-between items-center px-8 h-20 bg-stone-50/80 dark:bg-stone-950/80 backdrop-blur-md fixed top-0 right-0 w-[calc(100%-16rem)] z-40 border-b border-stone-100 dark:border-stone-900">
+<div class="flex items-center gap-md">
+<!-- Search bar on left as requested, but styled cleanly -->
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant rounded-full text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary w-64 text-on-surface placeholder-on-surface-variant transition-colors" placeholder="Search..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-sm">
+<button class="p-2 text-stone-600 dark:text-stone-400 hover:text-orange-800 dark:hover:text-orange-400 scale-95 active:scale-90 transition-transform rounded-full hover:bg-surface-container">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-stone-600 dark:text-stone-400 hover:text-orange-800 dark:hover:text-orange-400 scale-95 active:scale-90 transition-transform rounded-full hover:bg-surface-container">
+<span class="material-symbols-outlined">chat_bubble</span>
+</button>
+<button class="p-2 text-stone-600 dark:text-stone-400 hover:text-orange-800 dark:hover:text-orange-400 scale-95 active:scale-90 transition-transform rounded-full hover:bg-surface-container">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Scrollable Content Area -->
+<div class="flex-1 overflow-y-auto mt-20 p-8 flex gap-8">
+<!-- Left Column: Dashboard Content -->
+<div class="flex-1 flex flex-col gap-xl">
+<section>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-lg">Monitoring Overview</h2>
+<!-- Empty State: Agents -->
+<div class="bg-surface-container-low border border-outline-variant rounded-xl p-xl flex flex-col items-center justify-center min-h-[400px] text-center">
+<div class="w-48 h-48 mb-md rounded-full bg-surface-container-high flex items-center justify-center relative overflow-hidden">
+<!-- Subtle geometric illustration for empty state -->
+<div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(circle at center, #c15814 1px, transparent 1px); background-size: 16px 16px;"></div>
+<span class="material-symbols-outlined text-6xl text-outline-variant relative z-10">smart_toy</span>
+</div>
+<h3 class="font-headline-md text-[24px] font-medium text-on-surface mb-sm">Brak aktywnych agentów</h3>
+<p class="text-on-surface-variant max-w-md mx-auto mb-lg">Your desert is quiet. Start a new agent to begin monitoring operations and processing data streams.</p>
+<button class="bg-primary text-on-primary px-6 py-3 rounded-lg font-label-sm text-label-sm uppercase tracking-wider hover:bg-primary-container transition-colors shadow-sm">
+                            Deploy Agent
+                        </button>
+</div>
+</section>
+<section>
+<div class="flex items-center justify-between mb-lg">
+<h2 class="font-headline-md text-[24px] font-medium text-on-surface">Recent Projects</h2>
+<button class="text-primary font-label-sm text-label-sm uppercase tracking-wider hover:underline">View All</button>
+</div>
+<!-- Empty State: Projects Table -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container text-on-surface-variant border-b border-outline-variant">
+<th class="py-4 px-6 font-label-sm text-label-sm font-semibold uppercase tracking-wider">Project Name</th>
+<th class="py-4 px-6 font-label-sm text-label-sm font-semibold uppercase tracking-wider">Status</th>
+<th class="py-4 px-6 font-label-sm text-label-sm font-semibold uppercase tracking-wider">Last Active</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="py-xl text-center" colspan="3">
+<div class="flex flex-col items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-4xl mb-sm opacity-50">account_tree</span>
+<p class="font-body-md">Brak projektów do wyświetlenia</p>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+<!-- Right Column: Chat Sidebar (Contextual) -->
+<aside class="w-80 flex-shrink-0 flex flex-col bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden h-[calc(100vh-8rem)] sticky top-8">
+<div class="p-6 border-b border-outline-variant bg-surface-container text-on-surface">
+<h3 class="font-headline-md text-[20px] font-medium flex items-center gap-sm">
+<span class="material-symbols-outlined">forum</span>
+                        Agent Communications
+                    </h3>
+</div>
+<!-- Empty State: Chat -->
+<div class="flex-1 flex flex-col items-center justify-center p-8 text-center bg-surface-container-low/50">
+<div class="w-24 h-24 rounded-full bg-surface-variant flex items-center justify-center mb-md border border-outline-variant/30">
+<span class="material-symbols-outlined text-4xl text-secondary">chat_bubble_outline</span>
+</div>
+<p class="font-body-md text-on-surface-variant">Wybierz agenta, aby rozpocząć rozmowę</p>
+<p class="text-xs text-on-surface-variant mt-2 opacity-70">Select an active agent from the main dashboard to establish a communication link.</p>
+</div>
+<div class="p-4 border-t border-outline-variant bg-surface-container-lowest">
+<div class="relative opacity-50 cursor-not-allowed">
+<input class="w-full pl-4 pr-12 py-3 bg-surface-container-low border border-outline-variant rounded-lg text-sm text-on-surface placeholder-on-surface-variant cursor-not-allowed" disabled="" placeholder="Type a message..." type="text"/>
+<button class="absolute right-2 top-1/2 -translate-y-1/2 p-2 text-on-surface-variant" disabled="">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+</aside>
+</div>
+</main>
+</body></html>

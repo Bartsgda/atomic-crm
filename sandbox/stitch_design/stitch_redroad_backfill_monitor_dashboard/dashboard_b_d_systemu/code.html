@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RedRoad Monitoring Dashboard - Alert State</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-primary-fixed": "#341100",
+                      "primary": "#9e4200",
+                      "on-primary": "#ffffff",
+                      "on-error": "#ffffff",
+                      "inverse-on-surface": "#ffede6",
+                      "outline": "#8a7267",
+                      "on-secondary": "#ffffff",
+                      "primary-container": "#c15814",
+                      "tertiary-fixed": "#cde5ff",
+                      "on-tertiary-container": "#fdfcff",
+                      "surface-variant": "#f3ded6",
+                      "on-tertiary-fixed": "#001d32",
+                      "surface": "#fff8f6",
+                      "secondary-container": "#fdb794",
+                      "on-secondary-container": "#78462a",
+                      "primary-fixed-dim": "#ffb691",
+                      "tertiary-fixed-dim": "#95ccff",
+                      "secondary": "#865135",
+                      "on-error-container": "#93000a",
+                      "inverse-surface": "#3a2e28",
+                      "surface-container": "#ffeae1",
+                      "on-primary-container": "#0e0200",
+                      "surface-container-lowest": "#ffffff",
+                      "secondary-fixed": "#ffdbcb",
+                      "on-secondary-fixed": "#341100",
+                      "inverse-primary": "#ffb691",
+                      "surface-container-high": "#f9e4db",
+                      "error": "#ba1a1a",
+                      "background": "#fff8f6",
+                      "surface-container-highest": "#f3ded6",
+                      "on-background": "#241914",
+                      "tertiary-container": "#007abc",
+                      "on-primary-fixed-variant": "#793100",
+                      "secondary-fixed-dim": "#fdb794",
+                      "on-surface": "#241914",
+                      "on-surface-variant": "#574239",
+                      "on-tertiary": "#ffffff",
+                      "surface-tint": "#9e4200",
+                      "error-container": "#ffdad6",
+                      "outline-variant": "#dec1b4",
+                      "on-secondary-fixed-variant": "#6a3a20",
+                      "tertiary": "#006195",
+                      "surface-bright": "#fff8f6",
+                      "surface-dim": "#ead6cd",
+                      "on-tertiary-fixed-variant": "#004a75",
+                      "surface-container-low": "#fff1eb",
+                      "primary-fixed": "#ffdbcb"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xs": "4px",
+                      "sm": "12px",
+                      "xl": "64px",
+                      "md": "24px",
+                      "lg": "40px",
+                      "base": "8px"
+              },
+              "fontFamily": {
+                      "headline-md": [
+                              "Eb Garamond"
+                      ],
+                      "label-sm": [
+                              "Manrope"
+                      ],
+                      "headline-lg": [
+                              "Eb Garamond"
+                      ],
+                      "body-md": [
+                              "Manrope"
+                      ]
+              },
+              "fontSize": {
+                      "headline-md": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "1",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "1.1",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex selection:bg-primary-container selection:text-on-primary-container">
+<!-- Shared Component: SideNavBar -->
+<aside class="fixed left-0 top-0 z-50 w-64 h-screen border-r border-stone-200 dark:border-stone-800 bg-stone-50 dark:bg-stone-950 flex flex-col h-full py-8">
+<!-- Brand / Header -->
+<div class="px-8 mb-xl">
+<h1 class="text-2xl font-serif text-orange-700 dark:text-orange-500 tracking-tight font-headline-md">Sahara AI</h1>
+<p class="font-serif italic text-stone-900 dark:text-stone-100 font-label-sm mt-xs opacity-70">Desert Operations v2.1</p>
+</div>
+<!-- Navigation Links -->
+<nav class="flex-1 flex flex-col gap-sm px-4">
+<!-- Dashboard (Active State) -->
+<a class="flex items-center gap-sm px-4 py-3 rounded text-orange-700 dark:text-orange-500 font-semibold border-r-2 border-orange-700 dark:border-orange-500 bg-stone-100/50 dark:bg-stone-900/50 transition-colors duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-body-md font-medium tracking-wide">Dashboard</span>
+</a>
+<!-- Agents -->
+<a class="flex items-center gap-sm px-4 py-3 rounded text-stone-500 dark:text-stone-400 font-sans hover:bg-stone-100 dark:hover:bg-stone-900 transition-colors duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined">smart_toy</span>
+<span class="font-body-md">Agents</span>
+</a>
+<!-- Projects -->
+<a class="flex items-center gap-sm px-4 py-3 rounded text-stone-500 dark:text-stone-400 font-sans hover:bg-stone-100 dark:hover:bg-stone-900 transition-colors duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined">account_tree</span>
+<span class="font-body-md">Projects</span>
+</a>
+<!-- Human Tasks -->
+<a class="flex items-center gap-sm px-4 py-3 rounded text-stone-500 dark:text-stone-400 font-sans hover:bg-stone-100 dark:hover:bg-stone-900 transition-colors duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined">assignment_ind</span>
+<span class="font-body-md">Human Tasks</span>
+</a>
+<!-- Settings -->
+<a class="flex items-center gap-sm px-4 py-3 rounded text-stone-500 dark:text-stone-400 font-sans hover:bg-stone-100 dark:hover:bg-stone-900 transition-colors duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md">Settings</span>
+</a>
+</nav>
+<!-- CTA & Profile -->
+<div class="px-8 mt-auto flex flex-col gap-md">
+<button class="w-full py-3 bg-primary-container text-on-primary-container rounded font-label-sm uppercase tracking-widest hover:bg-primary-fixed transition-colors">
+                New Agent
+            </button>
+<div class="flex items-center gap-sm pt-md border-t border-stone-200 dark:border-stone-800">
+<img alt="MLOps Administrator Profile" class="w-10 h-10 rounded-full object-cover border border-outline-variant" data-alt="A close-up, high-quality portrait of a professional individual in a well-lit, modern office environment. The lighting is soft and warm, reflecting a sun-baked, minimalist aesthetic. The subject has a calm, confident expression, suited for a high-end luxury editorial style. Background is a beautifully blurred, bright architectural space." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYcsPGQc_WKC4QXukSIVNMyeAUrrqnzxy83_tLip8IuGWc4GcV7cP0oRGM123YSJ_cgIM0akBTRqipBE7iBPPIDdQ3EE4NLrMIWSnhjHB8XTOem_gUntv7bA6ymu2P7ySBpYGKImiQcHN5tcB4MDFkGG50P9xm4nA77u6rL4ckwT4URtm_m7V0c_GfduvCIZDZFjYYqr5_7ws7UMRWBdRIlB53Tz8NmDoM4caTg6PV1C9v0GnTkN5jffvZZEkfF8NZfvh8Aqv0MwRz"/>
+<div class="flex flex-col">
+<span class="font-label-sm text-on-surface">Admin</span>
+<span class="font-body-md text-on-surface-variant text-sm">System Ops</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 w-full min-h-screen flex flex-col">
+<!-- Shared Component: TopAppBar -->
+<header class="fixed top-0 right-0 w-[calc(100%-16rem)] z-40 border-b border-stone-200 dark:border-stone-800 bg-stone-50/80 dark:bg-stone-950/80 backdrop-blur-md flex justify-between items-center px-8 h-20">
+<!-- Left: Search -->
+<div class="flex-1 flex items-center">
+<div class="relative w-96 flex items-center text-stone-600 dark:text-stone-400 focus-within:text-orange-800">
+<span class="material-symbols-outlined absolute left-3">search</span>
+<input class="w-full bg-transparent border-none focus:ring-0 pl-10 font-body-md placeholder:text-stone-400" placeholder="Search operations..." type="text"/>
+</div>
+</div>
+<!-- Center: Product Name (Hidden visually per style_brand_logo but kept for semantic value if needed, though strictly hidden class is applied) -->
+<span class="hidden">Sahara MLOps</span>
+<!-- Right: Actions -->
+<div class="flex items-center gap-md">
+<button class="text-stone-600 dark:text-stone-400 hover:text-orange-800 dark:hover:text-orange-400 scale-95 active:scale-90 transition-transform relative">
+<span class="material-symbols-outlined">notifications</span>
+<!-- Alert dot due to error state -->
+<span class="absolute top-0 right-0 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="text-stone-600 dark:text-stone-400 hover:text-orange-800 dark:hover:text-orange-400 scale-95 active:scale-90 transition-transform">
+<span class="material-symbols-outlined">chat_bubble</span>
+</button>
+<button class="text-stone-600 dark:text-stone-400 hover:text-orange-800 dark:hover:text-orange-400 scale-95 active:scale-90 transition-transform">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Canvas -->
+<div class="pt-24 px-xl pb-xl flex-1 max-w-7xl mx-auto w-full">
+<!-- Global Error Banner -->
+<div class="bg-error-container text-on-error-container border border-error rounded-lg p-sm mb-lg flex items-center justify-between shadow-sm animate-pulse-slow">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">error</span>
+<span class="font-body-md font-bold tracking-wide">System Alert: GPU Server Offline</span>
+</div>
+<button class="text-on-error-container opacity-80 hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-sm">close</span>
+</button>
+</div>
+<!-- Page Header -->
+<div class="mb-lg flex justify-between items-end">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">RedRoad Monitoring</h2>
+<p class="font-body-md text-on-surface-variant mt-sm max-w-2xl">Real-time overview of active autonomous agents, current processing pipelines, and system health status.</p>
+</div>
+<div class="flex items-center gap-sm">
+<span class="flex items-center gap-xs font-label-sm text-on-surface-variant">
+<span class="w-2 h-2 rounded-full bg-error block animate-pulse"></span>
+                        Degraded State
+                    </span>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-lg">
+<!-- Left Column: Agents (Bento Span 8) -->
+<div class="col-span-12 lg:col-span-8 flex flex-col gap-md">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-xs border-b border-outline-variant pb-xs">Active Agents</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<!-- Agent Card A1: Normal -->
+<div class="bg-surface border border-outline-variant rounded-xl p-md flex flex-col justify-between hover:bg-surface-container-low transition-colors duration-300 min-h-[200px]">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded bg-primary-container/10 flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined">memory</span>
+</div>
+<div>
+<h4 class="font-body-md font-bold text-on-surface">Agent A1</h4>
+<span class="font-label-sm text-on-surface-variant">Data Ingestion</span>
+</div>
+</div>
+<span class="bg-tertiary-container/10 text-tertiary font-label-sm px-2 py-1 rounded-full flex items-center gap-xs">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> Active
+                                </span>
+</div>
+<div class="mt-xl">
+<div class="flex justify-between font-label-sm text-on-surface-variant mb-xs">
+<span>Load: 42%</span>
+<span>Uptime: 48h</span>
+</div>
+<div class="w-full bg-surface-variant rounded-full h-1">
+<div class="bg-primary h-1 rounded-full" style="width: 42%"></div>
+</div>
+</div>
+</div>
+<!-- Agent Card A2: Idle -->
+<div class="bg-surface border border-outline-variant rounded-xl p-md flex flex-col justify-between hover:bg-surface-container-low transition-colors duration-300 min-h-[200px]">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded bg-surface-variant flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">analytics</span>
+</div>
+<div>
+<h4 class="font-body-md font-bold text-on-surface">Agent A2</h4>
+<span class="font-label-sm text-on-surface-variant">Model Training</span>
+</div>
+</div>
+<span class="bg-surface-variant text-on-surface-variant font-label-sm px-2 py-1 rounded-full flex items-center gap-xs">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span> Idle
+                                </span>
+</div>
+<div class="mt-xl">
+<div class="flex justify-between font-label-sm text-on-surface-variant mb-xs">
+<span>Load: 5%</span>
+<span>Waiting for data...</span>
+</div>
+<div class="w-full bg-surface-variant rounded-full h-1">
+<div class="bg-outline h-1 rounded-full" style="width: 5%"></div>
+</div>
+</div>
+</div>
+<!-- Agent Card A3: CRITICAL ERROR -->
+<div class="col-span-1 md:col-span-2 bg-error-container/20 border-2 border-error rounded-xl p-md flex flex-col justify-between shadow-[0_0_20px_rgba(186,26,26,0.1)] min-h-[200px]">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-sm">
+<div class="w-12 h-12 rounded bg-error text-on-error flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">warning</span>
+</div>
+<div>
+<h4 class="font-body-md font-bold text-error text-lg">Agent A3</h4>
+<span class="font-label-sm text-error/80">Computer Vision OCR Pipeline</span>
+</div>
+</div>
+<span class="bg-error text-on-error font-label-sm px-3 py-1.5 rounded-full flex items-center gap-xs uppercase tracking-widest font-bold">
+                                    CRITICAL
+                                </span>
+</div>
+<div class="mt-lg bg-surface/50 rounded p-sm border border-error/30 backdrop-blur-sm">
+<p class="font-body-md text-error font-mono text-sm">
+                                    &gt; ERROR: OCR9 Connection Failed.<br/>
+                                    &gt; Timeout waiting for GPU tensor allocation.<br/>
+                                    &gt; Process terminated unexpectedly.
+                                </p>
+</div>
+<div class="mt-md flex justify-end gap-sm">
+<button class="px-4 py-2 border border-error text-error rounded font-label-sm hover:bg-error/10 transition-colors">View Logs</button>
+<button class="px-4 py-2 bg-error text-on-error rounded font-label-sm hover:bg-error/90 transition-colors shadow-sm">Restart Agent</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Projects list (Bento Span 4) -->
+<div class="col-span-12 lg:col-span-4 flex flex-col gap-md">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-xs border-b border-outline-variant pb-xs">Pipeline Status</h3>
+<div class="bg-surface border border-outline-variant rounded-xl p-0 overflow-hidden flex flex-col h-full">
+<!-- List Item 1: Normal -->
+<div class="p-md border-b border-outline-variant flex flex-col gap-xs hover:bg-surface-container-low transition-colors">
+<div class="flex justify-between items-center">
+<span class="font-body-md font-bold text-on-surface">Project Alpha-2</span>
+<span class="material-symbols-outlined text-tertiary">check_circle</span>
+</div>
+<span class="font-label-sm text-on-surface-variant">Data structuring complete.</span>
+</div>
+<!-- List Item 2: ERROR STATE -->
+<div class="p-md border-b border-outline-variant flex flex-col gap-xs bg-error-container/10">
+<div class="flex justify-between items-center">
+<span class="font-body-md font-bold text-on-surface">Project Beta-Scan</span>
+<span class="bg-error text-on-error font-label-sm px-2 py-1 rounded uppercase tracking-wider font-bold shadow-sm">Błąd</span>
+</div>
+<span class="font-label-sm text-error">Stalled at OCR node. Missing resources.</span>
+</div>
+<!-- List Item 3: Pending -->
+<div class="p-md border-b border-outline-variant flex flex-col gap-xs hover:bg-surface-container-low transition-colors">
+<div class="flex justify-between items-center">
+<span class="font-body-md font-bold text-on-surface text-opacity-60">Project Gamma</span>
+<span class="material-symbols-outlined text-outline">pending</span>
+</div>
+<span class="font-label-sm text-on-surface-variant">Queued. Waiting for A2 idle state.</span>
+</div>
+<!-- List Item 4: Success -->
+<div class="p-md flex flex-col gap-xs hover:bg-surface-container-low transition-colors">
+<div class="flex justify-between items-center">
+<span class="font-body-md font-bold text-on-surface">Project Delta-X</span>
+<span class="material-symbols-outlined text-tertiary">check_circle</span>
+</div>
+<span class="font-label-sm text-on-surface-variant">Deployment successful.</span>
+</div>
+<div class="mt-auto p-sm bg-surface-variant text-center border-t border-outline-variant">
+<a class="font-label-sm text-primary hover:text-primary-container transition-colors uppercase tracking-widest" href="#">View All Projects</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

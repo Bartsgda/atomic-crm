@@ -29,9 +29,10 @@ import { AgentKaratekaWindow } from './components/GlobalAgent/AgentKaratekaWindo
 import { calculateAiDiffs, mergeAiResponseToPolicy } from './modules/utils/diffEngine';
 import { useAutoWipe } from './hooks/useAutoWipe';
 import { Lock, ShieldAlert } from 'lucide-react';
+import DesignSahara from '../sandbox/DesignSahara';
 
 
-type Page = 'dashboard' | 'clients' | 'new' | 'edit-policy' | 'preview' | 'client-details' | 'calendar' | 'offers' | 'terminations' | 'vision' | 'sub-agents' | 'insurers' | 'form-builder' | 'raw-data' | 'finance' | 'data-repair' | 'test-page';
+type Page = 'dashboard' | 'clients' | 'new' | 'edit-policy' | 'preview' | 'client-details' | 'calendar' | 'offers' | 'terminations' | 'vision' | 'sub-agents' | 'insurers' | 'form-builder' | 'raw-data' | 'finance' | 'data-repair' | 'test-page' | 'sandbox';
 
 function App() {
   const [state, setState] = useState<AppState>({ clients: [], policies: [], notes: [], notifications: [], terminations: [], logs: [], subAgents: [], checklistTemplates: {}, insurers: [], insurerConfigs: {}, trash: [] });
@@ -364,6 +365,7 @@ function App() {
       'data-repair': 'Naprawa Danych',
       'test-page': 'Tester',
       preview: 'Podgląd wypowiedzenia',
+      sandbox: 'Sandbox'
     };
     const ctx: any = {
       page: currentPage,
@@ -480,7 +482,8 @@ function App() {
               <div className="text-center">
                 <p className="text-xl font-black text-white tracking-tight mb-2">Synchronizacja...</p>
                 <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.2em]">
-                  {pendingCloudAction === 'restore' ? 'Pobieranie i deszyfrowanie danych' : 'Szyfrowanie i wysyłka do chmury'}
+                  {/* pendingCloudAction check removed as it was not defined in the scope */}
+                  Synchronizacja z chmurą
                 </p>
               </div>
            </div>
@@ -529,6 +532,7 @@ function App() {
           )}
 
           {currentPage === 'vision' && <VisionBoard />}
+          {currentPage === 'sandbox' && <DesignSahara />}
 
           {currentPage === 'raw-data' && (
             <RawDataView state={state} />

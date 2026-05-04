@@ -74,12 +74,17 @@ export const EncryptionGate: React.FC<EncryptionGateProps> = ({ children }) => {
           onUnlocked={handleUnlocked}
           onLogout={handleLogout}
         />
-        <StatusEye />
+        <StatusEye isUnlocked={false} />
       </>
     );
   }
 
-  return <>{children}</>;
+  return (
+    <>
+      {children}
+      <StatusEye isUnlocked={true} />
+    </>
+  );
 };
 
 export default EncryptionGate;

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sahara MLOps - Agent Configuration</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Eb+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700&amp;family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#95ccff",
+                        "tertiary": "#006195",
+                        "surface-variant": "#f3ded6",
+                        "secondary-fixed": "#ffdbcb",
+                        "background": "#fff8f6",
+                        "secondary-fixed-dim": "#fdb794",
+                        "primary-container": "#c15814",
+                        "on-background": "#241914",
+                        "secondary-container": "#fdb794",
+                        "primary": "#9e4200",
+                        "on-primary-container": "#0e0200",
+                        "on-surface": "#241914",
+                        "on-secondary-fixed-variant": "#6a3a20",
+                        "on-tertiary-container": "#fdfcff",
+                        "error": "#ba1a1a",
+                        "on-tertiary": "#ffffff",
+                        "outline": "#8a7267",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#ffede6",
+                        "surface-dim": "#ead6cd",
+                        "surface-container": "#ffeae1",
+                        "tertiary-fixed": "#cde5ff",
+                        "primary-fixed-dim": "#ffb691",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed": "#001d32",
+                        "tertiary-container": "#007abc",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#f9e4db",
+                        "primary-fixed": "#ffdbcb",
+                        "on-surface-variant": "#574239",
+                        "on-error-container": "#93000a",
+                        "surface-tint": "#9e4200",
+                        "surface-container-low": "#fff1eb",
+                        "error-container": "#ffdad6",
+                        "outline-variant": "#dec1b4",
+                        "on-primary-fixed-variant": "#793100",
+                        "inverse-primary": "#ffb691",
+                        "surface-bright": "#fff8f6",
+                        "secondary": "#865135",
+                        "on-secondary-container": "#78462a",
+                        "inverse-surface": "#3a2e28",
+                        "surface": "#fff8f6",
+                        "surface-container-highest": "#f3ded6",
+                        "on-secondary-fixed": "#341100",
+                        "on-tertiary-fixed-variant": "#004a75",
+                        "on-primary-fixed": "#341100",
+                        "on-primary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "lg": "40px",
+                        "base": "8px",
+                        "md": "24px",
+                        "xl": "64px",
+                        "xs": "4px",
+                        "sm": "12px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Eb Garamond"],
+                        "body-md": ["Manrope"],
+                        "headline-md": ["Eb Garamond"],
+                        "label-sm": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["48px", {"lineHeight": "1.1", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-md": ["32px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                        "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Manrope', sans-serif; }
+        h1, h2, h3, .serif { font-family: 'Eb Garamond', serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- TopAppBar -->
+<header class="bg-[#fdfcfb] dark:bg-stone-950 text-stone-900 dark:text-stone-100 docked full-width top-0 z-50 border-b border-stone-200 dark:border-stone-800 flat no shadows flex justify-between items-center w-full px-8 h-16 fixed">
+<div class="flex items-center gap-4">
+<span class="text-2xl font-serif italic text-[#c15814]">Sahara MLOps</span>
+</div>
+<div class="flex items-center gap-6">
+<!-- Search Bar (on_right) -->
+<div class="relative hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-stone-400">search</span>
+<input class="bg-surface-container-low border-outline-variant text-body-md px-10 py-1.5 rounded-full w-64 focus:outline-none focus:ring-1 focus:ring-primary-container" placeholder="Search operations..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<button class="cursor-pointer active:opacity-70 transition-all text-stone-500 hover:text-[#c15814]"><span class="material-symbols-outlined">notifications</span></button>
+<button class="cursor-pointer active:opacity-70 transition-all text-stone-500 hover:text-[#c15814]"><span class="material-symbols-outlined">settings</span></button>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest overflow-hidden border border-outline-variant">
+<img alt="User avatar" data-alt="A close-up professional headshot of a person with a serene expression, set against a warm, sun-drenched architectural background with soft desert-toned shadows. The lighting is editorial and high-key, emphasizing a luxury minimalist aesthetic consistent with a high-end Sahara retreat. The skin tones are natural and the overall mood is disciplined and sophisticated." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAB3G-z_9Q4y5XMhNBJ5mdP10GE_lpzNHea8mLbJiV6tXIh50qDvKaoe89oBCCIf--3x8V4AP8kofJ2XYZsHjFY2MbKZW6xg4qcTUujT--F8uR8jS3GHm_vLHfXWQ9YWaPCO_s3JYiIynEEa0SpFgzj7lTpad7zm1kPCWg3mnev6IiD63Rh727TGGZ7K5StWtOrD01kwXriGdU9svLFNxh1jNTeTmQ_NtWIRWLEV6_yzQVFZOB4mq9dbAonIZ6TEHf-LHp66SE7Xerw"/>
+</div>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<nav class="h-screen w-64 border-r fixed left-0 top-0 z-40 bg-[#fdfcfb] dark:bg-stone-950 border-stone-200 dark:border-stone-800 flex flex-col pt-20">
+<div class="px-6 mb-8">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-8 h-8 bg-primary-container rounded flex items-center justify-center text-on-tertiary">
+<span class="material-symbols-outlined">hub</span>
+</div>
+<span class="font-serif text-xl font-bold text-[#c15814]">Sahara Agent</span>
+</div>
+<p class="text-stone-500 text-xs tracking-widest uppercase">Management Console</p>
+</div>
+<div class="flex-1 space-y-1">
+<a class="flex items-center space-x-3 px-6 py-4 w-full transition-all text-[#c15814] bg-[#f9f5f2] dark:bg-stone-900 font-medium border-r-4 border-[#c15814]" href="#">
+<span class="material-symbols-outlined">construction</span>
+<span class="font-serif tracking-tight">Agent Tools</span>
+</a>
+<a class="flex items-center space-x-3 px-6 py-4 w-full transition-all text-stone-500 dark:text-stone-400 hover:bg-stone-50 dark:hover:bg-stone-900 hover:text-[#c15814] hover:pl-7 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-serif tracking-tight">Prompt Library</span>
+</a>
+<a class="flex items-center space-x-3 px-6 py-4 w-full transition-all text-stone-500 dark:text-stone-400 hover:bg-stone-50 dark:hover:bg-stone-900 hover:text-[#c15814] hover:pl-7 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">key</span>
+<span class="font-serif tracking-tight">API Rotator</span>
+</a>
+<a class="flex items-center space-x-3 px-6 py-4 w-full transition-all text-stone-500 dark:text-stone-400 hover:bg-stone-50 dark:hover:bg-stone-900 hover:text-[#c15814] hover:pl-7 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">account_circle</span>
+<span class="font-serif tracking-tight">Agent Profile</span>
+</a>
+<a class="flex items-center space-x-3 px-6 py-4 w-full transition-all text-stone-500 dark:text-stone-400 hover:bg-stone-50 dark:hover:bg-stone-900 hover:text-[#c15814] hover:pl-7 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="font-serif tracking-tight">System Metrics</span>
+</a>
+</div>
+<div class="p-6">
+<button class="w-full bg-primary-container text-on-tertiary py-3 rounded-lg font-medium hover:opacity-90 transition-opacity">
+                New Configuration
+            </button>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="ml-64 pt-16 min-h-screen">
+<div class="max-w-7xl mx-auto p-xl">
+<!-- Page Header & System Metrics -->
+<div class="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-md mb-xl">
+<div>
+<span class="text-primary font-label-sm uppercase tracking-widest mb-xs block">Configuration Panel</span>
+<h1 class="text-headline-lg font-headline-lg text-on-background">Agent A1-Oracle</h1>
+</div>
+<div class="grid grid-cols-3 gap-md w-full lg:w-auto">
+<div class="bg-surface-container-low border border-outline-variant p-md rounded-xl min-w-[140px]">
+<div class="flex items-center gap-2 text-stone-500 mb-2">
+<span class="material-symbols-outlined text-sm">memory</span>
+<span class="text-label-sm">CPU</span>
+</div>
+<div class="text-2xl font-serif text-on-background">24%</div>
+<div class="w-full bg-surface-variant h-1 rounded-full mt-2">
+<div class="bg-primary-container h-1 rounded-full w-[24%]"></div>
+</div>
+</div>
+<div class="bg-surface-container-low border border-outline-variant p-md rounded-xl min-w-[140px]">
+<div class="flex items-center gap-2 text-stone-500 mb-2">
+<span class="material-symbols-outlined text-sm">storage</span>
+<span class="text-label-sm">RAM</span>
+</div>
+<div class="text-2xl font-serif text-on-background">4.2<span class="text-sm">GB</span></div>
+<div class="w-full bg-surface-variant h-1 rounded-full mt-2">
+<div class="bg-primary-container h-1 rounded-full w-[65%]"></div>
+</div>
+</div>
+<div class="bg-surface-container-low border border-outline-variant p-md rounded-xl min-w-[140px]">
+<div class="flex items-center gap-2 text-stone-500 mb-2">
+<span class="material-symbols-outlined text-sm">speed</span>
+<span class="text-label-sm">GPU</span>
+</div>
+<div class="text-2xl font-serif text-on-background">88%</div>
+<div class="w-full bg-surface-variant h-1 rounded-full mt-2">
+<div class="bg-primary-container h-1 rounded-full w-[88%]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bento Grid Content -->
+<div class="grid grid-cols-12 gap-md">
+<!-- Agent Identity Section -->
+<section class="col-span-12 lg:col-span-8 bg-surface-container-lowest border border-outline-variant rounded-xl p-xl shadow-sm">
+<h3 class="text-headline-md font-headline-md mb-md">Agent Identity</h3>
+<div class="flex flex-col md:flex-row gap-xl">
+<div class="relative group">
+<div class="w-40 h-40 rounded-2xl overflow-hidden border-2 border-primary-container">
+<img alt="Agent Avatar" data-alt="A stunning digital abstract artwork resembling swirling desert sands and topographical maps, rendered in warm burnt sienna and deep copper tones. The composition is organic and flowing, with soft golden light highlighting the textures and depths. The style is modern minimalist, evoking a sense of artificial intelligence and organic growth." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDiQemOaWhEzpqVGMEeRGPbUhrFD4XFG932cVNcIz3V3drnbIzSTKb6j8DTZwRRrexUqp3d385_HevWGkJW2Yh0owLivqbJQseHhMAkJuwn1nFrIFdYFB2FD1VTPMkvp-Lwb7iMQ89s7OnfwlP5vj2a7pId3YpGz6rwZw6MOIvxnzRlCvTzQjGEsYch2fubCD5IJav_OsZEzx5c-aiSDpryu7JXeej8bcKdJa6AnI96FI9BCsv4Y8d-DQbwTxBK60gjiEEJBd8FU3E0"/>
+</div>
+<button class="absolute -bottom-3 -right-3 bg-primary-container text-white p-2 rounded-full shadow-lg hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-base">edit</span>
+</button>
+</div>
+<div class="flex-1 space-y-md">
+<div>
+<label class="block text-label-sm text-stone-500 mb-1">Agent Identifier</label>
+<input class="w-full bg-surface-container-low border-outline-variant rounded-lg px-4 py-3 font-medium focus:ring-primary-container focus:border-primary-container" type="text" value="A1-Oracle-Production"/>
+</div>
+<div>
+<label class="block text-label-sm text-stone-500 mb-1">Functional Description</label>
+<textarea class="w-full bg-surface-container-low border-outline-variant rounded-lg px-4 py-3 focus:ring-primary-container focus:border-primary-container" rows="3">Advanced reasoning agent specialized in multi-modal data extraction and semantic synthesis for financial MLOps pipelines.</textarea>
+</div>
+</div>
+</div>
+</section>
+<!-- API Key Rotator -->
+<section class="col-span-12 lg:col-span-4 bg-surface-container border border-outline-variant rounded-xl p-md">
+<div class="flex justify-between items-center mb-md">
+<h3 class="text-headline-md font-headline-md text-xl">API Rotator</h3>
+<span class="material-symbols-outlined text-primary">sync</span>
+</div>
+<div class="space-y-sm">
+<div class="bg-surface-container-lowest p-sm rounded-lg border border-outline-variant/30 flex justify-between items-center">
+<div>
+<div class="text-body-md font-bold">API 1</div>
+<div class="text-xs text-stone-500">sahara_prod_...4k2</div>
+</div>
+<span class="px-2 py-1 bg-green-100 text-green-700 text-[10px] font-bold rounded uppercase">Active</span>
+</div>
+<div class="bg-surface-container-lowest p-sm rounded-lg border border-outline-variant/30 flex justify-between items-center">
+<div>
+<div class="text-body-md font-bold">API 2</div>
+<div class="text-xs text-stone-500">sahara_prod_...9m1</div>
+</div>
+<span class="px-2 py-1 bg-red-100 text-red-700 text-[10px] font-bold rounded uppercase">Limit Exceeded</span>
+</div>
+<div class="bg-surface-container-lowest p-sm rounded-lg border border-outline-variant/30 flex justify-between items-center">
+<div>
+<div class="text-body-md font-bold">API 3</div>
+<div class="text-xs text-stone-500">sahara_prod_...0z4</div>
+</div>
+<span class="px-2 py-1 bg-green-100 text-green-700 text-[10px] font-bold rounded uppercase">Active</span>
+</div>
+<button class="w-full py-2 border-2 border-dashed border-outline-variant rounded-lg text-label-sm text-stone-500 hover:bg-surface-container-low transition-colors mt-4">
+                            + Add Key
+                        </button>
+</div>
+</section>
+<!-- Advanced Tools Management -->
+<section class="col-span-12 lg:col-span-6 bg-surface-container-lowest border border-outline-variant rounded-xl p-xl">
+<div class="flex justify-between items-center mb-xl">
+<h3 class="text-headline-md font-headline-md">Advanced Tools</h3>
+<button class="bg-primary-container text-white px-4 py-2 rounded-lg text-label-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">add</span> Add New Tool
+                        </button>
+</div>
+<div class="space-y-md">
+<div class="flex items-center justify-between p-md border border-outline-variant rounded-xl hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-4">
+<div class="bg-tertiary-fixed text-tertiary-container w-10 h-10 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined">description</span>
+</div>
+<div>
+<h4 class="font-bold">OCR9 Engine</h4>
+<p class="text-xs text-stone-500">Optical character recognition for legacy docs</p>
+</div>
+</div>
+<div class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-stone-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:bg-primary-container after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+</div>
+</div>
+<div class="flex items-center justify-between p-md border border-outline-variant rounded-xl hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-4">
+<div class="bg-tertiary-fixed text-tertiary-container w-10 h-10 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined">picture_as_pdf</span>
+</div>
+<div>
+<h4 class="font-bold">PDF Parser Pro</h4>
+<p class="text-xs text-stone-500">Structural parsing for financial PDF schemas</p>
+</div>
+</div>
+<div class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-stone-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:bg-primary-container after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+</div>
+</div>
+<div class="flex items-center justify-between p-md border border-outline-variant rounded-xl hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-4">
+<div class="bg-tertiary-fixed text-tertiary-container w-10 h-10 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined">database</span>
+</div>
+<div>
+<h4 class="font-bold">Data Scraper</h4>
+<p class="text-xs text-stone-500">Dynamic web scraping for real-time market data</p>
+</div>
+</div>
+<div class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-stone-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:bg-primary-container after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Prompt & Instruction Repository -->
+<section class="col-span-12 lg:col-span-6 bg-surface-container-lowest border border-outline-variant rounded-xl p-xl">
+<h3 class="text-headline-md font-headline-md mb-xl">Prompt Repository</h3>
+<div class="grid grid-cols-2 gap-sm mb-md">
+<div class="bg-surface-container-low p-md rounded-lg border border-outline-variant flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-container">article</span>
+<div>
+<div class="text-xs font-bold truncate">base_rules.md</div>
+<div class="text-[10px] text-stone-500">Updated 2h ago</div>
+</div>
+</div>
+<div class="bg-surface-container-low p-md rounded-lg border border-outline-variant flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-container">code</span>
+<div>
+<div class="text-xs font-bold truncate">schema_v2.yml</div>
+<div class="text-[10px] text-stone-500">Updated 1d ago</div>
+</div>
+</div>
+<div class="bg-surface-container-low p-md rounded-lg border border-outline-variant flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-container">psychology</span>
+<div>
+<div class="text-xs font-bold truncate">reasoning_v1.md</div>
+<div class="text-[10px] text-stone-500">Updated 4h ago</div>
+</div>
+</div>
+<div class="bg-surface-container-low p-md rounded-lg border border-outline-variant flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-container">assignment</span>
+<div>
+<div class="text-xs font-bold truncate">task_flows.txt</div>
+<div class="text-[10px] text-stone-500">Updated 3d ago</div>
+</div>
+</div>
+</div>
+<div class="border-2 border-dashed border-outline-variant rounded-xl p-xl flex flex-col items-center justify-center bg-surface-container-low group cursor-pointer hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-4xl text-stone-300 group-hover:text-primary-container transition-colors">upload_file</span>
+<p class="text-label-sm text-stone-500 mt-2">Upload New Prompt File</p>
+<p class="text-[10px] text-stone-400">Drag and drop or click to browse</p>
+</div>
+</section>
+</div>
+<!-- Footer Action Bar -->
+<div class="mt-xl flex justify-end gap-md">
+<button class="px-8 py-3 border border-outline text-on-background font-medium rounded-lg hover:bg-surface-container transition-colors">Discard Changes</button>
+<button class="px-8 py-3 bg-primary-container text-white font-medium rounded-lg shadow-md hover:opacity-90 transition-opacity">Deploy Agent Configuration</button>
+</div>
+</div>
+</main>
+</body></html>

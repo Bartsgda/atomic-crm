@@ -378,6 +378,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         {isSystemOpen && (
           <div className="space-y-0.5 pl-2 animate-in slide-in-from-top-2 duration-200">
             {[
+              { label: 'Sahara (Sandbox)', icon: Palette, page: 'sandbox', action: () => onNavigate('sandbox') },
               { label: 'Architekt Formularzy', icon: PenTool, page: 'form-builder', action: () => onNavigate('form-builder') },
               { label: 'Vision Labs', icon: Lightbulb, page: 'vision', action: () => onNavigate('vision') },
               { label: 'Wygląd (Motyw)', icon: Palette, page: '_theme', action: onToggleTheme },

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+
+<html lang="pl"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RedRoad MLOps - Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline": "#8a7267",
+                        "on-secondary": "#ffffff",
+                        "primary-container": "#c15814",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#ffede6",
+                        "primary": "#9e4200",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed": "#341100",
+                        "on-primary-container": "#0e0200",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed": "#ffdbcb",
+                        "on-secondary-fixed": "#341100",
+                        "inverse-primary": "#ffb691",
+                        "primary-fixed-dim": "#ffb691",
+                        "tertiary-fixed-dim": "#95ccff",
+                        "secondary": "#865135",
+                        "on-error-container": "#93000a",
+                        "inverse-surface": "#3a2e28",
+                        "surface-container": "#ffeae1",
+                        "tertiary-fixed": "#cde5ff",
+                        "on-tertiary-container": "#fdfcff",
+                        "surface-variant": "#f3ded6",
+                        "on-tertiary-fixed": "#001d32",
+                        "surface": "#fff8f6",
+                        "secondary-container": "#fdb794",
+                        "on-secondary-container": "#78462a",
+                        "on-surface-variant": "#574239",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed-dim": "#fdb794",
+                        "on-surface": "#241914",
+                        "on-background": "#241914",
+                        "tertiary-container": "#007abc",
+                        "on-primary-fixed-variant": "#793100",
+                        "surface-container-high": "#f9e4db",
+                        "error": "#ba1a1a",
+                        "background": "#fff8f6",
+                        "surface-container-highest": "#f3ded6",
+                        "surface-container-low": "#fff1eb",
+                        "primary-fixed": "#ffdbcb",
+                        "surface-dim": "#ead6cd",
+                        "on-tertiary-fixed-variant": "#004a75",
+                        "tertiary": "#006195",
+                        "surface-bright": "#fff8f6",
+                        "surface-tint": "#9e4200",
+                        "error-container": "#ffdad6",
+                        "outline-variant": "#dec1b4",
+                        "on-secondary-fixed-variant": "#6a3a20"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "xl": "64px",
+                        "md": "24px",
+                        "sm": "12px",
+                        "lg": "40px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Manrope"],
+                        "label-sm": ["Manrope"],
+                        "headline-lg": ["Eb Garamond"],
+                        "headline-md": ["Eb Garamond"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg": ["48px", { "lineHeight": "1.1", "fontWeight": "500" }],
+                        "headline-md": ["32px", { "lineHeight": "1.2", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md antialiased selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopAppBar -->
+<header class="fixed bg-[#fffcf9] dark:bg-stone-950 docked full-width top-0 border-b border-[#84746d]/10 flat no shadows z-50">
+<div class="flex justify-between items-center w-full px-6 py-4">
+<button class="text-[#c15814] dark:text-[#e07a3d] hover:bg-[#f4f1ee] dark:hover:bg-stone-900 transition-colors duration-300 ease-in-out p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="text-xl font-semibold tracking-tighter text-[#c15814] dark:text-[#e07a3d] font-['EB_Garamond'] italic text-lg">Sahara MLOps</h1>
+<button class="hover:bg-[#f4f1ee] dark:hover:bg-stone-900 transition-colors duration-300 ease-in-out rounded-full w-10 h-10 overflow-hidden border border-[#84746d]/20">
+<img alt="User profile avatar" class="w-full h-full object-cover" data-alt="A close up portrait of a confident female tech professional. The lighting is warm and natural, casting soft shadows that highlight a minimalist, elegant aesthetic. She is framed against a bright, sun-baked terracotta wall that complements the warm Sahara brand colors. The overall mood is sophisticated, focused, and human-centric." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC79y3UCsCxumbRDlnx8qj1sdcZJjDBhJe0ZRaOQCdBtl45FVw_nyARlL50duxvH6AQphK5cs0HflQBfU9RD4dTVFoYSaFn5mZ1gWDvlI6pMhh3hWNjogAZhSmymeGxoPIATuYgdKcoavg5SfSV0TYGYguFntu7fv_hlf5LK-S_5G3HLgZK10xuA3naiOiuMoCwXnzdew93ilDFgvbOorSHqgRSEQS2KI6CoThClJyP56adT-MxZw_ucyawn-BscLX0ozUcU-nOp7Zh"/>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-[72px] pb-[96px] px-md max-w-2xl mx-auto space-y-md">
+<!-- Metrics Row -->
+<section class="grid grid-cols-3 gap-sm">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-sm flex flex-col items-center justify-center text-center">
+<span class="font-label-sm text-on-surface-variant text-label-sm uppercase mb-xs">Procesor</span>
+<span class="font-headline-md text-primary text-headline-md">42%</span>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-sm flex flex-col items-center justify-center text-center shadow-[0_4px_24px_-12px_rgba(132,116,109,0.15)]">
+<span class="font-label-sm text-on-surface-variant text-label-sm uppercase mb-xs">Pamięć</span>
+<span class="font-headline-md text-primary text-headline-md">16<span class="text-body-md font-body-md text-on-surface-variant ml-1">GB</span></span>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-sm flex flex-col items-center justify-center text-center">
+<span class="font-label-sm text-on-surface-variant text-label-sm uppercase mb-xs">Grafika</span>
+<span class="font-headline-md text-primary text-headline-md">89%</span>
+</div>
+</section>
+<!-- Document Type Detection Badges -->
+<section class="flex flex-col gap-xs">
+<h2 class="font-label-sm text-on-surface-variant text-label-sm uppercase px-1">Rozpoznane Typy</h2>
+<div class="flex flex-wrap gap-xs">
+<span class="bg-tertiary-container text-on-tertiary-container font-label-sm text-label-sm rounded-full px-sm py-[6px] border border-tertiary-fixed-dim/30">Pisma</span>
+<span class="bg-surface-variant text-on-surface-variant font-label-sm text-label-sm rounded-full px-sm py-[6px] border border-outline-variant">Umowy</span>
+<span class="bg-surface-variant text-on-surface-variant font-label-sm text-label-sm rounded-full px-sm py-[6px] border border-outline-variant">Opisy</span>
+</div>
+</section>
+<!-- OCR9 Sub-panel -->
+<section class="bg-surface-container rounded-xl p-md border border-outline-variant/50 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary-container/5 rounded-full blur-2xl -mr-10 -mt-10 pointer-events-none"></div>
+<div class="flex justify-between items-start mb-sm relative z-10">
+<div>
+<h3 class="font-headline-md text-on-surface text-[24px] leading-tight mb-xs">Panel OCR9</h3>
+<div class="flex items-center gap-xs">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-sm text-primary text-label-sm uppercase">Online</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant text-[32px]">document_scanner</span>
+</div>
+<p class="font-body-md text-on-surface-variant text-body-md mb-md max-w-[80%] relative z-10">
+                System analizy wizyjnej gotowy do przetworzenia nowych dokumentów.
+            </p>
+<div class="flex gap-sm relative z-10">
+<button class="flex-1 bg-primary-container text-on-primary-container font-label-sm text-label-sm py-sm rounded-lg flex items-center justify-center gap-xs hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">play_arrow</span>
+                    Uruchom
+                </button>
+<button class="flex-1 border border-outline text-primary font-label-sm text-label-sm py-sm rounded-lg flex items-center justify-center gap-xs hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[18px]">stop</span>
+                    Zatrzymaj
+                </button>
+</div>
+</section>
+<!-- Active Agent Card -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md shadow-[0_8px_32px_-16px_rgba(132,116,109,0.1)]">
+<div class="flex items-center gap-sm border-b border-outline-variant/30 pb-sm mb-sm">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined">smart_toy</span>
+</div>
+<div>
+<h3 class="font-body-md font-semibold text-on-surface text-[18px]">Agent A1</h3>
+<p class="font-label-sm text-on-surface-variant text-label-sm uppercase">Przetwarzanie w toku</p>
+</div>
+</div>
+<div class="space-y-sm">
+<div class="flex justify-between items-center">
+<span class="font-body-md text-on-surface-variant text-sm">Bieżące narzędzie:</span>
+<span class="font-body-md text-on-surface font-medium">Parser PDF</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body-md text-on-surface-variant text-sm">Ostatnia akcja:</span>
+<span class="font-body-md text-on-surface font-medium">Ekstrakcja tabel</span>
+</div>
+<div class="pt-xs">
+<div class="w-full bg-surface-variant rounded-full h-1.5 overflow-hidden">
+<div class="bg-primary h-1.5 rounded-full w-[65%]"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Project File Tree & List -->
+<section class="space-y-sm">
+<div class="flex justify-between items-end px-1">
+<h2 class="font-headline-md text-on-surface text-[24px]">Drzewo Projektu</h2>
+<button class="text-primary hover:text-primary-container transition-colors">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden">
+<!-- Drop Zone Indicator -->
+<div class="border-b border-dashed border-primary-container/40 bg-primary-container/5 p-sm flex items-center justify-center gap-xs text-primary">
+<span class="material-symbols-outlined text-[20px]">move_to_inbox</span>
+<span class="font-label-sm text-label-sm uppercase">Przeciągnij do kolejki</span>
+</div>
+<!-- List -->
+<div class="divide-y divide-outline-variant/30">
+<!-- Folder -->
+<div class="p-sm flex items-center justify-between hover:bg-surface-container-low transition-colors cursor-pointer">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">folder</span>
+<span class="font-body-md text-on-surface">Dane_Treningowe</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant text-[20px]">chevron_right</span>
+</div>
+<!-- File -->
+<div class="p-sm flex flex-col gap-xs hover:bg-surface-container-low transition-colors">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-sm pl-md">
+<span class="material-symbols-outlined text-outline">description</span>
+<span class="font-body-md text-on-surface text-sm">raport_q3.pdf</span>
+</div>
+<span class="font-label-sm text-on-surface-variant text-[10px]">100%</span>
+</div>
+<div class="w-full bg-surface-variant rounded-full h-1 ml-md w-[calc(100%-24px)]">
+<div class="bg-outline h-1 rounded-full w-full"></div>
+</div>
+</div>
+<!-- File processing -->
+<div class="p-sm flex flex-col gap-xs hover:bg-surface-container-low transition-colors">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-sm pl-md">
+<span class="material-symbols-outlined text-primary">description</span>
+<span class="font-body-md text-on-surface text-sm font-medium">umowa_najmu.docx</span>
+</div>
+<span class="font-label-sm text-primary text-[10px]">45%</span>
+</div>
+<div class="w-full bg-surface-variant rounded-full h-1 ml-md w-[calc(100%-24px)]">
+<div class="bg-primary h-1 rounded-full w-[45%]"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Chat Window -->
+<section class="bg-surface border border-outline-variant rounded-xl overflow-hidden flex flex-col mt-lg">
+<div class="bg-surface-container-low border-b border-outline-variant/50 p-sm flex items-center gap-xs">
+<span class="material-symbols-outlined text-secondary text-[20px]">chat</span>
+<span class="font-label-sm text-on-surface-variant text-label-sm uppercase">Czat z Agentem A1</span>
+</div>
+<div class="p-md text-center">
+<p class="font-body-md text-outline-variant italic text-sm">Brak nowych wiadomości. Rozpocznij konwersację dotycząca analizy.</p>
+</div>
+<div class="p-sm border-t border-outline-variant/30 flex gap-xs bg-surface-container-lowest">
+<input class="flex-1 bg-transparent border-none focus:ring-0 font-body-md text-on-surface placeholder:text-outline-variant px-sm py-xs" placeholder="Napisz wiadomość..." type="text"/>
+<button class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary hover:bg-primary-container hover:text-on-primary-container transition-colors">
+<span class="material-symbols-outlined text-[20px]">send</span>
+</button>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 py-3 pb-safe bg-[#fffcf9]/90 dark:bg-stone-950/90 backdrop-blur-md border-t border-[#84746d]/10 shadow-[0_-4px_12px_rgba(132,116,109,0.05)] z-50 transition-colors duration-300 ease-in-out font-['EB_Garamond'] text-[11px] uppercase tracking-widest">
+<!-- Active Tab: Monitor -->
+<button class="flex flex-col items-center justify-center text-[#c15814] dark:text-[#e07a3d] bg-[#c15814]/5 rounded-xl px-3 py-1 scale-95 transition-transform hover:opacity-100">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span>Monitor</span>
+</button>
+<!-- Inactive Tabs -->
+<button class="flex flex-col items-center justify-center text-[#84746d] opacity-70 hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined mb-1">folder_open</span>
+<span>Projects</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#84746d] opacity-70 hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined mb-1">document_scanner</span>
+<span>OCR</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#84746d] opacity-70 hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined mb-1">smart_toy</span>
+<span>Agent</span>
+</button>
+</nav>
+</body></html>

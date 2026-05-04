@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef, useCallback } from "react";
 import { getSupabaseClient } from "../providers/supabase/supabase";
 import { User } from "@supabase/supabase-js";
-import { Loader2, LogOut, AlertTriangle } from "lucide-react";
+import { Loader2, AlertTriangle } from "lucide-react";
 
 interface AuthBarrierProps {
   children: React.ReactNode;
@@ -163,8 +163,6 @@ export const AuthBarrier: React.FC<AuthBarrierProps> = ({ children }) => {
     );
   }
 
-  const avatarUrl = user.user_metadata?.avatar_url;
-  const fullName = user.user_metadata?.full_name || user.email;
 
   return (
     <>

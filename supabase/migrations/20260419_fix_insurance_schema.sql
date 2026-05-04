@@ -7,8 +7,9 @@
 -- 1. Fix insurance_clients columns to support encrypted strings
 ALTER TABLE public.insurance_clients 
   ALTER COLUMN birth_date TYPE TEXT,
-  ALTER COLUMN phones TYPE TEXT DEFAULT NULL,
-  ALTER COLUMN emails TYPE TEXT DEFAULT NULL;
+  ALTER COLUMN phones TYPE TEXT,
+  ALTER COLUMN emails TYPE TEXT;
+
 
 -- 2. Create Archive table for "Atomic Archival"
 CREATE TABLE IF NOT EXISTS public.insurance_trash (

@@ -1,4 +1,4 @@
-import { Import, Settings, User, Users } from "lucide-react";
+import { History, Import, MessageSquare, Settings, User, Users } from "lucide-react";
 import { CanAccess, useTranslate, useUserMenu } from "ra-core";
 import { Link, matchPath, useLocation } from "react-router";
 import { RefreshButton } from "@/components/admin/refresh-button";
@@ -90,6 +90,7 @@ const Header = () => {
                   <CanAccess resource="configuration" action="edit">
                     <SettingsMenu />
                   </CanAccess>
+                  <AdminMenu />
                   <ImportFromJsonMenuItem />
                 </UserMenu>
               </div>
@@ -183,6 +184,33 @@ const ImportFromJsonMenuItem = () => {
         {translate("crm.header.import_data")}
       </Link>
     </DropdownMenuItem>
+  );
+};
+
+const AdminMenu = () => {
+  const userMenuContext = useUserMenu();
+  if (!userMenuContext) {
+    throw new Error("<AdminMenu> must be used inside <UserMenu>");
+  }
+  return (
+    <>
+      <CanAccess resource="insurance_snapshots" action="list">
+        <DropdownMenuItem asChild onClick={userMenuContext.onClose}>
+          <Link to="/snapshots" className="flex items-center gap-2">
+            <History className="h-4 w-4" />
+            Snapshots (Recovery)
+          </Link>
+        </DropdownMenuItem>
+      </CanAccess>
+      <CanAccess resource="insurance_feedback" action="list">
+        <DropdownMenuItem asChild onClick={userMenuContext.onClose}>
+          <Link to="/insurance_feedback" className="flex items-center gap-2">
+            <MessageSquare className="h-4 w-4" />
+            Feedback (Błędy)
+          </Link>
+        </DropdownMenuItem>
+      </CanAccess>
+    </>
   );
 };
 export default Header;

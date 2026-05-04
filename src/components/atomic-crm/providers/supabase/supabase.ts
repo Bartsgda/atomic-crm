@@ -8,7 +8,13 @@ export const getSupabaseClient = () => {
     supabaseClient = createClient(
       import.meta.env.VITE_SUPABASE_URL,
       import.meta.env.VITE_SB_PUBLISHABLE_KEY,
+      {
+        db: {
+          schema: import.meta.env.VITE_SUPABASE_SCHEMA || "public",
+        },
+      }
     );
+
   }
   return supabaseClient;
 };

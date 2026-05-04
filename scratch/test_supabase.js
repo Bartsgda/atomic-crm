@@ -11,7 +11,11 @@ if (!supabaseUrl || !supabaseKey) {
   process.exit(1)
 }
 
-const supabase = createClient(supabaseUrl, supabaseKey)
+const supabase = createClient(supabaseUrl, supabaseKey, {
+  db: {
+    schema: process.env.VITE_SUPABASE_SCHEMA || 'public'
+  }
+})
 
 async function testConnection() {
   console.log('Testing Supabase connection to:', supabaseUrl)

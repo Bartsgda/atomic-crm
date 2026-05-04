@@ -4,7 +4,11 @@ import path from 'path';
 
 dotenv.config({ path: path.resolve(process.cwd(), '.env.development.local') });
 
-const supabase = createClient(process.env.VITE_SUPABASE_URL, process.env.VITE_SB_SECRET_KEY);
+const supabase = createClient(process.env.VITE_SUPABASE_URL, process.env.VITE_SB_SECRET_KEY, {
+  db: {
+    schema: process.env.VITE_SUPABASE_SCHEMA || 'public'
+  }
+});
 const TENANT_ID = '11111111-1111-1111-1111-111111111111';
 
 async function runDemo() {

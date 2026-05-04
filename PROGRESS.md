@@ -79,3 +79,15 @@ Live URL: **https://redroad.pl/alina/**
 - Write queue przy braku internetu → auto-push po powrocie
 - Toast po każdym zapisie do Supabase
 - Import XLSX z prawdziwymi danymi (dry-run + walidacja)
+
+## Faza D — izolowane środowisko testowe (✅ GOTOWE 2026-05-01)
+
+Implementacja izolacji schematowej (`test`) zamiast osobnego projektu, aby zachować spójność Google OAuth i łatwość zarządzania.
+
+### Co zrobione
+- [x] **Schema-level Isolation**: Dodanie wsparcia dla dynamicznych schematów w `getSupabaseClient`.
+- [x] **Config Switch**: Nowy plik `.env.alina.test` celujący w schemat `test`.
+- [x] **DDL Stabilization**: Skrypt `FIX_TEST_SCHEMA_LEGACY.sql` naprawiający braki w kolumnach legacy (`v1_original_id`) w schemacie `test`.
+- [x] **Security Sync**: Synchronizacja tabel `tenants` i `tenant_keys` (bez kolumny `updated_at`, której brak w projekcie ALINA) w celu poprawnego działania `PassphraseGate`.
+- [x] **Verification**: Skrypt `verify_test_schema.mjs` do audytu stabilności środowiska testowego.
+- [x] **Documentation**: Utworzenie `DOCS_TEST_ENVIRONMENT.md` opisującego architekturę połączenia.

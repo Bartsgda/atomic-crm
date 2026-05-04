@@ -6,6 +6,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 import { useConfigurationLoader } from "../root/useConfigurationLoader";
 import Header from "./Header";
+import { FeedbackButton } from "./FeedbackButton";
 
 export const Layout = ({ children }: { children: ReactNode }) => {
   useConfigurationLoader();
@@ -20,6 +21,7 @@ export const Layout = ({ children }: { children: ReactNode }) => {
         </ErrorBoundary>
       </main>
       <Notification />
+      <FeedbackButton />
     </>
   );
 };

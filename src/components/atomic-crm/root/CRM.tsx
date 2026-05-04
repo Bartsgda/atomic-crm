@@ -58,6 +58,9 @@ import { ContactListMobile } from "../contacts/ContactList.tsx";
 import { ContactShow } from "../contacts/ContactShow.tsx";
 import { CompanyShow } from "../companies/CompanyShow.tsx";
 import { NoteShowPage } from "../notes/NoteShowPage.tsx";
+import { snapshotService } from "../providers/supabase/snapshotService";
+import { SnapshotsPage } from "../admin/SnapshotsPage";
+import { FeedbackList, FeedbackShow } from "../admin/FeedbackConsole";
 
 const defaultStore = localStorageStore(undefined, "CRM");
 
@@ -178,11 +181,15 @@ export const CRM = ({
       login: async (params: any) => {
         const result = await authProvider.login(params);
         try {
+          // Trigger daily snapshot check
+          await snapshotService.checkDailySnapshot();
+
           const config = await dataProvider.getConfiguration();
           if (Object.keys(config).length > 0) {
             store.setItem(CONFIGURATION_STORE_KEY, config);
           }
-        } catch {
+        } catch (err) {
+          console.error('Failed to pre-fetch config or snapshot:', err);
           // Non-critical: config will load via useConfigurationLoader
         }
         return result;
@@ -195,11 +202,15 @@ export const CRM = ({
         }
         const result = await authProvider.handleCallback(params);
         try {
+          // Trigger daily snapshot check
+          await snapshotService.checkDailySnapshot();
+
           const config = await dataProvider.getConfiguration();
           if (Object.keys(config).length > 0) {
             store.setItem(CONFIGURATION_STORE_KEY, config);
           }
-        } catch {
+        } catch (err) {
+          console.error('Failed to pre-fetch config or snapshot during callback:', err);
           // Non-critical: config will load via useConfigurationLoader
         }
         return result;
@@ -262,6 +273,7 @@ const DesktopAdmin = (
         <Route path={ProfilePage.path} element={<ProfilePage />} />
         <Route path={SettingsPage.path} element={<SettingsPage />} />
         <Route path={ImportPage.path} element={<ImportPage />} />
+        <Route path="/snapshots" element={<SnapshotsPage />} />
       </CustomRoutes>
       <Resource name="deals" {...deals} />
       <Resource name="contacts" {...contacts} />
@@ -271,6 +283,8 @@ const DesktopAdmin = (
       <Resource name="tasks" />
       <Resource name="sales" {...sales} />
       <Resource name="tags" />
+      <Resource name="insurance_feedback" list={FeedbackList} show={FeedbackShow} options={{ label: 'Feedback' }} />
+      <Resource name="insurance_snapshots" list={SnapshotsPage} options={{ label: 'Snapshots' }} />
     </Admin>
   );
 };

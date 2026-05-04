@@ -36,7 +36,7 @@ type Page = 'dashboard' | 'clients' | 'new' | 'edit-policy' | 'preview' | 'clien
 function App() {
   const [state, setState] = useState<AppState>({ clients: [], policies: [], notes: [], notifications: [], terminations: [], logs: [], subAgents: [], checklistTemplates: {}, insurers: [], insurerConfigs: {}, trash: [] });
   const [isLoading, setIsLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState<Page>('dashboard');
+  const [currentPage, setCurrentPage] = useState<Page>('offers');
   const [isLocked, setIsLocked] = useState(false);
   
   // Auto wipe is now managed globally by AuthBarrier.

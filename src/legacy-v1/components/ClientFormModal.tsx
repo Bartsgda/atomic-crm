@@ -287,7 +287,21 @@ export const ClientFormModal: React.FC<Props> = ({ isOpen, onClose, onSave, init
 
         {/* MAIN SCROLLABLE AREA */}
         <div className="flex-1 overflow-y-auto p-8 bg-white dark:bg-zinc-900 scrollbar-hide space-y-6">
-            <form id="client-form" onSubmit={handleSubmit(handleFormSubmit)}>
+            <form id="client-form" onSubmit={handleSubmit(handleFormSubmit)} onKeyDown={(e) => {
+                // Alina F3: TAB skacze tylko po inputach do wpisywania, nie po wszystkich elementach.
+                if (e.key !== 'Tab') return;
+                const form = e.currentTarget;
+                const fields = Array.from(form.querySelectorAll<HTMLElement>(
+                    'input:not([type="hidden"]):not([disabled]), select:not([disabled]), textarea:not([disabled])'
+                )).filter(el => el.offsetParent !== null);
+                const active = document.activeElement as HTMLElement;
+                const idx = fields.indexOf(active);
+                if (idx === -1) return;
+                e.preventDefault();
+                const dir = e.shiftKey ? -1 : 1;
+                const next = fields[(idx + dir + fields.length) % fields.length];
+                next?.focus();
+            }}>
                 
                 {/* 1. SEKCJA GŁÓWNA: TOŻSAMOŚĆ */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

@@ -449,10 +449,22 @@ export const PolicyFormModal: React.FC<Props> = ({ isOpen, onClose, initialClien
   const form = useForm<any>({ defaultValues });
   const { register, handleSubmit, watch, setValue, getValues, reset } = form;
   
-  const currentType = watch('type'); 
+  const currentType = watch('type');
   const currentStage = watch('stage');
   const targetInsurers = watch('targetInsurers') || [];
   const calculations = watch('calculations') || [];
+
+  // Auto-update policyEndDate gdy zmienia sie policyStartDate.
+  // Rok ochrony liczony od daty startu (a nie od daty wystawienia).
+  // Skip przy initial loadzie zeby nie nadpisac istniejacej endDate edytowanej polisy.
+  const policyStartDate = watch('policyStartDate');
+  const initialStartDateRef = useRef<string | undefined>(defaultValues.policyStartDate);
+  useEffect(() => {
+      if (!policyStartDate) return;
+      if (policyStartDate === initialStartDateRef.current) return;
+      const newEnd = addDays(addYears(new Date(policyStartDate), 1), -1);
+      setValue('policyEndDate', newEnd.toISOString().split('T')[0]);
+  }, [policyStartDate, setValue]);
 
   const isOffer = ['of_do zrobienia', 'przeł kontakt', 'oferta_wysłana', 'ucięty kontakt', 'czekam na dane/dokum', 'of_przedst'].includes(currentStage);
 

@@ -91,3 +91,52 @@ Implementacja izolacji schematowej (`test`) zamiast osobnego projektu, aby zacho
 - [x] **Security Sync**: Synchronizacja tabel `tenants` i `tenant_keys` (bez kolumny `updated_at`, której brak w projekcie ALINA) w celu poprawnego działania `PassphraseGate`.
 - [x] **Verification**: Skrypt `verify_test_schema.mjs` do audytu stabilności środowiska testowego.
 - [x] **Documentation**: Utworzenie `DOCS_TEST_ENVIRONMENT.md` opisującego architekturę połączenia.
+
+## Faza E — security + UX feedback (sesja 2026-05-04)
+
+### Sekrety do rrv vault (DOM, opus)
+- [x] `.env.alina.{prod,test}` + `.env.e2e` + `scratch/{probe_supabase,run_migrations}.js` — plaintext Supabase keys → markery `<rrv:CRM_ALINA_*>`
+- [x] **`switch_env.ps1` v2** — przy `START_ALINA_*.bat` ekspanduje markery przez `rrv get` i zapisuje plaintext do gitignored `.env.development.local` (Vite to czyta). Tryby: `prod` / `test` / `e2e` / `dev`.
+- [x] Vault: `CRM_ALINA_SB_SECRET`, `CRM_ALINA_SB_PUBLISHABLE`, `CRM_ALINA_SUPABASE_URL`, `CRM_ALINA_E2E_SERVICE_ROLE`, `CRM_ALINA_E2E_SB_PUBLISHABLE`. Usunięte duplikaty `SB_PUBLISHABLE_KEY`, `VITE_SB_PUBLISHABLE_KEY`.
+- [x] `git reset --soft b63466f` cofnął 4 brudne lokalne commity (NIGDY nie pushowane). Czysty stan jako `8e48385` na `origin/main`.
+- [ ] **Otwarte (weekend)**: rotacja kluczy alina prod (HTTP 200 nadal), reflog purge, sweep konwersacji Claude/Antigravity.
+
+### Fixy z `insurance_feedback` (3 uwagi Aliny + 1 Bartka, commit `12295ab`)
+- [x] **F1 (bug)** — `policyEndDate` przeliczony od `policyStartDate` przez useEffect-watcher (`PolicyFormModal.tsx`). Skip przy initial load żeby nie nadpisać istniejących polis. Rok ochrony = startDate + 1 rok − 1 dzień.
+- [x] **F3 (idea)** — TAB w „Nowy Klient" skacze tylko po `input/select/textarea` (`ClientFormModal.tsx`, onKeyDown na `<form>`), pomija ikony i divy.
+- [x] **F4 (Bartek)** — domyślna strona po loginie = Kanban (`legacy-v1/App.tsx:39 useState<Page>('offers')`).
+- [ ] **F2 (bug)** — „klient klik → wszystko się rozmyło" — wymaga reprodukcji od Aliny (pyta w drafcie maila u/4 → r-391496440917209547).
+
+### Lista zgłoszeń + admin_reply (commit `f582d6d` + `ad2fe56`)
+- [x] **Migracja** `20260504_feedback_admin_reply.sql` — `admin_reply` / `admin_reply_at` / `admin_reply_by` w `public` + `test` schema (DO block sprawdza istnienie). Plus 2 RPC: `toggle_my_feedback_resolved(uuid)` (user toggle status `open<->done` na własnym), `set_feedback_admin_reply(uuid, text)` (admin pisze odpowiedź). Duplikaty RPC w schemie `test` (PostgREST routuje schema z `VITE_SUPABASE_SCHEMA`).
+- [x] **Service** `feedbackCapture.ts` — `listFeedback`, `toggleMyFeedbackResolved`, `setFeedbackAdminReply`, `isInsuranceAdmin` (cache 60s).
+- [x] **UI `StatusEye.tsx`** — w panel-Eye nowy przycisk **„Moje zgłoszenia (N)"** / **„Wszystkie zgłoszenia"** dla admina, badge z liczbą open. Modal listy: severity badge, checkbox toggle (tylko swoje), data, message, `element_label`, `admin_reply`. Admin: widzi `user_email` + textarea admin_reply + Zapisz. User (Alina): admin_reply jako bąbelek „Odpowiedź".
+
+### Workflow lokalnego testu (NIE deploy!)
+
+**Schema separation:** ten sam projekt Supabase `xqznrssrlnxqkdvisnck`, dwie schemy:
+- `public` = **prod** (alina.prod live na redroad.pl/alina/) — Alina realnie tu zgłasza, dodaje klientów/polis
+- `test` = **piaskownica** (`VITE_SUPABASE_SCHEMA=test`) — bezpieczna do eksperymentów, struktura z `combined_migrations_test.sql`
+
+**Lokalny test workflow:**
+```
+cd C:\BartsGda4\CRM-Atomic
+.\START_ALINA_TEST.bat        # schema='test', port 5173
+# → switch_env.ps1 expanduje rrv markery → .env.development.local (gitignored)
+# → npm run dev
+```
+Login: admin `redroadai@gmail.com` lub agent `alinakwidzinska@gmail.com` / `Test123!`.
+
+**Snapshot prod → test** (gdy chcesz odświeżyć piaskownicę realnymi danymi):
+1. SQL Editor Supabase → wklej `supabase/migrations/20260504_feedback_admin_reply.sql` → Run (raz, dodaje admin_reply column w obu schemach)
+2. SQL Editor → wklej `scratch/seed_test_from_prod.sql` → Run (truncate+insert dla `tenants`/`sales`/`clients`/`policies`/`insurance_notes`/`insurance_feedback`, dynamicznie po wspólnych kolumnach, ON CASCADE — bezpieczne, dotyczy tylko schemy `test`)
+
+### ⚠️ Deploy ≠ git push
+
+Komity (`12295ab`, `f582d6d`, `ad2fe56`) idą do **`origin/main` GitHub** — to **NIE jest deploy**. Wersja na `redroad.pl/alina/` zmienia się tylko gdy Bartek **manualnie**:
+1. `cd CRM-Atomic && VITE_BASE_PATH=/alina/ npm run build`
+2. ZIP `dist/`
+3. FTP upload `deploy@redroad.pl` → `/domains/redroad.pl/public_html/alina/`
+4. Extract w DirectAdmin
+
+**NIE używamy** `RedRoad-Hostido` MCP do automatycznego deploy aliny — Bartek ma swój manualny flow z DirectAdmin extract (`HOSTIDO_SSH_KEY_PASS` w vault, ale używany rzadko, nie do CRM-ALINA).

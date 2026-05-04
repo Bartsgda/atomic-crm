@@ -249,3 +249,65 @@ export async function submitFeedback(payload: FeedbackPayload): Promise<void> {
     );
   }
 }
+
+// ─── Lista zgloszen + admin reply (sesja 2026-05-04) ─────────────────────────
+
+export interface FeedbackItem {
+  id: string;
+  user_id: string | null;
+  user_email: string | null;
+  message: string;
+  severity: 'info' | 'bug' | 'idea' | 'blocker';
+  status: 'open' | 'seen' | 'done' | 'rejected';
+  element_label: string | null;
+  route: string | null;
+  created_at: string;
+  resolved_at: string | null;
+  admin_reply: string | null;
+  admin_reply_at: string | null;
+  admin_reply_by: string | null;
+}
+
+/** Lista feedbacku widoczna dla aktualnego usera. RLS filtruje:
+ *  user widzi swoje, admin widzi wszystkie w tenancie. */
+export async function listFeedback(): Promise<FeedbackItem[]> {
+  const sb = getSupabaseClient();
+  const { data, error } = await sb
+    .from('insurance_feedback')
+    .select(
+      'id,user_id,user_email,message,severity,status,element_label,route,created_at,resolved_at,admin_reply,admin_reply_at,admin_reply_by',
+    )
+    .order('created_at', { ascending: false })
+    .limit(100);
+  if (error) {
+    throw new Error(`Nie udało się pobrać listy: ${error.message}`);
+  }
+  return (data ?? []) as FeedbackItem[];
+}
+
+/** Toggle status open <-> done na wlasnym zgloszeniu. */
+export async function toggleMyFeedbackResolved(fbId: string): Promise<string> {
+  const sb = getSupabaseClient();
+  const { data, error } = await sb.rpc('toggle_my_feedback_resolved', { fb_id: fbId });
+  if (error) throw new Error(error.message);
+  return data as string;
+}
+
+/** Admin (is_insurance_admin) zapisuje odpowiedz do zgloszenia. */
+export async function setFeedbackAdminReply(fbId: string, reply: string): Promise<void> {
+  const sb = getSupabaseClient();
+  const { error } = await sb.rpc('set_feedback_admin_reply', { fb_id: fbId, reply });
+  if (error) throw new Error(error.message);
+}
+
+/** Sprawdza czy aktualny user jest insurance_admin (poprzez select widoku 'sales'
+ *  z RLS filterem). Cache'owane na 60s. */
+let _adminCache: { ts: number; v: boolean } | null = null;
+export async function isInsuranceAdmin(): Promise<boolean> {
+  if (_adminCache && Date.now() - _adminCache.ts < 60_000) return _adminCache.v;
+  const sb = getSupabaseClient();
+  const { data, error } = await sb.rpc('is_insurance_admin');
+  const v = !error && data === true;
+  _adminCache = { ts: Date.now(), v };
+  return v;
+}

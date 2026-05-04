@@ -1,7 +1,16 @@
-import { useEffect, useRef, useState } from 'react';
-import { Eye, LogOut, Clock, Target, Send, X, Loader2, Bug, Sparkles } from 'lucide-react';
+import { useEffect, useRef, useState, useCallback } from 'react';
+import { Eye, LogOut, Clock, Target, Send, X, Loader2, Bug, Sparkles, MessageSquare, Check } from 'lucide-react';
 import { getSupabaseClient } from '../../components/atomic-crm/providers/supabase/supabase';
-import { pickElement, submitFeedback, type CapturedElement } from '../services/feedbackCapture';
+import {
+  pickElement,
+  submitFeedback,
+  listFeedback,
+  toggleMyFeedbackResolved,
+  setFeedbackAdminReply,
+  isInsuranceAdmin,
+  type CapturedElement,
+  type FeedbackItem,
+} from '../services/feedbackCapture';
 
 // ─── stałe sesji ──────────────────────────────────────────────────────────────
 const SESSION_MS = 120 * 60 * 1000;

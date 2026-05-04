@@ -225,7 +225,9 @@ export async function submitFeedback(payload: FeedbackPayload): Promise<void> {
   const captured = payload.captured ?? null;
   const ctx: any = (window as any).__CRM_CONTEXT__ ?? {};
 
-  const { error } = await sb.from('insurance_feedback').insert({
+  // Feedback ZAWSZE do public schema (decyzja Bartek 2026-05-04):
+  // tryb test ma czytac/pisac realne zgloszenia Aliny, nie kopie w piaskownicy.
+  const { error } = await sb.schema('public').from('insurance_feedback').insert({
     tenant_id: tenantId,
     user_id: user?.id ?? null,
     user_email: user?.email ?? null,
@@ -268,11 +270,17 @@ export interface FeedbackItem {
   admin_reply_by: string | null;
 }
 
+/** Wszystkie operacje na feedbacku zawsze przeciwko schemie 'public' (decyzja
+ *  Bartek 2026-05-04): tryb test ma widziec realne zgloszenia Aliny i admin
+ *  reply, nie kopie w piaskownicy. Override schema per-query w supabase-js v2. */
+const FEEDBACK_SCHEMA = 'public';
+
 /** Lista feedbacku widoczna dla aktualnego usera. RLS filtruje:
  *  user widzi swoje, admin widzi wszystkie w tenancie. */
 export async function listFeedback(): Promise<FeedbackItem[]> {
   const sb = getSupabaseClient();
   const { data, error } = await sb
+    .schema(FEEDBACK_SCHEMA)
     .from('insurance_feedback')
     .select(
       'id,user_id,user_email,message,severity,status,element_label,route,created_at,resolved_at,admin_reply,admin_reply_at,admin_reply_by',
@@ -288,7 +296,9 @@ export async function listFeedback(): Promise<FeedbackItem[]> {
 /** Toggle status open <-> done na wlasnym zgloszeniu. */
 export async function toggleMyFeedbackResolved(fbId: string): Promise<string> {
   const sb = getSupabaseClient();
-  const { data, error } = await sb.rpc('toggle_my_feedback_resolved', { fb_id: fbId });
+  const { data, error } = await sb
+    .schema(FEEDBACK_SCHEMA)
+    .rpc('toggle_my_feedback_resolved', { fb_id: fbId });
   if (error) throw new Error(error.message);
   return data as string;
 }
@@ -296,17 +306,19 @@ export async function toggleMyFeedbackResolved(fbId: string): Promise<string> {
 /** Admin (is_insurance_admin) zapisuje odpowiedz do zgloszenia. */
 export async function setFeedbackAdminReply(fbId: string, reply: string): Promise<void> {
   const sb = getSupabaseClient();
-  const { error } = await sb.rpc('set_feedback_admin_reply', { fb_id: fbId, reply });
+  const { error } = await sb
+    .schema(FEEDBACK_SCHEMA)
+    .rpc('set_feedback_admin_reply', { fb_id: fbId, reply });
   if (error) throw new Error(error.message);
 }
 
-/** Sprawdza czy aktualny user jest insurance_admin (poprzez select widoku 'sales'
- *  z RLS filterem). Cache'owane na 60s. */
+/** Sprawdza czy aktualny user jest insurance_admin. Cache'owane na 60s.
+ *  Funkcja `is_insurance_admin` zyje w public — uzywamy jej tez dla schema test. */
 let _adminCache: { ts: number; v: boolean } | null = null;
 export async function isInsuranceAdmin(): Promise<boolean> {
   if (_adminCache && Date.now() - _adminCache.ts < 60_000) return _adminCache.v;
   const sb = getSupabaseClient();
-  const { data, error } = await sb.rpc('is_insurance_admin');
+  const { data, error } = await sb.schema(FEEDBACK_SCHEMA).rpc('is_insurance_admin');
   const v = !error && data === true;
   _adminCache = { ts: Date.now(), v };
   return v;

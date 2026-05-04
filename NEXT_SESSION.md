@@ -80,9 +80,11 @@ UI dla ownera (Bartek):
 ### Sekret w vault (`rrv`)
 Pliki `.env.alina.{prod,test}` + `.env.e2e` zawierają tylko **markery** `<rrv:NAZWA>`, np. `VITE_SB_SECRET_KEY=<rrv:CRM_ALINA_SB_SECRET>`. `switch_env.ps1` ekspanduje je przez `rrv get` i zapisuje plaintext do gitignored `.env.development.local` (Vite tylko ten plik czyta). Wymaga `rrv login` aktywnego.
 
-### Snapshot prod → test (gdy chcesz odświeżyć piaskownicę)
+### Snapshot prod → test (gdy chcesz odświeżyć piaskownicę clients/polis)
 1. SQL Editor `xqznrssrlnxqkdvisnck` → wklej `supabase/migrations/20260504_feedback_admin_reply.sql` → Run (raz)
-2. SQL Editor → wklej `scratch/seed_test_from_prod.sql` → Run (truncate+insert dla `tenants/sales/clients/policies/insurance_notes/insurance_feedback`, dynamicznie po wspólnych kolumnach)
+2. SQL Editor → wklej `scratch/seed_test_from_prod.sql` → Run (truncate+insert dla `tenants/sales/clients/policies/insurance_notes`, dynamicznie po wspólnych kolumnach)
+
+> 🟡 `insurance_feedback` **NIE** wymaga snapshotu — czytane zawsze z `public` (zob. Faza E w PROGRESS.md). Tryb test pokazuje realne zgłoszenia Aliny + admin_reply natychmiast.
 
 ### Deploy (manualny)
 ```

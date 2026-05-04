@@ -108,7 +108,15 @@ Implementacja izolacji schematowej (`test`) zamiast osobnego projektu, aby zacho
 - [ ] **F2 (bug)** — „klient klik → wszystko się rozmyło" — wymaga reprodukcji od Aliny (pyta w drafcie maila u/4 → r-391496440917209547).
 
 ### Lista zgłoszeń + admin_reply (commit `f582d6d` + `ad2fe56`)
-- [x] **Migracja** `20260504_feedback_admin_reply.sql` — `admin_reply` / `admin_reply_at` / `admin_reply_by` w `public` + `test` schema (DO block sprawdza istnienie). Plus 2 RPC: `toggle_my_feedback_resolved(uuid)` (user toggle status `open<->done` na własnym), `set_feedback_admin_reply(uuid, text)` (admin pisze odpowiedź). Duplikaty RPC w schemie `test` (PostgREST routuje schema z `VITE_SUPABASE_SCHEMA`).
+- [x] **Migracja** `20260504_feedback_admin_reply.sql` — `admin_reply` / `admin_reply_at` / `admin_reply_by` w `public` + `test` schema (DO block sprawdza istnienie). Plus 2 RPC: `toggle_my_feedback_resolved(uuid)` (user toggle status `open<->done` na własnym), `set_feedback_admin_reply(uuid, text)` (admin pisze odpowiedź). Duplikaty RPC w schemie `test` zostały (idempotentne) ale **nieużywane** od 2026-05-04 23:50 — patrz wyjątek niżej.
+
+### 🟡 Wyjątek: feedback ZAWSZE czyta/pisze do `public` (decyzja Bartek 2026-05-04 23:50)
+
+Mimo że tryb `test` używa schema='test' do reszty CRM-a (clients, policies, sales itp), **`insurance_feedback` jest jedyną tabelą czytaną/zapisywaną do `public`** niezależnie od trybu. Powód: realne uwagi Aliny + admin_reply mają być widoczne natychmiast w piaskownicy lokalnej, bez kopiowania danych przez snapshot.
+
+Implementacja: `feedbackCapture.ts` używa `sb.schema('public').from(...)` i `sb.schema('public').rpc(...)` (override per-query w supabase-js v2) dla wszystkich 4 funkcji (`submitFeedback`, `listFeedback`, `toggleMyFeedbackResolved`, `setFeedbackAdminReply`, `isInsuranceAdmin`). Stała `FEEDBACK_SCHEMA = 'public'`.
+
+**Konsekwencja:** wpisy testowe utworzone przez Bartka w `START_ALINA_TEST.bat` lądują w prod tabeli (`public.insurance_feedback`) — Alina je zobaczy. Akceptowalne kosztem — mogą być oznaczone severity=info i message="test" lub pominięte.
 - [x] **Service** `feedbackCapture.ts` — `listFeedback`, `toggleMyFeedbackResolved`, `setFeedbackAdminReply`, `isInsuranceAdmin` (cache 60s).
 - [x] **UI `StatusEye.tsx`** — w panel-Eye nowy przycisk **„Moje zgłoszenia (N)"** / **„Wszystkie zgłoszenia"** dla admina, badge z liczbą open. Modal listy: severity badge, checkbox toggle (tylko swoje), data, message, `element_label`, `admin_reply`. Admin: widzi `user_email` + textarea admin_reply + Zapisz. User (Alina): admin_reply jako bąbelek „Odpowiedź".
 

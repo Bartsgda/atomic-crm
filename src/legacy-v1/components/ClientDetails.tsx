@@ -185,7 +185,9 @@ const PolicyCardItem = ({ policy, client, statusConfig, isFiltered, isHovered, d
                     <div className="text-right">
                         <p className="text-[9px] font-black uppercase text-zinc-400">Koniec</p>
                         <p className={`text-xs font-bold ${daysToExpiry < 14 ? 'text-red-600' : 'text-zinc-700 dark:text-zinc-300'}`}>
-                            {format(new Date(policy.policyEndDate), 'dd.MM.yyyy')}
+                            {policy.policyEndDate && !isNaN(new Date(policy.policyEndDate).getTime())
+                                ? format(new Date(policy.policyEndDate), 'dd.MM.yyyy')
+                                : '—'}
                         </p>
                     </div>
                 </div>

@@ -1181,7 +1181,7 @@ export const PolicyFormModal: React.FC<Props> = ({ isOpen, onClose, initialClien
                                                         <div>
                                                             <span className="font-bold text-zinc-700 dark:text-zinc-300">{p.insurerName}</span>
                                                             <span className="text-zinc-400 mx-2">|</span>
-                                                            <span className="font-mono text-zinc-500">{format(new Date(p.policyEndDate), 'dd.MM.yyyy')}</span>
+                                                            <span className="font-mono text-zinc-500">{p.policyEndDate && !isNaN(new Date(p.policyEndDate).getTime()) ? format(new Date(p.policyEndDate), 'dd.MM.yyyy') : '—'}</span>
                                                             {isActive && daysLeft < 30 && <span className="ml-2 text-[9px] font-bold text-red-500 bg-red-50 px-1 rounded">Ważna {daysLeft} dni!</span>}
                                                         </div>
                                                     </div>
@@ -1259,7 +1259,7 @@ export const PolicyFormModal: React.FC<Props> = ({ isOpen, onClose, initialClien
                                                 <option value="">-- Brak / Nowa Polisa --</option>
                                                 {availablePreviousPolicies.map(p => (
                                                     <option key={p.id} value={p.id}>
-                                                        {p.vehicleBrand || p.type} ({p.insurerName} - {format(new Date(p.policyEndDate), 'dd.MM.yyyy')})
+                                                        {p.vehicleBrand || p.type} ({p.insurerName}{p.policyEndDate && !isNaN(new Date(p.policyEndDate).getTime()) ? ` - ${format(new Date(p.policyEndDate), 'dd.MM.yyyy')}` : ''})
                                                     </option>
                                                 ))}
                                             </select>

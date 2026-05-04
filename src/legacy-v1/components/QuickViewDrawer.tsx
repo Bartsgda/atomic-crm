@@ -117,7 +117,7 @@ export const QuickViewDrawer: React.FC<Props> = ({ client, state, onClose, onNav
                                 </div>
                                 <div className="text-right">
                                     <p className={`text-xs font-black ${isWarning ? 'text-red-600' : 'text-zinc-900 dark:text-zinc-100'}`}>{days} dni</p>
-                                    <p className="text-[9px] text-zinc-400 font-mono">{format(new Date(p.policyEndDate), 'dd.MM')}</p>
+                                    <p className="text-[9px] text-zinc-400 font-mono">{p.policyEndDate && !isNaN(new Date(p.policyEndDate).getTime()) ? format(new Date(p.policyEndDate), 'dd.MM') : '—'}</p>
                                 </div>
                             </div>
                         )

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pl" class="dark">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>CRM Alina — sandbox</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0" rel="stylesheet"/>
+<script>
+tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        bg:            '#080c14',
+        surface:       '#0f1623',
+        'surface-hi':  '#161e30',
+        border:        '#1e2d47',
+        accent:        '#38bdf8',
+        'accent-dark': '#0ea5e9',
+        tx:            '#e2e8f0',
+        'tx-dim':      '#94a3b8',
+        'tx-muted':    '#475569',
+      },
+      fontFamily: {
+        sans:    ['Inter', 'sans-serif'],
+        display: ['Space Grotesk', 'sans-serif'],
+      }
+    }
+  }
+}
+</script>
+<style>
+.material-symbols-outlined { font-variation-settings: 'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 24; vertical-align: middle; }
+#sidebar { width: 220px; transition: width .22s cubic-bezier(.4,0,.2,1); }
+#sidebar.slim { width: 64px; }
+#sidebar.slim .lbl   { display: none; }
+#sidebar.slim .badge { display: none; }
+#sidebar.slim .logo-txt { display: none; }
+#sidebar.slim .nav-row  { justify-content: center; padding-left: 0; padding-right: 0; }
+#main { margin-left: 220px; transition: margin-left .22s cubic-bezier(.4,0,.2,1); }
+#main.slim { margin-left: 64px; }
+.tile { transition: transform .18s ease, border-color .18s ease; }
+.tile:hover { transform: translateY(-2px); border-color: rgba(56,189,248,.25); }
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-thumb { background: #1e2d47; border-radius: 4px; }
+</style>
+</head>
+<body class="bg-bg text-tx min-h-screen flex font-sans">
+
+<!-- ═══════════════════════════════ SIDEBAR ═══════════════════════════════ -->
+<aside id="sidebar" class="fixed top-0 left-0 h-full bg-surface border-r border-border z-40 flex flex-col overflow-hidden select-none">
+
+  <!-- Logo -->
+  <div class="flex items-center gap-3 px-4 h-14 border-b border-border flex-shrink-0">
+    <div class="w-8 h-8 rounded-lg bg-accent flex items-center justify-center flex-shrink-0">
+      <span class="material-symbols-outlined text-bg text-[18px]">shield</span>
+    </div>
+    <span class="logo-txt font-display font-semibold text-tx text-sm tracking-wide whitespace-nowrap">CRM Alina</span>
+  </div>
+
+  <!-- Nav -->
+  <nav class="flex-1 py-3 px-2 space-y-0.5 overflow-y-auto">
+
+    <a href="#" class="nav-row flex items-center gap-3 px-3 py-2.5 rounded-lg bg-accent/10 text-accent">
+      <span class="material-symbols-outlined text-[20px] flex-shrink-0">dashboard</span>
+      <span class="lbl text-sm font-medium whitespace-nowrap">Pulpit</span>
+    </a>
+
+    <a href="#" class="nav-row flex items-center gap-3 px-3 py-2.5 rounded-lg text-tx-dim hover:bg-surface-hi hover:text-tx transition-colors">
+      <span class="material-symbols-outlined text-[20px] flex-shrink-0">groups</span>
+      <span class="lbl text-sm font-medium whitespace-nowrap flex-1">Klienci</span>
+      <span class="badge text-[10px] font-bold bg-accent text-bg px-1.5 py-0.5 rounded-full">3</span>
+    </a>
+
+    <a href="#" class="nav-row flex items-center gap-3 px-3 py-2.5 rounded-lg text-tx-dim hover:bg-surface-hi hover:text-tx transition-colors">
+      <span class="material-symbols-outlined text-[20px] flex-shrink-0">verified_user</span>
+      <span class="lbl text-sm font-medium whitespace-nowrap flex-1">Polisy</span>
+      <span class="badge text-[10px] font-bold bg-border text-tx-dim px-1.5 py-0.5 rounded-full">47</span>
+    </a>
+
+    <a href="#" class="nav-row flex items-center gap-3 px-3 py-2.5 rounded-lg text-tx-dim hover:bg-surface-hi hover:text-tx transition-colors">
+      <span class="material-symbols-outlined text-[20px] flex-shrink-0">view_kanban</span>
+      <span class="lbl text-sm font-medium whitespace-nowrap flex-1">Tablica</span>
+      <span class="badge text-[10px] font-bold bg-border text-tx-dim px-1.5 py-0.5 rounded-full">5</span>
+    </a>
+
+    <a href="#" class="nav-row flex items-center gap-3 px-3 py-2.5 rounded-lg text-tx-dim hover:bg-surface-hi hover:text-tx transition-colors">
+      <span class="material-symbols-outlined text-[20px] flex-shrink-0">calendar_month</span>
+      <span class="lbl text-sm font-medium whitespace-nowrap flex-1">Terminarz</span>
+      <span class="badge text-[10px] font-bold bg-orange-500/20 text-orange-400 px-1.5 py-0.5 rounded-full">2</span>
+    </a>
+
+    <a href="#" class="nav-row flex items-center gap-3 px-3 py-2.5 rounded-lg text-tx-dim hover:bg-surface-hi hover:text-tx transition-colors">
+      <span class="material-symbols-outlined text-[20px] flex-shrink-0">payments</span>
+      <span class="lbl text-sm font-medium whitespace-nowrap">Finanse</span>
+    </a>
+
+    <a href="#" class="nav-row flex items-center gap-3 px-3 py-2.5 rounded-lg text-tx-dim hover:bg-surface-hi hover:text-tx transition-colors">
+      <span class="material-symbols-outlined text-[20px] flex-shrink-0">description</span>
+      <span class="lbl text-sm font-medium whitespace-nowrap flex-1">Dokumenty</span>
+      <span class="badge text-[10px] font-bold bg-border text-tx-dim px-1.5 py-0.5 rounded-full">8</span>
+    </a>
+
+    <div class="pt-3 mt-3 border-t border-border space-y-0.5">
+      <a href="#" class="nav-row flex items-center gap-3 px-3 py-2.5 rounded-lg text-tx-dim hover:bg-surface-hi hover:text-tx transition-colors">
+        <span class="material-symbols-outlined text-[20px] flex-shrink-0">settings</span>
+        <span class="lbl text-sm font-medium whitespace-nowrap">Ustawienia</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- User -->
+  <div class="flex-shrink-0 px-3 py-4 border-t border-border">
+    <div class="nav-row flex items-center gap-3">
+      <div class="w-8 h-8 rounded-full bg-accent/15 border border-accent/30 flex items-center justify-center flex-shrink-0">
+        <span class="material-symbols-outlined text-accent text-[16px]">person</span>
+      </div>
+      <div class="lbl min-w-0">
+        <p class="text-xs font-semibold text-tx truncate">Aleksander V.</p>
+        <p class="text-[10px] text-tx-muted truncate">Agent ubezpieczeniowy</p>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- ═══════════════════════════════ MAIN ═══════════════════════════════ -->
+<div id="main" class="flex-1 min-h-screen flex flex-col">
+
+  <!-- Top bar -->
+  <header class="sticky top-0 z-30 bg-bg/80 backdrop-blur border-b border-border h-14 flex items-center px-5 gap-3">
+    <button onclick="toggle()" class="p-1.5 rounded-lg hover:bg-surface-hi text-tx-dim hover:text-tx transition-colors">
+      <span class="material-symbols-outlined text-[20px]">menu</span>
+    </button>
+    <div class="flex-1"></div>
+    <button class="p-1.5 rounded-lg hover:bg-surface-hi text-tx-dim hover:text-tx transition-colors relative">
+      <span class="material-symbols-outlined text-[20px]">search</span>
+    </button>
+    <button class="p-1.5 rounded-lg hover:bg-surface-hi text-tx-dim hover:text-tx transition-colors relative">
+      <span class="material-symbols-outlined text-[20px]">notifications</span>
+      <span class="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-accent rounded-full ring-2 ring-bg"></span>
+    </button>
+  </header>
+
+  <!-- Content -->
+  <main class="flex-1 p-6 max-w-[1100px] w-full mx-auto">
+
+    <!-- Greeting -->
+    <div class="mb-7">
+      <p class="text-tx-muted text-sm mb-1">Wtorek, 6 maja 2026</p>
+      <h1 class="font-display text-2xl font-semibold">Witaj, Aleksander</h1>
+    </div>
+
+    <!-- KPI strip -->
+    <div class="grid grid-cols-3 gap-3 mb-7">
+      <div class="bg-surface rounded-xl p-4 border border-border">
+        <p class="text-tx-muted text-xs mb-1 uppercase tracking-wider">Aktywne polisy</p>
+        <p class="font-display text-2xl font-semibold">47</p>
+        <p class="text-xs text-emerald-400 mt-1.5 flex items-center gap-1">
+          <span class="material-symbols-outlined text-[14px]">trending_up</span> 3 nowe w tym tygodniu
+        </p>
+      </div>
+      <div class="bg-surface rounded-xl p-4 border border-border">
+        <p class="text-tx-muted text-xs mb-1 uppercase tracking-wider">Składki (maj)</p>
+        <p class="font-display text-2xl font-semibold text-accent">38 400 zł</p>
+        <div class="mt-2 h-1 bg-border rounded-full overflow-hidden">
+          <div class="h-full w-[85%] bg-accent rounded-full"></div>
+        </div>
+        <p class="text-[10px] text-tx-muted mt-1">85% celu (45 000 zł)</p>
+      </div>
+      <div class="bg-surface rounded-xl p-4 border border-border">
+        <p class="text-tx-muted text-xs mb-1 uppercase tracking-wider">Zadania dziś</p>
+        <p class="font-display text-2xl font-semibold">5</p>
+        <p class="text-xs text-orange-400 mt-1.5 flex items-center gap-1">
+          <span class="material-symbols-outlined text-[14px]">priority_high</span> 2 pilne
+        </p>
+      </div>
+    </div>
+
+    <!-- Bento grid -->
+    <h2 class="text-[10px] font-semibold text-tx-muted uppercase tracking-widest mb-3">Moduły</h2>
+    <div class="grid grid-cols-4 grid-rows-2 gap-3 mb-7" style="grid-auto-rows: 130px;">
+
+      <!-- 2×2 hero tile -->
+      <div class="col-span-2 row-span-2 bg-surface border border-border rounded-xl p-5 tile cursor-pointer relative overflow-hidden flex flex-col">
+        <div class="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent pointer-events-none"></div>
+        <div class="flex items-center justify-between mb-3">
+          <span class="material-symbols-outlined text-accent text-3xl">groups</span>
+          <span class="text-[10px] font-bold bg-accent/15 text-accent px-2 py-0.5 rounded-full">+3 nowych</span>
+        </div>
+        <p class="font-display font-semibold text-lg">Baza Klientów</p>
+        <p class="text-tx-muted text-sm mt-0.5">124 kontakty</p>
+        <div class="mt-auto flex gap-2 flex-wrap">
+          <span class="text-[10px] bg-accent/10 text-accent px-2 py-0.5 rounded-full">OC</span>
+          <span class="text-[10px] bg-surface-hi text-tx-dim px-2 py-0.5 rounded-full">AC</span>
+          <span class="text-[10px] bg-surface-hi text-tx-dim px-2 py-0.5 rounded-full">Życie</span>
+          <span class="text-[10px] bg-surface-hi text-tx-dim px-2 py-0.5 rounded-full">Majątek</span>
+        </div>
+      </div>
+
+      <!-- small tiles row 1 -->
+      <div class="bg-surface border border-border rounded-xl p-4 tile cursor-pointer flex flex-col">
+        <span class="material-symbols-outlined text-sky-400 text-xl mb-auto">verified_user</span>
+        <p class="font-medium text-sm mt-2">Polisy</p>
+        <p class="text-tx-muted text-xs">47 aktywnych</p>
+      </div>
+
+      <div class="bg-surface border border-border rounded-xl p-4 tile cursor-pointer flex flex-col relative">
+        <span class="absolute top-3 right-3 w-2 h-2 bg-orange-400 rounded-full"></span>
+        <span class="material-symbols-outlined text-orange-400 text-xl mb-auto">calendar_month</span>
+        <p class="font-medium text-sm mt-2">Terminarz</p>
+        <p class="text-tx-muted text-xs">2 dziś</p>
+      </div>
+
+      <!-- small tiles row 2 -->
+      <div class="bg-surface border border-border rounded-xl p-4 tile cursor-pointer flex flex-col">
+        <span class="material-symbols-outlined text-violet-400 text-xl mb-auto">view_kanban</span>
+        <p class="font-medium text-sm mt-2">Tablica</p>
+        <p class="text-tx-muted text-xs">5 w toku</p>
+      </div>
+
+      <div class="bg-surface border border-border rounded-xl p-4 tile cursor-pointer flex flex-col">
+        <span class="material-symbols-outlined text-emerald-400 text-xl mb-auto">payments</span>
+        <p class="font-medium text-sm mt-2">Finanse</p>
+        <p class="text-tx-muted text-xs">38 400 zł</p>
+      </div>
+    </div>
+
+    <!-- Activity -->
+    <div class="flex items-center justify-between mb-3">
+      <h2 class="text-[10px] font-semibold text-tx-muted uppercase tracking-widest">Ostatnia aktywność</h2>
+      <button class="text-xs text-accent hover:text-accent-dark transition-colors">Zobacz wszystko →</button>
+    </div>
+    <div class="space-y-2">
+
+      <div class="bg-surface border border-border rounded-xl p-4 flex items-center gap-3 hover:bg-surface-hi transition-colors cursor-pointer">
+        <div class="w-9 h-9 bg-accent/10 rounded-lg flex items-center justify-center flex-shrink-0">
+          <span class="material-symbols-outlined text-accent text-[18px]">verified_user</span>
+        </div>
+        <div class="flex-1 min-w-0">
+          <p class="text-sm">Nowa polisa życiowa zaakceptowana</p>
+          <p class="text-xs text-tx-muted">ID: #8921-2023 • przed chwilą</p>
+        </div>
+        <p class="text-sm font-semibold text-emerald-400 flex-shrink-0">+4 500 zł</p>
+      </div>
+
+      <div class="bg-surface border border-border rounded-xl p-4 flex items-center gap-3 hover:bg-surface-hi transition-colors cursor-pointer">
+        <div class="w-9 h-9 bg-violet-500/10 rounded-lg flex items-center justify-center flex-shrink-0">
+          <span class="material-symbols-outlined text-violet-400 text-[18px]">update</span>
+        </div>
+        <div class="flex-1 min-w-0">
+          <p class="text-sm">Aktualizacja danych — Nowak Sp. z o.o.</p>
+          <p class="text-xs text-tx-muted">Baza Klientów • 2 godz. temu</p>
+        </div>
+        <span class="material-symbols-outlined text-tx-muted text-[18px]">chevron_right</span>
+      </div>
+
+      <div class="bg-surface border border-border rounded-xl p-4 flex items-center gap-3 hover:bg-surface-hi transition-colors cursor-pointer">
+        <div class="w-9 h-9 bg-orange-500/10 rounded-lg flex items-center justify-center flex-shrink-0">
+          <span class="material-symbols-outlined text-orange-400 text-[18px]">notification_important</span>
+        </div>
+        <div class="flex-1 min-w-0">
+          <p class="text-sm">Termin przeglądu — Mercedes-Maybach S</p>
+          <p class="text-xs text-tx-muted">Terminarz • 5 godz. temu</p>
+        </div>
+        <span class="text-[10px] font-bold bg-orange-500/15 text-orange-400 px-2 py-1 rounded-full">PILNE</span>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+let slim = false;
+function toggle() {
+  slim = !slim;
+  document.getElementById('sidebar').classList.toggle('slim', slim);
+  document.getElementById('main').classList.toggle('slim', slim);
+}
+</script>
+</body>
+</html>

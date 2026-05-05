@@ -1,9 +1,12 @@
 """
 ftp_deploy.py — Build produkcyjny + deploy CRM-Alina na Hostido FTP
 
+Architektura serwera:
+  FTP root = web root redroad.pl (index.php, drogi.php itp. są tu bezpośrednio)
+  /alina/  = redroad.pl/alina/ = właściwy cel deploymentu
+
 Pobiera klucze z rrv vault, buduje Vite z wstrzykniętym env (bez zapisywania
-sekretów do pliku), wgrywa dist/ → /alina/ uwzględniając że Hostido FTP root
-jest NAD public_html.
+sekretów do pliku), wgrywa dist/ → /alina/.
 
 Użycie:
   python scripts/ftp_deploy.py             # build + deploy
@@ -15,7 +18,7 @@ import subprocess
 from ftplib import FTP
 
 
-SB_URL          = "https://xqznrssrlnxqkdvisnck.supabase.co"
+SB_URL           = "https://xqznrssrlnxqkdvisnck.supabase.co"
 REMOTE_SUBFOLDER = "alina"
 LOCAL_DIST       = "dist"
 
@@ -50,8 +53,8 @@ def upload_directory(ftp, local_dir, remote_dir):
     """Rekurencyjnie wgrywa local_dir → remote_dir przez STOR."""
     uploaded = 0
     for root, _dirs, files in os.walk(local_dir):
-        rel     = os.path.relpath(root, local_dir)
-        target  = remote_dir if rel == "." else f"{remote_dir}/{rel}".replace("\\", "/")
+        rel    = os.path.relpath(root, local_dir)
+        target = remote_dir if rel == "." else f"{remote_dir}/{rel}".replace("\\", "/")
         try:
             ftp.mkd(target)
         except Exception:
@@ -65,8 +68,8 @@ def upload_directory(ftp, local_dir, remote_dir):
     return uploaded
 
 
-def connect_and_enter_webroot():
-    """Łączy z FTP i wchodzi do web roota (public_html jeśli istnieje)."""
+def connect():
+    """Łączy z FTP. FTP root = web root redroad.pl — nie wchodzimy do public_html."""
     host   = get_vault_secret("HOSTIDO_FTP_HOST")
     user   = get_vault_secret("HOSTIDO_FTP_USER")
     passwd = get_vault_secret("HOSTIDO_FTP_PASS")
@@ -76,11 +79,6 @@ def connect_and_enter_webroot():
     ftp = FTP(host)
     ftp.login(user, passwd)
     ftp.set_pasv(True)
-    if "public_html" in ftp.nlst():
-        ftp.cwd("public_html")
-        print("[*] Weszłem do public_html/ (web root Hostido)")
-    else:
-        print("[*] public_html nie znaleziono — zostaję w FTP root")
     return ftp
 
 
@@ -103,7 +101,7 @@ def main():
         print(f"[ERR] Folder {LOCAL_DIST}/ nie istnieje. Uruchom bez --no-build.")
         sys.exit(1)
 
-    ftp = connect_and_enter_webroot()
+    ftp = connect()
     print(f"[*] Upload: {LOCAL_DIST}/ → /{REMOTE_SUBFOLDER}/ ...")
     n = upload_directory(ftp, LOCAL_DIST, REMOTE_SUBFOLDER)
     ftp.quit()

@@ -1,7 +1,11 @@
 """
 ftp_audit.py — Read-only diagnostyka serwera Hostido FTP
 
-Pokazuje: root FTP, web root, /alina/ (mlsd: rozmiar+data), /alina/assets/,
+Architektura serwera:
+  FTP root = web root redroad.pl (index.php, drogi.php itp. są tu bezpośrednio)
+  /alina/  = redroad.pl/alina/ = aktywny CRM
+
+Pokazuje: root FTP, /alina/ (mlsd: rozmiar+data), /alina/assets/,
 oraz src/href ścieżki z zdalnego index.html (weryfikacja czy Vite build ma
 dobre base URL).
 
@@ -39,19 +43,6 @@ def connect():
     return ftp
 
 
-def enter_webroot(ftp):
-    """
-    Hostido: konto deploy@redroad.pl loguje się NAD public_html.
-    Web root to public_html/ — wchodzimy tam automatycznie.
-    Zwraca ścieżkę (string) do późniejszego wyświetlania.
-    """
-    root_items = ftp.nlst()
-    if "public_html" in root_items:
-        ftp.cwd("public_html")
-        return "public_html"
-    return "(ftp root)"
-
-
 def list_mlsd(ftp, path, indent=0):
     """Listuje katalog przez mlsd — daje typ, rozmiar i datę modyfikacji."""
     pad = "  " * indent
@@ -69,38 +60,34 @@ def list_mlsd(ftp, path, indent=0):
         print(f"{pad}[!] Błąd mlsd dla '{path}': {e}")
 
 
-def check_index_html(ftp, alina_path="alina"):
-    """Pobiera index.html ze zdalnego /alina/ i wypisuje src/href ścieżki."""
+def check_index_html(ftp, path="alina"):
+    """Pobiera index.html i wypisuje src/href — weryfikacja base URL."""
     try:
         buf = io.BytesIO()
-        ftp.retrbinary(f"RETR {alina_path}/index.html", buf.write)
+        ftp.retrbinary(f"RETR {path}/index.html", buf.write)
         content = buf.getvalue().decode("utf-8")
         matches = re.findall(r'(?:src|href)="([^"]+)"', content)
-        print(f"\n=== Ścieżki w /{alina_path}/index.html (weryfikacja base URL) ===")
+        print(f"\n=== Ścieżki w /{path}/index.html (weryfikacja base URL) ===")
         for m in matches:
             print(f"  {m}")
     except Exception as e:
-        print(f"[!] Nie można pobrać {alina_path}/index.html: {e}")
+        print(f"[!] Nie można pobrać {path}/index.html: {e}")
 
 
 def main():
     ftp = connect()
     print(f"[*] Połączono: {ftp.getwelcome()[:80]}")
 
-    print("\n=== ROOT FTP (surowy) ===")
+    print("\n=== ROOT FTP = web root redroad.pl ===")
     lines = []
     ftp.dir(lines.append)
     for ln in lines:
         print(f"  {ln}")
 
-    webroot = enter_webroot(ftp)
-    print(f"\n=== WEB ROOT ({webroot}/) ===")
-    list_mlsd(ftp, ".")
-
-    print(f"\n=== /{webroot}/alina/ ===")
+    print("\n=== /alina/ (aktywny CRM) ===")
     list_mlsd(ftp, "alina")
 
-    print(f"\n=== /{webroot}/alina/assets/ ===")
+    print("\n=== /alina/assets/ ===")
     list_mlsd(ftp, "alina/assets")
 
     check_index_html(ftp, "alina")

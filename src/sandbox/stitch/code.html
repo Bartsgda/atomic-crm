@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pl"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&amp;family=Manrope:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#0d0e12",
+                        "on-tertiary-container": "#464545",
+                        "tertiary-container": "#b5b2b2",
+                        "tertiary-fixed-dim": "#c9c6c5",
+                        "inverse-surface": "#e3e2e7",
+                        "primary-fixed-dim": "#e9c349",
+                        "primary-container": "#d4af37",
+                        "on-primary-container": "#554300",
+                        "primary": "#f2ca50",
+                        "on-surface": "#e3e2e7",
+                        "surface-dim": "#121317",
+                        "background": "#121317",
+                        "on-error": "#690005",
+                        "surface-variant": "#343539",
+                        "on-secondary-fixed-variant": "#474746",
+                        "on-tertiary": "#313030",
+                        "on-error-container": "#ffdad6",
+                        "on-background": "#e3e2e7",
+                        "surface-container-high": "#292a2e",
+                        "outline-variant": "#4d4635",
+                        "primary-fixed": "#ffe088",
+                        "inverse-on-surface": "#2f3034",
+                        "outline": "#99907c",
+                        "error-container": "#93000a",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "on-tertiary-fixed-variant": "#474646",
+                        "surface-container": "#1e1f23",
+                        "inverse-primary": "#735c00",
+                        "on-primary": "#3c2f00",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "error": "#ffb4ab",
+                        "on-secondary": "#313030",
+                        "secondary": "#c8c6c5",
+                        "secondary-fixed": "#e5e2e1",
+                        "tertiary": "#d0cecd",
+                        "on-tertiary-fixed": "#1c1b1b",
+                        "surface-container-highest": "#343539",
+                        "surface-container-low": "#1a1b1f",
+                        "tertiary-fixed": "#e5e2e1",
+                        "on-primary-fixed-variant": "#574500",
+                        "surface-bright": "#38393d",
+                        "on-surface-variant": "#d0c5af",
+                        "surface-tint": "#e9c349",
+                        "secondary-container": "#474746",
+                        "surface": "#121317",
+                        "on-secondary-container": "#b7b5b4",
+                        "on-primary-fixed": "#241a00"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "container-max": "1200px",
+                        "stack-sm": "16px",
+                        "stack-lg": "64px",
+                        "stack-md": "32px",
+                        "margin-x": "64px",
+                        "gutter": "24px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Manrope"],
+                        "display-lg": ["Noto Serif"],
+                        "label-md": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "headline-md": ["Noto Serif"],
+                        "label-sm": ["Manrope"],
+                        "headline-xl": ["Noto Serif"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "28px", "letterSpacing": "0.01em", "fontWeight": "400"}],
+                        "display-lg": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.08em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "400"}],
+                        "headline-md": ["32px", {"lineHeight": "40px", "letterSpacing": "0em", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                        "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.01em", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .gold-dust-border {
+            border: 1px solid rgba(212, 175, 55, 0.15);
+        }
+        .luxury-gradient-bg {
+            background: radial-gradient(circle at top right, rgba(212, 175, 55, 0.05) 0%, transparent 70%), 
+                        radial-gradient(circle at bottom left, rgba(212, 175, 55, 0.03) 0%, transparent 50%);
+        }
+        .divider-gold {
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, rgba(212, 175, 55, 0.2) 50%, transparent 100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md luxury-gradient-bg min-h-screen pb-32">
+<!-- Top Navigation Bar (Shared Component) -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-6 py-4 bg-black/95 dark:bg-black/95 backdrop-blur-xl border-b border-[#d4af37]/20 shadow-[0_2px_15px_rgba(212,175,55,0.05)]">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#d4af37] cursor-pointer" data-icon="menu">menu</span>
+<h1 class="text-lg font-bold text-[#d4af37] tracking-widest font-noto-serif uppercase">LUXURY PRIVATE</h1>
+</div>
+<div class="relative">
+<div class="w-10 h-10 rounded-full border border-[#d4af37]/30 overflow-hidden">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="Close-up portrait of a sophisticated executive in a tailored black suit, set against a dark, moody background with subtle golden rim lighting. The style is cinematic and high-end, emphasizing professional excellence and private luxury, perfectly complementing the obsidian and gold UI palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyDn2TsQ9ayA-BYDDF_fWEWehQimw1zuocG8d9FXIyGLvRIfiuntid3I0IgpyeWwhEQcHhaGZZA6Y2sMdeQaZAeoeSp1bAX3YHiWPLao34wSxWDVmOj9TNr5wzDyBi1trbL9QNsLnwU8I6Eo-6DThDHCw8EK3jeedIt5CgPA33-57r468pCxArOtav8DD7wweQtcWgtYTWWRZ8iCUWzr_THWAW3Q_FqnsH6PazifxFQQ8lCRvnuJUyWE_LaHUzYTNw7PI0csuiZEY"/>
+</div>
+<div class="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-[#d4af37] border-2 border-black rounded-full"></div>
+</div>
+</header>
+<main class="pt-24 px-4 max-w-[1200px] mx-auto">
+<!-- Hero Section -->
+<section class="mb-stack-md">
+<p class="text-label-sm text-[#d4af37] uppercase tracking-[0.2em] mb-2">Witamy ponownie,</p>
+<h2 class="font-headline-md text-on-surface">Aleksander V.</h2>
+<div class="divider-gold mt-4"></div>
+</section>
+<!-- Dashboard Grid -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-stack-lg">
+<!-- Tile: Pulpit -->
+<div class="bg-surface-container gold-dust-border p-5 rounded-xl relative group cursor-pointer hover:bg-surface-container-high transition-all duration-300">
+<div class="flex justify-between items-start mb-6">
+<span class="material-symbols-outlined text-[#d4af37] text-3xl" data-icon="dashboard">dashboard</span>
+<button class="w-8 h-8 rounded-full border border-[#d4af37]/20 flex items-center justify-center text-[#d4af37] hover:bg-[#d4af37] hover:text-black transition-colors duration-200">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+</button>
+</div>
+<div class="absolute top-4 left-12">
+<span class="bg-[#d4af37] text-black text-[10px] font-bold px-1.5 py-0.5 rounded-full">2</span>
+</div>
+<p class="font-label-md text-on-surface uppercase tracking-wider">Pulpit</p>
+</div>
+<!-- Tile: Baza Klientów -->
+<div class="bg-surface-container gold-dust-border p-5 rounded-xl relative group cursor-pointer hover:bg-surface-container-high transition-all duration-300">
+<div class="flex justify-between items-start mb-6">
+<span class="material-symbols-outlined text-[#d4af37] text-3xl" data-icon="groups">groups</span>
+<div class="absolute top-4 left-12">
+<span class="bg-[#d4af37] text-black text-[10px] font-bold px-1.5 py-0.5 rounded-full">3</span>
+</div>
+<button class="w-8 h-8 rounded-full border border-[#d4af37]/20 flex items-center justify-center text-[#d4af37] hover:bg-[#d4af37] hover:text-black transition-colors duration-200">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+</button>
+</div>
+<p class="font-label-md text-on-surface uppercase tracking-wider">Baza Klientów</p>
+</div>
+<!-- Tile: Tablica -->
+<div class="bg-surface-container gold-dust-border p-5 rounded-xl relative group cursor-pointer hover:bg-surface-container-high transition-all duration-300">
+<div class="flex justify-between items-start mb-6">
+<span class="material-symbols-outlined text-[#d4af37] text-3xl" data-icon="view_kanban">view_kanban</span>
+<button class="w-8 h-8 rounded-full border border-[#d4af37]/20 flex items-center justify-center text-[#d4af37] hover:bg-[#d4af37] hover:text-black transition-colors duration-200">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+</button>
+</div>
+<div class="absolute top-4 left-12">
+<span class="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-[#d4af37] text-black">1</span>
+</div>
+<p class="font-label-md text-on-surface uppercase tracking-wider">Tablica</p>
+</div>
+<!-- Tile: Terminarz -->
+<div class="bg-surface-container gold-dust-border p-5 rounded-xl relative group cursor-pointer hover:bg-surface-container-high transition-all duration-300">
+<div class="flex justify-between items-start mb-6">
+<span class="material-symbols-outlined text-[#d4af37] text-3xl" data-icon="calendar_month">calendar_month</span>
+<button class="w-8 h-8 rounded-full border border-[#d4af37]/20 flex items-center justify-center text-[#d4af37] hover:bg-[#d4af37] hover:text-black transition-colors duration-200">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+</button>
+</div>
+<p class="font-label-md text-on-surface uppercase tracking-wider">Terminarz</p>
+</div>
+<!-- Tile: Pojazdy -->
+<div class="bg-surface-container gold-dust-border p-5 rounded-xl relative group cursor-pointer hover:bg-surface-container-high transition-all duration-300">
+<div class="flex justify-between items-start mb-6">
+<span class="material-symbols-outlined text-[#d4af37] text-3xl" data-icon="directions_car">directions_car</span>
+<div class="absolute top-4 left-12">
+<span class="bg-[#d4af37] text-black text-[10px] font-bold px-1.5 py-0.5 rounded-full">2</span>
+</div>
+<button class="w-8 h-8 rounded-full border border-[#d4af37]/20 flex items-center justify-center text-[#d4af37] hover:bg-[#d4af37] hover:text-black transition-colors duration-200">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+</button>
+</div>
+<p class="font-label-md text-on-surface uppercase tracking-wider">Pojazdy</p>
+</div>
+<!-- Tile: Majątek -->
+<div class="bg-surface-container gold-dust-border p-5 rounded-xl relative group cursor-pointer hover:bg-surface-container-high transition-all duration-300">
+<div class="flex justify-between items-start mb-6">
+<span class="material-symbols-outlined text-[#d4af37] text-3xl" data-icon="account_balance">account_balance</span>
+<div class="absolute top-4 left-12">
+<span class="bg-[#d4af37] w-2 h-2 rounded-full"></span>
+</div>
+<button class="w-8 h-8 rounded-full border border-[#d4af37]/20 flex items-center justify-center text-[#d4af37] hover:bg-[#d4af37] hover:text-black transition-colors duration-200">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+</button>
+</div>
+<p class="font-label-md text-on-surface uppercase tracking-wider">Majątek</p>
+</div>
+<!-- Tile: Życiowe -->
+<div class="bg-surface-container gold-dust-border p-5 rounded-xl relative group cursor-pointer hover:bg-surface-container-high transition-all duration-300">
+<div class="flex justify-between items-start mb-6">
+<span class="material-symbols-outlined text-[#d4af37] text-3xl" data-icon="favorite">favorite</span>
+<div class="absolute top-4 left-12">
+<span class="bg-[#d4af37] w-2 h-2 rounded-full"></span>
+</div>
+<button class="w-8 h-8 rounded-full border border-[#d4af37]/20 flex items-center justify-center text-[#d4af37] hover:bg-[#d4af37] hover:text-black transition-colors duration-200">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+</button>
+</div>
+<p class="font-label-md text-on-surface uppercase tracking-wider">Życiowe</p>
+</div>
+<!-- Tile: Turystyczne -->
+<div class="bg-surface-container gold-dust-border p-5 rounded-xl relative group cursor-pointer hover:bg-surface-container-high transition-all duration-300">
+<div class="flex justify-between items-start mb-6">
+<span class="material-symbols-outlined text-[#d4af37] text-3xl" data-icon="flight_takeoff">flight_takeoff</span>
+<div class="absolute top-4 left-12">
+<span class="bg-[#d4af37] w-2 h-2 rounded-full"></span>
+</div>
+<button class="w-8 h-8 rounded-full border border-[#d4af37]/20 flex items-center justify-center text-[#d4af37] hover:bg-[#d4af37] hover:text-black transition-colors duration-200">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+</button>
+</div>
+<p class="font-label-md text-on-surface uppercase tracking-wider">Turystyczne</p>
+</div>
+</div>
+<!-- Activity Section -->
+<section class="mt-stack-md">
+<div class="flex justify-between items-center mb-gutter">
+<h3 class="font-headline-md text-xl text-[#d4af37]">Ostatnia Aktywność</h3>
+<span class="text-label-sm text-secondary-fixed-dim uppercase cursor-pointer hover:text-[#d4af37] transition-colors">Zobacz Wszystko</span>
+</div>
+<div class="space-y-4">
+<!-- Activity Item 1 -->
+<div class="bg-surface-container gold-dust-border rounded-xl p-4 flex items-center gap-4">
+<div class="w-12 h-12 bg-[#d4af37]/10 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-[#d4af37]" data-icon="verified_user">verified_user</span>
+</div>
+<div class="flex-1">
+<p class="font-body-md text-on-surface">Nowa polisa życiowa zaakceptowana</p>
+<p class="text-label-sm text-gray-500">ID: #8921-2023 • Przed chwilą</p>
+</div>
+<div class="text-right">
+<p class="font-body-md text-[#d4af37]">+ 4 500 PLN</p>
+</div>
+</div>
+<!-- Activity Item 2 -->
+<div class="bg-surface-container gold-dust-border rounded-xl p-4 flex items-center gap-4">
+<div class="w-12 h-12 bg-[#d4af37]/10 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-[#d4af37]" data-icon="update">update</span>
+</div>
+<div class="flex-1">
+<p class="font-body-md text-on-surface">Aktualizacja danych w Baza Klientów</p>
+<p class="text-label-sm text-gray-500">Klient: Nowak Sp. z o.o. • 2 godz. temu</p>
+</div>
+<span class="material-symbols-outlined text-gray-600" data-icon="chevron_right">chevron_right</span>
+</div>
+<!-- Activity Item 3 -->
+<div class="bg-surface-container gold-dust-border rounded-xl p-4 flex items-center gap-4">
+<div class="w-12 h-12 bg-[#d4af37]/10 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-[#d4af37]" data-icon="notification_important">notification_important</span>
+</div>
+<div class="flex-1">
+<p class="font-body-md text-on-surface">Przypomnienie: Termin przeglądu technicznego</p>
+<p class="text-label-sm text-gray-500">Pojazd: Mercedes-Maybach S • 5 godz. temu</p>
+</div>
+<span class="bg-error/20 text-error px-2 py-1 rounded text-[10px] font-bold uppercase">Ważne</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar (Shared Component) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-[#121212]/90 dark:bg-[#121212]/90 backdrop-blur-lg border-t border-[#d4af37]/15 shadow-[0_-8px_30px_rgba(0,0,0,0.5)]">
+<!-- Pulpit (Active) -->
+<a class="flex flex-col items-center justify-center text-[#d4af37] bg-[#d4af37]/5 rounded-xl px-3 py-1 scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="dashboard">dashboard</span>
+<span class="font-noto-serif text-[10px] uppercase tracking-tighter">Pulpit</span>
+</a>
+<!-- Produkty -->
+<a class="flex flex-col items-center justify-center text-gray-500 hover:bg-[#d4af37]/10 hover:text-[#d4af37] scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="inventory_2">inventory_2</span>
+<span class="font-noto-serif text-[10px] uppercase tracking-tighter">Produkty</span>
+</a>
+<!-- XLSX -->
+<a class="flex flex-col items-center justify-center text-gray-500 hover:bg-[#d4af37]/10 hover:text-[#d4af37] scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="description">description</span>
+<span class="font-noto-serif text-[10px] uppercase tracking-tighter">XLSX</span>
+</a>
+<!-- Finanse -->
+<a class="flex flex-col items-center justify-center text-gray-500 hover:bg-[#d4af37]/10 hover:text-[#d4af37] scale-95 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="payments">payments</span>
+<span class="font-noto-serif text-[10px] uppercase tracking-tighter">Finanse</span>
+</a>
+</nav>
+<!-- Floating Action Button (FAB) - Contextual for Home/Dashboard -->
+<div class="fixed bottom-24 right-6 z-40">
+<button class="w-16 h-16 rounded-full bg-gradient-to-br from-[#d4af37] to-[#b38f2d] text-black shadow-[0_10px_30px_rgba(212,175,55,0.3)] flex items-center justify-center group active:scale-90 transition-transform duration-200">
+<span class="material-symbols-outlined text-3xl transition-transform group-hover:rotate-90" data-icon="add">add</span>
+</button>
+</div>
+</body></html>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { Dashboard } from "./components/Dashboard";
+import { LuxuryDashboard } from "./components/LuxuryDashboard";
 import { PolicyFormModal } from "./components/PolicyFormModal";
 import { ClientFormModal } from "./components/ClientFormModal";
 import { TerminationPreview } from "./components/TerminationPreview";
@@ -639,23 +640,39 @@ function App() {
         isSyncing={isSyncing}
       />
 
-      <main className="flex-1 overflow-auto h-screen print:h-auto print:overflow-visible relative bg-zinc-50/50 dark:bg-zinc-900/50">
+      <main
+        className={`flex-1 overflow-auto h-screen print:h-auto print:overflow-visible relative ${uiPrefs.skin !== "luxury-gold" ? "bg-zinc-50/50 dark:bg-zinc-900/50" : ""}`}
+        style={
+          uiPrefs.skin === "luxury-gold" ? { background: "#121317" } : undefined
+        }
+      >
         <div className="print:p-0 min-h-full h-full">
-          {currentPage === "dashboard" && (
-            <Dashboard
-              key={`dashboard-${dataVersion}`} // Nuclear Re-mount
-              state={state}
-              onNavigate={navigate}
-              onDeletePolicy={handleDeletePolicy}
-              filterTypes={dashboardFilter}
-              predefinedDateRange={dashboardDateFilter}
-              categoryTitle={
-                MENU_CATEGORIES.find((c) => c.id === activeCategory)?.label
-              }
-              sortByDate={sortByDate}
-              onImportComplete={refreshData}
-              isCompact={uiPrefs.density === "compact"}
-            />
+          {currentPage === "dashboard" &&
+            uiPrefs.skin === "luxury-gold" &&
+            activeCategory === "all" && (
+              <LuxuryDashboard
+                key={`luxury-dash-${dataVersion}`}
+                state={state}
+                onNavigate={navigate}
+                onCategorySelect={handleCategorySelect}
+              />
+            )}
+          {currentPage === "dashboard" &&
+            (uiPrefs.skin !== "luxury-gold" || activeCategory !== "all") && (
+              <Dashboard
+                key={`dashboard-${dataVersion}`}
+                state={state}
+                onNavigate={navigate}
+                onDeletePolicy={handleDeletePolicy}
+                filterTypes={dashboardFilter}
+                predefinedDateRange={dashboardDateFilter}
+                categoryTitle={
+                  MENU_CATEGORIES.find((c) => c.id === activeCategory)?.label
+                }
+                sortByDate={sortByDate}
+                onImportComplete={refreshData}
+                isCompact={uiPrefs.density === "compact"}
+              />
           )}
 
           {currentPage === "vision" && <VisionBoard />}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Home,
   Trello,
@@ -228,7 +228,16 @@ export const Sidebar: React.FC<SidebarProps> = ({
   isSyncing = false,
 }) => {
   const [isSystemOpen, setIsSystemOpen] = useState(false);
+  const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
   const skin = uiPrefs.skin || "default";
+
+  useEffect(() => {
+    supabaseStorage.sb().auth.getSession().then(({ data }) => {
+      const meta = data.session?.user?.user_metadata;
+      const url = meta?.avatar_url ?? meta?.picture ?? null;
+      if (url) setAvatarUrl(url);
+    }).catch(() => {});
+  }, []);
 
   const getCategoryCount = (categoryId: string, types?: PolicyType[]) => {
     if (!state.policies) return 0;
@@ -425,14 +434,23 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <div className="v1-sidebar-header-blob absolute -top-24 -left-24 w-48 h-48 bg-indigo-500/10 blur-[100px] rounded-full" />
 
         <div className="flex items-center gap-4 relative z-10">
-          <div className="v1-logo-wrap w-12 h-12 bg-white/5 backdrop-blur-xl rounded-[1.25rem] border border-white/10 flex items-center justify-center shadow-2xl shadow-indigo-500/20 group-hover:scale-105 transition-transform duration-500">
-            <div className="relative">
-              <div className="v1-sidebar-header-blob absolute inset-0 bg-indigo-400 blur-md opacity-30 animate-pulse" />
-              <Activity
-                className="v1-sidebar-header-icon w-6 h-6 text-indigo-400 relative z-10"
-                strokeWidth={1.5}
+          <div className="v1-logo-wrap w-12 h-12 bg-white/5 backdrop-blur-xl rounded-[1.25rem] border border-white/10 flex items-center justify-center shadow-2xl shadow-indigo-500/20 group-hover:scale-105 transition-transform duration-500 overflow-hidden">
+            {avatarUrl ? (
+              <img
+                src={avatarUrl}
+                alt="avatar"
+                className="w-full h-full object-cover"
+                onError={() => setAvatarUrl(null)}
               />
-            </div>
+            ) : (
+              <div className="relative">
+                <div className="v1-sidebar-header-blob absolute inset-0 bg-indigo-400 blur-md opacity-30 animate-pulse" />
+                <Activity
+                  className="v1-sidebar-header-icon w-6 h-6 text-indigo-400 relative z-10"
+                  strokeWidth={1.5}
+                />
+              </div>
+            )}
           </div>
           <div className="flex flex-col">
             <div className="flex items-center gap-1.5">
@@ -498,10 +516,147 @@ export const Sidebar: React.FC<SidebarProps> = ({
         </div>
       </div>
 
-      {/* Skin Selection integrated into ThemeSettings below */}
+      {/* ── LUXURY GOLD: Tile Grid Navigation ── */}
+      {skin === "luxury-gold" && (() => {
+        const GOLD = "#d4af37";
+        const GOLD_DIM = "#f2ca50";
+        const TILE_BG = "#1e1f23";
+        const TILE_BG_ACTIVE = "rgba(212,175,55,0.12)";
+        const TILE_BORDER = "rgba(212,175,55,0.12)";
+        const TILE_BORDER_ACTIVE = "rgba(212,175,55,0.40)";
 
-      {/* ── Navigation ── */}
-      <nav
+        const luxTiles = [
+          { id: "all",         label: "Pulpit",       Icon: Zap,        count: getCategoryCount("all"), onClick: () => { onCategorySelect("all", undefined, false); onNavigate("dashboard"); } },
+          { id: "clients",     label: "Klienci",      Icon: Users,      count: state.clients?.length ?? 0, onAdd: () => onAddClient(), onClick: () => onNavigate("clients") },
+          { id: "offers",      label: "Tablica",      Icon: Trello,     count: getCategoryCount("offers"), onClick: () => { onCategorySelect("offers", undefined, false); onNavigate("offers"); } },
+          { id: "calendar",    label: "Terminarz",    Icon: CalendarIcon, count: 0, onClick: () => onNavigate("calendar") },
+          { id: "vehicles",    label: "Pojazdy",      Icon: Car,        count: getCategoryCount("vehicles", ["OC","AC","BOTH"] as PolicyType[]), onAdd: () => onNavigate("new", { initialType: "OC" }), onClick: () => { onCategorySelect("vehicles", ["OC","AC","BOTH"] as PolicyType[], false); onNavigate("dashboard"); } },
+          { id: "property",    label: "Majątek",      Icon: HomeIcon,   count: getCategoryCount("property", ["DOM"] as PolicyType[]),  onAdd: () => onNavigate("new", { initialType: "DOM" }),   onClick: () => { onCategorySelect("property", ["DOM"] as PolicyType[], false); onNavigate("dashboard"); } },
+          { id: "life",        label: "Życiowe",      Icon: Heart,      count: getCategoryCount("life", ["ZYCIE"] as PolicyType[]),   onAdd: () => onNavigate("new", { initialType: "ZYCIE" }),  onClick: () => { onCategorySelect("life", ["ZYCIE"] as PolicyType[], false); onNavigate("dashboard"); } },
+          { id: "travel",      label: "Turystyczne",  Icon: Plane,      count: getCategoryCount("travel", ["PODROZ"] as PolicyType[]), onAdd: () => onNavigate("new", { initialType: "PODROZ" }), onClick: () => { onCategorySelect("travel", ["PODROZ"] as PolicyType[], false); onNavigate("dashboard"); } },
+          { id: "terminations",label: "Wypowiedzenia",Icon: ShieldAlert, count: getCategoryCount("terminations"), onClick: () => onNavigate("terminations") },
+          { id: "renewals",    label: "Wznowienia",   Icon: RefreshCcw, count: getCategoryCount("renewals", MENU_CATEGORIES.find(c=>c.id==="renewals")?.types), onClick: () => { const cat = MENU_CATEGORIES.find(c=>c.id==="renewals")!; onCategorySelect(cat.id, cat.types, cat.sortByDate); onNavigate("dashboard"); } },
+          { id: "insurers",    label: "Towarzystwa",  Icon: Building2,  count: getCategoryCount("insurers"), onClick: () => onNavigate("insurers") },
+          { id: "finance",     label: "Finanse",      Icon: Banknote,   count: 0, onClick: () => onNavigate("finance") },
+        ] as const;
+
+        const isActiveTile = (id: string) => {
+          if (id === "clients") return ["clients","client-details"].includes(currentPage);
+          if (["insurers","finance","calendar","offers","terminations"].includes(id)) return currentPage === id;
+          return currentPage === "dashboard" && activeCategory === id;
+        };
+
+        return (
+          <nav className="px-2 flex-1 overflow-y-auto pb-6" style={{ scrollbarWidth: "none" }}>
+            {/* Tile grid */}
+            <div className="grid grid-cols-2 gap-1.5 mb-4">
+              {luxTiles.map(tile => {
+                const active = isActiveTile(tile.id);
+                return (
+                  <div
+                    key={tile.id}
+                    onClick={tile.onClick}
+                    className="relative cursor-pointer rounded-xl p-3 transition-all duration-200"
+                    style={{
+                      background: active ? TILE_BG_ACTIVE : TILE_BG,
+                      border: `1px solid ${active ? TILE_BORDER_ACTIVE : TILE_BORDER}`,
+                    }}
+                  >
+                    {/* Icon + add row */}
+                    <div className="flex justify-between items-start mb-3">
+                      <tile.Icon
+                        size={20}
+                        strokeWidth={1.5}
+                        style={{ color: active ? GOLD_DIM : GOLD, flexShrink: 0 }}
+                      />
+                      {"onAdd" in tile && tile.onAdd && (
+                        <button
+                          onClick={e => { e.stopPropagation(); (tile as any).onAdd(); }}
+                          className="w-5 h-5 rounded-full flex items-center justify-center transition-colors"
+                          style={{ border: "1px solid rgba(212,175,55,0.22)", color: GOLD }}
+                        >
+                          <Plus size={10} strokeWidth={2.5} />
+                        </button>
+                      )}
+                    </div>
+                    {/* Count badge */}
+                    {tile.count > 0 && (
+                      <div className="absolute top-2.5 left-8">
+                        <span
+                          className="text-[8px] font-bold px-1 py-px rounded-full"
+                          style={{ background: GOLD, color: "#1c1500" }}
+                        >
+                          {tile.count}
+                        </span>
+                      </div>
+                    )}
+                    {/* Label */}
+                    <p
+                      className="text-[9px] font-bold uppercase tracking-wider leading-tight"
+                      style={{ color: active ? GOLD_DIM : "#b0aea8" }}
+                    >
+                      {tile.label}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Tools strip — widoczne dla wszystkich */}
+            <div style={{ borderTop: "1px solid rgba(212,175,55,0.10)", paddingTop: "10px" }}>
+              <p className="text-[8px] font-bold uppercase mb-2 px-1" style={{ color: "#4d4635", letterSpacing: "0.15em" }}>
+                Narzędzia
+              </p>
+              {[
+                { label: "Import XLSX", Icon: FileDown, action: onToggleImporter },
+                { label: "Wygląd",      Icon: Palette,  action: onToggleTheme },
+              ].map(({ label, Icon, action }) => (
+                <button
+                  key={label}
+                  onClick={action}
+                  className="w-full flex items-center gap-2 px-2 py-1.5 rounded-lg text-[10px] font-bold transition-all text-left"
+                  style={{ color: "#5a5950" }}
+                >
+                  <Icon size={12} style={{ flexShrink: 0 }} /> {label}
+                </button>
+              ))}
+            </div>
+
+            {/* Admin section — tylko dla admina */}
+            {isAdmin && (
+              <div style={{ borderTop: "1px solid rgba(212,175,55,0.08)", paddingTop: "10px", marginTop: "6px" }}>
+                <p className="text-[8px] font-bold uppercase mb-2 px-1" style={{ color: "#92400e", letterSpacing: "0.15em" }}>
+                  ⬥ Admin
+                </p>
+                {[
+                  { label: "Rejestr Czynności", Icon: Activity, action: onToggleActivityLog, color: "#5a5950" },
+                  { label: "BugBot / Tester",   Icon: Bug,      action: onToggleTester,      color: "#5a5950" },
+                  ...(onOpenSnapshots ? [{ label: "Snapshoty bazy", Icon: Camera, action: onOpenSnapshots, color: "#5a5950" }] : []),
+                  ...(onWipeData      ? [{ label: "Nuclear Reset",  Icon: Trash2, action: onWipeData,      color: "#991b1b" }] : []),
+                ].map(({ label, Icon, action, color }) => (
+                  <button
+                    key={label}
+                    onClick={action}
+                    className="w-full flex items-center gap-2 px-2 py-1.5 rounded-lg text-[10px] font-bold transition-all text-left"
+                    style={{ color }}
+                  >
+                    <Icon size={12} style={{ flexShrink: 0 }} /> {label}
+                  </button>
+                ))}
+              </div>
+            )}
+
+            {showThemeSettings && (
+              <div style={{ borderTop: "1px solid rgba(212,175,55,0.08)", marginTop: "8px" }}>
+                <ThemeSettings prefs={uiPrefs} onUpdate={onUpdateUiPrefs} />
+              </div>
+            )}
+          </nav>
+        );
+      })()}
+
+      {/* ── Original Navigation (non-luxury skins) ── */}
+      {skin !== "luxury-gold" && <nav
         className="px-3 space-y-0.5 flex-1 overflow-y-auto pb-10"
         style={{ scrollbarWidth: "none" }}
       >
@@ -688,7 +843,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             )}
           </div>
         )}
-      </nav>
+      </nav>}
     </aside>
   );
 };

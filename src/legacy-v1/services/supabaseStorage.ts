@@ -250,14 +250,17 @@ async function noteToRow(n: ClientNote, dek: CryptoKey | null) {
     tag: n.tag || null,
     reminder_date: n.reminderDate ? new Date(n.reminderDate).toISOString() : null,
     reminder_status: reminderStatus,
-    linked_policy_ids: n.linkedPolicyIds ?? [],
+    linked_policy_ids: await Promise.all((n.linkedPolicyIds ?? []).map(id => toUUID(id))),
     history: n.history ?? [],
     v1_original_id: isValidUUID(n.id) ? null : n.id,
     v1_original_client_id: isValidUUID(n.clientId) ? null : n.clientId,
   };
 }
 
-async function rowToNote(r: any, dek: CryptoKey | null): Promise<ClientNote> {
+async function rowToNote(r: any, dek: CryptoKey | null, policyUuidToV1?: Map<string, string>): Promise<ClientNote> {
+  const linkedIds = (r.linked_policy_ids ?? []).map(
+    (uuid: string) => policyUuidToV1?.get(uuid) ?? uuid,
+  );
   return {
     id: r.v1_original_id || r.id,
     clientId: r.v1_original_client_id || r.client_id,
@@ -268,7 +271,7 @@ async function rowToNote(r: any, dek: CryptoKey | null): Promise<ClientNote> {
       ? new Date(r.reminder_date).toISOString().split('T')[0]
       : undefined,
     isCompleted: r.reminder_status === 'UKONCZONE',
-    linkedPolicyIds: r.linked_policy_ids ?? [],
+    linkedPolicyIds: linkedIds,
     history: Array.isArray(r.history) ? r.history : [],
   };
 }
@@ -400,10 +403,14 @@ class SupabaseStorageManager {
     }
 
     const dek = this.dek;
+    const policyUuidToV1 = new Map<string, string>();
+    for (const r of policiesRes.data ?? []) {
+      if (r.v1_original_id) policyUuidToV1.set(r.id, r.v1_original_id);
+    }
     const [clients, policies, notes, trash] = await Promise.all([
       Promise.all((clientsRes.data ?? []).map(r => rowToClient(r, dek))),
       Promise.all((policiesRes.data ?? []).map(r => rowToPolicy(r, dek))),
-      Promise.all((notesRes.data ?? []).map(r => rowToNote(r, dek))),
+      Promise.all((notesRes.data ?? []).map(r => rowToNote(r, dek, policyUuidToV1))),
       Promise.all((trashRes.data ?? []).map(r => trashToItem(r, dek))),
     ]);
 

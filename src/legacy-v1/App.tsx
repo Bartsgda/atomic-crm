@@ -427,6 +427,20 @@ function App() {
       .catch(() => setIsAdmin(false));
   }, []);
 
+  // Auto-snapshot: raz dziennie przy pierwszym zalogowaniu
+  useEffect(() => {
+    const KEY = "crm_alina_last_snap_date";
+    const today = new Date().toISOString().slice(0, 10);
+    if (localStorage.getItem(KEY) === today) return;
+    supabaseStorage
+      .createSnapshot(`auto ${today}`)
+      .then(() => {
+        localStorage.setItem(KEY, today);
+        console.log(`[AutoSnap] Snapshot ${today} OK`);
+      })
+      .catch((e) => console.warn("[AutoSnap] failed:", e));
+  }, []);
+
   // Integracja StatusEye → otwiera AutoTester / AgentKarateka
   useEffect(() => {
     const openTester = () => setIsTesterOpen(true);

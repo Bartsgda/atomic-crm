@@ -129,8 +129,8 @@ async function clientToRow(c: Client, dek: CryptoKey | null) {
   return {
     id: dbId,
     tenant_id: TENANT_ID,
-    first_name: c.firstName || null,
-    last_name: c.lastName || null,
+    first_name: c.firstName || '',
+    last_name: c.lastName || '',
     pesel_encrypted: await encStr(c.pesel, dek),
     birth_date: c.birthDate || null,
     gender: c.gender || null,

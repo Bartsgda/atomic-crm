@@ -158,13 +158,9 @@ function App() {
     try {
       const freshState = await storage.init();
       const rawPrefs = storage.getUiPrefs();
-      // remap legacy 'premium' skin → 'luxury-gold'
       const prefs = {
         ...rawPrefs,
-        skin:
-          !rawPrefs.skin || rawPrefs.skin === "premium"
-            ? "luxury-gold"
-            : rawPrefs.skin,
+        skin: "luxury-gold" as UiPreferences["skin"],
       };
 
       // NUCLEAR REFRESH: Force new object reference to trigger React updates
@@ -673,7 +669,7 @@ function App() {
                 onImportComplete={refreshData}
                 isCompact={uiPrefs.density === "compact"}
               />
-          )}
+            )}
 
           {currentPage === "vision" && <VisionBoard />}
           {currentPage === "sandbox" && <DesignSahara />}

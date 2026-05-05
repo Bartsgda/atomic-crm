@@ -607,19 +607,22 @@ export const Sidebar: React.FC<SidebarProps> = ({
               <p className="text-[8px] font-bold uppercase mb-2 px-1" style={{ color: "#4d4635", letterSpacing: "0.15em" }}>
                 Narzędzia
               </p>
-              {[
-                { label: "Import XLSX", Icon: FileDown, action: onToggleImporter },
-                { label: "Wygląd",      Icon: Palette,  action: onToggleTheme },
-              ].map(({ label, Icon, action }) => (
+              <button
+                onClick={onToggleImporter}
+                className="w-full flex items-center gap-2 px-2 py-1.5 rounded-lg text-[10px] font-bold transition-all text-left"
+                style={{ color: "#5a5950" }}
+              >
+                <FileDown size={12} style={{ flexShrink: 0 }} /> Import XLSX
+              </button>
+              {isAdmin && (
                 <button
-                  key={label}
-                  onClick={action}
+                  onClick={onToggleTheme}
                   className="w-full flex items-center gap-2 px-2 py-1.5 rounded-lg text-[10px] font-bold transition-all text-left"
                   style={{ color: "#5a5950" }}
                 >
-                  <Icon size={12} style={{ flexShrink: 0 }} /> {label}
+                  <Palette size={12} style={{ flexShrink: 0 }} /> Wygląd
                 </button>
-              ))}
+              )}
             </div>
 
             {/* Admin section — tylko dla admina */}

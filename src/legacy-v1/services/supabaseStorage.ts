@@ -303,10 +303,11 @@ async function itemToTrash(item: DeletedItem, dek: CryptoKey | null) {
 // ─── Defaults ─────────────────────────────────────────────────────────────────
 
 const DEFAULT_PREFS: UiPreferences = {
-  theme: 'light',
+  theme: 'dark',
   density: 'comfortable',
-  primaryColor: '#dc2626',
+  primaryColor: '#d4af37',
   fontScale: 1.0,
+  skin: 'luxury-gold',
 };
 
 const DEFAULT_CHECKLISTS: ChecklistTemplates = {

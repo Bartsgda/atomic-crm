@@ -1,162 +1,192 @@
+export type PolicyType =
+  | "OC"
+  | "AC"
+  | "BOTH"
+  | "DOM"
+  | "ZYCIE"
+  | "PODROZ"
+  | "INNE"
+  | "FIRMA";
 
-export type PolicyType = 'OC' | 'AC' | 'BOTH' | 'DOM' | 'ZYCIE' | 'PODROZ' | 'INNE' | 'FIRMA';
+export type SalesStage =
+  | "sprzedaż"
+  | "sprzedany"
+  | "of_do zrobienia"
+  | "przeł kontakt"
+  | "czekam na dane/dokum"
+  | "of_przedst"
+  | "oferta_wysłana"
+  | "ucięty kontakt"
+  | "rez po ofercie_kont za rok"
+  | "zbycie_pojazdu"
+  | "inne";
 
-export type SalesStage = 
-  | 'sprzedaż'
-  | 'sprzedany' 
-  | 'of_do zrobienia'
-  | 'przeł kontakt'
-  | 'czekam na dane/dokum' 
-  | 'of_przedst' 
-  | 'oferta_wysłana' 
-  | 'ucięty kontakt'
-  | 'rez po ofercie_kont za rok'
-  | 'zbycie_pojazdu'
-  | 'inne';
+export type NoteTag =
+  | "ROZMOWA"
+  | "RODZINA"
+  | "OCZEKIWANIA"
+  | "OFERTA"
+  | "STATUS"
+  | "PRYWATNE"
+  | "IMPORT"
+  | "WINDYKACJA"
+  | "SZKODA"
+  | "DECISION_PRICE"
+  | "DECISION_OFFER"
+  | "DECISION_LATER"
+  | "WSP"
+  | "AUDYT";
 
-export type NoteTag = 'ROZMOWA' | 'RODZINA' | 'OCZEKIWANIA' | 'OFERTA' | 'STATUS' | 'PRYWATNE' | 'IMPORT' | 'WINDYKACJA' | 'SZKODA' | 'DECISION_PRICE' | 'DECISION_OFFER' | 'DECISION_LATER' | 'WSP' | 'AUDYT';
-
-export type PaymentStatus = 
-  | 'PAID'
-  | 'UNPAID'
-  | 'PARTIAL'
-  | 'OVERDUE'
-  | 'INSTALLMENTS';
+export type PaymentStatus =
+  | "PAID"
+  | "UNPAID"
+  | "PARTIAL"
+  | "OVERDUE"
+  | "INSTALLMENTS";
 
 export enum TerminationBasis {
-  ART_28 = 'art28',
-  ART_28A = 'art28a',
-  ART_31 = 'art31',
-  OWU = 'owu',
-  OTHER = 'other'
+  ART_28 = "art28",
+  ART_28A = "art28a",
+  ART_31 = "art31",
+  OWU = "owu",
+  OTHER = "other",
 }
 
 export interface InsurerConfig {
-    id: string;
-    name: string;
-    managerName?: string;
-    managerPhone?: string;
-    managerEmail?: string;
-    helpdeskPhone?: string;
-    isActive: boolean;
-    legalName?: string;
+  id: string;
+  name: string;
+  managerName?: string;
+  managerPhone?: string;
+  managerEmail?: string;
+  helpdeskPhone?: string;
+  isActive: boolean;
+  legalName?: string;
 }
 
 export interface ChecklistItemDef {
-    id: string;
-    label: string;
-    isRequired: boolean;
+  id: string;
+  label: string;
+  isRequired: boolean;
 }
 
 export type ChecklistTemplates = Record<string, ChecklistItemDef[]>;
 
-export type VehicleSubType = 'OSOBOWY' | 'CIEZAROWY' | 'MOTOCYKL' | 'QUAD' | 'CIAGNIK' | 'PRZYCZEPA' | 'AUTOBUS' | 'FLOTA' | 'INNE';
+export type VehicleSubType =
+  | "OSOBOWY"
+  | "CIEZAROWY"
+  | "MOTOCYKL"
+  | "QUAD"
+  | "CIAGNIK"
+  | "PRZYCZEPA"
+  | "AUTOBUS"
+  | "FLOTA"
+  | "INNE";
 
 export interface CoOwner {
-    name: string;
-    pesel?: string;
-    address?: string;
-    type?: 'PERSON' | 'LEASING' | 'BANK'; 
-    notes?: string; 
-    phone?: string; 
-    email?: string; 
+  name: string;
+  pesel?: string;
+  address?: string;
+  type?: "PERSON" | "LEASING" | "BANK";
+  notes?: string;
+  phone?: string;
+  email?: string;
 }
 
 export interface AutoDetails {
-    vehicleType?: VehicleSubType;
-    
-    // Dane Techniczne
-    productionYear?: string; 
-    engineCapacity?: string; 
-    enginePower?: string;
-    fuelType?: 'BENZYNA' | 'DIESEL' | 'LPG' | 'HYBRYDA' | 'ELEKTRYK';    
-    grossWeight?: string;
-    mileage?: number; 
-    
-    // Wartość i Własność
-    vehicleValue?: number; 
-    vehicleValueType?: 'BRUTTO' | 'NETTO';
-    ownership?: 'PRYWATNA' | 'LEASING' | 'KREDYT';
-    
-    assistanceVariant: 'PODSTAWOWY' | 'ROZSZERZONY' | 'VIP';
-    towingLimitPL: 'BRAK' | '100KM' | '200KM' | '500KM' | 'NO_LIMIT';
-    towingLimitEU: 'BRAK' | '500KM' | '1000KM' | 'NO_LIMIT';
-    replacementCar: 'BRAK' | 'ACCIDENT_3' | 'ALL_7' | 'MAX_21';
-    tires: boolean;
-    windows: boolean;
-    acVariant?: 'KOSZTORYS' | 'ASO' | 'PARTNER';
-    acAmortization?: boolean;
-    acDeductible?: number;
-    
-    coOwners?: CoOwner[]; 
-    insuranceItems?: string; 
+  vehicleType?: VehicleSubType;
+
+  // Dane Techniczne
+  productionYear?: string;
+  engineCapacity?: string;
+  enginePower?: string;
+  fuelType?: "BENZYNA" | "DIESEL" | "LPG" | "HYBRYDA" | "ELEKTRYK";
+  grossWeight?: string;
+  mileage?: number;
+
+  // Wartość i Własność
+  vehicleValue?: number;
+  vehicleValueType?: "BRUTTO" | "NETTO";
+  ownership?: "PRYWATNA" | "LEASING" | "KREDYT";
+
+  assistanceVariant: "PODSTAWOWY" | "ROZSZERZONY" | "VIP";
+  towingLimitPL: "BRAK" | "100KM" | "200KM" | "500KM" | "NO_LIMIT";
+  towingLimitEU: "BRAK" | "500KM" | "1000KM" | "NO_LIMIT";
+  replacementCar: "BRAK" | "ACCIDENT_3" | "ALL_7" | "MAX_21";
+  tires: boolean;
+  windows: boolean;
+  acVariant?: "KOSZTORYS" | "ASO" | "PARTNER";
+  acAmortization?: boolean;
+  acDeductible?: number;
+
+  coOwners?: CoOwner[];
+  insuranceItems?: string;
 }
 
 export interface HomeDetails {
-    objectType: 'MIESZKANIE' | 'DOM' | 'BUDOWA' | 'LETNISKOWY';
-    constructionType: 'MUROWANA' | 'DREWNIANA';
-    yearBuilt?: string;
-    area?: number; 
-    floor?: 'PARTER' | 'SRODKOWE' | 'OSTATNIE';
-    totalFloors?: number; 
-    photovoltaics?: boolean; 
-    
-    sumWalls?: number;
-    sumFixedElements?: number;
-    sumItems?: number;
-    
-    flood: boolean;
-    theft: boolean;
-    surges: boolean;
-    ocPrivate: boolean;
-    assignmentBank?: string;
-    
-    coOwners?: CoOwner[]; 
+  objectType: "MIESZKANIE" | "DOM" | "BUDOWA" | "LETNISKOWY";
+  constructionType: "MUROWANA" | "DREWNIANA";
+  yearBuilt?: string;
+  area?: number;
+  floor?: "PARTER" | "SRODKOWE" | "OSTATNIE";
+  totalFloors?: number;
+  photovoltaics?: boolean;
 
-    ownershipType?: 'WLASNOSC' | 'SPOLDZIELCZE' | 'NAJEMCA' | 'WYNAJMUJACY';
-    businessActivity?: boolean; 
-    businessActivityOver50?: boolean; 
-    outbuildingsIncluded?: boolean; 
-    securityType?: 'STANDARD' | 'DRZWI_ATEST' | 'ALARM' | 'MONITORING';
-    historyClaims?: 'BRAK' | '1_SZKODA' | 'WIELE';
+  sumWalls?: number;
+  sumFixedElements?: number;
+  sumItems?: number;
 
-    customTags?: string[]; 
+  flood: boolean;
+  theft: boolean;
+  surges: boolean;
+  ocPrivate: boolean;
+  assignmentBank?: string;
+
+  coOwners?: CoOwner[];
+
+  ownershipType?: "WLASNOSC" | "SPOLDZIELCZE" | "NAJEMCA" | "WYNAJMUJACY";
+  businessActivity?: boolean;
+  businessActivityOver50?: boolean;
+  outbuildingsIncluded?: boolean;
+  securityType?: "STANDARD" | "DRZWI_ATEST" | "ALARM" | "MONITORING";
+  historyClaims?: "BRAK" | "1_SZKODA" | "WIELE";
+
+  customTags?: string[];
 }
 
 export interface TravelParticipant {
-    fullName: string;
-    birthDate?: string; 
-    notes?: string;
+  fullName: string;
+  birthDate?: string;
+  notes?: string;
 }
 
 export interface TravelDetails {
-    zone: 'EUROPA' | 'SWIAT';
-    participantsCount: number;
-    participants?: TravelParticipant[]; 
-    purpose: 'WYPOCZYNEK' | 'PRACA' | 'SPORT' | 'SPORT_EXTREME';
-    skiing: boolean;
-    chronicDiseases: boolean;
-    alcoholClause: boolean; 
-    sumMedical: number;
-    durationDays?: number; 
+  zone: "EUROPA" | "SWIAT";
+  participantsCount: number;
+  participants?: TravelParticipant[];
+  purpose: "WYPOCZYNEK" | "PRACA" | "SPORT" | "SPORT_EXTREME";
+  skiing: boolean;
+  chronicDiseases: boolean;
+  alcoholClause: boolean;
+  sumMedical: number;
+  durationDays?: number;
 }
 
 export interface LifePerson {
-    name: string;
-    role: 'UBEZPIECZONY' | 'UPOSAZONY';
-    pesel?: string;
-    percentShare?: number; // Dla uposażonych
+  name: string;
+  role: "UBEZPIECZONY" | "UPOSAZONY";
+  pesel?: string;
+  percentShare?: number; // Dla uposażonych
 }
 
 export interface LifeDetails {
-    lifeType: 'INDYWIDUALNA' | 'GRUPOWA' | 'SZKOLNA';
-    sumDeath: number;
-    hospital: boolean;
-    seriousIllness: boolean;
-    accidentDeath: boolean; 
-    hasBeneficiaries?: boolean;
-    insuredPersons?: LifePerson[]; // Lista ubezpieczonych (np. dzieci)
-    beneficiaries?: LifePerson[]; // Lista uposażonych
+  lifeType: "INDYWIDUALNA" | "GRUPOWA" | "SZKOLNA";
+  sumDeath: number;
+  hospital: boolean;
+  seriousIllness: boolean;
+  accidentDeath: boolean;
+  hasBeneficiaries?: boolean;
+  insuredPersons?: LifePerson[]; // Lista ubezpieczonych (np. dzieci)
+  beneficiaries?: LifePerson[]; // Lista uposażonych
 }
 
 export interface NoteHistoryEntry {
@@ -175,8 +205,8 @@ export interface ClientNote {
   history?: NoteHistoryEntry[];
   linkedPolicyIds?: string[];
   isCompleted?: boolean;
-  sentiment?: 'POSITIVE' | 'NEUTRAL' | 'NEGATIVE';
-  actionType?: 'CALL_OUT' | 'CALL_IN' | 'EMAIL' | 'MEETING';
+  sentiment?: "POSITIVE" | "NEUTRAL" | "NEGATIVE";
+  actionType?: "CALL_OUT" | "CALL_IN" | "EMAIL" | "MEETING";
 }
 
 export interface BusinessEntity {
@@ -199,7 +229,7 @@ export interface Client {
   lastName: string;
   pesel: string;
   birthDate?: string;
-  gender?: 'M' | 'F';
+  gender?: "M" | "F";
   phones: string[];
   emails: string[];
   businesses: BusinessEntity[];
@@ -213,7 +243,7 @@ export interface Client {
 
 export interface Notification {
   id: string;
-  type: 'AI_SUCCESS' | 'AI_ERROR' | 'INFO';
+  type: "AI_SUCCESS" | "AI_ERROR" | "INFO";
   message: string;
   relatedClientId?: string;
   timestamp: string;
@@ -221,67 +251,73 @@ export interface Notification {
 }
 
 export interface Installment {
-    number: number;
-    amount: number;
-    deadline: string;
-    isPaid: boolean;
-    paidDate?: string;
+  number: number;
+  amount: number;
+  deadline: string;
+  isPaid: boolean;
+  paidDate?: string;
 }
 
 export interface SubAgent {
-    id: string;
-    name: string;
-    phone?: string;
-    email?: string;
-    defaultRates: Record<string, number>; 
+  id: string;
+  name: string;
+  phone?: string;
+  email?: string;
+  defaultRates: Record<string, number>;
 }
 
 export interface PolicySubAgentShare {
-    agentId: string;
-    rate: number;
-    amount: number;
-    note?: string;
+  agentId: string;
+  rate: number;
+  amount: number;
+  note?: string;
 }
 
 // NOWA STRUKTURA: KALKULACJE (ALTERNATYWNE OFERTY)
 export interface PolicyCalculation {
-    id: string;
-    insurerName: string;
-    premium: number;
-    notes?: string; // Np. "Brak szyb", "Wymaga 2 kluczyków"
-    isSelected: boolean;
-    createdAt: string;
+  id: string;
+  insurerName: string;
+  premium: number;
+  notes?: string; // Np. "Brak szyb", "Wymaga 2 kluczyków"
+  isSelected: boolean;
+  createdAt: string;
 }
 
 export interface Policy {
   id: string;
   clientId: string;
   type: PolicyType;
-  stage: SalesStage; 
+  stage: SalesStage;
   nextContactDate?: string;
   insurerName: string;
   policyNumber: string;
-  
-  vehicleBrand: string; 
-  vehicleModel?: string; 
+
+  vehicleBrand: string;
+  vehicleModel?: string;
   vehicleReg: string;
   vehicleVin: string;
-  
-  originalProductString?: string; 
-  oldPolicyNumber?: string; 
-  oldPremium?: string; 
-  coOwner?: string; 
-  oldInsurerName?: string; 
-  
+
+  originalProductString?: string;
+  oldPolicyNumber?: string;
+  oldPremium?: string;
+  coOwner?: string;
+  oldInsurerName?: string;
+
   // New: Source Verified (Hide import data)
   sourceVerified?: boolean;
 
-  documentsStatus?: string; 
-  portalStatus?: string; 
+  documentsStatus?: string;
+  portalStatus?: string;
 
   propertyAddress?: string;
   businessPKD?: string;
-  businessType?: 'MAJATEK' | 'OC_DZIALALNOSCI' | 'OC_ZAWODOWE' | 'OCPD' | 'FLOTA' | 'INNE';
+  businessType?:
+    | "MAJATEK"
+    | "OC_DZIALALNOSCI"
+    | "OC_ZAWODOWE"
+    | "OCPD"
+    | "FLOTA"
+    | "INNE";
 
   destinationCountry?: string;
   travelStartDate?: string;
@@ -294,17 +330,17 @@ export interface Policy {
   terminationId?: string;
   policyStartDate: string;
   policyEndDate: string;
-  
+
   // NOWE POLE: Link do poprzedniej polisy (Wznowienie / Kontynuacja)
-  previousPolicyId?: string; 
-  
+  previousPolicyId?: string;
+
   // NOWE POLE: Planowane Towarzystwa (Do ofertowania)
   targetInsurers?: string[];
-  
+
   // NOWE POLE: Historia Kalkulacji (Bitwa Ofert)
   calculations?: PolicyCalculation[];
 
-  premium: number;      
+  premium: number;
   commission: number;
   commissionRate?: number;
   paymentStatus?: PaymentStatus;
@@ -319,12 +355,12 @@ export interface Policy {
   checklist?: Record<string, boolean>;
   hasMedicalSurvey?: boolean;
   hasRodo?: boolean;
-  
+
   autoDetails?: AutoDetails;
   homeDetails?: HomeDetails;
   travelDetails?: TravelDetails;
   lifeDetails?: LifeDetails;
-  
+
   createdAt: string;
   propertyDetails?: any;
 }
@@ -343,24 +379,37 @@ export interface TerminationRecord {
   fileName?: string;
 }
 
-export type LogAction = 'CREATE' | 'UPDATE' | 'DELETE' | 'IMPORT' | 'EXPORT' | 'AI_OP' | 'RESTORE';
-export type LogEntity = 'CLIENT' | 'POLICY' | 'NOTE' | 'TERMINATION' | 'SYSTEM' | 'SUB_AGENT';
+export type LogAction =
+  | "CREATE"
+  | "UPDATE"
+  | "DELETE"
+  | "IMPORT"
+  | "EXPORT"
+  | "AI_OP"
+  | "RESTORE";
+export type LogEntity =
+  | "CLIENT"
+  | "POLICY"
+  | "NOTE"
+  | "TERMINATION"
+  | "SYSTEM"
+  | "SUB_AGENT";
 
 export interface SystemLogEntry {
-    id: string;
-    timestamp: string;
-    action: LogAction;
-    entity: LogEntity;
-    entityId?: string;
-    details: string; 
-    meta?: any; 
+  id: string;
+  timestamp: string;
+  action: LogAction;
+  entity: LogEntity;
+  entityId?: string;
+  details: string;
+  meta?: any;
 }
 
 export interface DeletedItem {
-    id: string;
-    type: 'POLICY' | 'CLIENT' | 'NOTE';
-    data: any;
-    deletedAt: string;
+  id: string;
+  type: "POLICY" | "CLIENT" | "NOTE";
+  data: any;
+  deletedAt: string;
 }
 
 export interface AppState {
@@ -371,13 +420,18 @@ export interface AppState {
   terminations: TerminationRecord[];
   logs: SystemLogEntry[];
   subAgents: SubAgent[];
-  checklistTemplates: ChecklistTemplates; 
+  checklistTemplates: ChecklistTemplates;
   insurers: string[];
   insurerConfigs?: Record<string, InsurerConfig>;
-  trash?: DeletedItem[]; 
+  trash?: DeletedItem[];
 }
 
-export type CalendarEventType = 'RENEWAL' | 'MEETING' | 'TASK' | 'HISTORY' | 'OTHER';
+export type CalendarEventType =
+  | "RENEWAL"
+  | "MEETING"
+  | "TASK"
+  | "HISTORY"
+  | "OTHER";
 
 export interface CalendarEvent {
   id: string;
@@ -393,7 +447,7 @@ export interface CalendarEvent {
 }
 
 export interface NLPResult {
-  action: 'CREATE_NOTE' | 'SEARCH_CLIENT' | 'NAVIGATE';
+  action: "CREATE_NOTE" | "SEARCH_CLIENT" | "NAVIGATE";
   data: {
     title?: string;
     dateStr?: string;
@@ -403,9 +457,9 @@ export interface NLPResult {
 }
 
 export interface UiPreferences {
-    theme: 'light' | 'dark';
-    density: 'comfortable' | 'compact';
-    primaryColor: string; 
-    fontScale: number; 
-    skin: 'default' | 'warm' | 'midnight' | 'premium';
+  theme: "light" | "dark";
+  density: "comfortable" | "compact";
+  primaryColor: string;
+  fontScale: number;
+  skin: "default" | "warm" | "midnight" | "luxury-gold" | "premium";
 }

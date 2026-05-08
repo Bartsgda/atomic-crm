@@ -62,6 +62,7 @@ export const Notatki: FC<Props> = ({ clientId, notes, allPolicies, initialResume
   const [showAssetList, setShowAssetList] = useState(false);
   const [rejectionReasonMode, setRejectionReasonMode] = useState(false);
   const [automationToast, setAutomationToast] = useState<string | null>(null);
+  const [pendingOkConfirm, setPendingOkConfirm] = useState(false);
 
   // --- CALL MODE STATES ---
   const [isCallActive, setIsCallActive] = useState(false);
@@ -301,9 +302,28 @@ export const Notatki: FC<Props> = ({ clientId, notes, allPolicies, initialResume
       setTimeout(() => handleSave(), 100);
   };
 
+  const handleConfirmOk = async (withReminder: boolean) => {
+      setPendingOkConfirm(false);
+      await handleSave("[ST: OK] Klient zaakceptował ofertę. Prosi o wystawienie.", 'STATUS');
+      if (withReminder) {
+          const reminderAt = addDays(new Date(), 365).toISOString();
+          const reminderNote: ClientNote = {
+              id: `rnote_${Date.now()}`,
+              clientId,
+              content: `[WZNOWIENIE] Kontakt za rok — klient wyraził zgodę przy sprzedaży.`,
+              tag: 'STATUS',
+              createdAt: new Date().toISOString(),
+              linkedPolicyIds: [...pendingPolicyLinks],
+              reminderDate: reminderAt,
+          };
+          onAddNote(reminderNote);
+      }
+  };
+
   const handleQuickStatus = (type: 'OK' | 'REJECT' | 'PENDING') => {
       if (type === 'OK') {
-          handleSave("[ST: OK] Klient zaakceptował ofertę. Prosi o wystawienie.", 'STATUS');
+          setPendingOkConfirm(true);
+          return;
       } else if (type === 'REJECT') {
           setRejectionReasonMode(true);
           setText(prev => prev + "Klient odrzuca ofertę. Powód: ");
@@ -428,6 +448,32 @@ export const Notatki: FC<Props> = ({ clientId, notes, allPolicies, initialResume
                     </button>
                 </div>
             </div>
+
+            {pendingOkConfirm && (
+                <div className="bg-emerald-50 dark:bg-emerald-900/10 border-t border-emerald-200 dark:border-emerald-800 p-3 flex flex-col gap-2 animate-in fade-in">
+                    <p className="text-[10px] font-black text-emerald-700 uppercase tracking-wide">Klient zaakceptował ofertę — co dalej?</p>
+                    <div className="flex gap-2 flex-wrap">
+                        <button
+                            onClick={() => handleConfirmOk(true)}
+                            className="flex items-center gap-1.5 px-3 py-1.5 bg-emerald-600 text-white rounded-lg text-[9px] font-black uppercase hover:bg-emerald-700 transition-all"
+                        >
+                            <Calendar size={11} /> Zaznacz + przypomnienie za rok
+                        </button>
+                        <button
+                            onClick={() => handleConfirmOk(false)}
+                            className="flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-zinc-800 border border-emerald-300 text-emerald-700 rounded-lg text-[9px] font-black uppercase hover:bg-emerald-50 transition-all"
+                        >
+                            <CheckCircle2 size={11} /> Tylko zaznacz
+                        </button>
+                        <button
+                            onClick={() => setPendingOkConfirm(false)}
+                            className="flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-zinc-800 border border-zinc-200 text-zinc-500 rounded-lg text-[9px] font-black uppercase hover:bg-zinc-100 transition-all"
+                        >
+                            <X size={11} /> Anuluj
+                        </button>
+                    </div>
+                </div>
+            )}
 
             {rejectionReasonMode && (
                 <div className="bg-red-50 dark:bg-red-900/10 p-2 flex gap-2 animate-in fade-in">

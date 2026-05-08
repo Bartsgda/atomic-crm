@@ -641,7 +641,7 @@ function App() {
         onToggleTester={() => setIsTesterOpen(!isTesterOpen)}
         onUpdateUiPrefs={updateUiPrefs}
         onRefreshData={refreshData}
-        onAddClient={() => setIsGlobalClientModalOpen(true)}
+        onAddClient={() => { setCurrentData(prev => ({ ...prev, client: undefined })); setIsGlobalClientModalOpen(true); }}
         onOpenSnapshots={
           isAdmin ? () => setIsSnapshotDialogOpen(true) : undefined
         }

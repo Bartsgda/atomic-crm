@@ -95,7 +95,7 @@ export const Dashboard: React.FC<Props> = ({ state, onNavigate, onDeletePolicy, 
   const hoverCloseTimer = useRef<any>(null);
 
   // --- FILTERS STATE (FLAT & EXPOSED) ---
-  const [activeDatePreset, setActiveDatePreset] = useState<'THIS_MONTH' | 'PREV_MONTH' | 'THIS_YEAR' | 'ALL'>('THIS_MONTH'); // Default to This Month
+  const [activeDatePreset, setActiveDatePreset] = useState<'THIS_MONTH' | 'PREV_MONTH' | 'THIS_YEAR' | 'ALL'>('ALL');
   const [selectedStages, setSelectedStages] = useState<SalesStage[]>([]);
   const [selectedInsurers, setSelectedInsurers] = useState<string[]>([]);
 

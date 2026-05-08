@@ -666,14 +666,23 @@ export const Sidebar: React.FC<SidebarProps> = ({
         {renderNavBtn("all", "Pulpit")}
 
         {/* Baza Klientów + quick add */}
-        <div className="relative group/btn-container">
-          {themedNavRow(
-            Users,
-            "Baza Klientów",
-            ["clients", "client-details"].includes(currentPage),
-            () => onNavigate("clients"),
-            state.clients?.length ?? 0,
-          )}
+        <div className="relative group/btn-container flex items-center gap-1">
+          <div className="flex-1">
+            {themedNavRow(
+              Users,
+              "Baza Klientów",
+              ["clients", "client-details"].includes(currentPage),
+              () => onNavigate("clients"),
+              state.clients?.length ?? 0,
+            )}
+          </div>
+          <button
+            onClick={(e) => { e.stopPropagation(); onAddClient(); }}
+            title="Dodaj klienta"
+            className="opacity-0 group-hover/btn-container:opacity-100 transition-opacity p-1.5 rounded-lg hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 flex-shrink-0"
+          >
+            <Plus size={14} />
+          </button>
         </div>
 
         {renderNavBtn("offers", "Tablica")}

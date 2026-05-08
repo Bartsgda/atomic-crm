@@ -934,87 +934,8 @@ export const PolicyFormModal: React.FC<Props> = ({ isOpen, onClose, initialClien
 
                 {mode === 'EDIT' && (
                     <div className="p-8 space-y-8">
-                        
-                        {/* 1. STRATEGIA (PLANOWANIE) - Widoczne dla Leadów/Ofert */}
-                        {isOffer && (
-                            <div className="bg-amber-50/50 dark:bg-amber-900/10 p-5 rounded-3xl border border-amber-100 dark:border-amber-800/30 shadow-sm relative overflow-hidden group">
-                                <div className="absolute right-0 top-0 p-4 opacity-5 pointer-events-none group-hover:scale-110 transition-transform">
-                                    <Target size={100} />
-                                </div>
-                                <h4 className="text-sm font-black uppercase text-amber-700 dark:text-amber-500 mb-4 flex items-center gap-2 relative z-10">
-                                    <Target size={18} /> Strategia Ofertowa
-                                </h4>
-                                
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
-                                    <div>
-                                        <label className={LABEL_CLASS}>Termin (Przypomnienie)</label>
-                                        <div className="flex gap-2 mb-2">
-                                            <button type="button" onClick={() => handleQuickPlan(1)} className="px-3 py-1.5 bg-white border border-amber-200 rounded-lg text-[10px] font-bold text-amber-700 hover:bg-amber-50">+1 Dzień</button>
-                                            <button type="button" onClick={() => handleQuickPlan(3)} className="px-3 py-1.5 bg-white border border-amber-200 rounded-lg text-[10px] font-bold text-amber-700 hover:bg-amber-50">+3 Dni</button>
-                                            <button type="button" onClick={() => handleQuickPlan(7)} className="px-3 py-1.5 bg-white border border-amber-200 rounded-lg text-[10px] font-bold text-amber-700 hover:bg-amber-50">+Tydzień</button>
-                                        </div>
-                                        <div className="relative">
-                                            <input 
-                                                type="date" 
-                                                {...register('nextContactDate')}
-                                                className={STANDARD_INPUT_CLASS} 
-                                                onClick={(e) => e.currentTarget.showPicker()}
-                                            />
-                                            <CalendarIcon size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 pointer-events-none"/>
-                                        </div>
-                                    </div>
-                                    
-                                    <div>
-                                        <label className={LABEL_CLASS}>Gdzie Ofertujemy? (Cele)</label>
-                                        <div className="flex flex-wrap gap-2 mb-2">
-                                            {targetInsurers.map((tu: string) => (
-                                                <button 
-                                                    key={tu}
-                                                    type="button" 
-                                                    onClick={() => toggleTargetInsurer(tu)}
-                                                    className={`px-3 py-1.5 rounded-lg text-[10px] font-black uppercase border transition-all bg-amber-500 border-amber-500 text-white`}
-                                                >
-                                                    {tu}
-                                                </button>
-                                            ))}
-                                        </div>
-                                        {/* ADD NEW TARGET */}
-                                        <div className="flex gap-2">
-                                            <InsurerSelect 
-                                                value={newTargetInput}
-                                                onChange={(val) => {
-                                                    setNewTargetInput('');
-                                                    toggleTargetInsurer(val);
-                                                }}
-                                                activeList={sortedInsurers}
-                                                placeholder="+ Dodaj cel..."
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
 
-                                {/* WHAT NEXT ACTIONS (ONLY IF CALCS EXIST) */}
-                                {calculations.length > 0 && (
-                                    <div className="mt-4 pt-4 border-t border-amber-200/50 flex items-center justify-between animate-in fade-in">
-                                        <span className="text-[10px] font-bold uppercase text-amber-700">Co dalej?</span>
-                                        <div className="flex gap-2">
-                                            {selectedClient?.phones[0] && (
-                                                <a href={`tel:${selectedClient.phones[0]}`} className="flex items-center gap-1 px-3 py-1.5 bg-white text-blue-600 rounded-lg text-[10px] font-black uppercase border border-blue-200 hover:bg-blue-50 transition-all">
-                                                    <Phone size={12} /> Zadzwoń
-                                                </a>
-                                            )}
-                                            {selectedClient?.emails[0] && (
-                                                <a href={`mailto:${selectedClient.emails[0]}`} className="flex items-center gap-1 px-3 py-1.5 bg-white text-purple-600 rounded-lg text-[10px] font-black uppercase border border-purple-200 hover:bg-purple-50 transition-all">
-                                                    <Mail size={12} /> Wyślij
-                                                </a>
-                                            )}
-                                        </div>
-                                    </div>
-                                )}
-                            </div>
-                        )}
-
-                        {/* 2. CLIENT SELECTOR (IF NEW) */}
+                        {/* 1. CLIENT SELECTOR (IF NEW) */}
                         {!selectedClient && (
                             <div className="bg-red-50 dark:bg-red-900/10 p-6 rounded-3xl border-2 border-red-100 dark:border-red-900/30 animate-pulse">
                                 <h4 className="text-sm font-black uppercase text-red-600 mb-3 flex items-center gap-2">
@@ -1149,11 +1070,82 @@ export const PolicyFormModal: React.FC<Props> = ({ isOpen, onClose, initialClien
                             {['OC', 'AC', 'BOTH'].includes(currentType) && <AutoForm form={form} policyType={currentType} aiDiffs={aiDiffs} />}
                             {currentType === 'DOM' && <HomeForm form={form} />}
                             {currentType === 'ZYCIE' && <LifeForm form={form} />}
-                            {currentType === 'PODROZ' && <TravelForm form={form} />} 
+                            {currentType === 'PODROZ' && <TravelForm form={form} />}
                             {['FIRMA', 'INNE'].includes(currentType) && <OtherForm form={form} type={currentType} />}
                         </div>
 
-                        {/* 6. HISTORY & RENEWAL DATA (NEW SECTION) */}
+                        {/* 6. STRATEGIA OFERTOWA — przeniesiona pod dane pojazdu */}
+                        {isOffer && (
+                            <div className="bg-amber-50/50 dark:bg-amber-900/10 p-5 rounded-3xl border border-amber-100 dark:border-amber-800/30 shadow-sm relative overflow-hidden group">
+                                <div className="absolute right-0 top-0 p-4 opacity-5 pointer-events-none group-hover:scale-110 transition-transform">
+                                    <Target size={100} />
+                                </div>
+                                <h4 className="text-sm font-black uppercase text-amber-700 dark:text-amber-500 mb-4 flex items-center gap-2 relative z-10">
+                                    <Target size={18} /> Strategia Ofertowa
+                                </h4>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
+                                    <div>
+                                        <label className={LABEL_CLASS}>Termin (Przypomnienie)</label>
+                                        <div className="flex gap-2 mb-2">
+                                            <button type="button" onClick={() => handleQuickPlan(1)} className="px-3 py-1.5 bg-white border border-amber-200 rounded-lg text-[10px] font-bold text-amber-700 hover:bg-amber-50">+1 Dzień</button>
+                                            <button type="button" onClick={() => handleQuickPlan(3)} className="px-3 py-1.5 bg-white border border-amber-200 rounded-lg text-[10px] font-bold text-amber-700 hover:bg-amber-50">+3 Dni</button>
+                                            <button type="button" onClick={() => handleQuickPlan(7)} className="px-3 py-1.5 bg-white border border-amber-200 rounded-lg text-[10px] font-bold text-amber-700 hover:bg-amber-50">+Tydzień</button>
+                                        </div>
+                                        <div className="relative">
+                                            <input
+                                                type="date"
+                                                {...register('nextContactDate')}
+                                                className={STANDARD_INPUT_CLASS}
+                                                onClick={(e) => e.currentTarget.showPicker()}
+                                            />
+                                            <CalendarIcon size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 pointer-events-none"/>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label className={LABEL_CLASS}>Gdzie Ofertujemy? (Cele)</label>
+                                        <div className="flex flex-wrap gap-2 mb-2">
+                                            {targetInsurers.map((tu: string) => (
+                                                <button
+                                                    key={tu}
+                                                    type="button"
+                                                    onClick={() => toggleTargetInsurer(tu)}
+                                                    className="px-3 py-1.5 rounded-lg text-[10px] font-black uppercase border transition-all bg-amber-500 border-amber-500 text-white"
+                                                >
+                                                    {tu}
+                                                </button>
+                                            ))}
+                                        </div>
+                                        <div className="flex gap-2">
+                                            <InsurerSelect
+                                                value={newTargetInput}
+                                                onChange={(val) => { setNewTargetInput(''); toggleTargetInsurer(val); }}
+                                                activeList={sortedInsurers}
+                                                placeholder="+ Dodaj cel..."
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                {calculations.length > 0 && (
+                                    <div className="mt-4 pt-4 border-t border-amber-200/50 flex items-center justify-between animate-in fade-in">
+                                        <span className="text-[10px] font-bold uppercase text-amber-700">Co dalej?</span>
+                                        <div className="flex gap-2">
+                                            {selectedClient?.phones[0] && (
+                                                <a href={`tel:${selectedClient.phones[0]}`} className="flex items-center gap-1 px-3 py-1.5 bg-white text-blue-600 rounded-lg text-[10px] font-black uppercase border border-blue-200 hover:bg-blue-50 transition-all">
+                                                    <Phone size={12} /> Zadzwoń
+                                                </a>
+                                            )}
+                                            {selectedClient?.emails[0] && (
+                                                <a href={`mailto:${selectedClient.emails[0]}`} className="flex items-center gap-1 px-3 py-1.5 bg-white text-purple-600 rounded-lg text-[10px] font-black uppercase border border-purple-200 hover:bg-purple-50 transition-all">
+                                                    <Mail size={12} /> Wyślij
+                                                </a>
+                                            )}
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        )}
+
+                        {/* 7. HISTORY & RENEWAL DATA */}
                         <div className="bg-zinc-50 dark:bg-zinc-900/50 p-6 rounded-3xl border border-zinc-200 dark:border-zinc-800">
                             <p className="text-[10px] font-black uppercase text-zinc-500 dark:text-zinc-400 mb-4 tracking-widest flex items-center gap-2">
                                 <History size={16} /> Historia Ubezpieczenia (Dla Wypowiedzenia)

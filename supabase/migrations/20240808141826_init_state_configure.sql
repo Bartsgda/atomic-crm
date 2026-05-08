@@ -1,5 +1,5 @@
 create or replace view init_state
-  with (security_invoker=off)
+  with (security_invoker=on)
   as
 select count(id) as is_initialized
 from (

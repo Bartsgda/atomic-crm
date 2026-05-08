@@ -603,18 +603,18 @@ export const Dashboard: React.FC<Props> = ({ state, onNavigate, onDeletePolicy, 
                             {client.lastName[0]}
                         </div>
                         <div>
-                          <p className={`font-black ${isCompact ? 'text-[11px]' : 'text-xs'} text-zinc-900 dark:text-zinc-100 leading-none group-hover:text-red-600 transition-colors`}>
+                          <p className={`font-black ${isCompact ? 'text-xs' : 'text-sm'} text-zinc-900 dark:text-zinc-100 leading-none group-hover:text-red-600 transition-colors`}>
                               {client.lastName} {client.firstName}
                           </p>
                           <div className="mt-1 space-y-0.5">
                               {client.phones?.[0] && (
                                   <div className="flex items-center gap-1.5 text-zinc-400">
-                                      <Phone size={10} /> <span className="text-[9px] font-mono font-medium">{client.phones[0]}</span>
+                                      <Phone size={11} /> <span className="text-[11px] font-mono font-medium">{client.phones[0]}</span>
                                   </div>
                               )}
                               {client.emails?.[0] && (
                                   <div className="flex items-center gap-1.5 text-zinc-400">
-                                      <Mail size={10} /> <span className="text-[9px] font-medium truncate max-w-[140px]">{client.emails[0]}</span>
+                                      <Mail size={11} /> <span className="text-[11px] font-medium truncate max-w-[140px]">{client.emails[0]}</span>
                                   </div>
                               )}
                           </div>
@@ -629,19 +629,19 @@ export const Dashboard: React.FC<Props> = ({ state, onNavigate, onDeletePolicy, 
                                 <TypeIcon size={14} />
                             </div>
                             <div className="flex flex-col items-start w-full">
-                                <span 
-                                    className={`${isCompact ? 'text-[10px]' : 'text-[11px]'} font-bold text-zinc-700 dark:text-zinc-300 uppercase truncate max-w-[220px]`}
-                                    title={displayData.title} 
+                                <span
+                                    className={`${isCompact ? 'text-xs' : 'text-sm'} font-bold text-zinc-700 dark:text-zinc-300 uppercase truncate max-w-[220px]`}
+                                    title={displayData.title}
                                 >
                                     {displayData.title}
                                 </span>
-                                
+
                                 {/* PREMIUM & INSURER ROW */}
                                 <div className="flex items-center gap-2 mt-1.5 w-full">
-                                    <span className="text-[9px] font-black text-zinc-500 bg-zinc-100 dark:bg-zinc-800 px-1.5 py-0.5 rounded uppercase tracking-wide border border-zinc-200 dark:border-zinc-700 truncate max-w-[80px]">
+                                    <span className="text-[11px] font-black text-zinc-500 bg-zinc-100 dark:bg-zinc-800 px-1.5 py-0.5 rounded uppercase tracking-wide border border-zinc-200 dark:border-zinc-700 truncate max-w-[80px]">
                                         {(policy.insurerName || '').substring(0, 7)}{(policy.insurerName || '').length > 7 ? '.' : ''}
                                     </span>
-                                    <span className="text-[10px] font-black text-zinc-900 dark:text-zinc-100">
+                                    <span className="text-xs font-black text-zinc-900 dark:text-zinc-100">
                                         {policy.premium > 0 ? `${policy.premium} zł` : '-'}
                                     </span>
                                 </div>
@@ -650,7 +650,7 @@ export const Dashboard: React.FC<Props> = ({ state, onNavigate, onDeletePolicy, 
                     </td>
 
                     <td className={`px-4 ${paddingClass} text-center`}>
-                      <div className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[9px] font-black uppercase border shadow-sm ${statusConfig.color} ${statusConfig.bg} ${statusConfig.border}`}>
+                      <div className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[11px] font-black uppercase border shadow-sm ${statusConfig.color} ${statusConfig.bg} ${statusConfig.border}`}>
                         <statusConfig.icon size={12} />
                         {statusConfig.label}
                       </div>
@@ -658,10 +658,10 @@ export const Dashboard: React.FC<Props> = ({ state, onNavigate, onDeletePolicy, 
 
                     <td className={`px-4 ${paddingClass} text-center`}>
                       <div className="flex flex-col items-center">
-                        <span className={`${isCompact ? 'text-[10px]' : 'text-[11px]'} font-black ${days <= 30 && days >= 0 ? 'text-red-600' : days < 0 ? 'text-zinc-400 line-through' : 'text-zinc-900 dark:text-zinc-100'}`}>
+                        <span className={`${isCompact ? 'text-xs' : 'text-sm'} font-black ${days <= 30 && days >= 0 ? 'text-red-600' : days < 0 ? 'text-zinc-400 line-through' : 'text-zinc-900 dark:text-zinc-100'}`}>
                           {days < 0 ? 'Wygasła' : `${days} dni`}
                         </span>
-                        <span className="text-[9px] text-zinc-400 font-medium font-mono">
+                        <span className="text-[11px] text-zinc-400 font-medium font-mono">
                             {isValidDate ? format(end, 'dd.MM') : '---'}
                         </span>
                       </div>
@@ -692,8 +692,8 @@ export const Dashboard: React.FC<Props> = ({ state, onNavigate, onDeletePolicy, 
                             onMouseLeave={handleNoteLeave}
                         >
                             {latestNote ? (
-                                <div className="text-xs text-zinc-600 dark:text-zinc-400 whitespace-normal break-words leading-tight line-clamp-3">
-                                    <span className="font-bold text-zinc-400 dark:text-zinc-500 mr-1 text-[10px]">{format(new Date(latestNote.createdAt), 'dd.MM')}:</span>
+                                <div className="text-sm text-zinc-600 dark:text-zinc-400 whitespace-normal break-words leading-tight line-clamp-3">
+                                    <span className="font-bold text-zinc-400 dark:text-zinc-500 mr-1 text-xs">{format(new Date(latestNote.createdAt), 'dd.MM')}:</span>
                                     {latestNote.content}
                                 </div>
                             ) : (

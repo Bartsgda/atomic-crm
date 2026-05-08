@@ -345,7 +345,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       <div className="relative group/btn-container" key={`${id}-${label}`}>
         <button
           onClick={handleClick}
-          className={`w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium mb-0.5 ${navBtnBase(skin, isActive)}`}
+          className={`w-full flex items-center gap-3 px-3 py-2.5 text-base font-medium mb-0.5 ${navBtnBase(skin, isActive)}`}
           style={{
             borderRadius: "var(--v1-radius)",
             borderLeft: isActive
@@ -354,7 +354,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           }}
         >
           <Icon
-            size={16}
+            size={18}
             style={{ flexShrink: 0, opacity: isActive ? 1 : 0.65 }}
           />
           <span className="flex-1 text-left">{label}</span>
@@ -402,7 +402,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
     return (
       <button
         onClick={onClick}
-        className={`w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium mb-0.5 ${navBtnBase(skin, isActive)}`}
+        className={`w-full flex items-center gap-3 px-3 py-2.5 text-base font-medium mb-0.5 ${navBtnBase(skin, isActive)}`}
         style={{
           borderRadius: "var(--v1-radius)",
           borderLeft: isActive
@@ -411,7 +411,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         }}
       >
         <Icon
-          size={16}
+          size={18}
           style={{ flexShrink: 0, opacity: isActive ? 1 : 0.65 }}
         />
         <span className="flex-1 text-left">{label}</span>
@@ -583,7 +583,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                     {tile.count > 0 && (
                       <div className="absolute top-2.5 left-8">
                         <span
-                          className="text-[8px] font-bold px-1 py-px rounded-full"
+                          className="text-[10px] font-bold px-1 py-px rounded-full"
                           style={{ background: GOLD, color: "#1c1500" }}
                         >
                           {tile.count}
@@ -592,7 +592,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                     )}
                     {/* Label */}
                     <p
-                      className="text-[9px] font-bold uppercase tracking-wider leading-tight"
+                      className="text-xs font-bold uppercase tracking-wider leading-tight"
                       style={{ color: active ? GOLD_DIM : "#b0aea8" }}
                     >
                       {tile.label}
@@ -604,23 +604,23 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
             {/* Tools strip — widoczne dla wszystkich */}
             <div style={{ borderTop: "1px solid rgba(212,175,55,0.10)", paddingTop: "10px" }}>
-              <p className="text-[8px] font-bold uppercase mb-2 px-1" style={{ color: "#4d4635", letterSpacing: "0.15em" }}>
+              <p className="text-[11px] font-bold uppercase mb-2 px-1" style={{ color: "#4d4635", letterSpacing: "0.15em" }}>
                 Narzędzia
               </p>
               <button
                 onClick={onToggleImporter}
-                className="w-full flex items-center gap-2 px-2 py-1.5 rounded-lg text-[10px] font-bold transition-all text-left"
+                className="w-full flex items-center gap-2 px-2 py-1.5 rounded-lg text-xs font-bold transition-all text-left"
                 style={{ color: "#5a5950" }}
               >
-                <FileDown size={12} style={{ flexShrink: 0 }} /> Import XLSX
+                <FileDown size={14} style={{ flexShrink: 0 }} /> Import XLSX
               </button>
               {isAdmin && (
                 <button
                   onClick={onToggleTheme}
-                  className="w-full flex items-center gap-2 px-2 py-1.5 rounded-lg text-[10px] font-bold transition-all text-left"
+                  className="w-full flex items-center gap-2 px-2 py-1.5 rounded-lg text-xs font-bold transition-all text-left"
                   style={{ color: "#5a5950" }}
                 >
-                  <Palette size={12} style={{ flexShrink: 0 }} /> Wygląd
+                  <Palette size={14} style={{ flexShrink: 0 }} /> Wygląd
                 </button>
               )}
             </div>
@@ -628,7 +628,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             {/* Admin section — tylko dla admina */}
             {isAdmin && (
               <div style={{ borderTop: "1px solid rgba(212,175,55,0.08)", paddingTop: "10px", marginTop: "6px" }}>
-                <p className="text-[8px] font-bold uppercase mb-2 px-1" style={{ color: "#92400e", letterSpacing: "0.15em" }}>
+                <p className="text-[11px] font-bold uppercase mb-2 px-1" style={{ color: "#92400e", letterSpacing: "0.15em" }}>
                   ⬥ Admin
                 </p>
                 {[
@@ -640,10 +640,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   <button
                     key={label}
                     onClick={action}
-                    className="w-full flex items-center gap-2 px-2 py-1.5 rounded-lg text-[10px] font-bold transition-all text-left"
+                    className="w-full flex items-center gap-2 px-2 py-1.5 rounded-lg text-xs font-bold transition-all text-left"
                     style={{ color }}
                   >
-                    <Icon size={12} style={{ flexShrink: 0 }} /> {label}
+                    <Icon size={14} style={{ flexShrink: 0 }} /> {label}
                   </button>
                 ))}
               </div>
@@ -720,7 +720,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         {/* Import */}
         <button
           onClick={onToggleImporter}
-          className={`w-full flex items-center gap-3 px-3 py-2.5 text-sm mb-0.5 group font-medium transition-all ${skin !== "default" ? "v1-nav-btn" : "text-zinc-400 hover:bg-zinc-900/50 hover:text-zinc-200"}`}
+          className={`w-full flex items-center gap-3 px-3 py-2.5 text-base mb-0.5 group font-medium transition-all ${skin !== "default" ? "v1-nav-btn" : "text-zinc-400 hover:bg-zinc-900/50 hover:text-zinc-200"}`}
           style={
             skin !== "default"
               ? { borderRadius: "var(--v1-radius)" }
@@ -748,7 +748,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         {/* System / Tools */}
         <button
           onClick={() => setIsSystemOpen(!isSystemOpen)}
-          className={`w-full flex items-center justify-between px-3 py-2.5 text-xs font-black uppercase tracking-wider transition-all mb-1 ${
+          className={`w-full flex items-center justify-between px-3 py-2.5 text-sm font-black uppercase tracking-wider transition-all mb-1 ${
             skin === "default"
               ? `hover:bg-zinc-900 ${isSystemOpen ? "text-zinc-200 bg-zinc-900" : "text-zinc-600"}`
               : "v1-nav-btn"
@@ -818,7 +818,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               <button
                 key={page}
                 onClick={action}
-                className={`w-full flex items-center gap-3 px-3 py-2 text-xs font-bold transition-all ${
+                className={`w-full flex items-center gap-3 px-3 py-2 text-sm font-bold transition-all ${
                   skin === "default"
                     ? `text-zinc-500 hover:text-zinc-300 hover:bg-zinc-900/50 rounded-lg ${currentPage === page ? "text-white" : ""}`
                     : "v1-nav-btn"

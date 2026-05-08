@@ -406,15 +406,12 @@ export const LuxuryDashboard: React.FC<Props> = ({
         <div className="flex items-start justify-between">
           <div>
             <p
-              className="text-[10px] font-bold uppercase mb-0.5"
+              className="text-xs font-bold uppercase mb-0.5"
               style={{ color: G, letterSpacing: "0.2em" }}
             >
               {greeting}
             </p>
-            <p
-              className="text-[13px] font-semibold"
-              style={{ color: "#b0aea8" }}
-            >
+            <p className="text-sm font-semibold" style={{ color: "#b0aea8" }}>
               {dayName}, {dateStr}
             </p>
           </div>
@@ -452,7 +449,7 @@ export const LuxuryDashboard: React.FC<Props> = ({
                 {value}
               </p>
               <p
-                className="text-[9px] font-bold uppercase tracking-wider mt-0.5"
+                className="text-[11px] font-bold uppercase tracking-wider mt-0.5"
                 style={{ color: "#5a5950" }}
               >
                 {label}
@@ -480,7 +477,7 @@ export const LuxuryDashboard: React.FC<Props> = ({
               <div className="flex items-center gap-2">
                 <AlertTriangle size={14} style={{ color: "#fb923c" }} />
                 <span
-                  className="text-[10px] font-black uppercase tracking-wider"
+                  className="text-xs font-black uppercase tracking-wider"
                   style={{ color: "#fb923c" }}
                 >
                   Do Działania — Wygasające Polisy
@@ -503,7 +500,7 @@ export const LuxuryDashboard: React.FC<Props> = ({
                     "dashboard",
                   )
                 }
-                className="text-[9px] font-bold uppercase tracking-wider"
+                className="text-[11px] font-bold uppercase tracking-wider"
                 style={{ color: "#78716c" }}
               >
                 Wszystkie →
@@ -529,20 +526,20 @@ export const LuxuryDashboard: React.FC<Props> = ({
                   />
                   <div className="flex-1 min-w-0">
                     <span
-                      className="text-[11px] font-semibold truncate block"
+                      className="text-sm font-semibold truncate block"
                       style={{ color: "#e3e2e7" }}
                     >
                       {client
                         ? `${client.firstName} ${client.lastName}`
                         : "Nieznany klient"}
                     </span>
-                    <span className="text-[9px]" style={{ color: "#5a5950" }}>
+                    <span className="text-[11px]" style={{ color: "#5a5950" }}>
                       {p.policyNumber || "—"} · {TYPE_LABEL[p.type] ?? p.type}
                     </span>
                   </div>
                   <div className="text-right flex-shrink-0">
                     <p
-                      className="text-[11px] font-bold"
+                      className="text-sm font-bold"
                       style={{ color: urgColor(diff) }}
                     >
                       {diff <= 0
@@ -551,7 +548,7 @@ export const LuxuryDashboard: React.FC<Props> = ({
                           ? "jutro"
                           : `${diff} dni`}
                     </p>
-                    <p className="text-[9px]" style={{ color: "#5a5950" }}>
+                    <p className="text-[11px]" style={{ color: "#5a5950" }}>
                       {new Date(p.policyEndDate).toLocaleDateString("pl-PL")}
                     </p>
                   </div>
@@ -565,7 +562,7 @@ export const LuxuryDashboard: React.FC<Props> = ({
       {/* ── 4. NAWIGACJA: kafle ───────────────────────────────────────── */}
       <div className="px-4 mb-4">
         <p
-          className="text-[9px] font-black uppercase mb-2 px-0.5"
+          className="text-[11px] font-black uppercase mb-2 px-0.5"
           style={{ color: "#4d4635", letterSpacing: "0.15em" }}
         >
           Nawigacja
@@ -602,7 +599,7 @@ export const LuxuryDashboard: React.FC<Props> = ({
               {tile.count > 0 && (
                 <div className="absolute top-2 left-8">
                   <span
-                    className="text-[8px] font-bold px-1 py-px rounded-full"
+                    className="text-[10px] font-bold px-1 py-px rounded-full"
                     style={{ background: G, color: "#1c1500" }}
                   >
                     {tile.count}
@@ -610,7 +607,7 @@ export const LuxuryDashboard: React.FC<Props> = ({
                 </div>
               )}
               <p
-                className="text-[9px] font-bold uppercase tracking-wide leading-tight"
+                className="text-xs font-bold uppercase tracking-wide leading-tight"
                 style={{ color: "#b0aea8" }}
               >
                 {tile.label}
@@ -626,7 +623,7 @@ export const LuxuryDashboard: React.FC<Props> = ({
                   {tile.recent.map((name, i) => (
                     <p
                       key={i}
-                      className="text-[8px] truncate leading-relaxed"
+                      className="text-[10px] truncate leading-relaxed"
                       style={{ color: "#4d4635" }}
                     >
                       {name}
@@ -643,7 +640,7 @@ export const LuxuryDashboard: React.FC<Props> = ({
       <div className="px-4">
         <div className="flex items-center justify-between mb-2">
           <p
-            className="text-[9px] font-black uppercase px-0.5"
+            className="text-[11px] font-black uppercase px-0.5"
             style={{ color: "#4d4635", letterSpacing: "0.15em" }}
           >
             Ostatnie działania
@@ -655,7 +652,7 @@ export const LuxuryDashboard: React.FC<Props> = ({
         >
           {recent.length === 0 ? (
             <div
-              className="py-8 text-center text-[11px]"
+              className="py-8 text-center text-sm"
               style={{ color: "#5a5950", background: S }}
             >
               Brak aktywności
@@ -688,17 +685,17 @@ export const LuxuryDashboard: React.FC<Props> = ({
                   </div>
                   <div className="flex-1 min-w-0">
                     <p
-                      className="text-[11px] font-medium leading-snug truncate"
+                      className="text-sm font-medium leading-snug truncate"
                       style={{ color: "#d0cec8" }}
                     >
                       {log.details}
                     </p>
-                    <p className="text-[9px]" style={{ color: "#4d4635" }}>
+                    <p className="text-[11px]" style={{ color: "#4d4635" }}>
                       {log.entity}
                     </p>
                   </div>
                   <p
-                    className="text-[9px] flex-shrink-0"
+                    className="text-[11px] flex-shrink-0"
                     style={{ color: "#4d4635" }}
                   >
                     {relTime(log.timestamp)}

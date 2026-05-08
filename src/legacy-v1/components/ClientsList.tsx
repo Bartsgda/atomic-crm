@@ -449,7 +449,7 @@ export const ClientsList: React.FC<Props> = ({
                           {(client.lastName || 'U')[0]}
                         </div>
                         <div>
-                          <div className={`font-black text-zinc-950 dark:text-zinc-100 ${isCompact ? 'text-sm' : 'text-base'} tracking-tight leading-none group-hover:text-blue-600 transition-colors flex items-center gap-2 mb-1`}>
+                          <div className={`font-black text-zinc-950 dark:text-zinc-100 ${isCompact ? 'text-base' : 'text-lg'} tracking-tight leading-none group-hover:text-blue-600 transition-colors flex items-center gap-2 mb-1`}>
                             {client.lastName} {client.firstName}
                             {isAlsoCoOwner && !isVirtual && (
                                 <span className="inline-flex items-center px-1.5 py-0.5 rounded-md bg-purple-100 text-purple-700 text-[8px] font-black uppercase border border-purple-200" title="Ta osoba jest też współwłaścicielem w innej polisie">
@@ -462,7 +462,7 @@ export const ClientsList: React.FC<Props> = ({
                           {client._notePreview && (
                               <div className="flex items-start gap-1 mt-2 bg-yellow-50 dark:bg-yellow-900/10 border border-yellow-100 dark:border-yellow-800/30 p-1.5 rounded-lg max-w-[250px]">
                                   <StickyNote size={10} className="text-yellow-600 dark:text-yellow-500 mt-0.5 flex-shrink-0" />
-                                  <p className="text-[10px] font-medium text-zinc-600 dark:text-zinc-400 italic leading-tight line-clamp-2">
+                                  <p className="text-xs font-medium text-zinc-600 dark:text-zinc-400 italic leading-tight line-clamp-2">
                                       {client._notePreview}
                                   </p>
                               </div>
@@ -475,10 +475,10 @@ export const ClientsList: React.FC<Props> = ({
                     <td className={`px-8 ${paddingClass} align-top`}>
                         {client._lastActivity > 0 ? (
                             <div className="flex flex-col">
-                                <span className="text-xs font-bold text-zinc-800 dark:text-zinc-200">
+                                <span className="text-sm font-bold text-zinc-800 dark:text-zinc-200">
                                     {format(new Date(client._lastActivity), 'dd.MM.yyyy')}
                                 </span>
-                                <span className="text-[10px] text-zinc-400 font-medium">
+                                <span className="text-xs text-zinc-400 font-medium">
                                     {differenceInDays(new Date(), new Date(client._lastActivity))} dni temu
                                 </span>
                             </div>
@@ -513,13 +513,13 @@ export const ClientsList: React.FC<Props> = ({
                               {/* CONTACTS */}
                               <div className="flex flex-col gap-1">
                                 {client.phones?.[0] ? (
-                                    <div className="flex items-center gap-2 font-black text-zinc-700 dark:text-zinc-300 text-xs">
-                                        <Phone size={12} className="text-zinc-400" /> {client.phones[0]}
+                                    <div className="flex items-center gap-2 font-black text-zinc-700 dark:text-zinc-300 text-sm">
+                                        <Phone size={13} className="text-zinc-400" /> {client.phones[0]}
                                     </div>
                                 ) : null}
                                 {client.emails?.[0] ? (
-                                    <div className="flex items-center gap-2 text-[10px] font-medium text-zinc-500 truncate max-w-[150px]">
-                                        <Mail size={12} className="text-zinc-300" /> {client.emails[0]}
+                                    <div className="flex items-center gap-2 text-xs font-medium text-zinc-500 truncate max-w-[150px]">
+                                        <Mail size={13} className="text-zinc-300" /> {client.emails[0]}
                                     </div>
                                 ) : null}
                               </div>
@@ -527,8 +527,8 @@ export const ClientsList: React.FC<Props> = ({
                               {/* BUSINESS */}
                               {client.businesses?.[0] && (
                                 <div className="pt-2 border-t border-zinc-100 dark:border-zinc-800">
-                                  <div className="text-[10px] font-black text-zinc-800 dark:text-zinc-300 uppercase truncate max-w-[200px] leading-tight">{client.businesses[0].name}</div>
-                                  <div className="text-[9px] text-zinc-400 font-mono tracking-widest">NIP: {client.businesses[0].nip}</div>
+                                  <div className="text-xs font-black text-zinc-800 dark:text-zinc-300 uppercase truncate max-w-[200px] leading-tight">{client.businesses[0].name}</div>
+                                  <div className="text-[11px] text-zinc-400 font-mono tracking-widest">NIP: {client.businesses[0].nip}</div>
                                 </div>
                               )}
                           </div>
@@ -538,7 +538,7 @@ export const ClientsList: React.FC<Props> = ({
                     {/* STATYSTYKI & OFERTY (ALWAYS LAST) */}
                     {isVirtual ? (
                         <td className={`px-4 ${paddingClass} text-center align-middle`}>
-                            <span className="inline-flex items-center px-2 py-1 rounded bg-purple-100 text-purple-600 text-[9px] font-black uppercase border border-purple-200 shadow-sm">
+                            <span className="inline-flex items-center px-2 py-1 rounded bg-purple-100 text-purple-600 text-[11px] font-black uppercase border border-purple-200 shadow-sm">
                                 LEAD
                             </span>
                         </td>
@@ -546,13 +546,13 @@ export const ClientsList: React.FC<Props> = ({
                         <>
                             {/* PRODUCTS */}
                             <td className={`px-4 ${paddingClass} text-center align-middle`}>
-                                <span className={`text-[10px] font-black ${client._v > 0 ? 'text-blue-600' : 'text-zinc-200'}`}>{client._v > 0 ? client._v : '-'}</span>
+                                <span className={`text-xs font-black ${client._v > 0 ? 'text-blue-600' : 'text-zinc-200'}`}>{client._v > 0 ? client._v : '-'}</span>
                             </td>
                             <td className={`px-4 ${paddingClass} text-center align-middle`}>
-                                <span className={`text-[10px] font-black ${client._p > 0 ? 'text-emerald-600' : 'text-zinc-200'}`}>{client._p > 0 ? client._p : '-'}</span>
+                                <span className={`text-xs font-black ${client._p > 0 ? 'text-emerald-600' : 'text-zinc-200'}`}>{client._p > 0 ? client._p : '-'}</span>
                             </td>
                             <td className={`px-4 ${paddingClass} text-center align-middle`}>
-                                <span className={`text-[10px] font-black ${client._l > 0 ? 'text-rose-600' : 'text-zinc-200'}`}>{client._l > 0 ? client._l : '-'}</span>
+                                <span className={`text-xs font-black ${client._l > 0 ? 'text-rose-600' : 'text-zinc-200'}`}>{client._l > 0 ? client._l : '-'}</span>
                             </td>
 
                             {/* OFERTY (DATES) - MOVED TO END */}
@@ -563,13 +563,13 @@ export const ClientsList: React.FC<Props> = ({
                                             const d = new Date(off.createdAt);
                                             const isFresh = differenceInDays(new Date(), d) < 7;
                                             return (
-                                                <div key={off.id} className={`flex items-center gap-1 px-1.5 py-0.5 rounded text-[9px] font-black border w-full justify-center ${isFresh ? 'bg-red-50 text-red-600 border-red-100' : 'bg-white text-zinc-500 border-zinc-200'}`}>
-                                                    <Calendar size={8} />
+                                                <div key={off.id} className={`flex items-center gap-1 px-1.5 py-0.5 rounded text-[11px] font-black border w-full justify-center ${isFresh ? 'bg-red-50 text-red-600 border-red-100' : 'bg-white text-zinc-500 border-zinc-200'}`}>
+                                                    <Calendar size={10} />
                                                     {format(d, 'dd.MM')}
                                                 </div>
                                             );
                                         })}
-                                        {client._offers.length > 3 && <span className="text-[8px] text-zinc-400">+{client._offers.length - 3}</span>}
+                                        {client._offers.length > 3 && <span className="text-[10px] text-zinc-400">+{client._offers.length - 3}</span>}
                                     </div>
                                 ) : (
                                     <span className="text-zinc-200 dark:text-zinc-800 text-xs">-</span>

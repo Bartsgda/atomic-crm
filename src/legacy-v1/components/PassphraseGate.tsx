@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { AlertTriangle, Loader2, Lock, LogOut } from "lucide-react";
-import { getSupabaseClient } from "../../components/atomic-crm/providers/supabase/supabase";
+import { getPublicSupabaseClient } from "../../components/atomic-crm/providers/supabase/supabase";
 import { deriveKEK, unwrapDEK } from "../services/crypto";
 
 // ---------------------------------------------------------------------------
@@ -16,11 +16,11 @@ interface PassphraseGateProps {
 }
 
 type Phase =
-  | "loading"        // pobieranie danych z tenant_keys
-  | "no_key"         // brak wpisu dla usera
-  | "prompt"         // czeka na wpisanie hasła
-  | "unlocking"      // trwa derive+unwrap
-  | "locked_out";    // przekroczono limit prób
+  | "loading" // pobieranie danych z tenant_keys
+  | "no_key" // brak wpisu dla usera
+  | "prompt" // czeka na wpisanie hasła
+  | "unlocking" // trwa derive+unwrap
+  | "locked_out"; // przekroczono limit prób
 
 const MAX_ATTEMPTS = 5;
 
@@ -54,7 +54,7 @@ export const PassphraseGate: React.FC<PassphraseGateProps> = ({
 
     const fetchKey = async () => {
       try {
-        const sb = getSupabaseClient();
+        const sb = getPublicSupabaseClient();
 
         const { data, error: dbError } = await sb
           .from("tenant_keys")
@@ -121,7 +121,11 @@ export const PassphraseGate: React.FC<PassphraseGateProps> = ({
     setError(null);
 
     try {
-      const kek = await deriveKEK(passphrase, saltRef.current!, iterationsRef.current);
+      const kek = await deriveKEK(
+        passphrase,
+        saltRef.current!,
+        iterationsRef.current,
+      );
       const dek = await unwrapDEK(wrappedDekRef.current!, kek);
 
       // Sukces
@@ -152,12 +156,13 @@ export const PassphraseGate: React.FC<PassphraseGateProps> = ({
   return (
     <div className="min-h-screen bg-[#07090b] text-white flex flex-col items-center justify-center p-4">
       <div className="max-w-md w-full bg-[#111318] p-8 rounded-2xl shadow-2xl border border-white/5 flex flex-col items-center">
-
         {/* ── LOADING ─────────────────────────────────────────────────────── */}
         {phase === "loading" && (
           <div className="flex flex-col items-center gap-4">
             <Loader2 className="w-10 h-10 text-indigo-500 animate-spin" />
-            <p className="text-gray-400 text-sm">Ładowanie danych szyfrowania…</p>
+            <p className="text-gray-400 text-sm">
+              Ładowanie danych szyfrowania…
+            </p>
           </div>
         )}
 
@@ -171,8 +176,8 @@ export const PassphraseGate: React.FC<PassphraseGateProps> = ({
               Konto niezainicjalizowane
             </h2>
             <p className="text-gray-400 text-sm text-center mb-8">
-              Twoje konto nie zostało jeszcze zainicjalizowane.
-              Skontaktuj się z administratorem.
+              Twoje konto nie zostało jeszcze zainicjalizowane. Skontaktuj się z
+              administratorem.
             </p>
             <button
               onClick={onLogout}
@@ -231,8 +236,8 @@ export const PassphraseGate: React.FC<PassphraseGateProps> = ({
 
             {/* Podpowiedź */}
             <p className="text-gray-500 text-xs mb-6 self-start">
-              Hasło chroniące dane w chmurze. Jeśli zapomniałeś — skontaktuj
-              się z administratorem.
+              Hasło chroniące dane w chmurze. Jeśli zapomniałeś — skontaktuj się
+              z administratorem.
             </p>
 
             {/* Przycisk */}

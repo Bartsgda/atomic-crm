@@ -181,9 +181,9 @@ export const snapshotService = {
 
   /**
    * Sprawdza czy dzisiaj został już wykonany automatyczny snapshot.
-   * Jeśli nie — tworzy go z notatką "Automatyczny snapshot dzienny".
+   * Jeśli nie — tworzy go. Zwraca id nowo utworzonego snapshotu lub null.
    */
-  async checkDailySnapshot(): Promise<void> {
+  async checkDailySnapshot(): Promise<string | null> {
     const sb = getSupabaseClient();
     const tenantId = (import.meta.env.VITE_SUPABASE_TENANT_ID as string) || DEFAULT_TENANT_ID;
 
@@ -201,20 +201,46 @@ export const snapshotService = {
 
     if (error) {
       console.error('Błąd sprawdzania dziennego snapshotu:', error);
-      return;
+      return null;
     }
 
     if (!data || data.length === 0) {
-      console.log('Brak snapshotu na dziś. Tworzę automatyczny punkt kontrolny...');
       try {
-        await this.createSnapshot('Automatyczny snapshot dzienny (system)');
-        console.log('Automatyczny snapshot utworzony pomyślnie.');
+        const { data: { session } } = await sb.auth.getSession();
+        const email = session?.user?.email ?? 'nieznany';
+        const inserted = await this.createSnapshot(`auto ${today} — ${email}`);
+        return (inserted as any)?.id ?? null;
       } catch (err) {
         console.error('Nie udało się utworzyć automatycznego snapshotu:', err);
+        return null;
       }
-    } else {
-      console.log('Dzienny snapshot już istnieje. Pomijam.');
     }
+    return null;
+  },
+
+  /**
+   * Zapisuje wpis w rejestrze logowań.
+   * snapshotId — id snapshotu jeśli był właśnie tworzony przy tym logowaniu.
+   */
+  async logLogin(snapshotId: string | null): Promise<void> {
+    const sb = getSupabaseClient();
+    const tenantId = (import.meta.env.VITE_SUPABASE_TENANT_ID as string) || DEFAULT_TENANT_ID;
+    const { data: { session } } = await sb.auth.getSession();
+    if (!session) return;
+
+    const userId = session.user.id;
+    const userEmail = session.user.email ?? null;
+
+    const { data: s } = await sb.from('sales').select('id').eq('user_id', userId).maybeSingle();
+    const salesId = s?.id ?? null;
+
+    await sb.from('insurance_login_log').insert({
+      tenant_id: tenantId,
+      user_id: userId,
+      user_email: userEmail,
+      sales_id: salesId,
+      snapshot_id: snapshotId ?? null,
+    });
   },
 
   /**

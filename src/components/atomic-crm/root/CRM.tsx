@@ -181,8 +181,8 @@ export const CRM = ({
       login: async (params: any) => {
         const result = await authProvider.login(params);
         try {
-          // Trigger daily snapshot check
-          await snapshotService.checkDailySnapshot();
+          const snapshotId = await snapshotService.checkDailySnapshot();
+          await snapshotService.logLogin(snapshotId);
 
           const config = await dataProvider.getConfiguration();
           if (Object.keys(config).length > 0) {
@@ -190,7 +190,6 @@ export const CRM = ({
           }
         } catch (err) {
           console.error('Failed to pre-fetch config or snapshot:', err);
-          // Non-critical: config will load via useConfigurationLoader
         }
         return result;
       },
@@ -202,8 +201,8 @@ export const CRM = ({
         }
         const result = await authProvider.handleCallback(params);
         try {
-          // Trigger daily snapshot check
-          await snapshotService.checkDailySnapshot();
+          const snapshotId = await snapshotService.checkDailySnapshot();
+          await snapshotService.logLogin(snapshotId);
 
           const config = await dataProvider.getConfiguration();
           if (Object.keys(config).length > 0) {
@@ -211,7 +210,6 @@ export const CRM = ({
           }
         } catch (err) {
           console.error('Failed to pre-fetch config or snapshot during callback:', err);
-          // Non-critical: config will load via useConfigurationLoader
         }
         return result;
       },

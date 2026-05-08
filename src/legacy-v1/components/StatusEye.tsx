@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
-import { Eye, LogOut, Clock, Target, Send, X, Loader2, Bug, Sparkles, MessageSquare, Check, Lock } from 'lucide-react';
+import { Eye, LogOut, Clock, Target, Send, X, Loader2, Bug, Sparkles, MessageSquare, Check, Lock, LayoutGrid, List } from 'lucide-react';
+import { DragDropContext, Droppable, Draggable, type OnDragEndResponder } from '@hello-pangea/dnd';
 import { getSupabaseClient } from '../../components/atomic-crm/providers/supabase/supabase';
 import {
   pickElement,
@@ -7,10 +8,27 @@ import {
   listFeedback,
   toggleMyFeedbackResolved,
   setFeedbackAdminReply,
+  setFeedbackStatus,
   isInsuranceAdmin,
   type CapturedElement,
   type FeedbackItem,
 } from '../services/feedbackCapture';
+
+// ─── stałe kanban ─────────────────────────────────────────────────────────────
+
+const KANBAN_COLS = [
+  { status: 'open' as const, label: 'Otwarte', border: 'border-indigo-500/40', text: 'text-indigo-300', dot: 'bg-indigo-400' },
+  { status: 'seen' as const, label: 'W toku', border: 'border-amber-500/40', text: 'text-amber-300', dot: 'bg-amber-400' },
+  { status: 'done' as const, label: 'Gotowe', border: 'border-emerald-500/40', text: 'text-emerald-300', dot: 'bg-emerald-400' },
+  { status: 'rejected' as const, label: 'Odrzucone', border: 'border-red-500/40', text: 'text-red-300', dot: 'bg-red-400' },
+];
+
+const SEV_COLORS: Record<string, string> = {
+  blocker: 'bg-red-500/20 text-red-300 border-red-500/30',
+  bug: 'bg-amber-500/20 text-amber-300 border-amber-500/30',
+  idea: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30',
+  info: 'bg-blue-500/20 text-blue-300 border-blue-500/30',
+};
 
 // ─── stałe sesji ──────────────────────────────────────────────────────────────
 const SESSION_MS = 120 * 60 * 1000;
@@ -81,6 +99,8 @@ export default function StatusEye({ isUnlocked = false }: { isUnlocked?: boolean
   const [isAdmin, setIsAdmin] = useState(false);
   const [replyDrafts, setReplyDrafts] = useState<Record<string, string>>({});
   const [savingReply, setSavingReply] = useState<Record<string, boolean>>({});
+  const [movingStatus, setMovingStatus] = useState<Record<string, boolean>>({});
+  const [viewMode, setViewMode] = useState<'kanban' | 'list'>('kanban');
 
   const reloadList = useCallback(async () => {
     if (!isUnlocked) return; // NIE pobieraj danych przed odszyfrowaniem
@@ -128,6 +148,26 @@ export default function StatusEye({ isUnlocked = false }: { isUnlocked?: boolean
     } finally {
       setSavingReply((s) => { const n = { ...s }; delete n[id]; return n; });
     }
+  };
+
+  const handleMoveStatus = async (id: string, newStatus: FeedbackItem['status']) => {
+    setFeedbackList((prev) => prev.map((f) => (f.id === id ? { ...f, status: newStatus } : f)));
+    setMovingStatus((s) => ({ ...s, [id]: true }));
+    try {
+      await setFeedbackStatus(id, newStatus);
+    } catch (err: unknown) {
+      setListError(err instanceof Error ? err.message : 'Nieznany błąd');
+      reloadList();
+    } finally {
+      setMovingStatus((s) => { const n = { ...s }; delete n[id]; return n; });
+    }
+  };
+
+  const onDragEnd: OnDragEndResponder = (result) => {
+    const { destination, source, draggableId } = result;
+    if (!destination) return;
+    if (destination.droppableId === source.droppableId && destination.index === source.index) return;
+    handleMoveStatus(draggableId, destination.droppableId as FeedbackItem['status']);
   };
 
   // licznik nieprzeczytanych otwartych dla user-a (jego wlasne open + bez admin_reply)
@@ -562,135 +602,297 @@ export default function StatusEye({ isUnlocked = false }: { isUnlocked?: boolean
         </div>
       )}
 
-      {/* ── modal lista zgłoszeń ─────────────────────────────────────────────── */}
+      {/* ── panel Kanban / Lista zgłoszeń (full-screen) ──────────────────────── */}
       {listOpen && (
         <div
-          className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+          className="fixed inset-3 z-[9999] flex flex-col rounded-2xl border border-white/10 bg-[#111318] shadow-2xl overflow-hidden"
           data-feedback-ui="true"
         >
-          <div
-            className="w-full max-w-2xl max-h-[85vh] flex flex-col rounded-2xl border border-white/10 bg-[#111318] shadow-2xl overflow-hidden"
-            data-feedback-ui="true"
-          >
-            <div className="flex items-center justify-between px-5 py-4 border-b border-white/10">
-              <h2 className="text-sm font-semibold text-white flex items-center gap-2">
-                <MessageSquare className="w-4 h-4 text-indigo-400" />
-                {isAdmin ? 'Wszystkie zgłoszenia' : 'Moje zgłoszenia'}
-                <span className="text-xs text-gray-500 font-normal">({feedbackList.length})</span>
-              </h2>
+          {/* ── header ── */}
+          <div className="flex items-center justify-between px-5 py-3 border-b border-white/10 flex-shrink-0">
+            <h2 className="text-sm font-semibold text-white flex items-center gap-2">
+              <MessageSquare className="w-4 h-4 text-indigo-400" />
+              {isAdmin ? 'Wszystkie zgłoszenia' : 'Moje zgłoszenia'}
+              <span className="text-xs text-gray-500 font-normal">({feedbackList.length})</span>
+            </h2>
+            <div className="flex items-center gap-2">
+              <div className="flex rounded-lg border border-white/10 overflow-hidden">
+                <button
+                  onClick={() => setViewMode('kanban')}
+                  className={`px-2.5 py-1.5 flex items-center gap-1.5 text-xs transition-colors ${viewMode === 'kanban' ? 'bg-indigo-600 text-white' : 'text-gray-400 hover:text-white hover:bg-white/5'}`}
+                  data-feedback-ui="true"
+                >
+                  <LayoutGrid className="w-3.5 h-3.5" />
+                  Kanban
+                </button>
+                <button
+                  onClick={() => setViewMode('list')}
+                  className={`px-2.5 py-1.5 flex items-center gap-1.5 text-xs border-l border-white/10 transition-colors ${viewMode === 'list' ? 'bg-indigo-600 text-white' : 'text-gray-400 hover:text-white hover:bg-white/5'}`}
+                  data-feedback-ui="true"
+                >
+                  <List className="w-3.5 h-3.5" />
+                  Lista
+                </button>
+              </div>
+              <button
+                onClick={reloadList}
+                disabled={loadingList}
+                title="Odśwież"
+                className="p-1.5 rounded-lg text-gray-500 hover:text-white hover:bg-white/5 transition-colors disabled:opacity-40"
+                data-feedback-ui="true"
+              >
+                <Loader2 className={`w-3.5 h-3.5 ${loadingList ? 'animate-spin' : ''}`} />
+              </button>
               <button
                 onClick={() => setListOpen(false)}
-                className="text-gray-500 hover:text-white transition-colors"
+                className="p-1.5 rounded-lg text-gray-500 hover:text-white hover:bg-white/5 transition-colors"
                 data-feedback-ui="true"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
-
-            <div className="flex-1 overflow-y-auto p-4 space-y-3">
-              {loadingList && (
-                <div className="flex items-center justify-center py-8">
-                  <Loader2 className="w-5 h-5 animate-spin text-gray-500" />
-                </div>
-              )}
-              {listError && (
-                <p className="text-xs text-red-400 bg-red-500/10 rounded-xl px-3 py-2">
-                  Błąd: {listError}
-                </p>
-              )}
-              {!loadingList && feedbackList.length === 0 && (
-                <p className="text-sm text-gray-500 text-center py-8">
-                  Brak zgłoszeń.
-                </p>
-              )}
-              {feedbackList.map((f) => {
-                const isMine = f.user_id === user?.id;
-                const sevColor =
-                  f.severity === 'blocker' ? 'bg-red-500/20 text-red-300 border-red-500/30' :
-                  f.severity === 'bug' ? 'bg-amber-500/20 text-amber-300 border-amber-500/30' :
-                  f.severity === 'idea' ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30' :
-                  'bg-blue-500/20 text-blue-300 border-blue-500/30';
-                const isDone = f.status === 'done';
-                const date = new Date(f.created_at).toLocaleString('pl-PL', {
-                  day: '2-digit', month: '2-digit', year: 'numeric',
-                  hour: '2-digit', minute: '2-digit',
-                });
-                return (
-                  <div
-                    key={f.id}
-                    className={`rounded-xl border ${isDone ? 'border-emerald-500/20 bg-emerald-500/5' : 'border-white/10 bg-white/5'} p-3 space-y-2`}
-                  >
-                    <div className="flex items-start gap-2">
-                      <button
-                        onClick={() => isMine && handleToggleResolved(f.id)}
-                        disabled={!isMine}
-                        title={isMine ? 'Kliknij aby oznaczyć jako rozwiązane / otwarte' : 'Tylko autor zgłoszenia może zmienić status'}
-                        className={`mt-0.5 w-5 h-5 rounded border flex-shrink-0 flex items-center justify-center transition-colors ${
-                          isDone
-                            ? 'bg-emerald-500 border-emerald-500 text-white'
-                            : 'border-gray-500 ' + (isMine ? 'hover:border-emerald-400 cursor-pointer' : 'opacity-50 cursor-not-allowed')
-                        }`}
-                        data-feedback-ui="true"
-                      >
-                        {isDone && <Check className="w-3 h-3" />}
-                      </button>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 mb-1 flex-wrap">
-                          <span className={`text-[10px] uppercase font-semibold px-1.5 py-0.5 rounded border ${sevColor}`}>
-                            {f.severity}
-                          </span>
-                          <span className="text-[10px] text-gray-500">{date}</span>
-                          {isAdmin && f.user_email && (
-                            <span className="text-[10px] text-gray-400 font-mono">{f.user_email}</span>
-                          )}
-                        </div>
-                        <p className={`text-sm ${isDone ? 'text-gray-400 line-through' : 'text-gray-200'}`}>
-                          {f.message}
-                        </p>
-                        {f.element_label && (
-                          <p className="text-[10px] text-gray-600 font-mono mt-1 truncate">
-                            {f.element_label}
-                          </p>
-                        )}
-                      </div>
-                    </div>
-
-                    {/* admin_reply: czytanie dla wszystkich, edycja tylko dla admina */}
-                    {f.admin_reply && !isAdmin && (
-                      <div className="rounded-lg border border-indigo-500/20 bg-indigo-500/5 px-3 py-2">
-                        <p className="text-[10px] uppercase font-semibold text-indigo-300 mb-1">Odpowiedź</p>
-                        <p className="text-sm text-gray-200 whitespace-pre-wrap">{f.admin_reply}</p>
-                      </div>
-                    )}
-                    {isAdmin && (
-                      <div className="space-y-1">
-                        <label className="text-[10px] uppercase font-semibold text-indigo-300">Odpowiedź admina</label>
-                        <textarea
-                          rows={2}
-                          value={replyDrafts[f.id] ?? f.admin_reply ?? ''}
-                          onChange={(e) => setReplyDrafts((d) => ({ ...d, [f.id]: e.target.value }))}
-                          placeholder="Napisz odpowiedź…"
-                          className="w-full rounded-lg border border-white/10 bg-white/5 text-sm text-gray-200 px-2 py-1.5 resize-none focus:outline-none focus:ring-1 focus:ring-indigo-500 placeholder:text-gray-600"
-                          data-feedback-ui="true"
-                        />
-                        <div className="flex justify-end">
-                          <button
-                            onClick={() => handleSaveReply(f.id)}
-                            disabled={savingReply[f.id]}
-                            className="flex items-center gap-1.5 px-2 py-1 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-medium transition-colors disabled:opacity-40"
-                            data-feedback-ui="true"
-                          >
-                            {savingReply[f.id] ? <Loader2 className="w-3 h-3 animate-spin" /> : <Send className="w-3 h-3" />}
-                            Zapisz
-                          </button>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
           </div>
+
+          {listError && (
+            <div className="px-4 py-1.5 flex-shrink-0 border-b border-white/10">
+              <p className="text-xs text-red-400 bg-red-500/10 rounded-lg px-3 py-1.5">Błąd: {listError}</p>
+            </div>
+          )}
+
+          {loadingList && feedbackList.length === 0 && (
+            <div className="flex-1 flex items-center justify-center">
+              <Loader2 className="w-6 h-6 animate-spin text-gray-500" />
+            </div>
+          )}
+
+          {/* ── WIDOK KANBAN ── */}
+          {viewMode === 'kanban' && !(loadingList && feedbackList.length === 0) && (
+            <DragDropContext onDragEnd={onDragEnd}>
+              <div className="flex-1 overflow-hidden min-h-0">
+                <div className="h-full grid grid-cols-4 gap-2 p-3">
+                  {KANBAN_COLS.map((col) => {
+                    const colItems = feedbackList.filter((f) => f.status === col.status);
+                    return (
+                      <div
+                        key={col.status}
+                        className={`flex flex-col rounded-xl border ${col.border} bg-white/[0.02]`}
+                      >
+                        <div className="flex items-center gap-2 px-3 py-2 border-b border-white/10 flex-shrink-0">
+                          <span className={`w-2 h-2 rounded-full flex-shrink-0 ${col.dot}`} />
+                          <span className={`text-xs font-semibold ${col.text}`}>{col.label}</span>
+                          <span className="ml-auto text-[10px] text-gray-500 bg-white/5 rounded-full px-1.5 py-0.5 tabular-nums">{colItems.length}</span>
+                        </div>
+                        <Droppable droppableId={col.status}>
+                          {(droppableProvided, snapshot) => (
+                            <div
+                              ref={droppableProvided.innerRef}
+                              {...droppableProvided.droppableProps}
+                              className={`flex-1 overflow-y-auto p-2 space-y-2 min-h-[80px] transition-colors ${snapshot.isDraggingOver ? 'bg-white/[0.04]' : ''}`}
+                            >
+                              {colItems.length === 0 && !snapshot.isDraggingOver && (
+                                <p className="text-center text-xs text-gray-700 py-8">—</p>
+                              )}
+                              {colItems.map((f, index) => {
+                                const sevColor = SEV_COLORS[f.severity] ?? SEV_COLORS.info;
+                                const date = new Date(f.created_at).toLocaleString('pl-PL', {
+                                  day: '2-digit',
+                                  month: '2-digit',
+                                  hour: '2-digit',
+                                  minute: '2-digit',
+                                });
+                                return (
+                                  <Draggable key={f.id} draggableId={f.id} index={index}>
+                                    {(draggableProvided, draggableSnapshot) => (
+                                      <div
+                                        ref={draggableProvided.innerRef}
+                                        {...draggableProvided.draggableProps}
+                                        {...draggableProvided.dragHandleProps}
+                                        className={`rounded-xl border bg-[#0e1015] p-2.5 space-y-2 select-none cursor-grab active:cursor-grabbing transition-shadow ${
+                                          draggableSnapshot.isDragging
+                                            ? 'border-indigo-500/50 shadow-2xl shadow-black/60 ring-1 ring-indigo-500/30'
+                                            : 'border-white/10 hover:border-white/20'
+                                        }`}
+                                      >
+                                        <div className="flex items-center gap-1.5">
+                                          <span className={`text-[9px] uppercase font-bold px-1.5 py-0.5 rounded border ${sevColor}`}>
+                                            {f.severity}
+                                          </span>
+                                          <span className="text-[9px] text-gray-600 ml-auto tabular-nums">{date}</span>
+                                        </div>
+                                        {isAdmin && f.user_email && (
+                                          <p className="text-[9px] text-gray-500 font-mono truncate">{f.user_email}</p>
+                                        )}
+                                        <p className="text-xs text-gray-200 leading-relaxed">{f.message}</p>
+                                        {f.element_label && (
+                                          <p className="text-[9px] text-gray-600 font-mono truncate">{f.element_label}</p>
+                                        )}
+                                        {f.admin_reply && !isAdmin && (
+                                          <div className="rounded-lg border border-indigo-500/20 bg-indigo-500/5 px-2 py-1.5">
+                                            <p className="text-[9px] uppercase font-semibold text-indigo-300 mb-0.5">Odpowiedź</p>
+                                            <p className="text-xs text-gray-300 whitespace-pre-wrap">{f.admin_reply}</p>
+                                          </div>
+                                        )}
+                                        {isAdmin && (
+                                          <div className="space-y-1 pt-1 border-t border-white/5">
+                                            <textarea
+                                              rows={2}
+                                              value={replyDrafts[f.id] ?? f.admin_reply ?? ''}
+                                              onChange={(e) => setReplyDrafts((d) => ({ ...d, [f.id]: e.target.value }))}
+                                              placeholder="Odpowiedź…"
+                                              onMouseDown={(e) => e.stopPropagation()}
+                                              className="w-full rounded-lg border border-white/10 bg-white/5 text-xs text-gray-200 px-2 py-1 resize-none focus:outline-none focus:ring-1 focus:ring-indigo-500 placeholder:text-gray-600"
+                                              data-feedback-ui="true"
+                                            />
+                                            <button
+                                              onClick={() => handleSaveReply(f.id)}
+                                              disabled={!!savingReply[f.id]}
+                                              className="flex items-center gap-1 px-2 py-0.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-[10px] font-medium transition-colors disabled:opacity-40"
+                                              data-feedback-ui="true"
+                                            >
+                                              {savingReply[f.id] ? (
+                                                <Loader2 className="w-2.5 h-2.5 animate-spin" />
+                                              ) : (
+                                                <Send className="w-2.5 h-2.5" />
+                                              )}
+                                              Zapisz
+                                            </button>
+                                          </div>
+                                        )}
+                                        {!isAdmin && f.user_id === user?.id && (
+                                          <button
+                                            onClick={() => handleToggleResolved(f.id)}
+                                            onMouseDown={(e) => e.stopPropagation()}
+                                            className={`w-full flex items-center justify-center gap-1 px-2 py-1 rounded-lg border text-[10px] font-medium transition-colors ${
+                                              f.status === 'done'
+                                                ? 'border-emerald-500/30 text-emerald-300 bg-emerald-500/10 hover:bg-emerald-500/20'
+                                                : 'border-white/10 text-gray-400 hover:text-white hover:bg-white/5'
+                                            }`}
+                                            data-feedback-ui="true"
+                                          >
+                                            {f.status === 'done' ? (
+                                              <>
+                                                <Check className="w-3 h-3" /> Rozwiązane
+                                              </>
+                                            ) : (
+                                              '✓ Oznacz'
+                                            )}
+                                          </button>
+                                        )}
+                                      </div>
+                                    )}
+                                  </Draggable>
+                                );
+                              })}
+                              {droppableProvided.placeholder}
+                            </div>
+                          )}
+                        </Droppable>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </DragDropContext>
+          )}
+
+          {/* ── WIDOK LISTY ── */}
+          {viewMode === 'list' && !(loadingList && feedbackList.length === 0) && (
+            <div className="flex-1 overflow-y-auto min-h-0 p-4">
+              {feedbackList.length === 0 && (
+                <p className="text-sm text-gray-500 text-center py-12">Brak zgłoszeń.</p>
+              )}
+              <div className="space-y-2 max-w-4xl mx-auto">
+                {feedbackList.map((f) => {
+                  const isMine = f.user_id === user?.id;
+                  const sevColor = SEV_COLORS[f.severity] ?? SEV_COLORS.info;
+                  const colCfg = KANBAN_COLS.find((c) => c.status === f.status)!;
+                  const date = new Date(f.created_at).toLocaleString('pl-PL', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                  });
+                  return (
+                    <div key={f.id} className="rounded-xl border border-white/10 bg-white/[0.02] p-4 space-y-3">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <span className={`text-[10px] uppercase font-bold px-1.5 py-0.5 rounded border ${sevColor}`}>{f.severity}</span>
+                        <span className={`text-[10px] uppercase font-semibold px-1.5 py-0.5 rounded border ${colCfg.border} ${colCfg.text}`}>{colCfg.label}</span>
+                        {isAdmin && f.user_email && <span className="text-xs text-gray-400 font-mono">{f.user_email}</span>}
+                        <span className="text-xs text-gray-500 ml-auto tabular-nums">{date}</span>
+                      </div>
+                      <p className="text-sm text-gray-200">{f.message}</p>
+                      {f.element_label && <p className="text-[10px] text-gray-600 font-mono truncate">{f.element_label}</p>}
+                      {f.admin_reply && !isAdmin && (
+                        <div className="rounded-lg border border-indigo-500/20 bg-indigo-500/5 px-3 py-2">
+                          <p className="text-[10px] uppercase font-semibold text-indigo-300 mb-1">Odpowiedź</p>
+                          <p className="text-sm text-gray-200 whitespace-pre-wrap">{f.admin_reply}</p>
+                        </div>
+                      )}
+                      {isAdmin && (
+                        <div className="flex gap-4 flex-wrap">
+                          <div className="flex-1 min-w-[240px] space-y-1.5">
+                            <textarea
+                              rows={2}
+                              value={replyDrafts[f.id] ?? f.admin_reply ?? ''}
+                              onChange={(e) => setReplyDrafts((d) => ({ ...d, [f.id]: e.target.value }))}
+                              placeholder="Odpowiedź admina…"
+                              className="w-full rounded-lg border border-white/10 bg-white/5 text-sm text-gray-200 px-3 py-2 resize-none focus:outline-none focus:ring-1 focus:ring-indigo-500 placeholder:text-gray-600"
+                              data-feedback-ui="true"
+                            />
+                            <button
+                              onClick={() => handleSaveReply(f.id)}
+                              disabled={!!savingReply[f.id]}
+                              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-medium transition-colors disabled:opacity-40"
+                              data-feedback-ui="true"
+                            >
+                              {savingReply[f.id] ? <Loader2 className="w-3 h-3 animate-spin" /> : <Send className="w-3 h-3" />}
+                              Zapisz odpowiedź
+                            </button>
+                          </div>
+                          <div className="flex flex-col gap-1.5">
+                            <p className="text-[10px] text-gray-500 uppercase font-semibold">Przenieś do</p>
+                            <div className="flex flex-wrap gap-1.5">
+                              {KANBAN_COLS.filter((c) => c.status !== f.status).map((c) => (
+                                <button
+                                  key={c.status}
+                                  onClick={() => handleMoveStatus(f.id, c.status)}
+                                  disabled={!!movingStatus[f.id]}
+                                  className={`text-xs px-2.5 py-1 rounded-lg border transition-colors disabled:opacity-40 ${c.border} ${c.text} hover:bg-white/5`}
+                                  data-feedback-ui="true"
+                                >
+                                  {movingStatus[f.id] ? '…' : c.label}
+                                </button>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                      {!isAdmin && isMine && (
+                        <button
+                          onClick={() => handleToggleResolved(f.id)}
+                          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-medium transition-colors ${
+                            f.status === 'done'
+                              ? 'border-emerald-500/30 text-emerald-300 bg-emerald-500/10 hover:bg-emerald-500/20'
+                              : 'border-white/10 text-gray-400 hover:text-white hover:bg-white/5'
+                          }`}
+                          data-feedback-ui="true"
+                        >
+                          {f.status === 'done' ? (
+                            <>
+                              <Check className="w-3.5 h-3.5" /> Rozwiązane
+                            </>
+                          ) : (
+                            '✓ Oznacz jako rozwiązane'
+                          )}
+                        </button>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
         </div>
       )}
     </>

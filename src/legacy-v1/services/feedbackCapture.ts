@@ -2,8 +2,8 @@
  * feedbackCapture.ts — przechwytywanie elementów UI i wysyłanie feedbacku do Supabase.
  */
 
-import html2canvas from 'html2canvas';
-import { getSupabaseClient } from '../../components/atomic-crm/providers/supabase/supabase';
+import html2canvas from "html2canvas";
+import { getSupabaseClient } from "../../components/atomic-crm/providers/supabase/supabase";
 
 // ─── Typy publiczne ────────────────────────────────────────────────────────────
 
@@ -19,7 +19,7 @@ export interface CapturedElement {
 
 export interface FeedbackPayload {
   message: string;
-  severity: 'info' | 'bug' | 'idea' | 'blocker';
+  severity: "info" | "bug" | "idea" | "blocker";
   captured?: CapturedElement | null;
 }
 
@@ -32,10 +32,11 @@ function buildCssPath(el: Element): string {
 
   while (current && current !== document.body && segments.length < 6) {
     const tag = current.tagName.toLowerCase();
-    const id = current.id ? `#${current.id}` : '';
-    const firstClass = current.classList.length > 0 ? `.${current.classList[0]}` : '';
+    const id = current.id ? `#${current.id}` : "";
+    const firstClass =
+      current.classList.length > 0 ? `.${current.classList[0]}` : "";
 
-    let nthPart = '';
+    let nthPart = "";
     if (!id) {
       const parent = current.parentElement;
       if (parent) {
@@ -54,16 +55,16 @@ function buildCssPath(el: Element): string {
     current = current.parentElement;
   }
 
-  return segments.join(' > ');
+  return segments.join(" > ");
 }
 
 /** Buduje czytelny label elementu (max 60 znaków). */
 function buildLabel(el: Element): string {
   const tag = el.tagName.toLowerCase();
-  const id = el.id ? `#${el.id}` : '';
-  const firstClass = el.classList.length > 0 ? `.${el.classList[0]}` : '';
-  const text = (el.textContent ?? '').replace(/\s+/g, ' ').trim().slice(0, 40);
-  const raw = `${tag}${id}${firstClass}${text ? ` — ${text}` : ''}`;
+  const id = el.id ? `#${el.id}` : "";
+  const firstClass = el.classList.length > 0 ? `.${el.classList[0]}` : "";
+  const text = (el.textContent ?? "").replace(/\s+/g, " ").trim().slice(0, 40);
+  const raw = `${tag}${id}${firstClass}${text ? ` — ${text}` : ""}`;
   return raw.slice(0, 60);
 }
 
@@ -77,18 +78,18 @@ async function captureScreenshot(el: HTMLElement): Promise<string | null> {
     });
 
     if (canvas.width <= 600) {
-      return canvas.toDataURL('image/jpeg', 0.5);
+      return canvas.toDataURL("image/jpeg", 0.5);
     }
 
     // Przeskaluj do max 600 px szerokości
     const ratio = 600 / canvas.width;
-    const scaled = document.createElement('canvas');
+    const scaled = document.createElement("canvas");
     scaled.width = 600;
     scaled.height = Math.round(canvas.height * ratio);
-    const ctx = scaled.getContext('2d');
-    if (!ctx) return canvas.toDataURL('image/jpeg', 0.5);
+    const ctx = scaled.getContext("2d");
+    if (!ctx) return canvas.toDataURL("image/jpeg", 0.5);
     ctx.drawImage(canvas, 0, 0, scaled.width, scaled.height);
-    return scaled.toDataURL('image/jpeg', 0.5);
+    return scaled.toDataURL("image/jpeg", 0.5);
   } catch {
     return null;
   }
@@ -96,10 +97,10 @@ async function captureScreenshot(el: HTMLElement): Promise<string | null> {
 
 // ─── Stałe stylu highlight ─────────────────────────────────────────────────────
 
-const HIGHLIGHT_OUTLINE = '2px solid #ef4444';
-const HIGHLIGHT_BG = '#ef444420';
-const HIGHLIGHT_OUTLINE_KEY = '__fb_outline__';
-const HIGHLIGHT_BG_KEY = '__fb_bg__';
+const HIGHLIGHT_OUTLINE = "2px solid #ef4444";
+const HIGHLIGHT_BG = "#ef444420";
+const HIGHLIGHT_OUTLINE_KEY = "__fb_outline__";
+const HIGHLIGHT_BG_KEY = "__fb_bg__";
 
 type AugmentedHTMLElement = HTMLElement & {
   [HIGHLIGHT_OUTLINE_KEY]?: string;
@@ -114,8 +115,8 @@ function applyHighlight(el: AugmentedHTMLElement) {
 }
 
 function removeHighlight(el: AugmentedHTMLElement) {
-  el.style.outline = el[HIGHLIGHT_OUTLINE_KEY] ?? '';
-  el.style.backgroundColor = el[HIGHLIGHT_BG_KEY] ?? '';
+  el.style.outline = el[HIGHLIGHT_OUTLINE_KEY] ?? "";
+  el.style.backgroundColor = el[HIGHLIGHT_BG_KEY] ?? "";
   delete el[HIGHLIGHT_OUTLINE_KEY];
   delete el[HIGHLIGHT_BG_KEY];
 }
@@ -129,20 +130,20 @@ function removeHighlight(el: AugmentedHTMLElement) {
 export async function pickElement(): Promise<CapturedElement | null> {
   return new Promise<CapturedElement | null>((resolve) => {
     // Overlay blokujący tylko wizualnie (pointer-events: none)
-    const overlay = document.createElement('div');
-    overlay.setAttribute('data-feedback-ui', 'true');
+    const overlay = document.createElement("div");
+    overlay.setAttribute("data-feedback-ui", "true");
     Object.assign(overlay.style, {
-      position: 'fixed',
-      inset: '0',
-      zIndex: '2147483646',
-      pointerEvents: 'none',
-      cursor: 'crosshair',
+      position: "fixed",
+      inset: "0",
+      zIndex: "2147483646",
+      pointerEvents: "none",
+      cursor: "crosshair",
     });
     document.body.appendChild(overlay);
 
     // Cursor crosshair na body
     const prevCursor = document.body.style.cursor;
-    document.body.style.cursor = 'crosshair';
+    document.body.style.cursor = "crosshair";
 
     let lastHovered: AugmentedHTMLElement | null = null;
 
@@ -153,16 +154,16 @@ export async function pickElement(): Promise<CapturedElement | null> {
         lastHovered = null;
       }
       overlay.remove();
-      document.removeEventListener('mouseover', onMouseOver, true);
-      document.removeEventListener('mouseout', onMouseOut, true);
-      document.removeEventListener('click', onClick, true);
-      document.removeEventListener('keydown', onKeyDown, true);
+      document.removeEventListener("mouseover", onMouseOver, true);
+      document.removeEventListener("mouseout", onMouseOut, true);
+      document.removeEventListener("click", onClick, true);
+      document.removeEventListener("keydown", onKeyDown, true);
     }
 
     function onMouseOver(e: MouseEvent) {
       const target = e.target as AugmentedHTMLElement;
       if (!target || target === overlay) return;
-      if (target.getAttribute('data-feedback-ui') === 'true') return;
+      if (target.getAttribute("data-feedback-ui") === "true") return;
       if (lastHovered && lastHovered !== target) {
         removeHighlight(lastHovered);
       }
@@ -180,7 +181,7 @@ export async function pickElement(): Promise<CapturedElement | null> {
     async function onClick(e: MouseEvent) {
       const target = e.target as HTMLElement;
       if (!target) return;
-      if (target.getAttribute('data-feedback-ui') === 'true') return;
+      if (target.getAttribute("data-feedback-ui") === "true") return;
 
       e.stopPropagation();
       e.preventDefault();
@@ -196,16 +197,16 @@ export async function pickElement(): Promise<CapturedElement | null> {
     }
 
     function onKeyDown(e: KeyboardEvent) {
-      if (e.key === 'Escape') {
+      if (e.key === "Escape") {
         cleanup();
         resolve(null);
       }
     }
 
-    document.addEventListener('mouseover', onMouseOver, true);
-    document.addEventListener('mouseout', onMouseOut, true);
-    document.addEventListener('click', onClick, true);
-    document.addEventListener('keydown', onKeyDown, true);
+    document.addEventListener("mouseover", onMouseOver, true);
+    document.addEventListener("mouseout", onMouseOut, true);
+    document.addEventListener("click", onClick, true);
+    document.addEventListener("keydown", onKeyDown, true);
   });
 }
 
@@ -220,30 +221,33 @@ export async function submitFeedback(payload: FeedbackPayload): Promise<void> {
 
   const tenantId =
     (import.meta.env.VITE_SUPABASE_TENANT_ID as string | undefined) ??
-    '11111111-1111-1111-1111-111111111111';
+    "11111111-1111-1111-1111-111111111111";
 
   const captured = payload.captured ?? null;
   const ctx: any = (window as any).__CRM_CONTEXT__ ?? {};
 
   // Feedback ZAWSZE do public schema (decyzja Bartek 2026-05-04):
   // tryb test ma czytac/pisac realne zgloszenia Aliny, nie kopie w piaskownicy.
-  const { error } = await sb.schema('public').from('insurance_feedback').insert({
-    tenant_id: tenantId,
-    user_id: user?.id ?? null,
-    user_email: user?.email ?? null,
-    route: window.location.pathname + window.location.search,
-    page_key: ctx.page ?? null,
-    page_label: ctx.pageLabel ?? null,
-    page_context: Object.keys(ctx).length ? ctx : null,
-    element_selector: captured?.selector ?? null,
-    element_label: captured?.label ?? null,
-    message: payload.message,
-    severity: payload.severity,
-    screenshot_b64: captured?.screenshotB64 ?? null,
-    viewport_w: captured?.viewport.w ?? window.innerWidth,
-    viewport_h: captured?.viewport.h ?? window.innerHeight,
-    user_agent: navigator.userAgent,
-  });
+  const { error } = await sb
+    .schema("public")
+    .from("insurance_feedback")
+    .insert({
+      tenant_id: tenantId,
+      user_id: user?.id ?? null,
+      user_email: user?.email ?? null,
+      route: window.location.pathname + window.location.search,
+      page_key: ctx.page ?? null,
+      page_label: ctx.pageLabel ?? null,
+      page_context: Object.keys(ctx).length ? ctx : null,
+      element_selector: captured?.selector ?? null,
+      element_label: captured?.label ?? null,
+      message: payload.message,
+      severity: payload.severity,
+      screenshot_b64: captured?.screenshotB64 ?? null,
+      viewport_w: captured?.viewport.w ?? window.innerWidth,
+      viewport_h: captured?.viewport.h ?? window.innerHeight,
+      user_agent: navigator.userAgent,
+    });
 
   if (error) {
     throw new Error(
@@ -259,8 +263,9 @@ export interface FeedbackItem {
   user_id: string | null;
   user_email: string | null;
   message: string;
-  severity: 'info' | 'bug' | 'idea' | 'blocker';
-  status: 'open' | 'seen' | 'done' | 'rejected';
+  severity: "info" | "bug" | "idea" | "blocker";
+  status: "open" | "seen" | "done" | "rejected";
+  priority: number | null;
   element_label: string | null;
   route: string | null;
   created_at: string;
@@ -273,7 +278,7 @@ export interface FeedbackItem {
 /** Wszystkie operacje na feedbacku zawsze przeciwko schemie 'public' (decyzja
  *  Bartek 2026-05-04): tryb test ma widziec realne zgloszenia Aliny i admin
  *  reply, nie kopie w piaskownicy. Override schema per-query w supabase-js v2. */
-const FEEDBACK_SCHEMA = 'public';
+const FEEDBACK_SCHEMA = "public";
 
 /** Lista feedbacku widoczna dla aktualnego usera. RLS filtruje:
  *  user widzi swoje, admin widzi wszystkie w tenancie. */
@@ -281,11 +286,11 @@ export async function listFeedback(): Promise<FeedbackItem[]> {
   const sb = getSupabaseClient();
   const { data, error } = await sb
     .schema(FEEDBACK_SCHEMA)
-    .from('insurance_feedback')
+    .from("insurance_feedback")
     .select(
-      'id,user_id,user_email,message,severity,status,element_label,route,created_at,resolved_at,admin_reply,admin_reply_at,admin_reply_by',
+      "id,user_id,user_email,message,severity,status,priority,element_label,route,created_at,resolved_at,admin_reply,admin_reply_at,admin_reply_by",
     )
-    .order('created_at', { ascending: false })
+    .order("created_at", { ascending: false })
     .limit(100);
   if (error) {
     throw new Error(`Nie udało się pobrać listy: ${error.message}`);
@@ -298,17 +303,51 @@ export async function toggleMyFeedbackResolved(fbId: string): Promise<string> {
   const sb = getSupabaseClient();
   const { data, error } = await sb
     .schema(FEEDBACK_SCHEMA)
-    .rpc('toggle_my_feedback_resolved', { fb_id: fbId });
+    .rpc("toggle_my_feedback_resolved", { fb_id: fbId });
   if (error) throw new Error(error.message);
   return data as string;
 }
 
 /** Admin (is_insurance_admin) zapisuje odpowiedz do zgloszenia. */
-export async function setFeedbackAdminReply(fbId: string, reply: string): Promise<void> {
+export async function setFeedbackAdminReply(
+  fbId: string,
+  reply: string,
+): Promise<void> {
   const sb = getSupabaseClient();
   const { error } = await sb
     .schema(FEEDBACK_SCHEMA)
-    .rpc('set_feedback_admin_reply', { fb_id: fbId, reply });
+    .rpc("set_feedback_admin_reply", { fb_id: fbId, reply });
+  if (error) throw new Error(error.message);
+}
+
+/** Admin ustawia status zgłoszenia (kanban). */
+export async function setFeedbackStatus(
+  fbId: string,
+  status: FeedbackItem["status"],
+): Promise<void> {
+  const sb = getSupabaseClient();
+  const { error } = await sb
+    .schema(FEEDBACK_SCHEMA)
+    .from("insurance_feedback")
+    .update({
+      status,
+      resolved_at: status === "done" ? new Date().toISOString() : null,
+    })
+    .eq("id", fbId);
+  if (error) throw new Error(error.message);
+}
+
+/** Ustawia priorytet (gwiazdki 1-5) na zgłoszeniu. null = brak. */
+export async function setFeedbackPriority(
+  fbId: string,
+  priority: number | null,
+): Promise<void> {
+  const sb = getSupabaseClient();
+  const { error } = await sb
+    .schema(FEEDBACK_SCHEMA)
+    .from("insurance_feedback")
+    .update({ priority })
+    .eq("id", fbId);
   if (error) throw new Error(error.message);
 }
 
@@ -318,7 +357,9 @@ let _adminCache: { ts: number; v: boolean } | null = null;
 export async function isInsuranceAdmin(): Promise<boolean> {
   if (_adminCache && Date.now() - _adminCache.ts < 60_000) return _adminCache.v;
   const sb = getSupabaseClient();
-  const { data, error } = await sb.schema(FEEDBACK_SCHEMA).rpc('is_insurance_admin');
+  const { data, error } = await sb
+    .schema(FEEDBACK_SCHEMA)
+    .rpc("is_insurance_admin");
   const v = !error && data === true;
   _adminCache = { ts: Date.now(), v };
   return v;

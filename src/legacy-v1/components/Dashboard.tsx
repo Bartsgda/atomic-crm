@@ -19,8 +19,9 @@ interface Props {
   sortByDate?: boolean;
   onImportComplete: () => void;
   isCompact?: boolean;
-  onAddClient?: () => void; 
-  predefinedDateRange?: string | null; 
+  onAddClient?: () => void;
+  predefinedDateRange?: string | null;
+  searchFocusSignal?: number;
 }
 
 const normalize = (str: string) => str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
@@ -76,12 +77,32 @@ const NotesPopover = ({ notes, policyId, position }: { notes: ClientNote[], poli
     );
 };
 
-export const Dashboard: React.FC<Props> = ({ state, onNavigate, onDeletePolicy, initialSearchTerm, filterTypes, activeCategory, categoryTitle, sortByDate, onImportComplete, isCompact = false, predefinedDateRange }) => {
+export const Dashboard: React.FC<Props> = ({ state, onNavigate, onDeletePolicy, initialSearchTerm, filterTypes, activeCategory, categoryTitle, sortByDate, onImportComplete, isCompact = false, predefinedDateRange, searchFocusSignal }) => {
   const [searchTerm, setSearchTerm] = useState(initialSearchTerm || '');
   const [showAdvancedFilters, setShowAdvancedFilters] = useState(false);
   const [previewClient, setPreviewClient] = useState<Client | null>(null);
   const clickTimeoutRef = useRef<any>(null);
   const [activeSubType, setActiveSubType] = useState<VehicleSubType | null>(null);
+  const searchInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (searchFocusSignal && searchFocusSignal > 0) {
+      setTimeout(() => searchInputRef.current?.focus(), 50);
+    }
+  }, [searchFocusSignal]);
+
+  const [selectedRowIndex, setSelectedRowIndex] = useState(-1);
+
+  useEffect(() => {
+    setSelectedRowIndex(-1);
+  }, [searchTerm]);
+
+  useEffect(() => {
+    if (selectedRowIndex >= 0) {
+      document.querySelector(`[data-row-idx="${selectedRowIndex}"]`)
+        ?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    }
+  }, [selectedRowIndex]);
 
   // --- SORTING STATE ---
   const [sortConfig, setSortConfig] = useState<{ key: 'endDate' | 'client' | 'premium' | 'status'; direction: 'asc' | 'desc' }>({
@@ -257,6 +278,16 @@ export const Dashboard: React.FC<Props> = ({ state, onNavigate, onDeletePolicy, 
         }
     });
 
+    // Gdy aktywne wyszukiwanie — pokazuj każdego klienta tylko raz (pierwsza najlepsza polisa)
+    if (searchTerm.trim()) {
+      const seen = new Set<string>();
+      return relevantPolicies.filter(p => {
+        if (seen.has(p.clientId)) return false;
+        seen.add(p.clientId);
+        return true;
+      });
+    }
+
     return relevantPolicies;
   }, [searchTerm, state.clients, state.policies, filterTypes, activeSubType, sortConfig, selectedStages, selectedInsurers, dateRange, activeCategory]);
 
@@ -334,6 +365,28 @@ export const Dashboard: React.FC<Props> = ({ state, onNavigate, onDeletePolicy, 
           client, 
           highlightPolicyId: policy.id 
       });
+  };
+
+  const handleSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const total = filteredAndSortedPolicies.length;
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setSelectedRowIndex(i => Math.min(i + 1, total - 1));
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setSelectedRowIndex(i => {
+        if (i <= 0) return -1;
+        return i - 1;
+      });
+    } else if (e.key === 'Enter' && selectedRowIndex >= 0) {
+      e.preventDefault();
+      const policy = filteredAndSortedPolicies[selectedRowIndex];
+      const client = state.clients.find(c => c.id === policy.clientId);
+      if (client) onNavigate('client-details', { client, highlightPolicyId: policy.id });
+    } else if (e.key === 'Escape') {
+      setSearchTerm('');
+      setSelectedRowIndex(-1);
+    }
   };
 
   const renderSortIcon = (columnKey: string) => {
@@ -415,13 +468,16 @@ export const Dashboard: React.FC<Props> = ({ state, onNavigate, onDeletePolicy, 
             {/* ROW 1: SEARCH + DATES */}
             <div className="flex flex-col xl:flex-row gap-3">
                 <div className="relative flex-1 group">
-                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400 group-focus-within:text-zinc-900 dark:group-focus-within:text-white transition-colors" size={18} />
-                    <input 
-                        type="text" 
-                        placeholder="Szukaj (Nazwisko, Rej, Polisa)..." 
-                        className="w-full pl-11 pr-4 py-3 bg-zinc-100 dark:bg-zinc-800 border-2 border-transparent focus:bg-white dark:focus:bg-zinc-900 focus:border-zinc-300 dark:focus:border-zinc-700 rounded-2xl outline-none transition-all font-bold text-sm text-zinc-900 dark:text-zinc-100"
+                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400 group-focus-within:text-zinc-900 dark:group-focus-within:text-white transition-colors" size={20} />
+                    <input
+                        ref={searchInputRef}
+                        type="text"
+                        placeholder="Szukaj klienta, pojazdu, polisy…"
+                        className="w-full pl-12 pr-4 py-3.5 bg-zinc-100 dark:bg-zinc-800 border-2 border-transparent focus:bg-white dark:focus:bg-zinc-900 focus:border-indigo-400 dark:focus:border-indigo-500 rounded-2xl outline-none transition-all font-bold text-sm text-zinc-900 dark:text-zinc-100 placeholder:font-normal placeholder:text-zinc-400"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
+                        onKeyDown={handleSearchKeyDown}
+                        tabIndex={1}
                     />
                 </div>
 
@@ -559,9 +615,10 @@ export const Dashboard: React.FC<Props> = ({ state, onNavigate, onDeletePolicy, 
               </tr>
             </thead>
             <tbody className="divide-y divide-zinc-100 dark:divide-zinc-800">
-              {filteredAndSortedPolicies.map(policy => {
+              {filteredAndSortedPolicies.map((policy, idx) => {
                 const client = state.clients.find(c => c.id === policy.clientId);
                 if (!client) return null;
+                const isSelected = idx === selectedRowIndex;
 
                 const today = new Date();
                 const end = new Date(policy.policyEndDate);
@@ -586,10 +643,11 @@ export const Dashboard: React.FC<Props> = ({ state, onNavigate, onDeletePolicy, 
                 const latestNote = policyNotes[0];
 
                 return (
-                  <tr 
-                    key={policy.id} 
-                    className="hover:bg-zinc-50 dark:hover:bg-zinc-800/50 transition-colors group cursor-pointer"
-                    onClick={() => handleRowClick(client)}
+                  <tr
+                    key={policy.id}
+                    data-row-idx={idx}
+                    className={`transition-colors group cursor-pointer ${isSelected ? 'bg-indigo-50 dark:bg-indigo-950/60 outline outline-2 outline-indigo-400' : 'hover:bg-zinc-50 dark:hover:bg-zinc-800/50'}`}
+                    onClick={() => { setSelectedRowIndex(idx); handleRowClick(client); }}
                     onDoubleClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();

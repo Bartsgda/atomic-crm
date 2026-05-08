@@ -269,8 +269,33 @@ export const ClientDetails: React.FC<Props> = ({ client, policies, notes, termin
   const [hoveredNoteIds, setHoveredNoteIds] = useState<string[]>([]);
   const [pendingPolicyLinks, setPendingPolicyLinks] = useState<string[]>([]);
   const [selectedPolicy, setSelectedPolicy] = useState<Policy | null>(null);
-  const [renewalSourcePolicy, setRenewalSourcePolicy] = useState<Policy | null>(null); // NEW: For cloning
+  const [renewalSourcePolicy, setRenewalSourcePolicy] = useState<Policy | null>(null);
   const [filterPolicyId, setFilterPolicyId] = useState<string | null>(null);
+
+  // --- NAWIGACJA PRODUKTÓW (prawa kolumna, strzałki lewo/prawo) ---
+  const [productNavIdx, setProductNavIdx] = useState(0);
+  const productNavRef = useRef<HTMLDivElement>(null);
+
+  const handleProductNavKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+      e.preventDefault();
+      setProductNavIdx(i => Math.min(i + 1, clientPolicies.length - 1));
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      setProductNavIdx(i => Math.max(i - 1, 0));
+    } else if (e.key === 'Enter') {
+      const pol = clientPolicies[productNavIdx];
+      if (pol) { setSelectedPolicy(pol); setFilterPolicyId(pol.id); }
+    }
+  };
+
+  useEffect(() => {
+    if (productNavIdx >= 0 && productNavRef.current) {
+      const card = productNavRef.current.querySelector(`[data-product-idx="${productNavIdx}"]`);
+      card?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    }
+  }, [productNavIdx]);
+
   const [terminationModalPolicy, setTerminationModalPolicy] = useState<Policy | null>(null);
   const [isAddPolicyModalOpen, setIsAddPolicyModalOpen] = useState(false);
   const [isEditClientModalOpen, setIsEditClientModalOpen] = useState(false); 
@@ -620,8 +645,13 @@ export const ClientDetails: React.FC<Props> = ({ client, policies, notes, termin
                 </button>
             </div>
 
-            <div className="flex-1 overflow-y-auto p-6 space-y-8 scrollbar-hide">
-                
+            <div
+              ref={productNavRef}
+              tabIndex={0}
+              onKeyDown={handleProductNavKeyDown}
+              className="flex-1 overflow-y-auto p-6 space-y-8 scrollbar-hide outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-inset"
+            >
+
                 {filteredPipeline.length > 0 && (
                     <div className="space-y-4">
                         <div className="flex items-center justify-between px-2">
@@ -631,10 +661,13 @@ export const ClientDetails: React.FC<Props> = ({ client, policies, notes, termin
                             <span className="bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 text-[9px] font-black px-2 py-0.5 rounded-md">{filteredPipeline.length}</span>
                         </div>
                         <div className="space-y-3">
-                            {filteredPipeline.map(policy => (
-                                <div key={policy.id} ref={el => { policyRefs.current[policy.id] = el; }}>
-                                    <PolicyCardItem 
-                                        policy={policy} 
+                            {filteredPipeline.map(policy => {
+                              const navIdx = clientPolicies.findIndex(p => p.id === policy.id);
+                              return (
+                                <div key={policy.id} data-product-idx={navIdx} ref={el => { policyRefs.current[policy.id] = el; }}
+                                  className={navIdx === productNavIdx ? 'ring-2 ring-indigo-500 rounded-[1.5rem]' : ''}>
+                                    <PolicyCardItem
+                                        policy={policy}
                                         client={client}
                                         statusConfig={STATUS_CONFIG[policy.stage as SalesStage] || STATUS_CONFIG['inne']}
                                         isFiltered={filterPolicyId === policy.id}
@@ -652,7 +685,8 @@ export const ClientDetails: React.FC<Props> = ({ client, policies, notes, termin
                                         onToggleDocs={handleToggleDocs}
                                     />
                                 </div>
-                            ))}
+                              );
+                            })}
                         </div>
                     </div>
                 )}
@@ -677,10 +711,13 @@ export const ClientDetails: React.FC<Props> = ({ client, policies, notes, termin
                         <span className="bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 text-[9px] font-black px-2 py-0.5 rounded-md">{filteredWallet.length}</span>
                     </div>
                     <div className="space-y-3">
-                        {filteredWallet.length > 0 ? filteredWallet.map(policy => (
-                            <div key={policy.id} ref={el => { policyRefs.current[policy.id] = el; }}>
-                                <PolicyCardItem 
-                                    policy={policy} 
+                        {filteredWallet.length > 0 ? filteredWallet.map(policy => {
+                          const navIdx = clientPolicies.findIndex(p => p.id === policy.id);
+                          return (
+                            <div key={policy.id} data-product-idx={navIdx} ref={el => { policyRefs.current[policy.id] = el; }}
+                              className={navIdx === productNavIdx ? 'ring-2 ring-indigo-500 rounded-[1.5rem]' : ''}>
+                                <PolicyCardItem
+                                    policy={policy}
                                     client={client}
                                     statusConfig={STATUS_CONFIG[policy.stage as SalesStage] || STATUS_CONFIG['inne']}
                                     isFiltered={filterPolicyId === policy.id}
@@ -691,14 +728,15 @@ export const ClientDetails: React.FC<Props> = ({ client, policies, notes, termin
                                         setHoveredNoteIds(relatedNotes);
                                     }}
                                     onMouseOut={() => setHoveredNoteIds([])}
-                                    onClick={() => setFilterPolicyId(policy.id === filterPolicyId ? null : policy.id)}
+                                    onClick={() => { setProductNavIdx(navIdx); setFilterPolicyId(policy.id === filterPolicyId ? null : policy.id); }}
                                     onDoubleClick={() => handleEditPolicy(policy)}
                                     onEdit={() => handleEditPolicy(policy)}
                                     onAction={handlePolicyAction}
                                     onToggleDocs={handleToggleDocs}
                                 />
                             </div>
-                        )) : (
+                          );
+                        }) : (
                             <div className="text-center py-12 opacity-40 border-2 border-dashed border-zinc-100 dark:border-zinc-800 rounded-2xl">
                                 <FileText size={48} className="mx-auto text-zinc-300 mb-2" />
                                 <p className="text-[10px] font-black uppercase tracking-widest text-zinc-400">Brak aktywnych polis</p>

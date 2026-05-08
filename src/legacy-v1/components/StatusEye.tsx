@@ -9,6 +9,7 @@ import {
   toggleMyFeedbackResolved,
   setFeedbackAdminReply,
   setFeedbackStatus,
+  setFeedbackPriority,
   isInsuranceAdmin,
   type CapturedElement,
   type FeedbackItem,
@@ -19,9 +20,12 @@ import {
 const KANBAN_COLS = [
   { status: 'open' as const, label: 'Otwarte', border: 'border-indigo-500/40', text: 'text-indigo-300', dot: 'bg-indigo-400' },
   { status: 'seen' as const, label: 'W toku', border: 'border-amber-500/40', text: 'text-amber-300', dot: 'bg-amber-400' },
-  { status: 'done' as const, label: 'Gotowe', border: 'border-emerald-500/40', text: 'text-emerald-300', dot: 'bg-emerald-400' },
+  { status: 'done' as const, label: 'Ukończone', border: 'border-emerald-500/40', text: 'text-emerald-300', dot: 'bg-emerald-400' },
   { status: 'rejected' as const, label: 'Odrzucone', border: 'border-red-500/40', text: 'text-red-300', dot: 'bg-red-400' },
 ];
+
+const TOP_COLS = KANBAN_COLS.filter((c) => c.status !== 'done');
+const DONE_COL = KANBAN_COLS.find((c) => c.status === 'done')!;
 
 const SEV_COLORS: Record<string, string> = {
   blocker: 'bg-red-500/20 text-red-300 border-red-500/30',
@@ -100,6 +104,7 @@ export default function StatusEye({ isUnlocked = false }: { isUnlocked?: boolean
   const [replyDrafts, setReplyDrafts] = useState<Record<string, string>>({});
   const [savingReply, setSavingReply] = useState<Record<string, boolean>>({});
   const [movingStatus, setMovingStatus] = useState<Record<string, boolean>>({});
+  const [settingPriority, setSettingPriority] = useState<Record<string, boolean>>({});
   const [viewMode, setViewMode] = useState<'kanban' | 'list'>('kanban');
 
   const reloadList = useCallback(async () => {
@@ -160,6 +165,19 @@ export default function StatusEye({ isUnlocked = false }: { isUnlocked?: boolean
       reloadList();
     } finally {
       setMovingStatus((s) => { const n = { ...s }; delete n[id]; return n; });
+    }
+  };
+
+  const handleSetPriority = async (id: string, priority: number | null) => {
+    setFeedbackList((prev) => prev.map((f) => (f.id === id ? { ...f, priority } : f)));
+    setSettingPriority((s) => ({ ...s, [id]: true }));
+    try {
+      await setFeedbackPriority(id, priority);
+    } catch (err: unknown) {
+      setListError(err instanceof Error ? err.message : 'Błąd zapisu gwiazdek');
+      reloadList();
+    } finally {
+      setSettingPriority((s) => { const n = { ...s }; delete n[id]; return n; });
     }
   };
 
@@ -668,14 +686,18 @@ export default function StatusEye({ isUnlocked = false }: { isUnlocked?: boolean
           {/* ── WIDOK KANBAN ── */}
           {viewMode === 'kanban' && !(loadingList && feedbackList.length === 0) && (
             <DragDropContext onDragEnd={onDragEnd}>
-              <div className="flex-1 overflow-hidden min-h-0">
-                <div className="h-full grid grid-cols-4 gap-2 p-3">
-                  {KANBAN_COLS.map((col) => {
-                    const colItems = feedbackList.filter((f) => f.status === col.status);
+              <div className="flex-1 overflow-hidden min-h-0 flex flex-col gap-2 p-3">
+
+                {/* ─ 3 kolumny góra: Otwarte / W toku / Odrzucone ─ */}
+                <div className="flex-1 min-h-0 grid grid-cols-3 gap-2">
+                  {TOP_COLS.map((col) => {
+                    const colItems = feedbackList
+                      .filter((f) => f.status === col.status)
+                      .sort((a, b) => (b.priority ?? 0) - (a.priority ?? 0));
                     return (
                       <div
                         key={col.status}
-                        className={`flex flex-col rounded-xl border ${col.border} bg-white/[0.02]`}
+                        className={`flex flex-col min-h-0 rounded-xl border ${col.border} bg-white/[0.02]`}
                       >
                         <div className="flex items-center gap-2 px-3 py-2 border-b border-white/10 flex-shrink-0">
                           <span className={`w-2 h-2 rounded-full flex-shrink-0 ${col.dot}`} />
@@ -683,49 +705,49 @@ export default function StatusEye({ isUnlocked = false }: { isUnlocked?: boolean
                           <span className="ml-auto text-[10px] text-gray-500 bg-white/5 rounded-full px-1.5 py-0.5 tabular-nums">{colItems.length}</span>
                         </div>
                         <Droppable droppableId={col.status}>
-                          {(droppableProvided, snapshot) => (
+                          {(dProv, dSnap) => (
                             <div
-                              ref={droppableProvided.innerRef}
-                              {...droppableProvided.droppableProps}
-                              className={`flex-1 overflow-y-auto p-2 space-y-2 min-h-[80px] transition-colors ${snapshot.isDraggingOver ? 'bg-white/[0.04]' : ''}`}
+                              ref={dProv.innerRef}
+                              {...dProv.droppableProps}
+                              className={`flex-1 overflow-y-auto p-2 space-y-2 min-h-0 transition-colors ${dSnap.isDraggingOver ? 'bg-white/[0.04]' : ''}`}
                             >
-                              {colItems.length === 0 && !snapshot.isDraggingOver && (
+                              {colItems.length === 0 && !dSnap.isDraggingOver && (
                                 <p className="text-center text-xs text-gray-700 py-8">—</p>
                               )}
                               {colItems.map((f, index) => {
                                 const sevColor = SEV_COLORS[f.severity] ?? SEV_COLORS.info;
-                                const date = new Date(f.created_at).toLocaleString('pl-PL', {
-                                  day: '2-digit',
-                                  month: '2-digit',
-                                  hour: '2-digit',
-                                  minute: '2-digit',
-                                });
+                                const date = new Date(f.created_at).toLocaleString('pl-PL', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' });
                                 return (
                                   <Draggable key={f.id} draggableId={f.id} index={index}>
-                                    {(draggableProvided, draggableSnapshot) => (
+                                    {(gProv, gSnap) => (
                                       <div
-                                        ref={draggableProvided.innerRef}
-                                        {...draggableProvided.draggableProps}
-                                        {...draggableProvided.dragHandleProps}
-                                        className={`rounded-xl border bg-[#0e1015] p-2.5 space-y-2 select-none cursor-grab active:cursor-grabbing transition-shadow ${
-                                          draggableSnapshot.isDragging
-                                            ? 'border-indigo-500/50 shadow-2xl shadow-black/60 ring-1 ring-indigo-500/30'
-                                            : 'border-white/10 hover:border-white/20'
-                                        }`}
+                                        ref={gProv.innerRef}
+                                        {...gProv.draggableProps}
+                                        {...gProv.dragHandleProps}
+                                        className={`rounded-xl border bg-[#0e1015] p-2.5 space-y-2 select-none cursor-grab active:cursor-grabbing transition-shadow ${gSnap.isDragging ? 'border-indigo-500/50 shadow-2xl shadow-black/60 ring-1 ring-indigo-500/30' : 'border-white/10 hover:border-white/20'}`}
                                       >
+                                        {/* severity + date */}
                                         <div className="flex items-center gap-1.5">
-                                          <span className={`text-[9px] uppercase font-bold px-1.5 py-0.5 rounded border ${sevColor}`}>
-                                            {f.severity}
-                                          </span>
+                                          <span className={`text-[9px] uppercase font-bold px-1.5 py-0.5 rounded border ${sevColor}`}>{f.severity}</span>
                                           <span className="text-[9px] text-gray-600 ml-auto tabular-nums">{date}</span>
                                         </div>
-                                        {isAdmin && f.user_email && (
-                                          <p className="text-[9px] text-gray-500 font-mono truncate">{f.user_email}</p>
-                                        )}
+                                        {/* gwiazdki */}
+                                        <div className="flex gap-px">
+                                          {[1, 2, 3, 4, 5].map((n) => (
+                                            <button
+                                              key={n}
+                                              onClick={() => handleSetPriority(f.id, n === f.priority ? null : n)}
+                                              onMouseDown={(e) => e.stopPropagation()}
+                                              disabled={!!settingPriority[f.id]}
+                                              className={`text-sm leading-none px-px transition-colors disabled:opacity-40 ${n <= (f.priority ?? 0) ? 'text-amber-400 hover:text-amber-300' : 'text-gray-700 hover:text-gray-500'}`}
+                                              title={`Ważność ${n}/5`}
+                                              data-feedback-ui="true"
+                                            >★</button>
+                                          ))}
+                                        </div>
+                                        {isAdmin && f.user_email && <p className="text-[9px] text-gray-500 font-mono truncate">{f.user_email}</p>}
                                         <p className="text-xs text-gray-200 leading-relaxed">{f.message}</p>
-                                        {f.element_label && (
-                                          <p className="text-[9px] text-gray-600 font-mono truncate">{f.element_label}</p>
-                                        )}
+                                        {f.element_label && <p className="text-[9px] text-gray-600 font-mono truncate">{f.element_label}</p>}
                                         {f.admin_reply && !isAdmin && (
                                           <div className="rounded-lg border border-indigo-500/20 bg-indigo-500/5 px-2 py-1.5">
                                             <p className="text-[9px] uppercase font-semibold text-indigo-300 mb-0.5">Odpowiedź</p>
@@ -749,11 +771,7 @@ export default function StatusEye({ isUnlocked = false }: { isUnlocked?: boolean
                                               className="flex items-center gap-1 px-2 py-0.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-[10px] font-medium transition-colors disabled:opacity-40"
                                               data-feedback-ui="true"
                                             >
-                                              {savingReply[f.id] ? (
-                                                <Loader2 className="w-2.5 h-2.5 animate-spin" />
-                                              ) : (
-                                                <Send className="w-2.5 h-2.5" />
-                                              )}
+                                              {savingReply[f.id] ? <Loader2 className="w-2.5 h-2.5 animate-spin" /> : <Send className="w-2.5 h-2.5" />}
                                               Zapisz
                                             </button>
                                           </div>
@@ -762,20 +780,10 @@ export default function StatusEye({ isUnlocked = false }: { isUnlocked?: boolean
                                           <button
                                             onClick={() => handleToggleResolved(f.id)}
                                             onMouseDown={(e) => e.stopPropagation()}
-                                            className={`w-full flex items-center justify-center gap-1 px-2 py-1 rounded-lg border text-[10px] font-medium transition-colors ${
-                                              f.status === 'done'
-                                                ? 'border-emerald-500/30 text-emerald-300 bg-emerald-500/10 hover:bg-emerald-500/20'
-                                                : 'border-white/10 text-gray-400 hover:text-white hover:bg-white/5'
-                                            }`}
+                                            className="w-full flex items-center justify-center gap-1 px-2 py-1 rounded-lg border border-white/10 text-[10px] font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-colors"
                                             data-feedback-ui="true"
                                           >
-                                            {f.status === 'done' ? (
-                                              <>
-                                                <Check className="w-3 h-3" /> Rozwiązane
-                                              </>
-                                            ) : (
-                                              '✓ Oznacz'
-                                            )}
+                                            ✓ Oznacz jako ukończone
                                           </button>
                                         )}
                                       </div>
@@ -783,7 +791,7 @@ export default function StatusEye({ isUnlocked = false }: { isUnlocked?: boolean
                                   </Draggable>
                                 );
                               })}
-                              {droppableProvided.placeholder}
+                              {dProv.placeholder}
                             </div>
                           )}
                         </Droppable>
@@ -791,6 +799,71 @@ export default function StatusEye({ isUnlocked = false }: { isUnlocked?: boolean
                     );
                   })}
                 </div>
+
+                {/* ─ Ukończone — pełna szerokość, poziomy scroll ─ */}
+                <div className={`flex-shrink-0 flex flex-col rounded-xl border ${DONE_COL.border} bg-white/[0.02]`} style={{ height: '200px' }}>
+                  <div className="flex items-center gap-2 px-3 py-2 border-b border-white/10 flex-shrink-0">
+                    <span className={`w-2 h-2 rounded-full flex-shrink-0 ${DONE_COL.dot}`} />
+                    <span className={`text-xs font-semibold ${DONE_COL.text}`}>{DONE_COL.label}</span>
+                    <span className="ml-auto text-[10px] text-gray-500 bg-white/5 rounded-full px-1.5 py-0.5 tabular-nums">
+                      {feedbackList.filter((f) => f.status === 'done').length}
+                    </span>
+                  </div>
+                  <Droppable droppableId="done" direction="horizontal">
+                    {(dProv, dSnap) => (
+                      <div
+                        ref={dProv.innerRef}
+                        {...dProv.droppableProps}
+                        className={`flex-1 overflow-x-auto flex flex-row items-start gap-2 p-2 min-w-0 transition-colors ${dSnap.isDraggingOver ? 'bg-white/[0.04]' : ''}`}
+                      >
+                        {feedbackList.filter((f) => f.status === 'done').length === 0 && !dSnap.isDraggingOver && (
+                          <p className="text-xs text-gray-700 self-center px-4">Przeciągnij tu ukończone zgłoszenia</p>
+                        )}
+                        {feedbackList
+                          .filter((f) => f.status === 'done')
+                          .map((f, index) => {
+                            const sevColor = SEV_COLORS[f.severity] ?? SEV_COLORS.info;
+                            const date = new Date(f.created_at).toLocaleString('pl-PL', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' });
+                            return (
+                              <Draggable key={f.id} draggableId={f.id} index={index}>
+                                {(gProv, gSnap) => (
+                                  <div
+                                    ref={gProv.innerRef}
+                                    {...gProv.draggableProps}
+                                    {...gProv.dragHandleProps}
+                                    className={`w-[210px] flex-shrink-0 rounded-xl border bg-[#0e1015] p-2.5 space-y-1.5 select-none cursor-grab active:cursor-grabbing transition-shadow ${gSnap.isDragging ? 'border-emerald-500/50 shadow-2xl shadow-black/60 ring-1 ring-emerald-500/30' : 'border-white/10 hover:border-white/20'}`}
+                                  >
+                                    <div className="flex items-center gap-1.5">
+                                      <span className={`text-[9px] uppercase font-bold px-1.5 py-0.5 rounded border ${sevColor}`}>{f.severity}</span>
+                                      <div className="flex gap-px ml-1">
+                                        {[1, 2, 3, 4, 5].map((n) => (
+                                          <button
+                                            key={n}
+                                            onClick={() => handleSetPriority(f.id, n === f.priority ? null : n)}
+                                            onMouseDown={(e) => e.stopPropagation()}
+                                            className={`text-xs leading-none px-px transition-colors ${n <= (f.priority ?? 0) ? 'text-amber-400 hover:text-amber-300' : 'text-gray-800 hover:text-gray-600'}`}
+                                            title={`Ważność ${n}/5`}
+                                            data-feedback-ui="true"
+                                          >★</button>
+                                        ))}
+                                      </div>
+                                      <span className="text-[9px] text-gray-600 ml-auto tabular-nums">{date}</span>
+                                    </div>
+                                    <p className="text-xs text-gray-400 line-clamp-2 leading-relaxed">{f.message}</p>
+                                    {f.admin_reply && (
+                                      <p className="text-[9px] text-indigo-300/70 truncate">{f.admin_reply}</p>
+                                    )}
+                                  </div>
+                                )}
+                              </Draggable>
+                            );
+                          })}
+                        {dProv.placeholder}
+                      </div>
+                    )}
+                  </Droppable>
+                </div>
+
               </div>
             </DragDropContext>
           )}
@@ -818,6 +891,19 @@ export default function StatusEye({ isUnlocked = false }: { isUnlocked?: boolean
                       <div className="flex items-center gap-2 flex-wrap">
                         <span className={`text-[10px] uppercase font-bold px-1.5 py-0.5 rounded border ${sevColor}`}>{f.severity}</span>
                         <span className={`text-[10px] uppercase font-semibold px-1.5 py-0.5 rounded border ${colCfg.border} ${colCfg.text}`}>{colCfg.label}</span>
+                        {/* gwiazdki */}
+                        <div className="flex gap-px">
+                          {[1, 2, 3, 4, 5].map((n) => (
+                            <button
+                              key={n}
+                              onClick={() => handleSetPriority(f.id, n === f.priority ? null : n)}
+                              disabled={!!settingPriority[f.id]}
+                              className={`text-sm leading-none px-px transition-colors disabled:opacity-40 ${n <= (f.priority ?? 0) ? 'text-amber-400 hover:text-amber-300' : 'text-gray-700 hover:text-gray-500'}`}
+                              title={`Ważność ${n}/5`}
+                              data-feedback-ui="true"
+                            >★</button>
+                          ))}
+                        </div>
                         {isAdmin && f.user_email && <span className="text-xs text-gray-400 font-mono">{f.user_email}</span>}
                         <span className="text-xs text-gray-500 ml-auto tabular-nums">{date}</span>
                       </div>

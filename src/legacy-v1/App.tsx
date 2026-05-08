@@ -136,6 +136,7 @@ function App() {
     null,
   );
   const [sortByDate, setSortByDate] = useState<boolean>(false);
+  const [searchFocusSignal, setSearchFocusSignal] = useState(0);
 
   const unreadNotifCount = state.notifications.filter((n) => !n.isRead).length;
 
@@ -418,6 +419,11 @@ function App() {
     setDashboardFilter(types);
     setDashboardDateFilter(null);
     setSortByDate(sortByDate);
+    if (id === "all" && !types) {
+      setSearchFocusSignal(0);
+    } else {
+      setSearchFocusSignal((s) => s + 1);
+    }
   };
 
   useEffect(() => {
@@ -641,7 +647,10 @@ function App() {
         onToggleTester={() => setIsTesterOpen(!isTesterOpen)}
         onUpdateUiPrefs={updateUiPrefs}
         onRefreshData={refreshData}
-        onAddClient={() => { setCurrentData(prev => ({ ...prev, client: undefined })); setIsGlobalClientModalOpen(true); }}
+        onAddClient={() => {
+          setCurrentData((prev) => ({ ...prev, client: undefined }));
+          setIsGlobalClientModalOpen(true);
+        }}
         onOpenSnapshots={
           isAdmin ? () => setIsSnapshotDialogOpen(true) : undefined
         }
@@ -659,7 +668,8 @@ function App() {
         <div className="print:p-0 min-h-full h-full">
           {currentPage === "dashboard" &&
             uiPrefs.skin === "luxury-gold" &&
-            activeCategory === "all" && (
+            activeCategory === "all" &&
+            searchFocusSignal === 0 && (
               <LuxuryDashboard
                 key={`luxury-dash-${dataVersion}`}
                 state={state}
@@ -668,7 +678,9 @@ function App() {
               />
             )}
           {currentPage === "dashboard" &&
-            (uiPrefs.skin !== "luxury-gold" || activeCategory !== "all") && (
+            (uiPrefs.skin !== "luxury-gold" ||
+              activeCategory !== "all" ||
+              searchFocusSignal > 0) && (
               <Dashboard
                 key={`dashboard-${dataVersion}`}
                 state={state}
@@ -676,12 +688,14 @@ function App() {
                 onDeletePolicy={handleDeletePolicy}
                 filterTypes={dashboardFilter}
                 predefinedDateRange={dashboardDateFilter}
+                activeCategory={activeCategory}
                 categoryTitle={
                   MENU_CATEGORIES.find((c) => c.id === activeCategory)?.label
                 }
                 sortByDate={sortByDate}
                 onImportComplete={refreshData}
                 isCompact={uiPrefs.density === "compact"}
+                searchFocusSignal={searchFocusSignal}
               />
             )}
 

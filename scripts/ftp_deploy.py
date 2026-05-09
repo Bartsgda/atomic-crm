@@ -63,7 +63,7 @@ def upload_directory(ftp, local_dir, remote_dir):
             remote_path = f"{target}/{fname}".replace("\\", "/")
             with open(os.path.join(root, fname), "rb") as f:
                 ftp.storbinary(f"STOR {remote_path}", f)
-            print(f"  → {remote_path}")
+            print(f"  -> {remote_path}")
             uploaded += 1
     return uploaded
 
@@ -102,10 +102,10 @@ def main():
         sys.exit(1)
 
     ftp = connect()
-    print(f"[*] Upload: {LOCAL_DIST}/ → /{REMOTE_SUBFOLDER}/ ...")
+    print(f"[*] Upload: {LOCAL_DIST}/ -> /{REMOTE_SUBFOLDER}/ ...")
     n = upload_directory(ftp, LOCAL_DIST, REMOTE_SUBFOLDER)
     ftp.quit()
-    print(f"[OK] Deploy zakończony: {n} plików → redroad.pl/{REMOTE_SUBFOLDER}/")
+    print(f"[OK] Deploy OK: {n} plikow -> redroad.pl/{REMOTE_SUBFOLDER}/")
 
 
 if __name__ == "__main__":

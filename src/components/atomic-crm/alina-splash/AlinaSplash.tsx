@@ -192,11 +192,17 @@ export const AlinaSplash: React.FC<Props> = ({ user }) => {
   const [jokeIdx, setJokeIdx] = useState(0);
   const [chosenOutfit, setChosenOutfit] = useState<number | null>(null);
 
+  const IS_DEV =
+    typeof window !== "undefined" &&
+    (window.location.hostname === "localhost" ||
+      window.location.hostname === "127.0.0.1");
+
   useEffect(() => {
     if (!user) return;
     const today = new Date().toISOString().slice(0, 10);
     const key = `alina_splash_${today}`;
-    if (localStorage.getItem(key)) return;
+    // Na dev zawsze pokazuj (żeby móc testować bez czyszczenia localStorage)
+    if (!IS_DEV && localStorage.getItem(key)) return;
 
     const rng = seedRng(todaySeed());
     const outfits = pickN(OUTFITS, 3, rng);

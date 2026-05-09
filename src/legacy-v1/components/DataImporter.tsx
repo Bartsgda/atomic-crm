@@ -53,6 +53,10 @@ export const DataImporter: React.FC<Props> = ({
   const [totalRows, setTotalRows] = useState(0);
   const logEndRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  // .enc passphrase flow
+  const [encPending, setEncPending] = useState<File | null>(null);
+  const [encPass, setEncPass] = useState("");
+  const [encDecrypting, setEncDecrypting] = useState(false);
 
   useEffect(() => {
     if (logEndRef.current) {
@@ -284,37 +288,34 @@ export const DataImporter: React.FC<Props> = ({
     if (file) handleFile(file);
   };
 
-  const decryptEnc = async (buf: ArrayBuffer): Promise<ArrayBuffer> => {
-    const keyHex = (import.meta as any).env?.VITE_DATA_KEY as
-      | string
-      | undefined;
-    if (!keyHex || keyHex.length !== 64) {
-      throw new Error(
-        "Brak VITE_DATA_KEY w env — pliki .enc tylko w trybie dev (rr-claude --alina).",
-      );
-    }
-    const keyBytes = new Uint8Array(
-      keyHex.match(/.{2}/g)!.map((b: string) => parseInt(b, 16)),
-    );
-    const cryptoKey = await crypto.subtle.importKey(
+  // PBKDF2-SHA256 (600k) + AES-256-GCM — ten sam algorytm co PassphraseGate
+  // Format pliku .enc: [16B salt][12B IV][ciphertext+GCM tag]
+  const decryptWithPassphrase = async (
+    buf: ArrayBuffer,
+    passphrase: string,
+  ): Promise<ArrayBuffer> => {
+    const salt = new Uint8Array(buf, 0, 16);
+    const iv = new Uint8Array(buf, 16, 12);
+    const ct = new Uint8Array(buf, 28);
+    const enc = new TextEncoder();
+    const baseKey = await crypto.subtle.importKey(
       "raw",
-      keyBytes,
-      "AES-GCM",
+      enc.encode(passphrase),
+      "PBKDF2",
+      false,
+      ["deriveKey"],
+    );
+    const aesKey = await crypto.subtle.deriveKey(
+      { name: "PBKDF2", salt, iterations: 600_000, hash: "SHA-256" },
+      baseKey,
+      { name: "AES-GCM", length: 256 },
       false,
       ["decrypt"],
     );
-    const iv = new Uint8Array(buf, 0, 12);
-    const ct = new Uint8Array(buf, 12);
     try {
-      return await crypto.subtle.decrypt(
-        { name: "AES-GCM", iv },
-        cryptoKey,
-        ct,
-      );
+      return await crypto.subtle.decrypt({ name: "AES-GCM", iv }, aesKey, ct);
     } catch {
-      throw new Error(
-        "Deszyfrowanie nieudane — zły klucz lub uszkodzony plik .enc.",
-      );
+      throw new Error("Błędne hasło lub uszkodzony plik .enc.");
     }
   };
 
@@ -333,38 +334,47 @@ export const DataImporter: React.FC<Props> = ({
         const workbook = XLSX.read(buf, { type: "array", cellDates: true });
         log(`📊 Excel: ${label}`);
         await processSpreadsheetData(workbook);
-      } else if (innerExt === "ts") {
-        setError(
-          "Pliki .ts nie są importowalne jako dane — użyj .csv lub .xlsx. Plik odszyfrowany OK, ale CRM nie umie go sparsować.",
-        );
       } else {
-        setError(`Format .${innerExt} nieobsługiwany jako import danych.`);
+        setError(
+          `Format .${innerExt} nie jest importowalny. Plik odszyfrowany OK — skopiuj dane do .csv lub .xlsx.`,
+        );
       }
     } catch (err: any) {
       setError(err?.message ?? "Błąd parsowania pliku.");
     }
   };
 
+  const handleDecryptAndImport = async () => {
+    if (!encPending || !encPass) return;
+    setEncDecrypting(true);
+    setError(null);
+    const file = encPending;
+    const innerName = file.name.slice(0, -4); // strip .enc
+    const innerExt = innerName.split(".").pop()?.toLowerCase() ?? "";
+    try {
+      log(`🔐 Odszyfrowywanie ${file.name}...`);
+      const raw = await file.arrayBuffer();
+      const decrypted = await decryptWithPassphrase(raw, encPass);
+      setEncPending(null);
+      setEncPass("");
+      log(`✅ Odszyfrowano (${(decrypted.byteLength / 1024).toFixed(1)} KB) — importuję...`);
+      await parseAndImport(decrypted, innerExt, innerName);
+    } catch (err: any) {
+      setError(err?.message ?? "Błąd deszyfrowania.");
+    } finally {
+      setEncDecrypting(false);
+    }
+  };
+
   const handleFile = async (file: File) => {
     const ext = file.name.split(".").pop()?.toLowerCase();
+    setError(null);
+    setStats(null);
+    setLogs([]);
 
     if (ext === "enc") {
-      // Konwencja: dane.csv.enc → inner ext = csv
-      const innerName = file.name.slice(0, -4);
-      const innerExt = innerName.split(".").pop()?.toLowerCase() ?? "";
-      log(`🔐 Plik zaszyfrowany: ${file.name} (wewnatrz: .${innerExt})`);
-      const raw = await file.arrayBuffer();
-      let decrypted: ArrayBuffer;
-      try {
-        decrypted = await decryptEnc(raw);
-      } catch (err: any) {
-        setError(err?.message ?? "Blad deszyfrowania.");
-        return;
-      }
-      log(
-        `✅ Odszyfrowano (${(decrypted.byteLength / 1024).toFixed(1)} KB) — importuję...`,
-      );
-      await parseAndImport(decrypted, innerExt, innerName);
+      setEncPending(file);
+      setEncPass("");
     } else if (ext === "csv") {
       const text = await file.text();
       const workbook = XLSX.read(text, { type: "string", cellDates: true });
@@ -378,15 +388,11 @@ export const DataImporter: React.FC<Props> = ({
             cellDates: true,
           });
           await processSpreadsheetData(workbook);
-        } catch (err: any) {
+        } catch {
           setError("Błąd struktury pliku Excel.");
         }
       };
       reader.readAsArrayBuffer(file);
-    } else if (ext === "ts") {
-      setError(
-        "Pliki .ts nie są importowalne bezpośrednio. Zaszyfruj najpierw: crm-crypt.py encrypt plik.ts",
-      );
     } else {
       setError("Obsługiwane formaty: .xlsx, .xls, .csv, .enc (zaszyfrowane)");
     }
@@ -474,7 +480,48 @@ export const DataImporter: React.FC<Props> = ({
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 flex-1 overflow-hidden">
               {/* Drag Area */}
               <div className="flex flex-col gap-6">
-                {!isProcessing ? (
+                {encPending ? (
+                  /* ── Passphrase form for .enc files ── */
+                  <div className="flex-1 rounded-2xl border border-indigo-500/30 bg-indigo-950/30 flex flex-col items-center justify-center p-8 gap-5 animate-in fade-in">
+                    <div className="w-16 h-16 bg-indigo-500/10 rounded-full flex items-center justify-center border border-indigo-500/20">
+                      <Shield className="text-indigo-400" size={28} />
+                    </div>
+                    <div className="text-center">
+                      <p className="text-white font-bold text-base">Plik zaszyfrowany</p>
+                      <p className="text-zinc-500 text-xs mt-1 font-mono">{encPending.name}</p>
+                    </div>
+                    <div className="w-full max-w-xs space-y-3">
+                      <input
+                        type="password"
+                        placeholder="Hasło do odszyfrowania..."
+                        value={encPass}
+                        onChange={(e) => setEncPass(e.target.value)}
+                        onKeyDown={(e) => e.key === "Enter" && handleDecryptAndImport()}
+                        autoFocus
+                        className="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 text-white placeholder-zinc-600 text-sm focus:outline-none focus:border-indigo-500 transition-colors"
+                      />
+                      <div className="flex gap-2">
+                        <button
+                          onClick={handleDecryptAndImport}
+                          disabled={!encPass || encDecrypting}
+                          className="flex-1 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-40 disabled:cursor-not-allowed text-white font-bold py-2.5 rounded-xl text-sm transition-colors flex items-center justify-center gap-2"
+                        >
+                          {encDecrypting ? (
+                            <><Loader2 size={14} className="animate-spin" /> Odszyfrowywanie...</>
+                          ) : (
+                            <><Shield size={14} /> Odszyfruj i importuj</>
+                          )}
+                        </button>
+                        <button
+                          onClick={() => { setEncPending(null); setEncPass(""); }}
+                          className="px-3 py-2.5 rounded-xl border border-zinc-700 text-zinc-400 hover:text-white hover:border-zinc-500 transition-colors text-sm"
+                        >
+                          <X size={14} />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ) : !isProcessing ? (
                   <div
                     className={`
                                         flex-1 rounded-2xl border-2 border-dashed border-zinc-800 hover:border-zinc-700 transition-colors flex flex-col items-center justify-center p-8 gap-4
@@ -503,10 +550,10 @@ export const DataImporter: React.FC<Props> = ({
                       <FileSpreadsheet className="text-indigo-400" size={32} />
                     </div>
                     <p className="text-white font-bold text-lg">
-                      Wybierz plik Excel
+                      Wybierz plik Excel / CSV
                     </p>
                     <p className="text-zinc-500 text-sm mt-1">
-                      Kliknij tutaj lub przeciągnij plik
+                      .xlsx · .xls · .csv · .enc (zaszyfrowane)
                     </p>
                   </div>
                 ) : (

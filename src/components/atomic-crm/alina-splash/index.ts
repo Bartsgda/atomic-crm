@@ -1,0 +1,1 @@
+export { AlinaSplash } from "./AlinaSplash";

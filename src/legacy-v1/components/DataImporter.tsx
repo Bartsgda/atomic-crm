@@ -53,10 +53,25 @@ export const DataImporter: React.FC<Props> = ({
   const [totalRows, setTotalRows] = useState(0);
   const logEndRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  // .enc passphrase flow
+  // .enc passphrase flow (import decrypt)
   const [encPending, setEncPending] = useState<File | null>(null);
   const [encPass, setEncPass] = useState("");
   const [encDecrypting, setEncDecrypting] = useState(false);
+  // Tab
+  const [activeTab, setActiveTab] = useState<"import" | "encrypt">("import");
+  // Encrypt tab
+  const [encryptFile, setEncryptFile] = useState<File | null>(null);
+  const [encryptPass, setEncryptPass] = useState("");
+  const [encryptPassConfirm, setEncryptPassConfirm] = useState("");
+  const [encryptBusy, setEncryptBusy] = useState(false);
+  const [encryptDone, setEncryptDone] = useState(false);
+  const [encryptDragOver, setEncryptDragOver] = useState(false);
+  const encryptFileInputRef = useRef<HTMLInputElement>(null);
+  // Corrections (.ts.enc)
+  const [useCorrections, setUseCorrections] = useState(false);
+  const [corrFile, setCorrFile] = useState<File | null>(null);
+  const [corrPass, setCorrPass] = useState("");
+  const [corrStatus, setCorrStatus] = useState<string | null>(null);
 
   useEffect(() => {
     if (logEndRef.current) {
@@ -276,6 +291,102 @@ export const DataImporter: React.FC<Props> = ({
     }
   };
 
+  const encryptWithPassphrase = async (
+    buf: ArrayBuffer,
+    passphrase: string,
+  ): Promise<ArrayBuffer> => {
+    const salt = crypto.getRandomValues(new Uint8Array(16));
+    const iv = crypto.getRandomValues(new Uint8Array(12));
+    const enc = new TextEncoder();
+    const baseKey = await crypto.subtle.importKey(
+      "raw",
+      enc.encode(passphrase),
+      "PBKDF2",
+      false,
+      ["deriveKey"],
+    );
+    const aesKey = await crypto.subtle.deriveKey(
+      { name: "PBKDF2", salt, iterations: 600_000, hash: "SHA-256" },
+      baseKey,
+      { name: "AES-GCM", length: 256 },
+      false,
+      ["encrypt"],
+    );
+    const ct = await crypto.subtle.encrypt({ name: "AES-GCM", iv }, aesKey, buf);
+    const out = new Uint8Array(16 + 12 + ct.byteLength);
+    out.set(salt, 0);
+    out.set(iv, 16);
+    out.set(new Uint8Array(ct), 28);
+    return out.buffer;
+  };
+
+  const parseTsCorrections = (src: string): Record<string, any> => {
+    const result: Record<string, any> = {};
+    const declRegex = /export\s+const\s+\w+[^=]*=\s*\{/g;
+    let m;
+    while ((m = declRegex.exec(src)) !== null) {
+      const braceStart = m.index + m[0].lastIndexOf("{");
+      let depth = 0;
+      let i = braceStart;
+      for (; i < src.length; i++) {
+        if (src[i] === "{") depth++;
+        else if (src[i] === "}") {
+          depth--;
+          if (depth === 0) break;
+        }
+      }
+      const objectStr = src.slice(braceStart, i + 1);
+      try {
+        // eslint-disable-next-line no-new-func
+        const obj = new Function("return " + objectStr)();
+        Object.assign(result, obj);
+      } catch {}
+    }
+    return result;
+  };
+
+  const handleEncryptAndDownload = async () => {
+    if (!encryptFile || !encryptPass || encryptPass !== encryptPassConfirm) return;
+    setEncryptBusy(true);
+    setEncryptDone(false);
+    setError(null);
+    try {
+      const buf = await encryptFile.arrayBuffer();
+      const encrypted = await encryptWithPassphrase(buf, encryptPass);
+      const blob = new Blob([encrypted], { type: "application/octet-stream" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = encryptFile.name + ".enc";
+      a.click();
+      URL.revokeObjectURL(url);
+      setEncryptDone(true);
+      setEncryptPass("");
+      setEncryptPassConfirm("");
+    } catch (err: any) {
+      setError(err?.message ?? "Błąd szyfrowania.");
+    } finally {
+      setEncryptBusy(false);
+    }
+  };
+
+  const handleLoadCorrections = async () => {
+    if (!corrFile || !corrPass) return;
+    setCorrStatus(null);
+    try {
+      const raw = await corrFile.arrayBuffer();
+      const decrypted = await decryptWithPassphrase(raw, corrPass);
+      const src = new TextDecoder("utf-8").decode(decrypted);
+      const parsed = parseTsCorrections(src);
+      const count = Object.keys(parsed).length;
+      DataMapper.overrideMap = parsed;
+      setCorrStatus(`✅ Załadowano ${count} korekcji`);
+      setCorrPass("");
+    } catch (err: any) {
+      setCorrStatus("❌ " + (err?.message ?? "Błąd deszyfrowania"));
+    }
+  };
+
   const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) handleFile(file);
@@ -357,7 +468,9 @@ export const DataImporter: React.FC<Props> = ({
       const decrypted = await decryptWithPassphrase(raw, encPass);
       setEncPending(null);
       setEncPass("");
-      log(`✅ Odszyfrowano (${(decrypted.byteLength / 1024).toFixed(1)} KB) — importuję...`);
+      log(
+        `✅ Odszyfrowano (${(decrypted.byteLength / 1024).toFixed(1)} KB) — importuję...`,
+      );
       await parseAndImport(decrypted, innerExt, innerName);
     } catch (err: any) {
       setError(err?.message ?? "Błąd deszyfrowania.");
@@ -413,12 +526,12 @@ export const DataImporter: React.FC<Props> = ({
         </div>
 
         <div className="p-8 flex flex-col h-full overflow-hidden">
-          <div className="flex justify-between items-start mb-8">
+          <div className="flex justify-between items-start mb-6">
             <div>
               <h2 className="text-3xl font-black text-white flex items-center gap-3 tracking-tight">
-                <Database className="text-indigo-400" /> Wgrywanie XLSX{" "}
+                <Database className="text-indigo-400" /> Importer XLSX{" "}
                 <span className="text-indigo-500/50 text-sm font-normal">
-                  v5.0
+                  v5.1
                 </span>
               </h2>
               <p className="text-zinc-500 mt-1">
@@ -433,6 +546,30 @@ export const DataImporter: React.FC<Props> = ({
                 <X size={24} />
               </button>
             )}
+          </div>
+
+          {/* Tab switcher */}
+          <div className="flex gap-1 mb-6 bg-zinc-800/40 rounded-xl p-1 w-fit">
+            <button
+              onClick={() => setActiveTab("import")}
+              className={`px-5 py-2 rounded-lg text-xs font-bold uppercase tracking-widest transition-all ${
+                activeTab === "import"
+                  ? "bg-indigo-600 text-white shadow"
+                  : "text-zinc-500 hover:text-zinc-300"
+              }`}
+            >
+              Importuj
+            </button>
+            <button
+              onClick={() => { setActiveTab("encrypt"); setError(null); }}
+              className={`px-5 py-2 rounded-lg text-xs font-bold uppercase tracking-widest transition-all ${
+                activeTab === "encrypt"
+                  ? "bg-indigo-600 text-white shadow"
+                  : "text-zinc-500 hover:text-zinc-300"
+              }`}
+            >
+              Szyfruj
+            </button>
           </div>
 
           {stats ? (
@@ -476,7 +613,7 @@ export const DataImporter: React.FC<Props> = ({
                 Zamknij
               </button>
             </div>
-          ) : (
+          ) : activeTab === "import" ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 flex-1 overflow-hidden">
               {/* Drag Area */}
               <div className="flex flex-col gap-6">
@@ -487,8 +624,12 @@ export const DataImporter: React.FC<Props> = ({
                       <Shield className="text-indigo-400" size={28} />
                     </div>
                     <div className="text-center">
-                      <p className="text-white font-bold text-base">Plik zaszyfrowany</p>
-                      <p className="text-zinc-500 text-xs mt-1 font-mono">{encPending.name}</p>
+                      <p className="text-white font-bold text-base">
+                        Plik zaszyfrowany
+                      </p>
+                      <p className="text-zinc-500 text-xs mt-1 font-mono">
+                        {encPending.name}
+                      </p>
                     </div>
                     <div className="w-full max-w-xs space-y-3">
                       <input
@@ -496,7 +637,9 @@ export const DataImporter: React.FC<Props> = ({
                         placeholder="Hasło do odszyfrowania..."
                         value={encPass}
                         onChange={(e) => setEncPass(e.target.value)}
-                        onKeyDown={(e) => e.key === "Enter" && handleDecryptAndImport()}
+                        onKeyDown={(e) =>
+                          e.key === "Enter" && handleDecryptAndImport()
+                        }
                         autoFocus
                         className="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 text-white placeholder-zinc-600 text-sm focus:outline-none focus:border-indigo-500 transition-colors"
                       />
@@ -507,13 +650,21 @@ export const DataImporter: React.FC<Props> = ({
                           className="flex-1 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-40 disabled:cursor-not-allowed text-white font-bold py-2.5 rounded-xl text-sm transition-colors flex items-center justify-center gap-2"
                         >
                           {encDecrypting ? (
-                            <><Loader2 size={14} className="animate-spin" /> Odszyfrowywanie...</>
+                            <>
+                              <Loader2 size={14} className="animate-spin" />{" "}
+                              Odszyfrowywanie...
+                            </>
                           ) : (
-                            <><Shield size={14} /> Odszyfruj i importuj</>
+                            <>
+                              <Shield size={14} /> Odszyfruj i importuj
+                            </>
                           )}
                         </button>
                         <button
-                          onClick={() => { setEncPending(null); setEncPass(""); }}
+                          onClick={() => {
+                            setEncPending(null);
+                            setEncPass("");
+                          }}
                           className="px-3 py-2.5 rounded-xl border border-zinc-700 text-zinc-400 hover:text-white hover:border-zinc-500 transition-colors text-sm"
                         >
                           <X size={14} />
@@ -590,6 +741,71 @@ export const DataImporter: React.FC<Props> = ({
                     </li>
                   </ul>
                 </div>
+
+                {/* Korekcje .ts.enc */}
+                <div className="rounded-2xl border border-white/5 bg-zinc-800/20 p-4 space-y-3">
+                  <label className="flex items-center gap-2.5 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={useCorrections}
+                      onChange={(e) => {
+                        setUseCorrections(e.target.checked);
+                        if (!e.target.checked) {
+                          DataMapper.overrideMap = {};
+                          setCorrStatus(null);
+                          setCorrFile(null);
+                          setCorrPass("");
+                        }
+                      }}
+                      className="w-4 h-4 rounded accent-indigo-500"
+                    />
+                    <span className="text-xs font-bold text-zinc-400">
+                      Użyj pliku korekcji{" "}
+                      <span className="text-zinc-600 font-normal">.ts.enc</span>
+                    </span>
+                  </label>
+                  {useCorrections && (
+                    <div className="space-y-2 animate-in fade-in">
+                      <label className="flex items-center gap-2 cursor-pointer text-xs text-zinc-500 hover:text-zinc-300 transition-colors">
+                        <Shield size={12} className="text-indigo-400" />
+                        <span>{corrFile ? corrFile.name : "Wybierz plik .ts.enc..."}</span>
+                        <input
+                          type="file"
+                          accept=".enc"
+                          className="hidden"
+                          onChange={(e) => {
+                            const f = e.target.files?.[0];
+                            if (f) { setCorrFile(f); setCorrStatus(null); }
+                          }}
+                        />
+                      </label>
+                      {corrFile && (
+                        <div className="flex gap-2">
+                          <input
+                            type="password"
+                            placeholder="Hasło do .ts.enc..."
+                            value={corrPass}
+                            onChange={(e) => setCorrPass(e.target.value)}
+                            onKeyDown={(e) => e.key === "Enter" && handleLoadCorrections()}
+                            className="flex-1 bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-2 text-white placeholder-zinc-600 text-xs focus:outline-none focus:border-indigo-500"
+                          />
+                          <button
+                            onClick={handleLoadCorrections}
+                            disabled={!corrPass}
+                            className="px-3 py-2 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-40 rounded-lg text-xs font-bold text-white transition-colors"
+                          >
+                            Wczytaj
+                          </button>
+                        </div>
+                      )}
+                      {corrStatus && (
+                        <p className={`text-xs ${corrStatus.startsWith("✅") ? "text-emerald-400" : "text-red-400"}`}>
+                          {corrStatus}
+                        </p>
+                      )}
+                    </div>
+                  )}
+                </div>
               </div>
 
               {/* Logs Area */}
@@ -629,6 +845,153 @@ export const DataImporter: React.FC<Props> = ({
                     ))
                   )}
                   <div ref={logEndRef} />
+                </div>
+              </div>
+            </div>
+          ) : (
+            /* ── Zakładka Szyfruj ── */
+            <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-8 overflow-hidden">
+              {/* Drop zone */}
+              <div className="flex flex-col gap-5">
+                <div
+                  className={`flex-1 rounded-2xl border-2 border-dashed flex flex-col items-center justify-center p-8 gap-4 transition-all cursor-pointer ${
+                    encryptDragOver
+                      ? "border-emerald-400 bg-emerald-500/10 scale-[0.98]"
+                      : encryptFile
+                        ? "border-emerald-500/40 bg-emerald-500/5"
+                        : "border-zinc-700 bg-zinc-800/30 hover:border-zinc-600 hover:bg-zinc-800/50"
+                  }`}
+                  onDragOver={(e) => { e.preventDefault(); setEncryptDragOver(true); }}
+                  onDragLeave={() => setEncryptDragOver(false)}
+                  onDrop={(e) => {
+                    e.preventDefault();
+                    setEncryptDragOver(false);
+                    const f = e.dataTransfer.files?.[0];
+                    if (f) { setEncryptFile(f); setEncryptDone(false); setError(null); }
+                  }}
+                  onClick={() => encryptFileInputRef.current?.click()}
+                >
+                  <input
+                    type="file"
+                    ref={encryptFileInputRef}
+                    className="hidden"
+                    accept=".xlsx,.xls,.csv,.ts"
+                    onChange={(e) => {
+                      const f = e.target.files?.[0];
+                      if (f) { setEncryptFile(f); setEncryptDone(false); setError(null); }
+                    }}
+                  />
+                  <div className="w-16 h-16 bg-emerald-500/10 rounded-full flex items-center justify-center border border-emerald-500/20">
+                    <Shield className="text-emerald-400" size={28} />
+                  </div>
+                  {encryptFile ? (
+                    <div className="text-center">
+                      <p className="text-white font-bold">{encryptFile.name}</p>
+                      <p className="text-zinc-500 text-xs mt-1">
+                        {(encryptFile.size / 1024).toFixed(1)} KB — kliknij żeby zmienić
+                      </p>
+                    </div>
+                  ) : (
+                    <>
+                      <p className="text-white font-bold text-lg">Przeciągnij plik do zaszyfrowania</p>
+                      <p className="text-zinc-500 text-sm">.xlsx · .xls · .csv · .ts</p>
+                    </>
+                  )}
+                </div>
+
+                {encryptFile && (
+                  <div className="bg-zinc-800/40 rounded-2xl border border-white/5 p-5 space-y-3 animate-in fade-in">
+                    <input
+                      type="password"
+                      placeholder="Hasło szyfrowania..."
+                      value={encryptPass}
+                      onChange={(e) => setEncryptPass(e.target.value)}
+                      className="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 text-white placeholder-zinc-600 text-sm focus:outline-none focus:border-emerald-500 transition-colors"
+                    />
+                    <input
+                      type="password"
+                      placeholder="Powtórz hasło..."
+                      value={encryptPassConfirm}
+                      onChange={(e) => setEncryptPassConfirm(e.target.value)}
+                      onKeyDown={(e) => e.key === "Enter" && handleEncryptAndDownload()}
+                      className={`w-full bg-zinc-900 border rounded-xl px-4 py-3 text-white placeholder-zinc-600 text-sm focus:outline-none transition-colors ${
+                        encryptPassConfirm && encryptPass !== encryptPassConfirm
+                          ? "border-red-500/60"
+                          : "border-zinc-700 focus:border-emerald-500"
+                      }`}
+                    />
+                    {encryptPassConfirm && encryptPass !== encryptPassConfirm && (
+                      <p className="text-red-400 text-xs">Hasła nie są identyczne.</p>
+                    )}
+                    <button
+                      onClick={handleEncryptAndDownload}
+                      disabled={
+                        !encryptPass ||
+                        encryptPass !== encryptPassConfirm ||
+                        encryptBusy
+                      }
+                      className="w-full bg-emerald-600 hover:bg-emerald-500 disabled:opacity-40 disabled:cursor-not-allowed text-white font-bold py-3 rounded-xl text-sm transition-colors flex items-center justify-center gap-2"
+                    >
+                      {encryptBusy ? (
+                        <><Loader2 size={16} className="animate-spin" /> Szyfrowanie...</>
+                      ) : (
+                        <><Shield size={16} /> Zaszyfruj i pobierz .enc</>
+                      )}
+                    </button>
+                    {encryptDone && (
+                      <p className="text-emerald-400 text-xs text-center animate-in fade-in">
+                        ✅ Plik zaszyfrowany i pobrany jako <strong>{encryptFile.name}.enc</strong>
+                      </p>
+                    )}
+                    {error && (
+                      <p className="text-red-400 text-xs text-center">{error}</p>
+                    )}
+                  </div>
+                )}
+              </div>
+
+              {/* Info panel */}
+              <div className="flex flex-col gap-5">
+                <div className="bg-zinc-800/30 rounded-2xl border border-white/5 p-6 space-y-4">
+                  <h4 className="text-white text-xs font-black uppercase tracking-widest flex items-center gap-2">
+                    <Shield size={14} className="text-emerald-500" /> Jak to działa
+                  </h4>
+                  <ul className="text-[11px] text-zinc-500 space-y-3 leading-relaxed">
+                    <li className="flex gap-2">
+                      <span className="text-emerald-500">1.</span>
+                      Wybierz plik XLSX, CSV lub TS z danymi.
+                    </li>
+                    <li className="flex gap-2">
+                      <span className="text-emerald-500">2.</span>
+                      Wpisz hasło dwukrotnie.
+                    </li>
+                    <li className="flex gap-2">
+                      <span className="text-emerald-500">3.</span>
+                      Plik zostanie pobrany jako{" "}
+                      <span className="text-zinc-400 font-mono">plik.enc</span> —
+                      zaszyfrowany PBKDF2+AES-256-GCM (600k iteracji).
+                    </li>
+                    <li className="flex gap-2">
+                      <span className="text-emerald-500">4.</span>
+                      Zaszyfrowany plik możesz wgrać w zakładce{" "}
+                      <span className="text-zinc-400">Importuj</span> — system
+                      poprosi o hasło przed importem.
+                    </li>
+                  </ul>
+                  <div className="pt-2 border-t border-white/5 text-[10px] text-zinc-600">
+                    Szyfrowanie odbywa się wyłącznie w przeglądarce. Hasło nigdy
+                    nie opuszcza urządzenia.
+                  </div>
+                </div>
+
+                <div className="bg-emerald-500/5 rounded-2xl border border-emerald-500/10 p-5">
+                  <p className="text-[11px] text-zinc-500 leading-relaxed">
+                    <span className="text-emerald-400 font-bold">Tip dla pliku .ts:</span>{" "}
+                    Plik z korekcjami (np. <span className="font-mono">auto.ts</span>)
+                    zaszyfruj i zapisz jako <span className="font-mono">auto.ts.enc</span>.
+                    Przy następnym imporcie użyj checkboxa „Korekcje" i wczytaj
+                    ten plik.
+                  </p>
                 </div>
               </div>
             </div>

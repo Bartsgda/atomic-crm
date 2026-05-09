@@ -1,9 +1,11 @@
 @echo off
-title CRM-ALINA (V2) - TEST MODE
+title CRM-ALINA - DEV MODE
 cd /d "%~dp0"
 
-echo [MODE] Przelaczanie na TEST...
-powershell -ExecutionPolicy Bypass -File .\switch_env.ps1 -Mode test
+echo [KILL] Zamykam stare procesy Vite...
+for /f "tokens=5" %%a in ('netstat -aon ^| findstr :5173 ^| findstr LISTENING') do taskkill /F /PID %%a 2>nul
+for /f "tokens=5" %%a in ('netstat -aon ^| findstr :5174 ^| findstr LISTENING') do taskkill /F /PID %%a 2>nul
+for /f "tokens=5" %%a in ('netstat -aon ^| findstr :5175 ^| findstr LISTENING') do taskkill /F /PID %%a 2>nul
 
 if not exist node_modules (
     echo [SETUP] Brak node_modules - instaluje...
@@ -12,10 +14,11 @@ if not exist node_modules (
 
 echo.
 echo ========================================
-echo  CRM-ALINA V2 (TEST - TWOJA BAZA)
+echo  CRM-ALINA DEV - http://localhost:5173
 echo ========================================
 echo.
 
+timeout /t 1 /nobreak >nul
 start "" http://localhost:5173
 call npm run dev
 pause

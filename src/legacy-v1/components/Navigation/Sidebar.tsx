@@ -21,6 +21,7 @@ import {
   Settings2,
   ChevronDown,
   ChevronRight,
+  ChevronLeft,
   Save,
   Building2,
   FileSpreadsheet,
@@ -229,7 +230,14 @@ export const Sidebar: React.FC<SidebarProps> = ({
 }) => {
   const [isSystemOpen, setIsSystemOpen] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
+  const [isCollapsed, setIsCollapsed] = useState(() => localStorage.getItem('crm-sidebar-collapsed') === 'true');
   const skin = uiPrefs.skin || "default";
+
+  const toggleCollapse = () => setIsCollapsed(v => {
+    const next = !v;
+    localStorage.setItem('crm-sidebar-collapsed', String(next));
+    return next;
+  });
 
   useEffect(() => {
     supabaseStorage.sb().auth.getSession().then(({ data }) => {
@@ -270,7 +278,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
   const Separator = () => <div className={sepClass(skin)} />;
 
-  const SectionLabel = ({ label }: { label: string }) => (
+  const SectionLabel = ({ label }: { label: string }) => isCollapsed ? null : (
     <div className="px-3 mb-1.5 mt-1">
       <span className={labelClass(skin)}>{label}</span>
     </div>
@@ -314,7 +322,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
     };
 
     if (skin === "default") {
-      // Oryginalny NavButton component
       return (
         <div className="relative group/btn-container" key={`${id}-${label}`}>
           <NavButton
@@ -323,8 +330,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
             count={count}
             isActive={isActive}
             onClick={handleClick}
+            collapsed={isCollapsed}
           />
-          {(config as any)?.addType && (
+          {!isCollapsed && (config as any)?.addType && (
             <button
               onClick={(e) => {
                 e.stopPropagation();
@@ -341,6 +349,20 @@ export const Sidebar: React.FC<SidebarProps> = ({
     }
 
     // Themed button
+    if (isCollapsed) {
+      return (
+        <button
+          key={`${id}-${label}`}
+          onClick={handleClick}
+          title={label}
+          className={`w-full flex items-center justify-center py-2.5 mb-0.5 transition-all ${navBtnBase(skin, isActive)}`}
+          style={{ borderRadius: "var(--v1-radius)" }}
+        >
+          <Icon size={18} style={{ flexShrink: 0, opacity: isActive ? 1 : 0.65 }} />
+        </button>
+      );
+    }
+
     return (
       <div className="relative group/btn-container" key={`${id}-${label}`}>
         <button
@@ -396,7 +418,20 @@ export const Sidebar: React.FC<SidebarProps> = ({
           count={count}
           isActive={isActive}
           onClick={onClick}
+          collapsed={isCollapsed}
         />
+      );
+    }
+    if (isCollapsed) {
+      return (
+        <button
+          onClick={onClick}
+          title={label}
+          className={`w-full flex items-center justify-center py-2.5 mb-0.5 transition-all ${navBtnBase(skin, isActive)}`}
+          style={{ borderRadius: "var(--v1-radius)" }}
+        >
+          <Icon size={18} style={{ flexShrink: 0, opacity: isActive ? 1 : 0.65 }} />
+        </button>
       );
     }
     return (
@@ -425,16 +460,25 @@ export const Sidebar: React.FC<SidebarProps> = ({
   return (
     <aside
       data-v1-skin={skin !== "default" ? skin : undefined}
-      className={`w-full md:w-64 flex-shrink-0 print:hidden flex flex-col h-auto md:h-screen sticky top-0 z-10 shadow-2xl ${sidebarBase(skin)}`}
+      className={`w-full flex-shrink-0 print:hidden flex flex-col h-auto md:h-screen sticky top-0 z-10 shadow-2xl transition-all duration-300 ${isCollapsed ? 'md:w-16' : 'md:w-64'} ${sidebarBase(skin)}`}
     >
       {/* --- PREMIUM HEADER --- */}
-      <div className="p-6 mb-2 relative overflow-hidden group">
+      <div className={`${isCollapsed ? 'p-3' : 'p-6'} mb-2 relative overflow-hidden group transition-all duration-300`}>
+        {/* Toggle collapse button */}
+        <button
+          onClick={toggleCollapse}
+          className="absolute top-2 right-2 z-20 p-1.5 rounded-lg bg-white/5 hover:bg-white/15 text-zinc-500 hover:text-zinc-200 transition-all"
+          title={isCollapsed ? "Rozwin menu" : "Zwij menu"}
+        >
+          <ChevronLeft size={13} className={`transition-transform duration-300 ${isCollapsed ? 'rotate-180' : ''}`} />
+        </button>
+
         {/* Animated Glow Background */}
         <div className="v1-sidebar-header-glow absolute inset-0 bg-indigo-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
         <div className="v1-sidebar-header-blob absolute -top-24 -left-24 w-48 h-48 bg-indigo-500/10 blur-[100px] rounded-full" />
 
-        <div className="flex items-center gap-4 relative z-10">
-          <div className="v1-logo-wrap w-12 h-12 bg-white/5 backdrop-blur-xl rounded-[1.25rem] border border-white/10 flex items-center justify-center shadow-2xl shadow-indigo-500/20 group-hover:scale-105 transition-transform duration-500 overflow-hidden">
+        <div className={`flex items-center ${isCollapsed ? 'justify-center' : 'gap-4'} relative z-10`}>
+          <div className="v1-logo-wrap w-10 h-10 bg-white/5 backdrop-blur-xl rounded-[1.25rem] border border-white/10 flex items-center justify-center shadow-2xl shadow-indigo-500/20 group-hover:scale-105 transition-transform duration-500 overflow-hidden flex-shrink-0">
             {avatarUrl ? (
               <img
                 src={avatarUrl}
@@ -446,75 +490,102 @@ export const Sidebar: React.FC<SidebarProps> = ({
               <div className="relative">
                 <div className="v1-sidebar-header-blob absolute inset-0 bg-indigo-400 blur-md opacity-30 animate-pulse" />
                 <Activity
-                  className="v1-sidebar-header-icon w-6 h-6 text-indigo-400 relative z-10"
+                  className="v1-sidebar-header-icon w-5 h-5 text-indigo-400 relative z-10"
                   strokeWidth={1.5}
                 />
               </div>
             )}
           </div>
-          <div className="flex flex-col">
-            <div className="flex items-center gap-1.5">
-              <span className="text-lg font-black tracking-tighter text-white">
-                ALINA
-              </span>
-              <span className="px-1.5 py-0.5 bg-indigo-500/10 border border-indigo-500/20 rounded text-[9px] font-black text-indigo-400 uppercase tracking-widest">
-                v1
+          {!isCollapsed && (
+            <div className="flex flex-col overflow-hidden">
+              <div className="flex items-center gap-1.5">
+                <span className="text-lg font-black tracking-tighter text-white">
+                  ALINA
+                </span>
+                <span className="px-1.5 py-0.5 bg-indigo-500/10 border border-indigo-500/20 rounded text-[9px] font-black text-indigo-400 uppercase tracking-widest">
+                  v1
+                </span>
+              </div>
+              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-500">
+                Atomic CRM
               </span>
             </div>
-            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-500">
-              Atomic CRM
-            </span>
-          </div>
+          )}
         </div>
       </div>
 
       {/* --- PREMIUM QUICK ACTION DOCK (HARDENING TOOLS) --- */}
-      <div className="px-3 mb-6 relative group">
-        <div
-          className={`p-2 flex items-center justify-around gap-2 shadow-2xl ${
-            skin === "default"
-              ? "bg-zinc-900/50 border border-zinc-800 rounded-xl"
-              : "v1-quick-dock bg-indigo-950/40 backdrop-blur-2xl border border-indigo-500/20 rounded-[2rem] ring-1 ring-white/5 shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
-          }`}
-        >
-          {/* SNAPSHOT (admin only) - Emerald Glow */}
+      {isCollapsed ? (
+        <div className="px-1 mb-4 flex flex-col items-center gap-1">
           {isAdmin && onOpenSnapshots && (
-            <>
-              <button
-                onClick={onOpenSnapshots}
-                className="p-3 relative group/snap transition-all hover:scale-110 active:scale-90 text-emerald-500 hover:text-emerald-400"
-                title="Snapshoty bazy (admin)"
-              >
-                <div className="absolute inset-0 bg-emerald-500/0 group-hover/snap:bg-emerald-500/20 blur-xl rounded-full transition-all" />
-                <Camera size={20} strokeWidth={1.5} className="relative z-10" />
-              </button>
-              <div className="w-[1px] h-6 bg-white/10 mx-1" />
-            </>
+            <button
+              onClick={onOpenSnapshots}
+              className="p-2 relative group/snap transition-all hover:scale-110 active:scale-90 text-emerald-500 hover:text-emerald-400 rounded-xl hover:bg-emerald-500/10"
+              title="Snapshoty bazy (admin)"
+            >
+              <Camera size={18} strokeWidth={1.5} />
+            </button>
           )}
-
-          {/* ADD CLIENT - Indigo Glow */}
           <button
             onClick={onAddClient}
-            className="p-3 relative group/add transition-all hover:scale-110 active:scale-90 text-indigo-500 hover:text-indigo-400"
+            className="p-2 relative group/add transition-all hover:scale-110 active:scale-90 text-indigo-500 hover:text-indigo-400 rounded-xl hover:bg-indigo-500/10"
             title="Dodaj Klienta"
           >
-            <div className="absolute inset-0 bg-indigo-500/0 group-hover/add:bg-indigo-500/20 blur-xl rounded-full transition-all" />
-            <Plus size={20} strokeWidth={1.5} className="relative z-10" />
+            <Plus size={18} strokeWidth={1.5} />
           </button>
-
-          {/* NUCLEAR RESET (admin only) - Rose Glow */}
           {isAdmin && onWipeData && (
             <button
               onClick={onWipeData}
-              className="p-3 relative group/wipe transition-all hover:scale-110 active:scale-90 text-rose-500 hover:text-rose-400"
-              title="Wyczyść dane tenantu (admin, NUCLEAR RESET)"
+              className="p-2 relative group/wipe transition-all hover:scale-110 active:scale-90 text-rose-500 hover:text-rose-400 rounded-xl hover:bg-rose-500/10"
+              title="Nuclear Reset (admin)"
             >
-              <div className="absolute inset-0 bg-rose-500/0 group-hover/wipe:bg-rose-500/20 blur-xl rounded-full transition-all" />
-              <Trash2 size={20} strokeWidth={1.5} className="relative z-10" />
+              <Trash2 size={18} strokeWidth={1.5} />
             </button>
           )}
         </div>
-      </div>
+      ) : (
+        <div className="px-3 mb-6 relative group">
+          <div
+            className={`p-2 flex items-center justify-around gap-2 shadow-2xl ${
+              skin === "default"
+                ? "bg-zinc-900/50 border border-zinc-800 rounded-xl"
+                : "v1-quick-dock bg-indigo-950/40 backdrop-blur-2xl border border-indigo-500/20 rounded-[2rem] ring-1 ring-white/5 shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+            }`}
+          >
+            {isAdmin && onOpenSnapshots && (
+              <>
+                <button
+                  onClick={onOpenSnapshots}
+                  className="p-3 relative group/snap transition-all hover:scale-110 active:scale-90 text-emerald-500 hover:text-emerald-400"
+                  title="Snapshoty bazy (admin)"
+                >
+                  <div className="absolute inset-0 bg-emerald-500/0 group-hover/snap:bg-emerald-500/20 blur-xl rounded-full transition-all" />
+                  <Camera size={20} strokeWidth={1.5} className="relative z-10" />
+                </button>
+                <div className="w-[1px] h-6 bg-white/10 mx-1" />
+              </>
+            )}
+            <button
+              onClick={onAddClient}
+              className="p-3 relative group/add transition-all hover:scale-110 active:scale-90 text-indigo-500 hover:text-indigo-400"
+              title="Dodaj Klienta"
+            >
+              <div className="absolute inset-0 bg-indigo-500/0 group-hover/add:bg-indigo-500/20 blur-xl rounded-full transition-all" />
+              <Plus size={20} strokeWidth={1.5} className="relative z-10" />
+            </button>
+            {isAdmin && onWipeData && (
+              <button
+                onClick={onWipeData}
+                className="p-3 relative group/wipe transition-all hover:scale-110 active:scale-90 text-rose-500 hover:text-rose-400"
+                title="Wyczysc dane tenantu (admin, NUCLEAR RESET)"
+              >
+                <div className="absolute inset-0 bg-rose-500/0 group-hover/wipe:bg-rose-500/20 blur-xl rounded-full transition-all" />
+                <Trash2 size={20} strokeWidth={1.5} className="relative z-10" />
+              </button>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* ── LUXURY GOLD: Tile Grid Navigation ── */}
       {skin === "luxury-gold" && (() => {
@@ -549,78 +620,118 @@ export const Sidebar: React.FC<SidebarProps> = ({
         return (
           <nav className="px-2 flex-1 overflow-y-auto pb-6" style={{ scrollbarWidth: "none" }}>
             {/* Tile grid */}
-            <div className="grid grid-cols-2 gap-1.5 mb-4">
-              {luxTiles.map(tile => {
-                const active = isActiveTile(tile.id);
-                return (
-                  <div
-                    key={tile.id}
-                    onClick={tile.onClick}
-                    className="relative cursor-pointer rounded-xl p-3 transition-all duration-200"
-                    style={{
-                      background: active ? TILE_BG_ACTIVE : TILE_BG,
-                      border: `1px solid ${active ? TILE_BORDER_ACTIVE : TILE_BORDER}`,
-                    }}
-                  >
-                    {/* Icon + add row */}
-                    <div className="flex justify-between items-start mb-3">
+            {isCollapsed ? (
+              <div className="flex flex-col gap-1 mb-4">
+                {luxTiles.map(tile => {
+                  const active = isActiveTile(tile.id);
+                  return (
+                    <button
+                      key={tile.id}
+                      onClick={tile.onClick}
+                      title={tile.label}
+                      className="w-full flex items-center justify-center py-2.5 rounded-xl transition-all duration-200 relative"
+                      style={{
+                        background: active ? TILE_BG_ACTIVE : "transparent",
+                        border: `1px solid ${active ? TILE_BORDER_ACTIVE : "transparent"}`,
+                      }}
+                    >
                       <tile.Icon
-                        size={20}
+                        size={18}
                         strokeWidth={1.5}
-                        style={{ color: active ? GOLD_DIM : GOLD, flexShrink: 0 }}
+                        style={{ color: active ? GOLD_DIM : GOLD }}
                       />
-                      {"onAdd" in tile && tile.onAdd && (
-                        <button
-                          onClick={e => { e.stopPropagation(); (tile as any).onAdd(); }}
-                          className="w-5 h-5 rounded-full flex items-center justify-center transition-colors"
-                          style={{ border: "1px solid rgba(212,175,55,0.22)", color: GOLD }}
-                        >
-                          <Plus size={10} strokeWidth={2.5} />
-                        </button>
-                      )}
-                    </div>
-                    {/* Count badge */}
-                    {tile.count > 0 && (
-                      <div className="absolute top-2.5 left-8">
+                      {tile.count > 0 && (
                         <span
-                          className="text-[10px] font-bold px-1 py-px rounded-full"
+                          className="absolute top-1 right-1 text-[8px] font-bold w-3.5 h-3.5 flex items-center justify-center rounded-full"
                           style={{ background: GOLD, color: "#1c1500" }}
                         >
-                          {tile.count}
+                          {tile.count > 9 ? "9+" : tile.count}
                         </span>
-                      </div>
-                    )}
-                    {/* Label */}
-                    <p
-                      className="text-xs font-bold uppercase tracking-wider leading-tight"
-                      style={{ color: active ? GOLD_DIM : "#b0aea8" }}
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+            ) : (
+              <div className="grid grid-cols-2 gap-1.5 mb-4">
+                {luxTiles.map(tile => {
+                  const active = isActiveTile(tile.id);
+                  return (
+                    <div
+                      key={tile.id}
+                      onClick={tile.onClick}
+                      className="relative cursor-pointer rounded-xl p-3 transition-all duration-200"
+                      style={{
+                        background: active ? TILE_BG_ACTIVE : TILE_BG,
+                        border: `1px solid ${active ? TILE_BORDER_ACTIVE : TILE_BORDER}`,
+                      }}
                     >
-                      {tile.label}
-                    </p>
-                  </div>
-                );
-              })}
-            </div>
+                      {/* Icon + add row */}
+                      <div className="flex justify-between items-start mb-3">
+                        <tile.Icon
+                          size={20}
+                          strokeWidth={1.5}
+                          style={{ color: active ? GOLD_DIM : GOLD, flexShrink: 0 }}
+                        />
+                        {"onAdd" in tile && tile.onAdd && (
+                          <button
+                            onClick={e => { e.stopPropagation(); (tile as any).onAdd(); }}
+                            className="w-5 h-5 rounded-full flex items-center justify-center transition-colors"
+                            style={{ border: "1px solid rgba(212,175,55,0.22)", color: GOLD }}
+                          >
+                            <Plus size={10} strokeWidth={2.5} />
+                          </button>
+                        )}
+                      </div>
+                      {/* Count badge */}
+                      {tile.count > 0 && (
+                        <div className="absolute top-2.5 left-8">
+                          <span
+                            className="text-[10px] font-bold px-1 py-px rounded-full"
+                            style={{ background: GOLD, color: "#1c1500" }}
+                          >
+                            {tile.count}
+                          </span>
+                        </div>
+                      )}
+                      {/* Label */}
+                      <p
+                        className="text-xs font-bold uppercase tracking-wider leading-tight"
+                        style={{ color: active ? GOLD_DIM : "#b0aea8" }}
+                      >
+                        {tile.label}
+                      </p>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
 
             {/* Tools strip — widoczne dla wszystkich */}
             <div style={{ borderTop: "1px solid rgba(212,175,55,0.10)", paddingTop: "10px" }}>
-              <p className="text-[11px] font-bold uppercase mb-2 px-1" style={{ color: "#4d4635", letterSpacing: "0.15em" }}>
-                Narzędzia
-              </p>
+              {!isCollapsed && (
+                <p className="text-[11px] font-bold uppercase mb-2 px-1" style={{ color: "#4d4635", letterSpacing: "0.15em" }}>
+                  Narzedzia
+                </p>
+              )}
               <button
                 onClick={onToggleImporter}
-                className="w-full flex items-center gap-2 px-2 py-1.5 rounded-lg text-xs font-bold transition-all text-left"
+                title="Import XLSX"
+                className={`w-full flex items-center ${isCollapsed ? 'justify-center py-2' : 'gap-2 px-2 py-1.5'} rounded-lg text-xs font-bold transition-all text-left`}
                 style={{ color: "#5a5950" }}
               >
-                <FileDown size={14} style={{ flexShrink: 0 }} /> Import XLSX
+                <FileDown size={14} style={{ flexShrink: 0 }} />
+                {!isCollapsed && " Import XLSX"}
               </button>
               {isAdmin && (
                 <button
                   onClick={onToggleTheme}
-                  className="w-full flex items-center gap-2 px-2 py-1.5 rounded-lg text-xs font-bold transition-all text-left"
+                  title="Wyglad"
+                  className={`w-full flex items-center ${isCollapsed ? 'justify-center py-2' : 'gap-2 px-2 py-1.5'} rounded-lg text-xs font-bold transition-all text-left`}
                   style={{ color: "#5a5950" }}
                 >
-                  <Palette size={14} style={{ flexShrink: 0 }} /> Wygląd
+                  <Palette size={14} style={{ flexShrink: 0 }} />
+                  {!isCollapsed && " Wyglad"}
                 </button>
               )}
             </div>
@@ -628,11 +739,13 @@ export const Sidebar: React.FC<SidebarProps> = ({
             {/* Admin section — tylko dla admina */}
             {isAdmin && (
               <div style={{ borderTop: "1px solid rgba(212,175,55,0.08)", paddingTop: "10px", marginTop: "6px" }}>
-                <p className="text-[11px] font-bold uppercase mb-2 px-1" style={{ color: "#92400e", letterSpacing: "0.15em" }}>
-                  ⬥ Admin
-                </p>
+                {!isCollapsed && (
+                  <p className="text-[11px] font-bold uppercase mb-2 px-1" style={{ color: "#92400e", letterSpacing: "0.15em" }}>
+                    Admin
+                  </p>
+                )}
                 {[
-                  { label: "Rejestr Czynności", Icon: Activity, action: onToggleActivityLog, color: "#5a5950" },
+                  { label: "Rejestr Czynnosci", Icon: Activity, action: onToggleActivityLog, color: "#5a5950" },
                   { label: "BugBot / Tester",   Icon: Bug,      action: onToggleTester,      color: "#5a5950" },
                   ...(onOpenSnapshots ? [{ label: "Snapshoty bazy", Icon: Camera, action: onOpenSnapshots, color: "#5a5950" }] : []),
                   ...(onWipeData      ? [{ label: "Nuclear Reset",  Icon: Trash2, action: onWipeData,      color: "#991b1b" }] : []),
@@ -640,10 +753,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   <button
                     key={label}
                     onClick={action}
-                    className="w-full flex items-center gap-2 px-2 py-1.5 rounded-lg text-xs font-bold transition-all text-left"
+                    title={label}
+                    className={`w-full flex items-center ${isCollapsed ? 'justify-center py-2' : 'gap-2 px-2 py-1.5'} rounded-lg text-xs font-bold transition-all text-left`}
                     style={{ color }}
                   >
-                    <Icon size={14} style={{ flexShrink: 0 }} /> {label}
+                    <Icon size={14} style={{ flexShrink: 0 }} />
+                    {!isCollapsed && ` ${label}`}
                   </button>
                 ))}
               </div>
@@ -676,13 +791,15 @@ export const Sidebar: React.FC<SidebarProps> = ({
               state.clients?.length ?? 0,
             )}
           </div>
-          <button
-            onClick={(e) => { e.stopPropagation(); onAddClient(); }}
-            title="Dodaj klienta"
-            className="opacity-0 group-hover/btn-container:opacity-100 transition-opacity p-1.5 rounded-lg hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 flex-shrink-0"
-          >
-            <Plus size={14} />
-          </button>
+          {!isCollapsed && (
+            <button
+              onClick={(e) => { e.stopPropagation(); onAddClient(); }}
+              title="Dodaj klienta"
+              className="opacity-0 group-hover/btn-container:opacity-100 transition-opacity p-1.5 rounded-lg hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 flex-shrink-0"
+            >
+              <Plus size={14} />
+            </button>
+          )}
         </div>
 
         {renderNavBtn("offers", "Tablica")}
@@ -720,7 +837,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
         {/* Import */}
         <button
           onClick={onToggleImporter}
-          className={`w-full flex items-center gap-3 px-3 py-2.5 text-base mb-0.5 group font-medium transition-all ${skin !== "default" ? "v1-nav-btn" : "text-zinc-400 hover:bg-zinc-900/50 hover:text-zinc-200"}`}
+          title="Import XLSX"
+          className={`w-full flex items-center ${isCollapsed ? 'justify-center py-2.5' : 'gap-3 px-3 py-2.5'} text-base mb-0.5 group font-medium transition-all ${skin !== "default" ? "v1-nav-btn" : "text-zinc-400 hover:bg-zinc-900/50 hover:text-zinc-200"}`}
           style={
             skin !== "default"
               ? { borderRadius: "var(--v1-radius)" }
@@ -728,7 +846,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           }
         >
           <FileDown size={16} style={{ opacity: 0.6 }} />
-          <span className="flex-1 text-left">Import XLSX</span>
+          {!isCollapsed && <span className="flex-1 text-left">Import XLSX</span>}
         </button>
         {themedNavRow(
           FileSpreadsheet,
@@ -748,7 +866,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
         {/* System / Tools */}
         <button
           onClick={() => setIsSystemOpen(!isSystemOpen)}
-          className={`w-full flex items-center justify-between px-3 py-2.5 text-sm font-black uppercase tracking-wider transition-all mb-1 ${
+          title="Dane i Narzedzia"
+          className={`w-full flex items-center ${isCollapsed ? 'justify-center py-2.5' : 'justify-between px-3 py-2.5'} text-sm font-black uppercase tracking-wider transition-all mb-1 ${
             skin === "default"
               ? `hover:bg-zinc-900 ${isSystemOpen ? "text-zinc-200 bg-zinc-900" : "text-zinc-600"}`
               : "v1-nav-btn"
@@ -759,13 +878,15 @@ export const Sidebar: React.FC<SidebarProps> = ({
               : { borderRadius: "10px" }
           }
         >
-          <div className="flex items-center gap-2">
-            <Settings2 size={14} /> Dane i Narzędzia
-          </div>
-          {isSystemOpen ? (
-            <ChevronDown size={14} />
+          {isCollapsed ? (
+            <Settings2 size={16} />
           ) : (
-            <ChevronRight size={14} />
+            <>
+              <div className="flex items-center gap-2">
+                <Settings2 size={14} /> Dane i Narzedzia
+              </div>
+              {isSystemOpen ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
+            </>
           )}
         </button>
 

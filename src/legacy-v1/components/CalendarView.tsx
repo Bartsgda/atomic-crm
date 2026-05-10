@@ -213,6 +213,7 @@ export const CalendarView: React.FC<Props> = ({ state, onNavigate, onDeleteNote,
         // 1. WZNOWIENIA (Sprzedane polisy - Data końca)
         if (policy.stage === 'sprzedaż' || policy.stage === 'sprzedany') {
             const endDate = new Date(policy.policyEndDate);
+            if (endDate.getUTCHours() === 0 && endDate.getUTCMinutes() === 0) endDate.setHours(9, 0, 0, 0);
             if (isValid(endDate)) {
                 allEvents.push({
                     id: `end_${policy.id}`,
@@ -575,9 +576,9 @@ export const CalendarView: React.FC<Props> = ({ state, onNavigate, onDeleteNote,
                         ? 'bg-purple-500'
                         : 'bg-blue-500';
 
-                // Imieniny key for today
+                // Imieniny key for this day
                 const imieninyKey = format(day, 'MM-dd');
-                const imieninyText = isCurrent ? (IMIENINY[imieninyKey] || null) : null;
+                const imieninyText = IMIENINY[imieninyKey] || null;
 
                 return (
                 <div
@@ -597,13 +598,12 @@ export const CalendarView: React.FC<Props> = ({ state, onNavigate, onDeleteNote,
                             <span className={`text-xs font-bold w-6 h-6 flex items-center justify-center rounded-full ${isCurrent ? 'bg-red-600 text-white' : 'text-zinc-500 dark:text-zinc-400'}`}>
                                 {format(day, 'd')}
                             </span>
-                            <span className="hidden sm:inline text-[9px] font-bold text-zinc-300 dark:text-zinc-600 uppercase">
+                            <span className="text-[9px] font-bold text-zinc-300 dark:text-zinc-600 uppercase">
                                 {format(day, 'EEEEEE', { locale: pl })}
                             </span>
                         </div>
-                        {/* Imieniny — only for today */}
                         {imieninyText && (
-                            <span className="text-[7px] text-rose-400 font-bold leading-tight truncate max-w-full px-0.5 mt-0.5 hidden sm:block" title={`Imieniny: ${imieninyText}`}>
+                            <span className="text-[7px] text-rose-400 font-bold leading-tight truncate max-w-full px-0.5 mt-0.5 block" title={`Imieniny: ${imieninyText}`}>
                                 {imieninyText}
                             </span>
                         )}

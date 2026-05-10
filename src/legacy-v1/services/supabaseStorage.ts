@@ -768,16 +768,23 @@ class SupabaseStorageManager {
     return inserted as any;
   }
 
-  async listSnapshots(): Promise<Array<{ id: string; created_at: string; note: string | null; stats: any; created_by_email?: string | null }>> {
+  async listSnapshots(): Promise<Array<{ id: string; created_at: string; note: string | null; stats: any; created_by: number | null; is_auto: boolean }>> {
     const sb = this.sb();
     const { data, error } = await sb
       .from('insurance_snapshots')
       .select('id, created_at, note, stats, created_by')
       .eq('tenant_id', TENANT_ID)
       .order('created_at', { ascending: false })
-      .limit(50);
+      .limit(100);
     if (error) throw new Error(`Błąd listowania snapshotów: ${error.message}`);
-    return (data ?? []).map(r => ({ id: r.id, created_at: r.created_at, note: r.note, stats: r.stats }));
+    return (data ?? []).map(r => ({
+      id: r.id,
+      created_at: r.created_at,
+      note: r.note,
+      stats: r.stats,
+      created_by: r.created_by ?? null,
+      is_auto: typeof r.note === 'string' && r.note.startsWith('auto'),
+    }));
   }
 
   async restoreSnapshot(id: string): Promise<AppState> {

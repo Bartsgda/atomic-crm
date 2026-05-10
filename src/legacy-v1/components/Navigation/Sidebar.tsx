@@ -517,6 +517,15 @@ export const Sidebar: React.FC<SidebarProps> = ({
       {/* --- PREMIUM QUICK ACTION DOCK (HARDENING TOOLS) --- */}
       {isCollapsed ? (
         <div className="px-1 mb-4 flex flex-col items-center gap-1">
+          {!isAdmin && (
+            <button
+              onClick={onAddClient}
+              className="p-2 relative group/add transition-all hover:scale-110 active:scale-90 text-indigo-500 hover:text-indigo-400 rounded-xl hover:bg-indigo-500/10"
+              title="Dodaj Klienta"
+            >
+              <Plus size={18} strokeWidth={1.5} />
+            </button>
+          )}
           {isAdmin && onOpenSnapshots && (
             <button
               onClick={onOpenSnapshots}
@@ -524,22 +533,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
               title="Snapshoty bazy (admin)"
             >
               <Camera size={18} strokeWidth={1.5} />
-            </button>
-          )}
-          <button
-            onClick={onAddClient}
-            className="p-2 relative group/add transition-all hover:scale-110 active:scale-90 text-indigo-500 hover:text-indigo-400 rounded-xl hover:bg-indigo-500/10"
-            title="Dodaj Klienta"
-          >
-            <Plus size={18} strokeWidth={1.5} />
-          </button>
-          {isAdmin && onWipeData && (
-            <button
-              onClick={onWipeData}
-              className="p-2 relative group/wipe transition-all hover:scale-110 active:scale-90 text-rose-500 hover:text-rose-400 rounded-xl hover:bg-rose-500/10"
-              title="Nuclear Reset (admin)"
-            >
-              <Trash2 size={18} strokeWidth={1.5} />
             </button>
           )}
         </div>
@@ -552,35 +545,24 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 : "v1-quick-dock bg-indigo-950/40 backdrop-blur-2xl border border-indigo-500/20 rounded-[2rem] ring-1 ring-white/5 shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
             }`}
           >
-            {isAdmin && onOpenSnapshots && (
-              <>
-                <button
-                  onClick={onOpenSnapshots}
-                  className="p-3 relative group/snap transition-all hover:scale-110 active:scale-90 text-emerald-500 hover:text-emerald-400"
-                  title="Snapshoty bazy (admin)"
-                >
-                  <div className="absolute inset-0 bg-emerald-500/0 group-hover/snap:bg-emerald-500/20 blur-xl rounded-full transition-all" />
-                  <Camera size={20} strokeWidth={1.5} className="relative z-10" />
-                </button>
-                <div className="w-[1px] h-6 bg-white/10 mx-1" />
-              </>
-            )}
-            <button
-              onClick={onAddClient}
-              className="p-3 relative group/add transition-all hover:scale-110 active:scale-90 text-indigo-500 hover:text-indigo-400"
-              title="Dodaj Klienta"
-            >
-              <div className="absolute inset-0 bg-indigo-500/0 group-hover/add:bg-indigo-500/20 blur-xl rounded-full transition-all" />
-              <Plus size={20} strokeWidth={1.5} className="relative z-10" />
-            </button>
-            {isAdmin && onWipeData && (
+            {!isAdmin && (
               <button
-                onClick={onWipeData}
-                className="p-3 relative group/wipe transition-all hover:scale-110 active:scale-90 text-rose-500 hover:text-rose-400"
-                title="Wyczysc dane tenantu (admin, NUCLEAR RESET)"
+                onClick={onAddClient}
+                className="p-3 relative group/add transition-all hover:scale-110 active:scale-90 text-indigo-500 hover:text-indigo-400"
+                title="Dodaj Klienta"
               >
-                <div className="absolute inset-0 bg-rose-500/0 group-hover/wipe:bg-rose-500/20 blur-xl rounded-full transition-all" />
-                <Trash2 size={20} strokeWidth={1.5} className="relative z-10" />
+                <div className="absolute inset-0 bg-indigo-500/0 group-hover/add:bg-indigo-500/20 blur-xl rounded-full transition-all" />
+                <Plus size={20} strokeWidth={1.5} className="relative z-10" />
+              </button>
+            )}
+            {isAdmin && onOpenSnapshots && (
+              <button
+                onClick={onOpenSnapshots}
+                className="p-3 relative group/snap transition-all hover:scale-110 active:scale-90 text-emerald-500 hover:text-emerald-400"
+                title="Snapshoty bazy (admin)"
+              >
+                <div className="absolute inset-0 bg-emerald-500/0 group-hover/snap:bg-emerald-500/20 blur-xl rounded-full transition-all" />
+                <Camera size={20} strokeWidth={1.5} className="relative z-10" />
               </button>
             )}
           </div>

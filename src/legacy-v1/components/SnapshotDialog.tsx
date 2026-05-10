@@ -15,6 +15,8 @@ interface SnapshotItem {
   created_at: string;
   note: string | null;
   stats: Record<string, number>;
+  created_by: number | null;
+  is_auto: boolean;
 }
 
 interface SnapshotDialogProps {
@@ -191,108 +193,91 @@ export const SnapshotDialog: React.FC<SnapshotDialogProps> = ({
             </div>
           )}
 
-          {tab === "list" && (
-            <div className="space-y-2">
-              {list.length === 0 && !busy && (
-                <p className="text-gray-500 text-center py-8 text-sm">
-                  Brak snapshotów.
-                </p>
-              )}
-              {list.map((s) => (
-                <div
-                  key={s.id}
-                  className="p-4 rounded-xl bg-white/5 border border-white/5"
-                >
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="flex-1 min-w-0">
-                      <div className="text-white text-sm font-medium">
-                        {new Date(s.created_at).toLocaleString("pl-PL")}
-                      </div>
-                      {s.note && (
-                        <div className="text-gray-400 text-xs mt-0.5 truncate">
-                          {s.note}
-                        </div>
-                      )}
-                      <div className="text-gray-500 text-[11px] mt-1.5 flex gap-3 flex-wrap">
-                        <span>
-                          klienci:{" "}
-                          <b className="text-gray-300">
-                            {s.stats?.clients ?? 0}
-                          </b>
-                        </span>
-                        <span>
-                          polisy:{" "}
-                          <b className="text-gray-300">
-                            {s.stats?.policies ?? 0}
-                          </b>
-                        </span>
-                        <span>
-                          notatki:{" "}
-                          <b className="text-gray-300">{s.stats?.notes ?? 0}</b>
-                        </span>
-                        {s.stats?.trash ? (
-                          <span>
-                            kosz:{" "}
-                            <b className="text-gray-300">{s.stats.trash}</b>
-                          </span>
-                        ) : null}
-                      </div>
+          {tab === "list" && (() => {
+            const renderSnap = (s: SnapshotItem) => (
+              <div key={s.id} className="p-4 rounded-xl bg-white/5 border border-white/5">
+                <div className="flex items-start justify-between gap-3">
+                  <div className="flex-1 min-w-0">
+                    <div className="text-white text-sm font-medium">
+                      {new Date(s.created_at).toLocaleString("pl-PL")}
                     </div>
-                    <div className="flex gap-1 flex-shrink-0">
-                      {confirmRestoreId === s.id ? (
-                        <>
-                          <button
-                            onClick={() => handleRestore(s.id)}
-                            disabled={busy}
-                            className="px-3 py-1.5 bg-amber-600 hover:bg-amber-500 text-white text-xs rounded-lg disabled:opacity-60"
-                          >
-                            {busy ? (
-                              <Loader2 className="w-3 h-3 animate-spin" />
-                            ) : (
-                              "Potwierdź"
-                            )}
-                          </button>
-                          <button
-                            onClick={() => setConfirmRestoreId(null)}
-                            disabled={busy}
-                            className="px-2 py-1.5 bg-white/5 hover:bg-white/10 text-gray-300 text-xs rounded-lg"
-                          >
-                            Anuluj
-                          </button>
-                        </>
-                      ) : (
-                        <>
-                          <button
-                            onClick={() => setConfirmRestoreId(s.id)}
-                            disabled={busy}
-                            title="Przywróć — nadpisze aktualne dane!"
-                            className="p-2 bg-white/5 hover:bg-indigo-600/30 text-gray-300 hover:text-white rounded-lg transition-all"
-                          >
-                            <RotateCcw className="w-4 h-4" />
-                          </button>
-                          <button
-                            onClick={() => handleDelete(s.id)}
-                            disabled={busy}
-                            title="Usuń snapshot"
-                            className="p-2 bg-white/5 hover:bg-red-600/30 text-gray-300 hover:text-red-300 rounded-lg transition-all"
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </button>
-                        </>
-                      )}
+                    {s.note && !s.is_auto && (
+                      <div className="text-gray-400 text-xs mt-0.5 truncate">{s.note}</div>
+                    )}
+                    <div className="text-gray-500 text-[11px] mt-1.5 flex gap-3 flex-wrap">
+                      <span>klienci: <b className="text-gray-300">{s.stats?.clients ?? 0}</b></span>
+                      <span>polisy: <b className="text-gray-300">{s.stats?.policies ?? 0}</b></span>
+                      <span>notatki: <b className="text-gray-300">{s.stats?.notes ?? 0}</b></span>
+                      {s.stats?.trash ? <span>kosz: <b className="text-gray-300">{s.stats.trash}</b></span> : null}
                     </div>
                   </div>
-                  {confirmRestoreId === s.id && (
-                    <div className="mt-3 text-amber-300 text-xs flex items-start gap-2">
-                      <AlertTriangle className="w-4 h-4 flex-shrink-0" />
-                      Przywrócenie zastąpi <b>całą</b> aktualną bazę tenantu
-                      zawartością snapshotu. Aktualne zmiany zostaną utracone.
-                    </div>
-                  )}
+                  <div className="flex gap-1 flex-shrink-0">
+                    {confirmRestoreId === s.id ? (
+                      <>
+                        <button onClick={() => handleRestore(s.id)} disabled={busy}
+                          className="px-3 py-1.5 bg-amber-600 hover:bg-amber-500 text-white text-xs rounded-lg disabled:opacity-60">
+                          {busy ? <Loader2 className="w-3 h-3 animate-spin" /> : "Potwierdź"}
+                        </button>
+                        <button onClick={() => setConfirmRestoreId(null)} disabled={busy}
+                          className="px-2 py-1.5 bg-white/5 hover:bg-white/10 text-gray-300 text-xs rounded-lg">
+                          Anuluj
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <button onClick={() => setConfirmRestoreId(s.id)} disabled={busy}
+                          title="Przywróć — nadpisze aktualne dane!"
+                          className="p-2 bg-white/5 hover:bg-indigo-600/30 text-gray-300 hover:text-white rounded-lg transition-all">
+                          <RotateCcw className="w-4 h-4" />
+                        </button>
+                        <button onClick={() => handleDelete(s.id)} disabled={busy}
+                          title="Usuń snapshot"
+                          className="p-2 bg-white/5 hover:bg-red-600/30 text-gray-300 hover:text-red-300 rounded-lg transition-all">
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </>
+                    )}
+                  </div>
                 </div>
-              ))}
-            </div>
-          )}
+                {confirmRestoreId === s.id && (
+                  <div className="mt-3 text-amber-300 text-xs flex items-start gap-2">
+                    <AlertTriangle className="w-4 h-4 flex-shrink-0" />
+                    Przywrócenie zastąpi <b>całą</b> aktualną bazę tenantu zawartością snapshotu.
+                  </div>
+                )}
+              </div>
+            );
+
+            const manual = list.filter(s => !s.is_auto);
+            const auto = list.filter(s => s.is_auto);
+
+            return (
+              <div className="space-y-4">
+                {list.length === 0 && !busy && (
+                  <p className="text-gray-500 text-center py-8 text-sm">Brak snapshotów.</p>
+                )}
+
+                {manual.length > 0 && (
+                  <div>
+                    <p className="text-xs font-bold text-indigo-400 uppercase tracking-widest mb-2">
+                      Ręczne (admin) — {manual.length}
+                    </p>
+                    <div className="space-y-2">{manual.map(renderSnap)}</div>
+                  </div>
+                )}
+
+                {auto.length > 0 && (
+                  <div>
+                    {manual.length > 0 && <div className="border-t border-white/5 my-3" />}
+                    <p className="text-xs font-bold text-emerald-500 uppercase tracking-widest mb-2">
+                      Automatyczne — {auto.length}
+                    </p>
+                    <div className="space-y-2">{auto.map(renderSnap)}</div>
+                  </div>
+                )}
+              </div>
+            );
+          })()}
         </div>
       </div>
     </div>

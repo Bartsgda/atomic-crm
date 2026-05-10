@@ -6,6 +6,26 @@
 - `components/ClientFormModal.tsx`
 - `ai/prompts/CLIENT_MASTER_PROMPT.md`
 
+## 0. Widok Listy — Baza Kontrahentów (v2.1, 2026-05-10)
+
+### Kolumny tabeli
+| Kolumna | Źródło | Uwagi |
+|---|---|---|
+| Osoba / Notatka | `client.firstName/lastName` + ostatnia notatka user | Nie liczy systemowych [SYSTEM] ani AUDYT |
+| Ostatnia Aktywność | max(client.createdAt, lastPolicy.createdAt, lastNote.createdAt) | |
+| Kontakt & Firma | phones[0], emails[0], businesses[0] | |
+| Portfel | `_v` (OC/AC/BOTH), `_p` (DOM/FIRMA), `_l` (ZYCIE/PODROZ/INNE) | **Tylko stage∈{sprzedaż, sprzedany, sprzedaz}** |
+| W toku / Wznowienia | `_offers` (OFFER_STAGES) + `_upcoming` (sold, endDate ±7…30 dni) | isFresh = createdAt <7 dni temu → czerwony badge |
+| Akcje | Archiwizacja (DeleteSafetyButton) + nawigacja do profilu | |
+
+### Sortowanie
+`SortKey = 'name' | 'activity' | 'portfolio'`  
+- portfolio = suma `_v + _p + _l`
+
+### Routing
+Kafelek "Klienci" (luxury-gold) → `onNavigate("clients")`.  
+Domyślna strona po logowaniu: `useState<Page>("clients")`.
+
 ## 1. Definicja i Rola
 Klient jest główną encją w systemie. Może być Osobą Fizyczną lub Firmą.
 System traktuje dane klienta jako "Prawdę Ostateczną" (Single Source of Truth) dla wszystkich polis.

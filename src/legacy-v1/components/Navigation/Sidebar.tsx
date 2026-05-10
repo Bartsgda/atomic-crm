@@ -580,7 +580,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
         const luxTiles = [
           { id: "all",         label: "Pulpit",       Icon: Zap,        count: getCategoryCount("all"), onClick: () => { onCategorySelect("all", undefined, false); onNavigate("dashboard"); } },
-          { id: "clients",     label: "Klienci",      Icon: Users,      count: state.clients?.length ?? 0, onAdd: () => onAddClient(), onClick: () => { onCategorySelect("all_search", undefined, false); onNavigate("dashboard"); } },
+          { id: "clients",     label: "Klienci",      Icon: Users,      count: state.clients?.length ?? 0, onAdd: () => onAddClient(), onClick: () => { onNavigate("clients"); } },
           { id: "offers",      label: "Tablica",      Icon: Trello,     count: getCategoryCount("offers"), onClick: () => { onCategorySelect("offers", undefined, false); onNavigate("offers"); } },
           { id: "calendar",    label: "Terminarz",    Icon: CalendarIcon, count: 0, onClick: () => onNavigate("calendar") },
           { id: "vehicles",    label: "Pojazdy",      Icon: Car,        count: getCategoryCount("vehicles", ["OC","AC","BOTH"] as PolicyType[]), onAdd: () => onNavigate("new", { initialType: "OC" }), onClick: () => { onCategorySelect("vehicles", ["OC","AC","BOTH"] as PolicyType[], false); onNavigate("dashboard"); } },
@@ -594,7 +594,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         ] as const;
 
         const isActiveTile = (id: string) => {
-          if (id === "clients") return ["clients","client-details"].includes(currentPage) || (currentPage === "dashboard" && activeCategory === "all_search");
+          if (id === "clients") return ["clients","client-details"].includes(currentPage);
           if (["insurers","finance","calendar","offers","terminations"].includes(id)) return currentPage === id;
           return currentPage === "dashboard" && activeCategory === id;
         };

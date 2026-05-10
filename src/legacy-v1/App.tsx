@@ -76,7 +76,7 @@ function App() {
     trash: [],
   });
   const [isLoading, setIsLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState<Page>("offers");
+  const [currentPage, setCurrentPage] = useState<Page>("clients");
   const [isLocked, setIsLocked] = useState(false);
 
   // Auto wipe is now managed globally by AuthBarrier.

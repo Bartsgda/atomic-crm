@@ -14,12 +14,16 @@
 
 ## 3. Model Interakcji (Widok Listy)
 - **Kolumny Tabeli**: 
-    - **Osoba**: Nazwisko, Imię, PESEL.
-    - **Działalność**: Nazwa firmy, NIP.
-    - **Kontakt**: Telefon, Mail.
-    - **Oferty**: Aktywne procesy (badge: czerwony).
-    - **Polisy**: Sprzedane produkty (badge: ciemny).
-    - **Akcje**: Szybka nawigacja.
+    - **Osoba / Notatka**: Nazwisko, Imię + podgląd ostatniej notatki użytkownika.
+    - **Ostatnia Aktywność**: Data ostatniego kontaktu/polisy/notatki.
+    - **Kontakt & Firma**: Telefon, Mail, NIP/Nazwa firmy.
+    - **Portfel**: Sprzedane polisy per typ produktu (badge: niebieski=pojazdy, zielony=dom, różowy=życie). Liczy tylko stage=sprzedaż/sprzedany.
+    - **W toku / Wznowienia**: Aktywne oferty (badge: czerwony/pomarańczowy) + polisy kończące się ≤30 dni (badge: szary/pomarańczowy/czerwony po terminie).
+    - **Akcje**: Archiwizacja + przejście do profilu.
+
+- **Nawigacja**: Kafelek "Klienci" w sidebarze (skin luxury-gold) → page="clients" (ClientsList.tsx). Domyślna strona po logowaniu = "clients".
+
+- **Sortowanie**: Po Nazwisku, Ostatniej Aktywności, Portfelu (łączna liczba sprzedanych polis). Klikanie nagłówka kolumny zmienia kierunek (asc/desc).
 
 ## 4. Standard Bezpiecznego Usuwania (Safety First)
 W celu uniknięcia przypadkowej utraty danych (szczególnie linków do skanów i historii rozmów), system zabrania używania standardowych okien przeglądarkowych.

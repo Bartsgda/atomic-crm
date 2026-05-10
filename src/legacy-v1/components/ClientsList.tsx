@@ -179,7 +179,7 @@ export const ClientsList: React.FC<Props> = ({
           const clientNotes = state.notes.filter(n => n.clientId === client.id);
           
           // Oferty (wszystkie etapy sprzedażowe z wyjątkiem sprzedanych)
-          const SOLD_STAGES = ['sprzedaż', 'sprzedany'];
+          const SOLD_STAGES = ['sprzedaż', 'sprzedany', 'sprzedaz'];
           const OFFER_STAGES = ['of_do zrobienia', 'przeł kontakt', 'czekam na dane/dokum', 'of_przedst', 'oferta_wysłana', 'ucięty kontakt', 'rez po ofercie_kont za rok', 'inne'];
           const offers = pols.filter(p => OFFER_STAGES.includes(p.stage));
           const soldPols = pols.filter(p => SOLD_STAGES.includes(p.stage));

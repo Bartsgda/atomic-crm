@@ -128,6 +128,14 @@ interface ChangeEntry {
 
 const CHANGELOG: ChangeEntry[] = [
   {
+    date: "2026-05-10",
+    items: [
+      "Klienci → otwiera Bazę Kontrahentów (nie listę polis)",
+      "Kolumna Portfel — sprzedane polisy per klient (🚗 Dom 💗)",
+      "Kolumna W toku — aktywne oferty z typem + wznowienia do 30 dni",
+    ],
+  },
+  {
     date: "2026-05-09",
     items: [
       "Zakładka 'Szyfruj' w importerze — zaszyfruj XLSX hasłem",

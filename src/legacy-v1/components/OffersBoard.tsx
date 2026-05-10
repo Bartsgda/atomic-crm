@@ -201,7 +201,7 @@ const OfferRow = ({
                 <div className="flex items-center gap-2 min-w-[120px] justify-end">
                     <button
                         onClick={() => setIsExpanded(!isExpanded)}
-                        className={`p-2 rounded-lg border transition-all ${isExpanded ? 'bg-zinc-100 border-zinc-300 text-zinc-900' : 'bg-zinc-50 border-zinc-200 text-zinc-400 hover:bg-zinc-100 hover:text-zinc-600'}`}
+                        className={`p-2 rounded-lg border transition-all ${isExpanded ? 'bg-zinc-100 dark:bg-zinc-700 border-zinc-300 dark:border-zinc-600 text-zinc-900 dark:text-white' : 'bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-700 hover:text-zinc-600 dark:hover:text-zinc-300'}`}
                     >
                         <MessageSquare size={16} />
                     </button>

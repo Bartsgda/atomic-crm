@@ -563,7 +563,7 @@ export const ClientsList: React.FC<Props> = ({
                                             const d = new Date(off.createdAt);
                                             const isFresh = differenceInDays(new Date(), d) < 7;
                                             return (
-                                                <div key={off.id} className={`flex items-center gap-1 px-1.5 py-0.5 rounded text-[11px] font-black border w-full justify-center ${isFresh ? 'bg-red-50 text-red-600 border-red-100' : 'bg-white text-zinc-500 border-zinc-200'}`}>
+                                                <div key={off.id} className={`flex items-center gap-1 px-1.5 py-0.5 rounded text-[11px] font-black border w-full justify-center ${isFresh ? 'bg-red-50 dark:bg-red-900/30 text-red-600 border-red-100 dark:border-red-800' : 'bg-white dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 border-zinc-200 dark:border-zinc-700'}`}>
                                                     <Calendar size={10} />
                                                     {format(d, 'dd.MM')}
                                                 </div>

@@ -97,7 +97,7 @@ export const TerminationsView: React.FC<Props> = ({
     <div className="p-6 md:p-10 max-w-7xl mx-auto space-y-8 select-none min-h-screen bg-zinc-50 dark:bg-zinc-950 font-sans">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
-          <h1 className="text-4xl font-black text-zinc-950 tracking-tighter flex items-center gap-4">
+          <h1 className="text-4xl font-black text-zinc-950 dark:text-white tracking-tighter flex items-center gap-4">
             <ShieldAlert size={36} className="text-red-600" /> Rejestr
             Wypowiedzeń
           </h1>
@@ -128,17 +128,17 @@ export const TerminationsView: React.FC<Props> = ({
           <input
             type="text"
             placeholder="Szukaj ID, Klienta, Pojazdu..."
-            className="w-full pl-12 pr-4 py-4 bg-white border-2 border-zinc-100 rounded-3xl focus:ring-4 focus:ring-red-50 focus:border-red-500 outline-none transition-all font-bold text-zinc-900 shadow-sm"
+            className="w-full pl-12 pr-4 py-4 bg-white dark:bg-zinc-900 border-2 border-zinc-100 dark:border-zinc-700 rounded-3xl focus:ring-4 focus:ring-red-50 dark:focus:ring-red-900/30 focus:border-red-500 outline-none transition-all font-bold text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 shadow-sm"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
       </div>
 
-      <div className="bg-white border-2 border-zinc-100 rounded-[2.5rem] shadow-2xl overflow-hidden">
+      <div className="bg-white dark:bg-zinc-900 border-2 border-zinc-100 dark:border-zinc-800 rounded-[2.5rem] shadow-2xl overflow-hidden">
         <div className="overflow-x-auto scrollbar-hide">
           <table className="w-full text-left">
-            <thead className="bg-zinc-50/50 border-b-2 border-zinc-100 text-[10px] uppercase font-black text-zinc-400 tracking-widest">
+            <thead className="bg-zinc-50/50 dark:bg-zinc-800/50 border-b-2 border-zinc-100 dark:border-zinc-700 text-[10px] uppercase font-black text-zinc-400 tracking-widest">
               <tr>
                 <th className="px-8 py-6">ID / Sygnatura</th>
                 <th className="px-8 py-6">Data Złożenia (Fakt.)</th>
@@ -148,7 +148,7 @@ export const TerminationsView: React.FC<Props> = ({
                 <th className="px-8 py-6 text-right">Opcje</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-zinc-50">
+            <tbody className="divide-y divide-zinc-50 dark:divide-zinc-800">
               {filtered.length === 0 ? (
                 <tr>
                   <td colSpan={6} className="px-8 py-24 text-center">
@@ -164,10 +164,10 @@ export const TerminationsView: React.FC<Props> = ({
                 filtered.map((rec) => (
                   <tr
                     key={rec.id}
-                    className="hover:bg-zinc-50/50 transition-colors group"
+                    className="hover:bg-zinc-50/50 dark:hover:bg-zinc-800/50 transition-colors group"
                   >
                     <td className="px-8 py-6">
-                      <div className="flex items-center gap-2 px-2 py-1 bg-zinc-100 rounded-lg text-zinc-900 font-mono text-[11px] font-black border border-zinc-200 shadow-sm">
+                      <div className="flex items-center gap-2 px-2 py-1 bg-zinc-100 dark:bg-zinc-800 rounded-lg text-zinc-900 dark:text-zinc-100 font-mono text-[11px] font-black border border-zinc-200 dark:border-zinc-700 shadow-sm">
                         <Fingerprint size={12} className="text-zinc-400" />{" "}
                         {rec.id}
                       </div>
@@ -176,7 +176,7 @@ export const TerminationsView: React.FC<Props> = ({
                       <div className="flex items-center gap-3">
                         <Calendar size={14} className="text-red-600" />
                         <div>
-                          <p className="text-sm font-black text-zinc-950">
+                          <p className="text-sm font-black text-zinc-950 dark:text-white">
                             {rec.actualDate
                               ? format(new Date(rec.actualDate), "dd.MM.yyyy")
                               : "---"}
@@ -191,7 +191,7 @@ export const TerminationsView: React.FC<Props> = ({
                       <div className="flex items-center gap-3">
                         <Clock size={14} className="text-zinc-300" />
                         <div>
-                          <p className="text-xs font-bold text-zinc-600">
+                          <p className="text-xs font-bold text-zinc-600 dark:text-zinc-300">
                             {format(new Date(rec.sentAt), "dd.MM.yyyy")}
                           </p>
                           <p className="text-[10px] text-zinc-400 font-medium">
@@ -211,7 +211,7 @@ export const TerminationsView: React.FC<Props> = ({
                           }}
                           className="flex items-center gap-2 group/client"
                         >
-                          <span className="font-black text-sm text-zinc-900 group-hover/client:text-red-600 transition-colors underline decoration-zinc-100 decoration-2 underline-offset-4 whitespace-nowrap">
+                          <span className="font-black text-sm text-zinc-900 dark:text-zinc-100 group-hover/client:text-red-600 transition-colors underline decoration-zinc-100 dark:decoration-zinc-700 decoration-2 underline-offset-4 whitespace-nowrap">
                             {rec.clientName}
                           </span>
                         </button>
@@ -236,19 +236,19 @@ export const TerminationsView: React.FC<Props> = ({
                     </td>
                     <td className="px-8 py-6">
                       <div className="flex flex-col gap-2 max-w-xs">
-                        <div className="flex items-center gap-2 bg-zinc-50 border border-zinc-100 rounded-lg px-2 py-1.5 group/input">
+                        <div className="flex items-center gap-2 bg-zinc-50 dark:bg-zinc-800 border border-zinc-100 dark:border-zinc-700 rounded-lg px-2 py-1.5 group/input">
                           <HardDrive size={12} className="text-zinc-300" />
                           <input
                             type="text"
                             placeholder="C:\Skany\..."
-                            className="bg-transparent border-none focus:ring-0 text-[10px] font-bold text-zinc-600 w-full p-0"
+                            className="bg-transparent border-none focus:ring-0 text-[10px] font-bold text-zinc-600 dark:text-zinc-300 w-full p-0"
                             value={rec.localPath || ""}
                             onChange={(e) =>
                               handleUpdateLink(rec, "local", e.target.value)
                             }
                           />
                         </div>
-                        <div className="flex items-center gap-2 bg-zinc-50 border border-zinc-100 rounded-lg px-2 py-1.5 group/input">
+                        <div className="flex items-center gap-2 bg-zinc-50 dark:bg-zinc-800 border border-zinc-100 dark:border-zinc-700 rounded-lg px-2 py-1.5 group/input">
                           <LinkIcon size={12} className="text-blue-400" />
                           <input
                             type="text"

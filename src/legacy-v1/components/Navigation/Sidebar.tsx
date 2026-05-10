@@ -591,11 +591,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
           { id: "renewals",    label: "Wznowienia",   Icon: RefreshCcw, count: getCategoryCount("renewals", MENU_CATEGORIES.find(c=>c.id==="renewals")?.types), onClick: () => { const cat = MENU_CATEGORIES.find(c=>c.id==="renewals")!; onCategorySelect(cat.id, cat.types, cat.sortByDate); onNavigate("dashboard"); } },
           { id: "insurers",    label: "Towarzystwa",  Icon: Building2,  count: getCategoryCount("insurers"), onClick: () => onNavigate("insurers") },
           { id: "finance",     label: "Finanse",      Icon: Banknote,   count: 0, onClick: () => onNavigate("finance") },
+          { id: "sub-agents",  label: "Pośrednicy",   Icon: Handshake,  count: state.subAgents?.length ?? 0, onClick: () => onNavigate("sub-agents") },
         ] as const;
 
         const isActiveTile = (id: string) => {
           if (id === "clients") return ["clients","client-details"].includes(currentPage);
-          if (["insurers","finance","calendar","offers","terminations"].includes(id)) return currentPage === id;
+          if (["insurers","finance","calendar","offers","terminations","sub-agents"].includes(id)) return currentPage === id;
           return currentPage === "dashboard" && activeCategory === id;
         };
 

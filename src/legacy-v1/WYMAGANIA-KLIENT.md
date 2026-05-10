@@ -17,7 +17,7 @@
     - **Osoba / Notatka**: Nazwisko, Imię + podgląd ostatniej notatki użytkownika.
     - **Ostatnia Aktywność**: Data ostatniego kontaktu/polisy/notatki.
     - **Kontakt & Firma**: Telefon, Mail, NIP/Nazwa firmy.
-    - **Portfel**: Sprzedane polisy per typ produktu (badge: niebieski=pojazdy, zielony=dom, różowy=życie). Liczy tylko stage=sprzedaż/sprzedany.
+    - **Portfel**: Sprzedane polisy per typ produktu (badge: niebieski=pojazdy, zielony=dom, różowy=życie). Liczy tylko stage∈{sprzedaż, sprzedany, sprzedaz} (obie formy zapisu).
     - **W toku / Wznowienia**: Aktywne oferty (badge: czerwony/pomarańczowy) + polisy kończące się ≤30 dni (badge: szary/pomarańczowy/czerwony po terminie).
     - **Akcje**: Archiwizacja + przejście do profilu.
 

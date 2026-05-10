@@ -644,11 +644,15 @@ function mapPolicyLegacy(
     lifeDetails: lifeDetails,
   };
 
+  // Use policy start date as base for notes if row[1] (date column) is empty/invalid
+  const notesBaseDate =
+    row[1] && isValid(new Date(String(row[1]))) ? policy.createdAt : start;
+
   const notesFromLegacy = mapNotesLegacy(
     rawNotes,
     client.id,
     policy.id,
-    policy.createdAt,
+    notesBaseDate,
   );
   notes.push(...notesFromLegacy);
 

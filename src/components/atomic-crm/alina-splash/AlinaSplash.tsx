@@ -133,6 +133,9 @@ const CHANGELOG: ChangeEntry[] = [
       "Klienci → otwiera Bazę Kontrahentów (nie listę polis)",
       "Kolumna Portfel — sprzedane polisy per klient (🚗 Dom 💗)",
       "Kolumna W toku — aktywne oferty z typem + wznowienia do 30 dni",
+      "Pośrednicy — kafelek wrócił do menu luxury-gold",
+      "Finanse: fix — wszystkie polisy (sprzedaż/sprzedany) wliczane do obliczeń",
+      "Import XLSX: fix dat notatek — używana data polisy zamiast daty importu",
     ],
   },
   {

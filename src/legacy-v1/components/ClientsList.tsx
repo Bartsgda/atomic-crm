@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { AppState, Client, Policy, ClientNote } from '../types';
-import { Search, Phone, Mail, Plus, Edit2, ExternalLink, ArrowRight, User, Link as LinkIcon, Car, Home, Heart, Users, ArrowUp, ArrowDown, Calendar, StickyNote, X, Clock, Plane } from 'lucide-react';
+import { Search, Phone, Mail, Plus, Edit2, ExternalLink, ArrowRight, User, Link as LinkIcon, Car, Home, Heart, Users, ArrowUp, ArrowDown, Calendar, StickyNote, X, Clock, Plane, Zap } from 'lucide-react';
 import { ClientFormModal } from './ClientFormModal';
 import { format, differenceInDays, isValid } from 'date-fns';
 import { DeleteSafetyButton } from './DeleteSafetyButton';
@@ -33,7 +33,13 @@ interface VirtualClient extends Client {
     sourcePolicies: { id: string; label: string; type: 'AUTO' | 'DOM' | 'PODROZ'; mainClientName: string }[];
 }
 
-type SortKey = 'name' | 'activity' | 'vehicles' | 'property' | 'life';
+type SortKey = 'name' | 'activity' | 'portfolio';
+
+const TYPE_LABELS: Record<string, string> = {
+    'OC': 'OC', 'AC': 'AC', 'BOTH': 'OC+AC',
+    'DOM': 'Dom', 'FIRMA': 'Firma',
+    'ZYCIE': 'Życie', 'PODROZ': 'Podróż', 'INNE': 'Inne'
+};
 
 export const ClientsList: React.FC<Props> = ({ 
   state, trash = [], onNavigate, onSaveClient, onDeleteClient, onRestoreClient, onPurgeClient, 
@@ -172,8 +178,11 @@ export const ClientsList: React.FC<Props> = ({
           const pols = state.policies.filter(p => p.clientId === client.id);
           const clientNotes = state.notes.filter(n => n.clientId === client.id);
           
-          // Oferty
-          const offers = pols.filter(p => ['of_do zrobienia', 'przeł kontakt', 'oferta_wysłana', 'ucięty kontakt'].includes(p.stage));
+          // Oferty (wszystkie etapy sprzedażowe z wyjątkiem sprzedanych)
+          const SOLD_STAGES = ['sprzedaż', 'sprzedany'];
+          const OFFER_STAGES = ['of_do zrobienia', 'przeł kontakt', 'czekam na dane/dokum', 'of_przedst', 'oferta_wysłana', 'ucięty kontakt', 'rez po ofercie_kont za rok', 'inne'];
+          const offers = pols.filter(p => OFFER_STAGES.includes(p.stage));
+          const soldPols = pols.filter(p => SOLD_STAGES.includes(p.stage));
           
           // Ostatnia aktywność (Data utworzenia klienta vs Ostatnia polisa vs Ostatnia notatka)
           let lastActivity = new Date(client.createdAt).getTime();
@@ -187,10 +196,22 @@ export const ClientsList: React.FC<Props> = ({
               if (lastNoteDate > lastActivity) lastActivity = lastNoteDate;
           }
 
-          // Liczniki
-          const v = pols.filter(p => ['OC', 'AC', 'BOTH'].includes(p.type)).length;
-          const p = pols.filter(p => ['DOM', 'FIRMA'].includes(p.type)).length;
-          const l = pols.filter(p => ['ZYCIE', 'PODROZ'].includes(p.type)).length;
+          // Liczniki — tylko sprzedane polisy
+          const v = soldPols.filter(p => ['OC', 'AC', 'BOTH'].includes(p.type)).length;
+          const propCount = soldPols.filter(p => ['DOM', 'FIRMA'].includes(p.type)).length;
+          const l = soldPols.filter(p => ['ZYCIE', 'PODROZ', 'INNE'].includes(p.type)).length;
+
+          // Wznowienia — sprzedane polisy kończące się w ciągu 30 dni (lub do 7 dni po terminie)
+          const todayMs = new Date();
+          const upcoming = soldPols.filter(pol => {
+              if (!pol.policyEndDate) return false;
+              try {
+                  const endDate = new Date(pol.policyEndDate);
+                  if (!isValid(endDate)) return false;
+                  const daysUntil = differenceInDays(endDate, todayMs);
+                  return daysUntil >= -7 && daysUntil <= 30;
+              } catch { return false; }
+          }).sort((a, b) => new Date(a.policyEndDate).getTime() - new Date(b.policyEndDate).getTime());
           
           // Latest User Note (Exclude System)
           const userNotes = clientNotes
@@ -199,12 +220,13 @@ export const ClientsList: React.FC<Props> = ({
           
           const latestNoteContent = userNotes.length > 0 ? userNotes[0].content : (client.notes || '');
 
-          return { 
-              ...client, 
-              _offers: offers, 
+          return {
+              ...client,
+              _offers: offers,
+              _upcoming: upcoming,
               _lastActivity: lastActivity,
-              _v: v, _p: p, _l: l,
-              _notePreview: latestNoteContent 
+              _v: v, _p: propCount, _l: l,
+              _notePreview: latestNoteContent
           };
       });
 
@@ -239,9 +261,7 @@ export const ClientsList: React.FC<Props> = ({
           switch(sortKey) {
               case 'name': valA = a.lastName; valB = b.lastName; break;
               case 'activity': valA = a._lastActivity; valB = b._lastActivity; break;
-              case 'vehicles': valA = a._v; valB = b._v; break;
-              case 'property': valA = a._p; valB = b._p; break;
-              case 'life': valA = a._l; valB = b._l; break;
+              case 'portfolio': valA = a._v + a._p + a._l; valB = b._v + b._p + b._l; break;
           }
 
           if (valA < valB) return sortDir === 'asc' ? -1 : 1;
@@ -397,18 +417,11 @@ export const ClientsList: React.FC<Props> = ({
                     <th className={`px-4 ${isCompact ? 'py-3' : 'py-5'} text-center`}>Status Leada</th>
                 ) : (
                     <>
-                        <th onClick={() => handleSort('vehicles')} className={`px-4 ${isCompact ? 'py-3' : 'py-5'} text-center cursor-pointer hover:bg-zinc-100 dark:hover:bg-zinc-800`}>
-                            <div className="flex items-center justify-center"><Car size={14} className="mr-1"/> <SortIcon k="vehicles"/></div>
+                        <th onClick={() => handleSort('portfolio')} className={`px-4 ${isCompact ? 'py-3' : 'py-5'} cursor-pointer hover:bg-zinc-100 dark:hover:bg-zinc-800`}>
+                            <div className="flex items-center gap-1">Portfel <SortIcon k="portfolio"/></div>
                         </th>
-                        <th onClick={() => handleSort('property')} className={`px-4 ${isCompact ? 'py-3' : 'py-5'} text-center cursor-pointer hover:bg-zinc-100 dark:hover:bg-zinc-800`}>
-                            <div className="flex items-center justify-center"><Home size={14} className="mr-1"/> <SortIcon k="property"/></div>
-                        </th>
-                        <th onClick={() => handleSort('life')} className={`px-4 ${isCompact ? 'py-3' : 'py-5'} text-center cursor-pointer hover:bg-zinc-100 dark:hover:bg-zinc-800`}>
-                            <div className="flex items-center justify-center"><Heart size={14} className="mr-1"/> <SortIcon k="life"/></div>
-                        </th>
-                        {/* OFFERS NOW LAST */}
-                        <th className={`px-4 ${isCompact ? 'py-3' : 'py-5'} text-center bg-blue-50/30 dark:bg-blue-900/10`}>
-                            <div className="flex items-center justify-center">Oferty (Daty)</div>
+                        <th className={`px-4 ${isCompact ? 'py-3' : 'py-5'} bg-blue-50/30 dark:bg-blue-900/10`}>
+                            <div className="flex items-center gap-1">W toku / Wznowienia</div>
                         </th>
                     </>
                 )}
@@ -537,43 +550,69 @@ export const ClientsList: React.FC<Props> = ({
                     
                     {/* STATYSTYKI & OFERTY (ALWAYS LAST) */}
                     {isVirtual ? (
-                        <td className={`px-4 ${paddingClass} text-center align-middle`}>
+                        <td colSpan={2} className={`px-4 ${paddingClass} text-center align-middle`}>
                             <span className="inline-flex items-center px-2 py-1 rounded bg-purple-100 text-purple-600 text-[11px] font-black uppercase border border-purple-200 shadow-sm">
                                 LEAD
                             </span>
                         </td>
                     ) : (
                         <>
-                            {/* PRODUCTS */}
-                            <td className={`px-4 ${paddingClass} text-center align-middle`}>
-                                <span className={`text-xs font-black ${client._v > 0 ? 'text-blue-600' : 'text-zinc-200'}`}>{client._v > 0 ? client._v : '-'}</span>
-                            </td>
-                            <td className={`px-4 ${paddingClass} text-center align-middle`}>
-                                <span className={`text-xs font-black ${client._p > 0 ? 'text-emerald-600' : 'text-zinc-200'}`}>{client._p > 0 ? client._p : '-'}</span>
-                            </td>
-                            <td className={`px-4 ${paddingClass} text-center align-middle`}>
-                                <span className={`text-xs font-black ${client._l > 0 ? 'text-rose-600' : 'text-zinc-200'}`}>{client._l > 0 ? client._l : '-'}</span>
+                            {/* PORTFEL — sprzedane polisy */}
+                            <td className={`px-4 ${paddingClass} align-middle`}>
+                                <div className="flex flex-wrap gap-1">
+                                    {client._v > 0 && (
+                                        <span className="flex items-center gap-1 px-1.5 py-0.5 rounded bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-[10px] font-black border border-blue-100 dark:border-blue-800 whitespace-nowrap">
+                                            <Car size={9}/> {client._v}
+                                        </span>
+                                    )}
+                                    {client._p > 0 && (
+                                        <span className="flex items-center gap-1 px-1.5 py-0.5 rounded bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 text-[10px] font-black border border-emerald-100 dark:border-emerald-800 whitespace-nowrap">
+                                            <Home size={9}/> {client._p}
+                                        </span>
+                                    )}
+                                    {client._l > 0 && (
+                                        <span className="flex items-center gap-1 px-1.5 py-0.5 rounded bg-rose-50 dark:bg-rose-900/30 text-rose-600 dark:text-rose-400 text-[10px] font-black border border-rose-100 dark:border-rose-800 whitespace-nowrap">
+                                            <Heart size={9}/> {client._l}
+                                        </span>
+                                    )}
+                                    {client._v === 0 && client._p === 0 && client._l === 0 && (
+                                        <span className="text-zinc-300 dark:text-zinc-700 text-xs">—</span>
+                                    )}
+                                </div>
                             </td>
 
-                            {/* OFERTY (DATES) - MOVED TO END */}
-                            <td className={`px-4 ${paddingClass} text-center align-top bg-blue-50/20 dark:bg-blue-900/5`}>
-                                {client._offers && client._offers.length > 0 ? (
-                                    <div className="flex flex-col items-center gap-1 mt-1">
-                                        {client._offers.slice(0, 3).map((off: Policy) => {
-                                            const d = new Date(off.createdAt);
-                                            const isFresh = differenceInDays(new Date(), d) < 7;
-                                            return (
-                                                <div key={off.id} className={`flex items-center gap-1 px-1.5 py-0.5 rounded text-[11px] font-black border w-full justify-center ${isFresh ? 'bg-red-50 dark:bg-red-900/30 text-red-600 border-red-100 dark:border-red-800' : 'bg-white dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 border-zinc-200 dark:border-zinc-700'}`}>
-                                                    <Calendar size={10} />
-                                                    {format(d, 'dd.MM')}
-                                                </div>
-                                            );
-                                        })}
-                                        {client._offers.length > 3 && <span className="text-[10px] text-zinc-400">+{client._offers.length - 3}</span>}
-                                    </div>
-                                ) : (
-                                    <span className="text-zinc-200 dark:text-zinc-800 text-xs">-</span>
-                                )}
+                            {/* W TOKU — aktywne oferty + nadchodzące wznowienia */}
+                            <td className={`px-4 ${paddingClass} align-top bg-blue-50/20 dark:bg-blue-900/5`}>
+                                <div className="flex flex-col gap-1">
+                                    {client._offers && client._offers.slice(0, 3).map((off: Policy) => {
+                                        const d = new Date(off.createdAt);
+                                        const isFresh = differenceInDays(new Date(), d) < 7;
+                                        const typeLabel = TYPE_LABELS[off.type] || off.type;
+                                        return (
+                                            <div key={off.id} className={`flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-black border whitespace-nowrap ${isFresh ? 'bg-red-50 dark:bg-red-900/30 text-red-600 border-red-100 dark:border-red-800' : 'bg-amber-50 dark:bg-amber-900/20 text-amber-600 dark:text-amber-400 border-amber-100 dark:border-amber-800'}`}>
+                                                <Zap size={9}/> {typeLabel}
+                                            </div>
+                                        );
+                                    })}
+                                    {client._offers && client._offers.length > 3 && (
+                                        <span className="text-[10px] text-zinc-400">+{client._offers.length - 3} of.</span>
+                                    )}
+                                    {client._upcoming && client._upcoming.map((pol: Policy) => {
+                                        const endDate = new Date(pol.policyEndDate);
+                                        const daysUntil = differenceInDays(endDate, new Date());
+                                        const typeLabel = TYPE_LABELS[pol.type] || pol.type;
+                                        const isOverdue = daysUntil < 0;
+                                        const isUrgent = daysUntil <= 7;
+                                        return (
+                                            <div key={`ren-${pol.id}`} className={`flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-black border whitespace-nowrap ${isOverdue ? 'bg-red-100 dark:bg-red-900/40 text-red-700 dark:text-red-400 border-red-200 dark:border-red-700' : isUrgent ? 'bg-orange-50 dark:bg-orange-900/20 text-orange-600 dark:text-orange-400 border-orange-100 dark:border-orange-800' : 'bg-zinc-50 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 border-zinc-200 dark:border-zinc-700'}`}>
+                                                <RotateCcw size={9}/> {typeLabel} {format(endDate, 'dd.MM')}
+                                            </div>
+                                        );
+                                    })}
+                                    {(!client._offers || client._offers.length === 0) && (!client._upcoming || client._upcoming.length === 0) && (
+                                        <span className="text-zinc-200 dark:text-zinc-800 text-xs">-</span>
+                                    )}
+                                </div>
                             </td>
                         </>
                     )}

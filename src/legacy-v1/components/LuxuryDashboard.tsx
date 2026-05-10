@@ -623,8 +623,8 @@ export const LuxuryDashboard: React.FC<Props> = ({
                   {tile.recent.map((name, i) => (
                     <p
                       key={i}
-                      className="text-[10px] truncate leading-relaxed"
-                      style={{ color: "#4d4635" }}
+                      className="text-[11px] truncate leading-relaxed"
+                      style={{ color: "#8a7f6e" }}
                     >
                       {name}
                     </p>

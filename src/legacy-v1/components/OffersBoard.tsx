@@ -169,8 +169,8 @@ const OfferRow = ({
                     })}
 
                     {/* Quick Add */}
-                    <div className="flex items-center gap-1 bg-blue-50 dark:bg-blue-900/10 border border-blue-100 dark:border-blue-800 rounded-lg p-1 transition-all focus-within:ring-2 focus-within:ring-blue-200">
-                        <div className="w-24">
+                    <div className="flex items-center gap-2 bg-blue-50 dark:bg-blue-900/10 border border-blue-100 dark:border-blue-800 rounded-lg p-2 transition-all focus-within:ring-2 focus-within:ring-blue-200">
+                        <div className="w-32">
                             <InsurerSelect 
                                 value={newInsurer} 
                                 onChange={setNewInsurer} 
@@ -199,9 +199,9 @@ const OfferRow = ({
 
                 {/* 3. ACTIONS */}
                 <div className="flex items-center gap-2 min-w-[120px] justify-end">
-                    <button 
-                        onClick={() => setIsExpanded(!isExpanded)} 
-                        className={`p-2 rounded-lg border transition-all ${isExpanded ? 'bg-zinc-100 border-zinc-300 text-zinc-900' : 'bg-white border-zinc-200 text-zinc-400 hover:text-zinc-600'}`}
+                    <button
+                        onClick={() => setIsExpanded(!isExpanded)}
+                        className={`p-2 rounded-lg border transition-all ${isExpanded ? 'bg-zinc-100 border-zinc-300 text-zinc-900' : 'bg-zinc-50 border-zinc-200 text-zinc-400 hover:bg-zinc-100 hover:text-zinc-600'}`}
                     >
                         <MessageSquare size={16} />
                     </button>
@@ -997,7 +997,7 @@ export const OffersBoard: React.FC<Props> = ({ state, onNavigate, onRefresh }) =
                                             </div>
                                             <div className="flex-1 min-w-0">
                                                 <div className="flex justify-between">
-                                                    <p className="text-[10px] font-black text-zinc-800 dark:text-zinc-200 truncate">{client ? `${client.lastName} ${client.firstName}` : '---'}</p>
+                                                    <p className="text-xs font-black text-zinc-800 dark:text-zinc-200 truncate">{client ? `${client.lastName} ${client.firstName}` : '---'}</p>
                                                     <button 
                                                         onClick={() => handleStatusChange(p.id, 'przeł kontakt')} 
                                                         className="text-zinc-300 hover:text-blue-500" 

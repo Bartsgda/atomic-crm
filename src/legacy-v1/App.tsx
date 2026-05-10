@@ -604,8 +604,6 @@ function App() {
         onRestored={refreshData}
       />
 
-      <StatusEye />
-
       {isSyncing && (
         <div className="fixed inset-0 z-[3000] flex items-center justify-center bg-zinc-950/80 backdrop-blur-md animate-in fade-in duration-500">
           <div className="flex flex-col items-center gap-6 p-10 bg-zinc-900/50 rounded-[3rem] border border-zinc-800 shadow-2xl animate-in zoom-in-95">

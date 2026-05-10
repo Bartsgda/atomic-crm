@@ -106,6 +106,14 @@ def main():
     n = upload_directory(ftp, LOCAL_DIST, REMOTE_SUBFOLDER)
     ftp.quit()
     print(f"[OK] Deploy OK: {n} plikow -> redroad.pl/{REMOTE_SUBFOLDER}/")
+    print()
+    print("=" * 60)
+    print("  PAMIETAJ: powiedz Alinie co sie zmienilo!")
+    print("  Nie technicznie — tylko co inaczej dziala lub wyglada.")
+    print("  Np.: 'poprawilam ze klikasz raz zamiast dwa razy',")
+    print("       'godziny w kalendarzu sa teraz poprawne',")
+    print("       'sekcja wypowidzen wyglada teraz lepiej'.")
+    print("=" * 60)
 
 
 if __name__ == "__main__":

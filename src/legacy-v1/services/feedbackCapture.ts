@@ -68,28 +68,27 @@ function buildLabel(el: Element): string {
   return raw.slice(0, 60);
 }
 
-/** Robi screenshot elementu przez html2canvas, skaluje jeśli trzeba. */
-async function captureScreenshot(el: HTMLElement): Promise<string | null> {
+/** Robi screenshot całego widocznego viewportu przez html2canvas.
+ *  Skaluje do max 1400px szerokości, JPEG 0.72 (czytelny dla AI, rozsądny rozmiar). */
+async function captureScreenshot(_el: HTMLElement): Promise<string | null> {
   try {
-    const canvas = await html2canvas(el, {
-      scale: 0.75,
-      backgroundColor: null,
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const MAX_W = 1400;
+    const scale = Math.min(1, MAX_W / vw);
+
+    const canvas = await html2canvas(document.body, {
+      x: window.scrollX,
+      y: window.scrollY,
+      width: vw,
+      height: vh,
+      scale,
+      backgroundColor: "#ffffff",
       logging: false,
+      useCORS: true,
     });
 
-    if (canvas.width <= 600) {
-      return canvas.toDataURL("image/jpeg", 0.5);
-    }
-
-    // Przeskaluj do max 600 px szerokości
-    const ratio = 600 / canvas.width;
-    const scaled = document.createElement("canvas");
-    scaled.width = 600;
-    scaled.height = Math.round(canvas.height * ratio);
-    const ctx = scaled.getContext("2d");
-    if (!ctx) return canvas.toDataURL("image/jpeg", 0.5);
-    ctx.drawImage(canvas, 0, 0, scaled.width, scaled.height);
-    return scaled.toDataURL("image/jpeg", 0.5);
+    return canvas.toDataURL("image/jpeg", 0.72);
   } catch {
     return null;
   }
@@ -186,13 +185,14 @@ export async function pickElement(): Promise<CapturedElement | null> {
       e.stopPropagation();
       e.preventDefault();
 
-      cleanup();
-
+      // Screenshot PRZED cleanup — element nadal podświetlony (czerwona ramka widoczna)
       const selector = buildCssPath(target);
       const label = buildLabel(target);
       const screenshotB64 = await captureScreenshot(target);
-      const viewport = { w: window.innerWidth, h: window.innerHeight };
 
+      cleanup();
+
+      const viewport = { w: window.innerWidth, h: window.innerHeight };
       resolve({ selector, label, screenshotB64, viewport });
     }
 

@@ -80,8 +80,6 @@ const NotesPopover = ({ notes, policyId, position }: { notes: ClientNote[], poli
 export const Dashboard: React.FC<Props> = ({ state, onNavigate, onDeletePolicy, initialSearchTerm, filterTypes, activeCategory, categoryTitle, sortByDate, onImportComplete, isCompact = false, predefinedDateRange, searchFocusSignal }) => {
   const [searchTerm, setSearchTerm] = useState(initialSearchTerm || '');
   const [showAdvancedFilters, setShowAdvancedFilters] = useState(false);
-  const [previewClient, setPreviewClient] = useState<Client | null>(null);
-  const clickTimeoutRef = useRef<any>(null);
   const [activeSubType, setActiveSubType] = useState<VehicleSubType | null>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
@@ -346,25 +344,8 @@ export const Dashboard: React.FC<Props> = ({ state, onNavigate, onDeletePolicy, 
       };
   };
 
-  const handleRowClick = (client: Client) => {
-      if (clickTimeoutRef.current) {
-          clearTimeout(clickTimeoutRef.current);
-      }
-      clickTimeoutRef.current = setTimeout(() => {
-          setPreviewClient(client);
-          clickTimeoutRef.current = null;
-      }, 250);
-  };
-
-  const handleRowDoubleClick = (client: Client, policy: Policy) => {
-      if (clickTimeoutRef.current) {
-          clearTimeout(clickTimeoutRef.current);
-          clickTimeoutRef.current = null;
-      }
-      onNavigate('client-details', { 
-          client, 
-          highlightPolicyId: policy.id 
-      });
+  const handleRowClick = (client: Client, policy: Policy) => {
+      onNavigate('client-details', { client, highlightPolicyId: policy.id });
   };
 
   const handleSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -406,12 +387,6 @@ export const Dashboard: React.FC<Props> = ({ state, onNavigate, onDeletePolicy, 
           />
       )}
 
-      <QuickViewDrawer 
-        client={previewClient} 
-        state={state} 
-        onClose={() => setPreviewClient(null)} 
-        onNavigate={onNavigate} 
-      />
 
       {/* STAT CARDS - Surgically Hardened */}
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-8 flex-shrink-0">
@@ -647,12 +622,7 @@ export const Dashboard: React.FC<Props> = ({ state, onNavigate, onDeletePolicy, 
                     key={policy.id}
                     data-row-idx={idx}
                     className={`transition-colors group cursor-pointer ${isSelected ? 'bg-indigo-50 dark:bg-indigo-950/60 outline outline-2 outline-indigo-400' : 'hover:bg-zinc-50 dark:hover:bg-zinc-800/50'}`}
-                    onClick={() => { setSelectedRowIndex(idx); handleRowClick(client); }}
-                    onDoubleClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        handleRowDoubleClick(client, policy);
-                    }}
+                    onClick={() => handleRowClick(client, policy)}
                   >
                     {/* KLIENT COLUMN */}
                     <td className={`px-6 ${paddingClass}`}>

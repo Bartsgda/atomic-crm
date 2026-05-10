@@ -428,7 +428,7 @@ export const ClientsList: React.FC<Props> = ({
                 return (
                   <tr 
                     key={client.id} 
-                    onDoubleClick={() => {
+                    onClick={() => {
                         if (isVirtual) {
                             const sourceId = (client as VirtualClient).sourcePolicies[0]?.id;
                             if (sourceId) {
@@ -438,7 +438,7 @@ export const ClientsList: React.FC<Props> = ({
                         } else {
                             onNavigate('client-details', { client });
                         }
-                    }} 
+                    }}
                     onContextMenu={(e) => handleContextMenu(e, client)} 
                     className={`transition-all group cursor-pointer ${showCoOwners ? 'hover:bg-purple-50/50' : 'hover:bg-zinc-50/80 dark:hover:bg-zinc-800'}`}
                   >

@@ -199,8 +199,8 @@ export const CalendarView: React.FC<Props> = ({ state, onNavigate, onDeleteNote,
         if (isLead && policy.nextContactDate) {
             const contactDate = new Date(policy.nextContactDate);
             if (isValid(contactDate)) {
-                 // Domyślnie ustawiamy godzinę 09:00 jeśli data nie ma czasu, żeby ładnie wyglądało w agendzie
-                 if (contactDate.getHours() === 0) contactDate.setHours(9, 0, 0, 0);
+                 // Domyślnie ustawiamy godzinę 09:00 jeśli data nie ma czasu (UTC midnight = brak czasu, po przesunięciu UTC+2 = 02:00)
+                 if (contactDate.getUTCHours() === 0 && contactDate.getUTCMinutes() === 0) contactDate.setHours(9, 0, 0, 0);
 
                  allEvents.push({
                     id: `calc_${policy.id}`,
@@ -226,7 +226,8 @@ export const CalendarView: React.FC<Props> = ({ state, onNavigate, onDeleteNote,
     state.notes.forEach(note => {
       if (note.reminderDate) {
          const dateObj = new Date(note.reminderDate);
-         if (!isValid(dateObj)) return; 
+         if (!isValid(dateObj)) return;
+         if (dateObj.getUTCHours() === 0 && dateObj.getUTCMinutes() === 0) dateObj.setHours(9, 0, 0, 0);
          
          // CHECK STATUS based on text content [DATE]_STATUS_TEXT
          const isCompleted = note.content.includes('_UKOŃCZONE_');

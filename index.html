@@ -137,6 +137,22 @@
     </style>
   </head>
   <body>
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.getRegistrations().then(function (regs) {
+          regs.forEach(function (r) {
+            r.unregister();
+          });
+        });
+        navigator.serviceWorker.register("./sw.js").catch(function () {});
+        if (window.caches)
+          caches.keys().then(function (ks) {
+            ks.forEach(function (k) {
+              caches.delete(k);
+            });
+          });
+      }
+    </script>
     <div id="root">
       <div class="loader-container">
         <div class="loader">Loading...</div>

@@ -26,10 +26,16 @@ python scripts/ftp_deploy.py
 
 **Jeśli Firefox blokuje dist/ (EBUSY):**
 ```
-npx vite build --emptyOutDir false
-python scripts/ftp_deploy.py --no-build
+# zamknij Firefox/DevTools, potem:
+rm -rf dist/ && python scripts/ftp_deploy.py
 ```
-Następny deploy musi być już pełny (bez --no-build).
+NIGDY `--emptyOutDir false` jako workflow — STOR nie kasuje, FTP zaśmieci się starymi bundle (zdarzyło się 2026-05-10: 35 starych bundle na FTP po 4 deployach).
+
+**ZAKAZ ad-hoc Service Worker / kill-switcha** — nie dodawać `public/sw.js` ani `<script>navigator.serviceWorker.register</script>` w `index.html`. Jeśli klient ma stary SW, hard reload (Ctrl+Shift+R) lub karta incognito to wystarczy. Każda próba "fixu" przez nowy SW miesza w localStorage Supabase Auth.
+
+**Skansen `/public_html/alina/`** — okresowo (raz/tydzień) sprawdzaj `ftplib.mlsd('/public_html')` że jest pusty. 2026-05-10 znaleziono tam **61 plików + `unzip_helper.php` z hardcoded `crm2026`** (backdoor pattern, prawdopodobny powód flagi Safe Browsing) + `deploy_temp.zip` (2.4 MB pobieralne publicznie). Pozostałości po porzuconym workflow zip→PHP unzip. Cleanup w jednym Python skrypcie (rekurencyjny `ftp.delete` + `ftp.rmd`).
+
+**ZAKAZ workflow zip→PHP unzip** — `ftp_deploy.py` ze STOR działa pewnie i nie zostawia plików wykonywalnych. Każdy `*_helper.php`, `*_upload.php`, `unzip_*.php` na hostingu = automat flag dla Google Safe Browsing/Sucuri/Norton.
 
 ## 2. Testowanie — zawsze przez BAT
 

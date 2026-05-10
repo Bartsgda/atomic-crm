@@ -38,6 +38,44 @@ const START_HOUR = 6;
 const END_HOUR = 22;
 const SLOT_DURATION = 15;
 
+// Polish name days (imieniny) — most common/recognized ones
+const IMIENINY: Record<string, string> = {
+  "01-01": "Marii, Mieszka",
+  "01-06": "Kacpra, Melchiora",
+  "01-17": "Antoniego",
+  "01-25": "Pawła",
+  "02-14": "Walentego",
+  "03-08": "Beaty, Renaty",
+  "03-19": "Józefa",
+  "04-12": "Juliusza",
+  "04-23": "Jerzego, Wojciecha",
+  "04-24": "Grzegorza, Horacego",
+  "05-03": "Marii",
+  "05-15": "Zofii",
+  "06-13": "Antoniego",
+  "06-24": "Jana",
+  "06-29": "Piotra, Pawła",
+  "07-22": "Marii Magdaleny",
+  "08-04": "Dominika",
+  "08-15": "Marii, Stanisława",
+  "08-24": "Bartłomieja",
+  "09-08": "Marii",
+  "09-29": "Michała, Gabriela",
+  "10-04": "Franciszka",
+  "10-15": "Teresy",
+  "11-01": "Wszystkich Świętych",
+  "11-11": "Marcina",
+  "11-23": "Klemensa",
+  "11-30": "Andrzeja",
+  "12-04": "Barbary",
+  "12-06": "Mikołaja",
+  "12-13": "Łucji",
+  "12-21": "Tomasza",
+  "12-24": "Adama, Ewy",
+  "12-25": "Anastazji, Bożeny",
+  "12-31": "Sylwestra",
+};
+
 const startOfMonth = (date: Date) => new Date(date.getFullYear(), date.getMonth(), 1);
 const startOfDay = (date: Date) => new Date(date.getFullYear(), date.getMonth(), date.getDate());
 const startOfWeek = (date: Date) => {
@@ -151,6 +189,7 @@ export const CalendarView: React.FC<Props> = ({ state, onNavigate, onDeleteNote,
   const hoverTimerRef = useRef<any>(null);
 
   const [draggedEventId, setDraggedEventId] = useState<string | null>(null);
+  const [selectedDay, setSelectedDay] = useState<Date | null>(null);
   const [filters, setFilters] = useState({
     renewals: true,
     meetings: true,
@@ -492,6 +531,16 @@ export const CalendarView: React.FC<Props> = ({ state, onNavigate, onDeleteNote,
     const endDate = endOfWeek(monthEnd);
     const calendarDays = eachDayOfInterval({ start: startDate, end: endDate });
 
+    // Selected day events (for mobile panel)
+    const selectedDayEvents = selectedDay
+      ? events
+          .filter(e => isSameDay(e.date, selectedDay))
+          .sort((a, b) => {
+            if (a.isCompleted !== b.isCompleted) return a.isCompleted ? 1 : -1;
+            return a.date.getTime() - b.date.getTime();
+          })
+      : [];
+
     return (
         <div className="flex flex-col h-full bg-white dark:bg-zinc-900 rounded-3xl border border-zinc-200 dark:border-zinc-800 shadow-sm overflow-hidden relative">
              <div className="grid grid-cols-7 bg-zinc-50 dark:bg-zinc-950 border-b border-zinc-100 dark:border-zinc-800">
@@ -501,8 +550,8 @@ export const CalendarView: React.FC<Props> = ({ state, onNavigate, onDeleteNote,
                 </div>
                 ))}
             </div>
-            
-            <div className="grid grid-cols-7 auto-rows-fr h-full">
+
+            <div className="grid grid-cols-7 auto-rows-fr flex-1 overflow-hidden">
             {calendarDays.map(day => {
                 const dayEvents = events.filter(e => isSameDay(e.date, day));
                 // Sort day events for display: Completed last
@@ -513,33 +562,102 @@ export const CalendarView: React.FC<Props> = ({ state, onNavigate, onDeleteNote,
 
                 const isCurrent = isToday(day);
                 const isMonth = isSameMonth(day, currentDate);
+                const isSelected = selectedDay ? isSameDay(day, selectedDay) : false;
+
+                // Mobile dot color: first event color hint
+                const dotColorClass = dayEvents.length === 0
+                  ? ''
+                  : dayEvents[0].isSoldRenewal
+                    ? 'bg-rose-500'
+                    : dayEvents[0].isCalculation
+                      ? 'bg-amber-500'
+                      : dayEvents[0].type === 'MEETING'
+                        ? 'bg-purple-500'
+                        : 'bg-blue-500';
+
+                // Imieniny key for today
+                const imieninyKey = format(day, 'MM-dd');
+                const imieninyText = isCurrent ? (IMIENINY[imieninyKey] || null) : null;
 
                 return (
-                <div 
-                    key={day.toISOString()} 
+                <div
+                    key={day.toISOString()}
                     onDragOver={handleDragOver}
                     onDrop={(e) => handleDropOnDay(e, day)}
                     onClick={() => handleDayClick(day)}
-                    className={`border-b border-r border-zinc-100 dark:border-zinc-800 p-2 flex flex-col gap-1 transition-all cursor-pointer hover:bg-zinc-50 dark:hover:bg-zinc-800 relative
+                    className={`border-b border-r border-zinc-100 dark:border-zinc-800 p-1 sm:p-2 flex flex-col gap-1 transition-all cursor-pointer hover:bg-zinc-50 dark:hover:bg-zinc-800 relative
                         ${!isMonth ? 'bg-zinc-50/30 dark:bg-zinc-950/50 text-zinc-300 dark:text-zinc-700' : 'bg-white dark:bg-zinc-900'}
                         ${isCurrent ? 'bg-red-50/30 dark:bg-red-900/10' : ''}
+                        ${isSelected ? 'ring-2 ring-inset ring-blue-400' : ''}
                     `}
                 >
-                    <div className="flex justify-between items-start">
-                        <span className={`text-xs font-bold w-6 h-6 flex items-center justify-center rounded-full ${isCurrent ? 'bg-red-600 text-white' : 'text-zinc-500 dark:text-zinc-400'}`}>
-                            {format(day, 'd')}
-                        </span>
+                    {/* Day number + day-of-week abbreviation */}
+                    <div className="flex flex-col items-start">
+                        <div className="flex items-center gap-1">
+                            <span className={`text-xs font-bold w-6 h-6 flex items-center justify-center rounded-full ${isCurrent ? 'bg-red-600 text-white' : 'text-zinc-500 dark:text-zinc-400'}`}>
+                                {format(day, 'd')}
+                            </span>
+                            <span className="hidden sm:inline text-[9px] font-bold text-zinc-300 dark:text-zinc-600 uppercase">
+                                {format(day, 'EEEEEE', { locale: pl })}
+                            </span>
+                        </div>
+                        {/* Imieniny — only for today */}
+                        {imieninyText && (
+                            <span className="text-[7px] text-rose-400 font-bold leading-tight truncate max-w-full px-0.5 mt-0.5 hidden sm:block" title={`Imieniny: ${imieninyText}`}>
+                                {imieninyText}
+                            </span>
+                        )}
                     </div>
-                    <div className="flex-1 flex flex-col gap-0.5 overflow-hidden mt-1">
+
+                    {/* DESKTOP: full event badges */}
+                    <div className="hidden sm:flex flex-1 flex-col gap-0.5 overflow-hidden mt-1">
                         {dayEvents.slice(0, 4).map(renderEventBadge)}
                         {dayEvents.length > 4 && (
                             <span className="text-[8px] text-zinc-400 font-bold pl-1">+{dayEvents.length - 4} więcej...</span>
                         )}
                     </div>
+
+                    {/* MOBILE: compact dot + count badge */}
+                    {dayEvents.length > 0 && (
+                        <div
+                            className="sm:hidden flex items-center gap-1 mt-0.5"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setSelectedDay(prev => (prev && isSameDay(prev, day)) ? null : day);
+                            }}
+                        >
+                            <span className={`w-2 h-2 rounded-full ${dotColorClass}`} />
+                            <span className="text-[9px] font-black text-zinc-500 dark:text-zinc-400">{dayEvents.length}</span>
+                        </div>
+                    )}
                 </div>
                 );
             })}
             </div>
+
+            {/* MOBILE: Selected-day event panel */}
+            {selectedDay && (
+                <div className="sm:hidden border-t border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-3 max-h-60 overflow-y-auto">
+                    <div className="flex items-center justify-between mb-2">
+                        <span className="text-xs font-black text-zinc-700 dark:text-zinc-200 capitalize">
+                            {format(selectedDay, 'EEEE, d MMMM', { locale: pl })}
+                        </span>
+                        <button
+                            onClick={() => setSelectedDay(null)}
+                            className="p-1 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-400"
+                        >
+                            <X size={14} />
+                        </button>
+                    </div>
+                    {selectedDayEvents.length === 0 ? (
+                        <p className="text-[10px] text-zinc-400 italic">Brak wydarzeń.</p>
+                    ) : (
+                        <div className="flex flex-col gap-1">
+                            {selectedDayEvents.map(renderEventBadge)}
+                        </div>
+                    )}
+                </div>
+            )}
         </div>
     );
   };
@@ -649,6 +767,11 @@ export const CalendarView: React.FC<Props> = ({ state, onNavigate, onDeleteNote,
              <p className="text-[10px] text-zinc-400 font-bold uppercase tracking-widest">
                  {format(today, 'EEEE, d MMMM', { locale: pl })}
              </p>
+             {IMIENINY[format(today, 'MM-dd')] && (
+                 <p className="text-[9px] text-rose-400 font-bold mt-0.5">
+                     Imieniny: {IMIENINY[format(today, 'MM-dd')]}
+                 </p>
+             )}
          </div>
 
          <div className="flex-1 overflow-y-auto p-4 space-y-6 scrollbar-hide">

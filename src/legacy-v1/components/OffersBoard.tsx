@@ -121,7 +121,7 @@ const OfferRow = ({
     return (
         <div className={`bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl mb-2 transition-all hover:shadow-md ${isExpanded ? 'ring-2 ring-blue-100 dark:ring-blue-900' : ''}`}>
             {/* MAIN ROW */}
-            <div className="flex flex-col md:flex-row items-center p-3 gap-4">
+            <div className="flex flex-col md:flex-row items-center p-4 gap-4">
                 
                 {/* 1. INFO */}
                 <div className="flex-1 min-w-[200px] flex items-center gap-3 cursor-pointer" onClick={() => onNavigate('client-details', { client, highlightPolicyId: policy.id })}>
@@ -133,7 +133,7 @@ const OfferRow = ({
                             <span className="text-sm font-black text-zinc-900 dark:text-white truncate">{client.lastName} {client.firstName}</span>
                             {daysSinceUpdate > 3 && <span className="bg-red-100 text-red-600 text-[9px] px-1.5 rounded font-bold">{daysSinceUpdate}d</span>}
                         </div>
-                        <p className="text-[10px] text-zinc-500 font-bold uppercase truncate max-w-[180px]">
+                        <p className="text-xs text-zinc-500 font-bold uppercase truncate max-w-[180px]">
                             {policy.vehicleBrand || policy.type} {policy.vehicleReg}
                         </p>
                     </div>

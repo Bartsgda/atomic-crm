@@ -602,6 +602,7 @@ function App() {
         isOpen={isSnapshotDialogOpen}
         onClose={() => setIsSnapshotDialogOpen(false)}
         onRestored={refreshData}
+        isAdmin={isAdmin}
       />
 
       {isSyncing && (

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
-import { Eye, LogOut, Clock, Target, Send, X, Loader2, Bug, Sparkles, MessageSquare, Check, Lock, LayoutGrid, List } from 'lucide-react';
+import { Eye, LogOut, Clock, Target, Send, X, Loader2, Bug, Sparkles, MessageSquare, Check, Lock, LayoutGrid, List, Camera, Trash2 } from 'lucide-react';
 import { DragDropContext, Droppable, Draggable, type OnDragEndResponder } from '@hello-pangea/dnd';
 import { getSupabaseClient } from '../../components/atomic-crm/providers/supabase/supabase';
 import {
@@ -296,16 +296,21 @@ export default function StatusEye({ isUnlocked = false }: { isUnlocked?: boolean
     window.location.reload();
   };
 
-  const handleReportClick = async () => {
+  const handleReportClick = () => {
     setExpanded(false);
-    const el = await pickElement();
-    if (!el) return;
-    setCaptured(el);
+    setCaptured(null);
     setFeedbackOpen(true);
     setMessage('');
     setSeverity('bug');
     setSubmitError(null);
     setSubmitSuccess(false);
+  };
+
+  const handleCameraClick = async () => {
+    setFeedbackOpen(false);
+    const el = await pickElement();
+    setFeedbackOpen(true);
+    if (el) setCaptured(el);
   };
 
   const handleSubmit = async () => {
@@ -529,25 +534,6 @@ export default function StatusEye({ isUnlocked = false }: { isUnlocked?: boolean
             </div>
 
             <div className="p-5 space-y-4">
-              {/* miniatura screenshota */}
-              {captured?.screenshotB64 && (
-                <div className="rounded-xl overflow-hidden border border-white/10">
-                  <img
-                    src={`data:image/png;base64,${captured.screenshotB64}`}
-                    alt="Zrzut ekranu"
-                    className="max-w-full object-contain"
-                    style={{ maxWidth: 300 }}
-                  />
-                </div>
-              )}
-
-              {/* info o elemencie */}
-              {captured?.label && (
-                <p className="text-[11px] text-gray-500 font-mono break-all">
-                  Element: {captured.label}
-                </p>
-              )}
-
               {/* severity */}
               <div className="space-y-1">
                 <label className="text-xs text-gray-400">Typ zgłoszenia</label>
@@ -575,6 +561,45 @@ export default function StatusEye({ isUnlocked = false }: { isUnlocked?: boolean
                   className="w-full rounded-xl border border-white/10 bg-white/5 text-sm text-gray-200 px-3 py-2 resize-none focus:outline-none focus:ring-1 focus:ring-indigo-500 placeholder:text-gray-600"
                   data-feedback-ui="true"
                 />
+              </div>
+
+              {/* kamera + screenshot — na dole */}
+              <div className="space-y-2">
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={handleCameraClick}
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 text-gray-300 text-xs font-medium transition-colors"
+                    data-feedback-ui="true"
+                  >
+                    <Camera className="w-3.5 h-3.5" />
+                    {captured ? 'Zmień screenshot' : 'Dodaj screenshot'}
+                  </button>
+                  {captured && !isAdmin && (
+                    <button
+                      onClick={() => setCaptured(null)}
+                      className="p-1.5 rounded-xl border border-white/10 bg-white/5 hover:bg-red-500/20 hover:border-red-500/30 text-gray-500 hover:text-red-400 transition-colors"
+                      title="Usuń screenshot"
+                      data-feedback-ui="true"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                    </button>
+                  )}
+                </div>
+                {captured?.screenshotB64 && (
+                  <div className="rounded-xl overflow-hidden border border-white/10">
+                    <img
+                      src={captured.screenshotB64}
+                      alt="Zrzut ekranu"
+                      className="max-w-full object-contain"
+                      style={{ maxWidth: 300 }}
+                    />
+                  </div>
+                )}
+                {captured?.label && (
+                  <p className="text-[11px] text-gray-500 font-mono break-all">
+                    Element: {captured.label}
+                  </p>
+                )}
               </div>
 
               {/* błąd */}

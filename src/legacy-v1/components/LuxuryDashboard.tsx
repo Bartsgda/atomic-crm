@@ -60,6 +60,43 @@ const MONTHS = [
   "grudnia",
 ];
 
+const IMIENINY: Record<string, string> = {
+  "01-01": "Marii, Mieszka",
+  "01-06": "Kacpra",
+  "01-17": "Antoniego",
+  "01-25": "Pawła",
+  "02-14": "Walentego",
+  "03-08": "Beaty, Renaty",
+  "03-19": "Józefa",
+  "04-12": "Juliusza",
+  "04-23": "Jerzego, Wojciecha",
+  "04-24": "Grzegorza",
+  "05-03": "Marii",
+  "05-15": "Zofii",
+  "06-13": "Antoniego",
+  "06-24": "Jana",
+  "06-29": "Piotra, Pawła",
+  "07-22": "Marii Magdaleny",
+  "08-04": "Dominika",
+  "08-15": "Marii, Stanisława",
+  "08-24": "Bartłomieja",
+  "09-08": "Marii",
+  "09-29": "Michała, Gabriela",
+  "10-04": "Franciszka",
+  "10-15": "Teresy",
+  "11-01": "Wszystkich Świętych",
+  "11-11": "Marcina",
+  "11-23": "Klemensa",
+  "11-30": "Andrzeja",
+  "12-04": "Barbary",
+  "12-06": "Mikołaja",
+  "12-13": "Łucji",
+  "12-21": "Tomasza",
+  "12-24": "Adama, Ewy",
+  "12-25": "Anastazji, Bożeny",
+  "12-31": "Sylwestra",
+};
+
 const TYPE_LABEL: Record<string, string> = {
   OC: "OC",
   AC: "AC",
@@ -111,6 +148,8 @@ export const LuxuryDashboard: React.FC<Props> = ({
   const dayName = DAYS[now.getDay()];
   const dateStr = `${now.getDate()} ${MONTHS[now.getMonth()]} ${now.getFullYear()}`;
   const timeStr = `${String(h).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
+  const mmdd = `${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+  const todayImieniny = IMIENINY[mmdd] ?? null;
 
   // ── KPIs ──────────────────────────────────────────────────────────────────
   const kpis = useMemo(() => {
@@ -414,6 +453,11 @@ export const LuxuryDashboard: React.FC<Props> = ({
             <p className="text-sm font-semibold" style={{ color: "#b0aea8" }}>
               {dayName}, {dateStr}
             </p>
+            {todayImieniny && (
+              <p className="text-xs mt-0.5" style={{ color: "#e879a0" }}>
+                Imieniny: {todayImieniny}
+              </p>
+            )}
           </div>
           <div
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg"

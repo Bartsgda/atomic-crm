@@ -514,7 +514,6 @@ export const CalendarView: React.FC<Props> = ({ state, onNavigate, onDeleteNote,
     );
 };
 
-  // ... [RENDER MONTH/GRID KEEP SAME AS PREVIOUS] ...
   const changePeriod = (direction: 'prev' | 'next') => {
       if (viewMode === 'month') {
           setCurrentDate(d => direction === 'prev' ? addMonths(d, -1) : addMonths(d, 1));
@@ -523,6 +522,93 @@ export const CalendarView: React.FC<Props> = ({ state, onNavigate, onDeleteNote,
       } else {
           setCurrentDate(d => direction === 'prev' ? addDays(d, -1) : addDays(d, 1));
       }
+  };
+
+  const renderWeekView = () => {
+    const weekStart = startOfWeek(currentDate, { weekStartsOn: 1 });
+    const weekDays = Array.from({ length: 7 }, (_, i) => addDays(weekStart, i));
+    return (
+      <div className="flex flex-col h-full bg-white dark:bg-zinc-900 rounded-3xl border border-zinc-200 dark:border-zinc-800 shadow-sm overflow-hidden">
+        {/* Header row */}
+        <div className="grid grid-cols-7 border-b border-zinc-100 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950">
+          {weekDays.map(day => {
+            const isCur = isToday(day);
+            const imieninyKey = format(day, 'MM-dd');
+            return (
+              <div key={day.toISOString()} className={`p-2 text-center border-r border-zinc-100 dark:border-zinc-800 last:border-r-0 ${isCur ? 'bg-red-50/50 dark:bg-red-900/10' : ''}`}>
+                <div className="text-[9px] font-bold text-zinc-400 uppercase">{format(day, 'EEEEEE', { locale: pl })}</div>
+                <div className={`text-sm font-black mx-auto w-7 h-7 flex items-center justify-center rounded-full ${isCur ? 'bg-red-600 text-white' : 'text-zinc-700 dark:text-zinc-300'}`}>
+                  {format(day, 'd')}
+                </div>
+                {IMIENINY[imieninyKey] && (
+                  <div className="text-[7px] text-rose-400 font-bold truncate" title={IMIENINY[imieninyKey]}>{IMIENINY[imieninyKey]}</div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+        {/* Events */}
+        <div className="grid grid-cols-7 flex-1 overflow-y-auto">
+          {weekDays.map(day => {
+            const dayEvents = events.filter(e => isSameDay(e.date, day)).sort((a, b) => a.date.getTime() - b.date.getTime());
+            return (
+              <div key={day.toISOString()} onDragOver={handleDragOver} onDrop={(e) => handleDropOnDay(e, day)}
+                onClick={() => handleDayClick(day)}
+                className={`border-r border-zinc-100 dark:border-zinc-800 last:border-r-0 p-1 min-h-[200px] cursor-pointer hover:bg-zinc-50 dark:hover:bg-zinc-800/50 ${isToday(day) ? 'bg-red-50/20 dark:bg-red-900/5' : ''}`}>
+                {dayEvents.map(renderEventBadge)}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
+  };
+
+  const renderDayView = () => {
+    const dayEvents = events.filter(e => isSameDay(e.date, currentDate)).sort((a, b) => a.date.getTime() - b.date.getTime());
+    const imieninyKey = format(currentDate, 'MM-dd');
+    return (
+      <div className="flex flex-col h-full bg-white dark:bg-zinc-900 rounded-3xl border border-zinc-200 dark:border-zinc-800 shadow-sm overflow-hidden">
+        {/* Day header */}
+        <div className={`p-4 border-b border-zinc-100 dark:border-zinc-800 ${isToday(currentDate) ? 'bg-red-50/30 dark:bg-red-900/10' : 'bg-zinc-50 dark:bg-zinc-950'}`}>
+          <div className="text-xs font-bold text-zinc-400 uppercase">{format(currentDate, 'EEEE', { locale: pl })}</div>
+          <div className="text-2xl font-black text-zinc-800 dark:text-white">{format(currentDate, 'd MMMM yyyy', { locale: pl })}</div>
+          {IMIENINY[imieninyKey] && (
+            <div className="text-xs text-rose-400 font-bold mt-0.5">Imieniny: {IMIENINY[imieninyKey]}</div>
+          )}
+        </div>
+        {/* Events list */}
+        <div className="flex-1 overflow-y-auto p-3">
+          {dayEvents.length === 0 ? (
+            <p className="text-zinc-400 text-sm text-center mt-8">Brak wydarzeń na ten dzień</p>
+          ) : (
+            <div className="space-y-1">
+              {dayEvents.map(e => {
+                const EventIcon = getEventIcon(e);
+                return (
+                  <div key={e.id} draggable={!e.isSoldRenewal} onDragStart={(ev) => handleDragStart(ev, e.id)}
+                    onMouseEnter={(ev) => handleEventMouseEnter(ev, e)} onMouseLeave={handleEventMouseLeave}
+                    onClick={() => {
+                      if (e.clientId && e.clientId !== 'SYSTEM_GLOBAL') {
+                        const client = state.clients.find(c => c.id === e.clientId);
+                        if (client) onNavigate('client-details', { client, highlightPolicyId: e.type === 'RENEWAL' || e.isCalculation ? e.relatedId : undefined });
+                      }
+                    }}
+                    className={`flex items-center gap-3 p-3 rounded-xl cursor-pointer hover:scale-[1.01] transition-transform ${getEventStyle(e)}`}>
+                    <span className="text-xs font-mono opacity-60 w-10 shrink-0">{isValid(e.date) && !e.isSoldRenewal ? format(e.date, 'HH:mm') : '——'}</span>
+                    <EventIcon size={14} className="shrink-0" />
+                    <div className="flex-1 min-w-0">
+                      <div className={`text-xs font-bold truncate ${e.isCompleted ? 'line-through opacity-50' : ''}`}>{e.title}</div>
+                      {e.clientName && <div className="text-[10px] opacity-60 truncate">{e.clientName}</div>}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      </div>
+    );
   };
 
   const renderMonthView = () => {
@@ -712,6 +798,8 @@ export const CalendarView: React.FC<Props> = ({ state, onNavigate, onDeleteNote,
         {/* The Grid */}
         <div className="flex-1 overflow-hidden relative">
             {viewMode === 'month' && renderMonthView()}
+            {viewMode === 'week' && renderWeekView()}
+            {viewMode === 'day' && renderDayView()}
             
             {/* Quick Add Modal */}
             {isQuickAddOpen && (

@@ -54,3 +54,5 @@ node_modules/
 # Artefakty sesji i deployu
 *.zip
 .q.json
+
+dev.log

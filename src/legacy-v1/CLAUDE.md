@@ -32,10 +32,32 @@
 - **[STATE_FLOW.md](./STATE_FLOW.md)** — obieg polisy, spójność stanów
 
 ### 💰 Prowizje i pośrednicy (KOMPLET)
-- **[COMMISSIONS_SPEC.md](./COMMISSIONS_SPEC.md)** — kaskadowy split: composition (towarzystwo→agent), pośrednik bierze % wg `default_rates`, netto = commission − partner
+- **[COMMISSIONS_SPEC.md](./COMMISSIONS_SPEC.md)** — ⚠️ **UWAGA**: SPEC opisuje kaskadowy split ("Agent = Całkowita − Pośrednik") ale to STARY/teoretyczny model. **Faktyczny model w `FinanceView.tsx` (production):** **dwie niezależne pule prowizji** (patrz niżej).
 - **[SUB_AGENTS_SPEC.md](./SUB_AGENTS_SPEC.md)** — Centrum Pośredników (MLM/OWCA/Tip-serwis), `group_prefix` ∈ {`firmowy`, `wlasny`, `partner`} (DB check constraint)
 - **[ALGORITHM_RATES.md](./ALGORITHM_RATES.md)** — "Reverse Rate" (analiza wsteczna prowizji z istniejących danych)
-- **Test schema (Supabase test):** `policy_sub_agent_shares` (tabela: policy_id, sub_agent_id, rate, amount, note). Provider `supabaseStorage.ts` MUSI to pobierać i mapować na `subAgentSplits` w `rowToPolicy` (legacy zawiera fallback `subAgentCommission` jako pole).
+
+#### 🔑 Model prowizji (Bartek 2026-05-11)
+
+**Agent i pośrednik dostają DWIE OSOBNE prowizje od towarzystwa, NIE dzielą jednej puli.**
+
+- XLSX col 14 `prow` → `commission` = **pełna prowizja agenta** (np. 4% od składki)
+- XLSX col 15 `rozl` → `subAgentCommission` / `policy_sub_agent_shares.amount` = **osobna prowizja pośrednika** (np. też 4% od składki, niezależnie)
+- Często `commission == rozl` (oba 4%) — to NIE błąd, to dwa równoległe strumienie
+
+Jak liczy `FinanceView.tsx`:
+```js
+incomeNet     += agentPart                  // pełne 4% agenta na czysto (NIE odejmuje pośrednika)
+revenueGross  += agentPart + partnerPart    // suma obu pul (np. 8% łącznie)
+costPartners  += partnerPart                // tylko prowizja pośrednika (do osobnego rozliczenia/przelewu)
+```
+
+Rola `group_prefix` w SubAgents:
+- **`wlasny`** = Alina sama jest pośrednikiem (np. polecony przez nią) → dostaje **OBA** strumienie 4%+4%
+- **`firmowy`** = inny agent w agencji (Hejka, Beata, Osip…) → drugie 4% wraca wewnątrz firmy
+- **`partner`** = zewnętrzny finder (dealer aut, kolega, agent nieruchomości) → drugie 4% wypłacane na zewnątrz (Tip-serwis)
+
+#### Schema DB (test)
+**`policy_sub_agent_shares`** (tabela: policy_id, sub_agent_id, rate, amount, note). Provider `supabaseStorage.ts` MUSI to pobierać w `init()` i mapować na `subAgentSplits` w `rowToPolicy` (legacy zawiera fallback `subAgentCommission` jako pole na polisie).
 
 ### 📝 Notatki
 - **[NOTES_SPEC.md](./NOTES_SPEC.md)** — oś czasu, tagi, separatory `_` w XLSX (1. wiersz najstarszy, kolejne uzupełniane)
@@ -62,6 +84,7 @@
 ### 🛠️ Naprawa / dane
 - **[DATA_REPAIR_SPEC.md](./DATA_REPAIR_SPEC.md)** — Centrum Naprawy Danych
 - **[BACKUP_SYSTEM.md](./BACKUP_SYSTEM.md)** — JSON backup
+- **[TIMELINE_ARCHITECTURE.md](./TIMELINE_ARCHITECTURE.md)** — ⭐ **NOWY 2026-05-11**: model bi-temporal (assets, policy_terminations, client_attribute_history, policy_versions). Stary tel/email NIE znika z notatek; pojazd ma timeline polis; wznowienia/wypowiedzenia jako persistent encje ze statusami
 
 ### 📜 Zasady / przepływy
 - **[SUPREME_RULES.md](./SUPREME_RULES.md)** — ⚠️ **ENFORCED LAW** (7 zasad): inputMode dla cyfr, onClick→showPicker dla dat, `flex-wrap` zamiast scroll, **#4 Documentation First** (nie dotykaj `.tsx` bez przeczytania `.md`), Mapa Modul→Spec
@@ -95,6 +118,7 @@
 - ❌ **NIE używać regex substring `'ac' in low and 'oc' in low`** dla BOTH — łapie `Classic`/`Black`/`samochód`. Tylko explicit `AC/OC` slash combo lub `\bAC\b + \bOC\b` word boundaries
 - ❌ **`VEHICLE_REG` regex z samym `\b`** — `_` jest word-char, blokuje boundary. Użyj `(?<![A-Z0-9])...(?![A-Z0-9])` + ≥1 cyfra w sufiksie + PLATE_BLACKLIST (NNW/ASS/TDI/LPG/PZU/RAV4/CX5/VIII)
 - ❌ **`subAgentSplits: []` hardcode w `rowToPolicy`** — musi pobierać `policy_sub_agent_shares` w `init()` i mapować
+- ❌ **Odejmować prowizję pośrednika od prowizji agenta** — to DWIE niezależne pule od towarzystwa (`commission` i `rozl` w XLSX są niezależne, często równe np. 4% i 4%). Agent dostaje swoje 4% na czysto, pośrednik osobno 4%. `incomeNet = commission` (NIE `commission − partner`). Patrz § "Model prowizji" wyżej
 - ❌ **DB enum CHECK constraints** (przed insertem sprawdź): `policies.stage`, `policies.type`, `sub_agents.group_prefix`, `insurance_clients.source` — wszystko underscore + no Polish chars
 - ❌ **`START_ALINA_TEST.bat` bez `switch_env.ps1 test`** — vite ładuje stary `.env.development.local` (schema=public) zamiast test. Naprawione 2026-05-11.
 

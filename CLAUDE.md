@@ -10,12 +10,15 @@ Deweloper CRM RedRoad — modyfikujesz atomic-crm framework lokalnie i deploy'uj
 
 ## 🎯 Pierwsze 3 ruchy
 
-1. **Twoje TODO z brain (15 zadań na dziś):**
+1. **Twoje TODO z brain (40 pending 2026-05-11):**
    ```
-   mcp__MCP-CONSIS__list_tasks(project_ref="crm-alina", status="pending")
-   mcp__MCP-CONSIS__list_tasks(project_ref="crm-atomic", status="pending")
+   mcp__MCP-CONSIS__list_tasks(project_ref="crm-alina", status="pending")  # 27
+   mcp__MCP-CONSIS__list_tasks(project_ref="crm", status="pending")        # 12
+   mcp__MCP-CONSIS__list_tasks(project_ref="crm-atomic", status="pending") # 1
    ```
    Albo CLI: `python C:\BartsGda4-MCP-SKILLS\CONSIS-MCP\tools\brain_cli.py list-tasks --project-ref crm-alina --status pending`
+
+   ⚠️ **project_ref niespójne** — kanon przyszły `crm-alina`. Zadanie normalizacyjne w brain: `29162f1d-8f3d-4bf7-8b78-c3d5dad0ff24` (UPDATE `crm`,`crm-atomic` → `crm-alina`).
 
 2. **Briefing globalny:** `python C:\BartsGda4\start_session.py` (status repo, RAG context, brain.ai_tasks per project_ref dzięki `$env:RR_SESSION_SLUG`)
 

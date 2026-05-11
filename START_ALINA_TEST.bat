@@ -1,6 +1,14 @@
 @echo off
-title CRM-ALINA - DEV MODE
+title CRM-ALINA - DEV MODE (TEST schema)
 cd /d "%~dp0"
+
+echo [ENV] switch_env.ps1 test (.env.alina.test -^> .env.development.local + rrv expand)
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%~dp0switch_env.ps1" test
+if errorlevel 1 (
+    echo [ERROR] switch_env.ps1 test failed (rrv login? brak markerow?)
+    pause
+    exit /b 1
+)
 
 echo [KILL] Zamykam stare procesy Vite...
 for /f "tokens=5" %%a in ('netstat -aon ^| findstr :5173 ^| findstr LISTENING') do taskkill /F /PID %%a 2>nul

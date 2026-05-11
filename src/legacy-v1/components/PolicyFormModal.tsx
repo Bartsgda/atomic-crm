@@ -572,6 +572,13 @@ export const PolicyFormModal: React.FC<Props> = ({ isOpen, onClose, initialClien
               // Set client from source
              const found = clients.find(c => c.id === renewalSource.clientId);
              if (found) setSelectedClient(found);
+          } else {
+             // FIX 2026-05-11: gdy plus "+" z Sidebar (Pojazdy/Majątek/Życie/Turystyczne)
+             // BEZ initialClient/initialPolicy/renewalSource - wyczyść stary stan
+             // żeby user mógł wybrać klienta od zera (nie używaj ostatniego)
+             setSelectedClient(null);
+             setSearchClientTerm('');
+             setIsClientDropdownOpen(true);
           }
       } else {
           // CLEANUP ON CLOSE - Wipe diffs to prevent ghost data

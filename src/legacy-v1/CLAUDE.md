@@ -120,6 +120,7 @@ Rola `group_prefix` w SubAgents:
 - ❌ **`VEHICLE_REG` regex z samym `\b`** — `_` jest word-char, blokuje boundary. Użyj `(?<![A-Z0-9])...(?![A-Z0-9])` + ≥1 cyfra w sufiksie + PLATE_BLACKLIST (NNW/ASS/TDI/LPG/PZU/RAV4/CX5/VIII)
 - ❌ **`subAgentSplits: []` hardcode w `rowToPolicy`** — musi pobierać `policy_sub_agent_shares` w `init()` i mapować
 - ❌ **Odejmować prowizję pośrednika od prowizji agenta** — to DWIE niezależne pule od towarzystwa (`commission` i `rozl` w XLSX są niezależne, często równe np. 4% i 4%). Agent dostaje swoje 4% na czysto, pośrednik osobno 4%. `incomeNet = commission` (NIE `commission − partner`). Patrz § "Model prowizji" wyżej
+- ❌ **`PolicyFormModal` w `useEffect [isOpen]` nie czyścił `selectedClient` gdy plus `+` z Sidebar dla nowej polisy** (Pojazdy/Majątek/Życie/Turystyczne) — `key={policy-modal-${dataVersion}}` nie wymusza remountu między otwarciami, więc `selectedClient` z poprzedniego użycia pozostawał ("ostatni klient"). Fix 2026-05-11: dodano `else { setSelectedClient(null); setSearchClientTerm(''); setIsClientDropdownOpen(true); }` w branchach `initialClient | initialPolicy | renewalSource | ELSE`.
 - ❌ **DB enum CHECK constraints** (przed insertem sprawdź): `policies.stage`, `policies.type`, `sub_agents.group_prefix`, `insurance_clients.source` — wszystko underscore + no Polish chars
 - ❌ **`START_ALINA_TEST.bat` bez `switch_env.ps1 test`** — vite ładuje stary `.env.development.local` (schema=public) zamiast test. Naprawione 2026-05-11.
 - ❌ **Sesja przeżywająca Sleep/Hibernate kompa** (security bug 2026-05-11):

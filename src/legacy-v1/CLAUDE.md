@@ -74,6 +74,7 @@ Rola `group_prefix` w SubAgents:
 ### 🎨 UI/UX
 - **[DESIGN_SYSTEM.md](./DESIGN_SYSTEM.md)** — motywy (Exec/Onyx/Forest), typografia
 - **[UI_UX_DROPDOWN_FIX.md](./UI_UX_DROPDOWN_FIX.md)** — Smart Dropdowns
+- **[UI_SEARCH_KEYBOARD_RULES.md](./UI_SEARCH_KEYBOARD_RULES.md)** — ⭐ pasek wyszukiwania + autofocus + nawigacja ↓↑Enter/Esc + ikony sortowania ArrowUpDown (kanon: Dashboard pojazdów; ClientsList zsynchronizowany 2026-05-11)
 
 ### 🏛️ Architektura
 - **[ARCHITECTURE.md](./ARCHITECTURE.md)** — system + standardy deweloperskie
@@ -121,6 +122,15 @@ Rola `group_prefix` w SubAgents:
 - ❌ **Odejmować prowizję pośrednika od prowizji agenta** — to DWIE niezależne pule od towarzystwa (`commission` i `rozl` w XLSX są niezależne, często równe np. 4% i 4%). Agent dostaje swoje 4% na czysto, pośrednik osobno 4%. `incomeNet = commission` (NIE `commission − partner`). Patrz § "Model prowizji" wyżej
 - ❌ **DB enum CHECK constraints** (przed insertem sprawdź): `policies.stage`, `policies.type`, `sub_agents.group_prefix`, `insurance_clients.source` — wszystko underscore + no Polish chars
 - ❌ **`START_ALINA_TEST.bat` bez `switch_env.ps1 test`** — vite ładuje stary `.env.development.local` (schema=public) zamiast test. Naprawione 2026-05-11.
+- ❌ **Sesja przeżywająca Sleep/Hibernate kompa** (security bug 2026-05-11):
+  - `createClient()` bez `auth: { storage }` → defaults `persistSession=true` w localStorage, JWT na rok
+  - `supabaseStorage.getSessionExpiry` zwraca `+365 dni`
+  - React state `unlocked=true` w `EncryptionGate` przeżywa suspend (Chrome nie killuje procesu)
+  - Po wybudzeniu = pełen dostęp bez passphrase
+  - **Fix:** `EncryptionGate` dodano:
+    1. `IDLE_TIMEOUT_MS = 30min` — listener `mousedown/keydown/touchstart/scroll` resetuje timer, po idle → `lock()`
+    2. `visibilitychange` listener — jeśli gap od ostatniej aktywności >5 min, lock
+    3. `pageshow` listener z `e.persisted=true` (bfcache restore) → lock
 
 ## 🔑 KRYTYCZNE PLIKI (kod, nie spec)
 

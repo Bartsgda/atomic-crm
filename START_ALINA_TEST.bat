@@ -4,8 +4,8 @@ cd /d "%~dp0"
 
 echo [ENV] switch_env.ps1 test (.env.alina.test -^> .env.development.local + rrv expand)
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%~dp0switch_env.ps1" test
-if errorlevel 1 (
-    echo [ERROR] switch_env.ps1 test failed (rrv login? brak markerow?)
+if %ERRORLEVEL% NEQ 0 (
+    echo [ERROR] switch_env.ps1 test failed exit code %ERRORLEVEL% - rrv login? brak markerow?
     pause
     exit /b 1
 )

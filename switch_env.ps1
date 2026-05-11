@@ -65,3 +65,4 @@ $content = ($out -join "`n") + "`n"
 [System.IO.File]::WriteAllText((Resolve-Path .).Path + "\$target", $content, [System.Text.UTF8Encoding]::new($false))
 
 Write-Host "[OK] Tryb: $Mode | $source -> $target | rrv markerow: $expanded" -ForegroundColor Green
+exit 0

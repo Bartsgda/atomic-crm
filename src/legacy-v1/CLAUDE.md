@@ -9,8 +9,11 @@
 ## 🎯 Jeśli robisz X — przeczytaj NAJPIERW te:
 
 ### 📥 Import danych z XLSX
+0. **[IMPORT_AUDIT_HOWTO.md](./IMPORT_AUDIT_HOWTO.md)** — ⭐ **CZYTAJ ZAWSZE NAJPIERW** gdy robisz audyt/reimport. Połączenie do Alina Supabase (NIE brain!), `legacy_id` mapping, 10 pułapek typu „wczytałem zły XLSX/zły URL/zła schema".
 1. **[XLSX_MAPPING.md](./XLSX_MAPPING.md)** — mapowanie 23 kolumn Excela na pola CRM (col[0]→firstName/lastName, col[1]→**`createdAt`**, col[7]→PESEL/NIP dedup, col[8]→`co` (typ+pojazd), col[15]→`subAgentCommission` jako pole na polisie)
 2. **[IMPORT_LOGIC.md](./IMPORT_LOGIC.md)** — ⚠️ **CODE FREEZE** na `DataMapper.ts` + `legacyParser.ts`. Pipeline kategoryzacji: DOM → PODROZ → FIRMA → OC bifurcation (działal/zawod/lekarz → FIRMA; inaczej AUTO) → ZYCIE → POJAZD fallback. Zasada "First Word Rule".
+2b. **[AUDIT_ROWS_1_10_2026-05-11.md](./AUDIT_ROWS_1_10_2026-05-11.md)** — raport ręcznego audytu pierwszych 10 wierszy (Opus 4.7). Top 10 bugów importu.
+2c. **[AUDIT_PLAN.md](./AUDIT_PLAN.md)** — plan napraw w 4 fazach (cleanup → parser bugfix → TIMELINE backfill → UI flagi + reimport).
 3. **[DATA_MAPPING.md](./DATA_MAPPING.md)** — struktura w aplikacji
 4. **[LEGACY_DATA_SPEC.md](./LEGACY_DATA_SPEC.md)** — dane historyczne z `data/legacy/*.ts` (hardcoded mapy z `aiNote`)
 5. **[REVERSE_ARCH_SPEC.md](./REVERSE_ARCH_SPEC.md)** — eksport XLSX (Hybrid Excel)

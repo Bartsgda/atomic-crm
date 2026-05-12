@@ -181,6 +181,23 @@
 - `parse_coowners.py` — port `secondaryParsers.parseCoOwnerColumn`
 - `apply_ai_parsed.py` — PATCH policies w DB z `ai_parsed_182.json`
 
+## 🚨 KRYTYCZNY ZAKAZ (lekcja Bartka 2026-05-11)
+
+**NIGDY nie wrzucaj surowej zawartości kolumn XLSX do `policy_notes` z prefixami `[WSPOLWL/CESJA]`/`[STARA POLISA]`/`[KONTEKST]`** jako "tymczasowe rozwiązanie". To było mój pierwszy import — wepchnąłem 54 notatki `[WSPOLWL/CESJA]` które:
+- Były **redundant** z `coOwners[]` (po parsowaniu)
+- **Zaciemniały oś czasu** notatek klienta (mieszane "fake" wpisy z prawdziwymi rozmowami)
+- Dla 6 wierszy gdzie parser nie wyciągnął coOwnera (`pesel kl`, `czy X jest właścicielem?`, `15.09.2025 klient podpisał gdzie indziej`, `regon bez nazwy`) **tekst NIE był informacją o współwłaścicielu** — np. row 116 to faktycznie status DECISION_PRICE (rezygnacja) + pytanie do agenta o właścicieli (rodzice?)
+
+**Każdy znak z XLSX musi być sklasyfikowany PRZED zapisem:**
+- col[18] `wsp` → `parse_coowners.py` → albo `coOwners[]` (structurd) albo `clients.pesel_encrypted` (gdy `pesel kl`) albo notatka tag=STATUS (gdy pytanie/niewiadome) albo notatka tag=DECISION_PRICE (gdy status klienta)
+- col[17] `st pol` → `policy_terminations.old_*` (po TIMELINE migration) NIE `policy_notes [STARA POLISA]`
+- col[19] `notatki` → split po `_` z datami, każdy fragment z tag detection (STATUS/OFERTA/DECISION_PRICE/ROZMOWA)
+
+**Czyszczenie 2026-05-11:**
+- DELETE 54 `[WSPOLWL/CESJA]` notatek (dane są w `coOwners[]`)
+- Dodano 6 notatek **STATUS/DECISION_PRICE** dla wierszy gdzie `parse_coowners.py` skipped (z konkretną treścią + tagiem, NIE jako fake-coowner)
+- Pozostaje 102 `[STARA POLISA]` (czekają na migration `policy_terminations` w TIMELINE_ARCHITECTURE)
+
 ## ⏭ Bugi/dopracowania (do następnej iteracji)
 
 1. **`parse_coowners.py`** — multi-osoba travel split (`ubezpieczeni ->PESEL Imię, PESEL Imię, ...`), NIP/REGON przed phone regex, czystsze regex po peselu

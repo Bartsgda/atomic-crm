@@ -449,18 +449,20 @@ export const AutoForm: React.FC<Props> = ({ form, policyType, aiDiffs = {}, onUs
                         </div>
                         {coOwnerFields.map((field, index) => (
                             <div key={field.id} className="flex flex-col gap-2 mb-3 bg-zinc-50 dark:bg-zinc-800/50 p-2 rounded-lg border border-zinc-100 dark:border-zinc-800">
-                                <div className="flex gap-2">
-                                    <input 
-                                        {...register(`autoDetails.coOwners.${index}.name`)} 
-                                        className={`flex-1 ${STANDARD_INPUT_CLASS} p-2 text-xs`}
+                                {/* FIX 2026-05-11: grid zamiast flex (flex-1 z w-full STANDARD_INPUT_CLASS gubił width).
+                                    Bartek feedback #8675bf37 - brak pola Imię i Nazwisko w widocznym renderze. */}
+                                <div className="grid grid-cols-[minmax(0,1fr)_140px_auto] gap-2 items-center">
+                                    <input
+                                        {...register(`autoDetails.coOwners.${index}.name`)}
+                                        className={`${STANDARD_INPUT_CLASS} p-2 text-xs min-w-0`}
                                         placeholder="Imię i Nazwisko"
                                     />
-                                    <input 
-                                        {...register(`autoDetails.coOwners.${index}.pesel`)} 
-                                        className={`w-32 ${STANDARD_INPUT_CLASS} p-2 text-xs font-mono`}
+                                    <input
+                                        {...register(`autoDetails.coOwners.${index}.pesel`)}
+                                        className={`${STANDARD_INPUT_CLASS} p-2 text-xs font-mono min-w-0`}
                                         placeholder="PESEL"
                                     />
-                                    <button type="button" onClick={() => removeCoOwner(index)} className="p-2 text-zinc-400 hover:text-red-500"><Trash2 size={16}/></button>
+                                    <button type="button" onClick={() => removeCoOwner(index)} className="p-2 text-zinc-400 hover:text-red-500" aria-label="Usuń współwłaściciela"><Trash2 size={16}/></button>
                                 </div>
                                 <div className="flex gap-2">
                                     <div className="flex-1 relative">

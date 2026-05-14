@@ -1,7 +1,7 @@
 
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { AppState, Client, Policy, ClientNote } from '../types';
-import { Search, Phone, Mail, Plus, Edit2, ExternalLink, ArrowRight, User, Link as LinkIcon, Car, Home, Heart, Users, ArrowUp, ArrowDown, Calendar, StickyNote, X, Clock, Plane, Zap } from 'lucide-react';
+import { Search, Phone, Mail, Plus, Edit2, ExternalLink, ArrowRight, User, Link as LinkIcon, Car, Home, Heart, Users, ArrowUp, ArrowDown, ArrowUpDown, Calendar, StickyNote, X, Clock, Plane, Zap } from 'lucide-react';
 import { ClientFormModal } from './ClientFormModal';
 import { format, differenceInDays, isValid } from 'date-fns';
 import { DeleteSafetyButton } from './DeleteSafetyButton';
@@ -48,6 +48,25 @@ export const ClientsList: React.FC<Props> = ({
   const [searchTerm, setSearchTerm] = useState('');
   const [showCoOwners, setShowCoOwners] = useState(false);
   const [viewMode, setViewMode] = useState<'CLIENTS' | 'ARCHIVE'>('CLIENTS');
+  const searchInputRef = useRef<HTMLInputElement>(null);
+  const [selectedRowIndex, setSelectedRowIndex] = useState(-1);
+
+  // Autofocus na search input po wejsciu do widoku Klientow (jak Dashboard pojazdow)
+  useEffect(() => {
+    const t = setTimeout(() => searchInputRef.current?.focus(), 50);
+    return () => clearTimeout(t);
+  }, []);
+
+  // Reset zaznaczonego wiersza przy zmianie searcha
+  useEffect(() => { setSelectedRowIndex(-1); }, [searchTerm]);
+
+  // Scroll do zaznaczonego wiersza
+  useEffect(() => {
+    if (selectedRowIndex >= 0) {
+      document.querySelector(`[data-row-idx="${selectedRowIndex}"]`)
+        ?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    }
+  }, [selectedRowIndex]);
   const [isClientModalOpen, setIsClientModalOpen] = useState(false);
   const [editingClient, setEditingClient] = useState<Client | null>(null);
   const [contextMenu, setContextMenu] = useState<ContextMenuState | null>(null);
@@ -280,8 +299,37 @@ export const ClientsList: React.FC<Props> = ({
       }
   };
 
+  // Nawigacja klawiaturą (jak Dashboard pojazdow)
+  const handleSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const total = processedList.length;
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setSelectedRowIndex(i => Math.min(i + 1, total - 1));
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setSelectedRowIndex(i => (i <= 0 ? -1 : i - 1));
+    } else if (e.key === 'Enter' && selectedRowIndex >= 0) {
+      e.preventDefault();
+      const client = processedList[selectedRowIndex];
+      if (!client) return;
+      if ((client as any).isVirtual) {
+        const sourceId = (client as VirtualClient).sourcePolicies[0]?.id;
+        if (sourceId) {
+          const realClient = state.clients.find(c => state.policies.find(p => p.id === sourceId)?.clientId === c.id);
+          if (realClient) onNavigate('client-details', { client: realClient, highlightPolicyId: sourceId });
+        }
+      } else {
+        onNavigate('client-details', { client });
+      }
+      setSelectedRowIndex(-1);
+    } else if (e.key === 'Escape') {
+      setSelectedRowIndex(-1);
+      if (searchTerm) setSearchTerm('');
+    }
+  };
+
   const SortIcon = ({ k }: { k: SortKey }) => {
-      if (sortKey !== k) return <ArrowDown size={12} className="opacity-20 ml-1" />;
+      if (sortKey !== k) return <ArrowUpDown size={12} className="ml-1 opacity-30" />;
       return sortDir === 'asc' ? <ArrowUp size={12} className="ml-1 text-zinc-900 dark:text-white" /> : <ArrowDown size={12} className="ml-1 text-zinc-900 dark:text-white" />;
   };
 
@@ -370,20 +418,25 @@ export const ClientsList: React.FC<Props> = ({
                 </button>
             </div>
 
-            {/* OMNI SEARCH */}
-            <div className="relative flex-1 md:w-[400px] group">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-zinc-400 group-focus-within:text-blue-500 transition-colors" />
-              <input 
-                type="text" 
-                className="block w-full pl-12 pr-10 py-3 border-2 border-zinc-200 dark:border-zinc-700 rounded-xl text-zinc-900 dark:text-white focus:border-blue-500 focus:ring-4 focus:ring-blue-50 outline-none font-bold shadow-sm bg-white dark:bg-zinc-900 transition-all text-sm" 
-                placeholder={showCoOwners ? "Szukaj w polisach..." : "Szukaj: Nazwisko, Telefon, E-mail, Firma..."}
-                value={searchTerm} 
-                onChange={(e) => setSearchTerm(e.target.value)} 
+            {/* OMNI SEARCH — styl + rozmiar identyczny z Dashboard pojazdow */}
+            <div className="relative flex-1 group">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400 group-focus-within:text-zinc-900 dark:group-focus-within:text-white transition-colors" size={20} />
+              <input
+                ref={searchInputRef}
+                type="text"
+                placeholder={showCoOwners ? "Szukaj w polisach…" : "Szukaj: Nazwisko, Telefon, E-mail, Firma…"}
+                className="w-full pl-12 pr-10 py-3.5 bg-zinc-100 dark:bg-zinc-800 border-2 border-transparent focus:bg-white dark:focus:bg-zinc-900 focus:border-indigo-400 dark:focus:border-indigo-500 rounded-2xl outline-none transition-all font-bold text-sm text-zinc-900 dark:text-zinc-100 placeholder:font-normal placeholder:text-zinc-400"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                onKeyDown={handleSearchKeyDown}
+                tabIndex={1}
+                autoFocus
               />
               {searchTerm && (
-                  <button 
+                  <button
                     onClick={() => setSearchTerm('')}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-zinc-400 hover:text-zinc-900 dark:hover:text-white rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-zinc-400 hover:text-zinc-900 dark:hover:text-white rounded-full hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
+                    aria-label="Wyczysc wyszukiwanie"
                   >
                       <X size={14} />
                   </button>
@@ -432,15 +485,17 @@ export const ClientsList: React.FC<Props> = ({
               </tr>
             </thead>
             <tbody className={`divide-y ${showCoOwners ? 'divide-purple-50' : 'divide-zinc-50 dark:divide-zinc-800'}`}>
-              {processedList.map((client: any) => {
+              {processedList.map((client: any, idx: number) => {
                 const isVirtual = !!client.isVirtual;
                 const paddingClass = isCompact ? 'py-3' : 'py-5';
                 const avatarSize = isCompact ? 'w-10 h-10 text-sm' : 'w-12 h-12 text-xl';
                 const isAlsoCoOwner = !isVirtual && isClientAlsoCoOwner(client);
+                const isSelected = idx === selectedRowIndex;
 
                 return (
-                  <tr 
-                    key={client.id} 
+                  <tr
+                    key={client.id}
+                    data-row-idx={idx}
                     onClick={() => {
                         if (isVirtual) {
                             const sourceId = (client as VirtualClient).sourcePolicies[0]?.id;
@@ -452,8 +507,12 @@ export const ClientsList: React.FC<Props> = ({
                             onNavigate('client-details', { client });
                         }
                     }}
-                    onContextMenu={(e) => handleContextMenu(e, client)} 
-                    className={`transition-all group cursor-pointer ${showCoOwners ? 'hover:bg-purple-50/50' : 'hover:bg-zinc-50/80 dark:hover:bg-zinc-800'}`}
+                    onContextMenu={(e) => handleContextMenu(e, client)}
+                    className={`transition-all group cursor-pointer ${
+                      isSelected
+                        ? 'bg-indigo-50 dark:bg-indigo-900/30 ring-2 ring-inset ring-indigo-400'
+                        : showCoOwners ? 'hover:bg-purple-50/50' : 'hover:bg-zinc-50/80 dark:hover:bg-zinc-800'
+                    }`}
                   >
                     {/* KOLUMNA 1: OSOBA + NOTATKA */}
                     <td className={`px-8 ${paddingClass} align-top`}>

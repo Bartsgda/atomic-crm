@@ -2,7 +2,8 @@
  * feedbackCapture.ts — przechwytywanie elementów UI i wysyłanie feedbacku do Supabase.
  */
 
-import html2canvas from "html2canvas";
+// html2canvas-pro: fork z obsługą oklch/lab (Tailwind v4 używa oklch — vanilla html2canvas faila)
+import html2canvas from "html2canvas-pro";
 import { getSupabaseClient } from "../../components/atomic-crm/providers/supabase/supabase";
 
 // ─── Typy publiczne ────────────────────────────────────────────────────────────
@@ -89,7 +90,10 @@ async function captureScreenshot(_el: HTMLElement): Promise<string | null> {
     });
 
     return canvas.toDataURL("image/jpeg", 0.72);
-  } catch {
+  } catch (e) {
+    // FIX 2026-05-11: cichy catch ukrywał błąd html2canvas (Tailwind v4 oklch).
+    // Loguj żeby wiedzieć dlaczego screen się nie zrobił.
+    console.error('[Feedback] Screenshot capture failed:', e);
     return null;
   }
 }

@@ -129,6 +129,9 @@ Pełna lista: `mcp__MCP-CONSIS__list_tasks(project_ref="crm-alina")`.
 
 # ZASADY PRACY — CRM-Alina (OBOWIĄZKOWE)
 
+> **AI: zanim dotkniesz `src/legacy-v1/*.tsx` lub piszesz mapper/parser/import — przeczytaj NAJPIERW [`src/legacy-v1/CLAUDE.md`](./src/legacy-v1/CLAUDE.md). Tam jest indeks 38 plików `.md` per moduł + SUPREME_RULES + anti-patterns (lekcja 2026-05-11: AI 4 razy poprawiał błędy bo zignorował te spec).**
+
+
 ## 1. Deploy — jedyna poprawna procedura
 
 ```

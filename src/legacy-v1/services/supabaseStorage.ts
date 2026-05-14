@@ -386,16 +386,17 @@ class SupabaseStorageManager {
       throw new Error("Brak aktywnej sesji Supabase. Zaloguj się ponownie.");
     }
 
-    const [clientsRes, policiesRes, notesRes, subAgentsRes, insurersRes, trashRes] = await Promise.all([
+    const [clientsRes, policiesRes, notesRes, subAgentsRes, insurersRes, trashRes, sharesRes] = await Promise.all([
       sb.from('insurance_clients').select('*').eq('tenant_id', TENANT_ID).order('last_name'),
       sb.from('policies').select('*').eq('tenant_id', TENANT_ID),
       sb.from('policy_notes').select('*').eq('tenant_id', TENANT_ID).order('created_at', { ascending: false }),
       sb.from('sub_agents').select('*').eq('tenant_id', TENANT_ID),
       sb.from('insurers').select('name').eq('tenant_id', TENANT_ID).eq('is_visible', true),
       sb.from('insurance_trash').select('*').eq('tenant_id', TENANT_ID).order('deleted_at', { ascending: false }),
+      sb.from('policy_sub_agent_shares').select('*').eq('tenant_id', TENANT_ID),
     ]);
 
-    const errors = [clientsRes.error, policiesRes.error, notesRes.error, subAgentsRes.error, insurersRes.error, trashRes.error].filter(Boolean);
+    const errors = [clientsRes.error, policiesRes.error, notesRes.error, subAgentsRes.error, insurersRes.error, trashRes.error, sharesRes.error].filter(Boolean);
     if (errors.length > 0) {
       const firstError = errors[0];
       console.error('[SupabaseStorage] Query failure:', firstError);
@@ -407,9 +408,25 @@ class SupabaseStorageManager {
     for (const r of policiesRes.data ?? []) {
       if (r.v1_original_id) policyUuidToV1.set(r.id, r.v1_original_id);
     }
+    // Build sub-agent shares map: policy_id -> [{agentId, rate, amount, note}]
+    const sharesByPolicy = new Map<string, Array<{agentId: string; rate: number; amount: number; note?: string}>>();
+    for (const s of sharesRes.data ?? []) {
+      const arr = sharesByPolicy.get(s.policy_id) || [];
+      arr.push({
+        agentId: s.sub_agent_id,
+        rate: Number(s.rate ?? 0),
+        amount: Number(s.amount ?? 0),
+        note: s.note ?? undefined,
+      });
+      sharesByPolicy.set(s.policy_id, arr);
+    }
     const [clients, policies, notes, trash] = await Promise.all([
       Promise.all((clientsRes.data ?? []).map(r => rowToClient(r, dek))),
-      Promise.all((policiesRes.data ?? []).map(r => rowToPolicy(r, dek))),
+      Promise.all((policiesRes.data ?? []).map(async r => {
+        const p = await rowToPolicy(r, dek);
+        p.subAgentSplits = sharesByPolicy.get(r.id) || [];
+        return p;
+      })),
       Promise.all((notesRes.data ?? []).map(r => rowToNote(r, dek, policyUuidToV1))),
       Promise.all((trashRes.data ?? []).map(r => trashToItem(r, dek))),
     ]);

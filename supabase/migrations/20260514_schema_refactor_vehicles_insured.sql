@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS test.vehicles (
     engine_cc   integer,                       -- pojemność cm³
     power_kw    integer,                       -- moc kW
     fuel        text CHECK (fuel IN ('benzyna','diesel','hybryda','elektryczny','LPG','CNG','MHEV','PHEV','inne')),
-    vehicle_type text CHECK (vehicle_type IN ('OSOBOWY','DOSTAWCZY','CIEZAROWY','PRZYCZEPA','MOTOCYKL','CIAGNIK','SPECJALNY','inne')),
+    vehicle_type text CHECK (vehicle_type IN ('OSOBOWY','DOSTAWCZY','CIEZAROWY','PRZYCZEPA','MOTOCYKL','CIAGNIK','SPECJALNY','QUAD','inne')),
     vin         text,
     first_reg_date date,
     notes       text,
@@ -52,8 +52,10 @@ SELECT DISTINCT ON (p.tenant_id, p.vehicle_reg)
     (p.auto_details->>'year')::integer,
     (p.auto_details->>'engine_cc')::integer,
     (p.auto_details->>'power_kw')::integer,
-    p.auto_details->>'fuel',
-    p.auto_details->>'vehicle_type'
+    CASE WHEN p.auto_details->>'fuel' IN ('benzyna','diesel','hybryda','elektryczny','LPG','CNG','MHEV','PHEV','inne')
+         THEN p.auto_details->>'fuel' ELSE NULL END,
+    CASE WHEN p.auto_details->>'vehicle_type' IN ('OSOBOWY','DOSTAWCZY','CIEZAROWY','PRZYCZEPA','MOTOCYKL','CIAGNIK','SPECJALNY','QUAD','inne')
+         THEN p.auto_details->>'vehicle_type' ELSE 'inne' END
 FROM test.policies p
 WHERE p.vehicle_reg IS NOT NULL
 ORDER BY p.tenant_id, p.vehicle_reg, p.created_at DESC
@@ -211,17 +213,24 @@ BEGIN
   FOR t IN VALUES ('vehicles'),('insured_persons'),('client_businesses')
   LOOP
     EXECUTE format($f$
-      CREATE POLICY IF NOT EXISTS "%1$s_sel" ON test.%1$I FOR SELECT USING (tenant_id = test.current_tenant_id() OR test.is_insurance_admin());
-      CREATE POLICY IF NOT EXISTS "%1$s_ins" ON test.%1$I FOR INSERT WITH CHECK (tenant_id = test.current_tenant_id() OR test.is_insurance_admin());
-      CREATE POLICY IF NOT EXISTS "%1$s_upd" ON test.%1$I FOR UPDATE USING (tenant_id = test.current_tenant_id() OR test.is_insurance_admin());
-      CREATE POLICY IF NOT EXISTS "%1$s_del" ON test.%1$I FOR DELETE USING (tenant_id = test.current_tenant_id() OR test.is_insurance_admin());
+      DROP POLICY IF EXISTS "%1$s_sel" ON test.%1$I;
+      DROP POLICY IF EXISTS "%1$s_ins" ON test.%1$I;
+      DROP POLICY IF EXISTS "%1$s_upd" ON test.%1$I;
+      DROP POLICY IF EXISTS "%1$s_del" ON test.%1$I;
+      CREATE POLICY "%1$s_sel" ON test.%1$I FOR SELECT USING (tenant_id = test.current_tenant_id() OR test.is_insurance_admin());
+      CREATE POLICY "%1$s_ins" ON test.%1$I FOR INSERT WITH CHECK (tenant_id = test.current_tenant_id() OR test.is_insurance_admin());
+      CREATE POLICY "%1$s_upd" ON test.%1$I FOR UPDATE USING (tenant_id = test.current_tenant_id() OR test.is_insurance_admin());
+      CREATE POLICY "%1$s_del" ON test.%1$I FOR DELETE USING (tenant_id = test.current_tenant_id() OR test.is_insurance_admin());
     $f$, t);
   END LOOP;
 END $$;
 
-CREATE POLICY IF NOT EXISTS "pnl_sel" ON test.policy_note_links FOR SELECT USING (true);
-CREATE POLICY IF NOT EXISTS "pnl_ins" ON test.policy_note_links FOR INSERT WITH CHECK (true);
-CREATE POLICY IF NOT EXISTS "pnl_del" ON test.policy_note_links FOR DELETE USING (true);
+DROP POLICY IF EXISTS "pnl_sel" ON test.policy_note_links;
+DROP POLICY IF EXISTS "pnl_ins" ON test.policy_note_links;
+DROP POLICY IF EXISTS "pnl_del" ON test.policy_note_links;
+CREATE POLICY "pnl_sel" ON test.policy_note_links FOR SELECT USING (true);
+CREATE POLICY "pnl_ins" ON test.policy_note_links FOR INSERT WITH CHECK (true);
+CREATE POLICY "pnl_del" ON test.policy_note_links FOR DELETE USING (true);
 
 -- -------------------------------------------------------
 -- 8. UPDATED_AT trigger dla nowych tabel

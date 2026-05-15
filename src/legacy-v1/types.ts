@@ -279,6 +279,8 @@ export interface PolicySubAgentShare {
 // ─── Schema refactor v2 — nowe encje ────────────────────────────────────────
 
 export interface Vehicle {
+  /** UUID z tabeli vehicles (ustawiany przez load flow — rowToPolicy) */
+  id?: string;
   reg?: string;
   brand?: string;
   model?: string;

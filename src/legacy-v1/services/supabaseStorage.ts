@@ -174,7 +174,7 @@ async function rowToClient(r: any, dek: CryptoKey | null): Promise<Client> {
   };
 }
 
-async function policyToRow(p: Policy, dek: CryptoKey | null) {
+async function policyToRow(p: Policy, dek: CryptoKey | null, vehicleId?: string | null) {
   const isFake = p.id.includes('demo') || p.clientId.includes('demo') || (p as any).isFake;
   const dbId = await toUUID(p.id);
   const dbClientId = await toUUID(p.clientId);
@@ -196,7 +196,8 @@ async function policyToRow(p: Policy, dek: CryptoKey | null) {
     vehicle_brand: p.vehicleBrand || null,
     vehicle_model: p.vehicleModel || null,
     vehicle_reg: await encStr(p.vehicleReg, dek),
-    auto_details: p.autoDetails ?? null,
+    vehicle_id: vehicleId ?? null,                     // schema v2 — null gdy brak pojazdu
+    auto_details: p.autoDetails ?? null,               // dual write — legacy JSONB
     home_details: await encJson(p.homeDetails, dek),
     life_details: p.lifeDetails ?? null,
     travel_details: p.travelDetails ?? null,
@@ -216,6 +217,7 @@ async function rowToPolicy(r: any, dek: CryptoKey | null): Promise<Policy> {
   if (r.vehicle_id && vehicleMap.has(r.vehicle_id)) {
     const v = vehicleMap.get(r.vehicle_id);
     vehicle = {
+      id:          v.id,
       reg:         v.reg       ?? undefined,
       brand:       v.brand     ?? undefined,
       model:       v.model     ?? undefined,

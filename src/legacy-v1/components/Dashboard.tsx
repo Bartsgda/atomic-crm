@@ -9,6 +9,7 @@ import { QuickViewDrawer } from './QuickViewDrawer';
 import { STATUS_CONFIG } from '../constants';
 import { collectAllFlags, selectTodaysFlags } from '../services/policyFlags';
 import { supabaseStorage } from '../services/supabaseStorage';
+import { imieninyForDate } from '../constants/imieniny';
 
 const LS_LAST_REMINDER = 'crm-alina:lastReminderShownAt';
 const LS_INTERVAL = 'crm-alina:reminderInterval';
@@ -30,6 +31,7 @@ interface Props {
 }
 
 // B1 FIX 2026-05-15: Widget dzień tygodnia + data dla Aliny
+// 2026-05-16: dodano imieniny (npm `imieniny`)
 const DAYS_PL = ['Niedziela', 'Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota'];
 const MONTHS_PL = ['stycznia', 'lutego', 'marca', 'kwietnia', 'maja', 'czerwca', 'lipca', 'sierpnia', 'września', 'października', 'listopada', 'grudnia'];
 
@@ -37,10 +39,16 @@ function DateHeader() {
   const now = new Date();
   const dayName = DAYS_PL[now.getDay()];
   const dateStr = `${now.getDate()} ${MONTHS_PL[now.getMonth()]} ${now.getFullYear()}`;
+  const imieniny = imieninyForDate(now);
   return (
-    <div className="flex items-center gap-3 px-1 mb-2">
+    <div className="flex items-center gap-3 px-1 mb-2 flex-wrap">
       <span className="text-lg font-black text-zinc-900 dark:text-white">{dayName}</span>
       <span className="text-sm text-zinc-500 dark:text-zinc-400 font-medium">{dateStr}</span>
+      {imieniny && (
+        <span className="text-sm text-rose-500 dark:text-rose-400 font-semibold">
+          🎂 Imieniny: {imieniny}
+        </span>
+      )}
     </div>
   );
 }

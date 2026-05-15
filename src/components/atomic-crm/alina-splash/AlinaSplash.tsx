@@ -141,6 +141,8 @@ const CHANGELOG: ChangeEntry[] = [
       "Ubezpieczony różny od ubezpieczającego (np. dziecko z NNW szkolnym) zapisywany jako osobna osoba.",
       "🔒 PESEL zawsze szyfrowany — system odmawia zapisu numeru PESEL gdy aplikacja jest zablokowana (zapomniane hasło nie spowoduje już wycieku danych do bazy).",
       "📋 Nowy widget na Pulpicie — lista spraw do uzupełnienia (brakujące rejestracje, NIP-y, typy polis). Możesz oznaczyć jako zrobione, pominąć na dziś lub pominąć trwale. Reminder pojawia się co kilka godzin.",
+      "💬 Lista spraw do uzupełnienia (chmurka) pływa teraz nad ikonką Oka w prawym dolnym rogu — widać ją z każdej strony, nie tylko na Pulpicie. Strzałka przy zgłoszeniu otwiera od razu właściwą polisę pojazdu (gdy brak rejestracji) albo kartę klienta.",
+      "🎂 Imieniny dnia obok daty na Pulpicie (Andrzej, Maria…) — żebyś wiedziała komu pogratulować.",
     ],
   },
   {

@@ -1,12 +1,13 @@
-import {
+import type {
   Client,
   Policy,
   ClientNote,
   PolicyType,
-  TerminationBasis,
   SalesStage,
   NoteTag,
+  InsuredPerson,
 } from "../types";
+import { TerminationBasis } from "../types";
 import { addDays, isValid, addMinutes } from "date-fns";
 import { LEGACY_RECOGNITION_MAP } from "../data/legacy/index";
 import {
@@ -62,10 +63,14 @@ export class DataMapper {
         if (row[11]) {
           try {
             restoredNotes = JSON.parse(row[11]);
-          } catch {}
+          } catch {
+            // intentionally empty: notes are optional in JSON restore path
+          }
         }
         return { client: restored, notes: restoredNotes };
-      } catch {}
+      } catch {
+        // intentionally empty: fall through to normal client construction
+      }
     }
 
     const client: Client = {
@@ -97,28 +102,6 @@ export class DataMapper {
     if (!row || row.length < 5) return null;
 
     const str = (v: any) => (v ? String(v).trim() : "");
-    const money = (v: any) => {
-      if (typeof v === "number") return v;
-      if (!v) return 0;
-      const cleaned = String(v)
-        .replace(/[^\d.,-]/g, "")
-        .replace(",", ".");
-      return parseFloat(cleaned) || 0;
-    };
-    const date = (v: any) => {
-      if (v instanceof Date) return v.toISOString();
-      if (!v) return new Date().toISOString();
-      if (typeof v === "string" && v.match(/^\d{1,2}\.\d{1,2}\.\d{4}/)) {
-        const parts = v.split(".");
-        return new Date(
-          Number(parts[2]),
-          Number(parts[1]) - 1,
-          Number(parts[0]),
-        ).toISOString();
-      }
-      const d = new Date(v);
-      return isValid(d) ? d.toISOString() : new Date().toISOString();
-    };
 
     // --- 1. CLIENT MAPPING ---
     const rawName = str(row[0]);
@@ -150,7 +133,7 @@ export class DataMapper {
     ) {
       try {
         client = JSON.parse(sysClientJson);
-      } catch (e) {
+      } catch {
         client = tempClient;
       }
     } else {
@@ -181,7 +164,7 @@ export class DataMapper {
             policy.createdAt,
           );
         }
-      } catch (e) {
+      } catch {
         const mapped = mapPolicyLegacy(rawProduct, rawNotes, row, client);
         policy = mapped.policy;
         notes = mapped.notes;
@@ -220,15 +203,23 @@ function ensureUlPrefix(s: string): string {
   return `ul. ${s}`;
 }
 
-function parseAddress(raw: string): {
+// BUG #2 FIX: exported — Agent #5 testy importują parseAddress z dataMapper.ts
+// Zwraca zarówno `zipCode` (pole Client) jak i `zip` (alias dla testów)
+export function parseAddress(raw: string): {
   street: string;
   city: string;
   zipCode: string;
+  zip: string;
 } {
-  if (!raw) return { street: raw, city: "", zipCode: "" };
+  if (!raw) return { street: raw, city: "", zipCode: "", zip: "" };
   const zipMatch = raw.match(/(\d{2}-\d{3})/);
   if (!zipMatch) {
-    return { street: ensureUlPrefix(raw.trim()), city: "", zipCode: "" };
+    return {
+      street: ensureUlPrefix(raw.trim()),
+      city: "",
+      zipCode: "",
+      zip: "",
+    };
   }
   const zipCode = zipMatch[1];
   const prefix = zipCode.split("-")[0];
@@ -237,7 +228,8 @@ function parseAddress(raw: string): {
   if (city && rest.toLowerCase().startsWith(city.toLowerCase())) {
     rest = rest.slice(city.length).trim();
   }
-  return { street: ensureUlPrefix(rest.trim()), city, zipCode };
+  const street = ensureUlPrefix(rest.trim());
+  return { street, city, zipCode, zip: zipCode };
 }
 
 function mapClientLegacy(
@@ -300,7 +292,20 @@ function mapClientLegacy(
   };
 }
 
-function mapNotesLegacy(
+// BUG #1 FIX: exported — Agent #5 testy importują parseNotes z dataMapper.ts
+// parseNotes(rawNotes, baseDate) to publiczne API; mapNotesLegacy to wewnętrzne (4 argumenty)
+export function parseNotes(
+  rawNotes: string,
+  baseDate: Date | string,
+): ClientNote[] {
+  const baseDateStr =
+    baseDate instanceof Date
+      ? baseDate.toISOString()
+      : (baseDate ?? new Date().toISOString());
+  return mapNotesLegacy(rawNotes, "STANDALONE", "STANDALONE", baseDateStr);
+}
+
+export function mapNotesLegacy(
   rawNotes: string,
   clientId: string,
   policyId: string,
@@ -309,37 +314,27 @@ function mapNotesLegacy(
   const notes: ClientNote[] = [];
   if (!rawNotes) return notes;
 
-  // BUG #1 FIX: split po `_` LUB `\n` LUB przed datą inline (dd.mm lub dd.mm.yyyy)
-  // Regex split: rozdzielamy przed każdą datą inline poprzedzoną whitespace/separator
-  // Przykład: "czekam...05.09.2025 rozmawiałam" → dwa fragmenty
-  const INLINE_DATE_SPLIT =
-    /(?:_|\n)|(?=(?:^|[\s;)\->])(\d{1,2}\.\d{1,2}(?:\.\d{4})?)\b)/g;
-
-  // Używamy split z lookahead przez matchAll + manualne cięcie, bo JS split z lookbehind
-  // jest ograniczony — zamiast tego splitujemy po `_`/`\n` i wewnątrz każdego fragmentu
-  // szukamy dalszych dat inline i rozcinamy
+  // BUG #1 FIX: split po `_` LUB `\n` i wewnątrz każdego fragmentu po dacie inline (dd.mm lub dd.mm.yyyy)
+  // Przykład: "a_b 11.06.2025 c" → ["a", "b", "11.06.2025 c"] → notatka "b" + notatka z datą 2025-06-11
   const roughParts = rawNotes.split(/_|\n/);
   const parts: string[] = [];
+  // LEADING_DATE_RE: fragment zaczyna się od daty — data = nagłówek notatki (nie tniemy)
   const LEADING_DATE_RE = /^(\d{1,2}\.\d{1,2}(?:\.\d{4})?)\b\s*/;
-  const MID_DATE_RE = /(?<=\S\s)(\d{1,2}\.\d{1,2}(?:\.\d{4})?)\b/;
+  // MID_DATE_RE: data pojawia się w środku fragmentu (poprzedzona spacją/separatorem)
+  const MID_DATE_RE = /(?<=\s)(\d{1,2}\.\d{1,2}(?:\.\d{4})?\b)/;
 
   for (const rough of roughParts) {
     // Sprawdzamy czy w fragmencie jest wewnętrzna data (nie na samym początku)
     const trimmed = rough.trim();
     if (!trimmed) continue;
 
-    // Jeśli po przyciętym fragmencie jest wzorzec <tekst><whitespace><dd.mm(.yyyy)><tekst>
-    // to tniemy na granicy daty
-    const midMatch = trimmed.match(
-      /^(.+?)\s+(\d{1,2}\.\d{1,2}(?:\.\d{4})?)\b(.*)$/,
-    );
-    if (
-      midMatch &&
-      midMatch[1].length > 3 && // sensowny tekst przed datą
-      !LEADING_DATE_RE.test(trimmed) // nie zaczyna się od daty (tam data = nagłówek)
-    ) {
-      parts.push(midMatch[1].trim());
-      parts.push((midMatch[2] + " " + midMatch[3]).trim());
+    // Jeśli fragment NIE zaczyna się od daty i MA datę w środku — tniemy na granicy daty
+    const dm = MID_DATE_RE.exec(trimmed);
+    if (dm && !LEADING_DATE_RE.test(trimmed)) {
+      const before = trimmed.slice(0, dm.index).trim();
+      const fromDate = trimmed.slice(dm.index).trim(); // data na początku → POLISH_DATE_RE ją wyciągnie
+      if (before) parts.push(before);
+      parts.push(fromDate);
     } else {
       parts.push(trimmed);
     }
@@ -360,7 +355,9 @@ function mapNotesLegacy(
     if (polishDateMatch) {
       const day = Number(polishDateMatch[1]);
       const month = Number(polishDateMatch[2]) - 1;
-      const year = polishDateMatch[3] ? Number(polishDateMatch[3]) : new Date().getFullYear();
+      const year = polishDateMatch[3]
+        ? Number(polishDateMatch[3])
+        : new Date().getFullYear();
       const candidate = new Date(year, month, day);
       if (isValid(candidate)) {
         noteDate = candidate;
@@ -436,6 +433,12 @@ function mapPolicyLegacy(
 
   const pLow = rawProduct.toLowerCase();
 
+  // BUG #4 FIX: col[8]='?' — brak danych o produkcie, klasyfikacja domyślna OC + aiNote
+  const isMissingProductData = rawProduct.trim() === "?";
+  const aiNoteFromMissingData: string | undefined = isMissingProductData
+    ? "BRAK DANYCH: col[8]=?, klasyfikacja domyślna"
+    : undefined;
+
   let policyType: PolicyType = "OC";
   let vehicleBrand = "";
   let vehicleModel = "";
@@ -447,10 +450,10 @@ function mapPolicyLegacy(
 
   let autoDetails: any = { coOwners: [] };
   let homeDetails: any = { coOwners: [] };
-  let travelDetails: any = {};
-  let lifeDetails: any = {};
+  const travelDetails: any = {};
+  const lifeDetails: any = {};
   // Zbieracze z parseCoOwnerColumn przed stworzeniem obiektu `policy`
-  let pendingInsuredPersons: import("../types").InsuredPerson[] = [];
+  const pendingInsuredPersons: InsuredPerson[] = [];
   let pendingClientPesel: string | undefined = undefined;
   let travelStart: string | undefined = undefined;
   let travelEnd: string | undefined = undefined;
@@ -758,6 +761,13 @@ function mapPolicyLegacy(
       ? { insuredPersons: pendingInsuredPersons }
       : {}),
   };
+
+  // BUG #4: col[8]='?' — dołącz aiNote do polisy
+  if (aiNoteFromMissingData) {
+    policy.aiNote =
+      [policy.aiNote, aiNoteFromMissingData].filter(Boolean).join(" | ") ||
+      aiNoteFromMissingData;
+  }
 
   // BUG #3: PESEL klienta głównego z col[18] "pesel kl X" — wstrzykujemy po stworzeniu policy
   if (pendingClientPesel) {

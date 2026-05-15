@@ -1,4 +1,4 @@
-import { CoOwner, TravelParticipant } from "../../types";
+import type { CoOwner, TravelParticipant } from "../../types";
 
 /**
  * Typ wyniku parseCoOwnerColumn.
@@ -70,7 +70,7 @@ export const parseOldPolicyInfo = (raw: string) => {
   const valueMatch = text.match(/(\d[\d\s]+)\s*(netto|brutto|zł|pln|tys)/i);
 
   if (valueMatch) {
-    let amountStr = valueMatch[1].replace(/\s/g, ""); // Usuń spacje: "56 730" -> "56730"
+    const amountStr = valueMatch[1].replace(/\s/g, ""); // Usuń spacje: "56 730" -> "56730"
     let amount = parseFloat(amountStr);
     const suffix = valueMatch[2].toLowerCase();
 
@@ -216,7 +216,7 @@ export const parseCoOwnerColumn = (raw: string): ParseCoOwnerResult | null => {
 
   // 4. Fallback: Sam tekst (np. imię i nazwisko bez peselu)
   // Clean text further before saving
-  let cleanName = text
+  const cleanName = text
     .replace(/tel\.?\s?/gi, "")
     .replace(/^[-_,:;]+/, "")
     .trim();

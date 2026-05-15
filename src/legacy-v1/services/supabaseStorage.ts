@@ -114,7 +114,7 @@ function toArray(val: any): string[] {
   if (typeof val === 'string') {
     const t = val.trim();
     if (!t || t === '{}') return [];
-    try { const p = JSON.parse(t); return Array.isArray(p) ? p : []; } catch {}
+    try { const p = JSON.parse(t); return Array.isArray(p) ? p : []; } catch { /* invalid JSON — return [] below */ }
   }
   return [];
 }
@@ -268,7 +268,7 @@ async function rowToPolicy(r: any, dek: CryptoKey | null): Promise<Policy> {
   };
 }
 
-async function noteToRow(n: ClientNote, dek: CryptoKey | null) {
+async function noteToRow(n: ClientNote, _dek: CryptoKey | null) {
   let reminderStatus: 'PRZYPOMNIENIE' | 'UKONCZONE' | 'ANULOWANE' | null = null;
   if (n.reminderDate) {
     reminderStatus = n.isCompleted ? 'UKONCZONE' : 'PRZYPOMNIENIE';
@@ -345,7 +345,7 @@ async function itemToTrash(item: DeletedItem, dek: CryptoKey | null) {
 // ─── Schema refactor v2 — moduł-level maps (aktualizowane w init()) ──────────
 
 let vehicleMap = new Map<string, any>();
-let insuredPersonsMap = new Map<string, any[]>();
+let insuredPersonsMap = new Map<string, InsuredPerson[]>();
 let clientBusinessesMap = new Map<string, any[]>();
 let noteLinksMap = new Map<string, string[]>();
 

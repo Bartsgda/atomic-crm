@@ -1,4 +1,3 @@
-import { VehicleSubType } from "../../types";
 import { normalizeAgentInput } from "../../data/normalizationDictionary";
 
 // BUG #5 FIX (BUG-SYS-REG): tablica blacklist fałszywych dopasowań
@@ -113,22 +112,24 @@ export const parseAutoString = (raw: string) => {
   }
 
   const result: any = {
-    vehicleReg: "",
+    vehicleReg: null,
     vehicleBrand: "",
     autoDetails: {},
   };
 
   // 1. WYCIĄGANIE REJESTRACJI (Najważniejsze)
-  // BUG #5 FIX: używamy isValidPLPlate() z PLATE_BLACKLIST zamiast prostego testu
-  const regMatch = processingText.match(PARSER_PATTERNS.REG_NUMBER);
-  if (regMatch) {
-    // Grupa 1 (wyróżnik) + Grupa 2 (reszta)
+  // BUG #5 FIX v6.8: matchAll + iteracja — znajdź PIERWSZY ważny kandydat (nie tylko pierwszy match)
+  // Potrzebne dla "Toyota RAV4 GD12345" gdzie RAV4 jest pierwszy ale w blackliście
+  const REG_NUMBER_GLOBAL =
+    /(?<![A-Z0-9])([A-Z]{2,3})\s?([A-Z0-9]*\d[A-Z0-9]*)(?![A-Z0-9])/gi;
+  const allRegMatches = [...processingText.matchAll(REG_NUMBER_GLOBAL)];
+  for (const regMatch of allRegMatches) {
     const candidate = (regMatch[1] + regMatch[2]).toUpperCase();
-
     if (isValidPLPlate(candidate)) {
       result.vehicleReg = candidate;
       // Zastąp rejestrację SPACJĄ, aby nie skleić wyrazów
       processingText = processingText.replace(regMatch[0], " ");
+      break;
     }
   }
 

@@ -3,6 +3,7 @@ import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react'
 import { AppState, Client, Policy, ClientNote } from '../types';
 import { Search, Phone, Mail, Plus, Edit2, ExternalLink, ArrowRight, User, Link as LinkIcon, Car, Home, Heart, Users, ArrowUp, ArrowDown, ArrowUpDown, Calendar, StickyNote, X, Clock, Plane, Zap } from 'lucide-react';
 import { ClientFormModal } from './ClientFormModal';
+import { computeClientFlagCount } from '../services/policyFlags';
 import { format, differenceInDays, isValid } from 'date-fns';
 import { DeleteSafetyButton } from './DeleteSafetyButton';
 import { Archive, RotateCcw, Trash, AlertCircle } from 'lucide-react';
@@ -33,7 +34,7 @@ interface VirtualClient extends Client {
     sourcePolicies: { id: string; label: string; type: 'AUTO' | 'DOM' | 'PODROZ'; mainClientName: string }[];
 }
 
-type SortKey = 'name' | 'activity' | 'portfolio';
+type SortKey = 'name' | 'activity' | 'portfolio' | 'flags';
 
 const TYPE_LABELS: Record<string, string> = {
     'OC': 'OC', 'AC': 'AC', 'BOTH': 'OC+AC',
@@ -74,6 +75,9 @@ export const ClientsList: React.FC<Props> = ({
   // Sorting State - Domyślnie po aktywności (Najnowsze na górze)
   const [sortKey, setSortKey] = useState<SortKey>('activity');
   const [sortDir, setSortDir] = useState<'asc' | 'desc'>('desc');
+
+  // Filtr "tylko z flagami" (Dashboard TODO)
+  const [showFlagsOnly, setShowFlagsOnly] = useState(false);
 
   useEffect(() => {
       if (initialAutoCreate) {
@@ -239,13 +243,16 @@ export const ClientsList: React.FC<Props> = ({
           
           const latestNoteContent = userNotes.length > 0 ? userNotes[0].content : (client.notes || '');
 
+          const flagCount = computeClientFlagCount(client, state.policies);
+
           return {
               ...client,
               _offers: offers,
               _upcoming: upcoming,
               _lastActivity: lastActivity,
               _v: v, _p: propCount, _l: l,
-              _notePreview: latestNoteContent
+              _notePreview: latestNoteContent,
+              _flagCount: flagCount,
           };
       });
 
@@ -273,14 +280,20 @@ export const ClientsList: React.FC<Props> = ({
         return matchesName || matchesPhone || matchesEmail || matchesBusiness || matchesSource;
       });
 
-      // 3. Sortowanie
-      return filtered.sort((a, b) => {
+      // 3. Filtr flag (Dashboard TODO)
+      const flagFiltered = showFlagsOnly
+          ? filtered.filter(c => (c._flagCount ?? 0) > 0)
+          : filtered;
+
+      // 4. Sortowanie
+      return flagFiltered.sort((a, b) => {
           let valA: any = 0, valB: any = 0;
 
           switch(sortKey) {
               case 'name': valA = a.lastName; valB = b.lastName; break;
               case 'activity': valA = a._lastActivity; valB = b._lastActivity; break;
               case 'portfolio': valA = a._v + a._p + a._l; valB = b._v + b._p + b._l; break;
+              case 'flags': valA = a._flagCount ?? 0; valB = b._flagCount ?? 0; break;
           }
 
           if (valA < valB) return sortDir === 'asc' ? -1 : 1;
@@ -288,7 +301,7 @@ export const ClientsList: React.FC<Props> = ({
           return 0;
       });
 
-  }, [state.policies, state.clients, state.notes, trash, coOwnerList, showCoOwners, viewMode, searchTerm, sortKey, sortDir]);
+  }, [state.policies, state.clients, state.notes, trash, coOwnerList, showCoOwners, viewMode, searchTerm, sortKey, sortDir, showFlagsOnly]);
 
   const handleSort = (key: SortKey) => {
       if (sortKey === key) {
@@ -410,12 +423,26 @@ export const ClientsList: React.FC<Props> = ({
                 >
                     <LinkIcon size={12} /> Współwł.
                 </button>
-                <button 
+                <button
                     onClick={() => { setShowCoOwners(false); setViewMode('ARCHIVE'); }}
                     className={`px-4 py-2 rounded-lg text-xs font-black uppercase transition-all flex items-center gap-2 ${viewMode === 'ARCHIVE' ? 'bg-zinc-950 dark:bg-zinc-100 text-white dark:text-zinc-900 shadow-sm' : 'text-zinc-500 hover:text-zinc-700'}`}
                 >
                     <Archive size={12} /> Archiwum
                 </button>
+                {/* Dashboard TODO — tylko klienci z flagami */}
+                {!showCoOwners && viewMode === 'CLIENTS' && (
+                    <button
+                        onClick={() => {
+                            setShowFlagsOnly(f => !f);
+                            if (!showFlagsOnly) { setSortKey('flags'); setSortDir('desc'); }
+                            else setSortKey('activity');
+                        }}
+                        className={`px-4 py-2 rounded-lg text-xs font-black uppercase transition-all flex items-center gap-2 ${showFlagsOnly ? 'bg-red-600 text-white shadow-sm' : 'text-zinc-500 hover:text-zinc-700'}`}
+                        title="Pokaż tylko klientów wymagających uzupełnienia danych"
+                    >
+                        <AlertCircle size={12} /> TODO
+                    </button>
+                )}
             </div>
 
             {/* OMNI SEARCH — styl + rozmiar identyczny z Dashboard pojazdow */}
@@ -475,6 +502,15 @@ export const ClientsList: React.FC<Props> = ({
                         </th>
                         <th className={`px-4 ${isCompact ? 'py-3' : 'py-5'} bg-blue-50/30 dark:bg-blue-900/10`}>
                             <div className="flex items-center gap-1">W toku / Wznowienia</div>
+                        </th>
+                        <th
+                            onClick={() => handleSort('flags')}
+                            className={`px-4 ${isCompact ? 'py-3' : 'py-5'} cursor-pointer hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors ${showFlagsOnly ? 'bg-red-50/50 dark:bg-red-900/10' : ''}`}
+                            title="Sortuj według liczby brakujących danych"
+                        >
+                            <div className="flex items-center gap-1">
+                                <AlertCircle size={12} className="text-red-500" /> Flagi <SortIcon k="flags" />
+                            </div>
                         </th>
                     </>
                 )}

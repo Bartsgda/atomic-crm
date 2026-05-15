@@ -3,6 +3,17 @@
    Użycie: atrybut data-v1-skin="warm" | "midnight" na <aside>
    ========================================================= */
 
+/* ── A1 FIX 2026-05-15: Remove spinners from number inputs (Alina feedback) ── */
+/* Zachowujemy type="number" + inputMode="decimal" zgodnie z SUPREME_RULES §1.  */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
 /* ── Skin: Claude Warm (jasny krem) ── */
 [data-v1-skin="warm"] {
   --v1-bg: #fdfaf6;

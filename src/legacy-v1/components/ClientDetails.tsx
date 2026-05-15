@@ -13,6 +13,7 @@ import { differenceInDays, format, isAfter } from 'date-fns';
 import { pl } from 'date-fns/locale/pl';
 import { Notatki } from './Notatki';
 import { storage } from '../services/storage';
+import { computePolicyFlags, computeClientLevelFlags, PolicyFlag, ClientFlag } from '../services/policyFlags';
 import { DeleteSafetyButton } from './DeleteSafetyButton';
 import { TerminationFormModal } from './TerminationFormModal';
 import { PolicyFormModal } from './PolicyFormModal';
@@ -63,6 +64,30 @@ const SectionHeader = ({ icon: Icon, title }: { icon: any, title: string }) => (
     </div>
 );
 
+// ── FLAG PILLS ────────────────────────────────────────────────────────────
+const FLAG_COLORS: Record<string, string> = {
+  CRITICAL: 'bg-red-100 text-red-700 border-red-200 dark:bg-red-900/30 dark:text-red-400 dark:border-red-800/40',
+  WARNING: 'bg-amber-100 text-amber-700 border-amber-200 dark:bg-amber-900/30 dark:text-amber-400 dark:border-amber-800/40',
+};
+
+const FlagPill = ({ flag }: { flag: PolicyFlag | ClientFlag }) => (
+  <span
+    className={`inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[9px] font-black border leading-none ${FLAG_COLORS[flag.severity]}`}
+    title={flag.tooltip}
+  >
+    {flag.emoji} {flag.label}
+  </span>
+);
+
+const FlagPillRow = ({ flags }: { flags: (PolicyFlag | ClientFlag)[] }) => {
+  if (flags.length === 0) return null;
+  return (
+    <div className="flex flex-wrap gap-1 mt-2 mb-1">
+      {flags.map(f => <FlagPill key={f.code} flag={f} />)}
+    </div>
+  );
+};
+
 // --- NEW REDESIGNED POLICY CARD (PRODUCT CENTER STYLE) ---
 const PolicyCardItem = ({ policy, client, statusConfig, isFiltered, isHovered, daysToExpiry, onClick, onEdit, onAction, onToggleDocs, onDoubleClick }: any) => {
     let TypeIcon = FileText;
@@ -103,6 +128,9 @@ const PolicyCardItem = ({ policy, client, statusConfig, isFiltered, isHovered, d
         // Map travel participants to match structure { name: ... }
         ...(policy.travelDetails?.participants?.map((p: any) => ({ name: p.fullName })) || [])
     ];
+
+    // Flagi "wymaga uzupełnienia" — AUDIT_PLAN Faza 4
+    const policyFlags = computePolicyFlags(policy, client);
 
     // Renewal Badge Logic
     let renewalBadge = null;
@@ -170,10 +198,20 @@ const PolicyCardItem = ({ policy, client, statusConfig, isFiltered, isHovered, d
                     <div className="mb-3 space-y-1">
                         {coOwners.map((owner: any, idx: number) => (
                             <div key={idx} className="flex items-center gap-1.5 text-[10px] font-bold text-purple-600 bg-purple-50 dark:bg-purple-900/20 px-2 py-1 rounded-lg w-fit border border-purple-100 dark:border-purple-800">
-                                <Users size={10} /> 
+                                <Users size={10} />
                                 <span className="truncate max-w-[180px]">{owner.name}</span>
                             </div>
                         ))}
+                    </div>
+                )}
+
+                {/* FLAGI "wymaga uzupełnienia" — klikalne (otwierają edycję polisy) */}
+                {policyFlags.length > 0 && (
+                    <div
+                        onClick={(e) => { e.stopPropagation(); onEdit(); }}
+                        title="Kliknij aby uzupełnić dane"
+                    >
+                        <FlagPillRow flags={policyFlags} />
                     </div>
                 )}
 
@@ -478,9 +516,13 @@ export const ClientDetails: React.FC<Props> = ({ client, policies, notes, termin
                             />
                         </div>
 
-                        <div className="flex items-center gap-3 mt-1.5">
+                        <div className="flex items-center gap-3 mt-1.5 flex-wrap">
                             <span className="bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 text-[10px] font-mono px-2 py-0.5 rounded font-bold">{client.pesel || 'BRAK PESEL'}</span>
                             {isVip && <span className="text-[9px] font-black text-amber-600 bg-amber-50 dark:bg-amber-900/20 px-2 py-0.5 rounded uppercase tracking-wider">Kluczowy Klient</span>}
+                            {/* Flagi klienta (np. PESEL niezaszyfrowany) */}
+                            {computeClientLevelFlags(client).map(f => (
+                                <FlagPill key={f.code} flag={f} />
+                            ))}
                         </div>
                     </div>
                 </div>

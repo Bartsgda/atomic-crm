@@ -1267,20 +1267,20 @@ export const PolicyFormModal: React.FC<Props> = ({ isOpen, onClose, initialClien
                                 </div>
 
                                 <div className="grid grid-cols-2 gap-4">
-                                    {/* Policy Number Field - Added Here */}
-                                    <div>
+                                    {/* A3 FIX 2026-05-15: col-span-2 = pełna szerokość, font-mono dla czytelności numerów */}
+                                    <div className="col-span-2">
                                         <label className={LABEL_CLASS}>
                                             Numer Polisy {currentStage === 'sprzedaż' && <span className="text-red-500">*</span>}
                                         </label>
                                         <input
                                             {...register('policyNumber', { required: currentStage === 'sprzedaż' })}
-                                            className={`${STANDARD_INPUT_CLASS} font-mono uppercase`}
+                                            className={`${STANDARD_INPUT_CLASS} font-mono uppercase tracking-wider`}
                                             placeholder="np. POL/12345"
                                         />
                                     </div>
-                                    <div>
+                                    <div className="col-span-2">
                                         <label className="text-[10px] font-bold uppercase text-zinc-500 mb-1 block pl-2">Składka Roczna (PLN)</label>
-                                        <input type="number" step="0.01" {...register('premium')} className={`${STANDARD_INPUT_CLASS} text-emerald-600 font-black text-lg`} placeholder="0.00" />
+                                        <input type="number" step="0.01" inputMode="decimal" onFocus={e => e.target.select()} {...register('premium')} className={`${STANDARD_INPUT_CLASS} text-emerald-600 font-black text-lg`} placeholder="0.00" />
                                     </div>
                                 </div>
                                 <div className="grid grid-cols-2 gap-4">

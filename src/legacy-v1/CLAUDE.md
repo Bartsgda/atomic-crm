@@ -85,6 +85,9 @@ Rola `group_prefix` w SubAgents:
 - **[AI_ARCHITECTURE.md](./AI_ARCHITECTURE.md)** — Brain Core v2.0
 - **[REQUIREMENTS.md](./REQUIREMENTS.md)** — hub wymagań
 
+### 🗄️ Scratch slots (tymczasowe tabele dla Claude)
+- **[SLOT_REGISTRY.md](./SLOT_REGISTRY.md)** — 30 zarezerwowanych tabel `test.slot_01..30`. Gdy sesja potrzebuje nowej tabeli — bierze FREE slot, aktualizuje rejestr, używa `slotStore` z `services/slotStore.ts`. Bartek co miesiac: PROMOTE (RENAME) lub RESET (TRUNCATE + FREE).
+
 ### 🛠️ Naprawa / dane
 - **[DATA_REPAIR_SPEC.md](./DATA_REPAIR_SPEC.md)** — Centrum Naprawy Danych
 - **[BACKUP_SYSTEM.md](./BACKUP_SYSTEM.md)** — JSON backup

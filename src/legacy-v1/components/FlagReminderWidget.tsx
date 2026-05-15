@@ -363,11 +363,37 @@ export const FlagReminderWidget: React.FC<Props> = ({ state, onNavigate }) => {
                 {/* Link + akcje */}
                 <div className="flex items-center gap-1 shrink-0">
                   <button
-                    onClick={() =>
-                      onNavigate("client-details", { clientId: item.clientId })
-                    }
+                    onClick={() => {
+                      const client = state.clients.find(
+                        (c) => c.id === item.clientId,
+                      );
+                      if (!client) return;
+                      // AUTO_NO_REG → otwórz modal polisy do edycji danych pojazdu.
+                      // Inne flagi polisowe → podświetl polisę na karcie klienta.
+                      // Flagi klienta → otwórz kartę klienta.
+                      if (
+                        item.targetType === "POLICY" &&
+                        item.flag.code === "AUTO_NO_REG"
+                      ) {
+                        onNavigate("client-details", {
+                          client,
+                          autoOpenPolicyId: item.targetId,
+                        });
+                      } else if (item.targetType === "POLICY") {
+                        onNavigate("client-details", {
+                          client,
+                          highlightPolicyId: item.targetId,
+                        });
+                      } else {
+                        onNavigate("client-details", { client });
+                      }
+                    }}
                     className="p-1 rounded hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-400 hover:text-zinc-700 transition-colors"
-                    title="Otwórz kartę klienta"
+                    title={
+                      item.flag.code === "AUTO_NO_REG"
+                        ? "Uzupełnij dane pojazdu"
+                        : "Otwórz kartę klienta"
+                    }
                   >
                     <ArrowRight size={13} />
                   </button>

@@ -7,7 +7,6 @@ import { pl } from 'date-fns/locale/pl';
 import { AdvancedFilters } from './AdvancedFilters';
 import { QuickViewDrawer } from './QuickViewDrawer';
 import { STATUS_CONFIG } from '../constants';
-import { FlagReminderWidget } from './FlagReminderWidget';
 import { collectAllFlags, selectTodaysFlags } from '../services/policyFlags';
 import { supabaseStorage } from '../services/supabaseStorage';
 
@@ -132,7 +131,6 @@ export const Dashboard: React.FC<Props> = ({ state, onNavigate, onDeletePolicy, 
 
   // --- FLAG REMINDER TOAST ---
   const [reminderToast, setReminderToast] = useState<{ count: number } | null>(null);
-  const widgetRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Sprawdź czy trzeba pokazać toast (raz przy mount na Dashboard)
@@ -499,13 +497,10 @@ export const Dashboard: React.FC<Props> = ({ state, onNavigate, onDeletePolicy, 
             Masz <span className="font-black text-orange-600">{reminderToast.count}</span> spraw do uzupełnienia.
           </p>
           <button
-            onClick={() => {
-              setReminderToast(null);
-              widgetRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }}
+            onClick={() => setReminderToast(null)}
             className="text-xs text-orange-600 font-bold hover:underline whitespace-nowrap"
           >
-            Pokaż
+            OK
           </button>
           <button
             onClick={() => setReminderToast(null)}
@@ -515,11 +510,6 @@ export const Dashboard: React.FC<Props> = ({ state, onNavigate, onDeletePolicy, 
           </button>
         </div>
       )}
-
-      {/* FLAG REMINDER WIDGET */}
-      <div ref={widgetRef} id="flag-reminder-widget">
-        <FlagReminderWidget state={state} onNavigate={onNavigate} />
-      </div>
 
       {/* FILTER BAR */}
       <div className="sticky top-2 z-30">

@@ -23,6 +23,7 @@ import { Sidebar, MENU_CATEGORIES } from "./components/Navigation/Sidebar";
 import { storage, supabaseStorage } from "./services/storage";
 import { SnapshotDialog } from "./components/SnapshotDialog";
 import StatusEye from "./components/StatusEye";
+import { FlagReminderWidget } from "./components/FlagReminderWidget";
 import {
   AppState,
   Client,
@@ -798,6 +799,16 @@ function App() {
             )}
         </div>
       </main>
+
+      {/* Chmurka flag nad ikoną Eye (StatusEye renderowany w EncryptionGate) */}
+      {!isLoading && (
+        <div
+          className="fixed right-5 z-[90] w-[360px] max-h-[70vh] overflow-y-auto shadow-2xl rounded-2xl"
+          style={{ bottom: 92 }}
+        >
+          <FlagReminderWidget state={state} onNavigate={navigate} />
+        </div>
+      )}
 
       <DataImporter
         isOpen={isImporterOpen}

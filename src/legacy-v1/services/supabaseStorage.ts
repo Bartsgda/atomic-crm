@@ -12,7 +12,8 @@ import { getSupabaseClient } from '../../components/atomic-crm/providers/supabas
 import type {
   AppState, Client, Policy, ClientNote, Notification,
   TerminationRecord, SubAgent, ChecklistTemplates,
-  InsurerConfig, DeletedItem, UiPreferences
+  InsurerConfig, DeletedItem, UiPreferences,
+  Vehicle, InsuredPerson, ClientBusiness,
 } from '../types';
 import { encryptField, decryptField, encryptJsonField, decryptJsonField, looksEncrypted } from './crypto';
 
@@ -149,6 +150,13 @@ async function clientToRow(c: Client, dek: CryptoKey | null) {
 async function rowToClient(r: any, dek: CryptoKey | null): Promise<Client> {
   const phones = await decJson<string[]>(r.phones, dek, []);
   const emails = await decJson<string[]>(r.emails, dek, []);
+
+  // Businesses — nowa tabela (priorytet) lub fallback na JSONB
+  const businessesFromTable: ClientBusiness[] = clientBusinessesMap.get(r.id) || [];
+  const businesses = businessesFromTable.length > 0
+    ? businessesFromTable.map(b => ({ name: b.name, nip: b.nip, regon: b.regon, krs: b.krs, role: b.role, notes: b.notes }))
+    : toArray(r.businesses) as any;
+
   return {
     id: r.v1_original_id || r.id,
     firstName: r.first_name ?? '',
@@ -158,7 +166,7 @@ async function rowToClient(r: any, dek: CryptoKey | null): Promise<Client> {
     gender: r.gender ?? undefined,
     phones: toArray(phones),
     emails: toArray(emails),
-    businesses: toArray(r.businesses) as any,
+    businesses,
     street: await decStr(r.street, dek),
     city: await decStr(r.city, dek),
     zipCode: await decStr(r.zip_code, dek),
@@ -203,6 +211,25 @@ async function policyToRow(p: Policy, dek: CryptoKey | null) {
 }
 
 async function rowToPolicy(r: any, dek: CryptoKey | null): Promise<Policy> {
+  // Vehicle — nowa tabela (priorytet) lub fallback na legacy auto_details
+  let vehicle: Vehicle | undefined;
+  if (r.vehicle_id && vehicleMap.has(r.vehicle_id)) {
+    const v = vehicleMap.get(r.vehicle_id);
+    vehicle = {
+      reg:         v.reg       ?? undefined,
+      brand:       v.brand     ?? undefined,
+      model:       v.model     ?? undefined,
+      vin:         v.vin       ?? undefined,
+      year:        v.year      ?? undefined,
+      fuel:        v.fuel      ?? undefined,
+      vehicleType: v.vehicle_type ?? undefined,
+      powerKw:     v.power_kw  ?? undefined,
+      engineCc:    v.engine_cc ?? undefined,
+    };
+  } else if (r.auto_details) {
+    vehicle = legacyAutoDetailsToVehicle(r.auto_details);
+  }
+
   return {
     id: r.v1_original_id || r.id,
     clientId: r.v1_original_client_id || r.client_id,
@@ -232,6 +259,12 @@ async function rowToPolicy(r: any, dek: CryptoKey | null): Promise<Policy> {
     createdAt: r.created_at,
     subAgentSplits: [],
     installments: [],
+    // Schema refactor v2
+    vehicle,
+    insuredPersons: insuredPersonsMap.get(r.id) || [],
+    renewalOfPolicyId:   r.renewal_of_policy_id   ?? null,
+    referredByName:      r.referred_by_name        ?? null,
+    referredByClientId:  r.referred_by_client_id   ?? null,
   };
 }
 
@@ -258,9 +291,15 @@ async function noteToRow(n: ClientNote, dek: CryptoKey | null) {
 }
 
 async function rowToNote(r: any, dek: CryptoKey | null, policyUuidToV1?: Map<string, string>): Promise<ClientNote> {
-  const linkedIds = (r.linked_policy_ids ?? []).map(
+  // policy_note_links — nowa tabela (priorytet) lub fallback na uuid[]
+  const linkedFromTable = noteLinksMap.get(r.id) || [];
+  const rawLinkedIds = linkedFromTable.length > 0
+    ? linkedFromTable
+    : (r.linked_policy_ids ?? []);
+  const linkedIds = rawLinkedIds.map(
     (uuid: string) => policyUuidToV1?.get(uuid) ?? uuid,
   );
+
   return {
     id: r.v1_original_id || r.id,
     clientId: r.v1_original_client_id || r.client_id,
@@ -301,6 +340,25 @@ async function itemToTrash(item: DeletedItem, dek: CryptoKey | null) {
     deleted_at: item.deletedAt,
     v1_original_id: isValidUUID(item.id) ? null : item.id,
   };
+}
+
+// ─── Schema refactor v2 — moduł-level maps (aktualizowane w init()) ──────────
+
+let vehicleMap = new Map<string, any>();
+let insuredPersonsMap = new Map<string, any[]>();
+let clientBusinessesMap = new Map<string, any[]>();
+let noteLinksMap = new Map<string, string[]>();
+
+/** Backward compat: konwertuje legacy auto_details JSONB → Vehicle */
+function legacyAutoDetailsToVehicle(autoDetails: any): Vehicle | undefined {
+  if (!autoDetails) return undefined;
+  const v: Vehicle = {};
+  if (autoDetails.vehicleType)    v.vehicleType = autoDetails.vehicleType;
+  if (autoDetails.fuelType)       v.fuel = autoDetails.fuelType;
+  if (autoDetails.engineCapacity) v.engineCc = Number(autoDetails.engineCapacity) || undefined;
+  if (autoDetails.enginePower)    v.powerKw  = Number(autoDetails.enginePower) || undefined;
+  if (autoDetails.productionYear) v.year     = Number(autoDetails.productionYear) || undefined;
+  return Object.keys(v).length > 0 ? v : undefined;
 }
 
 // ─── Defaults ─────────────────────────────────────────────────────────────────
@@ -386,7 +444,10 @@ class SupabaseStorageManager {
       throw new Error("Brak aktywnej sesji Supabase. Zaloguj się ponownie.");
     }
 
-    const [clientsRes, policiesRes, notesRes, subAgentsRes, insurersRes, trashRes, sharesRes] = await Promise.all([
+    const [
+      clientsRes, policiesRes, notesRes, subAgentsRes, insurersRes, trashRes, sharesRes,
+      vehiclesRes, insuredPersonsRes, businessesRes, noteLinksRes,
+    ] = await Promise.all([
       sb.from('insurance_clients').select('*').eq('tenant_id', TENANT_ID).order('last_name'),
       sb.from('policies').select('*').eq('tenant_id', TENANT_ID),
       sb.from('policy_notes').select('*').eq('tenant_id', TENANT_ID).order('created_at', { ascending: false }),
@@ -394,6 +455,11 @@ class SupabaseStorageManager {
       sb.from('insurers').select('name').eq('tenant_id', TENANT_ID).eq('is_visible', true),
       sb.from('insurance_trash').select('*').eq('tenant_id', TENANT_ID).order('deleted_at', { ascending: false }),
       sb.from('policy_sub_agent_shares').select('*').eq('tenant_id', TENANT_ID),
+      // Schema refactor v2 — nowe tabele (graceful: błąd nie blokuje init)
+      sb.from('vehicles').select('*').eq('tenant_id', TENANT_ID),
+      sb.from('insured_persons').select('*').eq('tenant_id', TENANT_ID),
+      sb.from('client_businesses').select('*').eq('tenant_id', TENANT_ID),
+      sb.from('policy_note_links').select('*'),
     ]);
 
     const errors = [clientsRes.error, policiesRes.error, notesRes.error, subAgentsRes.error, insurersRes.error, trashRes.error, sharesRes.error].filter(Boolean);
@@ -401,6 +467,36 @@ class SupabaseStorageManager {
       const firstError = errors[0];
       console.error('[SupabaseStorage] Query failure:', firstError);
       throw new Error(`Błąd bazy danych: ${firstError?.message || 'unknown'}`);
+    }
+
+    // Logujemy ale nie rzucamy błędu dla nowych tabel (graceful degradation)
+    if (vehiclesRes.error)       console.warn('[SupabaseStorage] vehicles query failed:', vehiclesRes.error.message);
+    if (insuredPersonsRes.error) console.warn('[SupabaseStorage] insured_persons query failed:', insuredPersonsRes.error.message);
+    if (businessesRes.error)     console.warn('[SupabaseStorage] client_businesses query failed:', businessesRes.error.message);
+    if (noteLinksRes.error)      console.warn('[SupabaseStorage] policy_note_links query failed:', noteLinksRes.error.message);
+
+    // Aktualizuj moduł-level maps (używane przez rowToPolicy/rowToClient/rowToNote)
+    vehicleMap = new Map((vehiclesRes.data ?? []).map((v: any) => [v.id, v]));
+
+    insuredPersonsMap = new Map<string, any[]>();
+    for (const ip of insuredPersonsRes.data ?? []) {
+      const list = insuredPersonsMap.get(ip.policy_id) || [];
+      list.push(ip);
+      insuredPersonsMap.set(ip.policy_id, list);
+    }
+
+    clientBusinessesMap = new Map<string, any[]>();
+    for (const b of businessesRes.data ?? []) {
+      const list = clientBusinessesMap.get(b.client_id) || [];
+      list.push(b);
+      clientBusinessesMap.set(b.client_id, list);
+    }
+
+    noteLinksMap = new Map<string, string[]>();
+    for (const nl of noteLinksRes.data ?? []) {
+      const list = noteLinksMap.get(nl.note_id) || [];
+      list.push(nl.policy_id);
+      noteLinksMap.set(nl.note_id, list);
     }
 
     const dek = this.dek;

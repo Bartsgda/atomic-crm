@@ -128,6 +128,17 @@ interface ChangeEntry {
 
 const CHANGELOG: ChangeEntry[] = [
   {
+    date: "2026-05-15",
+    items: [
+      "Pojazdy, ubezpieczeni, firmy i powiązania notatka↔polisa wydzielone do osobnych tabel (czystsza struktura, łatwiejsze raporty).",
+      "Parser naprawiony — rejestracje pojazdów wykrywane poprawnie (Twoje GD72N6, blokuje false-positives jak NNW/ASS/TDI).",
+      "Adresy bez 'ul.' rozpoznawane przez kod pocztowy (Gdańsk, Gdynia, Puck, okolice).",
+      "Notatki z wieloma datami w jednej kolumnie XLSX poprawnie dzielone na osobne wpisy.",
+      "PESEL klienta z col[18] ('pesel kl X') nie tworzy już fake-współwłaściciela.",
+      "Ubezpieczony różny od ubezpieczającego (np. dziecko z NNW szkolnym) zapisywany jako osobna osoba.",
+    ],
+  },
+  {
     date: "2026-05-10",
     items: [
       "Klienci → otwiera Bazę Kontrahentów (nie listę polis)",

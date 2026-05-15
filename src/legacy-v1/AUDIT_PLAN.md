@@ -163,4 +163,23 @@ Edycja `services/dataMapper.ts` + `services/legacyParser.ts` + `services/seconda
 
 ---
 
+## ✅ Status 2026-05-15 (paralel 5× Sonnet)
+
+| Faza | Status | Notatka |
+|---|---|---|
+| Audyt 1-182 | ✅ KOMPLETNY (2026-05-11) | 18 plików AUDIT_ROWS |
+| Faza 1 — SQL cleanup | ⚠️ wykonane przez agenta #1 | sprawdź `scripts/fix_audit_rows.py` |
+| Faza 2 — Parser bugfix (4 bugi) | ⚠️ wykonane przez agenta #2 | `dataMapper.ts` |
+| Faza 2 — BUG #3 + wzorzec #18 | ⚠️ wykonane przez agenta #3 | `secondaryParsers.ts` + `dataMapper:565` |
+| Faza 3 — Provider schema v2 | ⚠️ wykonane przez agenta #4 | `supabaseStorage.ts` |
+| Tests vitest | ⚠️ wykonane przez agenta #5 | `src/__tests__/parser.test.ts` |
+| Faza 4 — UI flagi + reimport | ⏸ czeka na nowy XLSX (weekend) | |
+
+**Decyzje podjęte w sesji:**
+1. Sub_agent linking → `policy_sub_agent_shares` z amount=0 (spójne ze schema v2)
+2. Provider mapping row_110 → `insured_persons` table (nie `life_details JSONB`)
+3. PESEL Gabriel Zaklicki → `insured_persons.pesel_encrypted=NULL` + `notes='PESEL_PENDING_DEK'`
+
+---
+
 **Utworzony:** 2026-05-11 (Opus 4.7 — po audycie ręcznym wierszy 1-10)

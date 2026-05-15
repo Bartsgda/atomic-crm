@@ -14,6 +14,7 @@ import {
   parseCoOwnerColumn,
   parseTravelParticipants,
 } from "../modules/utils/secondaryParsers";
+import type { ParseCoOwnerResult } from "../modules/utils/secondaryParsers";
 import {
   parseHomeString,
   parseAutoString,
@@ -202,6 +203,43 @@ export class DataMapper {
   }
 }
 
+// BUG #2 FIX: parseAddress — obsługa adresów bez prefiksu "ul."
+// Zip-lookup dla Pomorza: 80-xxx Gdańsk, 81-xxx Gdynia, 83-xxx okolice, 84-xxx Puck/Władysławowo
+const ZIP_CITY_MAP: Record<string, string> = {
+  "80": "Gdańsk",
+  "81": "Gdynia",
+  "82": "Tczew",
+  "83": "Starogard Gdański",
+  "84": "Puck",
+};
+
+function ensureUlPrefix(s: string): string {
+  if (!s) return s;
+  if (/^(ul\.|al\.|os\.|pl\.|sk\.|rondo)/i.test(s)) return s;
+  if (/^\d/.test(s)) return s; // adresy wiejskie "43" — bez prefiksu
+  return `ul. ${s}`;
+}
+
+function parseAddress(raw: string): {
+  street: string;
+  city: string;
+  zipCode: string;
+} {
+  if (!raw) return { street: raw, city: "", zipCode: "" };
+  const zipMatch = raw.match(/(\d{2}-\d{3})/);
+  if (!zipMatch) {
+    return { street: ensureUlPrefix(raw.trim()), city: "", zipCode: "" };
+  }
+  const zipCode = zipMatch[1];
+  const prefix = zipCode.split("-")[0];
+  const city = ZIP_CITY_MAP[prefix] ?? "";
+  let rest = raw.replace(zipCode, "").trim().replace(/^,\s*/, "");
+  if (city && rest.toLowerCase().startsWith(city.toLowerCase())) {
+    rest = rest.slice(city.length).trim();
+  }
+  return { street: ensureUlPrefix(rest.trim()), city, zipCode };
+}
+
 function mapClientLegacy(
   rawName: string,
   nipOrPesel: string,
@@ -247,18 +285,15 @@ function mapClientLegacy(
       .split(/[,;]/)
       .map((e) => e.trim())
       .filter(Boolean),
-    street: str(row[6]),
-    city: "",
-    zipCode: "",
+    // BUG #2 FIX: parsuj adres zamiast zostawiać city="" zipCode=""
+    ...parseAddress(str(row[6])),
     createdAt: date(row[1] || new Date()),
     businesses: isCompany
       ? [
           {
             name: rawName,
             nip: nipOrPesel.length === 10 ? nipOrPesel : undefined,
-            street: str(row[6]),
-            city: "",
-            zipCode: "",
+            ...parseAddress(str(row[6])),
           },
         ]
       : [],
@@ -274,7 +309,44 @@ function mapNotesLegacy(
   const notes: ClientNote[] = [];
   if (!rawNotes) return notes;
 
-  const parts = rawNotes.split(/_|\n/);
+  // BUG #1 FIX: split po `_` LUB `\n` LUB przed datą inline (dd.mm lub dd.mm.yyyy)
+  // Regex split: rozdzielamy przed każdą datą inline poprzedzoną whitespace/separator
+  // Przykład: "czekam...05.09.2025 rozmawiałam" → dwa fragmenty
+  const INLINE_DATE_SPLIT =
+    /(?:_|\n)|(?=(?:^|[\s;)\->])(\d{1,2}\.\d{1,2}(?:\.\d{4})?)\b)/g;
+
+  // Używamy split z lookahead przez matchAll + manualne cięcie, bo JS split z lookbehind
+  // jest ograniczony — zamiast tego splitujemy po `_`/`\n` i wewnątrz każdego fragmentu
+  // szukamy dalszych dat inline i rozcinamy
+  const roughParts = rawNotes.split(/_|\n/);
+  const parts: string[] = [];
+  const LEADING_DATE_RE = /^(\d{1,2}\.\d{1,2}(?:\.\d{4})?)\b\s*/;
+  const MID_DATE_RE = /(?<=\S\s)(\d{1,2}\.\d{1,2}(?:\.\d{4})?)\b/;
+
+  for (const rough of roughParts) {
+    // Sprawdzamy czy w fragmencie jest wewnętrzna data (nie na samym początku)
+    const trimmed = rough.trim();
+    if (!trimmed) continue;
+
+    // Jeśli po przyciętym fragmencie jest wzorzec <tekst><whitespace><dd.mm(.yyyy)><tekst>
+    // to tniemy na granicy daty
+    const midMatch = trimmed.match(
+      /^(.+?)\s+(\d{1,2}\.\d{1,2}(?:\.\d{4})?)\b(.*)$/,
+    );
+    if (
+      midMatch &&
+      midMatch[1].length > 3 && // sensowny tekst przed datą
+      !LEADING_DATE_RE.test(trimmed) // nie zaczyna się od daty (tam data = nagłówek)
+    ) {
+      parts.push(midMatch[1].trim());
+      parts.push((midMatch[2] + " " + midMatch[3]).trim());
+    } else {
+      parts.push(trimmed);
+    }
+  }
+
+  // Regex do wyciągania daty polskiej z początku fragmentu (dd.mm lub dd.mm.yyyy)
+  const POLISH_DATE_RE = /^(\d{1,2})\.(\d{1,2})(?:\.(\d{4}))?\b\s*/;
 
   parts.forEach((part, index) => {
     let content = part.trim();
@@ -283,6 +355,20 @@ function mapNotesLegacy(
     let tag: NoteTag = "ROZMOWA";
     let noteDate = addMinutes(new Date(baseDate), index);
 
+    // BUG #1 FIX: wyciągaj datę polską dd.mm.yyyy z początku fragmentu
+    const polishDateMatch = content.match(POLISH_DATE_RE);
+    if (polishDateMatch) {
+      const day = Number(polishDateMatch[1]);
+      const month = Number(polishDateMatch[2]) - 1;
+      const year = polishDateMatch[3] ? Number(polishDateMatch[3]) : new Date().getFullYear();
+      const candidate = new Date(year, month, day);
+      if (isValid(candidate)) {
+        noteDate = candidate;
+        content = content.replace(POLISH_DATE_RE, "").trim();
+      }
+    }
+
+    // Istniejące: obsługa daty w formacie [YYYY-MM-DD]
     const dateMatch = content.match(/^\[(\d{4}-\d{2}-\d{2})\]/);
     if (dateMatch) {
       const parsedDate = new Date(dateMatch[1]);
@@ -363,6 +449,9 @@ function mapPolicyLegacy(
   let homeDetails: any = { coOwners: [] };
   let travelDetails: any = {};
   let lifeDetails: any = {};
+  // Zbieracze z parseCoOwnerColumn przed stworzeniem obiektu `policy`
+  let pendingInsuredPersons: import("../types").InsuredPerson[] = [];
+  let pendingClientPesel: string | undefined = undefined;
   let travelStart: string | undefined = undefined;
   let travelEnd: string | undefined = undefined;
   let extraNoteFromLegacy: string | undefined = undefined;
@@ -561,40 +650,62 @@ function mapPolicyLegacy(
       travelDetails.participantsCount = travelDetails.participants.length || 1;
     }
   } else {
-    // Standard logic for AUTO/HOME
-    const coOwnerInfo = parseCoOwnerColumn(coOwnerRaw);
+    // Standard logic for AUTO/HOME/ZYCIE/FIRMA
+    const coOwnerInfo: ParseCoOwnerResult | null =
+      parseCoOwnerColumn(coOwnerRaw);
 
-    if (coOwnerInfo.ownershipType)
-      autoDetails.ownership = coOwnerInfo.ownershipType;
     if (oldPolicyInfo.vehicleValue) {
       autoDetails.vehicleValue = oldPolicyInfo.vehicleValue;
       autoDetails.vehicleValueType = oldPolicyInfo.valueType;
     }
 
-    if (coOwnerInfo.coOwners.length > 0) {
-      if (policyType === "DOM") {
-        if (!homeDetails.coOwners) homeDetails.coOwners = [];
-        homeDetails.coOwners.push(...coOwnerInfo.coOwners);
-      } else {
-        if (!autoDetails.coOwners) autoDetails.coOwners = [];
-        autoDetails.coOwners.push(...coOwnerInfo.coOwners);
-      }
-    }
-
-    if (coOwnerInfo.assignment) {
-      notes.push({
-        id: `n_imp_assign_${policyId}`,
-        clientId: client.id,
-        content: `[IMPORT] Wykryto cesję/bank: ${coOwnerInfo.assignment}`,
-        tag: "ROZMOWA",
-        createdAt: addMinutes(
-          new Date(policyId.includes("_") ? start : new Date().toISOString()),
-          10,
-        ).toISOString(),
-        linkedPolicyIds: [policyId],
+    if (coOwnerInfo === null) {
+      // puste pole — nic nie robimy
+    } else if (coOwnerInfo.type === "CLIENT_PESEL") {
+      // BUG #3 fix: "pesel kl XXXXXXXXXXX" — PESEL głównego klienta, NIE coOwnera
+      // Przechowujemy tymczasowo; EncryptionGate zaszyfruje do `pesel` w przyszłości
+      pendingClientPesel = coOwnerInfo.pesel;
+    } else if (coOwnerInfo.type === "INSURED_PERSON") {
+      // Wzorzec #18 (row_110): "Ubezpieczony X PESEL Y" — ubezpieczony ≠ ubezpieczający
+      // Mapujemy na Policy.insuredPersons (InsuredPerson[] z types.ts schema v2)
+      pendingInsuredPersons.push({
+        firstName: coOwnerInfo.firstName,
+        lastName: coOwnerInfo.lastName ?? undefined,
+        peselEncrypted: coOwnerInfo.pesel, // plaintext — PESEL_PENDING_DEK, zaszyfrować po EncryptionGate
+        relation: coOwnerInfo.relation ?? undefined,
+        notes: "PESEL_PENDING_DEK",
+        aiExtracted: true,
       });
-      if (policyType === "DOM" && !homeDetails.assignmentBank) {
-        homeDetails.assignmentBank = coOwnerInfo.assignment;
+    } else {
+      // type === 'COOWNER' — dotychczasowa logika bez zmian
+      if (coOwnerInfo.ownershipType)
+        autoDetails.ownership = coOwnerInfo.ownershipType;
+
+      if (coOwnerInfo.coOwners.length > 0) {
+        if (policyType === "DOM") {
+          if (!homeDetails.coOwners) homeDetails.coOwners = [];
+          homeDetails.coOwners.push(...coOwnerInfo.coOwners);
+        } else {
+          if (!autoDetails.coOwners) autoDetails.coOwners = [];
+          autoDetails.coOwners.push(...coOwnerInfo.coOwners);
+        }
+      }
+
+      if (coOwnerInfo.assignment) {
+        notes.push({
+          id: `n_imp_assign_${policyId}`,
+          clientId: client.id,
+          content: `[IMPORT] Wykryto cesję/bank: ${coOwnerInfo.assignment}`,
+          tag: "ROZMOWA",
+          createdAt: addMinutes(
+            new Date(policyId.includes("_") ? start : new Date().toISOString()),
+            10,
+          ).toISOString(),
+          linkedPolicyIds: [policyId],
+        });
+        if (policyType === "DOM" && !homeDetails.assignmentBank) {
+          homeDetails.assignmentBank = coOwnerInfo.assignment;
+        }
       }
     }
   }
@@ -642,7 +753,16 @@ function mapPolicyLegacy(
     homeDetails: homeDetails,
     travelDetails: travelDetails,
     lifeDetails: lifeDetails,
+    // Wzorzec #18: ubezpieczeni zebrani przed stworzeniem policy
+    ...(pendingInsuredPersons.length > 0
+      ? { insuredPersons: pendingInsuredPersons }
+      : {}),
   };
+
+  // BUG #3: PESEL klienta głównego z col[18] "pesel kl X" — wstrzykujemy po stworzeniu policy
+  if (pendingClientPesel) {
+    client.pesel_encrypted_pending = pendingClientPesel;
+  }
 
   // Use policy start date as base for notes if row[1] (date column) is empty/invalid
   const notesBaseDate =

@@ -239,6 +239,9 @@ export interface Client {
   notes?: string;
   createdAt: string;
   isAiPending?: boolean;
+  /** Tymczasowy PESEL klienta głównego z col[18] "pesel kl X" przed zaszyfrowaniem DEK.
+   *  Pole usuwane po wdrożeniu EncryptionGate — wówczas trafia do zaszyfrowanego `pesel`. */
+  pesel_encrypted_pending?: string;
 }
 
 export interface Notification {
@@ -271,6 +274,44 @@ export interface PolicySubAgentShare {
   rate: number;
   amount: number;
   note?: string;
+}
+
+// ─── Schema refactor v2 — nowe encje ────────────────────────────────────────
+
+export interface Vehicle {
+  reg?: string;
+  brand?: string;
+  model?: string;
+  vin?: string;
+  year?: number;
+  fuel?: string;
+  vehicleType?: string;
+  powerKw?: number;
+  engineCc?: number;
+}
+
+export interface InsuredPerson {
+  id?: string;
+  firstName?: string;
+  lastName?: string;
+  peselEncrypted?: string;
+  birthDate?: string;
+  nip?: string;
+  email?: string;
+  phone?: string;
+  relation?: string;
+  notes?: string;
+  aiExtracted?: boolean;
+}
+
+export interface ClientBusiness {
+  id?: string;
+  name: string;
+  nip?: string;
+  regon?: string;
+  krs?: string;
+  role?: string;
+  notes?: string;
 }
 
 // NOWA STRUKTURA: KALKULACJE (ALTERNATYWNE OFERTY)
@@ -360,6 +401,16 @@ export interface Policy {
   homeDetails?: HomeDetails;
   travelDetails?: TravelDetails;
   lifeDetails?: LifeDetails;
+
+  // Schema refactor v2 — nowe pola
+  vehicle?: Vehicle;
+  insuredPersons?: InsuredPerson[];
+  renewalOfPolicyId?: string | null;
+  referredByName?: string | null;
+  referredByClientId?: string | null;
+
+  // BUG #4 FIX: pole AI note dla klasyfikacji wymagającej uwagi agenta
+  aiNote?: string;
 
   createdAt: string;
   propertyDetails?: any;

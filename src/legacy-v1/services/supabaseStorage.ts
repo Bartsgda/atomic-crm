@@ -13,9 +13,9 @@ import type {
   AppState, Client, Policy, ClientNote, Notification,
   TerminationRecord, SubAgent, ChecklistTemplates,
   InsurerConfig, DeletedItem, UiPreferences,
-  Vehicle, InsuredPerson, ClientBusiness,
+  Vehicle, InsuredPerson, ClientBusiness, BusinessEntity,
 } from '../types';
-import { encryptField, decryptField, encryptJsonField, decryptJsonField, looksEncrypted } from './crypto';
+import { encryptField, decryptField, encryptJsonField, decryptJsonField, looksEncrypted, looksLikePlaintextPesel } from './crypto';
 
 const TENANT_ID = (typeof import.meta !== 'undefined' && (import.meta as any).env?.VITE_SUPABASE_TENANT_ID) || '11111111-1111-1111-1111-111111111111';
 const PREFS_KEY = 'InsuranceMaster_UI_Prefs_v2';
@@ -78,9 +78,27 @@ function typeFromDb(t: string)  { return t === 'OTHER' ? 'INNE' : t; }
 
 // ─── Encryption helpers (scoped to a DEK) ────────────────────────────────────
 
+/**
+ * Szyfruj string wrażliwy (PESEL, telefon, email, numer polisy, rejestracja, adres).
+ *
+ * RODO security (fix 2026-05-15, task PESEL DEK):
+ * - val pusty (null/undefined/'') → null (nic do zachowania)
+ * - DEK obecny → zaszyfruj envelope AES-GCM
+ * - DEK brakuje + val niepusty → THROW. **NIGDY nie zapisujemy plaintext PESEL**
+ *   do kolumny `*_encrypted`. Cały save path musi działać tylko gdy EncryptionGate
+ *   odblokował sesję (`supabaseStorage.setDEK(dek)`).
+ *
+ * Stare zachowanie ("fallback do plaintext gdy brak DEK") było źródłem wycieku
+ * row_110 (Gabriel Zaklicki, dziecko, PESEL 18221803056 lądował plaintext w DB).
+ */
 async function encStr(val: string | null | undefined, dek: CryptoKey | null): Promise<string | null> {
   if (!val) return null;
-  if (!dek) return val;
+  if (!dek) {
+    throw new Error(
+      '[encStr] DEK is null — odmawiam zapisu wrażliwego pola plaintext. ' +
+      'Sesja musi być odblokowana przez EncryptionGate przed zapisem.',
+    );
+  }
   return encryptField(val, dek);
 }
 
@@ -94,7 +112,14 @@ async function decStr(val: any, dek: CryptoKey | null): Promise<string> {
 
 async function encJson(val: any, dek: CryptoKey | null): Promise<any> {
   if (val == null) return null;
-  if (!dek) return val;
+  // Pusta lista/obiekt nie wymaga DEK — to brak danych do utajnienia.
+  if (Array.isArray(val) && val.length === 0) return val;
+  if (typeof val === 'object' && !Array.isArray(val) && Object.keys(val).length === 0) return val;
+  if (!dek) {
+    throw new Error(
+      '[encJson] DEK is null — odmawiam zapisu wrażliwego JSON (phones/emails/home_details) plaintext.',
+    );
+  }
   return encryptJsonField(val, dek);
 }
 
@@ -127,12 +152,17 @@ function toArray(val: any): string[] {
 async function clientToRow(c: Client, dek: CryptoKey | null) {
   const isFake = c.id.includes('demo') || (c as any).isFake;
   const dbId = await toUUID(c.id);
+  // BUG #3 row_110 fix (PESEL DEK task 2026-05-15):
+  // dataMapper ustawia `pesel_encrypted_pending` z col[18] "pesel kl X" przed
+  // wdrożeniem DEK. Tutaj — w pierwszym miejscu z DEK w ręku — bierzemy pending
+  // jako plaintext do zaszyfrowania. Nie zostawiamy plaintext nigdzie indziej.
+  const peselPlaintext = c.pesel || (c as any).pesel_encrypted_pending || null;
   return {
     id: dbId,
     tenant_id: TENANT_ID,
     first_name: c.firstName || '',
     last_name: c.lastName || '',
-    pesel_encrypted: await encStr(c.pesel, dek),
+    pesel_encrypted: await encStr(peselPlaintext, dek),
     birth_date: c.birthDate || null,
     gender: c.gender || null,
     phones: await encJson(c.phones ?? [], dek),
@@ -363,6 +393,273 @@ function legacyAutoDetailsToVehicle(autoDetails: any): Vehicle | undefined {
   return Object.keys(v).length > 0 ? v : undefined;
 }
 
+// ─── Schema v2 — save helpers ─────────────────────────────────────────────────
+//
+// Każdy helper jest samodzielny: try/catch + console.error — błąd nie blokuje
+// głównego save (legacy JSONB dual-write jest zawsze w policyToRow/clientToRow).
+//
+// UUID conversion: każdy helper sam wywołuje toUUID() na incoming IDs.
+
+function getSupabase() {
+  return getSupabaseClient();
+}
+
+/**
+ * Zapisuje pojazd do tabeli `vehicles`.
+ * Strategia: SELECT po (tenant_id, client_id, reg) → UPDATE jeśli istnieje,
+ * INSERT jeśli nie. Nie używamy upsert onConflict (brak UNIQUE constraint).
+ * Zwraca vehicle_id (uuid) lub null przy błędzie.
+ */
+async function saveVehicle(
+  vehicle: Vehicle,
+  clientDbId: string,
+  _dek: CryptoKey | null,
+): Promise<string | null> {
+  try {
+    const sb = getSupabase();
+
+    // Jeśli mamy już id z load flow — preferuj UPDATE tego rekordu
+    if (vehicle.id && isValidUUID(vehicle.id)) {
+      const row = {
+        tenant_id:    TENANT_ID,
+        client_id:    clientDbId,
+        reg:          vehicle.reg          ?? null,
+        brand:        vehicle.brand        ?? null,
+        model:        vehicle.model        ?? null,
+        vin:          vehicle.vin          ?? null,
+        year:         vehicle.year         ?? null,
+        fuel:         vehicle.fuel         ?? null,
+        vehicle_type: vehicle.vehicleType  ?? null,
+        power_kw:     vehicle.powerKw      ?? null,
+        engine_cc:    vehicle.engineCc     ?? null,
+      };
+      const { error } = await sb.from('vehicles').update(row).eq('id', vehicle.id);
+      if (error) {
+        console.error('[v2:saveVehicle] UPDATE failed:', error.message);
+        return null;
+      }
+      // Odśwież vehicleMap
+      vehicleMap.set(vehicle.id, { id: vehicle.id, ...row });
+      return vehicle.id;
+    }
+
+    // Brak id — szukaj po (tenant_id, client_id, reg) jeśli reg podane
+    if (vehicle.reg) {
+      const { data: existing } = await sb
+        .from('vehicles')
+        .select('id')
+        .eq('tenant_id', TENANT_ID)
+        .eq('client_id', clientDbId)
+        .eq('reg', vehicle.reg)
+        .maybeSingle();
+
+      if (existing?.id) {
+        const { error } = await sb.from('vehicles').update({
+          brand:        vehicle.brand        ?? null,
+          model:        vehicle.model        ?? null,
+          vin:          vehicle.vin          ?? null,
+          year:         vehicle.year         ?? null,
+          fuel:         vehicle.fuel         ?? null,
+          vehicle_type: vehicle.vehicleType  ?? null,
+          power_kw:     vehicle.powerKw      ?? null,
+          engine_cc:    vehicle.engineCc     ?? null,
+        }).eq('id', existing.id);
+        if (error) {
+          console.error('[v2:saveVehicle] UPDATE by reg failed:', error.message);
+          return null;
+        }
+        return existing.id;
+      }
+    }
+
+    // INSERT nowego pojazdu
+    const { data: inserted, error: insErr } = await sb.from('vehicles').insert({
+      tenant_id:    TENANT_ID,
+      client_id:    clientDbId,
+      reg:          vehicle.reg          ?? null,
+      brand:        vehicle.brand        ?? null,
+      model:        vehicle.model        ?? null,
+      vin:          vehicle.vin          ?? null,
+      year:         vehicle.year         ?? null,
+      fuel:         vehicle.fuel         ?? null,
+      vehicle_type: vehicle.vehicleType  ?? null,
+      power_kw:     vehicle.powerKw      ?? null,
+      engine_cc:    vehicle.engineCc     ?? null,
+    }).select('id').single();
+
+    if (insErr || !inserted?.id) {
+      console.error('[v2:saveVehicle] INSERT failed:', insErr?.message);
+      return null;
+    }
+    vehicleMap.set(inserted.id, { id: inserted.id, reg: vehicle.reg, brand: vehicle.brand, model: vehicle.model });
+    return inserted.id;
+  } catch (err) {
+    console.error('[v2:saveVehicle] unexpected error:', err);
+    return null;
+  }
+}
+
+/**
+ * Zapisuje listę ubezpieczonych do tabeli `insured_persons`.
+ * Strategia: DELETE WHERE policy_id + INSERT batch (pełen replace).
+ * Wrażliwe pola szyfrowane przez DEK (peselEncrypted, email, phone, birthDate).
+ *
+ * list=undefined → skip (brak semantyki "usuń wszystkich")
+ * list=[]        → usuwa wszystkich (user wyczyścił listę)
+ */
+async function saveInsuredPersons(
+  policyDbId: string,
+  list: InsuredPerson[] | undefined,
+  dek: CryptoKey | null,
+): Promise<void> {
+  if (list === undefined) return;
+  try {
+    const sb = getSupabase();
+    await sb.from('insured_persons').delete().eq('policy_id', policyDbId);
+    if (list.length === 0) return;
+
+    const rows = await Promise.all(list.map(async (ip) => ({
+      tenant_id:       TENANT_ID,
+      policy_id:       policyDbId,
+      relation:        ip.relation ?? 'ubezpieczony',
+      first_name:      ip.firstName  ?? null,
+      last_name:       ip.lastName   ?? null,
+      pesel_encrypted: await encStr(ip.peselEncrypted, dek),
+      birth_date:      await encStr(ip.birthDate, dek),
+      nip:             ip.nip        ?? null,
+      email:           await encStr(ip.email, dek),
+      phone:           await encStr(ip.phone, dek),
+      notes:           ip.notes      ?? null,
+      ai_extracted:    ip.aiExtracted ?? false,
+    })));
+
+    const { error } = await sb.from('insured_persons').insert(rows);
+    if (error) console.error('[v2:saveInsuredPersons] INSERT failed:', error.message);
+
+    // Odśwież insuredPersonsMap
+    insuredPersonsMap.set(policyDbId, list);
+  } catch (err) {
+    console.error('[v2:saveInsuredPersons] unexpected error:', err);
+  }
+}
+
+/**
+ * Zapisuje firmy klienta do tabeli `client_businesses`.
+ * Strategia: SELECT istniejących NIP-ów, DELETE orphanów, UPSERT po (client_id, nip).
+ * Przyjmuje BusinessEntity[] (kształt Client.businesses).
+ *
+ * Pola stratne dla tabeli (street/city/zipCode/phones/emails/representation)
+ * zostają w legacy JSONB (dual-write przez clientToRow).
+ */
+async function saveClientBusinesses(
+  clientDbId: string,
+  list: BusinessEntity[] | undefined,
+): Promise<void> {
+  if (list === undefined) return;
+  try {
+    const sb = getSupabase();
+
+    if (list.length === 0) {
+      // Usuń wszystkie firmy klienta
+      await sb.from('client_businesses').delete().eq('client_id', clientDbId).eq('tenant_id', TENANT_ID);
+      clientBusinessesMap.delete(clientDbId);
+      return;
+    }
+
+    // Pobierz istniejące rekordy
+    const { data: existing } = await sb
+      .from('client_businesses')
+      .select('id, nip, name')
+      .eq('client_id', clientDbId)
+      .eq('tenant_id', TENANT_ID);
+
+    const existingByNip = new Map<string, string>(); // nip → id
+    const existingByName = new Map<string, string>(); // name → id (fallback gdy brak NIP)
+    for (const e of existing ?? []) {
+      if (e.nip) existingByNip.set(e.nip, e.id);
+      else       existingByName.set(e.name, e.id);
+    }
+
+    const incomingNips = new Set(list.filter(b => b.nip).map(b => b.nip!));
+    const incomingNames = new Set(list.filter(b => !b.nip).map(b => b.name));
+
+    // Usuń orphany (rekordy nieobecne w nowej liście)
+    const toDelete: string[] = [];
+    for (const [nip, id] of existingByNip) {
+      if (!incomingNips.has(nip)) toDelete.push(id);
+    }
+    for (const [name, id] of existingByName) {
+      if (!incomingNames.has(name)) toDelete.push(id);
+    }
+    if (toDelete.length > 0) {
+      await sb.from('client_businesses').delete().in('id', toDelete);
+    }
+
+    // INSERT lub UPDATE per business
+    for (const biz of list) {
+      const row = {
+        tenant_id:  TENANT_ID,
+        client_id:  clientDbId,
+        name:       biz.name,
+        nip:        biz.nip   || null,
+        regon:      biz.regon || null,
+        krs:        biz.krs   || null,
+        role:       'owner' as const,   // BusinessEntity nie ma role — default 'owner'
+        notes:      biz.notes || null,
+      };
+
+      const existingId = biz.nip
+        ? existingByNip.get(biz.nip)
+        : existingByName.get(biz.name);
+
+      if (existingId) {
+        await sb.from('client_businesses').update(row).eq('id', existingId);
+      } else {
+        await sb.from('client_businesses').insert(row);
+      }
+    }
+
+    // Odśwież clientBusinessesMap
+    clientBusinessesMap.set(clientDbId, list.map(b => ({ ...b, client_id: clientDbId })));
+  } catch (err) {
+    console.error('[v2:saveClientBusinesses] unexpected error:', err);
+  }
+}
+
+/**
+ * Zapisuje linki notatka↔polisa do tabeli `policy_note_links`.
+ * Strategia: DELETE WHERE note_id + INSERT batch.
+ * Dual-write do legacy `linked_policy_ids` odbywa się automatycznie w noteToRow().
+ */
+async function savePolicyNoteLinks(
+  noteDbId: string,
+  policyIds: string[],
+): Promise<void> {
+  try {
+    const sb = getSupabase();
+    await sb.from('policy_note_links').delete().eq('note_id', noteDbId);
+    if (policyIds.length === 0) {
+      noteLinksMap.delete(noteDbId);
+      return;
+    }
+
+    // Konwertuj v1 IDs na UUID
+    const policyDbIds = await Promise.all(policyIds.map(id => toUUID(id)));
+
+    const rows = policyDbIds.map(pid => ({
+      note_id:   noteDbId,
+      policy_id: pid,
+    }));
+
+    const { error } = await sb.from('policy_note_links').insert(rows);
+    if (error) console.error('[v2:savePolicyNoteLinks] INSERT failed:', error.message);
+
+    noteLinksMap.set(noteDbId, policyDbIds);
+  } catch (err) {
+    console.error('[v2:savePolicyNoteLinks] unexpected error:', err);
+  }
+}
+
 // ─── Defaults ─────────────────────────────────────────────────────────────────
 
 const DEFAULT_PREFS: UiPreferences = {
@@ -427,6 +724,98 @@ class SupabaseStorageManager {
 
   extendSession() {}
   getSessionExpiry(): number | null { return Date.now() + 365 * 24 * 3600 * 1000; }
+
+  /**
+   * Batch reconciler: re-szyfruje wszystkie wycieki plaintext PESEL w
+   * `insurance_clients.pesel_encrypted` oraz `insured_persons.pesel_encrypted`,
+   * używając aktualnego DEK w pamięci.
+   *
+   * Wymaga: sesja odblokowana (DEK ustawiony przez EncryptionGate).
+   * dryRun=true (domyślnie) — tylko raport, bez UPDATE.
+   *
+   * RODO: PESEL nigdy nie jest logowany. Raport zawiera tylko id wierszy + count.
+   */
+  async reencryptOrphanPesels(opts: { dryRun?: boolean } = {}): Promise<{
+    clientsFound: number;
+    clientsFixed: number;
+    insuredFound: number;
+    insuredFixed: number;
+    errors: string[];
+  }> {
+    const dryRun = opts.dryRun !== false;
+    if (!this.dek) {
+      throw new Error('reencryptOrphanPesels: sesja zablokowana, brak DEK');
+    }
+    const dek = this.dek;
+    const sb = this.sb();
+    const result = {
+      clientsFound: 0, clientsFixed: 0,
+      insuredFound: 0, insuredFixed: 0,
+      errors: [] as string[],
+    };
+
+    // 1. insurance_clients
+    const { data: clients, error: cErr } = await sb
+      .from('insurance_clients')
+      .select('id, pesel_encrypted')
+      .eq('tenant_id', TENANT_ID)
+      .not('pesel_encrypted', 'is', null);
+    if (cErr) {
+      result.errors.push(`select insurance_clients: ${cErr.message}`);
+    } else {
+      for (const r of clients ?? []) {
+        if (!looksLikePlaintextPesel(r.pesel_encrypted)) continue;
+        result.clientsFound++;
+        if (dryRun) continue;
+        try {
+          const ct = await encryptField(r.pesel_encrypted, dek);
+          const { error } = await sb
+            .from('insurance_clients')
+            .update({ pesel_encrypted: ct })
+            .eq('id', r.id);
+          if (error) {
+            result.errors.push(`update client ${r.id}: ${error.message}`);
+          } else {
+            result.clientsFixed++;
+          }
+        } catch (e: any) {
+          result.errors.push(`encrypt client ${r.id}: ${e?.message ?? String(e)}`);
+        }
+      }
+    }
+
+    // 2. insured_persons
+    const { data: insured, error: iErr } = await sb
+      .from('insured_persons')
+      .select('id, pesel_encrypted')
+      .eq('tenant_id', TENANT_ID)
+      .not('pesel_encrypted', 'is', null);
+    if (iErr) {
+      result.errors.push(`select insured_persons: ${iErr.message}`);
+    } else {
+      for (const r of insured ?? []) {
+        if (!looksLikePlaintextPesel(r.pesel_encrypted)) continue;
+        result.insuredFound++;
+        if (dryRun) continue;
+        try {
+          const ct = await encryptField(r.pesel_encrypted, dek);
+          const { error } = await sb
+            .from('insured_persons')
+            .update({ pesel_encrypted: ct })
+            .eq('id', r.id);
+          if (error) {
+            result.errors.push(`update insured ${r.id}: ${error.message}`);
+          } else {
+            result.insuredFixed++;
+          }
+        } catch (e: any) {
+          result.errors.push(`encrypt insured ${r.id}: ${e?.message ?? String(e)}`);
+        }
+      }
+    }
+
+    return result;
+  }
 
   async exportToJSON() {
     const state = await this.init();
@@ -582,6 +971,8 @@ class SupabaseStorageManager {
     if (existing.data) return this.updateClient(client);
     const { error } = await sb.from('insurance_clients').insert(await clientToRow(client, this.dek));
     if (error) throw new Error(`Błąd dodawania klienta: ${error.message}`);
+    // Schema v2 — firmy klienta (po udanym INSERT)
+    await saveClientBusinesses(dbId, client.businesses);
     return this.init();
   }
 
@@ -590,12 +981,27 @@ class SupabaseStorageManager {
     const dbId = await toUUID(client.id);
     const { error } = await sb.from('insurance_clients').upsert(await clientToRow(client, this.dek)).eq('id', dbId);
     if (error) throw new Error(`Błąd aktualizacji klienta: ${error.message}`);
+    // Schema v2 — firmy klienta
+    await saveClientBusinesses(dbId, client.businesses);
     return this.init();
   }
 
   async addPolicy(policy: Policy): Promise<AppState> {
-    const { error } = await this.sb().from('policies').insert(await policyToRow(policy, this.dek));
+    const dbId = await toUUID(policy.id);
+    const dbClientId = await toUUID(policy.clientId);
+
+    // Schema v2 — zapisz pojazd przed polisą (potrzebujemy vehicle_id)
+    let vehicleId: string | null = null;
+    if (policy.vehicle && (policy.vehicle.reg || policy.vehicle.brand || policy.vehicle.id)) {
+      vehicleId = await saveVehicle(policy.vehicle, dbClientId, this.dek);
+    }
+
+    const { error } = await this.sb().from('policies').insert(await policyToRow(policy, this.dek, vehicleId));
     if (error) throw new Error(`Błąd dodawania polisy: ${error.message}`);
+
+    // Schema v2 — ubezpieczeni (po udanym INSERT polisy)
+    await saveInsuredPersons(dbId, policy.insuredPersons, this.dek);
+
     if (policy.insurerName) {
       await this.sb().from('insurers').upsert(
         { tenant_id: TENANT_ID, name: policy.insurerName, is_visible: true, is_custom: true },
@@ -607,8 +1013,20 @@ class SupabaseStorageManager {
 
   async updatePolicy(policy: Policy): Promise<AppState> {
     const dbId = await toUUID(policy.id);
-    const { error } = await this.sb().from('policies').upsert(await policyToRow(policy, this.dek)).eq('id', dbId);
+    const dbClientId = await toUUID(policy.clientId);
+
+    // Schema v2 — zapisz pojazd przed polisą
+    let vehicleId: string | null = null;
+    if (policy.vehicle && (policy.vehicle.reg || policy.vehicle.brand || policy.vehicle.id)) {
+      vehicleId = await saveVehicle(policy.vehicle, dbClientId, this.dek);
+    }
+
+    const { error } = await this.sb().from('policies').upsert(await policyToRow(policy, this.dek, vehicleId)).eq('id', dbId);
     if (error) throw new Error(`Błąd aktualizacji polisy: ${error.message}`);
+
+    // Schema v2 — ubezpieczeni
+    await saveInsuredPersons(dbId, policy.insuredPersons, this.dek);
+
     if (policy.insurerName) {
       await this.sb().from('insurers').upsert(
         { tenant_id: TENANT_ID, name: policy.insurerName, is_visible: true, is_custom: true },
@@ -697,13 +1115,18 @@ class SupabaseStorageManager {
   }
 
   async addNote(note: ClientNote): Promise<AppState> {
+    const dbId = await toUUID(note.id);
     await this.sb().from('policy_notes').insert(await noteToRow(note, this.dek));
+    // Schema v2 — linki notatka↔polisa (dual-write; legacy linked_policy_ids w noteToRow)
+    await savePolicyNoteLinks(dbId, note.linkedPolicyIds ?? []);
     return this.init();
   }
 
   async updateNote(note: ClientNote): Promise<AppState> {
     const dbId = await toUUID(note.id);
     await this.sb().from('policy_notes').upsert(await noteToRow(note, this.dek)).eq('id', dbId);
+    // Schema v2 — linki notatka↔polisa
+    await savePolicyNoteLinks(dbId, note.linkedPolicyIds ?? []);
     return this.init();
   }
 

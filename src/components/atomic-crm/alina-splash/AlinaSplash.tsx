@@ -136,6 +136,7 @@ const CHANGELOG: ChangeEntry[] = [
       "Notatki z wieloma datami w jednej kolumnie XLSX poprawnie dzielone na osobne wpisy.",
       "PESEL klienta z col[18] ('pesel kl X') nie tworzy już fake-współwłaściciela.",
       "Ubezpieczony różny od ubezpieczającego (np. dziecko z NNW szkolnym) zapisywany jako osobna osoba.",
+      "🔒 PESEL zawsze szyfrowany — system odmawia zapisu numeru PESEL gdy aplikacja jest zablokowana (zapomniane hasło nie spowoduje już wycieku danych do bazy).",
     ],
   },
   {

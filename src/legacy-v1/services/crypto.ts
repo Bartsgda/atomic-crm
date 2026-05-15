@@ -58,7 +58,7 @@ export function generateSalt(): Uint8Array {
 export async function deriveKEK(
   passphrase: string,
   salt: Uint8Array,
-  iterations: number
+  iterations: number,
 ): Promise<CryptoKey> {
   const enc = new TextEncoder();
   const baseKey = await subtle.importKey(
@@ -66,14 +66,14 @@ export async function deriveKEK(
     enc.encode(passphrase),
     "PBKDF2",
     false,
-    ["deriveKey"]
+    ["deriveKey"],
   );
   return subtle.deriveKey(
     { name: "PBKDF2", salt, iterations, hash: "SHA-256" },
     baseKey,
     { name: "AES-GCM", length: 256 },
     false,
-    ["wrapKey", "unwrapKey"]
+    ["wrapKey", "unwrapKey"],
   );
 }
 
@@ -95,7 +95,7 @@ export async function wrapDEK(dek: CryptoKey, kek: CryptoKey): Promise<string> {
 /** Unwrap a Base64 DEK envelope with KEK. Throws "Invalid passphrase" on decryption failure. */
 export async function unwrapDEK(
   wrappedBase64: string,
-  kek: CryptoKey
+  kek: CryptoKey,
 ): Promise<CryptoKey> {
   const raw = new Uint8Array(base64ToBuf(wrappedBase64));
   const iv = raw.slice(0, 12);
@@ -108,7 +108,7 @@ export async function unwrapDEK(
       { name: "AES-GCM", iv },
       { name: "AES-GCM" },
       true,
-      ["encrypt", "decrypt"]
+      ["encrypt", "decrypt"],
     );
   } catch {
     throw new Error("Invalid passphrase");
@@ -120,13 +120,13 @@ export async function unwrapDEK(
 /** Encrypt a UTF-8 string with DEK. Returns Base64( IV[12] || ciphertext_with_tag ). */
 export async function encryptField(
   plaintext: string,
-  dek: CryptoKey
+  dek: CryptoKey,
 ): Promise<string> {
   const iv = randomIV();
   const ciphertext = await subtle.encrypt(
     { name: "AES-GCM", iv },
     dek,
-    new TextEncoder().encode(plaintext)
+    new TextEncoder().encode(plaintext),
   );
   const result = new Uint8Array(iv.byteLength + ciphertext.byteLength);
   result.set(iv, 0);
@@ -137,7 +137,7 @@ export async function encryptField(
 /** Decrypt a Base64 envelope ( IV[12] || ciphertext_with_tag ) with DEK. Returns UTF-8 string. */
 export async function decryptField(
   ciphertextBase64: string,
-  dek: CryptoKey
+  dek: CryptoKey,
 ): Promise<string> {
   const raw = new Uint8Array(base64ToBuf(ciphertextBase64));
   const iv = raw.slice(0, 12);
@@ -145,7 +145,7 @@ export async function decryptField(
   const plainBuf = await subtle.decrypt(
     { name: "AES-GCM", iv },
     dek,
-    data.buffer
+    data.buffer,
   );
   return new TextDecoder().decode(plainBuf);
 }
@@ -154,13 +154,19 @@ export async function decryptField(
 
 /** JSON-serialize any value then encrypt with DEK. Useful for arrays of phones/emails. */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function encryptJsonField(value: any, dek: CryptoKey): Promise<string> {
+export async function encryptJsonField(
+  value: any,
+  dek: CryptoKey,
+): Promise<string> {
   return encryptField(JSON.stringify(value), dek);
 }
 
 /** Decrypt a Base64-encoded JSON field with DEK and parse back to the original type. */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function decryptJsonField(ciphertextBase64: string, dek: CryptoKey): Promise<any> {
+export async function decryptJsonField(
+  ciphertextBase64: string,
+  dek: CryptoKey,
+): Promise<any> {
   const json = await decryptField(ciphertextBase64, dek);
   return JSON.parse(json);
 }
@@ -169,6 +175,7 @@ export async function decryptJsonField(ciphertextBase64: string, dek: CryptoKey)
 
 const PL_CHARS_RE = /[ąćęłńóśźżĄĆĘŁŃÓŚŹŻ]/;
 const BASE64_RE = /^[A-Za-z0-9+/]+=*$/;
+const PLAINTEXT_PESEL_RE = /^\d{11}$/;
 
 /**
  * Heuristic: returns true if string looks like an encrypted Base64 blob.
@@ -178,4 +185,38 @@ export function looksEncrypted(s: string | null | undefined): boolean {
   if (!s || s.length < 28) return false;
   if (PL_CHARS_RE.test(s)) return false;
   return BASE64_RE.test(s.replace(/\s/g, ""));
+}
+
+/**
+ * Heuristic odwrotna: prawda gdy wartość wygląda jak raw 11-cyfrowy PESEL
+ * (czyli niezaszyfrowane dane, które wyciekły do kolumny `pesel_encrypted`).
+ * Używane przez batch reconciler.
+ */
+export function looksLikePlaintextPesel(s: string | null | undefined): boolean {
+  if (!s) return false;
+  return PLAINTEXT_PESEL_RE.test(s.trim());
+}
+
+// ── Aliases (task API spec) ──────────────────────────────────────────────────
+// Te aliasy odpowiadają nazewnictwu z PESEL DEK design doc.
+// Pod spodem używają tej samej envelope encryption co reszta CRM
+// (DEK = AES-256-GCM, ciphertext = Base64(IV[12] || ct || tag)).
+
+export { deriveKEK as deriveDek };
+
+/** Encrypt 11-digit PESEL with DEK. Returns Base64 envelope string. */
+export async function encryptPesel(
+  plaintext: string,
+  dek: CryptoKey,
+): Promise<string> {
+  if (!plaintext) throw new Error("encryptPesel: empty plaintext");
+  return encryptField(plaintext, dek);
+}
+
+/** Decrypt Base64 envelope to PESEL plaintext. Throws on wrong DEK / corrupted ct. */
+export async function decryptPesel(
+  ciphertext: string,
+  dek: CryptoKey,
+): Promise<string> {
+  return decryptField(ciphertext, dek);
 }

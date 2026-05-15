@@ -166,6 +166,7 @@ def parse_address_parts(addr):
     """
     Probie parsowac adres w formacie '80-XXX Miasto Ulica N' lub 'Miasto Ulica N'.
     Zwraca dict {city, zip_code}.
+    City = tekst po kodzie pocztowym, do pierwszego 'ul.' / 'al.' / cyfry.
     """
     if not addr:
         return {}
@@ -175,15 +176,21 @@ def parse_address_parts(addr):
 
     result = {'zip_code': zip_code}
 
-    # Probie wyciagnac miasto (pierwsze slowo po kodzie pocztowym lub na poczatku)
     if zip_match:
         after_zip = addr[zip_match.end():].strip().lstrip(',').strip()
-        # Pierwsze "slowo" (az do cyfry lub ul.)
-        city_match = re.match(r'^([A-Za-zĄąĆćĘęŁłŃńÓóŚśŹźŻż]+(?:\s[A-Za-zĄąĆćĘęŁłŃńÓóŚśŹźŻż]+)*)', after_zip)
+        # Miasto = pierwsze "slowa" az do: cyfry, 'ul.', 'al.', 'os.', lub krotki token (2 litery)
+        city_match = re.match(
+            r'^([A-Za-zĄąĆćĘęŁłŃńÓóŚśŹźŻż]+(?:\s+[A-Za-zĄąĆćĘęŁłŃńÓóŚśŹźŻż]{3,})*)',
+            after_zip
+        )
         if city_match:
-            result['city'] = city_match.group(1).strip()
+            city_raw = city_match.group(1).strip()
+            # Odrzuc 'ul' / 'al' / 'os' jako czesc nazwy miasta (sa prefiksem ulicy)
+            city_words = [w for w in city_raw.split() if w.lower() not in ('ul', 'al', 'os')]
+            if city_words:
+                result['city'] = ' '.join(city_words)
     else:
-        # Bez kodu: probuj pierwsze slowo jak Bojano, Banino, etc.
+        # Bez kodu: pierwsze slowo (np. Bojano, Banino, Gdansk)
         city_match = re.match(r'^([A-Za-zĄąĆćĘęŁłŃńÓóŚśŹźŻż]+)', addr.strip())
         if city_match:
             result['city'] = city_match.group(1).strip()
@@ -432,49 +439,75 @@ def step2_business(dry, policies_firma, client_businesses):
 # KROK 3 — policy_terminations z notatek
 # ============================================================
 
-# Mapa regexow do parsowania TU z roznych formatow
+# Mapa regexow do parsowania TU z roznych formatow.
+# Kolejnosc: od najdokladniejszego do najogolniejszego.
+# Grupy: (insurer_name, policy_number) — policy_number moze byc None.
+
+# Known TU names dla normalizacji (case-insensitive match -> canonical)
+_TU_CANONICAL = {
+    'pzu': 'PZU', 'hdi': 'HDI', 'warta': 'Warta', 'hestia': 'Hestia',
+    'compensa': 'Compensa', 'allianz': 'Allianz', 'uniqa': 'Uniqa',
+    'link4': 'Link4', 'link 4': 'Link4', 'tuz': 'TUZ', 'tuw': 'TUW',
+    'interrisk': 'Interrisk', 'generali': 'Generali',
+    'euro inc': 'Euro Inc', 'insurance jsc': 'Insurance JSC',
+    'e7': 'Hestia',  # Hestia E7 to Hestia
+}
+
 _TU_PATTERNS = [
-    # '[STARA POLISA] stara <TU> nr <NR>'
-    re.compile(
-        r'\[STARA POLISA\]\s+stara\s+(\w[\w\s]*?)\s+nr\s+([A-Z0-9a-z_\-/\.]+)',
-        re.IGNORECASE
-    ),
-    # '[STARA POLISA] stara polisa <TU> nr <NR>'
-    re.compile(
-        r'\[STARA POLISA\]\s+stara\s+polisa\s+(\w[\w\s]*?)\s+nr\s+([A-Z0-9a-z_\-/\.]+)',
-        re.IGNORECASE
-    ),
     # '[STARA POLISA] stara polisa w <TU> nr <NR>'
     re.compile(
         r'\[STARA POLISA\]\s+stara\s+polisa\s+w\s+(\w+)\s+nr\s+([A-Z0-9a-z_\-/\.]+)',
         re.IGNORECASE
     ),
-    # '[STARA POLISA] stara w <TU> nr <NR>' / '[STARA POLISA] stara w <TU>'
+    # '[STARA POLISA] stara polisa <TU> nr <NR>' (bez 'w')
     re.compile(
-        r'\[STARA POLISA\]\s+stara\s+w\s+(\w+)(?:\s+nr\s+([A-Z0-9a-z_\-/\.]+))?',
+        r'\[STARA POLISA\]\s+stara\s+polisa\s+([A-Za-zĄąĆćĘęŁłŃńÓóŚśŹźŻż]{3,})\s+nr\s+([A-Z0-9a-z_\-/\.]+)',
         re.IGNORECASE
     ),
-    # '[STARA POLISA] <TU> <NR>' — samo TU + numer (bez 'stara')
+    # '[STARA POLISA] stara w <TU> nr <NR>'
     re.compile(
-        r'\[STARA POLISA\]\s+([A-Za-zĄąĆćĘęŁłŃńÓóŚśŹźŻż]{3,})\s+([A-Z0-9a-z_\-/\.]{5,})',
+        r'\[STARA POLISA\]\s+stara\s+w\s+(\w+)\s+nr\s+([A-Z0-9a-z_\-/\.]+)',
         re.IGNORECASE
     ),
-    # '[STARA POLISA] <TU>' — samo TU (bez numeru)
+    # '[STARA POLISA] stara <TU> nr <NR>' (np. 'stara PZU nr 1234')
+    re.compile(
+        r'\[STARA POLISA\]\s+stara\s+([A-Za-zĄąĆćĘęŁłŃńÓóŚśŹźŻż]{3,})\s+nr\s+([A-Z0-9a-z_\-/\.]+)',
+        re.IGNORECASE
+    ),
+    # '[STARA POLISA] stara w <TU>' (bez numeru)
+    re.compile(
+        r'\[STARA POLISA\]\s+stara\s+w\s+(\w+)(?:\s|$)',
+        re.IGNORECASE
+    ),
+    # '[STARA POLISA] <TU> <NR_TYLKO_CYFRY>' — samo TU + numer liczbowy
+    re.compile(
+        r'\[STARA POLISA\]\s+([A-Za-zĄąĆćĘęŁłŃńÓóŚśŹźŻż]{3,})\s+(\d[\d\-/\.]{4,})',
+        re.IGNORECASE
+    ),
+    # '[STARA POLISA] stara <TU>' (bez nr)
+    re.compile(
+        r'\[STARA POLISA\]\s+stara\s+([A-Za-zĄąĆćĘęŁłŃńÓóŚśŹźŻż]{3,})(?:\s|$)',
+        re.IGNORECASE
+    ),
+    # '[STARA POLISA] <TU>' — samo TU (bez numeru, bez 'stara')
     re.compile(
         r'\[STARA POLISA\]\s+([A-Za-zĄąĆćĘęŁłŃńÓóŚśŹźŻż]{3,})(?:\s|$)',
         re.IGNORECASE
     ),
 ]
 
-# Slowa kluczowe ktore sa NA PEWNO nie-TU (numerami, slugami itp.)
+# Slowa kluczowe ktore sa NA PEWNO nie-TU
 _NON_TU_WORDS = {
     'stara', 'polisa', 'w', 'do', 'na', 'ze', 'z', 'nr', 'pin',
     'brak', 'pierwsza', 'rejestracja', 'nowy', 'nowa', 'nowo', 'kupiony',
     'wznowienie', 'inny', 'inne', 'moja', 'oferta', 'zostali', 'nie', 'byl',
     'ubezpieczenie', 'od', 'kilku', 'lat', 'po', 'raz', 'pierwszy',
-    'sprowadzany', 'sprowadzana', 'pbierwsze', 'za',
-    '?', 'brak'
+    'sprowadzany', 'sprowadzana', 'pbierwsze', 'za', 'samo',
+    '?', 'brak', 'nr', 'bylo', 'bylo', 'samo', 'z', 'ze',
 }
+
+# Slowa ktore sa czescia opisu, nie numerem polisy
+_NON_POLICY_WORDS = {'stara', 'polisa', 'nr', 'pin', 'brak', '?'}
 
 
 def detect_status(content):
@@ -490,30 +523,44 @@ def detect_status(content):
     return 'DRAFT'
 
 
+def normalize_tu(name):
+    """Normalizuj nazwe TU do kanonicznej formy (lub zwroc oryginalna)."""
+    if not name:
+        return name
+    return _TU_CANONICAL.get(name.strip().lower(), name.strip())
+
+
 def parse_old_policy_from_note(content):
     """
     Probuje wyciagnac old_insurer_name + old_policy_number z tresci notatki.
     Zwraca dict z kluczami old_insurer_name, old_policy_number (lub None).
+    Zabezpieczenie: odrzuca insurer jezeli jest slowem z _NON_TU_WORDS,
+    odrzuca number jezeli jest slowem z _NON_POLICY_WORDS.
     """
-    # Probuj kazdego wzorca od najdokladniejszego
-    for pat in _TU_PATTERNS[:4]:  # wzorce z numerem
+    for pat in _TU_PATTERNS:
         m = pat.search(content)
-        if m:
-            groups = m.groups()
-            insurer = groups[0].strip() if groups[0] else None
-            number  = groups[1].strip() if len(groups) > 1 and groups[1] else None
-            if insurer and insurer.lower() not in _NON_TU_WORDS:
-                return {'old_insurer_name': insurer, 'old_policy_number': number}
+        if not m:
+            continue
+        groups = m.groups()
+        insurer_raw = groups[0].strip() if groups[0] else None
+        number_raw  = groups[1].strip() if len(groups) > 1 and groups[1] else None
 
-    # Wzorce bez numeru (samo TU)
-    for pat in _TU_PATTERNS[4:]:
-        m = pat.search(content)
-        if m:
-            groups = m.groups()
-            insurer = groups[0].strip() if groups[0] else None
-            number  = groups[1].strip() if len(groups) > 1 and groups[1] else None
-            if insurer and insurer.lower() not in _NON_TU_WORDS:
-                return {'old_insurer_name': insurer, 'old_policy_number': number}
+        # Odfiltruj nie-TU (slowa kluczowe, za krotkie)
+        if not insurer_raw or insurer_raw.lower() in _NON_TU_WORDS or len(insurer_raw) < 3:
+            continue
+
+        # Sprawdz czy insurer nie jest liczba (numery polis nie sa nazwa TU)
+        if re.match(r'^\d+', insurer_raw):
+            continue
+
+        insurer = normalize_tu(insurer_raw)
+
+        # Walidacja numeru — odrzuc slowa kluczowe jako numer
+        number = None
+        if number_raw and number_raw.lower() not in _NON_POLICY_WORDS:
+            number = number_raw
+
+        return {'old_insurer_name': insurer, 'old_policy_number': number}
 
     return {'old_insurer_name': None, 'old_policy_number': None}
 

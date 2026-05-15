@@ -130,6 +130,9 @@ const CHANGELOG: ChangeEntry[] = [
   {
     date: "2026-05-15",
     items: [
+      "Strzałki przy polach kwot usunięte — wartości wpisujesz z klawiatury tak jak w Excelu.",
+      "Numer polisy wyświetlany w pełnej szerokości — widzisz cały numer i możesz sprawdzić czy wpisałaś poprawnie.",
+      "Pulpit pokazuje dzień tygodnia i datę na górze — od razu wiesz który jest dzień.",
       "Pojazdy, ubezpieczeni, firmy i powiązania notatka↔polisa wydzielone do osobnych tabel (czystsza struktura, łatwiejsze raporty).",
       "Parser naprawiony — rejestracje pojazdów wykrywane poprawnie (Twoje GD72N6, blokuje false-positives jak NNW/ASS/TDI).",
       "Adresy bez 'ul.' rozpoznawane przez kod pocztowy (Gdańsk, Gdynia, Puck, okolice).",

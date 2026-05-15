@@ -21,7 +21,7 @@
  *   Gdy aiNote zawiera 'SUB_AGENT', flagujemy jako WARNING (heurystyka).
  */
 
-import { Policy, Client } from "../types";
+import type { Policy, Client } from "../types";
 
 export type FlagSeverity = "CRITICAL" | "WARNING";
 

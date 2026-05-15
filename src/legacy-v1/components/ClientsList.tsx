@@ -645,7 +645,7 @@ export const ClientsList: React.FC<Props> = ({
                     
                     {/* STATYSTYKI & OFERTY (ALWAYS LAST) */}
                     {isVirtual ? (
-                        <td colSpan={2} className={`px-4 ${paddingClass} text-center align-middle`}>
+                        <td colSpan={3} className={`px-4 ${paddingClass} text-center align-middle`}>
                             <span className="inline-flex items-center px-2 py-1 rounded bg-purple-100 text-purple-600 text-[11px] font-black uppercase border border-purple-200 shadow-sm">
                                 LEAD
                             </span>
@@ -708,6 +708,25 @@ export const ClientsList: React.FC<Props> = ({
                                         <span className="text-zinc-200 dark:text-zinc-800 text-xs">-</span>
                                     )}
                                 </div>
+                            </td>
+
+                            {/* FLAGI — liczba braków danych */}
+                            <td
+                                className={`px-4 ${paddingClass} align-middle ${showFlagsOnly ? 'bg-red-50/30 dark:bg-red-900/5' : ''}`}
+                                onClick={(e) => e.stopPropagation()}
+                            >
+                                {(client._flagCount ?? 0) > 0 ? (
+                                    <button
+                                        onClick={() => onNavigate('client-details', { client })}
+                                        className="inline-flex items-center gap-1 px-2 py-1 rounded-lg bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 text-[11px] font-black border border-red-200 dark:border-red-800 hover:bg-red-200 dark:hover:bg-red-900/50 transition-colors"
+                                        title={`${client._flagCount} pozycji wymaga uzupełnienia — kliknij aby przejść do klienta`}
+                                    >
+                                        <AlertCircle size={11} />
+                                        {client._flagCount}
+                                    </button>
+                                ) : (
+                                    <span className="text-zinc-200 dark:text-zinc-800 text-xs">—</span>
+                                )}
                             </td>
                         </>
                     )}

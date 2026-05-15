@@ -140,6 +140,7 @@ const CHANGELOG: ChangeEntry[] = [
       "PESEL klienta z col[18] ('pesel kl X') nie tworzy już fake-współwłaściciela.",
       "Ubezpieczony różny od ubezpieczającego (np. dziecko z NNW szkolnym) zapisywany jako osobna osoba.",
       "🔒 PESEL zawsze szyfrowany — system odmawia zapisu numeru PESEL gdy aplikacja jest zablokowana (zapomniane hasło nie spowoduje już wycieku danych do bazy).",
+      "📋 Nowy widget na Pulpicie — lista spraw do uzupełnienia (brakujące rejestracje, NIP-y, typy polis). Możesz oznaczyć jako zrobione, pominąć na dziś lub pominąć trwale. Reminder pojawia się co kilka godzin.",
     ],
   },
   {

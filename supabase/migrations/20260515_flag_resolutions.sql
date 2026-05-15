@@ -41,9 +41,21 @@ CREATE TRIGGER trg_flag_resolutions_updated_at
     BEFORE UPDATE ON test.flag_resolutions
     FOR EACH ROW EXECUTE FUNCTION test.set_flag_resolutions_updated_at();
 
--- RLS — analogiczne do test.policies
+-- RLS — analogiczne do test.policies (4 osobne policy: SELECT/INSERT/UPDATE/DELETE)
 ALTER TABLE test.flag_resolutions ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS flag_resolutions_sel ON test.flag_resolutions;
+DROP POLICY IF EXISTS flag_resolutions_ins ON test.flag_resolutions;
+DROP POLICY IF EXISTS flag_resolutions_upd ON test.flag_resolutions;
+DROP POLICY IF EXISTS flag_resolutions_del ON test.flag_resolutions;
+-- usuń stary policy z poprzedniej wersji migracji, gdyby istniał
 DROP POLICY IF EXISTS flag_resolutions_tenant_policy ON test.flag_resolutions;
-CREATE POLICY flag_resolutions_tenant_policy ON test.flag_resolutions
-    USING (tenant_id = '11111111-1111-1111-1111-111111111111'::uuid);
+
+CREATE POLICY flag_resolutions_sel ON test.flag_resolutions
+    FOR SELECT USING (tenant_id = public.current_tenant_id() OR public.is_insurance_admin());
+CREATE POLICY flag_resolutions_ins ON test.flag_resolutions
+    FOR INSERT WITH CHECK (tenant_id = public.current_tenant_id() OR public.is_insurance_admin());
+CREATE POLICY flag_resolutions_upd ON test.flag_resolutions
+    FOR UPDATE USING (tenant_id = public.current_tenant_id() OR public.is_insurance_admin());
+CREATE POLICY flag_resolutions_del ON test.flag_resolutions
+    FOR DELETE USING (tenant_id = public.current_tenant_id() OR public.is_insurance_admin());

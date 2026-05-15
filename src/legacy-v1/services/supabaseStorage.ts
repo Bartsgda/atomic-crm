@@ -15,6 +15,8 @@ import type {
   InsurerConfig, DeletedItem, UiPreferences,
   Vehicle, InsuredPerson, ClientBusiness, BusinessEntity,
 } from '../types';
+import type { FlagResolution } from './policyFlags';
+import { resolutionKey } from './policyFlags';
 import { encryptField, decryptField, encryptJsonField, decryptJsonField, looksEncrypted, looksLikePlaintextPesel } from './crypto';
 
 const TENANT_ID = (typeof import.meta !== 'undefined' && (import.meta as any).env?.VITE_SUPABASE_TENANT_ID) || '11111111-1111-1111-1111-111111111111';
@@ -1419,6 +1421,130 @@ class SupabaseStorageManager {
       if (error) throw error;
     }
     return this.init();
+  }
+
+  // ─── Flag Resolutions ─────────────────────────────────────────────────────
+
+  /**
+   * Ładuje wszystkie rekordy flag_resolutions dla tenantu.
+   * Zwraca Map z kluczem `${targetType}:${targetId}:${flagType}`.
+   * Graceful: jeśli tabela nie istnieje (pre-migration), zwraca pustą mapę.
+   */
+  async loadFlagResolutions(): Promise<Map<string, FlagResolution>> {
+    const sb = this.sb();
+    const { data, error } = await sb
+      .from('flag_resolutions')
+      .select('*')
+      .eq('tenant_id', TENANT_ID);
+
+    if (error) {
+      console.warn('[SupabaseStorage] loadFlagResolutions failed (tabela może nie istnieć jeszcze):', error.message);
+      return new Map();
+    }
+
+    const map = new Map<string, FlagResolution>();
+    for (const row of data ?? []) {
+      const res: FlagResolution = {
+        id: row.id,
+        tenantId: row.tenant_id,
+        targetType: row.target_type,
+        targetId: row.target_id,
+        flagType: row.flag_type,
+        resolvedAt: row.resolved_at ?? null,
+        resolvedByUserId: row.resolved_by_user_id ?? null,
+        dismissedAt: row.dismissed_at ?? null,
+        dismissReason: row.dismiss_reason ?? null,
+        dismissedByUserId: row.dismissed_by_user_id ?? null,
+        createdAt: row.created_at,
+        updatedAt: row.updated_at,
+      };
+      map.set(resolutionKey(res.targetType, res.targetId, res.flagType), res);
+    }
+    return map;
+  }
+
+  /**
+   * Oznacza flagę jako rozwiązaną (UPSERT).
+   */
+  async resolveFlag(
+    targetType: 'POLICY' | 'CLIENT',
+    targetId: string,
+    flagType: string,
+  ): Promise<void> {
+    const sb = this.sb();
+    const { data: { user } } = await sb.auth.getUser();
+    const { error } = await sb
+      .from('flag_resolutions')
+      .upsert(
+        {
+          tenant_id: TENANT_ID,
+          target_type: targetType,
+          target_id: targetId,
+          flag_type: flagType,
+          resolved_at: new Date().toISOString(),
+          resolved_by_user_id: user?.id ?? null,
+          // Cofnij ewentualne dismiss przy rozwiązaniu
+          dismissed_at: null,
+          dismiss_reason: null,
+        },
+        { onConflict: 'tenant_id,target_type,target_id,flag_type' },
+      );
+    if (error) throw new Error(`[resolveFlag] ${error.message}`);
+  }
+
+  /**
+   * Pomija flagę na dziś (snooze_today) lub trwale (manual_skip) (UPSERT).
+   */
+  async dismissFlag(
+    targetType: 'POLICY' | 'CLIENT',
+    targetId: string,
+    flagType: string,
+    reason: 'snooze_today' | 'manual_skip',
+  ): Promise<void> {
+    const sb = this.sb();
+    const { data: { user } } = await sb.auth.getUser();
+    const { error } = await sb
+      .from('flag_resolutions')
+      .upsert(
+        {
+          tenant_id: TENANT_ID,
+          target_type: targetType,
+          target_id: targetId,
+          flag_type: flagType,
+          dismissed_at: new Date().toISOString(),
+          dismiss_reason: reason,
+          dismissed_by_user_id: user?.id ?? null,
+          resolved_at: null,
+          resolved_by_user_id: null,
+        },
+        { onConflict: 'tenant_id,target_type,target_id,flag_type' },
+      );
+    if (error) throw new Error(`[dismissFlag] ${error.message}`);
+  }
+
+  /**
+   * Cofa resolve/dismiss flagi (np. "Cofnij pominięcie" w ustawieniach).
+   */
+  async unmarkFlag(
+    targetType: 'POLICY' | 'CLIENT',
+    targetId: string,
+    flagType: string,
+  ): Promise<void> {
+    const sb = this.sb();
+    const { error } = await sb
+      .from('flag_resolutions')
+      .update({
+        resolved_at: null,
+        resolved_by_user_id: null,
+        dismissed_at: null,
+        dismiss_reason: null,
+        dismissed_by_user_id: null,
+      })
+      .eq('tenant_id', TENANT_ID)
+      .eq('target_type', targetType)
+      .eq('target_id', targetId)
+      .eq('flag_type', flagType);
+    if (error) throw new Error(`[unmarkFlag] ${error.message}`);
   }
 }
 

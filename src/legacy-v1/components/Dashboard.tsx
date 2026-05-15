@@ -1,12 +1,18 @@
 
 import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { AppState, PolicyType, SalesStage, Client, Policy, VehicleSubType, ClientNote } from '../types';
-import { Search, Plus, Wallet, Zap, TrendingUp, SlidersHorizontal, ArrowRight, Car, Home, Heart, Plane, Building2, FileText, Truck, Bike, Tractor, Bus, Container, LayoutGrid, Gamepad2, Calendar, MailCheck, MailWarning, MessageSquare, Briefcase, Clock, CheckCircle2, Snowflake, Phone, Mail, ArrowUp, ArrowDown, ArrowUpDown } from 'lucide-react';
+import { Search, Plus, Wallet, Zap, TrendingUp, SlidersHorizontal, ArrowRight, Car, Home, Heart, Plane, Building2, FileText, Truck, Bike, Tractor, Bus, Container, LayoutGrid, Gamepad2, Calendar, MailCheck, MailWarning, MessageSquare, Briefcase, Clock, CheckCircle2, Snowflake, Phone, Mail, ArrowUp, ArrowDown, ArrowUpDown, X, ClipboardList } from 'lucide-react';
 import { format, differenceInDays, isWithinInterval, isValid, addDays, endOfMonth, endOfYear, addMonths } from 'date-fns';
 import { pl } from 'date-fns/locale/pl';
-import { AdvancedFilters } from './AdvancedFilters'; 
+import { AdvancedFilters } from './AdvancedFilters';
 import { QuickViewDrawer } from './QuickViewDrawer';
 import { STATUS_CONFIG } from '../constants';
+import { FlagReminderWidget } from './FlagReminderWidget';
+import { collectAllFlags, selectTodaysFlags } from '../services/policyFlags';
+import { supabaseStorage } from '../services/supabaseStorage';
+
+const LS_LAST_REMINDER = 'crm-alina:lastReminderShownAt';
+const LS_INTERVAL = 'crm-alina:reminderInterval';
 
 interface Props {
   state: AppState;
@@ -123,6 +129,36 @@ export const Dashboard: React.FC<Props> = ({ state, onNavigate, onDeletePolicy, 
       key: 'endDate',
       direction: 'asc' // Default: Najbliższe końce
   });
+
+  // --- FLAG REMINDER TOAST ---
+  const [reminderToast, setReminderToast] = useState<{ count: number } | null>(null);
+  const widgetRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Sprawdź czy trzeba pokazać toast (raz przy mount na Dashboard)
+    const check = async () => {
+      try {
+        const intervalH = parseInt(localStorage.getItem(LS_INTERVAL) || '3', 10);
+        const lastShown = localStorage.getItem(LS_LAST_REMINDER);
+        const nowTs = Date.now();
+        if (lastShown) {
+          const diff = (nowTs - parseInt(lastShown, 10)) / 3_600_000;
+          if (diff < intervalH) return; // za wcześnie
+        }
+        const resolutions = await supabaseStorage.loadFlagResolutions();
+        const allFlags = collectAllFlags(state.clients, state.policies);
+        const active = selectTodaysFlags(allFlags, resolutions, Infinity);
+        if (active.length > 0) {
+          setReminderToast({ count: active.length });
+          localStorage.setItem(LS_LAST_REMINDER, String(nowTs));
+        }
+      } catch {
+        // graceful — nie blokuje reszty Dashboard
+      }
+    };
+    check();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // --- HOVER STATE ---
   const [hoveredNoteData, setHoveredNoteData] = useState<{ policyId: string, pos: {x:number, y:number} } | null>(null);
@@ -455,6 +491,36 @@ export const Dashboard: React.FC<Props> = ({ state, onNavigate, onDeletePolicy, 
         </div>
       </div>
       
+      {/* FLAG REMINDER TOAST */}
+      {reminderToast && (
+        <div className="fixed bottom-6 right-6 z-50 flex items-center gap-3 bg-white dark:bg-zinc-900 border border-orange-300 dark:border-orange-600 shadow-2xl rounded-2xl px-4 py-3 max-w-sm animate-in slide-in-from-bottom-4 duration-300">
+          <ClipboardList size={18} className="text-orange-500 shrink-0" />
+          <p className="text-sm font-semibold text-zinc-800 dark:text-zinc-200 flex-1">
+            Masz <span className="font-black text-orange-600">{reminderToast.count}</span> spraw do uzupełnienia.
+          </p>
+          <button
+            onClick={() => {
+              setReminderToast(null);
+              widgetRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }}
+            className="text-xs text-orange-600 font-bold hover:underline whitespace-nowrap"
+          >
+            Pokaż
+          </button>
+          <button
+            onClick={() => setReminderToast(null)}
+            className="p-0.5 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-400"
+          >
+            <X size={14} />
+          </button>
+        </div>
+      )}
+
+      {/* FLAG REMINDER WIDGET */}
+      <div ref={widgetRef} id="flag-reminder-widget">
+        <FlagReminderWidget state={state} onNavigate={onNavigate} />
+      </div>
+
       {/* FILTER BAR */}
       <div className="sticky top-2 z-30">
         <div className="bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-xl transition-all p-3 space-y-2">

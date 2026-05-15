@@ -5,6 +5,7 @@
  * Używane przez:
  *  - PolicyCardItem (ClientDetails.tsx) — badge per polisa
  *  - ClientsList.tsx — kolumna flag_count + filter "tylko z flagami"
+ *  - FlagReminderWidget.tsx — system przypomnień (Faza 5, 2026-05-15)
  *
  * UWAGA NIP/FIRMA:
  *   `firmaDetails` nie istnieje w typach frontendu — NIP firmy żyje na
@@ -22,6 +23,165 @@
  */
 
 import type { Policy, Client } from "../types";
+
+// ─── FlagResolution — persistence per-flag ───────────────────────────────────
+
+/**
+ * Rekord z tabeli test.flag_resolutions.
+ * Klucz mapy: `${targetType}:${targetId}:${flagType}`
+ */
+export interface FlagResolution {
+  id: string;
+  tenantId: string;
+  targetType: "POLICY" | "CLIENT";
+  targetId: string;
+  flagType: string;
+  resolvedAt: string | null;
+  resolvedByUserId: string | null;
+  dismissedAt: string | null;
+  dismissReason: "snooze_today" | "manual_skip" | null;
+  dismissedByUserId: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+/** Klucz do map resolutions: `${targetType}:${targetId}:${flagType}` */
+export function resolutionKey(
+  targetType: "POLICY" | "CLIENT",
+  targetId: string,
+  flagType: string,
+): string {
+  return `${targetType}:${targetId}:${flagType}`;
+}
+
+// ─── ActiveFlagItem — rozszerzona flaga z danymi klienta (do widgetu) ────────
+
+export interface ActiveFlagItem {
+  flag: PolicyFlag | ClientFlag;
+  targetType: "POLICY" | "CLIENT";
+  targetId: string;
+  /** Nazwa klienta do wyświetlenia w widgecie (np. "Jan Kowalski") */
+  clientName: string;
+  /** ID klienta — do linku nawigacji */
+  clientId: string;
+  /** Opis kontekstu np. "Toyota Avensis GD72N6" dla AUTO_NO_REG */
+  contextLabel: string;
+  /** Data polisy/klienta do sortowania */
+  sortDate: string;
+}
+
+// ─── selectTodaysFlags — algorytm doboru N flag na dziś ──────────────────────
+
+/**
+ * Wybiera N aktywnych flag do uzupełnienia dziś.
+ *
+ * Algorytm:
+ * 1. Odfiltruj flagi z resolved_at IS NOT NULL
+ * 2. Odfiltruj dismissed (manual_skip zawsze; snooze_today tylko jeśli
+ *    dismissed_at jest dziś — po lokalnej północy snooze wraca)
+ * 3. Sortuj: CRITICAL przed WARNING; w ramach priorytetu po sortDate ASC
+ * 4. Weź pierwsze `quota` elementów
+ *
+ * UWAGA snooze_today: używamy `toDateString()` (locale-niezależne, porównuje
+ * datę lokalną) zamiast UTC ::date — unika błędu strefy czasowej.
+ */
+export function selectTodaysFlags(
+  allFlags: ActiveFlagItem[],
+  resolutions: Map<string, FlagResolution>,
+  quota: number,
+): ActiveFlagItem[] {
+  const todayStr = new Date().toDateString();
+
+  const active = allFlags.filter((item) => {
+    const key = resolutionKey(item.targetType, item.targetId, item.flag.code);
+    const res = resolutions.get(key);
+    if (!res) return true; // brak rekordu = aktywna
+
+    // Rozwiązana → ukryj
+    if (res.resolvedAt) return false;
+
+    // Pominięta trwale → ukryj
+    if (res.dismissedAt && res.dismissReason === "manual_skip") return false;
+
+    // Snooze na dziś — ukryj tylko jeśli dismissed_at jest dziś lokalnie
+    if (res.dismissedAt && res.dismissReason === "snooze_today") {
+      const dismissedStr = new Date(res.dismissedAt).toDateString();
+      if (dismissedStr === todayStr) return false;
+      // snooze wygasł (był wczoraj lub starszy) → pokazuj z powrotem
+    }
+
+    return true;
+  });
+
+  // Sortuj: CRITICAL=0, WARNING=1; potem po sortDate ASC
+  active.sort((a, b) => {
+    const sa = a.flag.severity === "CRITICAL" ? 0 : 1;
+    const sb = b.flag.severity === "CRITICAL" ? 0 : 1;
+    if (sa !== sb) return sa - sb;
+    return a.sortDate.localeCompare(b.sortDate);
+  });
+
+  return active.slice(0, quota);
+}
+
+/**
+ * Zbiera wszystkie aktywne flagi (policy + client-level) jako ActiveFlagItem[].
+ * Wywoływane przez FlagReminderWidget raz przy montowaniu / po zmianie stanu.
+ */
+export function collectAllFlags(
+  clients: Client[],
+  policies: Policy[],
+): ActiveFlagItem[] {
+  const items: ActiveFlagItem[] = [];
+
+  for (const client of clients) {
+    const clientPolicies = policies.filter((p) => p.clientId === client.id);
+    const clientName = `${client.firstName} ${client.lastName}`.trim();
+
+    // Flagi na polisach
+    for (const policy of clientPolicies) {
+      const flags = computePolicyFlags(policy, client);
+      for (const flag of flags) {
+        let contextLabel = "";
+        if (flag.code === "AUTO_NO_REG") {
+          contextLabel =
+            [policy.vehicleBrand, policy.vehicleModel]
+              .filter(Boolean)
+              .join(" ") || "pojazd bez marki";
+        } else if (flag.code === "FIRMA_NO_NIP") {
+          contextLabel = "brak NIP w danych klienta";
+        } else {
+          contextLabel = policy.policyNumber || `polisa ${policy.type}`;
+        }
+        items.push({
+          flag,
+          targetType: "POLICY",
+          targetId: policy.id,
+          clientName,
+          clientId: client.id,
+          contextLabel,
+          sortDate: policy.createdAt || "",
+        });
+      }
+    }
+
+    // Flagi na kliencie
+    const clientFlags = computeClientLevelFlags(client);
+    for (const flag of clientFlags) {
+      items.push({
+        flag,
+        targetType: "CLIENT",
+        targetId: client.id,
+        clientName,
+        clientId: client.id,
+        contextLabel: "dane klienta",
+        sortDate: (client as any).createdAt || "",
+      });
+    }
+  }
+
+  return items;
+}
 
 export type FlagSeverity = "CRITICAL" | "WARNING";
 

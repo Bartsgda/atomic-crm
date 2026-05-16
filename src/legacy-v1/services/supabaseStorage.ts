@@ -862,11 +862,27 @@ class SupabaseStorageManager {
       throw new Error(`Błąd bazy danych: ${firstError?.message || 'unknown'}`);
     }
 
-    // Logujemy ale nie rzucamy błędu dla nowych tabel (graceful degradation)
-    if (vehiclesRes.error)       console.warn('[SupabaseStorage] vehicles query failed:', vehiclesRes.error.message);
-    if (insuredPersonsRes.error) console.warn('[SupabaseStorage] insured_persons query failed:', insuredPersonsRes.error.message);
-    if (businessesRes.error)     console.warn('[SupabaseStorage] client_businesses query failed:', businessesRes.error.message);
-    if (noteLinksRes.error)      console.warn('[SupabaseStorage] policy_note_links query failed:', noteLinksRes.error.message);
+    // Graceful degradation dla refactor v2 tabel (zastosowane w `test`, jeszcze nie w `public`).
+    // Brak tabeli (PGRST205 / 42P01) = expected → debug. Inny błąd → warn.
+    const isMissingTable = (err: any) => {
+      if (!err) return false;
+      const m = (err.message || "").toLowerCase();
+      return (
+        err.code === "PGRST205" ||
+        err.code === "42P01" ||
+        m.includes("could not find the table") ||
+        m.includes("does not exist")
+      );
+    };
+    const logTableErr = (name: string, err: any) => {
+      if (!err) return;
+      const fn = isMissingTable(err) ? console.debug : console.warn;
+      fn(`[SupabaseStorage] ${name} query failed:`, err.message);
+    };
+    logTableErr("vehicles",          vehiclesRes.error);
+    logTableErr("insured_persons",   insuredPersonsRes.error);
+    logTableErr("client_businesses", businessesRes.error);
+    logTableErr("policy_note_links", noteLinksRes.error);
 
     // Aktualizuj moduł-level maps (używane przez rowToPolicy/rowToClient/rowToNote)
     vehicleMap = new Map((vehiclesRes.data ?? []).map((v: any) => [v.id, v]));
@@ -1438,7 +1454,13 @@ class SupabaseStorageManager {
       .eq('tenant_id', TENANT_ID);
 
     if (error) {
-      console.warn('[SupabaseStorage] loadFlagResolutions failed (tabela może nie istnieć jeszcze):', error.message);
+      const m = (error.message || "").toLowerCase();
+      const missing = error.code === "PGRST205" || error.code === "42P01" ||
+        m.includes("could not find the table") || m.includes("does not exist");
+      (missing ? console.debug : console.warn)(
+        '[SupabaseStorage] loadFlagResolutions failed (tabela może nie istnieć jeszcze):',
+        error.message,
+      );
       return new Map();
     }
 

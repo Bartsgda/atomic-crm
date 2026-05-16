@@ -21,17 +21,16 @@ export const getSupabaseClient = () => {
 };
 
 /** Klient zawsze w schemacie public — do tabel auth-side (tenant_keys, tenants).
- *  Auth persistSession=false żeby NIE tworzył drugiego storage key (GoTrue conflict).
+ *  UWAGA: NIE ustawiaj `persistSession: false` — PassphraseGate query do tenant_keys
+ *  wymaga zalogowanego usera (RLS po user_id). 2026-05-16: incydent "konto
+ *  niezainicjowane" gdy ta opcja była włączona.
  */
 export const getPublicSupabaseClient = () => {
   if (!publicSupabaseClient) {
     publicSupabaseClient = createClient(
       import.meta.env.VITE_SUPABASE_URL,
       import.meta.env.VITE_SB_PUBLISHABLE_KEY,
-      {
-        db: { schema: "public" },
-        auth: { persistSession: false, autoRefreshToken: false },
-      },
+      { db: { schema: "public" } },
     );
   }
   return publicSupabaseClient;
@@ -41,17 +40,15 @@ export const getPublicSupabaseClient = () => {
  * Klient do schematu `test` — read-only archiwum historyczne (XLSX 2025).
  * Używany przez "Wczytaj historię" w StatusEye (2026-05-16).
  * NIE zapisuj nigdy do tego klienta — tylko select.
- * Auth persistSession=false: nie chcemy drugiego/trzeciego GoTrue storage key.
+ * UWAGA 2026-05-16: NIE ustawiaj `persistSession: false` — RLS na test
+ * schema może wymagać `authenticated` role. Akceptujemy multi-GoTrueClient warning.
  */
 export const getArchiveSupabaseClient = () => {
   if (!archiveSupabaseClient) {
     archiveSupabaseClient = createClient(
       import.meta.env.VITE_SUPABASE_URL,
       import.meta.env.VITE_SB_PUBLISHABLE_KEY,
-      {
-        db: { schema: "test" },
-        auth: { persistSession: false, autoRefreshToken: false },
-      },
+      { db: { schema: "test" } },
     );
   }
   return archiveSupabaseClient;

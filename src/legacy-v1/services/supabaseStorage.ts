@@ -8,7 +8,7 @@
  * Tenant: Alina Insurance (11111111-1111-1111-1111-111111111111)
  */
 
-import { getSupabaseClient } from '../../components/atomic-crm/providers/supabase/supabase';
+import { getSupabaseClient, getActiveSchema } from '../../components/atomic-crm/providers/supabase/supabase';
 import type {
   AppState, Client, Policy, ClientNote, Notification,
   TerminationRecord, SubAgent, ChecklistTemplates,
@@ -159,7 +159,7 @@ async function clientToRow(c: Client, dek: CryptoKey | null) {
   // wdrożeniem DEK. Tutaj — w pierwszym miejscu z DEK w ręku — bierzemy pending
   // jako plaintext do zaszyfrowania. Nie zostawiamy plaintext nigdzie indziej.
   const peselPlaintext = c.pesel || (c as any).pesel_encrypted_pending || null;
-  return {
+  const base = {
     id: dbId,
     tenant_id: TENANT_ID,
     first_name: c.firstName || '',
@@ -175,8 +175,10 @@ async function clientToRow(c: Client, dek: CryptoKey | null) {
     zip_code: await encStr(c.zipCode, dek),
     source: 'manual' as const,
     is_fake: isFake,
-    v1_original_id: isValidUUID(c.id) ? null : c.id,
   };
+  // v1_original_id istnieje TYLKO w test schema
+  if (getActiveSchema() !== 'test') return base;
+  return { ...base, v1_original_id: isValidUUID(c.id) ? null : c.id };
 }
 
 async function rowToClient(r: any, dek: CryptoKey | null): Promise<Client> {
@@ -210,7 +212,8 @@ async function policyToRow(p: Policy, dek: CryptoKey | null, vehicleId?: string 
   const isFake = p.id.includes('demo') || p.clientId.includes('demo') || (p as any).isFake;
   const dbId = await toUUID(p.id);
   const dbClientId = await toUUID(p.clientId);
-  return {
+  const isTest = getActiveSchema() === 'test';
+  const base = {
     id: dbId,
     tenant_id: TENANT_ID,
     client_id: dbClientId,
@@ -228,8 +231,7 @@ async function policyToRow(p: Policy, dek: CryptoKey | null, vehicleId?: string 
     vehicle_brand: p.vehicleBrand || null,
     vehicle_model: p.vehicleModel || null,
     vehicle_reg: await encStr(p.vehicleReg, dek),
-    vehicle_id: vehicleId ?? null,                     // schema v2 — null gdy brak pojazdu
-    auto_details: p.autoDetails ?? null,               // dual write — legacy JSONB
+    auto_details: p.autoDetails ?? null,
     home_details: await encJson(p.homeDetails, dek),
     life_details: p.lifeDetails ?? null,
     travel_details: p.travelDetails ?? null,
@@ -238,8 +240,17 @@ async function policyToRow(p: Policy, dek: CryptoKey | null, vehicleId?: string 
     calculations: p.calculations ?? [],
     source: 'manual' as const,
     is_fake: isFake,
+  };
+  // Kolumny v2 istnieją TYLKO w test schema — nie wysyłaj na public (PostgREST 400)
+  if (!isTest) return base;
+  return {
+    ...base,
+    vehicle_id: vehicleId ?? null,
     v1_original_id: isValidUUID(p.id) ? null : p.id,
     v1_original_client_id: isValidUUID(p.clientId) ? null : p.clientId,
+    renewal_of_policy_id: (p as any).renewalOfPolicyId ?? null,
+    referred_by_name: (p as any).referredByName ?? null,
+    referred_by_client_id: (p as any).referredByClientId ?? null,
   };
 }
 
@@ -309,7 +320,7 @@ async function noteToRow(n: ClientNote, _dek: CryptoKey | null) {
   }
   const dbId = await toUUID(n.id);
   const dbClientId = await toUUID(n.clientId);
-  return {
+  const base = {
     id: dbId,
     tenant_id: TENANT_ID,
     client_id: dbClientId,
@@ -319,6 +330,11 @@ async function noteToRow(n: ClientNote, _dek: CryptoKey | null) {
     reminder_status: reminderStatus,
     linked_policy_ids: await Promise.all((n.linkedPolicyIds ?? []).map(id => toUUID(id))),
     history: n.history ?? [],
+  };
+  // v1_original_id / v1_original_client_id istnieją TYLKO w test schema
+  if (getActiveSchema() !== 'test') return base;
+  return {
+    ...base,
     v1_original_id: isValidUUID(n.id) ? null : n.id,
     v1_original_client_id: isValidUUID(n.clientId) ? null : n.clientId,
   };

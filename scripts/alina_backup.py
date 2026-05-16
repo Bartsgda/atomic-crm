@@ -161,21 +161,34 @@ def _backed_up_today() -> bool:
 
 # ── Supabase fetch ────────────────────────────────────────────────────────────
 
-def _fetch_all(sb) -> dict[str, list]:
+def _fetch_schema(sb, schema: str) -> dict[str, list]:
+    """Pobiera wszystkie TABLES z danego schematu Supabase."""
     data: dict[str, list] = {}
+    sb_schema = sb.schema(schema) if schema != "public" else sb
     for table in TABLES:
         rows: list = []
         offset = 0
-        while True:
-            resp  = sb.table(table).select("*").range(offset, offset + 999).execute()
-            batch = resp.data or []
-            rows.extend(batch)
-            if len(batch) < 1000:
-                break
-            offset += 1000
+        try:
+            while True:
+                resp  = sb_schema.table(table).select("*").range(offset, offset + 999).execute()
+                batch = resp.data or []
+                rows.extend(batch)
+                if len(batch) < 1000:
+                    break
+                offset += 1000
+        except Exception as e:
+            # Tabela może nie istnieć w danym schemacie (np. init_state jest VIEW)
+            print(f"  [{schema}] {table:<35} SKIP ({e})")
+            rows = []
         data[table] = rows
-        print(f"  {table:<35} {len(rows):>5} wierszy")
+        if rows:
+            print(f"  [{schema}] {table:<35} {len(rows):>5} wierszy")
     return data
+
+
+def _fetch_all(sb) -> dict[str, list]:
+    """Pobiera public schema — kompatybilność wsteczna."""
+    return _fetch_schema(sb, "public")
 
 # ── SQLite builder ────────────────────────────────────────────────────────────
 
@@ -226,10 +239,17 @@ def cmd_backup(force: bool = False, quiet: bool = False) -> int:
     print(f"[alina_backup {ts}] Łączę z Supabase…")
     sb = create_client(url, secret)
 
-    print("[alina_backup] Pobieram tabele:")
-    data  = _fetch_all(sb)
+    print("[alina_backup] Pobieram tabele (public + test):")
+    pub_data  = _fetch_schema(sb, "public")
+    test_data = _fetch_schema(sb, "test")
+    # Łącz dane: tabele public bez prefiksu, test z prefiksem "test__"
+    data: dict[str, list] = {}
+    for t, rows in pub_data.items():
+        data[t] = rows
+    for t, rows in test_data.items():
+        data[f"test__{t}"] = rows
     total = sum(len(v) for v in data.values())
-    print(f"[alina_backup] Łącznie: {total} wierszy")
+    print(f"[alina_backup] Łącznie: {total} wierszy (public + test)")
 
     tmp = tempfile.NamedTemporaryFile(suffix=".db", delete=False)
     tmp_path = tmp.name

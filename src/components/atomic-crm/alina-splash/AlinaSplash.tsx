@@ -128,6 +128,13 @@ interface ChangeEntry {
 
 const CHANGELOG: ChangeEntry[] = [
   {
+    date: "2026-05-16",
+    items: [
+      "Import zaszyfrowanego pliku (xlsx.enc) naprawiony — działał niepoprawnie gdy aplikacja była w trybie 'produkcja'.",
+      "Backup automatyczny teraz zapisuje zarówno dane produkcyjne jak i testowe — dwa razy więcej pewności.",
+    ],
+  },
+  {
     date: "2026-05-15",
     items: [
       "Strzałki przy polach kwot usunięte — wartości wpisujesz z klawiatury tak jak w Excelu.",

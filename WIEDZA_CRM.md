@@ -138,6 +138,33 @@ Zamiast: Python + `supabase-py` + `rrv get CRM_ALINA_SB_SECRET`.
 
 ## Sesje
 
+### 2026-05-16b — Import xlsx.enc + backup test schema
+
+**Zrobiono:**
+- `supabaseStorage.ts` — `policyToRow`/`clientToRow`/`noteToRow` schema-aware: v2 kolumny
+  (`vehicle_id`, `v1_original_id`, `renewal_of_policy_id`, itp.) wysyłane TYLKO gdy
+  `getActiveSchema() === 'test'`. Na public schema upsert tych kolumn → PostgREST 400.
+- `alina_backup.py` — backup obejmuje teraz obie schematy (public + test). Tabele test
+  w SQLite pod prefiksem `test__<tabela>`. Użyto `sb.schema("test").table(...)`.
+
+**Root cause błędu importu xlsx.enc:**
+Gdy `localStorage["crm_active_schema"] = "public"`, `getSupabaseClient()` tworzy klient
+z `{ db: { schema: "public" } }`. `policyToRow` wysyłało `vehicle_id: null` — kolumna
+nie istnieje w `public.policies` (tylko w `test.policies` z migracji v2). PostgREST
+zwracał 400 "could not find column vehicle_id". Fix: warunek `isTest` w każdej funkcji.
+
+**Nowa wiedza:**
+- `sb.schema("test")` działa w supabase-py (Python client) — można querować test z Pythona
+- v2 kolumny TYLKO w test: `vehicle_id`, `renewal_of_policy_id`, `referred_by_name`,
+  `referred_by_client_id`, `v1_original_id`, `v1_original_client_id`
+- Plik korekcji `.ts.enc` = zaszyfrowany TS z `export const X = { ... }` → `DataMapper.overrideMap`
+  (nadpisanie mapowania XLSX). Tworzy się w zakładce "Szyfruj", ładuje przez checkbox "Korekcje".
+
+**Stan DB po sync:**
+- `public.insurance_clients`: 4 wiersze (nie zmienione)
+- `test.insurance_clients`: 4 wiersze (po sync z public — XLSX 100 klientów UTRACONE)
+- Jedyna droga odzyskania: re-import z oryginalnego xlsx.enc w DataImporterze (test mode)
+
 ### 2026-05-16 — Magiczny przycisk prod→test (pełna implementacja)
 
 **Zrobiono:**

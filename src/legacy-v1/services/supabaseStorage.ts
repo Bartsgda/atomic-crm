@@ -1410,6 +1410,7 @@ class SupabaseStorageManager {
   async importState(newState: AppState): Promise<AppState> {
     const sb = this.sb();
     const dek = this.dek;
+    if (!dek) throw new Error('importState: DEK jest null — sesja zablokowana. Odblokuj EncryptionGate przed importem.');
 
     const clientRows = await Promise.all((newState.clients ?? []).map(c => clientToRow(c, dek)));
     const policyRows = await Promise.all((newState.policies ?? []).map(p => policyToRow(p, dek)));

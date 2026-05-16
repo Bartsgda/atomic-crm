@@ -110,6 +110,12 @@ export const DataImporter: React.FC<Props> = ({
 
     try {
       log("🚀 Inicjalizacja procesu importu...");
+      if (!storage.hasDEK()) {
+        throw new Error(
+          'Sesja zaszyfrowania jest zablokowana. Wróć na ekran logowania, ' +
+          'wpisz hasło szyfrowania (EncryptionGate) i spróbuj ponownie.',
+        );
+      }
       const currentState = await storage.init();
       const workingClients: Client[] = [...currentState.clients];
       const clientMap = new Map<string, Client>();

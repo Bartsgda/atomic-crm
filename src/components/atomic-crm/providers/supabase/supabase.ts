@@ -10,7 +10,11 @@ const SCHEMA_KEY = "crm_active_schema";
 export const getActiveSchema = (): "public" | "test" => {
   try {
     const v = localStorage.getItem(SCHEMA_KEY);
-    return v === "test" ? "test" : "public";
+    if (v === "test") return "test";
+    if (v === "public") return "public"; // explicit user override beats env
+    // localStorage nie ustawione — użyj env z .env.alina.test (START_ALINA_TEST.bat)
+    if (import.meta.env.VITE_SUPABASE_SCHEMA === "test") return "test";
+    return "public";
   } catch {
     return "public";
   }

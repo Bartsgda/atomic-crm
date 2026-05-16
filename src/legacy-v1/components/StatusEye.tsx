@@ -308,7 +308,14 @@ export default function StatusEye({ isUnlocked = false }: { isUnlocked?: boolean
 
   const handleCameraClick = async () => {
     setFeedbackOpen(false);
-    const el = await pickElement();
+    const el = await pickElement({ captureScreen: true });
+    setFeedbackOpen(true);
+    if (el) setCaptured(el);
+  };
+
+  const handlePickElementClick = async () => {
+    setFeedbackOpen(false);
+    const el = await pickElement({ captureScreen: false });
     setFeedbackOpen(true);
     if (el) setCaptured(el);
   };
@@ -565,20 +572,30 @@ export default function StatusEye({ isUnlocked = false }: { isUnlocked?: boolean
 
               {/* kamera + screenshot — na dole */}
               <div className="space-y-2">
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 flex-wrap">
                   <button
                     onClick={handleCameraClick}
                     className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 text-gray-300 text-xs font-medium transition-colors"
                     data-feedback-ui="true"
                   >
                     <Camera className="w-3.5 h-3.5" />
-                    {captured ? 'Zmień screenshot' : 'Dodaj screenshot'}
+                    {captured?.screenshotB64 ? 'Zmień screenshot' : 'Dodaj screenshot'}
+                  </button>
+                  {/* 2026-05-16: drugi guzik — zaznacz element BEZ screena */}
+                  <button
+                    onClick={handlePickElementClick}
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 text-gray-300 text-xs font-medium transition-colors"
+                    data-feedback-ui="true"
+                    title="Zaznacz element bez screenshotu (samego selektora wystarczy)"
+                  >
+                    <Target className="w-3.5 h-3.5" />
+                    {captured?.label ? 'Zmień element' : 'Zaznacz element'}
                   </button>
                   {captured && !isAdmin && (
                     <button
                       onClick={() => setCaptured(null)}
                       className="p-1.5 rounded-xl border border-white/10 bg-white/5 hover:bg-red-500/20 hover:border-red-500/30 text-gray-500 hover:text-red-400 transition-colors"
-                      title="Usuń screenshot"
+                      title="Usuń element/screenshot"
                       data-feedback-ui="true"
                     >
                       <Trash2 className="w-3.5 h-3.5" />

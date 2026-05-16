@@ -20,6 +20,8 @@ import {
   Settings2,
   Undo2,
   Loader2,
+  X,
+  Bell,
 } from "lucide-react";
 import type { AppState } from "../types";
 import type { FlagResolution, ActiveFlagItem } from "../services/policyFlags";
@@ -33,6 +35,7 @@ import { supabaseStorage } from "../services/supabaseStorage";
 // ─── LocalStorage keys ────────────────────────────────────────────────────────
 const LS_QUOTA = "crm-alina:flagQuota";
 const LS_INTERVAL = "crm-alina:reminderInterval";
+const LS_HIDDEN = "crm-alina:flagWidgetHidden";
 
 function getQuota(): number {
   const v = localStorage.getItem(LS_QUOTA);
@@ -68,6 +71,18 @@ export const FlagReminderWidget: React.FC<Props> = ({ state, onNavigate }) => {
   const [intervalH, setIntervalH] = useState(getInterval);
   const [showSettings, setShowSettings] = useState(false);
   const [showAllDismissed, setShowAllDismissed] = useState(false);
+  const [hidden, setHidden] = useState(
+    () => localStorage.getItem(LS_HIDDEN) === "1",
+  );
+
+  const hide = () => {
+    localStorage.setItem(LS_HIDDEN, "1");
+    setHidden(true);
+  };
+  const show = () => {
+    localStorage.removeItem(LS_HIDDEN);
+    setHidden(false);
+  };
 
   // Załaduj resolutions przy mount
   useEffect(() => {
@@ -199,6 +214,25 @@ export const FlagReminderWidget: React.FC<Props> = ({ state, onNavigate }) => {
     );
   }
 
+  // 2026-05-16: nic do roboty → nie pokazuj nic (zamiast "0 z 0")
+  if (totalActive === 0) {
+    return null;
+  }
+
+  // 2026-05-16: user ukrył ręcznie → mini-badge z liczbą, klik = unhide
+  if (hidden) {
+    return (
+      <button
+        onClick={show}
+        className="flex items-center gap-2 px-3 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-full shadow-lg transition-colors"
+        title="Pokaż chmurkę z flagami do uzupełnienia"
+      >
+        <Bell size={14} />
+        <span className="text-xs font-bold">{totalActive}</span>
+      </button>
+    );
+  }
+
   return (
     <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl overflow-hidden">
       {/* Header */}
@@ -211,13 +245,22 @@ export const FlagReminderWidget: React.FC<Props> = ({ state, onNavigate }) => {
             {todaysFlags.length} z {totalActive}
           </span>
         </div>
-        <button
-          onClick={() => setShowSettings((s) => !s)}
-          className="p-1.5 rounded-lg hover:bg-zinc-200 dark:hover:bg-zinc-800 text-zinc-500 transition-colors"
-          title="Ustawienia przypomnień"
-        >
-          <Settings2 size={15} />
-        </button>
+        <div className="flex items-center gap-1">
+          <button
+            onClick={() => setShowSettings((s) => !s)}
+            className="p-1.5 rounded-lg hover:bg-zinc-200 dark:hover:bg-zinc-800 text-zinc-500 transition-colors"
+            title="Ustawienia przypomnień"
+          >
+            <Settings2 size={15} />
+          </button>
+          <button
+            onClick={hide}
+            className="p-1.5 rounded-lg hover:bg-zinc-200 dark:hover:bg-zinc-800 text-zinc-500 hover:text-red-500 transition-colors"
+            title="Ukryj chmurkę (zostanie mały dzwonek)"
+          >
+            <X size={15} />
+          </button>
+        </div>
       </div>
 
       {/* Settings (kolapsowane) */}

@@ -93,7 +93,7 @@ async function captureScreenshot(_el: HTMLElement): Promise<string | null> {
   } catch (e) {
     // FIX 2026-05-11: cichy catch ukrywał błąd html2canvas (Tailwind v4 oklch).
     // Loguj żeby wiedzieć dlaczego screen się nie zrobił.
-    console.error('[Feedback] Screenshot capture failed:', e);
+    console.error("[Feedback] Screenshot capture failed:", e);
     return null;
   }
 }
@@ -130,7 +130,10 @@ function removeHighlight(el: AugmentedHTMLElement) {
  * Startuje tryb "pick element": cursor crosshair, hover highlight, Escape anuluje.
  * Zwraca Promise<CapturedElement | null> — null gdy użytkownik wcisnął Escape.
  */
-export async function pickElement(): Promise<CapturedElement | null> {
+export async function pickElement(
+  opts: { captureScreen?: boolean } = {},
+): Promise<CapturedElement | null> {
+  const captureScreen = opts.captureScreen !== false; // default true (zachowanie wsteczne)
   return new Promise<CapturedElement | null>((resolve) => {
     // Overlay blokujący tylko wizualnie (pointer-events: none)
     const overlay = document.createElement("div");
@@ -189,10 +192,13 @@ export async function pickElement(): Promise<CapturedElement | null> {
       e.stopPropagation();
       e.preventDefault();
 
-      // Screenshot PRZED cleanup — element nadal podświetlony (czerwona ramka widoczna)
+      // Screenshot PRZED cleanup — element nadal podświetlony (czerwona ramka widoczna).
+      // Gdy captureScreen=false (2026-05-16) zapisujemy tylko selektor+label.
       const selector = buildCssPath(target);
       const label = buildLabel(target);
-      const screenshotB64 = await captureScreenshot(target);
+      const screenshotB64 = captureScreen
+        ? await captureScreenshot(target)
+        : null;
 
       cleanup();
 

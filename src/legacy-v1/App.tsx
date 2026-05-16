@@ -803,7 +803,7 @@ function App() {
       {/* Chmurka flag nad ikoną Eye (StatusEye renderowany w EncryptionGate) */}
       {!isLoading && (
         <div
-          className="fixed right-5 z-[90] w-[360px] max-h-[70vh] overflow-y-auto shadow-2xl rounded-2xl"
+          className="fixed right-5 z-[90] max-w-[360px] max-h-[70vh] overflow-y-auto"
           style={{ bottom: 92 }}
         >
           <FlagReminderWidget state={state} onNavigate={navigate} />

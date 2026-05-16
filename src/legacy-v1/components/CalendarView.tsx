@@ -12,7 +12,7 @@ import {
   ChevronLeft, ChevronRight, RefreshCcw, MessageSquare, CheckCircle2, 
   Clock, Calendar as CalendarIcon, LayoutGrid, Rows, History, X, 
   Banknote, FileText, Plus, AlertCircle, ArrowRight, TableProperties, StretchHorizontal, Zap, GripHorizontal,
-  Car, Truck, Bike, Tractor, Bus, Container, Home, Heart, Plane, Building2, ChevronDown, ChevronUp, Ghost, Check, User, Calculator
+  Car, Truck, Bike, Tractor, Bus, Container, Home, Heart, Plane, Building2, ChevronDown, ChevronUp, Ghost, Check, User, Calculator, Phone
 } from 'lucide-react';
 import { storage } from '../services/storage';
 
@@ -677,14 +677,15 @@ export const CalendarView: React.FC<Props> = ({ state, onNavigate, onDeleteNote,
             <div className="space-y-1">
               {dayEvents.map(e => {
                 const EventIcon = getEventIcon(e);
+                const client = e.clientId && e.clientId !== 'SYSTEM_GLOBAL'
+                  ? state.clients.find(c => c.id === e.clientId)
+                  : null;
+                const phone = client?.phones?.[0];
                 return (
                   <div key={e.id} draggable={!e.isSoldRenewal} onDragStart={(ev) => handleDragStart(ev, e.id)}
                     onMouseEnter={(ev) => handleEventMouseEnter(ev, e)} onMouseLeave={handleEventMouseLeave}
                     onClick={() => {
-                      if (e.clientId && e.clientId !== 'SYSTEM_GLOBAL') {
-                        const client = state.clients.find(c => c.id === e.clientId);
-                        if (client) onNavigate('client-details', { client, highlightPolicyId: e.type === 'RENEWAL' || e.isCalculation ? e.relatedId : undefined });
-                      }
+                      if (client) onNavigate('client-details', { client, highlightPolicyId: e.type === 'RENEWAL' || e.isCalculation ? e.relatedId : undefined });
                     }}
                     className={`flex items-center gap-3 p-3 rounded-xl cursor-pointer hover:scale-[1.01] transition-transform ${getEventStyle(e)}`}>
                     <span className="text-xs font-mono opacity-60 w-10 shrink-0">{isValid(e.date) && !e.isSoldRenewal ? format(e.date, 'HH:mm') : '——'}</span>
@@ -692,6 +693,15 @@ export const CalendarView: React.FC<Props> = ({ state, onNavigate, onDeleteNote,
                     <div className="flex-1 min-w-0">
                       <div className={`text-xs font-bold truncate ${e.isCompleted ? 'line-through opacity-50' : ''}`}>{e.title}</div>
                       {e.clientName && <div className="text-[10px] opacity-60 truncate">{e.clientName}</div>}
+                      {phone && (
+                        <a
+                          href={`tel:${phone.replace(/\s+/g, '')}`}
+                          onClick={(ev) => ev.stopPropagation()}
+                          className="inline-flex items-center gap-1 text-[10px] font-bold text-blue-600 dark:text-blue-400 hover:underline mt-0.5"
+                        >
+                          <Phone size={9} /> {phone}
+                        </a>
+                      )}
                     </div>
                   </div>
                 );
@@ -1001,18 +1011,19 @@ export const CalendarView: React.FC<Props> = ({ state, onNavigate, onDeleteNote,
                          {todayEvents.map(e => {
                              const EventIcon = getEventIcon(e);
                              const isGhost = e.type === 'RENEWAL' && !e.isSoldRenewal && !e.isCalculation;
+                             const eventClient = e.clientId && e.clientId !== 'SYSTEM_GLOBAL'
+                                 ? state.clients.find(cl => cl.id === e.clientId)
+                                 : null;
+                             const eventPhone = eventClient?.phones?.[0];
 
                              return (
                                  <div key={e.id} className={`p-3 bg-white dark:bg-zinc-800 border rounded-xl shadow-sm hover:shadow-md transition-all cursor-pointer ${getEventStyle(e)}`}>
                                      <div className="flex justify-between items-start">
                                          <div onClick={() => {
-                                             if(e.clientId && e.clientId !== 'SYSTEM_GLOBAL') {
-                                                 const c = state.clients.find(cl => cl.id === e.clientId);
-                                                 if(c) onNavigate('client-details', { 
-                                                     client: c,
-                                                     highlightPolicyId: (e.type === 'RENEWAL' || e.isCalculation) ? e.relatedId : undefined
-                                                 });
-                                             }
+                                             if(eventClient) onNavigate('client-details', {
+                                                 client: eventClient,
+                                                 highlightPolicyId: (e.type === 'RENEWAL' || e.isCalculation) ? e.relatedId : undefined
+                                             });
                                          }} className="flex-1">
                                              <div className="flex items-center gap-2 mb-1">
                                                  <span className="text-[10px] font-black bg-white/50 px-1.5 rounded">{format(e.date, 'HH:mm')}</span>
@@ -1023,6 +1034,15 @@ export const CalendarView: React.FC<Props> = ({ state, onNavigate, onDeleteNote,
                                              </div>
                                              <p className={`text-xs font-black leading-tight ${isGhost || e.isCompleted ? 'opacity-60' : ''} ${e.isCompleted ? 'line-through' : ''}`}>{e.title}</p>
                                              <p className="text-[10px] opacity-80 mt-0.5 truncate max-w-[180px]">{e.details || e.clientName}</p>
+                                             {eventPhone && (
+                                                 <a
+                                                     href={`tel:${eventPhone.replace(/\s+/g, '')}`}
+                                                     onClick={(ev) => ev.stopPropagation()}
+                                                     className="inline-flex items-center gap-1 text-[10px] font-bold text-blue-600 dark:text-blue-400 hover:underline mt-0.5"
+                                                 >
+                                                     <Phone size={9} /> {eventPhone}
+                                                 </a>
+                                             )}
                                          </div>
                                          {!e.isSoldRenewal && (
                                              <button onClick={() => { toggleCompletion(e.relatedId || e.id); }} className={`p-1 rounded-full border transition-colors ${e.isCompleted ? 'bg-zinc-200 text-zinc-500 border-zinc-300' : 'bg-white border-zinc-200 text-zinc-300 hover:text-emerald-500 hover:border-emerald-500'}`}>

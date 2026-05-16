@@ -920,9 +920,18 @@ export const OffersBoard: React.FC<Props> = ({ state, onNavigate, onRefresh }) =
                                         <h4 className="text-xs font-black text-zinc-900 dark:text-white leading-tight mb-1 truncate">
                                             {client.lastName} {client.firstName}
                                         </h4>
-                                        <p className="text-[10px] text-zinc-500 font-bold mb-2 truncate">
+                                        <p className="text-[10px] text-zinc-500 font-bold mb-1 truncate">
                                             {policy.vehicleBrand || policy.type}
                                         </p>
+                                        {client.phones?.[0] && (
+                                            <a
+                                                href={`tel:${client.phones[0].replace(/\s+/g, '')}`}
+                                                onClick={(e) => e.stopPropagation()}
+                                                className="inline-flex items-center gap-1 mb-2 text-[10px] font-bold text-blue-600 dark:text-blue-400 hover:underline"
+                                            >
+                                                <Phone size={9} /> {client.phones[0]}
+                                            </a>
+                                        )}
 
                                         {latestNote && (
                                             <div className="mb-2 p-1.5 bg-zinc-50 dark:bg-zinc-800 rounded border border-zinc-100 dark:border-zinc-700">

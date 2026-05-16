@@ -159,7 +159,8 @@ async function clientToRow(c: Client, dek: CryptoKey | null) {
   // wdrożeniem DEK. Tutaj — w pierwszym miejscu z DEK w ręku — bierzemy pending
   // jako plaintext do zaszyfrowania. Nie zostawiamy plaintext nigdzie indziej.
   const peselPlaintext = c.pesel || (c as any).pesel_encrypted_pending || null;
-  const base = {
+  // v1_original_id: OBIE schematy (public + test oba mają)
+  return {
     id: dbId,
     tenant_id: TENANT_ID,
     first_name: c.firstName || '',
@@ -175,10 +176,8 @@ async function clientToRow(c: Client, dek: CryptoKey | null) {
     zip_code: await encStr(c.zipCode, dek),
     source: 'manual' as const,
     is_fake: isFake,
+    v1_original_id: isValidUUID(c.id) ? null : c.id,
   };
-  // v1_original_id istnieje TYLKO w test schema
-  if (getActiveSchema() !== 'test') return base;
-  return { ...base, v1_original_id: isValidUUID(c.id) ? null : c.id };
 }
 
 async function rowToClient(r: any, dek: CryptoKey | null): Promise<Client> {
@@ -212,8 +211,10 @@ async function policyToRow(p: Policy, dek: CryptoKey | null, vehicleId?: string 
   const isFake = p.id.includes('demo') || p.clientId.includes('demo') || (p as any).isFake;
   const dbId = await toUUID(p.id);
   const dbClientId = await toUUID(p.clientId);
+  // v1_original_id + v1_original_client_id: OBIE schematy (public + test oba mają)
+  // vehicle_id / renewal_of_policy_id / referred_*: TYLKO test (migracja v2)
   const isTest = getActiveSchema() === 'test';
-  const base = {
+  return {
     id: dbId,
     tenant_id: TENANT_ID,
     client_id: dbClientId,
@@ -240,17 +241,15 @@ async function policyToRow(p: Policy, dek: CryptoKey | null, vehicleId?: string 
     calculations: p.calculations ?? [],
     source: 'manual' as const,
     is_fake: isFake,
-  };
-  // Kolumny v2 istnieją TYLKO w test schema — nie wysyłaj na public (PostgREST 400)
-  if (!isTest) return base;
-  return {
-    ...base,
-    vehicle_id: vehicleId ?? null,
     v1_original_id: isValidUUID(p.id) ? null : p.id,
     v1_original_client_id: isValidUUID(p.clientId) ? null : p.clientId,
-    renewal_of_policy_id: (p as any).renewalOfPolicyId ?? null,
-    referred_by_name: (p as any).referredByName ?? null,
-    referred_by_client_id: (p as any).referredByClientId ?? null,
+    // Kolumny test-only (v2 migration — nie istnieją w public.policies)
+    ...(isTest ? {
+      vehicle_id: vehicleId ?? null,
+      renewal_of_policy_id: (p as any).renewalOfPolicyId ?? null,
+      referred_by_name: (p as any).referredByName ?? null,
+      referred_by_client_id: (p as any).referredByClientId ?? null,
+    } : {}),
   };
 }
 
@@ -320,7 +319,10 @@ async function noteToRow(n: ClientNote, _dek: CryptoKey | null) {
   }
   const dbId = await toUUID(n.id);
   const dbClientId = await toUUID(n.clientId);
-  const base = {
+  // v1_original_id: OBIE schematy (public + test)
+  // v1_original_client_id: public ✓, test ✗ (dodaj ręcznie: patrz migration noterow_v1_client_id)
+  const isTest = getActiveSchema() === 'test';
+  return {
     id: dbId,
     tenant_id: TENANT_ID,
     client_id: dbClientId,
@@ -330,13 +332,10 @@ async function noteToRow(n: ClientNote, _dek: CryptoKey | null) {
     reminder_status: reminderStatus,
     linked_policy_ids: await Promise.all((n.linkedPolicyIds ?? []).map(id => toUUID(id))),
     history: n.history ?? [],
-  };
-  // v1_original_id / v1_original_client_id istnieją TYLKO w test schema
-  if (getActiveSchema() !== 'test') return base;
-  return {
-    ...base,
     v1_original_id: isValidUUID(n.id) ? null : n.id,
-    v1_original_client_id: isValidUUID(n.clientId) ? null : n.clientId,
+    // Nie wysyłamy v1_original_client_id do test — kolumna jeszcze nie dodana
+    // Po uruchomieniu migracji: usuń warunek i zawsze wysyłaj
+    ...(isTest ? {} : { v1_original_client_id: isValidUUID(n.clientId) ? null : n.clientId }),
   };
 }
 

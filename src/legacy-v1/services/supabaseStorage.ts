@@ -1435,8 +1435,17 @@ class SupabaseStorageManager {
       if (error) throw error;
     }
     if (agentRows.length) {
-      const { error } = await sb.from('sub_agents').upsert(agentRows, { onConflict: 'id' });
-      if (error) throw error;
+      if (getActiveSchema() === 'test') {
+        // test.sub_agents brak PRIMARY KEY — upsert ON CONFLICT (id) nie działa
+        // workaround: DELETE + INSERT (bezpieczne bo import zawsze full-replace)
+        const ids = agentRows.map(r => r.id);
+        await sb.from('sub_agents').delete().in('id', ids);
+        const { error } = await sb.from('sub_agents').insert(agentRows);
+        if (error) throw error;
+      } else {
+        const { error } = await sb.from('sub_agents').upsert(agentRows, { onConflict: 'id' });
+        if (error) throw error;
+      }
     }
     if (newState.trash?.length) {
       const trashRows = await Promise.all(newState.trash.map(item => itemToTrash(item, dek)));

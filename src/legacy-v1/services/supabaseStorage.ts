@@ -1229,7 +1229,8 @@ class SupabaseStorageManager {
       phone: a.phone ?? null,
       email: a.email ?? null,
       default_rates: a.defaultRates ?? {},
-      v1_original_id: isValidUUID(a.id) ? null : a.id,
+      // v1_original_id: TYLKO public (test.sub_agents nie ma tej kolumny)
+      ...(getActiveSchema() === 'test' ? {} : { v1_original_id: isValidUUID(a.id) ? null : a.id }),
     };
   }
 

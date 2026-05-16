@@ -29,6 +29,12 @@ export const EncryptionGate: React.FC<EncryptionGateProps> = ({ children }) => {
   const lastActivityRef = useRef<number>(Date.now());
   const idleTimerRef = useRef<number | null>(null);
 
+  // Guard: HMR lub race condition może zresetować DEK ale zachować unlocked=true.
+  // Przy każdym renderze sprawdzamy spójność — jeśli brak DEK, wymuszamy re-lock.
+  if (unlocked && !supabaseStorage.hasDEK()) {
+    setUnlocked(false);
+  }
+
   // Auto-lock po idle timeout lub sleep/hibernate
   const lock = () => {
     setUnlocked(false);

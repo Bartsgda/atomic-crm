@@ -1423,44 +1423,48 @@ class SupabaseStorageManager {
       return r;
     };
 
-    for (const c of chunk(clientRows, 50)) {
-      const { error } = await sb.from('insurance_clients').upsert(c, { onConflict: 'id' });
-      if (error) throw error;
-    }
-    for (const c of chunk(policyRows, 50)) {
-      const { error } = await sb.from('policies').upsert(c, { onConflict: 'id' });
-      if (error) throw error;
-    }
-    for (const c of chunk(noteRows, 50)) {
-      const { error } = await sb.from('policy_notes').upsert(c, { onConflict: 'id' });
-      if (error) throw error;
-    }
-    if (agentRows.length) {
-      if (getActiveSchema() === 'test') {
-        // test.sub_agents brak PRIMARY KEY — upsert ON CONFLICT (id) nie działa
-        // workaround: DELETE + INSERT (bezpieczne bo import zawsze full-replace)
-        const ids = agentRows.map(r => r.id);
-        await sb.from('sub_agents').delete().in('id', ids);
-        const { error } = await sb.from('sub_agents').insert(agentRows);
-        if (error) throw error;
+    const isTest = getActiveSchema() === 'test';
+
+    // test schema nie ma PRIMARY KEY / UNIQUE na id w starszych tabelach
+    // → używamy DELETE+INSERT zamiast upsert ON CONFLICT
+    const upsertOrReplace = async (table: string, rows: any[], conflictCol = 'id') => {
+      if (!rows.length) return;
+      if (isTest) {
+        const ids = rows.map(r => r[conflictCol]);
+        await sb.from(table).delete().in(conflictCol, ids);
+        for (const c of chunk(rows, 50)) {
+          const { error } = await sb.from(table).insert(c);
+          if (error) throw error;
+        }
       } else {
-        const { error } = await sb.from('sub_agents').upsert(agentRows, { onConflict: 'id' });
-        if (error) throw error;
+        for (const c of chunk(rows, 50)) {
+          const { error } = await sb.from(table).upsert(c, { onConflict: conflictCol });
+          if (error) throw error;
+        }
       }
-    }
+    };
+
+    await upsertOrReplace('insurance_clients', clientRows);
+    await upsertOrReplace('policies', policyRows);
+    await upsertOrReplace('policy_notes', noteRows);
+    await upsertOrReplace('sub_agents', agentRows);
+
     if (newState.trash?.length) {
       const trashRows = await Promise.all(newState.trash.map(item => itemToTrash(item, dek)));
-      for (const c of chunk(trashRows, 20)) {
-        const { error } = await sb.from('insurance_trash').upsert(c, { onConflict: 'id' });
-        if (error) throw error;
-      }
+      await upsertOrReplace('insurance_trash', trashRows);
     }
     if (newState.insurers?.length) {
       const rows = newState.insurers.map(name => ({
         tenant_id: TENANT_ID, name, is_visible: true, is_custom: true,
       }));
-      const { error } = await sb.from('insurers').upsert(rows, { onConflict: 'tenant_id,name' });
-      if (error) throw error;
+      if (isTest) {
+        await sb.from('insurers').delete().eq('tenant_id', TENANT_ID);
+        const { error } = await sb.from('insurers').insert(rows);
+        if (error) throw error;
+      } else {
+        const { error } = await sb.from('insurers').upsert(rows, { onConflict: 'tenant_id,name' });
+        if (error) throw error;
+      }
     }
     return this.init();
   }

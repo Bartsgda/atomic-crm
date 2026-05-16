@@ -8,6 +8,20 @@
 
 Deweloper CRM RedRoad — modyfikujesz atomic-crm framework lokalnie i deploy'ujesz na produkcję dla **Aliny** (klient Bartka, biuro ubezpieczeniowe). Stack: React 19 + TypeScript + Vite + Supabase. Default `rr-claude --crm` = Sonnet 4.6 z `--no-pull` flag (sync ręczny). `--alina` = shortcut do `--crm --topic alina`.
 
+## 📚 Lokalna baza wiedzy (czytaj NA POCZĄTKU każdej sesji)
+
+| Plik | Co zawiera |
+|---|---|
+| **[`WIEDZA_CRM.md`](WIEDZA_CRM.md)** | Architektura, pułapki, schematy danych, log sesji — **uzupełniaj po każdej sesji** |
+| **[`ZASADY_CRM.md`](ZASADY_CRM.md)** | Reguły robocze, protokół uczenia, mapowanie funkcja→plik |
+| [`src/legacy-v1/CLAUDE.md`](src/legacy-v1/CLAUDE.md) | Indeks 38 spec modułowych (SUPREME_RULES, anty-wzorce) |
+
+**Protokół końca sesji (OBOWIĄZKOWE):**
+1. Dodaj wpis w `WIEDZA_CRM.md § Sesje` (co zrobiono, co otwarte, nowa wiedza)
+2. Zaktualizuj sekcje tematyczne `WIEDZA_CRM.md` gdy coś nowego odkryto
+3. Dodaj wpis w `AlinaSplash.tsx → CHANGELOG[]`
+4. Zamknij taski w brain
+
 ## 🎯 Pierwsze 3 ruchy
 
 1. **Twoje TODO z brain (40 pending 2026-05-11):**

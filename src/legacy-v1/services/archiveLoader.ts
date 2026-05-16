@@ -20,9 +20,9 @@ export interface ArchiveClient {
   last_name: string | null;
   phones: string[];
   emails: string[];
+  /** Złożony adres ze street + city + zip_code (test schema nie ma jednej kolumny `address`). */
   address: string | null;
   created_at: string;
-  notes: string | null;
 }
 
 export interface ArchivePolicy {
@@ -78,7 +78,7 @@ async function fetchFromTest(): Promise<ArchiveSnapshot> {
     sb
       .from("insurance_clients")
       .select(
-        "id, legacy_id, first_name, last_name, phones, emails, address, created_at, notes",
+        "id, legacy_id, first_name, last_name, phones, emails, street, city, zip_code, created_at",
       )
       .order("last_name", { ascending: true })
       .limit(2000),
@@ -100,17 +100,19 @@ async function fetchFromTest(): Promise<ArchiveSnapshot> {
   if (policiesRes.error) throw policiesRes.error;
   if (notesRes.error) throw notesRes.error;
 
-  const clients: ArchiveClient[] = (clientsRes.data ?? []).map((r: any) => ({
-    id: r.id,
-    legacy_id: r.legacy_id,
-    first_name: r.first_name,
-    last_name: r.last_name,
-    phones: parseJsonArray(r.phones),
-    emails: parseJsonArray(r.emails),
-    address: r.address,
-    created_at: r.created_at,
-    notes: r.notes,
-  }));
+  const clients: ArchiveClient[] = (clientsRes.data ?? []).map((r: any) => {
+    const addressParts = [r.street, r.zip_code, r.city].filter(Boolean);
+    return {
+      id: r.id,
+      legacy_id: r.legacy_id,
+      first_name: r.first_name,
+      last_name: r.last_name,
+      phones: parseJsonArray(r.phones),
+      emails: parseJsonArray(r.emails),
+      address: addressParts.length > 0 ? addressParts.join(", ") : null,
+      created_at: r.created_at,
+    };
+  });
 
   const policies: ArchivePolicy[] = (policiesRes.data ?? []).map((r: any) => ({
     id: r.id,

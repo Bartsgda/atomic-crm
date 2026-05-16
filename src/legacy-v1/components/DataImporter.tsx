@@ -221,6 +221,12 @@ export const DataImporter: React.FC<Props> = ({
 
             result.policy.clientId = finalClientId;
 
+            // Deterministyczne ID — ten sam wiersz XLSX → ten sam UUID w DB → upsert UPDATE zamiast INSERT
+            result.policy.id = `xlsx_imp_row_${i}`;
+            result.notes.forEach((note, noteIdx) => {
+              note.id = `n_imp_xlsx_imp_row_${i}_${noteIdx}`;
+            });
+
             // Agency detection
             if (result.sourceName) {
               const normalizedName = result.sourceName.trim();
@@ -244,7 +250,12 @@ export const DataImporter: React.FC<Props> = ({
             if (result.policy.insurerName?.trim())
               allInsurers.add(result.policy.insurerName.trim());
 
-            allPolicies.push(result.policy);
+            const existPIdx = allPolicies.findIndex(p => p.id === result.policy.id);
+            if (existPIdx >= 0) {
+              allPolicies[existPIdx] = result.policy;
+            } else {
+              allPolicies.push(result.policy);
+            }
             importedPolicies.push(result.policy);
             counts.policiesCreated++;
 
@@ -254,7 +265,12 @@ export const DataImporter: React.FC<Props> = ({
             for (const note of result.notes) {
               note.clientId = finalClientId;
               note.linkedPolicyIds = [result.policy.id];
-              allNotes.push(note);
+              const existNIdx = allNotes.findIndex(n => n.id === note.id);
+              if (existNIdx >= 0) {
+                allNotes[existNIdx] = note;
+              } else {
+                allNotes.push(note);
+              }
               counts.notes++;
             }
 

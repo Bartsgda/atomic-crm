@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
-import { Eye, LogOut, Clock, Target, Send, X, Loader2, Bug, Sparkles, MessageSquare, Check, Lock, LayoutGrid, List, Camera, Trash2, Archive } from 'lucide-react';
-import ArchiveBrowser from './ArchiveBrowser';
+import { Eye, LogOut, Clock, Target, Send, X, Loader2, Bug, Sparkles, MessageSquare, Check, Lock, LayoutGrid, List, Camera, Trash2, DatabaseBackup, AlertTriangle } from 'lucide-react';
+import { useSchemaSyncState, type SyncConflict } from '../hooks/useSchemaSyncState';
 import { DragDropContext, Droppable, Draggable, type OnDragEndResponder } from '@hello-pangea/dnd';
 import { getSupabaseClient } from '../../components/atomic-crm/providers/supabase/supabase';
 import {
@@ -108,8 +108,12 @@ export default function StatusEye({ isUnlocked = false }: { isUnlocked?: boolean
   const [settingPriority, setSettingPriority] = useState<Record<string, boolean>>({});
   const [viewMode, setViewMode] = useState<'kanban' | 'list'>('kanban');
 
-  // archiwum 2025 (test schema, read-only) — 2026-05-16
-  const [archiveOpen, setArchiveOpen] = useState(false);
+  // schema sync prod→test — 2026-05-16
+  const { checkConflicts, executeSyncToTest, lastSyncAt, isLoading: syncLoading } = useSchemaSyncState();
+  const [syncDialogOpen, setSyncDialogOpen] = useState(false);
+  const [syncConflicts, setSyncConflicts] = useState<SyncConflict[]>([]);
+  const [syncChecking, setSyncChecking] = useState(false);
+  const [syncError, setSyncError] = useState<string | null>(null);
 
   const reloadList = useCallback(async () => {
     if (!isUnlocked) return; // NIE pobieraj danych przed odszyfrowaniem
@@ -293,6 +297,31 @@ export default function StatusEye({ isUnlocked = false }: { isUnlocked?: boolean
     const iv = setInterval(() => forceRerender(n => n + 1), 10_000);
     return () => clearInterval(iv);
   }, []);
+
+  const handleSyncClick = async () => {
+    if (!isUnlocked) return;
+    setSyncError(null);
+    setSyncChecking(true);
+    setSyncDialogOpen(true);
+    try {
+      const conflicts = await checkConflicts();
+      setSyncConflicts(conflicts);
+    } catch {
+      setSyncError('Błąd sprawdzania zmian — spróbuj ponownie.');
+    } finally {
+      setSyncChecking(false);
+    }
+  };
+
+  const handleSyncConfirm = async () => {
+    setSyncError(null);
+    const email = user?.email ?? 'unknown';
+    const { error } = await executeSyncToTest(email);
+    if (error) {
+      setSyncError(`Błąd sync: ${error}`);
+    }
+    // executeSyncToTest wywołuje window.location.reload() przy sukcesie
+  };
 
   // ── handlery ──────────────────────────────────────────────────────────────
   const handleLogout = async () => {
@@ -493,22 +522,90 @@ export default function StatusEye({ isUnlocked = false }: { isUnlocked?: boolean
                 <Sparkles className="w-3.5 h-3.5" /> Agent AI
               </button>
             </div>
-            {/* 2026-05-16: Archiwum 2025 (read-only schema=test) */}
+            {/* 2026-05-16: Sync prod→test */}
             <div className="px-4 pb-3">
               <button
-                onClick={() => { if (isUnlocked) { setExpanded(false); setArchiveOpen(true); } }}
-                disabled={!isUnlocked}
+                onClick={handleSyncClick}
+                disabled={!isUnlocked || syncLoading}
                 className={`w-full flex items-center justify-center gap-1.5 px-2 py-2 rounded-lg border text-xs font-medium transition-colors ${
                   isUnlocked
-                    ? 'bg-amber-500/10 hover:bg-amber-500/20 border-amber-500/30 text-amber-300'
+                    ? 'bg-blue-500/10 hover:bg-blue-500/20 border-blue-500/30 text-blue-300'
                     : 'bg-gray-500/10 border-white/5 text-gray-600 opacity-50 cursor-not-allowed'
                 }`}
                 data-feedback-ui="true"
-                title={isUnlocked ? "Wczytaj historię (archiwum 2025, tylko podgląd)" : "Zablokowane (wymagane hasło)"}
+                title={isUnlocked ? 'Skopiuj dane prod → test (sandbox)' : 'Zablokowane (wymagane hasło)'}
               >
-                <Archive className="w-3.5 h-3.5" /> Archiwum 2025
+                {syncLoading
+                  ? <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                  : <DatabaseBackup className="w-3.5 h-3.5" />}
+                Skopiuj prod → test
               </button>
             </div>
+
+            {/* Dialog potwierdzenia sync */}
+            {syncDialogOpen && (
+              <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/60 backdrop-blur-sm" data-feedback-ui="true">
+                <div className="bg-gray-900 border border-white/10 rounded-2xl p-5 w-[340px] shadow-2xl">
+                  <div className="flex items-center gap-2 mb-3">
+                    <DatabaseBackup className="w-5 h-5 text-blue-400" />
+                    <h3 className="font-bold text-white text-sm">Skopiuj prod → test</h3>
+                  </div>
+
+                  {syncChecking ? (
+                    <div className="flex items-center gap-2 text-gray-400 text-xs py-4">
+                      <Loader2 className="w-4 h-4 animate-spin" /> Sprawdzam zmiany w test...
+                    </div>
+                  ) : syncConflicts.length > 0 ? (
+                    <>
+                      <div className="flex items-start gap-2 bg-amber-500/10 border border-amber-500/30 rounded-lg p-3 mb-3">
+                        <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                        <div className="text-xs text-amber-200">
+                          <p className="font-semibold mb-1">Zmiany w test zostaną nadpisane:</p>
+                          <ul className="space-y-0.5">
+                            {syncConflicts.slice(0, 8).map((c, i) => (
+                              <li key={i} className="text-amber-300">• {c.name}</li>
+                            ))}
+                            {syncConflicts.length > 8 && (
+                              <li className="text-amber-400">…i {syncConflicts.length - 8} więcej</li>
+                            )}
+                          </ul>
+                        </div>
+                      </div>
+                      <p className="text-xs text-gray-400 mb-4">
+                        Dane z prod zastąpią test. Zmiany Aliny w test przepadną.
+                      </p>
+                    </>
+                  ) : (
+                    <p className="text-xs text-gray-300 mb-4">
+                      Skopiuje wszystkie dane z produkcji do bazy testowej.<br />
+                      <span className="text-gray-500">Zmiany w test nie trafią do prod.</span>
+                    </p>
+                  )}
+
+                  {syncError && (
+                    <p className="text-xs text-red-400 mb-3">{syncError}</p>
+                  )}
+
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => { setSyncDialogOpen(false); setSyncConflicts([]); setSyncError(null); }}
+                      className="flex-1 py-2 rounded-lg border border-white/10 text-gray-400 text-xs hover:bg-white/5 transition-colors"
+                    >
+                      Anuluj
+                    </button>
+                    <button
+                      onClick={handleSyncConfirm}
+                      disabled={syncChecking || syncLoading}
+                      className="flex-1 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white text-xs font-semibold transition-colors flex items-center justify-center gap-1.5"
+                    >
+                      {syncLoading
+                        ? <><Loader2 className="w-3 h-3 animate-spin" /> Kopiuję…</>
+                        : syncConflicts.length > 0 ? 'Kopiuj i nadpisz' : 'Kopiuj'}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         )}
 
@@ -1044,8 +1141,6 @@ export default function StatusEye({ isUnlocked = false }: { isUnlocked?: boolean
         </div>
       )}
 
-      {/* 2026-05-16: Archiwum 2025 modal (read-only test schema) */}
-      <ArchiveBrowser open={archiveOpen} onClose={() => setArchiveOpen(false)} />
     </>
   );
 }

@@ -138,23 +138,30 @@ Zamiast: Python + `supabase-py` + `rrv get CRM_ALINA_SB_SECRET`.
 
 ## Sesje
 
-### 2026-05-16 — Magiczny przycisk prod→test + cleanup
+### 2026-05-16 — Magiczny przycisk prod→test (pełna implementacja)
 
 **Zrobiono:**
 - Usunięto 2 false-positive zgłoszenia "czas Polska" z `public.insurance_feedback`
-- Zaplanowano architekturę schema sync (Edge Function + SchemaContext + Realtime)
+- Zaimplementowano pełną architekturę schema sync — wszystkie 6 plików
+- `supabase/migrations/20260516_sync_prod_to_test.sql` — sync_log + 3 funkcje SQL
+- `supabase/functions/sync-prod-to-test/index.ts` — Edge Function (check/sync/switch)
+- `src/.../supabase.ts` — `getActiveSchema()`, `switchSchema()`, `getTestSupabaseClient()`
+- `src/legacy-v1/hooks/useSchemaSyncState.ts` — hook z Realtime subscription
+- `src/legacy-v1/components/TestModeBanner.tsx` — floating amber "TRYB TESTOWY"
+- `src/legacy-v1/components/StatusEye.tsx` — przycisk sync + dialog potwierdzenia z listą konfliktów
+- `src/legacy-v1/components/EncryptionGate.tsx` — renderuje TestModeBanner
 - Utworzono `ZASADY_CRM.md` i `WIEDZA_CRM.md` (ten plik)
-- Zaktualizowano task `75f6ed76` w brain — nowa definicja magicznego przycisku
 
-**Otwarte:**
-- Edge Function `sync-prod-to-test` — do napisania i zdeploy'owania
-- `SchemaContext.tsx` + `TestModeBanner.tsx` — do napisania
-- `supabase.ts` — `getActiveSchemaClient()` + singleton reset
-- `supabaseStorage.ts` — swap importu
-- StatusEye — przycisk sync + "wróć do prod"
-- Pytanie bez odpowiedzi: czy przycisk sync dostępny dla Aliny czy tylko Bartka?
+**Otwarte (deploy):**
+- Bartek: wklej `20260516_sync_prod_to_test.sql` w Supabase Dashboard SQL Editor
+- Bartek: `npx supabase functions deploy sync-prod-to-test --project-ref xqznrssrlnxqkdvisnck`
+- Test lokalny (`npm run dev`) → StatusEye → "Skopiuj prod→test" → deploy FTP PO teście
 
 **Nowa wiedza:**
-- `public` ma MNIEJ tabel niż `test` (38 v2-tabel + 30 slotów tylko w test)
-- `configuration` tabela istnieje w obu schematach — można tu przechowywać `active_schema`
-- Pattern Python dla rrv + supabase-py działa stabilnie (wzorzec z `check_alina_feedback.py`)
+- `configuration` tabela: `{id: 1, config: jsonb}` — NIE key-value, używamy jsonb merge `config || '{...}'`
+- Tylko 3 tabele mają `updated_at`: insurance_clients, policies, policy_notes — konfl. detekcja tylko na nich
+- `exec_sql` RPC nie istnieje — migracje DDL tylko przez Supabase CLI lub Dashboard
+- Brak `SUPABASE_DB_PASSWORD` w vault — `npx supabase db push` nie zadziała bez hasła
+- `START_ALINA_TEST.bat` DEPRECATED — zastąpiony przełącznikiem schema w app
+- Nowy test workflow: `npm run dev` → "Skopiuj prod→test" w app → test na żywych danych → FTP
+- Alina MOŻE odpalić sync (świadoma decyzja) — dostaje floating banner z ostrzeżeniem

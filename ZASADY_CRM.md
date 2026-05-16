@@ -44,11 +44,28 @@ python scripts/ftp_deploy.py
 - NIE deploy bez pytania Bartka: "czy wrzucić?"
 - Przed deploy: `hostido_list_remote "/"` → sprawdź że `/alina` jest w FTP root
 
-### Testowanie
+### Testowanie — nowy workflow (od 2026-05-16)
+
+**Po zmianie schema sync: `START_ALINA_TEST.bat` jest zastąpiony przełącznikiem w aplikacji.**
+
 ```
-START_ALINA_TEST.bat
+# Opcja A — lokalny devserver (do testowania UI/kodu przed deployem)
+npm run dev
+# → otwiera http://localhost:5173 z aktywnym schematem (public lub test z localStorage)
+
+# Opcja B — test na prawdziwych danych Aliny
+# 1. Uruchom app (lokalnie lub na prod)
+# 2. StatusEye → "Skopiuj prod → test"  ← pełna kopia prod do sandboxa
+# 3. Oba test na żywych danych bez ryzyka zniszczenia prod
 ```
-NIE: `npx vite`, `npm run dev`, nic ręcznie. BAT ustawia env poprawnie.
+
+**Stary workflow (deprecated):**
+```
+START_ALINA_TEST.bat  ← wskazywał na test schema ze starym XLSX 2025
+```
+BAT jest już zbędny — przełącznik schematu w app robi to samo z aktualnym danymi.
+
+**WAŻNE:** NIE deployuj na FTP przed testem. NIE deployuj bez pytania Bartka.
 
 ### stage 'sprzedaz' vs 'sprzedaż' — ZAWSZE oba + trzecia forma
 ```ts

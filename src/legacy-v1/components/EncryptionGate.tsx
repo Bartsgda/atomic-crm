@@ -4,6 +4,8 @@ import { getSupabaseClient } from "../../components/atomic-crm/providers/supabas
 import { supabaseStorage } from "../services/supabaseStorage";
 import PassphraseGate from "./PassphraseGate";
 import StatusEye from "./StatusEye";
+import { TestModeBanner } from "./TestModeBanner";
+import { useSchemaSyncState } from "../hooks/useSchemaSyncState";
 
 const TENANT_ID =
   (typeof import.meta !== "undefined" &&
@@ -23,6 +25,7 @@ export const EncryptionGate: React.FC<EncryptionGateProps> = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<{ id: string; email: string } | null>(null);
   const [unlocked, setUnlocked] = useState(false);
+  const { lastSyncAt } = useSchemaSyncState();
   const lastActivityRef = useRef<number>(Date.now());
   const idleTimerRef = useRef<number | null>(null);
 
@@ -41,35 +44,41 @@ export const EncryptionGate: React.FC<EncryptionGateProps> = ({ children }) => {
       if (idleTimerRef.current) window.clearTimeout(idleTimerRef.current);
       idleTimerRef.current = window.setTimeout(lock, IDLE_TIMEOUT_MS);
     };
-    const activityEvents = ['mousedown', 'keydown', 'touchstart', 'scroll'];
-    activityEvents.forEach(e => window.addEventListener(e, markActivity, { passive: true }));
+    const activityEvents = ["mousedown", "keydown", "touchstart", "scroll"];
+    activityEvents.forEach((e) =>
+      window.addEventListener(e, markActivity, { passive: true }),
+    );
     markActivity(); // start
 
     // 2) Sleep/hibernate detection: gdy karta wraca z hidden, sprawdź ile minęło
     const onVisibility = () => {
-      if (document.visibilityState === 'visible') {
+      if (document.visibilityState === "visible") {
         const gap = Date.now() - lastActivityRef.current;
         if (gap > SUSPEND_LOCK_THRESHOLD_MS) {
-          console.warn(`[EncryptionGate] Suspend detected (${Math.round(gap/1000)}s offline) - lockuje sesje`);
+          console.warn(
+            `[EncryptionGate] Suspend detected (${Math.round(gap / 1000)}s offline) - lockuje sesje`,
+          );
           lock();
         }
       }
     };
-    document.addEventListener('visibilitychange', onVisibility);
+    document.addEventListener("visibilitychange", onVisibility);
 
     // 3) BFCache restore: gdy przeglądarka przywraca strone z back-forward cache
     const onPageShow = (e: PageTransitionEvent) => {
       if (e.persisted) {
-        console.warn('[EncryptionGate] BFCache restore - lockuje sesje');
+        console.warn("[EncryptionGate] BFCache restore - lockuje sesje");
         lock();
       }
     };
-    window.addEventListener('pageshow', onPageShow);
+    window.addEventListener("pageshow", onPageShow);
 
     return () => {
-      activityEvents.forEach(e => window.removeEventListener(e, markActivity));
-      document.removeEventListener('visibilitychange', onVisibility);
-      window.removeEventListener('pageshow', onPageShow);
+      activityEvents.forEach((e) =>
+        window.removeEventListener(e, markActivity),
+      );
+      document.removeEventListener("visibilitychange", onVisibility);
+      window.removeEventListener("pageshow", onPageShow);
       if (idleTimerRef.current) window.clearTimeout(idleTimerRef.current);
     };
   }, [unlocked]);
@@ -83,7 +92,9 @@ export const EncryptionGate: React.FC<EncryptionGateProps> = ({ children }) => {
       setLoading(false);
     });
 
-    const { data: { subscription } } = sb.auth.onAuthStateChange((_e, session) => {
+    const {
+      data: { subscription },
+    } = sb.auth.onAuthStateChange((_e, session) => {
       if (session?.user) {
         setUser({ id: session.user.id, email: session.user.email ?? "" });
       } else {
@@ -138,6 +149,7 @@ export const EncryptionGate: React.FC<EncryptionGateProps> = ({ children }) => {
     <>
       {children}
       <StatusEye isUnlocked={true} />
+      <TestModeBanner lastSyncAt={lastSyncAt} />
     </>
   );
 };

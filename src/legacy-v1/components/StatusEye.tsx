@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
-import { Eye, LogOut, Clock, Target, Send, X, Loader2, Bug, Sparkles, MessageSquare, Check, Lock, LayoutGrid, List, Camera, Trash2 } from 'lucide-react';
+import { Eye, LogOut, Clock, Target, Send, X, Loader2, Bug, Sparkles, MessageSquare, Check, Lock, LayoutGrid, List, Camera, Trash2, Archive } from 'lucide-react';
+import ArchiveBrowser from './ArchiveBrowser';
 import { DragDropContext, Droppable, Draggable, type OnDragEndResponder } from '@hello-pangea/dnd';
 import { getSupabaseClient } from '../../components/atomic-crm/providers/supabase/supabase';
 import {
@@ -106,6 +107,9 @@ export default function StatusEye({ isUnlocked = false }: { isUnlocked?: boolean
   const [movingStatus, setMovingStatus] = useState<Record<string, boolean>>({});
   const [settingPriority, setSettingPriority] = useState<Record<string, boolean>>({});
   const [viewMode, setViewMode] = useState<'kanban' | 'list'>('kanban');
+
+  // archiwum 2025 (test schema, read-only) — 2026-05-16
+  const [archiveOpen, setArchiveOpen] = useState(false);
 
   const reloadList = useCallback(async () => {
     if (!isUnlocked) return; // NIE pobieraj danych przed odszyfrowaniem
@@ -487,6 +491,22 @@ export default function StatusEye({ isUnlocked = false }: { isUnlocked?: boolean
                 title={isUnlocked ? "Agent AI (Karateka)" : "Zablokowane (wymagane hasło)"}
               >
                 <Sparkles className="w-3.5 h-3.5" /> Agent AI
+              </button>
+            </div>
+            {/* 2026-05-16: Archiwum 2025 (read-only schema=test) */}
+            <div className="px-4 pb-3">
+              <button
+                onClick={() => { if (isUnlocked) { setExpanded(false); setArchiveOpen(true); } }}
+                disabled={!isUnlocked}
+                className={`w-full flex items-center justify-center gap-1.5 px-2 py-2 rounded-lg border text-xs font-medium transition-colors ${
+                  isUnlocked
+                    ? 'bg-amber-500/10 hover:bg-amber-500/20 border-amber-500/30 text-amber-300'
+                    : 'bg-gray-500/10 border-white/5 text-gray-600 opacity-50 cursor-not-allowed'
+                }`}
+                data-feedback-ui="true"
+                title={isUnlocked ? "Wczytaj historię (archiwum 2025, tylko podgląd)" : "Zablokowane (wymagane hasło)"}
+              >
+                <Archive className="w-3.5 h-3.5" /> Archiwum 2025
               </button>
             </div>
           </div>
@@ -1023,6 +1043,9 @@ export default function StatusEye({ isUnlocked = false }: { isUnlocked?: boolean
           )}
         </div>
       )}
+
+      {/* 2026-05-16: Archiwum 2025 modal (read-only test schema) */}
+      <ArchiveBrowser open={archiveOpen} onClose={() => setArchiveOpen(false)} />
     </>
   );
 }

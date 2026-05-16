@@ -33,6 +33,7 @@ supabase/.temp
 .supabase-e2e/
 
 dist/
+ftp_backups/
 /lib/
 .env
 *storybook.log

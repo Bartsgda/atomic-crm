@@ -65,6 +65,8 @@ export function useSchemaSyncState(): SchemaSyncState {
         "postgres_changes",
         { event: "UPDATE", schema: "public", table: "configuration" },
         (payload) => {
+          // W dev mode (START_ALINA_TEST.bat) Realtime nie nadpisuje schematu
+          if (import.meta.env.VITE_SUPABASE_SCHEMA === "test") return;
           const newSchema = payload.new?.config?.active_schema as
             | string
             | undefined;

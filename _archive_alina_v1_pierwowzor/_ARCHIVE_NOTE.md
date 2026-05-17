@@ -40,6 +40,35 @@ npm install         # odbuduje node_modules z package-lock
 npm run dev         # uruchom v1 lokalnie
 ```
 
+## 🚨 TODO: Cleanup GitHub repo (sprawdzić + zarchiwizować/usunąć)
+
+**Bartek 2026-05-17 wieczór:** *"dopisz aby w githubie te stare CRM-ALINA czyścić"*.
+
+Sprawdzić czy istnieją na `Bartsgda` te zdalne repo (kandydaci do archive/delete):
+- `Bartsgda/CRM-ALINA`
+- `Bartsgda/insurance-master-crm-pro`
+- `Bartsgda/crm-alina-v1`
+- inne zawierające `alina` / `insurance`
+
+**Procedura** (Bartek manualnie, bo wymaga decyzji per repo):
+
+```bash
+# 1. Lista repo (PowerShell na maszynie z gh CLI)
+gh repo list Bartsgda --limit 100 | findstr /I "crm alina insurance"
+
+# 2. Per repo decyzja:
+gh repo view Bartsgda/CRM-ALINA --json description,visibility,updatedAt
+gh repo archive Bartsgda/CRM-ALINA          # ZALECANE: archive (zachowuje historię, read-only)
+# LUB
+gh repo delete Bartsgda/CRM-ALINA --confirm # DESTRUKTYWNE: tylko jeśli pewny
+
+# 3. W opisie zarchiwizowanego repo dodać:
+gh repo edit Bartsgda/CRM-ALINA --description "ARCHIVED 2026-05-17. Migrated to Bartsgda/BartsGda4 → CRM-Atomic/_archive_alina_v1_pierwowzor/. See _ARCHIVE_NOTE.md."
+```
+
+**Status workspace local:** ✅ usunięte z tracking ROOT repo (`git rm -r CRM-ALINA/`, commit `cf78d7f` 2026-05-17).
+**Status GitHub:** ⚠️ **TODO** — sprawdzić + decyzja archive/delete.
+
 ## Powiązane
 
 - `../CLAUDE.md` — Atomic CRM router (aktualny source of truth)

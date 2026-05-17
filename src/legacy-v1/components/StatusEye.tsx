@@ -548,7 +548,7 @@ export default function StatusEye({ isUnlocked = false }: { isUnlocked?: boolean
                 <div className="bg-gray-900 border border-white/10 rounded-2xl p-5 w-[340px] shadow-2xl">
                   <div className="flex items-center gap-2 mb-3">
                     <DatabaseBackup className="w-5 h-5 text-blue-400" />
-                    <h3 className="font-bold text-white text-sm">Skopiuj prod → test</h3>
+                    <h3 className="font-bold text-white text-sm">Uzupełnij test danymi z prod</h3>
                   </div>
 
                   {syncChecking ? (
@@ -557,28 +557,28 @@ export default function StatusEye({ isUnlocked = false }: { isUnlocked?: boolean
                     </div>
                   ) : syncConflicts.length > 0 ? (
                     <>
-                      <div className="flex items-start gap-2 bg-amber-500/10 border border-amber-500/30 rounded-lg p-3 mb-3">
-                        <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
-                        <div className="text-xs text-amber-200">
-                          <p className="font-semibold mb-1">Zmiany w test zostaną nadpisane:</p>
+                      <div className="flex items-start gap-2 bg-blue-500/10 border border-blue-500/30 rounded-lg p-3 mb-3">
+                        <AlertTriangle className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
+                        <div className="text-xs text-blue-200">
+                          <p className="font-semibold mb-1">Edytowałaś te rekordy w test — zostaną bez zmian:</p>
                           <ul className="space-y-0.5">
                             {syncConflicts.slice(0, 8).map((c, i) => (
-                              <li key={i} className="text-amber-300">• {c.name}</li>
+                              <li key={i} className="text-blue-300">• {c.name}</li>
                             ))}
                             {syncConflicts.length > 8 && (
-                              <li className="text-amber-400">…i {syncConflicts.length - 8} więcej</li>
+                              <li className="text-blue-400">…i {syncConflicts.length - 8} więcej</li>
                             )}
                           </ul>
                         </div>
                       </div>
                       <p className="text-xs text-gray-400 mb-4">
-                        Dane z prod zastąpią test. Zmiany Aliny w test przepadną.
+                        Doda nowe rekordy z prod. Twoje edycje pozostają nienaruszone.
                       </p>
                     </>
                   ) : (
                     <p className="text-xs text-gray-300 mb-4">
-                      Skopiuje wszystkie dane z produkcji do bazy testowej.<br />
-                      <span className="text-gray-500">Zmiany w test nie trafią do prod.</span>
+                      Doda nowe rekordy z prod do test. Twoje dane i edycje zostają.<br />
+                      <span className="text-gray-500">Nic nie trafi z test do prod.</span>
                     </p>
                   )}
 
@@ -599,8 +599,8 @@ export default function StatusEye({ isUnlocked = false }: { isUnlocked?: boolean
                       className="flex-1 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white text-xs font-semibold transition-colors flex items-center justify-center gap-1.5"
                     >
                       {syncLoading
-                        ? <><Loader2 className="w-3 h-3 animate-spin" /> Kopiuję…</>
-                        : syncConflicts.length > 0 ? 'Kopiuj i nadpisz' : 'Kopiuj'}
+                        ? <><Loader2 className="w-3 h-3 animate-spin" /> Uzupełniam…</>
+                        : 'Uzupełnij test'}
                     </button>
                   </div>
                 </div>

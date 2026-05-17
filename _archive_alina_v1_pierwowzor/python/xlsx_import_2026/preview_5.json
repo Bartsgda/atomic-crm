@@ -1,0 +1,471 @@
+[
+  {
+    "row_idx": 1,
+    "client": {
+      "id": "a671a948-f867-4362-bf69-48eacb1bfd21",
+      "tenant_id": "11111111-1111-1111-1111-111111111111",
+      "first_name": "Rafał",
+      "last_name": "Gurbowicz",
+      "phones": "{509718289}",
+      "emails": "{olagurbowicz@op.pl}",
+      "street": "ul. Na glinach 5",
+      "city": "Somonino",
+      "zip_code": "83-314",
+      "businesses": null,
+      "source": "xlsx_import",
+      "legacy_id": "xlsx_2025_row_1",
+      "created_at": "2025-07-02T12:00:00+00:00",
+      "updated_at": "2025-07-02T12:00:00+00:00"
+    },
+    "policy": {
+      "id": "be59220b-5b6a-4ed6-bfce-4b59a04b14b0",
+      "tenant_id": "11111111-1111-1111-1111-111111111111",
+      "client_id": "a671a948-f867-4362-bf69-48eacb1bfd21",
+      "type": "OC",
+      "stage": "uciety_kontakt",
+      "insurer_id": null,
+      "insurer_name": null,
+      "policy_number": null,
+      "premium": null,
+      "commission": null,
+      "commission_rate": null,
+      "payment_status": "UNPAID",
+      "policy_start_date": "2025-07-02",
+      "policy_end_date": "2026-07-02",
+      "next_contact_date": "2025-05-30",
+      "created_at": "2025-07-02T12:00:00+00:00",
+      "updated_at": "2025-07-02T12:00:00+00:00",
+      "vehicle_brand": "G03V",
+      "vehicle_model": null,
+      "vehicle_reg": null,
+      "auto_details": {
+        "vehicleType": "OSOBOWY"
+      },
+      "home_details": {},
+      "travel_details": {},
+      "firma_details": {},
+      "life_details": {},
+      "original_product_string": "samochód_G03V_OC samo",
+      "ai_note": null,
+      "source": "xlsx_import",
+      "legacy_id": "xlsx_2025_row_1"
+    },
+    "sub_agent": {
+      "name": "Firmowy (ogólny)",
+      "group_prefix": "firmowy",
+      "notes": null,
+      "id": "ff79b09b-be0f-4458-8d7e-20de7ddf97dd",
+      "tenant_id": "11111111-1111-1111-1111-111111111111",
+      "default_rates": {
+        "OC": 0,
+        "AC": 0
+      }
+    },
+    "share": null,
+    "notes": [
+      {
+        "id": "215f3ff5-2feb-4e73-9c37-5c94df8b9229",
+        "tenant_id": "11111111-1111-1111-1111-111111111111",
+        "client_id": "a671a948-f867-4362-bf69-48eacb1bfd21",
+        "linked_policy_ids": "{be59220b-5b6a-4ed6-bfce-4b59a04b14b0}",
+        "content": "ubezp na męża kontakt pod danym nr tel z Panią Aleksandrą Gurbiowicz-> 04.06.2025 nie odbiera od 2 dni",
+        "tag": "STATUS",
+        "created_at": "2025-05-29T00:00:00+00:00",
+        "legacy_id": "xlsx_2025_row_1_note_0"
+      },
+      {
+        "id": "8b82b943-89d2-48ee-b68c-2de75fb8b754",
+        "tenant_id": "11111111-1111-1111-1111-111111111111",
+        "client_id": "a671a948-f867-4362-bf69-48eacb1bfd21",
+        "linked_policy_ids": "{be59220b-5b6a-4ed6-bfce-4b59a04b14b0}",
+        "content": "[STARA POLISA] stara w HDI",
+        "tag": "STATUS",
+        "created_at": "2025-05-29T00:00:00+00:00",
+        "legacy_id": "xlsx_2025_row_1_oldpol"
+      },
+      {
+        "id": "65c0873c-8b8a-440b-a195-d06ca8b84021",
+        "tenant_id": "11111111-1111-1111-1111-111111111111",
+        "client_id": "a671a948-f867-4362-bf69-48eacb1bfd21",
+        "linked_policy_ids": "{be59220b-5b6a-4ed6-bfce-4b59a04b14b0}",
+        "content": "[KONTEKST] kontakt do Aleksandry G.",
+        "tag": "ROZMOWA",
+        "created_at": "2025-05-29T00:00:00+00:00",
+        "legacy_id": "xlsx_2025_row_1_context"
+      }
+    ]
+  },
+  {
+    "row_idx": 2,
+    "client": {
+      "id": "f77f3c1a-60da-4ef1-97fb-1d313f40cdd8",
+      "tenant_id": "11111111-1111-1111-1111-111111111111",
+      "first_name": "Marek",
+      "last_name": "Czechowski",
+      "phones": "{601611399}",
+      "emails": "{}",
+      "street": "ul. Konwaliowa 3",
+      "city": "Pruszcz Gdański",
+      "zip_code": "83-000",
+      "businesses": null,
+      "source": "xlsx_import",
+      "legacy_id": "xlsx_2025_row_2",
+      "created_at": "2025-06-16T12:00:00+00:00",
+      "updated_at": "2025-06-16T12:00:00+00:00"
+    },
+    "policy": {
+      "id": "c00059a0-319f-44af-8ff0-2fc9f2c27376",
+      "tenant_id": "11111111-1111-1111-1111-111111111111",
+      "client_id": "f77f3c1a-60da-4ef1-97fb-1d313f40cdd8",
+      "type": "OC",
+      "stage": "uciety_kontakt",
+      "insurer_id": null,
+      "insurer_name": null,
+      "policy_number": null,
+      "premium": null,
+      "commission": null,
+      "commission_rate": null,
+      "payment_status": "UNPAID",
+      "policy_start_date": null,
+      "policy_end_date": null,
+      "next_contact_date": "2025-06-19",
+      "created_at": "2025-06-16T12:00:00+00:00",
+      "updated_at": "2025-06-16T12:00:00+00:00",
+      "vehicle_brand": null,
+      "vehicle_model": null,
+      "vehicle_reg": null,
+      "auto_details": {},
+      "home_details": {},
+      "travel_details": {},
+      "firma_details": {},
+      "life_details": {},
+      "original_product_string": "?",
+      "ai_note": "XLSX: produkt nieokreslony \"?\" - wymaga sprawdzenia",
+      "source": "xlsx_import",
+      "legacy_id": "xlsx_2025_row_2"
+    },
+    "sub_agent": {
+      "name": "Beata",
+      "group_prefix": "firmowy",
+      "notes": null,
+      "id": "e1ee2dd4-4768-4ba6-a9bd-cf42191b1be8",
+      "tenant_id": "11111111-1111-1111-1111-111111111111",
+      "default_rates": {
+        "OC": 0,
+        "AC": 0
+      }
+    },
+    "share": null,
+    "notes": [
+      {
+        "id": "1edebcf5-d888-4f7d-a974-2b5178bbaf71",
+        "tenant_id": "11111111-1111-1111-1111-111111111111",
+        "client_id": "f77f3c1a-60da-4ef1-97fb-1d313f40cdd8",
+        "linked_policy_ids": "{c00059a0-319f-44af-8ff0-2fc9f2c27376}",
+        "content": "i 16.06.2025 nie odbiera",
+        "tag": "STATUS",
+        "created_at": "2025-06-11T00:00:00+00:00",
+        "legacy_id": "xlsx_2025_row_2_note_0"
+      }
+    ]
+  },
+  {
+    "row_idx": 3,
+    "client": {
+      "id": "3573bd7b-3e7c-4139-bbf5-ffdb6f78f34a",
+      "tenant_id": "11111111-1111-1111-1111-111111111111",
+      "first_name": "Jędrzej",
+      "last_name": "Machol",
+      "phones": "{537004798}",
+      "emails": "{}",
+      "street": "ul. Kiełpińska 21D",
+      "city": "Mezowo",
+      "zip_code": "83-332",
+      "businesses": null,
+      "source": "xlsx_import",
+      "legacy_id": "xlsx_2025_row_3",
+      "created_at": "2025-06-05T12:00:00+00:00",
+      "updated_at": "2025-06-05T12:00:00+00:00"
+    },
+    "policy": {
+      "id": "1b2870bd-091a-4665-9391-50a1576368a3",
+      "tenant_id": "11111111-1111-1111-1111-111111111111",
+      "client_id": "3573bd7b-3e7c-4139-bbf5-ffdb6f78f34a",
+      "type": "FIRMA",
+      "stage": "przel_kontakt",
+      "insurer_id": null,
+      "insurer_name": null,
+      "policy_number": null,
+      "premium": null,
+      "commission": null,
+      "commission_rate": null,
+      "payment_status": "UNPAID",
+      "policy_start_date": null,
+      "policy_end_date": null,
+      "next_contact_date": "2025-07-21",
+      "created_at": "2025-06-05T12:00:00+00:00",
+      "updated_at": "2025-06-05T12:00:00+00:00",
+      "vehicle_brand": null,
+      "vehicle_model": null,
+      "vehicle_reg": null,
+      "auto_details": {},
+      "home_details": {},
+      "travel_details": {},
+      "firma_details": {
+        "description": "WGM3815L",
+        "subType": "FLOTA"
+      },
+      "life_details": {},
+      "original_product_string": "flota 60 pojazdów na 3 różne firmy_WGM3815L",
+      "ai_note": null,
+      "source": "xlsx_import",
+      "legacy_id": "xlsx_2025_row_3"
+    },
+    "sub_agent": {
+      "name": "Firmowy (ogólny)",
+      "group_prefix": "firmowy",
+      "notes": null,
+      "id": "f3f7c9c4-4886-4b01-be95-1884a2fe7e7d",
+      "tenant_id": "11111111-1111-1111-1111-111111111111",
+      "default_rates": {
+        "OC": 0,
+        "AC": 0
+      }
+    },
+    "share": null,
+    "notes": [
+      {
+        "id": "92cf084c-9919-46ac-a313-d7d6c86fcf6e",
+        "tenant_id": "11111111-1111-1111-1111-111111111111",
+        "client_id": "3573bd7b-3e7c-4139-bbf5-ffdb6f78f34a",
+        "linked_policy_ids": "{1b2870bd-091a-4665-9391-50a1576368a3}",
+        "content": "rozmowa z Panią Patrycją -> jutro prześle plik z pojazdami do ubezpieczenia flotowego -> pierwsze kończy się w sierpniu Iweko Plandeka 3,5t rej WGM3815L",
+        "tag": "ROZMOWA",
+        "created_at": "2025-06-05T00:00:00+00:00",
+        "legacy_id": "xlsx_2025_row_3_note_0"
+      },
+      {
+        "id": "36cffa5e-801b-42a4-bb6a-d46c37c94220",
+        "tenant_id": "11111111-1111-1111-1111-111111111111",
+        "client_id": "3573bd7b-3e7c-4139-bbf5-ffdb6f78f34a",
+        "linked_policy_ids": "{1b2870bd-091a-4665-9391-50a1576368a3}",
+        "content": "[KONTEKST] rozmowa z Panią Patrycją",
+        "tag": "ROZMOWA",
+        "created_at": "2025-06-05T00:00:00+00:00",
+        "legacy_id": "xlsx_2025_row_3_context"
+      }
+    ]
+  },
+  {
+    "row_idx": 4,
+    "client": {
+      "id": "d7a8e51a-fee4-4a32-9323-96544d836001",
+      "tenant_id": "11111111-1111-1111-1111-111111111111",
+      "first_name": "Kamila",
+      "last_name": "Jędrasik",
+      "phones": "{607990880}",
+      "emails": "{kamila.jedrasik@gmail.com}",
+      "street": "ul. Jagiełły 4",
+      "city": "Bojano",
+      "zip_code": null,
+      "businesses": null,
+      "source": "xlsx_import",
+      "legacy_id": "xlsx_2025_row_4",
+      "created_at": "2025-07-01T12:00:00+00:00",
+      "updated_at": "2025-07-01T12:00:00+00:00"
+    },
+    "policy": {
+      "id": "c5b1dfd7-b5fd-4882-918e-0d9345d36c22",
+      "tenant_id": "11111111-1111-1111-1111-111111111111",
+      "client_id": "d7a8e51a-fee4-4a32-9323-96544d836001",
+      "type": "DOM",
+      "stage": "czekam_na_dane",
+      "insurer_id": null,
+      "insurer_name": null,
+      "policy_number": null,
+      "premium": null,
+      "commission": null,
+      "commission_rate": null,
+      "payment_status": "UNPAID",
+      "policy_start_date": "2025-07-01",
+      "policy_end_date": "2026-07-01",
+      "next_contact_date": "2025-07-30",
+      "created_at": "2025-07-01T12:00:00+00:00",
+      "updated_at": "2025-07-01T12:00:00+00:00",
+      "vehicle_brand": null,
+      "vehicle_model": null,
+      "vehicle_reg": null,
+      "auto_details": {},
+      "home_details": {
+        "objectType": "DOM"
+      },
+      "travel_details": {},
+      "firma_details": {},
+      "life_details": {},
+      "original_product_string": "dom_Jagiełły 4",
+      "ai_note": null,
+      "source": "xlsx_import",
+      "legacy_id": "xlsx_2025_row_4"
+    },
+    "sub_agent": {
+      "name": "Hejka",
+      "group_prefix": "firmowy",
+      "notes": null,
+      "id": "1c526a52-70a4-4cb5-ae2d-51563b3c34de",
+      "tenant_id": "11111111-1111-1111-1111-111111111111",
+      "default_rates": {
+        "OC": 0,
+        "AC": 0
+      }
+    },
+    "share": null,
+    "notes": [
+      {
+        "id": "29223473-26ef-49a0-9de5-4c786cae7d2b",
+        "tenant_id": "11111111-1111-1111-1111-111111111111",
+        "client_id": "d7a8e51a-fee4-4a32-9323-96544d836001",
+        "linked_policy_ids": "{c5b1dfd7-b5fd-4882-918e-0d9345d36c22}",
+        "content": "klientka nie odbiera",
+        "tag": "STATUS",
+        "created_at": "2025-07-29T00:00:00+00:00",
+        "legacy_id": "xlsx_2025_row_4_note_0"
+      },
+      {
+        "id": "f5d85ee3-32a7-49d2-b61b-55596388206b",
+        "tenant_id": "11111111-1111-1111-1111-111111111111",
+        "client_id": "d7a8e51a-fee4-4a32-9323-96544d836001",
+        "linked_policy_ids": "{c5b1dfd7-b5fd-4882-918e-0d9345d36c22}",
+        "content": "wysłałam sms z przypomnieniem o wysłaniu dokumentów",
+        "tag": "ROZMOWA",
+        "created_at": "2025-07-16T00:00:00+00:00",
+        "legacy_id": "xlsx_2025_row_4_note_1"
+      },
+      {
+        "id": "d3d8e066-534c-4256-bc6f-b5940173ea7e",
+        "tenant_id": "11111111-1111-1111-1111-111111111111",
+        "client_id": "d7a8e51a-fee4-4a32-9323-96544d836001",
+        "linked_policy_ids": "{c5b1dfd7-b5fd-4882-918e-0d9345d36c22}",
+        "content": "odpisała że wyśle do końca tygodnia dokumenty i że jest zainteresowana ;)24.06.2025 wysłałam jej wiadomość sms z przypomnieniem",
+        "tag": "ROZMOWA",
+        "created_at": "2025-07-16T00:00:00+00:00",
+        "legacy_id": "xlsx_2025_row_4_note_2"
+      },
+      {
+        "id": "2db09556-d1f4-4adc-a8d2-0ca4f48ad5cf",
+        "tenant_id": "11111111-1111-1111-1111-111111111111",
+        "client_id": "d7a8e51a-fee4-4a32-9323-96544d836001",
+        "linked_policy_ids": "{c5b1dfd7-b5fd-4882-918e-0d9345d36c22}",
+        "content": "telefon przypominający, obiecała wysłać dzisiaj, 11.06.2025->ustaliłam z Panią Kamilą że wyślę maila do niej a w odpowiedzi dostanę starą polisę bądź dane do kalkulacji + wspomniałam że mogą dostać 1 - 2 miesiące abonamentu za free",
+        "tag": "OFERTA",
+        "created_at": "2025-07-16T00:00:00+00:00",
+        "legacy_id": "xlsx_2025_row_4_note_3"
+      }
+    ]
+  },
+  {
+    "row_idx": 5,
+    "client": {
+      "id": "14986b3e-7512-429b-925a-d547c2072ebc",
+      "tenant_id": "11111111-1111-1111-1111-111111111111",
+      "first_name": "Aliaksandr",
+      "last_name": "Tron",
+      "phones": "{696556097}",
+      "emails": "{tron.alexbud@gmail.com}",
+      "street": "ul. Wspólna 1/1",
+      "city": "Nowy Tuchom",
+      "zip_code": "80-209",
+      "businesses": null,
+      "source": "xlsx_import",
+      "legacy_id": "xlsx_2025_row_5",
+      "created_at": "2025-07-11T12:00:00+00:00",
+      "updated_at": "2025-07-11T12:00:00+00:00"
+    },
+    "policy": {
+      "id": "4b6ff25b-9f74-4123-83a6-fedba97cf894",
+      "tenant_id": "11111111-1111-1111-1111-111111111111",
+      "client_id": "14986b3e-7512-429b-925a-d547c2072ebc",
+      "type": "FIRMA",
+      "stage": "rez_po_ofercie",
+      "insurer_id": null,
+      "insurer_name": null,
+      "policy_number": null,
+      "premium": null,
+      "commission": null,
+      "commission_rate": null,
+      "payment_status": "UNPAID",
+      "policy_start_date": null,
+      "policy_end_date": null,
+      "next_contact_date": "2025-08-20",
+      "created_at": "2025-07-11T12:00:00+00:00",
+      "updated_at": "2025-07-11T12:00:00+00:00",
+      "vehicle_brand": null,
+      "vehicle_model": null,
+      "vehicle_reg": null,
+      "auto_details": {},
+      "home_details": {},
+      "travel_details": {},
+      "firma_details": {
+        "description": "przyczepa ThePhoenixBarber"
+      },
+      "life_details": {},
+      "original_product_string": "firma_przyczepa ThePhoenixBarber",
+      "ai_note": null,
+      "source": "xlsx_import",
+      "legacy_id": "xlsx_2025_row_5"
+    },
+    "sub_agent": {
+      "name": "Własny",
+      "group_prefix": "wlasny",
+      "notes": null,
+      "id": "223950a3-bcc1-428b-9ab1-3eae62266711",
+      "tenant_id": "11111111-1111-1111-1111-111111111111",
+      "default_rates": {
+        "OC": 0,
+        "AC": 0
+      }
+    },
+    "share": null,
+    "notes": [
+      {
+        "id": "864a051d-5c51-48ba-a1d8-f388d6d1db32",
+        "tenant_id": "11111111-1111-1111-1111-111111111111",
+        "client_id": "14986b3e-7512-429b-925a-d547c2072ebc",
+        "linked_policy_ids": "{4b6ff25b-9f74-4123-83a6-fedba97cf894}",
+        "content": "klient wstrzymuje się z ubezpieczeniem ze względu na wysoki koszt ubezpieczenia samochodu w leasingu GD187YG",
+        "tag": "DECISION_PRICE",
+        "created_at": "2025-07-15T00:00:00+00:00",
+        "legacy_id": "xlsx_2025_row_5_note_0"
+      },
+      {
+        "id": "a53c9449-7d1b-4869-9ac0-7b0d6fd5864c",
+        "tenant_id": "11111111-1111-1111-1111-111111111111",
+        "client_id": "14986b3e-7512-429b-925a-d547c2072ebc",
+        "linked_policy_ids": "{4b6ff25b-9f74-4123-83a6-fedba97cf894}",
+        "content": "wysłana oferta z PZU za 574 zł SU główna 50 tys, do oferty w Generali (bez gwarancji że będą chcieli ubezpieczyć) trzeba dołączyć jeszcze opis i zdjęcia 881 zł",
+        "tag": "OFERTA",
+        "created_at": "2025-07-11T00:00:00+00:00",
+        "legacy_id": "xlsx_2025_row_5_note_1"
+      },
+      {
+        "id": "4e274167-46ee-4355-a0be-814b93803ece",
+        "tenant_id": "11111111-1111-1111-1111-111111111111",
+        "client_id": "14986b3e-7512-429b-925a-d547c2072ebc",
+        "linked_policy_ids": "{4b6ff25b-9f74-4123-83a6-fedba97cf894}",
+        "content": "[STARA POLISA] brak",
+        "tag": "STATUS",
+        "created_at": "2025-07-11T00:00:00+00:00",
+        "legacy_id": "xlsx_2025_row_5_oldpol"
+      },
+      {
+        "id": "a81c323a-e1ee-4d57-942d-cf2238fce423",
+        "tenant_id": "11111111-1111-1111-1111-111111111111",
+        "client_id": "14986b3e-7512-429b-925a-d547c2072ebc",
+        "linked_policy_ids": "{4b6ff25b-9f74-4123-83a6-fedba97cf894}",
+        "content": "[WSPOLWL/CESJA] pesel kl 86080119155",
+        "tag": "STATUS",
+        "created_at": "2025-07-11T00:00:00+00:00",
+        "legacy_id": "xlsx_2025_row_5_coowner"
+      }
+    ]
+  }
+]

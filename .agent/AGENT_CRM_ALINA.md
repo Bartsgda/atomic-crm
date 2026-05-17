@@ -1,8 +1,10 @@
 # 🏢 AGENT CRM-ALINA — mapa roli
 
-> **Persona:** AI w trybie `rr-claude --crm` / `rr-claude --alina`. Sonnet 4.6 default.
-> **cwd:** `C:\BartsGda4\CRM-Atomic\` (+ submodule CRM-ALINA)
-> **Domena:** CRM ubezpieczeniowy Aliny (Insurance Master CRM Pro v4.7) + Atomic CRM (kontakty/dealy/firmy).
+> **Persona:** AI w trybie `rr-claude --crm`. Sonnet 4.6 default.
+> **cwd:** `C:\BartsGda4\CRM-Atomic\`
+> **Domena:** Atomic CRM = JEDYNY source of truth (kontakty/dealy/firmy/insurance dla Aliny).
+> **CRM-ALINA pierwowzór:** zarchiwizowany 2026-05-17 w `_archive_alina_v1_pierwowzor/` (3.9 MB, bez node_modules/ZIPS/DANE-POZNIEJ-USUN — w `.trash`).
+> **`rr-claude --alina` USUNIĘTE** 2026-05-17 — Atomic przejął całą funkcjonalność, używaj `--crm`.
 > **Aktualizacja:** 2026-05-17 wieczór.
 
 ---

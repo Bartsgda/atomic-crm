@@ -1,0 +1,1618 @@
+[
+  {
+    "row_idx": 1,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.vehicle_reg",
+        "problem": "Tablica rejestracyjna G03V jest nieprawidłowa (4 znaki).",
+        "suggested_fix": "Zweryfikuj poprawność tablicy w UFG lub u klienta."
+      }
+    ]
+  },
+  {
+    "row_idx": 2,
+    "verdict": "ERROR",
+    "issues": [
+      {
+        "severity": "ERROR",
+        "field": "policy.type",
+        "problem": "Brak typu polisy w kolumnie 'co' (wartość '?').",
+        "suggested_fix": "Ustal typ polisy z klientem i uzupełnij dane."
+      }
+    ]
+  },
+  {
+    "row_idx": 3,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 4,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.home_details",
+        "problem": "Brakujące dane techniczne nieruchomości (metraż, rok budowy, suma ubezpieczenia).",
+        "suggested_fix": "Uzupełnij brakujące parametry w polisie na podstawie dokumentacji."
+      }
+    ]
+  },
+  {
+    "row_idx": 5,
+    "verdict": "ERROR",
+    "issues": [
+      {
+        "severity": "ERROR",
+        "field": "coOwners",
+        "problem": "PESEL klienta błędnie zinterpretowany jako współwłaściciel (wsp: 'pesel kl 86080119155').",
+        "suggested_fix": "Usuń błędny wpis z coOwners i przenieś PESEL do profilu klienta."
+      }
+    ]
+  },
+  {
+    "row_idx": 6,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 7,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.home_details",
+        "problem": "Brakujące dane techniczne nieruchomości (area_m2, year_built, su) mimo dostępności w opisie.",
+        "suggested_fix": "Uzupełnić brakujące parametry w bazie na podstawie dokumentacji lub dopytać klienta."
+      }
+    ]
+  },
+  {
+    "row_idx": 8,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.home_details",
+        "problem": "Brakujące dane techniczne nieruchomości (area_m2, year_built, su).",
+        "suggested_fix": "Uzupełnić brakujące parametry w bazie."
+      }
+    ]
+  },
+  {
+    "row_idx": 9,
+    "verdict": "ERROR",
+    "issues": [
+      {
+        "severity": "ERROR",
+        "field": "client.name",
+        "problem": "Klient zidentyfikowany jako 'Dominika (brak nazwiska)', co utrudnia procesowanie polisy.",
+        "suggested_fix": "Wymagane ręczne uzupełnienie nazwiska klienta w bazie."
+      },
+      {
+        "severity": "ERROR",
+        "field": "policy.auto_details",
+        "problem": "Brak danych dla 3 samochodów wspomnianych w notatkach.",
+        "suggested_fix": "Dodać brakujące pojazdy do bazy lub wyjaśnić z klientem."
+      }
+    ]
+  },
+  {
+    "row_idx": 10,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 11,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.home_details",
+        "problem": "Brak danych technicznych nieruchomości (area_m2, year_built, su) w XLSX.",
+        "suggested_fix": "Uzupełnić dane nieruchomości w systemie na podstawie dokumentacji polisy PZU."
+      }
+    ]
+  },
+  {
+    "row_idx": 12,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 13,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.firma_details",
+        "problem": "Brak szczegółów firmy (subType, su, branża) w XLSX.",
+        "suggested_fix": "Doprecyzować profil działalności firmy w notatkach lub systemie."
+      }
+    ]
+  },
+  {
+    "row_idx": 14,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "notes",
+        "problem": "Chronologia notatek: notatka z 2024-09-24 jest starsza niż data utworzenia polisy (2025-09-24).",
+        "suggested_fix": "Zweryfikować czy notatka z 2024 roku nie powinna być przypisana do innej polisy lub czy data utworzenia w systemie jest poprawna."
+      }
+    ]
+  },
+  {
+    "row_idx": 15,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.life_details",
+        "problem": "Brak szczegółów polisy na życie (SU, produkt szczegółowy) w XLSX.",
+        "suggested_fix": "Uzupełnić dane po przeprowadzeniu badania potrzeb z klientem."
+      }
+    ]
+  },
+  {
+    "row_idx": 16,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.home_details",
+        "problem": "Brakujące dane techniczne nieruchomości (area_m2, year_built, su) w XLSX.",
+        "suggested_fix": "Uzupełnić dane nieruchomości na podstawie dokumentacji klienta."
+      }
+    ]
+  },
+  {
+    "row_idx": 17,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.auto_details",
+        "problem": "Brak konkretnych danych pojazdów w XLSX mimo informacji o wielu pojazdach.",
+        "suggested_fix": "Dodać notatkę o oczekiwaniu na dane od klienta lub zaktualizować po otrzymaniu maila."
+      }
+    ]
+  },
+  {
+    "row_idx": 18,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 19,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 20,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.home_details",
+        "problem": "Brakujące dane techniczne mieszkania (area_m2, year_built, su) w XLSX.",
+        "suggested_fix": "Uzupełnić dane podczas zbierania informacji od klienta."
+      }
+    ]
+  },
+  {
+    "row_idx": 21,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 22,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 23,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.stage",
+        "problem": "Notatki sugerują, że klient nadal rozważa ofertę, ale etap w bazie to 'oferta_wyslana' mimo braku finalizacji.",
+        "suggested_fix": "Zweryfikować czy etap nie powinien być 'przel_kontakt' lub 'negocjacje'."
+      }
+    ]
+  },
+  {
+    "row_idx": 24,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "coOwners",
+        "problem": "W notatce wspomniano o żonie, która jest właścicielem pojazdu.",
+        "suggested_fix": "Dodać żonę jako współwłaściciela lub klienta w bazie, jeśli to możliwe."
+      }
+    ]
+  },
+  {
+    "row_idx": 25,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "coOwners",
+        "problem": "W notatce wspomniano o mężu Marku Herlingu, który jest aktywnym uczestnikiem procesu decyzyjnego.",
+        "suggested_fix": "Dodać Marka Herlinga jako współwłaściciela lub powiązanego klienta."
+      }
+    ]
+  },
+  {
+    "row_idx": 26,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.home_details",
+        "problem": "Brak szczegółowych danych nieruchomości (area_m2, year_built, su) oraz numeru mieszkania w XLSX.",
+        "suggested_fix": "Uzupełnić dane techniczne nieruchomości w bazie na podstawie dokumentacji lub kontaktu z klientem."
+      }
+    ]
+  },
+  {
+    "row_idx": 27,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.home_details",
+        "problem": "Brak danych technicznych nieruchomości (area_m2, year_built, su) w XLSX.",
+        "suggested_fix": "Uzupełnić brakujące parametry nieruchomości."
+      }
+    ]
+  },
+  {
+    "row_idx": 28,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.home_details",
+        "problem": "Brak danych technicznych nieruchomości (area_m2, year_built, su) w XLSX.",
+        "suggested_fix": "Uzupełnić brakujące parametry nieruchomości."
+      }
+    ]
+  },
+  {
+    "row_idx": 29,
+    "verdict": "ERROR",
+    "issues": [
+      {
+        "severity": "ERROR",
+        "field": "client.name",
+        "problem": "Klient zapisany jako 'Mariusz (brak nazwiska)'.",
+        "suggested_fix": "Uzupełnić nazwisko klienta w bazie."
+      },
+      {
+        "severity": "WARN",
+        "field": "policy.home_details",
+        "problem": "Typ nieruchomości nieokreślony (dom vs mieszkanie) w XLSX.",
+        "suggested_fix": "Doprecyzować typ nieruchomości przy kolejnym kontakcie."
+      }
+    ]
+  },
+  {
+    "row_idx": 30,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 31,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.type",
+        "problem": "Typ polisy nieokreślony (DOM vs KOMUNIKACJA)",
+        "suggested_fix": "Uzupełnić typ polisy po kontakcie z klientem."
+      }
+    ]
+  },
+  {
+    "row_idx": 32,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.vehicle_brand",
+        "problem": "Brak danych pojazdu mimo informacji o nowym zakupie",
+        "suggested_fix": "Zweryfikować dane pojazdu w UFG lub podczas kontaktu."
+      }
+    ]
+  },
+  {
+    "row_idx": 33,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.vehicle_brand",
+        "problem": "Brak danych dla 2 samochodów wspomnianych w notatce",
+        "suggested_fix": "Pobrać dane z TUZ zgodnie z notatką."
+      }
+    ]
+  },
+  {
+    "row_idx": 34,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 35,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 36,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 37,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 38,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 39,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.type",
+        "problem": "Polisa typu OC zawiera w notatce informację o ubezpieczeniu domu, co sugeruje brak osobnej polisy dla nieruchomości.",
+        "suggested_fix": "Zweryfikować czy należy utworzyć osobną polisę typu DOM dla tego klienta."
+      }
+    ]
+  },
+  {
+    "row_idx": 40,
+    "verdict": "ERROR",
+    "issues": [
+      {
+        "severity": "ERROR",
+        "field": "client.name",
+        "problem": "Klient posiada tylko imię 'Agnieszka', brak nazwiska w bazie.",
+        "suggested_fix": "Uzupełnić nazwisko klienta w bazie danych."
+      },
+      {
+        "severity": "ERROR",
+        "field": "policy.vehicle_reg",
+        "problem": "Brak danych pojazdu (marka, model, rejestracja) mimo że polisa dotyczy samochodu.",
+        "suggested_fix": "Skontaktować się z klientem w celu pozyskania danych pojazdu."
+      }
+    ]
+  },
+  {
+    "row_idx": 41,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 42,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "coOwners",
+        "problem": "Współwłaściciel Jerzy Sowa wymieniony w kolumnie 'wsp', ale nie został dodany do bazy.",
+        "suggested_fix": "Zweryfikować czy Jerzy Sowa jest współwłaścicielem i dodać go do tablicy coOwners."
+      }
+    ]
+  },
+  {
+    "row_idx": 43,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 44,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "notes",
+        "problem": "Brak notatek w bazie mimo dostępności danych w systemie.",
+        "suggested_fix": "Przenieść informacje o kontakcie z XLSX do notatek w bazie."
+      }
+    ]
+  },
+  {
+    "row_idx": 45,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 46,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 47,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.vehicle_brand",
+        "problem": "Brak danych o pojeździe (marka/model) w XLSX",
+        "suggested_fix": "Uzupełnić dane pojazdu na podstawie UFG lub zapytać klienta"
+      }
+    ]
+  },
+  {
+    "row_idx": 48,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.home_details",
+        "problem": "Brakujące dane nieruchomości (area_m2, year_built, su) w XLSX",
+        "suggested_fix": "Uzupełnić brakujące parametry nieruchomości w systemie"
+      }
+    ]
+  },
+  {
+    "row_idx": 49,
+    "verdict": "ERROR",
+    "issues": [
+      {
+        "severity": "ERROR",
+        "field": "policy.vehicle_reg",
+        "problem": "Tablica rejestracyjna 'G3EF' jest nieprawidłowa (zbyt krótka)",
+        "suggested_fix": "Zweryfikować poprawność numeru rejestracyjnego w dokumentach polisy"
+      }
+    ]
+  },
+  {
+    "row_idx": 50,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.vehicle_brand",
+        "problem": "Brak danych o pojeździe (marka/model) w XLSX",
+        "suggested_fix": "Uzupełnić dane pojazdu na podstawie UFG lub zapytać klienta"
+      }
+    ]
+  },
+  {
+    "row_idx": 51,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 52,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 53,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "coOwners",
+        "problem": "Mąż Marek Hering wymieniony w notatkach jako osoba decyzyjna, może być współwłaścicielem lub klientem w bazie.",
+        "suggested_fix": "Sprawdź czy Marek Hering powinien zostać dodany jako coOwner lub powiązany klient."
+      }
+    ]
+  },
+  {
+    "row_idx": 54,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.vehicle_model",
+        "problem": "Brak modelu pojazdu dla T2TESLA w bazie.",
+        "suggested_fix": "Uzupełnij model pojazdu na podstawie danych z importu lub kontaktu z klientem."
+      }
+    ]
+  },
+  {
+    "row_idx": 55,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 56,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 57,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "coOwners",
+        "problem": "Name field in coOwners contains garbage text 'czy jest em '",
+        "suggested_fix": "Clean the name field to only contain 'Małgorzata Białko'"
+      }
+    ]
+  },
+  {
+    "row_idx": 58,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 59,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 60,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "notes",
+        "problem": "Missing contact information for Barbara Kobylarz in client profile",
+        "suggested_fix": "Add Barbara Kobylarz as a co-owner or contact person in the client profile"
+      }
+    ]
+  },
+  {
+    "row_idx": 61,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 62,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 63,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 64,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 65,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 66,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 67,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 68,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 69,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 70,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 71,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 72,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 73,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 74,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "notes",
+        "problem": "Notatka wskazuje na Barbarę Kobylarz jako osobę kontaktową, ale brak jej w bazie jako współwłaściciela lub osoby powiązanej.",
+        "suggested_fix": "Dodać Barbarę Kobylarz jako osobę powiązaną w bazie danych."
+      }
+    ]
+  },
+  {
+    "row_idx": 75,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 76,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 77,
+    "verdict": "ERROR",
+    "issues": [
+      {
+        "severity": "ERROR",
+        "field": "coOwners",
+        "problem": "PESEL klienta (86080119155) został błędnie zaciągnięty do pola coOwnera (PKO Leasing).",
+        "suggested_fix": "Usuń PESEL z pola nazwy coOwnera i sprawdź, czy klient nie powinien być powiązany z tym PESELem w bazie."
+      }
+    ]
+  },
+  {
+    "row_idx": 78,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.home_details.su",
+        "problem": "Brak sumy ubezpieczenia (su) w danych polisy.",
+        "suggested_fix": "Uzupełnij sumę ubezpieczenia na podstawie dokumentu polisy."
+      }
+    ]
+  },
+  {
+    "row_idx": 79,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.vehicle_brand",
+        "problem": "Brak marki i modelu pojazdu (przyczepy) w bazie.",
+        "suggested_fix": "Uzupełnij dane techniczne przyczepy."
+      }
+    ]
+  },
+  {
+    "row_idx": 80,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 81,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 82,
+    "verdict": "ERROR",
+    "issues": [
+      {
+        "severity": "ERROR",
+        "field": "coOwners",
+        "problem": "PESEL of the client was incorrectly mapped as a coOwner.",
+        "suggested_fix": "Remove the entry from coOwners and ensure the PESEL is stored in the client's profile."
+      }
+    ]
+  },
+  {
+    "row_idx": 83,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.vehicle_brand",
+        "problem": "Missing engine_cc, power, year, and fuel data which could be extracted from vehicle documentation.",
+        "suggested_fix": "Verify vehicle registration document and update missing fields."
+      }
+    ]
+  },
+  {
+    "row_idx": 84,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.vehicle_brand",
+        "problem": "Vehicle brand and model are missing for the trailer.",
+        "suggested_fix": "Check registration document to populate brand and model fields."
+      }
+    ]
+  },
+  {
+    "row_idx": 85,
+    "verdict": "ERROR",
+    "issues": [
+      {
+        "severity": "ERROR",
+        "field": "notes",
+        "problem": "Note created_at date (2024-08-04) is chronologically inconsistent with the policy creation date (2025-08-04).",
+        "suggested_fix": "Verify if the note date is a typo or if the policy was backdated."
+      }
+    ]
+  },
+  {
+    "row_idx": 86,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 87,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 88,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 89,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.vehicle_reg",
+        "problem": "Tablica rejestracyjna 'GD86S1' ma 5 znaków, co jest nietypowe dla standardowych polskich tablic.",
+        "suggested_fix": "Zweryfikuj w dokumentach czy tablica nie powinna mieć dodatkowego znaku (np. GD86S1X)."
+      }
+    ]
+  },
+  {
+    "row_idx": 90,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "coOwners",
+        "problem": "Współwłaściciel dodany do bazy zawiera w nazwie opis procesu ('nie dopisany do polisy...').",
+        "suggested_fix": "Wyczyść pole name w coOwners do samej wartości 'Jerzy Sowa'."
+      }
+    ]
+  },
+  {
+    "row_idx": 91,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 92,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.auto_details",
+        "problem": "Missing vehicle year in database despite being available in raw data context or standard vehicle lookup.",
+        "suggested_fix": "Update vehicle year in auto_details."
+      }
+    ]
+  },
+  {
+    "row_idx": 93,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.auto_details",
+        "problem": "Missing engine_cc and year in database.",
+        "suggested_fix": "Populate missing technical details for Fiat Ducato."
+      }
+    ]
+  },
+  {
+    "row_idx": 94,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.auto_details",
+        "problem": "Missing technical details (engine_cc, power, year, fuel) in database.",
+        "suggested_fix": "Update vehicle technical specifications."
+      }
+    ]
+  },
+  {
+    "row_idx": 95,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 96,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 97,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.home_details",
+        "problem": "Missing detailed home data (area_m2, year_built, su) in database despite being a property policy.",
+        "suggested_fix": "Verify if client provided these details during the follow-up call."
+      }
+    ]
+  },
+  {
+    "row_idx": 98,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.home_details",
+        "problem": "Missing detailed home data (area_m2, year_built, su).",
+        "suggested_fix": "Update home_details once the client confirms policy end date and property specifics."
+      }
+    ]
+  },
+  {
+    "row_idx": 99,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 100,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.home_details",
+        "problem": "Missing detailed home data (area_m2, year_built, su, zip code).",
+        "suggested_fix": "Request full address and property details during the next scheduled contact."
+      }
+    ]
+  },
+  {
+    "row_idx": 101,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 102,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 103,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 104,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.vehicle_brand",
+        "problem": "Brak danych o marce i modelu pojazdu w bazie, mimo że są kluczowe dla polisy komunikacyjnej.",
+        "suggested_fix": "Uzupełnić dane pojazdu na podstawie dowodu rejestracyjnego lub wniosku."
+      }
+    ]
+  },
+  {
+    "row_idx": 105,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.commission",
+        "problem": "Notatka wskazuje na wątpliwość co do wysokości prowizji (0.874 PLN przy składce 437 PLN to 2%, co może być błędem).",
+        "suggested_fix": "Zweryfikować stawkę prowizji z ubezpieczycielem MTU24."
+      }
+    ]
+  },
+  {
+    "row_idx": 106,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 107,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 108,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 109,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 110,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.type",
+        "problem": "Typ polisy ustawiony na ZYCIE, podczas gdy NNW szkolne powinno być mapowane jako NNW.",
+        "suggested_fix": "Zmień policy.type z ZYCIE na NNW."
+      }
+    ]
+  },
+  {
+    "row_idx": 111,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 112,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 113,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 114,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 115,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.home_details",
+        "problem": "Brakujące dane techniczne nieruchomości (area_m2, year_built, su) mimo że polisa dotyczy ubezpieczenia hotelu.",
+        "suggested_fix": "Uzupełnić brakujące parametry nieruchomości w bazie na podstawie dokumentacji polisy."
+      }
+    ]
+  },
+  {
+    "row_idx": 116,
+    "verdict": "ERROR",
+    "issues": [
+      {
+        "severity": "ERROR",
+        "field": "coOwners",
+        "problem": "Tekst z kolumny 'wsp' (informacje o rezygnacji) został błędnie zinterpretowany jako współwłaściciele.",
+        "suggested_fix": "Wyczyść tablicę coOwners i przenieś informacje o rezygnacji do notatek."
+      }
+    ]
+  },
+  {
+    "row_idx": 117,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 118,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "home_details",
+        "problem": "Brakujące dane techniczne nieruchomości (area_m2, year_built, su) mimo że polisa jest sprzedażowa.",
+        "suggested_fix": "Uzupełnij brakujące parametry w bazie na podstawie dokumentacji polisy."
+      }
+    ]
+  },
+  {
+    "row_idx": 119,
+    "verdict": "ERROR",
+    "issues": [
+      {
+        "severity": "ERROR",
+        "field": "policy.type",
+        "problem": "Typ polisy ustawiony na DOM, podczas gdy notatka sugeruje ubezpieczenie auta.",
+        "suggested_fix": "Zmień typ polisy na KOMUNIKACJA lub inny właściwy dla auta."
+      },
+      {
+        "severity": "WARN",
+        "field": "client.name",
+        "problem": "Brak nazwiska klienta w bazie.",
+        "suggested_fix": "Uzupełnij nazwisko klienta."
+      }
+    ]
+  },
+  {
+    "row_idx": 120,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 121,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 122,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.vehicle_reg",
+        "problem": "Tablica WF0597V jest nietypowa dla polskich rejestracji.",
+        "suggested_fix": "Zweryfikuj poprawność wpisania numeru rejestracyjnego w XLSX."
+      }
+    ]
+  },
+  {
+    "row_idx": 123,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 124,
+    "verdict": "ERROR",
+    "issues": [
+      {
+        "severity": "ERROR",
+        "field": "coOwners",
+        "problem": "Błędne zmapowanie starej polisy jako współwłaściciela (coOwner).",
+        "suggested_fix": "Usuń 'stara uniqa 2864320336' z listy współwłaścicieli."
+      },
+      {
+        "severity": "WARN",
+        "field": "notes",
+        "problem": "Polisa oznaczona jako 'rez po ofercie', ale notatka wskazuje na rezygnację klienta.",
+        "suggested_fix": "Zmień etap polisy na 'rezygnacja'."
+      }
+    ]
+  },
+  {
+    "row_idx": 125,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.home_details",
+        "problem": "Brakujące dane techniczne nieruchomości (area_m2, year_built, su).",
+        "suggested_fix": "Uzupełnij brakujące parametry nieruchomości w bazie."
+      }
+    ]
+  },
+  {
+    "row_idx": 126,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 127,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 128,
+    "verdict": "ERROR",
+    "issues": [
+      {
+        "severity": "ERROR",
+        "field": "policy.home_details.su",
+        "problem": "Brak sumy ubezpieczenia (SU) w bazie, mimo że w notatce wspomniano o poprzedniej polisie 100 tys.",
+        "suggested_fix": "Uzupełnić pole SU w bazie na podstawie informacji o wartości rzeczywistej lub poprzedniej polisy."
+      }
+    ]
+  },
+  {
+    "row_idx": 129,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 130,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 131,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 132,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "notes",
+        "problem": "Notatka wskazuje, że klient Maciej Leśniak nie brał udziału w rozmowie, a wszystko załatwiała Hanna Grądziel.",
+        "suggested_fix": "Zweryfikować, czy Maciej Leśniak powinien być głównym klientem, czy może Hanna Grądziel powinna być klientem, a Maciej współwłaścicielem."
+      }
+    ]
+  },
+  {
+    "row_idx": 133,
+    "verdict": "ERROR",
+    "issues": [
+      {
+        "severity": "ERROR",
+        "field": "policy.created_at",
+        "problem": "Data utworzenia polisy (08.10.2025) jest wcześniejsza niż data notatki o podpisaniu polisy (10.10.2025) i rozmowie o wypowiedzeniu (21.11.2025).",
+        "suggested_fix": "Skorygować datę created_at w bazie na 10.10.2025."
+      }
+    ]
+  },
+  {
+    "row_idx": 134,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.stage",
+        "problem": "Polisa została anulowana (odstąpienie od umowy), ale etap w bazie to nadal 'sprzedaż'.",
+        "suggested_fix": "Zmienić status polisy na 'anulowana' lub 'odstąpienie'."
+      }
+    ]
+  },
+  {
+    "row_idx": 135,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.home_details",
+        "problem": "Brakujące dane w XLSX (area_m2, year_built, su), które są istotne dla polisy mieszkaniowej.",
+        "suggested_fix": "Uzupełnić brakujące parametry nieruchomości w bazie na podstawie dokumentacji polisy."
+      }
+    ]
+  },
+  {
+    "row_idx": 136,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 137,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "home_details",
+        "problem": "Missing SU (Suma Ubezpieczenia) and area_m2 in database despite being relevant for home insurance.",
+        "suggested_fix": "Verify if SU and area_m2 can be extracted from policy documents or client records."
+      }
+    ]
+  },
+  {
+    "row_idx": 138,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "home_details",
+        "problem": "Missing SU (Suma Ubezpieczenia) and area_m2 in database.",
+        "suggested_fix": "Update policy details with missing property parameters."
+      }
+    ]
+  },
+  {
+    "row_idx": 139,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "home_details",
+        "problem": "Missing SU (Suma Ubezpieczenia) in database.",
+        "suggested_fix": "Update policy details with the insured sum."
+      }
+    ]
+  },
+  {
+    "row_idx": 140,
+    "verdict": "ERROR",
+    "issues": [
+      {
+        "severity": "ERROR",
+        "field": "notes",
+        "problem": "Chronology error: Note created_at is 2026-11-26, which is in the future relative to policy creation (2025-11-26).",
+        "suggested_fix": "Correct the date of the note to 2025-11-26."
+      },
+      {
+        "severity": "WARN",
+        "field": "firma_details",
+        "problem": "Missing SU (Suma Ubezpieczenia) in database.",
+        "suggested_fix": "Update policy details with the insured sum."
+      }
+    ]
+  },
+  {
+    "row_idx": 141,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 142,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "coOwners",
+        "problem": "Współwłaściciel zawiera dane o ratach zamiast imienia i nazwiska.",
+        "suggested_fix": "Usuń 'RATY 2 po 524' z listy współwłaścicieli, to nie jest osoba."
+      }
+    ]
+  },
+  {
+    "row_idx": 143,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 144,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.home_details",
+        "problem": "Brak danych adresowych i sumy ubezpieczenia dla polisy DOM.",
+        "suggested_fix": "Uzupełnij brakujące dane w systemie, jeśli są dostępne w dokumentacji."
+      }
+    ]
+  },
+  {
+    "row_idx": 145,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 146,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 147,
+    "verdict": "ERROR",
+    "issues": [
+      {
+        "severity": "ERROR",
+        "field": "policy.stage",
+        "problem": "Polisa oznaczona jako 'sprzedaż' w bazie, podczas gdy notatki wskazują na rezygnację klienta ('klientka na pewno wybrała gdzie indziej').",
+        "suggested_fix": "Zmień status polisy na 'rezygnacja' lub 'archiwum'."
+      }
+    ]
+  },
+  {
+    "row_idx": 148,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 149,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 150,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "notes",
+        "problem": "Data w notatce '26.11.2026' jest w przyszłości względem daty utworzenia polisy (2025).",
+        "suggested_fix": "Zweryfikuj czy rok w notatce nie jest literówką (prawdopodobnie 2025)."
+      }
+    ]
+  },
+  {
+    "row_idx": 151,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 152,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.home_details",
+        "problem": "Brakujące dane techniczne nieruchomości (area_m2, year_built, su) w XLSX.",
+        "suggested_fix": "Uzupełnić dane w systemie, jeśli są dostępne w dokumentacji polisy."
+      }
+    ]
+  },
+  {
+    "row_idx": 153,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 154,
+    "verdict": "ERROR",
+    "issues": [
+      {
+        "severity": "ERROR",
+        "field": "policy",
+        "problem": "Polisa zawiera dwa różne produkty (samochód + dom) w jednym wierszu, co utrudnia poprawne mapowanie.",
+        "suggested_fix": "Rozdzielić na dwa osobne rekordy w bazie danych."
+      }
+    ]
+  },
+  {
+    "row_idx": 155,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.home_details.address",
+        "problem": "Niepełny adres (tylko 'Bojano').",
+        "suggested_fix": "Uzupełnić pełny adres nieruchomości w bazie."
+      }
+    ]
+  },
+  {
+    "row_idx": 156,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 157,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "coOwners",
+        "problem": "Co-owner field contains bank assignment details mixed with person data.",
+        "suggested_fix": "Separate the bank assignment (BNP Paribas) into a dedicated assignment field and keep only Piotr Zuchniarz as the co-owner."
+      }
+    ]
+  },
+  {
+    "row_idx": 158,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 159,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 160,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.auto_details",
+        "problem": "Missing vehicle production year in database.",
+        "suggested_fix": "Verify the production year from the registration document and update the database."
+      }
+    ]
+  },
+  {
+    "row_idx": 161,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 162,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.auto_details",
+        "problem": "Missing technical data (power, AC kind) in database despite being available or implied in context.",
+        "suggested_fix": "Update vehicle technical details in the database."
+      }
+    ]
+  },
+  {
+    "row_idx": 163,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 164,
+    "verdict": "ERROR",
+    "issues": [
+      {
+        "severity": "ERROR",
+        "field": "policy.vehicle_model",
+        "problem": "Vehicle model is missing in database, although it is a standard Volkswagen model.",
+        "suggested_fix": "Manually identify and fill the vehicle model field."
+      },
+      {
+        "severity": "WARN",
+        "field": "policy.auto_details.fuel",
+        "problem": "Fuel type missing in database.",
+        "suggested_fix": "Update fuel type based on vehicle registration data."
+      }
+    ]
+  },
+  {
+    "row_idx": 165,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.auto_details",
+        "problem": "Missing technical data (engine_cc, power, year, fuel) in database.",
+        "suggested_fix": "Complete missing vehicle technical specifications."
+      }
+    ]
+  },
+  {
+    "row_idx": 166,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 167,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "coOwners",
+        "problem": "Klient (Alicja Waczyńska) posiada współubezpieczonego Michała Czarnotę, który może być członkiem rodziny, ale brak danych o relacji.",
+        "suggested_fix": "Zweryfikować czy Michał Czarnota nie powinien być dodany jako powiązany klient w bazie."
+      }
+    ]
+  },
+  {
+    "row_idx": 168,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "coOwners",
+        "problem": "Mariola Salamonik (klient) została dodana jako współubezpieczony do własnej polisy.",
+        "suggested_fix": "Usunąć klienta z listy coOwners, zostawić tylko pozostałych uczestników podróży."
+      }
+    ]
+  },
+  {
+    "row_idx": 169,
+    "verdict": "ERROR",
+    "issues": [
+      {
+        "severity": "ERROR",
+        "field": "notes",
+        "problem": "Notatka wskazuje na rezygnację z polisy (podwójne ubezpieczenie, zakup w PZU), ale polisa w bazie nadal widnieje jako aktywna sprzedaż.",
+        "suggested_fix": "Zmienić status polisy na 'anulowana' lub 'zrezygnowano' zgodnie z notatką."
+      }
+    ]
+  },
+  {
+    "row_idx": 170,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 171,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 172,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.travel_details",
+        "problem": "Missing travel dates and number of persons in DB despite being a travel policy.",
+        "suggested_fix": "Extract date_from, date_to, and persons count from raw data or client interview."
+      }
+    ]
+  },
+  {
+    "row_idx": 173,
+    "verdict": "ERROR",
+    "issues": [
+      {
+        "severity": "ERROR",
+        "field": "notes",
+        "problem": "Identical note content as row 172 suggests a copy-paste error.",
+        "suggested_fix": "Verify if this is a duplicate entry or if the note content is incorrect for Daniel Mikusik."
+      },
+      {
+        "severity": "WARN",
+        "field": "policy.travel_details",
+        "problem": "Missing travel dates and number of persons.",
+        "suggested_fix": "Update travel_details with correct dates and person count."
+      }
+    ]
+  },
+  {
+    "row_idx": 174,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.travel_details",
+        "problem": "Missing persons count in DB.",
+        "suggested_fix": "Update persons count based on the travel policy details."
+      }
+    ]
+  },
+  {
+    "row_idx": 175,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.travel_details",
+        "problem": "Missing persons count in DB (though coOwners are listed).",
+        "suggested_fix": "Set persons count to 4 based on the number of coOwners provided."
+      }
+    ]
+  },
+  {
+    "row_idx": 176,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 177,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "coOwners",
+        "problem": "Name field contains address data (81-005 Gdynia ul. Kcyńska 5/4) which should be separated from the name.",
+        "suggested_fix": "Clean the name field to only include 'Oleh Veredyn'."
+      }
+    ]
+  },
+  {
+    "row_idx": 178,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 179,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.life_details",
+        "problem": "Missing detailed product information for life insurance.",
+        "suggested_fix": "Verify if specific product details or beneficiary information can be retrieved from the client."
+      }
+    ]
+  },
+  {
+    "row_idx": 180,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.vehicle_model",
+        "problem": "Fleet details are aggregated; individual vehicle data (brands, models, plates) is missing.",
+        "suggested_fix": "Request a list of individual vehicles with their respective brands, models, and registration numbers."
+      }
+    ]
+  },
+  {
+    "row_idx": 181,
+    "verdict": "OK",
+    "issues": []
+  },
+  {
+    "row_idx": 182,
+    "verdict": "WARN",
+    "issues": [
+      {
+        "severity": "WARN",
+        "field": "policy.auto_details",
+        "problem": "Missing vehicle production year in database, although it is often extractable from registration date or standard vehicle data.",
+        "suggested_fix": "Verify if the production year can be inferred from the registration date (2022-11-18) or if it needs to be manually updated."
+      }
+    ]
+  }
+]

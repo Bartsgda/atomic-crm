@@ -1,0 +1,4096 @@
+[
+  {
+    "row_idx": 1,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": null,
+      "model": null,
+      "reg": null,
+      "engine_cc": null,
+      "power_km": null,
+      "year": null,
+      "fuel": null,
+      "vehicle_type": "OSOBOWY"
+    },
+    "old_policy": {
+      "insurer": "HDI",
+      "number": null,
+      "type_hint": null
+    },
+    "braki": [
+      "brand",
+      "model",
+      "reg",
+      "engine_cc",
+      "power",
+      "year",
+      "fuel"
+    ],
+    "ai_note": "samochód_G03V - tablica nietypowa (G03V 4 znaki nie pasuje PL), brak marki/modelu/rocznika - sprawdz w UFG"
+  },
+  {
+    "row_idx": 3,
+    "policy_type": "FIRMA",
+    "firma": {
+      "description": "flota 60 pojazdow na 3 rozne firmy",
+      "subType": "FLOTA",
+      "fleet_count": 60
+    },
+    "vehicle": {
+      "brand": "Iveco",
+      "model": "Plandeka 3.5t",
+      "reg": "WGM3815L",
+      "engine_cc": null,
+      "power_km": null,
+      "year": null,
+      "fuel": null,
+      "vehicle_type": "CIEZAROWY"
+    },
+    "braki": [
+      "engine_cc",
+      "power",
+      "year",
+      "fuel",
+      "pozostale_59_pojazdow"
+    ],
+    "ai_note": "Flota 60 pojazdow na 3 firmy - na razie tylko 1 pojazd (Iveco Plandeka WGM3815L konczy sie w sierpniu), reszta floty do dodania po przeslaniu pliku przez klientke"
+  },
+  {
+    "row_idx": 9,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": null,
+      "model": null,
+      "reg": null,
+      "engine_cc": null,
+      "power_km": null,
+      "year": null,
+      "fuel": null,
+      "vehicle_type": "OSOBOWY"
+    },
+    "braki": [
+      "brand",
+      "model",
+      "reg",
+      "engine_cc",
+      "power",
+      "year",
+      "fuel"
+    ],
+    "ai_note": "samochod_? - klientka ubezpiecza 3 auta, brak tablic/marek w XLSX"
+  },
+  {
+    "row_idx": 10,
+    "policy_type": "BOTH",
+    "vehicle": {
+      "brand": "Volvo",
+      "model": "XC60 Inscription AWD",
+      "reg": "GD721YL",
+      "engine_cc": 1968,
+      "power_kw": 140,
+      "power_km": 190,
+      "year": 2017,
+      "fuel": "diesel",
+      "vehicle_type": "OSOBOWY"
+    },
+    "ac_details": {
+      "kind": "serwis",
+      "ass": null,
+      "szyby": false,
+      "opony": false,
+      "extras": []
+    },
+    "old_policy": {
+      "insurer": "PZU",
+      "number": "1098320345",
+      "type_hint": "AC/OC pelne serwisowe (umowa generalna 18737/BUW/AW/2023)"
+    },
+    "braki": []
+  },
+  {
+    "row_idx": 12,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": "Hyundai",
+      "model": "i20 1.2 Classic Plus",
+      "reg": "GWE5636U",
+      "engine_cc": 1288,
+      "power_km": 85,
+      "year": 2017,
+      "fuel": "LPG",
+      "vehicle_type": "OSOBOWY"
+    },
+    "extras": [
+      "NNW",
+      "ASS"
+    ],
+    "braki": []
+  },
+  {
+    "row_idx": 14,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": "Scania",
+      "model": "R450",
+      "reg": "CBY1736A",
+      "engine_cc": 12742,
+      "power_kw": 331,
+      "power_km": 450,
+      "year": 2017,
+      "fuel": "diesel",
+      "vehicle_type": "CIEZAROWY"
+    },
+    "extras": [
+      "NNW"
+    ],
+    "old_policy": {
+      "insurer": "Warta",
+      "number": "920046699330",
+      "type_hint": null
+    },
+    "braki": []
+  },
+  {
+    "row_idx": 17,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": null,
+      "model": null,
+      "reg": null,
+      "engine_cc": null,
+      "power_km": null,
+      "year": null,
+      "fuel": null,
+      "vehicle_type": "OSOBOWY"
+    },
+    "braki": [
+      "brand",
+      "model",
+      "reg",
+      "engine_cc",
+      "power",
+      "year",
+      "fuel"
+    ],
+    "ai_note": "Klient ma wiele pojazdow, jakies konca sie w grudniu - brak konkretnych tablic w XLSX"
+  },
+  {
+    "row_idx": 18,
+    "policy_type": "AC",
+    "vehicle": {
+      "brand": "Ford",
+      "model": "Focus MR'15 RS Ecoboost 2.3",
+      "reg": "GD707NN",
+      "engine_cc": 2290,
+      "power_kw": 257,
+      "power_km": 350,
+      "year": 2017,
+      "fuel": "benzyna",
+      "vehicle_type": "OSOBOWY"
+    },
+    "ac_details": {
+      "kind": "serwis",
+      "ass": null,
+      "szyby": false,
+      "opony": false,
+      "extras": [
+        "dodatki"
+      ]
+    },
+    "ai_note": "Samo AC z dodatkami (OC byl wczesniej u Aliny w HDI z czerwca)"
+  },
+  {
+    "row_idx": 19,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": "CAN-AM Bombardier",
+      "model": "Outlander Max 1000R X-TP",
+      "reg": "GKAL82R",
+      "engine_cc": 976,
+      "power_km": null,
+      "power_kw": null,
+      "year": null,
+      "fuel": "benzyna",
+      "vehicle_type": "QUAD"
+    },
+    "old_policy": {
+      "insurer": "PZU",
+      "number": "1103211399",
+      "type_hint": "wartosc 56730 netto, PIN 4479"
+    },
+    "braki": [
+      "power",
+      "year"
+    ],
+    "ai_note": "Quad, wczesniej rejestracja GA425N"
+  },
+  {
+    "row_idx": 24,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": null,
+      "model": null,
+      "reg": null,
+      "engine_cc": null,
+      "power_km": null,
+      "year": null,
+      "fuel": null,
+      "vehicle_type": "OSOBOWY"
+    },
+    "braki": [
+      "brand",
+      "model",
+      "reg",
+      "engine_cc",
+      "power",
+      "year",
+      "fuel"
+    ],
+    "ai_note": "samochod zony - klient nie pamietal nr rej, konczy sie 24.02.2026"
+  },
+  {
+    "row_idx": 30,
+    "policy_type": "BOTH",
+    "vehicle": {
+      "brand": "Skoda",
+      "model": "Superb",
+      "reg": "GD555XR",
+      "engine_cc": null,
+      "power_km": null,
+      "year": null,
+      "fuel": null,
+      "vehicle_type": "OSOBOWY"
+    },
+    "ac_details": {
+      "kind": "pakiet",
+      "ass": null,
+      "szyby": false,
+      "opony": false,
+      "extras": [
+        "pelen pakiet"
+      ]
+    },
+    "braki": [
+      "engine_cc",
+      "power",
+      "year",
+      "fuel"
+    ],
+    "ai_note": "AC/OC pelen pakiet - brak detali silnika/rocznika w XLSX"
+  },
+  {
+    "row_idx": 32,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": null,
+      "model": null,
+      "reg": null,
+      "engine_cc": null,
+      "power_km": null,
+      "year": null,
+      "fuel": null,
+      "vehicle_type": "OSOBOWY"
+    },
+    "braki": [
+      "brand",
+      "model",
+      "reg",
+      "engine_cc",
+      "power",
+      "year",
+      "fuel"
+    ],
+    "ai_note": "Nowo zakupiony, klient zainteresowany w przyszlym roku - brak danych"
+  },
+  {
+    "row_idx": 33,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": null,
+      "model": null,
+      "reg": null,
+      "engine_cc": null,
+      "power_km": null,
+      "year": null,
+      "fuel": null,
+      "vehicle_type": "OSOBOWY"
+    },
+    "old_policy": {
+      "insurer": "TUZ",
+      "number": null,
+      "type_hint": null
+    },
+    "braki": [
+      "brand",
+      "model",
+      "reg",
+      "engine_cc",
+      "power",
+      "year",
+      "fuel"
+    ],
+    "ai_note": "Klient ma 2 samochody w TUZ - mozna sciagnac dane z TUZ"
+  },
+  {
+    "row_idx": 34,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": null,
+      "model": null,
+      "reg": "GKA7367E",
+      "engine_cc": null,
+      "power_km": null,
+      "year": null,
+      "fuel": null,
+      "vehicle_type": "OSOBOWY"
+    },
+    "old_policy": {
+      "insurer": "Compensa",
+      "number": "119344516/22014",
+      "type_hint": null
+    },
+    "braki": [
+      "brand",
+      "model",
+      "engine_cc",
+      "power",
+      "year",
+      "fuel"
+    ],
+    "ai_note": "Tylko tablica + stara polisa Compensa - sprawdz UFG"
+  },
+  {
+    "row_idx": 35,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": "Mazda",
+      "model": "CX-5",
+      "reg": "GD896HK",
+      "engine_cc": null,
+      "power_km": null,
+      "year": null,
+      "fuel": null,
+      "vehicle_type": "OSOBOWY"
+    },
+    "old_policy": {
+      "insurer": "PZU",
+      "number": "1019190667",
+      "type_hint": null
+    },
+    "braki": [
+      "engine_cc",
+      "power",
+      "year",
+      "fuel"
+    ]
+  },
+  {
+    "row_idx": 38,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": "Volkswagen",
+      "model": "Polo",
+      "reg": "RBR11282",
+      "engine_cc": 1390,
+      "power_km": null,
+      "power_kw": null,
+      "year": 2008,
+      "fuel": null,
+      "vehicle_type": "OSOBOWY"
+    },
+    "old_policy": {
+      "insurer": "HDI",
+      "number": "920052699255",
+      "type_hint": null
+    },
+    "braki": [
+      "power",
+      "fuel"
+    ],
+    "ai_note": "W XLSX rok '2027' to literowka - faktyczna pierwsza rej 2008-03-07"
+  },
+  {
+    "row_idx": 39,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": "Mazda",
+      "model": "CX-5",
+      "reg": "GD896HK",
+      "engine_cc": null,
+      "power_km": null,
+      "year": null,
+      "fuel": null,
+      "vehicle_type": "OSOBOWY"
+    },
+    "braki": [
+      "engine_cc",
+      "power",
+      "year",
+      "fuel"
+    ],
+    "ai_note": "samochod + dom razem - polisa na samochod GD896HK, dom osobno (duplikat row 35? sprawdz)"
+  },
+  {
+    "row_idx": 40,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": null,
+      "model": null,
+      "reg": null,
+      "engine_cc": null,
+      "power_km": null,
+      "year": null,
+      "fuel": null,
+      "vehicle_type": "OSOBOWY"
+    },
+    "braki": [
+      "brand",
+      "model",
+      "reg",
+      "engine_cc",
+      "power",
+      "year",
+      "fuel"
+    ],
+    "ai_note": "Konczy sie ubezpieczenie auta w maju, brak danych - mila Pani"
+  },
+  {
+    "row_idx": 41,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": null,
+      "model": null,
+      "reg": null,
+      "engine_cc": null,
+      "power_km": null,
+      "year": null,
+      "fuel": null,
+      "vehicle_type": "OSOBOWY"
+    },
+    "braki": [
+      "brand",
+      "model",
+      "reg",
+      "engine_cc",
+      "power",
+      "year",
+      "fuel"
+    ],
+    "ai_note": "samochod_? - kontakt od 1 maja, brak danych"
+  },
+  {
+    "row_idx": 42,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": null,
+      "model": null,
+      "reg": null,
+      "engine_cc": null,
+      "power_km": null,
+      "year": null,
+      "fuel": null,
+      "vehicle_type": "OSOBOWY"
+    },
+    "braki": [
+      "brand",
+      "model",
+      "reg",
+      "engine_cc",
+      "power",
+      "year",
+      "fuel"
+    ],
+    "ai_note": "samochod - brak jakichkolwiek danych w XLSX"
+  },
+  {
+    "row_idx": 43,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": null,
+      "model": null,
+      "reg": "GKA66243",
+      "engine_cc": null,
+      "power_km": null,
+      "year": null,
+      "fuel": null,
+      "vehicle_type": "OSOBOWY"
+    },
+    "braki": [
+      "brand",
+      "model",
+      "engine_cc",
+      "power",
+      "year",
+      "fuel"
+    ],
+    "ai_note": "Tylko tablica - sprawdz UFG"
+  },
+  {
+    "row_idx": 44,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": null,
+      "model": null,
+      "reg": "GDA32773",
+      "engine_cc": null,
+      "power_km": null,
+      "year": null,
+      "fuel": null,
+      "vehicle_type": "OSOBOWY"
+    },
+    "braki": [
+      "brand",
+      "model",
+      "engine_cc",
+      "power",
+      "year",
+      "fuel"
+    ],
+    "ai_note": "Tylko tablica - sprawdz UFG"
+  },
+  {
+    "row_idx": 45,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": null,
+      "model": null,
+      "reg": null,
+      "engine_cc": null,
+      "power_km": null,
+      "year": null,
+      "fuel": null,
+      "vehicle_type": "OSOBOWY"
+    },
+    "braki": [
+      "brand",
+      "model",
+      "reg",
+      "engine_cc",
+      "power",
+      "year",
+      "fuel"
+    ],
+    "ai_note": "Klientka ma 2 samochody, konczy sie maj-czerwiec, brak tablic"
+  },
+  {
+    "row_idx": 46,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": "Citroen",
+      "model": "C5",
+      "reg": "GSPW775",
+      "engine_cc": null,
+      "power_km": null,
+      "year": 2009,
+      "fuel": null,
+      "vehicle_type": "OSOBOWY"
+    },
+    "old_policy": {
+      "insurer": "PZU",
+      "number": "1095030994",
+      "type_hint": null
+    },
+    "braki": [
+      "engine_cc",
+      "power",
+      "fuel"
+    ],
+    "ai_note": "Model 'C105-09' w XLSX - prawdopodobnie C5 z 2009"
+  },
+  {
+    "row_idx": 47,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": null,
+      "model": null,
+      "reg": "GWE98928",
+      "engine_cc": null,
+      "power_km": null,
+      "year": null,
+      "fuel": null,
+      "vehicle_type": "OSOBOWY"
+    },
+    "braki": [
+      "brand",
+      "model",
+      "engine_cc",
+      "power",
+      "year",
+      "fuel"
+    ],
+    "ai_note": "Tylko tablica - sprawdz UFG"
+  },
+  {
+    "row_idx": 49,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": null,
+      "model": null,
+      "reg": "G3EF",
+      "engine_cc": null,
+      "power_km": null,
+      "year": null,
+      "fuel": null,
+      "vehicle_type": "OSOBOWY"
+    },
+    "old_policy": {
+      "insurer": "Warta",
+      "number": null,
+      "type_hint": null
+    },
+    "braki": [
+      "brand",
+      "model",
+      "engine_cc",
+      "power",
+      "year",
+      "fuel"
+    ],
+    "ai_note": "Tablica G3EF nietypowa (4 znaki, nie pasuje PL) - sprawdz zapis i UFG"
+  },
+  {
+    "row_idx": 50,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": null,
+      "model": null,
+      "reg": "GD537XX",
+      "engine_cc": null,
+      "power_km": null,
+      "year": null,
+      "fuel": null,
+      "vehicle_type": "OSOBOWY"
+    },
+    "old_policy": {
+      "insurer": "TUZ",
+      "number": null,
+      "type_hint": null
+    },
+    "braki": [
+      "brand",
+      "model",
+      "engine_cc",
+      "power",
+      "year",
+      "fuel"
+    ],
+    "ai_note": "Tylko tablica - sprawdz UFG"
+  },
+  {
+    "row_idx": 51,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": "Peugeot",
+      "model": "408",
+      "reg": "GD7N567",
+      "engine_cc": null,
+      "power_km": null,
+      "year": null,
+      "fuel": null,
+      "vehicle_type": "OSOBOWY"
+    },
+    "braki": [
+      "engine_cc",
+      "power",
+      "year",
+      "fuel"
+    ],
+    "ai_note": "Leasing - wymogi leasingodawcy"
+  },
+  {
+    "row_idx": 52,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": "Yamaha",
+      "model": "Tenere 700 Rally",
+      "reg": "GD73R4",
+      "engine_cc": null,
+      "power_km": null,
+      "year": null,
+      "fuel": "benzyna",
+      "vehicle_type": "MOTOCYKL"
+    },
+    "braki": [
+      "engine_cc",
+      "power",
+      "year"
+    ],
+    "ai_note": "Motocykl nowy - pierwszy rok ubezpieczenia"
+  },
+  {
+    "row_idx": 53,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": "Lexus",
+      "model": "RX 450h Elite 4WD",
+      "reg": "GA388HV",
+      "engine_cc": null,
+      "power_km": null,
+      "year": null,
+      "fuel": "hybryda",
+      "vehicle_type": "OSOBOWY"
+    },
+    "old_policy": {
+      "insurer": "Hestia",
+      "number": "460003479748",
+      "type_hint": null
+    },
+    "braki": [
+      "engine_cc",
+      "power",
+      "year"
+    ]
+  },
+  {
+    "row_idx": 54,
+    "policy_type": "FIRMA",
+    "firma": {
+      "description": "klient T2TESLA i inne (4 pojazdy, moze flota)",
+      "subType": "FLOTA",
+      "fleet_count": 4
+    },
+    "vehicle": {
+      "brand": "Tesla",
+      "model": null,
+      "reg": "T2TESLA",
+      "engine_cc": null,
+      "power_km": null,
+      "year": null,
+      "fuel": "elektryk",
+      "vehicle_type": "OSOBOWY"
+    },
+    "braki": [
+      "model",
+      "power",
+      "year",
+      "pozostale_3_pojazdy"
+    ],
+    "ai_note": "Klient z Osipa, na chwile kontaktu 4 pojazdy, moze wiecej"
+  },
+  {
+    "row_idx": 55,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": "BMW",
+      "model": "R 125 RT",
+      "reg": "GD99J4",
+      "engine_cc": null,
+      "power_km": null,
+      "year": null,
+      "fuel": "benzyna",
+      "vehicle_type": "MOTOCYKL"
+    },
+    "braki": [
+      "engine_cc",
+      "power",
+      "year"
+    ]
+  },
+  {
+    "row_idx": 56,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": "Ford",
+      "model": "Focus",
+      "reg": "GD707NN",
+      "engine_cc": null,
+      "power_km": null,
+      "year": null,
+      "fuel": null,
+      "vehicle_type": "OSOBOWY"
+    },
+    "old_policy": {
+      "insurer": "Allianz",
+      "number": "115-67281364",
+      "type_hint": "samo OC"
+    },
+    "braki": [
+      "engine_cc",
+      "power",
+      "year",
+      "fuel"
+    ]
+  },
+  {
+    "row_idx": 57,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": "Mini",
+      "model": "Countryman",
+      "reg": null,
+      "engine_cc": null,
+      "power_km": null,
+      "year": null,
+      "fuel": null,
+      "vehicle_type": "OSOBOWY"
+    },
+    "braki": [
+      "reg",
+      "engine_cc",
+      "power",
+      "year",
+      "fuel"
+    ],
+    "ai_note": "Nowy pojazd, pierwsza rejestracja koniec maja - poczatek czerwca, brak tablicy"
+  },
+  {
+    "row_idx": 58,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": "Citroen",
+      "model": "C4 Grand Picasso",
+      "reg": "GDA30537",
+      "engine_cc": null,
+      "power_km": null,
+      "year": null,
+      "fuel": "benzyna",
+      "vehicle_type": "OSOBOWY"
+    },
+    "old_policy": {
+      "insurer": "Allianz",
+      "number": null,
+      "type_hint": null
+    },
+    "braki": [
+      "engine_cc",
+      "power",
+      "year"
+    ],
+    "ai_note": "Klient ubezpiecza ten samochod + dom (osobny wiersz)"
+  },
+  {
+    "row_idx": 62,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": "Mazda",
+      "model": "6 SkyDream aut kombi",
+      "reg": "RZ339FT",
+      "engine_cc": 1998,
+      "power_kw": 121,
+      "power_km": 165,
+      "year": 2020,
+      "fuel": null,
+      "vehicle_type": "OSOBOWY"
+    },
+    "old_policy": {
+      "insurer": "Warta",
+      "number": "920043387995",
+      "type_hint": "stara 3635 zl"
+    },
+    "braki": [
+      "fuel"
+    ]
+  },
+  {
+    "row_idx": 66,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": null,
+      "model": null,
+      "reg": "GD321YK",
+      "engine_cc": null,
+      "power_km": null,
+      "year": null,
+      "fuel": null,
+      "vehicle_type": "OSOBOWY"
+    },
+    "braki": [
+      "brand",
+      "model",
+      "engine_cc",
+      "power",
+      "year",
+      "fuel"
+    ],
+    "ai_note": "Tylko tablica - sprawdz UFG; klient od Tomka Olszewskiego, ma zycie u Aliny"
+  },
+  {
+    "row_idx": 68,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": "Sym",
+      "model": "Mio 50",
+      "reg": "GDA1N27",
+      "engine_cc": 50,
+      "power_km": null,
+      "year": null,
+      "fuel": "benzyna",
+      "vehicle_type": "MOTOCYKL"
+    },
+    "old_policy": {
+      "insurer": "PZU",
+      "number": "1013164214",
+      "type_hint": null
+    },
+    "braki": [
+      "power",
+      "year"
+    ],
+    "ai_note": "Skuter Sym Mio 50 - kontakt do Barbara Kobylarz (ubezpieczenie na meza)"
+  },
+  {
+    "row_idx": 69,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": null,
+      "model": null,
+      "reg": "GD196YE",
+      "engine_cc": null,
+      "power_km": null,
+      "year": null,
+      "fuel": null,
+      "vehicle_type": "OSOBOWY"
+    },
+    "old_policy": {
+      "insurer": "Hestia/Link4",
+      "number": "HB202506160925000200",
+      "type_hint": "AC Hestia + OC Link4"
+    },
+    "braki": [
+      "brand",
+      "model",
+      "engine_cc",
+      "power",
+      "year",
+      "fuel"
+    ],
+    "ai_note": "Klientka pozostala u swojej agentki (bledna polisa Link4)"
+  },
+  {
+    "row_idx": 70,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": null,
+      "model": null,
+      "reg": "NE9363H",
+      "engine_cc": null,
+      "power_km": null,
+      "year": null,
+      "fuel": null,
+      "vehicle_type": "OSOBOWY"
+    },
+    "old_policy": {
+      "insurer": "Compensa",
+      "number": null,
+      "type_hint": null
+    },
+    "braki": [
+      "brand",
+      "model",
+      "engine_cc",
+      "power",
+      "year",
+      "fuel"
+    ],
+    "ai_note": "Rezygnacja, zostali w Compensa"
+  },
+  {
+    "row_idx": 71,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": "Volvo",
+      "model": "XC40",
+      "reg": "CWL17222",
+      "engine_cc": null,
+      "power_km": null,
+      "year": 2021,
+      "fuel": null,
+      "vehicle_type": "OSOBOWY"
+    },
+    "old_policy": {
+      "insurer": "Warta",
+      "number": "920043429123",
+      "type_hint": "wznowienie 3559 zl"
+    },
+    "braki": [
+      "engine_cc",
+      "power",
+      "fuel"
+    ]
+  },
+  {
+    "row_idx": 72,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": "Volkswagen",
+      "model": "Touran 2.0 TDI MR'03 Highline",
+      "reg": "GD438WY",
+      "engine_cc": 2000,
+      "power_km": null,
+      "year": 2003,
+      "fuel": "diesel",
+      "vehicle_type": "OSOBOWY"
+    },
+    "old_policy": {
+      "insurer": "Uniqa",
+      "number": "2024-943798680",
+      "type_hint": "580 zl"
+    },
+    "braki": [
+      "power"
+    ],
+    "ai_note": "Pojemnosc szacunkowa z '2.0 TDI'"
+  },
+  {
+    "row_idx": 74,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": "Land Rover",
+      "model": "Freelander II",
+      "reg": "GDA2AP4",
+      "engine_cc": null,
+      "power_km": null,
+      "year": null,
+      "fuel": null,
+      "vehicle_type": "OSOBOWY"
+    },
+    "braki": [
+      "engine_cc",
+      "power",
+      "year",
+      "fuel"
+    ],
+    "ai_note": "Wznowienie (Barbara Kobylarz - ubezpieczenie na meza)"
+  },
+  {
+    "row_idx": 77,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": "Toyota",
+      "model": "RAV4 2.5 Hybrid Black Edition By JBL 4x2",
+      "reg": "GD187YG",
+      "engine_cc": 2500,
+      "power_km": null,
+      "year": null,
+      "fuel": "hybryda",
+      "vehicle_type": "OSOBOWY"
+    },
+    "old_policy": {
+      "insurer": "PZU",
+      "number": "1084248173",
+      "type_hint": "2024"
+    },
+    "braki": [
+      "power",
+      "year"
+    ],
+    "ai_note": "Z opisu '18-21' rocznik wiec 2018-2021; pojemnosc 2.5 z modelu"
+  },
+  {
+    "row_idx": 79,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": null,
+      "model": null,
+      "reg": "GDA25PP",
+      "engine_cc": null,
+      "power_km": null,
+      "year": null,
+      "fuel": null,
+      "vehicle_type": "PRZYCZEPA"
+    },
+    "braki": [
+      "brand",
+      "model",
+      "year"
+    ],
+    "ai_note": "Przyczepa - wznowienie (Barbara Kobylarz)"
+  },
+  {
+    "row_idx": 80,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": "KTM",
+      "model": "690 SMC R",
+      "reg": "GD716Y",
+      "engine_cc": 690,
+      "power_km": null,
+      "year": null,
+      "fuel": "benzyna",
+      "vehicle_type": "MOTOCYKL"
+    },
+    "old_policy": {
+      "insurer": "Hestia",
+      "number": "911041791467",
+      "type_hint": null
+    },
+    "braki": [
+      "power",
+      "year"
+    ]
+  },
+  {
+    "row_idx": 83,
+    "policy_type": "BOTH",
+    "vehicle": {
+      "brand": "Mazda",
+      "model": "CX-5 15-17",
+      "reg": "GD758YK",
+      "engine_cc": null,
+      "power_km": null,
+      "year": null,
+      "fuel": null,
+      "vehicle_type": "OSOBOWY"
+    },
+    "ac_details": {
+      "kind": "serwis",
+      "ass": null,
+      "szyby": false,
+      "opony": false,
+      "extras": []
+    },
+    "old_policy": {
+      "insurer": "Hestia",
+      "number": null,
+      "type_hint": "AC/OC"
+    },
+    "braki": [
+      "engine_cc",
+      "power",
+      "year",
+      "fuel"
+    ],
+    "ai_note": "Rocznik z modelu '15-17' = 2015-2017"
+  },
+  {
+    "row_idx": 84,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": null,
+      "model": null,
+      "reg": "GD075YX",
+      "engine_cc": null,
+      "power_km": null,
+      "year": null,
+      "fuel": null,
+      "vehicle_type": "PRZYCZEPA"
+    },
+    "old_policy": {
+      "insurer": "PZU",
+      "number": "1063564798",
+      "type_hint": null
+    },
+    "braki": [
+      "brand",
+      "model",
+      "year"
+    ],
+    "ai_note": "Przyczepa - polisa zdalna, sprawdz UFG"
+  },
+  {
+    "row_idx": 86,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": "Piaggio",
+      "model": "Vespa",
+      "reg": "GKAE29L",
+      "engine_cc": null,
+      "power_km": null,
+      "year": null,
+      "fuel": "benzyna",
+      "vehicle_type": "MOTOCYKL"
+    },
+    "old_policy": {
+      "insurer": "PZU",
+      "number": "1032457358",
+      "type_hint": null
+    },
+    "braki": [
+      "engine_cc",
+      "power",
+      "year"
+    ]
+  },
+  {
+    "row_idx": 87,
+    "policy_type": "BOTH",
+    "vehicle": {
+      "brand": "Volkswagen",
+      "model": "Caravelle 6.1 2.0 TDI Trendline DSG",
+      "reg": "GKA88830",
+      "engine_cc": 2000,
+      "power_km": null,
+      "power_kw": null,
+      "year": null,
+      "fuel": "diesel",
+      "vehicle_type": "DOSTAWCZY"
+    },
+    "ac_details": {
+      "kind": "kosztorys",
+      "ass": null,
+      "szyby": false,
+      "opony": false,
+      "extras": [
+        "napęd 4x4"
+      ]
+    },
+    "old_policy": {
+      "insurer": "PZU",
+      "number": "1097753829",
+      "type_hint": "umowa generalna 18737/BUW/AW/2023"
+    },
+    "braki": [
+      "power",
+      "year"
+    ]
+  },
+  {
+    "row_idx": 88,
+    "policy_type": "BOTH",
+    "vehicle": {
+      "brand": "Volkswagen",
+      "model": "Crafter",
+      "reg": "GKA84750",
+      "engine_cc": 1968,
+      "power_km": null,
+      "year": 2012,
+      "fuel": "diesel",
+      "vehicle_type": "CIEZAROWY"
+    },
+    "ac_details": {
+      "kind": "kosztorys",
+      "ass": "Standard",
+      "szyby": true,
+      "opony": false,
+      "extras": []
+    },
+    "old_policy": {
+      "insurer": "PZU",
+      "number": "1097753830",
+      "type_hint": "serwis"
+    },
+    "braki": [
+      "power"
+    ]
+  },
+  {
+    "row_idx": 89,
+    "policy_type": "AC",
+    "vehicle": {
+      "brand": "CFMOTO",
+      "model": "CForce 1000 Overland",
+      "reg": "GD86S1",
+      "engine_cc": 962,
+      "power_km": null,
+      "year": 2025,
+      "fuel": "benzyna",
+      "vehicle_type": "QUAD"
+    },
+    "ac_details": {
+      "kind": null,
+      "ass": null,
+      "szyby": false,
+      "opony": false,
+      "extras": []
+    },
+    "braki": [
+      "power",
+      "ac_kind"
+    ],
+    "ai_note": "Nowy pojazd, pierwsze ubezpieczenie. Tablica 'GD86S1' nietypowa (5 znakow) - moze GD86S1X w pelnej formie"
+  },
+  {
+    "row_idx": 91,
+    "policy_type": "BOTH",
+    "vehicle": {
+      "brand": "Volkswagen",
+      "model": "Amarok 3.0 V6 TDI 4MOT Highline AUT",
+      "reg": "GKA3022F",
+      "engine_cc": 2967,
+      "power_km": null,
+      "year": 2017,
+      "fuel": "diesel",
+      "vehicle_type": "CIEZAROWY"
+    },
+    "ac_details": {
+      "kind": "pakiet",
+      "ass": null,
+      "szyby": false,
+      "opony": false,
+      "extras": []
+    },
+    "braki": [
+      "power"
+    ],
+    "ai_note": "Sprowadzany, pierwsza rej w PL 2025"
+  },
+  {
+    "row_idx": 92,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": "Seat",
+      "model": "MII 1.0 Style EU6",
+      "reg": "GD355NY",
+      "engine_cc": 999,
+      "power_km": null,
+      "year": null,
+      "fuel": "benzyna",
+      "vehicle_type": "OSOBOWY"
+    },
+    "old_policy": {
+      "insurer": "Insurance JSC Dallborgg",
+      "number": null,
+      "type_hint": "Life and Health (zagraniczne)"
+    },
+    "braki": [
+      "power",
+      "year"
+    ]
+  },
+  {
+    "row_idx": 93,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": "Fiat",
+      "model": "Ducato 35 MJ Euro 5 (Kempingowy)",
+      "reg": "GD9E700",
+      "engine_cc": null,
+      "power_km": null,
+      "year": null,
+      "fuel": "diesel",
+      "vehicle_type": "DOSTAWCZY"
+    },
+    "old_policy": {
+      "insurer": "Hestia",
+      "number": "911042774251",
+      "type_hint": null
+    },
+    "braki": [
+      "engine_cc",
+      "power",
+      "year"
+    ],
+    "ai_note": "Kemping - pojazd specjalistyczny"
+  },
+  {
+    "row_idx": 94,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": "Skoda",
+      "model": "Fabia II",
+      "reg": "KTA3295E",
+      "engine_cc": null,
+      "power_km": null,
+      "year": null,
+      "fuel": null,
+      "vehicle_type": "OSOBOWY"
+    },
+    "old_policy": {
+      "insurer": "Euro Inc",
+      "number": null,
+      "type_hint": "zagraniczne"
+    },
+    "braki": [
+      "engine_cc",
+      "power",
+      "year",
+      "fuel"
+    ]
+  },
+  {
+    "row_idx": 95,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": "Volkswagen",
+      "model": "Golf VII Variant Kombi",
+      "reg": "GD8J410",
+      "engine_cc": 1598,
+      "power_kw": 85,
+      "power_km": 115,
+      "year": 2018,
+      "fuel": "diesel",
+      "vehicle_type": "OSOBOWY"
+    },
+    "old_policy": {
+      "insurer": "Link4",
+      "number": null,
+      "type_hint": null
+    },
+    "braki": [],
+    "ai_note": "Klient z polecenia od Pawla Popczynskiego"
+  },
+  {
+    "row_idx": 96,
+    "policy_type": "BOTH",
+    "vehicle": {
+      "brand": "Fiat",
+      "model": "Panda 1.1 Fresh",
+      "reg": "WPR4L92",
+      "engine_cc": 1100,
+      "power_km": null,
+      "year": 2005,
+      "fuel": "benzyna",
+      "vehicle_type": "OSOBOWY"
+    },
+    "ac_details": {
+      "kind": "pakiet",
+      "ass": "Standard",
+      "szyby": false,
+      "opony": false,
+      "extras": [
+        "NNW"
+      ]
+    },
+    "old_policy": {
+      "insurer": "PZU",
+      "number": "1097927220",
+      "type_hint": "PIN 4888"
+    },
+    "braki": [
+      "power"
+    ],
+    "ai_note": "Klientka wybrala wznowienie w PZU, kontakt za rok"
+  },
+  {
+    "row_idx": 101,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": "Skoda",
+      "model": "Fabia",
+      "reg": "GWE9310K",
+      "engine_cc": null,
+      "power_km": null,
+      "year": null,
+      "fuel": null,
+      "vehicle_type": "OSOBOWY"
+    },
+    "old_policy": {
+      "insurer": "HDI",
+      "number": "920045293819",
+      "type_hint": "ubieg 610 zl"
+    },
+    "braki": [
+      "engine_cc",
+      "power",
+      "year",
+      "fuel"
+    ]
+  },
+  {
+    "row_idx": 102,
+    "policy_type": "BOTH",
+    "vehicle": {
+      "brand": "Volkswagen",
+      "model": "Transporter T5",
+      "reg": "GKA28168",
+      "engine_cc": 1968,
+      "power_km": 102,
+      "power_kw": 75,
+      "year": 2021,
+      "fuel": "diesel",
+      "vehicle_type": "DOSTAWCZY"
+    },
+    "ac_details": {
+      "kind": "kosztorys",
+      "ass": "Złoty",
+      "szyby": true,
+      "opony": false,
+      "extras": []
+    },
+    "old_policy": {
+      "insurer": "PZU",
+      "number": "1098320364",
+      "type_hint": "samo OC+ASS"
+    },
+    "braki": []
+  },
+  {
+    "row_idx": 103,
+    "policy_type": "BOTH",
+    "vehicle": {
+      "brand": "Porsche",
+      "model": "Macan",
+      "reg": "GA770ME",
+      "engine_cc": 1984,
+      "power_km": null,
+      "year": 2020,
+      "fuel": "benzyna",
+      "vehicle_type": "OSOBOWY"
+    },
+    "ac_details": {
+      "kind": "serwis",
+      "ass": "Złoty+",
+      "szyby": true,
+      "opony": true,
+      "extras": [
+        "NNW"
+      ]
+    },
+    "braki": [
+      "power"
+    ],
+    "ai_note": "Pierwsza rej 20-01-2021"
+  },
+  {
+    "row_idx": 104,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": null,
+      "model": null,
+      "reg": "GD305KR",
+      "engine_cc": null,
+      "power_km": null,
+      "year": null,
+      "fuel": null,
+      "vehicle_type": "OSOBOWY"
+    },
+    "braki": [
+      "brand",
+      "model",
+      "engine_cc",
+      "power",
+      "year",
+      "fuel"
+    ],
+    "ai_note": "Pierwsza polisa, firma Siczek Dawid INSTGAZ regon 523966516 - polecony przez Jowite"
+  },
+  {
+    "row_idx": 105,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": "Skoda",
+      "model": "Octavia III Kombi",
+      "reg": "WI095JW",
+      "engine_cc": 1598,
+      "power_km": null,
+      "year": 2019,
+      "fuel": null,
+      "vehicle_type": "OSOBOWY"
+    },
+    "extras": [
+      "NNW"
+    ],
+    "braki": [
+      "power",
+      "fuel"
+    ],
+    "ai_note": "Klientka dzwonila na telefon Bartka"
+  },
+  {
+    "row_idx": 106,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": "Ford",
+      "model": "Transit Connect",
+      "reg": "GDA17975",
+      "engine_cc": null,
+      "power_km": null,
+      "year": null,
+      "fuel": null,
+      "vehicle_type": "DOSTAWCZY"
+    },
+    "old_policy": {
+      "insurer": "Warta",
+      "number": "920044664151",
+      "type_hint": null
+    },
+    "braki": [
+      "engine_cc",
+      "power",
+      "year",
+      "fuel"
+    ]
+  },
+  {
+    "row_idx": 107,
+    "policy_type": "BOTH",
+    "vehicle": {
+      "brand": "Volkswagen",
+      "model": "Caddy Alltruck (furgon)",
+      "reg": "GKA69777",
+      "engine_cc": 1197,
+      "power_kw": 62,
+      "power_km": 84,
+      "year": 2016,
+      "fuel": null,
+      "vehicle_type": "DOSTAWCZY"
+    },
+    "ac_details": {
+      "kind": "serwis",
+      "ass": "Złoty",
+      "szyby": true,
+      "opony": true,
+      "extras": [
+        "ZK",
+        "Ochrona znizek AC i OC"
+      ],
+      "su_brutto": 38000
+    },
+    "old_policy": {
+      "insurer": "PZU",
+      "number": "1098320365",
+      "type_hint": "pakiet SU 51tys netto +50% VAT"
+    },
+    "braki": [
+      "fuel"
+    ]
+  },
+  {
+    "row_idx": 108,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": "Mazda",
+      "model": "CX-5",
+      "reg": "WI345MF",
+      "engine_cc": null,
+      "power_km": null,
+      "year": 2023,
+      "fuel": "hybryda",
+      "vehicle_type": "OSOBOWY"
+    },
+    "old_policy": {
+      "insurer": "Uniqa",
+      "number": "2802982715",
+      "type_hint": null
+    },
+    "braki": [
+      "engine_cc",
+      "power"
+    ],
+    "ai_note": "Miękka hybryda benzyna"
+  },
+  {
+    "row_idx": 109,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": "Audi",
+      "model": "A6 sedan",
+      "reg": "GDAGY50",
+      "engine_cc": null,
+      "power_km": null,
+      "year": null,
+      "fuel": null,
+      "vehicle_type": "OSOBOWY"
+    },
+    "old_policy": {
+      "insurer": "Link4",
+      "number": null,
+      "type_hint": null
+    },
+    "braki": [
+      "engine_cc",
+      "power",
+      "year",
+      "fuel"
+    ],
+    "ai_note": "Klientka przestala odbierac, data start polisy minela"
+  },
+  {
+    "row_idx": 114,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": "Temared",
+      "model": "8 14B SGV",
+      "reg": "GD4X797",
+      "engine_cc": null,
+      "power_km": null,
+      "year": null,
+      "fuel": null,
+      "vehicle_type": "PRZYCZEPA"
+    },
+    "braki": [
+      "year"
+    ],
+    "ai_note": "Przyczepa Biały Wieszak, pierwsza rejestracja, polisa zdalna"
+  },
+  {
+    "row_idx": 117,
+    "policy_type": "AC",
+    "vehicle": {
+      "brand": "CFMOTO",
+      "model": "CForce 1000 Overland",
+      "reg": "GD86S1",
+      "engine_cc": 962,
+      "power_km": null,
+      "year": 2025,
+      "fuel": "benzyna",
+      "vehicle_type": "QUAD"
+    },
+    "ac_details": {
+      "kind": null,
+      "ass": null,
+      "szyby": false,
+      "opony": false,
+      "extras": []
+    },
+    "braki": [
+      "power"
+    ],
+    "ai_note": "Polisa zastepcza po rekalkulacji w PZU Quad - samo AC w zamian za polise z ktorej klient rezygnowal"
+  },
+  {
+    "row_idx": 120,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": "Volkswagen",
+      "model": "Caddy 2.0 TDI",
+      "reg": "SLUMK91",
+      "engine_cc": 1968,
+      "power_km": null,
+      "year": 2020,
+      "fuel": "diesel",
+      "vehicle_type": "DOSTAWCZY"
+    },
+    "braki": [
+      "power",
+      "reg_format"
+    ],
+    "ai_note": "Tablica SLUMK91 7 znakow ale niestandardowa - sprawdz w UFG; dostawczy do 3.5t, 2 miejsca"
+  },
+  {
+    "row_idx": 121,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": "Volkswagen",
+      "model": "Golf",
+      "reg": "GWE1142V",
+      "engine_cc": 1598,
+      "power_kw": 85,
+      "power_km": 115,
+      "year": 2019,
+      "fuel": "diesel",
+      "vehicle_type": "OSOBOWY"
+    },
+    "old_policy": {
+      "insurer": "Allianz",
+      "number": null,
+      "type_hint": null
+    },
+    "braki": [],
+    "ai_note": "Leasing - oplata 300 zl przy zmianie ubezpieczyciela"
+  },
+  {
+    "row_idx": 122,
+    "policy_type": "BOTH",
+    "vehicle": {
+      "brand": "Dacia",
+      "model": "Duster 1.3 TCE FAP Essential",
+      "reg": "WF0597V",
+      "engine_cc": 1333,
+      "power_km": null,
+      "year": 2020,
+      "fuel": "benzyna",
+      "vehicle_type": "OSOBOWY"
+    },
+    "ac_details": {
+      "kind": "pakiet",
+      "ass": "Standard",
+      "szyby": false,
+      "opony": false,
+      "extras": [
+        "NNW"
+      ]
+    },
+    "old_policy": {
+      "insurer": "PZU",
+      "number": "1074800394",
+      "type_hint": null
+    },
+    "braki": [
+      "power"
+    ],
+    "ai_note": "Tablica WF0597V nietypowa (WF nie jest PL prefiks) - sprawdz"
+  },
+  {
+    "row_idx": 123,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": "Cadillac",
+      "model": "Escalade",
+      "reg": "WPI2792K",
+      "engine_cc": 6200,
+      "power_km": 326,
+      "power_kw": 239,
+      "year": 2015,
+      "fuel": "LPG",
+      "vehicle_type": "OSOBOWY"
+    },
+    "old_policy": {
+      "insurer": "PZU",
+      "number": null,
+      "type_hint": null
+    },
+    "braki": [],
+    "ai_note": "Pierwsza rej w PL 15.10.2020 (USA import), benzyna/LPG, 7 miejsc, 193 tys przebiegu"
+  },
+  {
+    "row_idx": 124,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": "Mercedes-Benz",
+      "model": "CLA 250",
+      "reg": "GKA2014E",
+      "engine_cc": null,
+      "power_km": null,
+      "year": null,
+      "fuel": null,
+      "vehicle_type": "OSOBOWY"
+    },
+    "old_policy": {
+      "insurer": "Uniqa",
+      "number": null,
+      "type_hint": null
+    },
+    "braki": [
+      "engine_cc",
+      "power",
+      "year",
+      "fuel"
+    ],
+    "ai_note": "Klient zrezygnowal - sms"
+  },
+  {
+    "row_idx": 127,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": "Kia",
+      "model": "Cee'd hatchback manual",
+      "reg": "GD519KW",
+      "engine_cc": 1583,
+      "power_kw": 85,
+      "power_km": 115,
+      "year": 2007,
+      "fuel": "diesel",
+      "vehicle_type": "OSOBOWY"
+    },
+    "braki": [],
+    "ai_note": "Nowo kupiony (uzywany), Ania znalazla Aline z ogloszenia"
+  },
+  {
+    "row_idx": 133,
+    "policy_type": "BOTH",
+    "vehicle": {
+      "brand": "Peugeot",
+      "model": "3008 1.6 HDI Crossway Automat",
+      "reg": "WP0997S",
+      "engine_cc": 1600,
+      "power_km": null,
+      "year": 2017,
+      "fuel": "diesel",
+      "vehicle_type": "OSOBOWY"
+    },
+    "ac_details": {
+      "kind": "kosztorys",
+      "ass": "Standard",
+      "szyby": false,
+      "opony": false,
+      "extras": [
+        "NNW"
+      ]
+    },
+    "old_policy": {
+      "insurer": "TUW",
+      "number": null,
+      "type_hint": "blad agenta - nie na to auto"
+    },
+    "braki": [
+      "power"
+    ],
+    "ai_note": "Przebieg 2151 km w XLSX wyglada na bledny (zbyt niski dla 2017)"
+  },
+  {
+    "row_idx": 134,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": "BMW",
+      "model": "X3 xDrive",
+      "reg": "GD8F033",
+      "engine_cc": 1998,
+      "power_km": null,
+      "year": 2022,
+      "fuel": null,
+      "vehicle_type": "OSOBOWY"
+    },
+    "old_policy": {
+      "insurer": "Warta",
+      "number": "920046993860",
+      "type_hint": null
+    },
+    "braki": [
+      "power",
+      "fuel"
+    ],
+    "ai_note": "Mariola nie poinformowala leasingu o zmianie ubezpieczyciela - odstapienie od umowy"
+  },
+  {
+    "row_idx": 136,
+    "policy_type": "BOTH",
+    "vehicle": {
+      "brand": "Ford",
+      "model": "Fiesta 1.2 E4 Silver X Plus",
+      "reg": "WPI5440G",
+      "engine_cc": 1242,
+      "power_km": null,
+      "year": null,
+      "fuel": "benzyna",
+      "vehicle_type": "OSOBOWY"
+    },
+    "ac_details": {
+      "kind": "kosztorys",
+      "ass": null,
+      "szyby": false,
+      "opony": false,
+      "extras": [
+        "pakiet"
+      ]
+    },
+    "braki": [
+      "power",
+      "year"
+    ],
+    "ai_note": "Klient zostal u swojego agenta"
+  },
+  {
+    "row_idx": 141,
+    "policy_type": "BOTH",
+    "vehicle": {
+      "brand": "Toyota",
+      "model": "Avensis Kombi",
+      "reg": "PZ109XY",
+      "engine_cc": 1998,
+      "power_km": null,
+      "year": 2010,
+      "fuel": null,
+      "vehicle_type": "OSOBOWY"
+    },
+    "ac_details": {
+      "kind": null,
+      "ass": "Standard",
+      "szyby": false,
+      "opony": false,
+      "extras": [
+        "NNW",
+        "awaria i wypadek holowanie na cala Polske"
+      ]
+    },
+    "braki": [
+      "power",
+      "fuel",
+      "ac_kind"
+    ]
+  },
+  {
+    "row_idx": 142,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": "DAF",
+      "model": "LF 45.180 G12 EEV",
+      "reg": "NEL13K3",
+      "engine_cc": 4462,
+      "power_km": 180,
+      "year": 2010,
+      "fuel": "diesel",
+      "vehicle_type": "CIEZAROWY"
+    },
+    "old_policy": {
+      "insurer": "PZU",
+      "number": "1113978401",
+      "type_hint": "PIN 0878 (od poprzedniego wlasciciela)"
+    },
+    "braki": [
+      "power_kw"
+    ]
+  },
+  {
+    "row_idx": 143,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": "Opel",
+      "model": "Karl Enjoy",
+      "reg": "GSP59VL",
+      "engine_cc": 999,
+      "power_kw": 55,
+      "power_km": 75,
+      "year": null,
+      "fuel": null,
+      "vehicle_type": "OSOBOWY"
+    },
+    "old_policy": {
+      "insurer": "Warta",
+      "number": "920047886115",
+      "type_hint": null
+    },
+    "braki": [
+      "year",
+      "fuel"
+    ]
+  },
+  {
+    "row_idx": 145,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": "Renault",
+      "model": "Trafic",
+      "reg": "GPUSA19",
+      "engine_cc": 1870,
+      "power_kw": 74,
+      "power_km": 101,
+      "year": 2006,
+      "fuel": "diesel",
+      "vehicle_type": "CIEZAROWY"
+    },
+    "extras": [
+      "ASS"
+    ],
+    "braki": [],
+    "ai_note": "Tomek chce sprzedac w ciagu roku, samo lyse OC, ASS pakietowy najnizszy. Tablica GPUSA19 nietypowa"
+  },
+  {
+    "row_idx": 146,
+    "policy_type": "BOTH",
+    "vehicle": {
+      "brand": "Volkswagen",
+      "model": "Golf VIII 1.5 TSI Life PLUS",
+      "reg": "NO504CS",
+      "engine_cc": null,
+      "power_kw": 110,
+      "power_km": 150,
+      "year": 2024,
+      "fuel": "benzyna",
+      "vehicle_type": "OSOBOWY"
+    },
+    "ac_details": {
+      "kind": "pakiet",
+      "ass": null,
+      "szyby": false,
+      "opony": false,
+      "extras": [
+        "pelen pakiet"
+      ],
+      "su_netto": 90583
+    },
+    "old_policy": {
+      "insurer": "Warta",
+      "number": "912800262379",
+      "type_hint": "wystawiona przez Leasing"
+    },
+    "braki": [
+      "engine_cc"
+    ],
+    "ai_note": "Pierwsza rej 27.11.2024"
+  },
+  {
+    "row_idx": 147,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": null,
+      "model": null,
+      "reg": "GD401WA",
+      "engine_cc": null,
+      "power_km": null,
+      "year": null,
+      "fuel": null,
+      "vehicle_type": "OSOBOWY"
+    },
+    "old_policy": {
+      "insurer": "Link4",
+      "number": "K21697188405",
+      "type_hint": null
+    },
+    "braki": [
+      "brand",
+      "model",
+      "engine_cc",
+      "power",
+      "year",
+      "fuel"
+    ],
+    "ai_note": "Termin minal, klientka pewnie wybrala gdzie indziej"
+  },
+  {
+    "row_idx": 149,
+    "policy_type": "BOTH",
+    "vehicle": {
+      "brand": "Volkswagen",
+      "model": "Caddy Maxi Kombi",
+      "reg": "GD4S329",
+      "engine_cc": 1968,
+      "power_kw": 75,
+      "power_km": 102,
+      "year": 2018,
+      "fuel": "diesel",
+      "vehicle_type": "DOSTAWCZY"
+    },
+    "ac_details": {
+      "kind": "pakiet",
+      "ass": null,
+      "szyby": false,
+      "opony": false,
+      "extras": [
+        "pelen pakiet do leasingu"
+      ]
+    },
+    "old_policy": {
+      "insurer": "PZU",
+      "number": "1102355619",
+      "type_hint": "PIN 1386, umowa generalna 18737/BUW/AW/2023"
+    },
+    "braki": []
+  },
+  {
+    "row_idx": 150,
+    "policy_type": "BOTH",
+    "vehicle": {
+      "brand": "Kia",
+      "model": "Optima MR'19 E6L kombi",
+      "reg": "GA811KR",
+      "engine_cc": 1591,
+      "power_km": null,
+      "year": 2019,
+      "fuel": null,
+      "vehicle_type": "OSOBOWY"
+    },
+    "ac_details": {
+      "kind": "pakiet",
+      "ass": null,
+      "szyby": false,
+      "opony": false,
+      "extras": [
+        "pelen pakiet bez szyb"
+      ]
+    },
+    "old_policy": {
+      "insurer": "Warta",
+      "number": "920047981599",
+      "type_hint": null
+    },
+    "braki": [
+      "power",
+      "fuel"
+    ],
+    "ai_note": "Przebieg 149265 km"
+  },
+  {
+    "row_idx": 151,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": "SAM",
+      "model": "SAM",
+      "reg": "GKATJ79",
+      "engine_cc": null,
+      "power_km": null,
+      "year": 2009,
+      "fuel": null,
+      "vehicle_type": "PRZYCZEPA"
+    },
+    "braki": [
+      "engine_cc",
+      "power",
+      "fuel"
+    ],
+    "ai_note": "Przyczepka samodzialki (SAM model SAM), najtansze OC. Tablica GKATJ79 + 'SAM' w nazwie - sprawdz"
+  },
+  {
+    "row_idx": 154,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": null,
+      "model": null,
+      "reg": null,
+      "engine_cc": null,
+      "power_km": null,
+      "year": null,
+      "fuel": null,
+      "vehicle_type": "OSOBOWY"
+    },
+    "braki": [
+      "brand",
+      "model",
+      "reg",
+      "engine_cc",
+      "power",
+      "year",
+      "fuel"
+    ],
+    "ai_note": "samochod_? dom_? - klient zablokowal nr lub linia zajeta, brak kontaktu; w XLSX 2 produkty (samochod+dom) bez detali"
+  },
+  {
+    "row_idx": 156,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": "MAN",
+      "model": "TGX",
+      "reg": "WGM34796",
+      "engine_cc": 12419,
+      "power_km": null,
+      "year": 2018,
+      "fuel": "diesel",
+      "vehicle_type": "CIEZAROWY"
+    },
+    "old_policy": {
+      "insurer": "Warta",
+      "number": "920048662436",
+      "type_hint": "inny agent"
+    },
+    "braki": [
+      "power"
+    ],
+    "ai_note": "Samo OC, 2 miejsca, pierwsza rej 2018-03-28"
+  },
+  {
+    "row_idx": 158,
+    "policy_type": "BOTH",
+    "vehicle": {
+      "brand": "Audi",
+      "model": "A3 Sportback Quattro Ambiente 1.8 TFSI MR'12 E5 8V",
+      "reg": "GA228JX",
+      "engine_cc": 1800,
+      "power_km": null,
+      "year": 2012,
+      "fuel": "benzyna",
+      "vehicle_type": "OSOBOWY"
+    },
+    "ac_details": {
+      "kind": "kosztorys",
+      "ass": "Złoty",
+      "szyby": false,
+      "opony": false,
+      "extras": [
+        "pelne",
+        "dodatki bez szyb"
+      ]
+    },
+    "old_policy": {
+      "insurer": "Link4",
+      "number": "33216067800",
+      "type_hint": null
+    },
+    "braki": [
+      "power"
+    ]
+  },
+  {
+    "row_idx": 160,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": "Malaguti",
+      "model": "XTM 125",
+      "reg": "PY753W",
+      "engine_cc": 125,
+      "power_km": null,
+      "year": null,
+      "fuel": "benzyna",
+      "vehicle_type": "MOTOCYKL"
+    },
+    "extras": [
+      "NNW",
+      "ASS"
+    ],
+    "braki": [
+      "power",
+      "year"
+    ],
+    "ai_note": "Tablica PY753W nietypowa (5 znakow), maz Magdy z Bialego Wieszka"
+  },
+  {
+    "row_idx": 161,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": "MAN",
+      "model": "TGL",
+      "reg": "EZG24Y7",
+      "engine_cc": 4580,
+      "power_kw": 162,
+      "power_km": 220,
+      "year": 2012,
+      "fuel": "diesel",
+      "vehicle_type": "CIEZAROWY"
+    },
+    "old_policy": {
+      "insurer": "Compensa",
+      "number": "KPC-968011",
+      "type_hint": "stara z poprzedniego wlasciciela"
+    },
+    "braki": [],
+    "ai_note": "Samo łyse OC, DMC 11990 kg, klient kupil pojazd w tym roku - zmiana wlasnosci rozwiazuje stara polise"
+  },
+  {
+    "row_idx": 162,
+    "policy_type": "BOTH",
+    "vehicle": {
+      "brand": "CAN-AM Bombardier",
+      "model": "Outlander 1000R",
+      "reg": "GD72N6",
+      "engine_cc": 976,
+      "power_km": null,
+      "year": 2024,
+      "fuel": "benzyna",
+      "vehicle_type": "QUAD"
+    },
+    "ac_details": {
+      "kind": null,
+      "ass": null,
+      "szyby": false,
+      "opony": false,
+      "extras": []
+    },
+    "old_policy": {
+      "insurer": "PZU",
+      "number": "1104672494/1104836862",
+      "type_hint": "AC PIN 0905 netto 85365zl, OC"
+    },
+    "braki": [
+      "power",
+      "ac_kind"
+    ],
+    "ai_note": "Polisa na min wartosc dla pojazdu, leasing 50tys do splaty"
+  },
+  {
+    "row_idx": 163,
+    "policy_type": "BOTH",
+    "vehicle": {
+      "brand": "Volkswagen",
+      "model": "Caddy Maxi 2.0 TDI",
+      "reg": "GD891VW",
+      "engine_cc": 1968,
+      "power_kw": 75,
+      "power_km": 102,
+      "year": 2020,
+      "fuel": "diesel",
+      "vehicle_type": "CIEZAROWY"
+    },
+    "ac_details": {
+      "kind": "kosztorys",
+      "ass": null,
+      "szyby": true,
+      "opony": false,
+      "extras": [
+        "pakiet"
+      ]
+    },
+    "old_policy": {
+      "insurer": "PZU",
+      "number": "1103211407",
+      "type_hint": "PIN 2264 netto 54848"
+    },
+    "braki": [],
+    "ai_note": "Juz nie ma leasingu"
+  },
+  {
+    "row_idx": 164,
+    "policy_type": "BOTH",
+    "vehicle": {
+      "brand": "Volkswagen",
+      "model": null,
+      "reg": "GKA62206",
+      "engine_cc": 1968,
+      "power_kw": 110,
+      "power_km": 150,
+      "year": 2016,
+      "fuel": null,
+      "vehicle_type": "OSOBOWY"
+    },
+    "ac_details": {
+      "kind": "serwis",
+      "ass": null,
+      "szyby": false,
+      "opony": false,
+      "extras": [
+        "pakiet (nie leasingowy)"
+      ]
+    },
+    "old_policy": {
+      "insurer": "PZU",
+      "number": "1078646610",
+      "type_hint": "PIN 9931"
+    },
+    "braki": [
+      "model",
+      "fuel"
+    ],
+    "ai_note": "3 miejsca - chyba dostawczy ale brak modelu w XLSX"
+  },
+  {
+    "row_idx": 165,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": "Opel",
+      "model": "Meriva",
+      "reg": "GD341SU",
+      "engine_cc": null,
+      "power_km": null,
+      "year": null,
+      "fuel": null,
+      "vehicle_type": "OSOBOWY"
+    },
+    "extras": [
+      "ASS opony",
+      "NNW",
+      "ASS"
+    ],
+    "old_policy": {
+      "insurer": "Uniqa",
+      "number": "2025-2387693621",
+      "type_hint": "907 zl ubiegloroczna"
+    },
+    "braki": [
+      "engine_cc",
+      "power",
+      "year",
+      "fuel"
+    ],
+    "ai_note": "Klientce zalezalo na ASS opony"
+  },
+  {
+    "row_idx": 166,
+    "policy_type": "BOTH",
+    "vehicle": {
+      "brand": "Volkswagen",
+      "model": "Transporter 6.1 TDI",
+      "reg": "GD1M326",
+      "engine_cc": 1968,
+      "power_kw": 110,
+      "power_km": 150,
+      "year": 2023,
+      "fuel": "diesel",
+      "vehicle_type": "DOSTAWCZY"
+    },
+    "ac_details": {
+      "kind": "pakiet",
+      "ass": null,
+      "szyby": true,
+      "opony": false,
+      "extras": [
+        "pakiet do leasingu+szyby"
+      ],
+      "su_netto": 102363
+    },
+    "old_policy": {
+      "insurer": "Allianz",
+      "number": "58061977",
+      "type_hint": null
+    },
+    "braki": [],
+    "ai_note": "Przeb 37600, 3 miejsca, AC serwis"
+  },
+  {
+    "row_idx": 169,
+    "policy_type": "BOTH",
+    "vehicle": {
+      "brand": "Volkswagen",
+      "model": "Amarok 3.0 V6 TDI 4MOT Highline AUT",
+      "reg": "GKA3022F",
+      "engine_cc": 2967,
+      "power_km": null,
+      "year": 2017,
+      "fuel": "diesel",
+      "vehicle_type": "CIEZAROWY"
+    },
+    "ac_details": {
+      "kind": "pakiet",
+      "ass": null,
+      "szyby": false,
+      "opony": false,
+      "extras": []
+    },
+    "braki": [
+      "power"
+    ],
+    "ai_note": "Sprowadzany, pierwsza rej w PL 2025; duplikat row 91? sprawdz"
+  },
+  {
+    "row_idx": 171,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": "Toyota",
+      "model": "Yaris 1.0 Life",
+      "reg": "WN8928L",
+      "engine_cc": 998,
+      "power_km": 70,
+      "year": 2024,
+      "fuel": "benzyna",
+      "vehicle_type": "OSOBOWY"
+    },
+    "extras": [
+      "ASS podstawowy"
+    ],
+    "old_policy": {
+      "insurer": "Allianz",
+      "number": null,
+      "type_hint": null
+    },
+    "braki": [],
+    "ai_note": "Polisa zdalna, klientka raty"
+  },
+  {
+    "row_idx": 182,
+    "policy_type": "OC",
+    "vehicle": {
+      "brand": "Toyota",
+      "model": "Yaris Base hatchback manual",
+      "reg": "CTR36929",
+      "engine_cc": 998,
+      "power_km": 66,
+      "power_kw": 48,
+      "year": null,
+      "fuel": "benzyna",
+      "vehicle_type": "OSOBOWY"
+    },
+    "old_policy": {
+      "insurer": "Warta",
+      "number": "920047444171",
+      "type_hint": null
+    },
+    "braki": [
+      "year"
+    ],
+    "ai_note": "Rejest w PL 2022-11-18 (start_pol z XLSX). Klient sprzedal pojazd 13.11.2025"
+  },
+  {
+    "row_idx": 180,
+    "policy_type": "FIRMA",
+    "firma": {
+      "description": "flota 13 betonomieszarek + 2 prywatne samochody i motor",
+      "subType": "FLOTA",
+      "fleet_count": 16
+    },
+    "vehicle": {
+      "brand": null,
+      "model": "betonomieszarki x13 + 2 osobowe + 1 motor",
+      "reg": null,
+      "engine_cc": null,
+      "power_km": null,
+      "year": null,
+      "fuel": null,
+      "vehicle_type": "CIEZAROWY"
+    },
+    "braki": [
+      "poszczegolne_tablice",
+      "marki_modele_kazdego_pojazdu"
+    ],
+    "ai_note": "Flota mieszana: 13 betoniarek + 2 osobowe + 1 motocykl - brak detali poszczegolnych pojazdow"
+  },
+  {
+    "row_idx": 4,
+    "policy_type": "DOM",
+    "home": {
+      "address": "Bojano ul. Jagiełły 4",
+      "area_m2": null,
+      "type": "DOM",
+      "year_built": null,
+      "su": null,
+      "extras": []
+    },
+    "braki": [
+      "area_m2",
+      "year_built",
+      "su"
+    ],
+    "ai_note": "Brak metrazu/rocznika/SU w XLSX"
+  },
+  {
+    "row_idx": 7,
+    "policy_type": "DOM",
+    "home": {
+      "address": "Banino ul. Księżycowa 35",
+      "area_m2": null,
+      "type": "DOM",
+      "year_built": null,
+      "su": null,
+      "extras": []
+    },
+    "braki": [
+      "area_m2",
+      "year_built",
+      "su"
+    ],
+    "ai_note": "Klient szuka starej polisy"
+  },
+  {
+    "row_idx": 8,
+    "policy_type": "DOM",
+    "home": {
+      "address": "83-032 Pszczółki ul. Rumiankowa 1",
+      "area_m2": null,
+      "type": "DOM",
+      "year_built": null,
+      "su": null,
+      "extras": []
+    },
+    "braki": [
+      "area_m2",
+      "year_built",
+      "su"
+    ]
+  },
+  {
+    "row_idx": 11,
+    "policy_type": "DOM",
+    "home": {
+      "address": "35-506 Rzeszów Myśliwska 1008/1",
+      "area_m2": null,
+      "type": "DOM",
+      "year_built": null,
+      "su": null,
+      "extras": []
+    },
+    "old_policy": {
+      "insurer": "PZU",
+      "number": "1074950357",
+      "type_hint": "PIN 7914"
+    },
+    "braki": [
+      "area_m2",
+      "year_built",
+      "su"
+    ],
+    "ai_note": "Adres w XLSX 'Myśliwska 1008/1' to chyba literowka - klient z Rzeszowa, korespondencyjny inny"
+  },
+  {
+    "row_idx": 16,
+    "policy_type": "DOM",
+    "home": {
+      "address": "02-791 Warszawa ul. Hetmańska 17",
+      "area_m2": null,
+      "type": "DOM",
+      "year_built": null,
+      "su": null,
+      "extras": []
+    },
+    "braki": [
+      "area_m2",
+      "year_built",
+      "su"
+    ]
+  },
+  {
+    "row_idx": 20,
+    "policy_type": "DOM",
+    "home": {
+      "address": "Lniska Perłowa 1A/A",
+      "area_m2": null,
+      "type": "MIESZKANIE",
+      "year_built": null,
+      "su": null,
+      "extras": []
+    },
+    "braki": [
+      "area_m2",
+      "year_built",
+      "su"
+    ],
+    "ai_note": "mieszkanie_ (puste po _) - klient z bazy od Beci, zona chce podpiac"
+  },
+  {
+    "row_idx": 21,
+    "policy_type": "DOM",
+    "home": {
+      "address": "Borkowo ul. Leśna",
+      "area_m2": null,
+      "type": "DOM",
+      "year_built": null,
+      "su": null,
+      "extras": []
+    },
+    "braki": [
+      "area_m2",
+      "year_built",
+      "su",
+      "nr_domu"
+    ],
+    "ai_note": "Brak nr domu w adresie"
+  },
+  {
+    "row_idx": 23,
+    "policy_type": "DOM",
+    "home": {
+      "address": "84-207 Bojano ul. Poległych Żołnierzy 30",
+      "area_m2": null,
+      "type": "DOM",
+      "year_built": null,
+      "su": null,
+      "extras": []
+    },
+    "braki": [
+      "area_m2",
+      "year_built",
+      "su"
+    ]
+  },
+  {
+    "row_idx": 25,
+    "policy_type": "DOM",
+    "home": {
+      "address": "81-181 Gdynia ul. Skrajna 14A",
+      "area_m2": null,
+      "type": "DOM",
+      "year_built": null,
+      "su": null,
+      "extras": []
+    },
+    "braki": [
+      "area_m2",
+      "year_built",
+      "su"
+    ],
+    "ai_note": "Maz Marek Herling - rozmawialam z nim, w ubieg roku ofertowali"
+  },
+  {
+    "row_idx": 26,
+    "policy_type": "DOM",
+    "home": {
+      "address": "80-180 Gdańsk ul. Niepołomicka",
+      "area_m2": null,
+      "type": "MIESZKANIE",
+      "year_built": null,
+      "su": null,
+      "extras": []
+    },
+    "braki": [
+      "area_m2",
+      "year_built",
+      "su",
+      "nr_mieszkania"
+    ],
+    "ai_note": "Brak numeru mieszkania"
+  },
+  {
+    "row_idx": 27,
+    "policy_type": "DOM",
+    "home": {
+      "address": "83-010 Jagatowo ul. Konwaliowa 13",
+      "area_m2": null,
+      "type": "DOM",
+      "year_built": null,
+      "su": null,
+      "extras": []
+    },
+    "braki": [
+      "area_m2",
+      "year_built",
+      "su"
+    ]
+  },
+  {
+    "row_idx": 28,
+    "policy_type": "DOM",
+    "home": {
+      "address": "33-190 Ciężkowice ul. Ks. Jacka Michalika 5A",
+      "area_m2": null,
+      "type": "DOM",
+      "year_built": null,
+      "su": null,
+      "extras": []
+    },
+    "braki": [
+      "area_m2",
+      "year_built",
+      "su"
+    ]
+  },
+  {
+    "row_idx": 29,
+    "policy_type": "DOM",
+    "home": {
+      "address": "Różyny ul. Jaworowa",
+      "area_m2": null,
+      "type": null,
+      "year_built": null,
+      "su": null,
+      "extras": []
+    },
+    "braki": [
+      "type_dom_vs_mieszkanie",
+      "area_m2",
+      "year_built",
+      "su",
+      "nr_domu"
+    ],
+    "ai_note": "XLSX: 'dom? mieszkanie?' - nieruchomosc w stanie otwartym, klient niezdecydowany"
+  },
+  {
+    "row_idx": 31,
+    "policy_type": "DOM",
+    "home": {
+      "address": "Gdańsk Śluza 2",
+      "area_m2": null,
+      "type": null,
+      "year_built": null,
+      "su": null,
+      "extras": []
+    },
+    "braki": [
+      "type_dom_vs_komunikacja",
+      "area_m2",
+      "year_built",
+      "su"
+    ],
+    "ai_note": "XLSX: 'dom? komunikacja?' - klientka Solidu, ubezpieczyla cos w styczniu - jeszcze nie wiadomo czy dom czy auto"
+  },
+  {
+    "row_idx": 36,
+    "policy_type": "DOM",
+    "home": {
+      "address": "80-283 Gdańsk ul. Myśliwska 69B/7",
+      "area_m2": null,
+      "type": "MIESZKANIE",
+      "year_built": null,
+      "su": null,
+      "extras": []
+    },
+    "braki": [
+      "area_m2",
+      "year_built",
+      "su"
+    ]
+  },
+  {
+    "row_idx": 37,
+    "policy_type": "DOM",
+    "home": {
+      "address": "26-008 Bączków ul. Gościniec 4",
+      "area_m2": null,
+      "type": "DOM",
+      "year_built": null,
+      "su": null,
+      "extras": []
+    },
+    "braki": [
+      "area_m2",
+      "year_built",
+      "su"
+    ],
+    "ai_note": "Klient z Osipa"
+  },
+  {
+    "row_idx": 48,
+    "policy_type": "DOM",
+    "home": {
+      "address": "84-207 Bojano ul. Miodowa 3",
+      "area_m2": null,
+      "type": "DOM",
+      "year_built": null,
+      "su": null,
+      "extras": []
+    },
+    "braki": [
+      "area_m2",
+      "year_built",
+      "su"
+    ]
+  },
+  {
+    "row_idx": 60,
+    "policy_type": "DOM",
+    "home": {
+      "address": "83-031 Różany ul. Gdańska 105",
+      "area_m2": null,
+      "type": "DOM",
+      "year_built": null,
+      "su": null,
+      "extras": []
+    },
+    "old_policy": {
+      "insurer": "PZU",
+      "number": "1083306755",
+      "type_hint": null
+    },
+    "braki": [
+      "area_m2",
+      "year_built",
+      "su"
+    ],
+    "ai_note": "Kontakt Barbara Kobylarz - na meza"
+  },
+  {
+    "row_idx": 61,
+    "policy_type": "DOM",
+    "home": {
+      "address": "84-230 Rumia ul. Leszczynowa 10",
+      "area_m2": null,
+      "type": "DOM",
+      "year_built": null,
+      "su": null,
+      "extras": []
+    },
+    "old_policy": {
+      "insurer": "Allianz",
+      "number": null,
+      "type_hint": "bez widocznej skladki"
+    },
+    "braki": [
+      "area_m2",
+      "year_built",
+      "su"
+    ],
+    "ai_note": "Najtaniej PZU 1252 zl"
+  },
+  {
+    "row_idx": 64,
+    "policy_type": "DOM",
+    "home": {
+      "address": "Gdańsk ul. Junony 88",
+      "area_m2": 214,
+      "type": "DOM",
+      "year_built": 2021,
+      "su": null,
+      "extras": [
+        "wolnostojący"
+      ]
+    },
+    "old_policy": {
+      "insurer": "Hestia",
+      "number": "909012145084",
+      "type_hint": "E7"
+    },
+    "braki": [
+      "su"
+    ],
+    "ai_note": "Klient rezygnuje (nie podobaja mu sie 'towarzystwa ubezp')"
+  },
+  {
+    "row_idx": 67,
+    "policy_type": "DOM",
+    "home": {
+      "address": "80-180 Gdańsk ul. Kazimierza Porębskiego 33/1",
+      "area_m2": 53,
+      "type": "MIESZKANIE",
+      "year_built": null,
+      "su": 400000,
+      "extras": []
+    },
+    "old_policy": {
+      "insurer": "PZU",
+      "number": "1062715888",
+      "type_hint": "SU 400 tys"
+    },
+    "braki": [
+      "year_built"
+    ],
+    "ai_note": "Adres koresp inny: Świętokrzyska 51/4"
+  },
+  {
+    "row_idx": 73,
+    "policy_type": "DOM",
+    "home": {
+      "address": "81-228 Gdynia ul. Okrzei 3/18",
+      "area_m2": null,
+      "type": "MIESZKANIE",
+      "year_built": null,
+      "su": null,
+      "extras": []
+    },
+    "braki": [
+      "area_m2",
+      "year_built",
+      "su"
+    ],
+    "ai_note": "Wybrala odnowienie w Link4 (rezygnacja u Aliny)"
+  },
+  {
+    "row_idx": 78,
+    "policy_type": "DOM",
+    "home": {
+      "address": "80-180 Gdańsk ul. Rytelska 25",
+      "area_m2": 120,
+      "type": "DOM",
+      "year_built": 2020,
+      "su": null,
+      "extras": []
+    },
+    "old_policy": {
+      "insurer": "TUZ",
+      "number": "0400076",
+      "type_hint": "HFS"
+    },
+    "braki": [
+      "su"
+    ]
+  },
+  {
+    "row_idx": 81,
+    "policy_type": "DOM",
+    "home": {
+      "address": "96-515 Granice Południowa 33",
+      "area_m2": null,
+      "type": "DOM",
+      "year_built": null,
+      "su": null,
+      "extras": []
+    },
+    "braki": [
+      "area_m2",
+      "year_built",
+      "su"
+    ],
+    "ai_note": "Dowiedziala sie przy okazji samochodu"
+  },
+  {
+    "row_idx": 85,
+    "policy_type": "FIRMA",
+    "firma": {
+      "description": "majatek NZOZ Kłóbka 10 - podmiot leczniczy",
+      "subType": "MIENIE",
+      "fleet_count": null
+    },
+    "home": {
+      "address": "87-840 Lubień Kujawski Kłóbka 10",
+      "type": "MAJATEK",
+      "year_built": null,
+      "area_m2": null,
+      "su": null,
+      "extras": [
+        "NZOZ"
+      ]
+    },
+    "braki": [
+      "area_m2",
+      "year_built",
+      "su"
+    ],
+    "ai_note": "Klient nie mial polisy od kilku lat, NZOZ podmiot leczniczy"
+  },
+  {
+    "row_idx": 90,
+    "policy_type": "DOM",
+    "home": {
+      "address": "Zbychowo ul. Jeziorna 12 (84-206)",
+      "area_m2": null,
+      "type": "DOM",
+      "year_built": null,
+      "su": null,
+      "extras": [
+        "drewniany"
+      ]
+    },
+    "braki": [
+      "area_m2",
+      "year_built",
+      "su"
+    ],
+    "ai_note": "Wybrala TUZ przez wyzsza kwote ubezp, w Link4 dom drewniany mozna ale niska wartosc"
+  },
+  {
+    "row_idx": 97,
+    "policy_type": "DOM",
+    "home": {
+      "address": "51-361 Wilczyce ul. Wesoła 4",
+      "area_m2": null,
+      "type": "MIESZKANIE",
+      "year_built": null,
+      "su": null,
+      "extras": []
+    },
+    "old_policy": {
+      "insurer": "TUZ",
+      "number": null,
+      "type_hint": null
+    },
+    "braki": [
+      "area_m2",
+      "year_built",
+      "su"
+    ],
+    "ai_note": "Mieszkanie_? Dzial wznowien TUZ skontaktowal sie wczesniej"
+  },
+  {
+    "row_idx": 98,
+    "policy_type": "DOM",
+    "home": {
+      "address": "Gdansk ul. Cienista 10/D2",
+      "area_m2": null,
+      "type": "DOM",
+      "year_built": null,
+      "su": null,
+      "extras": []
+    },
+    "braki": [
+      "area_m2",
+      "year_built",
+      "su"
+    ],
+    "ai_note": "Klient nie wie kiedy konczy sie ubezp"
+  },
+  {
+    "row_idx": 99,
+    "policy_type": "DOM",
+    "home": {
+      "address": "80-419 Gdańsk Stanisława Dubois 44",
+      "area_m2": null,
+      "type": "DOM",
+      "year_built": null,
+      "su": null,
+      "extras": []
+    },
+    "old_policy": {
+      "insurer": "PZU",
+      "number": "T1482145792",
+      "type_hint": "wznowienie inny zakres"
+    },
+    "braki": [
+      "area_m2",
+      "year_built",
+      "su"
+    ]
+  },
+  {
+    "row_idx": 100,
+    "policy_type": "DOM",
+    "home": {
+      "address": "Sitno 43",
+      "area_m2": null,
+      "type": "DOM",
+      "year_built": null,
+      "su": null,
+      "extras": []
+    },
+    "braki": [
+      "area_m2",
+      "year_built",
+      "su",
+      "kod_pocztowy"
+    ],
+    "ai_note": "Polisa na 3 lata, konczy sie 2026"
+  },
+  {
+    "row_idx": 115,
+    "policy_type": "FIRMA",
+    "firma": {
+      "description": "majatek firmowy Hotel + OC",
+      "subType": "MIENIE",
+      "fleet_count": null
+    },
+    "home": {
+      "address": "81-225 Gdynia Morska 162A",
+      "type": "MAJATEK",
+      "year_built": null,
+      "area_m2": null,
+      "su": null,
+      "extras": [
+        "Hotel"
+      ]
+    },
+    "old_policy": {
+      "insurer": "PZU",
+      "number": "1098641513",
+      "type_hint": "tegoroczna kalkulacja ~8350"
+    },
+    "braki": [
+      "area_m2",
+      "year_built",
+      "su"
+    ],
+    "ai_note": "Hotel + OC, polisa zdalna oplacona"
+  },
+  {
+    "row_idx": 116,
+    "policy_type": "DOM",
+    "home": {
+      "address": "06-230 Różan Poniatowskiego 24",
+      "area_m2": 240,
+      "type": "DOM",
+      "year_built": 1996,
+      "su": 700000,
+      "extras": [
+        "żelbet",
+        "dachówka"
+      ]
+    },
+    "braki": [],
+    "ai_note": "Wartosc mury i stale elementy ~700k"
+  },
+  {
+    "row_idx": 118,
+    "policy_type": "DOM",
+    "home": {
+      "address": "02-798 Warszawa ul. Wilczy Dół 1/85",
+      "area_m2": null,
+      "type": "MIESZKANIE",
+      "year_built": null,
+      "su": null,
+      "extras": []
+    },
+    "old_policy": {
+      "insurer": "Uniqa",
+      "number": "2860348953",
+      "type_hint": null
+    },
+    "braki": [
+      "area_m2",
+      "year_built",
+      "su"
+    ],
+    "ai_note": "Zniżka 55% specjalna"
+  },
+  {
+    "row_idx": 119,
+    "policy_type": "DOM",
+    "home": {
+      "address": "Żukowo ul. Literacka",
+      "area_m2": null,
+      "type": null,
+      "year_built": null,
+      "su": null,
+      "extras": []
+    },
+    "braki": [
+      "type_dom_vs_mieszkanie",
+      "area_m2",
+      "year_built",
+      "su",
+      "nr_domu"
+    ],
+    "ai_note": "XLSX: 'dom, mieszkanie?' - niepewny typ, kontakt na ofertę umówiony"
+  },
+  {
+    "row_idx": 125,
+    "policy_type": "DOM",
+    "home": {
+      "address": "83-300 Kartuzy ul. Jana Kochanowskiego 3B",
+      "area_m2": null,
+      "type": "DOM",
+      "year_built": null,
+      "su": null,
+      "extras": []
+    },
+    "old_policy": {
+      "insurer": "PZU",
+      "number": "1082747856",
+      "type_hint": null
+    },
+    "braki": [
+      "area_m2",
+      "year_built",
+      "su"
+    ],
+    "ai_note": "Zniżka 50%"
+  },
+  {
+    "row_idx": 126,
+    "policy_type": "DOM",
+    "home": {
+      "address": "84-230 Rumia ul. Dębowa 36/2",
+      "area_m2": null,
+      "type": "DOM",
+      "year_built": null,
+      "su": 650000,
+      "extras": [
+        "ruchomosci 50tys",
+        "OC 100tys"
+      ]
+    },
+    "braki": [
+      "area_m2",
+      "year_built"
+    ],
+    "ai_note": "SU dom 650tys + ruchomosci 50tys + OC 100tys"
+  },
+  {
+    "row_idx": 128,
+    "policy_type": "DOM",
+    "home": {
+      "address": "80-175 Gdańsk ul. Leszczynowa 56b/6",
+      "area_m2": null,
+      "type": "MIESZKANIE",
+      "year_built": null,
+      "su": null,
+      "extras": []
+    },
+    "old_policy": {
+      "insurer": "Interrisk",
+      "number": "DI-K/P 240661",
+      "type_hint": null
+    },
+    "braki": [
+      "area_m2",
+      "year_built",
+      "su"
+    ],
+    "ai_note": "Polisa zdalna, klient sam sie skontaktowal"
+  },
+  {
+    "row_idx": 129,
+    "policy_type": "DOM",
+    "home": {
+      "address": "77-124 Parchowo Parchowski Młyn 354/3",
+      "area_m2": 25,
+      "type": "DOMEK",
+      "year_built": 2015,
+      "su": 100000,
+      "extras": [
+        "ogrodzenie 5tys",
+        "el ruchome 5tys",
+        "OC 100tys"
+      ]
+    },
+    "old_policy": {
+      "insurer": "Compensa",
+      "number": "6748500",
+      "type_hint": null
+    },
+    "braki": [],
+    "ai_note": "Domek letniskowy (mama Hanna Gradziel)"
+  },
+  {
+    "row_idx": 130,
+    "policy_type": "DOM",
+    "home": {
+      "address": "77-124 Parchowo Parchowski Młyn 355/7 D1",
+      "area_m2": 25,
+      "type": "DOMEK",
+      "year_built": 2017,
+      "su": 100000,
+      "extras": [
+        "ogrodzenie 5tys",
+        "el ruchome 5tys"
+      ]
+    },
+    "old_policy": {
+      "insurer": "Compensa",
+      "number": "6748493",
+      "type_hint": "wczesniej domki polaczone bez wyszczegolnienia za 569zl"
+    },
+    "braki": [],
+    "ai_note": "Domek letniskowy D1 (Gradziel)"
+  },
+  {
+    "row_idx": 131,
+    "policy_type": "DOM",
+    "home": {
+      "address": "77-124 Parchowo Parchowski Młyn 355/7 D2",
+      "area_m2": 25,
+      "type": "DOMEK",
+      "year_built": 2017,
+      "su": 100000,
+      "extras": [
+        "ogrodzenie 5tys",
+        "el ruchome 5tys"
+      ]
+    },
+    "old_policy": {
+      "insurer": "Compensa",
+      "number": "6748493",
+      "type_hint": null
+    },
+    "braki": [],
+    "ai_note": "Domek letniskowy D2 (Gradziel)"
+  },
+  {
+    "row_idx": 132,
+    "policy_type": "DOM",
+    "home": {
+      "address": "77-124 Parchowo Parchowski Młyn 355/10",
+      "area_m2": 35,
+      "type": "DOMEK",
+      "year_built": 2023,
+      "su": 200000,
+      "extras": [
+        "ogrodzenie",
+        "sauna 10tys",
+        "el ruchome 10tys",
+        "OC 100tys"
+      ]
+    },
+    "old_policy": {
+      "insurer": "Compensa",
+      "number": "6748583",
+      "type_hint": null
+    },
+    "braki": [],
+    "ai_note": "Domek letniskowy Maciej (Gradziel zalatwiala)"
+  },
+  {
+    "row_idx": 135,
+    "policy_type": "DOM",
+    "home": {
+      "address": "84-230 Rumia Kosynierów 79E/117",
+      "area_m2": null,
+      "type": "MIESZKANIE",
+      "year_built": null,
+      "su": null,
+      "extras": []
+    },
+    "old_policy": {
+      "insurer": "PZU",
+      "number": "1098751325",
+      "type_hint": "PIN 2279"
+    },
+    "braki": [
+      "area_m2",
+      "year_built",
+      "su"
+    ],
+    "ai_note": "Pan Siergiej, polisa zdalna"
+  },
+  {
+    "row_idx": 137,
+    "policy_type": "DOM",
+    "home": {
+      "address": "80-180 Gdańsk ul. Płocka 96",
+      "area_m2": null,
+      "type": "DOM",
+      "year_built": null,
+      "su": null,
+      "extras": []
+    },
+    "old_policy": {
+      "insurer": "PZU",
+      "number": "1087517615",
+      "type_hint": "PIN 5435"
+    },
+    "braki": [
+      "area_m2",
+      "year_built",
+      "su"
+    ],
+    "ai_note": "Z PZU oferta ~1400 (Mariola sprzedala)"
+  },
+  {
+    "row_idx": 138,
+    "policy_type": "DOM",
+    "home": {
+      "address": "80-180 Gdańsk ul. Przemyska 59/3",
+      "area_m2": null,
+      "type": "MIESZKANIE",
+      "year_built": null,
+      "su": null,
+      "extras": []
+    },
+    "braki": [
+      "area_m2",
+      "year_built",
+      "su"
+    ]
+  },
+  {
+    "row_idx": 139,
+    "policy_type": "DOM",
+    "home": {
+      "address": "80-180 Gdańsk ul. Ciechanowska 3B/2",
+      "area_m2": 77.58,
+      "type": "MIESZKANIE",
+      "year_built": 1991,
+      "su": null,
+      "extras": [
+        "parter",
+        "okna antywłamaniowe",
+        "alarm",
+        "piwnica połączona z mieszkaniem"
+      ]
+    },
+    "braki": [
+      "su"
+    ],
+    "ai_note": "Klientka nie miala waznego ubezp, polisa zdalna"
+  },
+  {
+    "row_idx": 144,
+    "policy_type": "DOM",
+    "home": {
+      "address": "-",
+      "area_m2": null,
+      "type": "DOM",
+      "year_built": null,
+      "su": null,
+      "extras": []
+    },
+    "braki": [
+      "adres",
+      "area_m2",
+      "year_built",
+      "su"
+    ],
+    "ai_note": "dom_? bez adresu w XLSX; ubezpiecza dodatkowo cos jeszcze - klient nie odbiera"
+  },
+  {
+    "row_idx": 148,
+    "policy_type": "DOM",
+    "home": {
+      "address": "83-320 Sulęczyno ul. Rydzowa 2",
+      "area_m2": null,
+      "type": "DOM",
+      "year_built": null,
+      "su": null,
+      "extras": []
+    },
+    "old_policy": {
+      "insurer": "Link4",
+      "number": "M33115622801",
+      "type_hint": "drozsze 798zl ze wzgledu na szkode"
+    },
+    "braki": [
+      "area_m2",
+      "year_built",
+      "su"
+    ]
+  },
+  {
+    "row_idx": 152,
+    "policy_type": "DOM",
+    "home": {
+      "address": "81-005 Gdynia ul. Kcyńska 10/52",
+      "area_m2": null,
+      "type": "MIESZKANIE",
+      "year_built": null,
+      "su": null,
+      "extras": [
+        "OC najemcy",
+        "NNW"
+      ]
+    },
+    "braki": [
+      "area_m2",
+      "year_built",
+      "su"
+    ],
+    "ai_note": "OC najemcy + NNW, polecona przez Lukasza Blaszaka"
+  },
+  {
+    "row_idx": 153,
+    "policy_type": "DOM",
+    "home": {
+      "address": "80-180 Gdańsk ul. Płocka 60",
+      "area_m2": 175,
+      "type": "DOM",
+      "year_built": null,
+      "su": 1500000,
+      "extras": [
+        "powódź aneksem"
+      ]
+    },
+    "old_policy": {
+      "insurer": "PZU",
+      "number": "1102454490",
+      "type_hint": "PIN 1231"
+    },
+    "braki": [
+      "year_built"
+    ],
+    "ai_note": "Klient od Marioli Salamonik, aneks powodzi"
+  },
+  {
+    "row_idx": 155,
+    "policy_type": "DOM",
+    "home": {
+      "address": "Bojano",
+      "area_m2": null,
+      "type": "DOM",
+      "year_built": null,
+      "su": null,
+      "extras": []
+    },
+    "braki": [
+      "adres_szczegolowy",
+      "area_m2",
+      "year_built",
+      "su"
+    ],
+    "ai_note": "Tylko 'Bojano' bez ulicy/nr - sprawdz w XLSX"
+  },
+  {
+    "row_idx": 157,
+    "policy_type": "DOM",
+    "home": {
+      "address": "80-180 Borkowo ul. Wierzbowa 14A",
+      "area_m2": null,
+      "type": "DOM",
+      "year_built": null,
+      "su": null,
+      "extras": [
+        "szkoda 2025 - altana spalila sie, dostala 40 tys"
+      ]
+    },
+    "old_policy": {
+      "insurer": "Allianz",
+      "number": "260-88931146",
+      "type_hint": "szkoda 2025"
+    },
+    "braki": [
+      "area_m2",
+      "year_built",
+      "su"
+    ]
+  },
+  {
+    "row_idx": 2,
+    "policy_type": "OC",
+    "vehicle": null,
+    "braki": [
+      "WSZYSTKO - co='?' brak typu polisy"
+    ],
+    "ai_note": "XLSX kolumna 'co' = '?' - brak jakichkolwiek danych, klient nie odbiera od 11-16.06.2025. Trzeba zadzwonic i ustalic"
+  },
+  {
+    "row_idx": 5,
+    "policy_type": "FIRMA",
+    "firma": {
+      "description": "przyczepa ThePhoenixBarber (mobilny barber)",
+      "subType": "MIENIE",
+      "fleet_count": null
+    },
+    "vehicle": {
+      "brand": null,
+      "model": "przyczepa Phoenix Barber",
+      "reg": null,
+      "vehicle_type": "PRZYCZEPA"
+    },
+    "braki": [
+      "reg",
+      "brand",
+      "year"
+    ],
+    "ai_note": "Firma mobilny barber - przyczepa, klient wstrzymal sie ze wzgledu na koszt OC samochodu w leasingu GD187YG; oferta PZU 574 zl SU 50 tys"
+  },
+  {
+    "row_idx": 6,
+    "policy_type": "PODROZ",
+    "travel": {
+      "destination": "Malta",
+      "date_from": "2025-08-30",
+      "date_to": "2025-09-05",
+      "persons": null
+    },
+    "braki": [
+      "persons",
+      "su"
+    ],
+    "ai_note": "Klient ubezpieczyl wyjazd gdzie indziej lub nie pojechal"
+  },
+  {
+    "row_idx": 13,
+    "policy_type": "FIRMA",
+    "firma": {
+      "description": "Deja Vu (firma Justyna Szwejkowska)",
+      "subType": null,
+      "fleet_count": null
+    },
+    "braki": [
+      "subType",
+      "su",
+      "branza"
+    ],
+    "ai_note": "Brak detali firmy w XLSX - zagadac o oferte wczesniejsza + ubezp auta"
+  },
+  {
+    "row_idx": 15,
+    "policy_type": "ZYCIE",
+    "life": {
+      "description": "zycie (puste po _)",
+      "kind": "ZYCIE"
+    },
+    "braki": [
+      "su",
+      "produkt_szczegolowy"
+    ],
+    "ai_note": "XLSX 'zycie_' (puste) - klient chce poznac oferte, badanie potrzeb"
+  },
+  {
+    "row_idx": 22,
+    "policy_type": "FIRMA",
+    "firma": {
+      "description": "mienie firmowe - mury ul. Kościerska 1A (Parkiet Stark)",
+      "subType": "MIENIE",
+      "fleet_count": null
+    },
+    "home": {
+      "address": "Kościerska 1A",
+      "type": "MAJATEK",
+      "extras": [
+        "mury budynkow firmowych",
+        "aneks: PKD firm prowadzacych dzialalnosc w budynkach"
+      ]
+    },
+    "old_policy": {
+      "insurer": "PZU",
+      "number": "1079344806",
+      "type_hint": "PIN 0011"
+    },
+    "braki": [
+      "area_m2",
+      "su"
+    ],
+    "ai_note": "Polisa firmowa mienie Parkiet Stark - papierowy aneks 02.12.2025"
+  },
+  {
+    "row_idx": 59,
+    "policy_type": "FIRMA",
+    "firma": {
+      "description": "Betop By (firma Tetiana Vyval)",
+      "subType": null,
+      "fleet_count": null
+    },
+    "braki": [
+      "subType",
+      "su",
+      "branza",
+      "adres_dzialal"
+    ],
+    "ai_note": "Adres dzialalnosci moze inny niz koresp: Swietokrzyska 28; klientka ociaga sie z decyzja"
+  },
+  {
+    "row_idx": 63,
+    "policy_type": "FIRMA",
+    "firma": {
+      "description": "OC zawodowe dzialalnosci gospodarczej (OCPD)",
+      "subType": "OC_DZIALALNOSCI",
+      "fleet_count": null
+    },
+    "old_policy": {
+      "insurer": "PZU",
+      "number": null,
+      "type_hint": "niepodpisana oferta"
+    },
+    "braki": [
+      "branza",
+      "su"
+    ],
+    "ai_note": "Klient zawarl u innego agenta - blokada akceptacji UW PZU"
+  },
+  {
+    "row_idx": 65,
+    "policy_type": "ZYCIE",
+    "life": {
+      "description": "z mysla o zyciu plus (Warta/Generali)",
+      "kind": "ZYCIE"
+    },
+    "old_policy": {
+      "insurer": "Generali/Warta",
+      "number": null,
+      "type_hint": "moja oferta"
+    },
+    "braki": [
+      "su",
+      "uposazony"
+    ],
+    "ai_note": "Brakuje danych uposazonego, klient chce drukow platnosci papierowo"
+  },
+  {
+    "row_idx": 75,
+    "policy_type": "FIRMA",
+    "firma": {
+      "description": "OC dzialalnosci gospodarczej (nowy NIP 5891208560 - z ojcem)",
+      "subType": "OC_DZIALALNOSCI",
+      "fleet_count": null
+    },
+    "braki": [
+      "branza",
+      "su"
+    ],
+    "ai_note": "Stary NIP 524994868 zawieszony, oferta na nowy NIP wyslana 14.07; polisa zdalna 22.07"
+  },
+  {
+    "row_idx": 76,
+    "policy_type": "ZYCIE",
+    "life": {
+      "description": "NNW szkolne",
+      "kind": "NNW"
+    },
+    "braki": [
+      "dziecko_dane",
+      "su"
+    ],
+    "ai_note": "NNW szkolne - polisa mailem"
+  },
+  {
+    "row_idx": 82,
+    "policy_type": "FIRMA",
+    "firma": {
+      "description": "OC przedsiebiorcy - kosmetolog (botoks, kwas hialuronowy)",
+      "subType": "OC_DZIALALNOSCI",
+      "fleet_count": null
+    },
+    "old_policy": {
+      "insurer": "Hestia",
+      "number": "922001100465",
+      "type_hint": null
+    },
+    "braki": [
+      "su"
+    ],
+    "ai_note": "Kosmetolog z zabiegami - OC szyte na miare"
+  },
+  {
+    "row_idx": 110,
+    "policy_type": "ZYCIE",
+    "life": {
+      "description": "NNW szkolne (Siergiej - dziecko 1)",
+      "kind": "NNW"
+    },
+    "braki": [
+      "dziecko_dane",
+      "su"
+    ],
+    "ai_note": "Czeka na odeslanie podpisanej polisy (Siergiej)"
+  },
+  {
+    "row_idx": 111,
+    "policy_type": "ZYCIE",
+    "life": {
+      "description": "NNW szkolne (Siergiej - dziecko 2)",
+      "kind": "NNW"
+    },
+    "braki": [
+      "dziecko_dane",
+      "su"
+    ],
+    "ai_note": "Drugie dziecko Siergieja"
+  },
+  {
+    "row_idx": 112,
+    "policy_type": "ZYCIE",
+    "life": {
+      "description": "NNW szkolne (Mariola Salamonik)",
+      "kind": "NNW"
+    },
+    "braki": [
+      "dziecko_dane",
+      "su"
+    ],
+    "ai_note": "Polisa zdalna"
+  },
+  {
+    "row_idx": 113,
+    "policy_type": "ZYCIE",
+    "life": {
+      "description": "NNW szkolne (corka Barbary)",
+      "kind": "NNW"
+    },
+    "braki": [
+      "dziecko_dane",
+      "su"
+    ],
+    "ai_note": "Polisa zawarta, kontakt za rok; klientka nie pamieta gdzie miala wczesniej"
+  },
+  {
+    "row_idx": 140,
+    "policy_type": "FIRMA",
+    "firma": {
+      "description": "srodki obrotowe ul. Kościerska 1A (Parkiet Stark)",
+      "subType": "MIENIE",
+      "fleet_count": null
+    },
+    "old_policy": {
+      "insurer": "PZU",
+      "number": "1082747856",
+      "type_hint": "PIN 0259"
+    },
+    "braki": [
+      "su"
+    ],
+    "ai_note": "Branza najwyzszego ryzyka, skladka ~26 tys, polisa papierowa do podpisu"
+  },
+  {
+    "row_idx": 159,
+    "policy_type": "FIRMA",
+    "firma": {
+      "description": "OC zawodowe obowiazkowe NZOZ - podmiot leczniczy Klóbka 10 + koszty prawne 60tys + dobrowolne OC 200tys",
+      "subType": "OC_DZIALALNOSCI",
+      "fleet_count": null
+    },
+    "old_policy": {
+      "insurer": "Allianz",
+      "number": "459-67634905",
+      "type_hint": null
+    },
+    "braki": [
+      "su"
+    ],
+    "ai_note": "Oferta o 400 zl drozsza niz Allianz"
+  },
+  {
+    "row_idx": 167,
+    "policy_type": "PODROZ",
+    "travel": {
+      "destination": null,
+      "date_from": null,
+      "date_to": null,
+      "persons": null
+    },
+    "braki": [
+      "destination",
+      "date_from",
+      "date_to",
+      "persons",
+      "su"
+    ],
+    "ai_note": "XLSX 'podrózne' - brak wszelkich detali (destination/daty/osoby) - sprawdz w notatkach lub zadzwonic"
+  },
+  {
+    "row_idx": 168,
+    "policy_type": "PODROZ",
+    "travel": {
+      "destination": "Grecja Santorini",
+      "date_from": "2025-06-30",
+      "date_to": "2025-07-07",
+      "persons": null
+    },
+    "braki": [
+      "persons",
+      "su"
+    ]
+  },
+  {
+    "row_idx": 170,
+    "policy_type": "PODROZ",
+    "travel": {
+      "destination": "Norwegia",
+      "date_from": "2025-08-19",
+      "date_to": "2025-08-24",
+      "persons": null
+    },
+    "braki": [
+      "persons",
+      "su"
+    ],
+    "ai_note": "Polisa mailem"
+  },
+  {
+    "row_idx": 172,
+    "policy_type": "PODROZ",
+    "travel": {
+      "destination": "Włochy",
+      "date_from": null,
+      "date_to": null,
+      "persons": null
+    },
+    "old_policy": {
+      "insurer": "Generali",
+      "number": null,
+      "type_hint": "wybor klienta"
+    },
+    "braki": [
+      "date_from",
+      "date_to",
+      "persons",
+      "su"
+    ],
+    "ai_note": "Zalezalo na podwyzszeniu ubezp na wypadek smierci - w Generali nie bylo"
+  },
+  {
+    "row_idx": 173,
+    "policy_type": "PODROZ",
+    "travel": {
+      "destination": "Włochy",
+      "date_from": null,
+      "date_to": null,
+      "persons": null
+    },
+    "old_policy": {
+      "insurer": "Generali",
+      "number": null,
+      "type_hint": "wybor klienta"
+    },
+    "braki": [
+      "date_from",
+      "date_to",
+      "persons",
+      "su"
+    ],
+    "ai_note": "Identyczna notatka jak row 172 (kopiowane?) - Daniel Mikusik"
+  },
+  {
+    "row_idx": 174,
+    "policy_type": "PODROZ",
+    "travel": {
+      "destination": "Włochy",
+      "date_from": "2025-10-12",
+      "date_to": "2025-11-02",
+      "persons": null
+    },
+    "old_policy": {
+      "insurer": "Generali",
+      "number": null,
+      "type_hint": "Warta nie mogla potwierdzic tozsamosci"
+    },
+    "braki": [
+      "persons",
+      "su"
+    ],
+    "ai_note": "Kamila Figur - sobota, brak tokenu"
+  },
+  {
+    "row_idx": 175,
+    "policy_type": "PODROZ",
+    "travel": {
+      "destination": "Emiraty Arabskie Dubaj",
+      "date_from": "2025-11-02",
+      "date_to": "2025-11-09",
+      "persons": null
+    },
+    "braki": [
+      "persons",
+      "su"
+    ]
+  },
+  {
+    "row_idx": 176,
+    "policy_type": "PODROZ",
+    "travel": {
+      "destination": "Włochy (kontynuacja)",
+      "date_from": null,
+      "date_to": null,
+      "persons": null
+    },
+    "braki": [
+      "date_from",
+      "date_to",
+      "persons",
+      "su"
+    ],
+    "ai_note": "Kontynuacja - klient przedluzyl pobyt"
+  },
+  {
+    "row_idx": 177,
+    "policy_type": "PODROZ",
+    "travel": {
+      "destination": "Indonezja Dżakarta (podroz sluzbowa)",
+      "date_from": "2025-11-15",
+      "date_to": "2025-11-20",
+      "persons": null
+    },
+    "braki": [
+      "persons",
+      "su"
+    ],
+    "ai_note": "Polisa zdalna podroz sluzbowa"
+  },
+  {
+    "row_idx": 178,
+    "policy_type": "PODROZ",
+    "travel": {
+      "destination": "Włochy (narty)",
+      "date_from": "2025-12-05",
+      "date_to": "2025-12-13",
+      "persons": null,
+      "su": 600000
+    },
+    "braki": [
+      "persons"
+    ],
+    "ai_note": "Wyjazd na narty, SU 600 tys"
+  },
+  {
+    "row_idx": 179,
+    "policy_type": "ZYCIE",
+    "life": {
+      "description": "zycie",
+      "kind": "ZYCIE"
+    },
+    "braki": [
+      "produkt_szczegolowy",
+      "su",
+      "uposazony"
+    ],
+    "ai_note": "XLSX tylko 'zycie' - brak detali"
+  },
+  {
+    "row_idx": 181,
+    "policy_type": "PODROZ",
+    "travel": {
+      "destination": "Hiszpania Palma de Mallorca",
+      "date_from": "2025-07-06",
+      "date_to": "2025-07-16",
+      "persons": null
+    },
+    "old_policy": {
+      "insurer": "Generali/Warta",
+      "number": null,
+      "type_hint": "425 zl"
+    },
+    "braki": [
+      "persons",
+      "su"
+    ],
+    "ai_note": "Rezygnacja - zalezalo na ubezp rezygnacji z podrozy ktorego nie moglam zaproponowac (daty)"
+  }
+]

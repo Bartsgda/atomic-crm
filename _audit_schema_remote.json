@@ -1,0 +1,6330 @@
+[
+  {
+    "table_schema": "public",
+    "table_name": "activity_log",
+    "column_name": "id",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "activity_log",
+    "column_name": "type",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "activity_log",
+    "column_name": "date",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "activity_log",
+    "column_name": "company_id",
+    "data_type": "bigint",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "activity_log",
+    "column_name": "sales_id",
+    "data_type": "bigint",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "activity_log",
+    "column_name": "company",
+    "data_type": "json",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "activity_log",
+    "column_name": "contact",
+    "data_type": "json",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "activity_log",
+    "column_name": "deal",
+    "data_type": "json",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "activity_log",
+    "column_name": "contact_note",
+    "data_type": "json",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "activity_log",
+    "column_name": "deal_note",
+    "data_type": "json",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "checklist_templates",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "checklist_templates",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "checklist_templates",
+    "column_name": "owner_id",
+    "data_type": "bigint",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "checklist_templates",
+    "column_name": "policy_type",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "checklist_templates",
+    "column_name": "items",
+    "data_type": "jsonb",
+    "is_nullable": "YES",
+    "column_default": "'[]'::jsonb"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "checklist_templates",
+    "column_name": "is_default",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": "false"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "checklist_templates",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "companies_summary",
+    "column_name": "id",
+    "data_type": "bigint",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "companies_summary",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "companies_summary",
+    "column_name": "name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "companies_summary",
+    "column_name": "sector",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "companies_summary",
+    "column_name": "size",
+    "data_type": "smallint",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "companies_summary",
+    "column_name": "linkedin_url",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "companies_summary",
+    "column_name": "website",
+    "data_type": "USER-DEFINED",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "companies_summary",
+    "column_name": "phone_number",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "companies_summary",
+    "column_name": "address",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "companies_summary",
+    "column_name": "zipcode",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "companies_summary",
+    "column_name": "city",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "companies_summary",
+    "column_name": "state_abbr",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "companies_summary",
+    "column_name": "sales_id",
+    "data_type": "bigint",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "companies_summary",
+    "column_name": "context_links",
+    "data_type": "json",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "companies_summary",
+    "column_name": "country",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "companies_summary",
+    "column_name": "description",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "companies_summary",
+    "column_name": "revenue",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "companies_summary",
+    "column_name": "tax_identifier",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "companies_summary",
+    "column_name": "logo",
+    "data_type": "jsonb",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "companies_summary",
+    "column_name": "nb_deals",
+    "data_type": "bigint",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "companies_summary",
+    "column_name": "nb_contacts",
+    "data_type": "bigint",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "contacts_summary",
+    "column_name": "id",
+    "data_type": "bigint",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "contacts_summary",
+    "column_name": "first_name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "contacts_summary",
+    "column_name": "last_name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "contacts_summary",
+    "column_name": "gender",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "contacts_summary",
+    "column_name": "title",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "contacts_summary",
+    "column_name": "background",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "contacts_summary",
+    "column_name": "avatar",
+    "data_type": "jsonb",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "contacts_summary",
+    "column_name": "first_seen",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "contacts_summary",
+    "column_name": "last_seen",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "contacts_summary",
+    "column_name": "has_newsletter",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "contacts_summary",
+    "column_name": "status",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "contacts_summary",
+    "column_name": "tags",
+    "data_type": "ARRAY",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "contacts_summary",
+    "column_name": "company_id",
+    "data_type": "bigint",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "contacts_summary",
+    "column_name": "sales_id",
+    "data_type": "bigint",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "contacts_summary",
+    "column_name": "linkedin_url",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "contacts_summary",
+    "column_name": "email_jsonb",
+    "data_type": "jsonb",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "contacts_summary",
+    "column_name": "phone_jsonb",
+    "data_type": "jsonb",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "contacts_summary",
+    "column_name": "email_fts",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "contacts_summary",
+    "column_name": "phone_fts",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "contacts_summary",
+    "column_name": "company_name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "contacts_summary",
+    "column_name": "nb_tasks",
+    "data_type": "bigint",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "init_state",
+    "column_name": "is_initialized",
+    "data_type": "bigint",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_activity_log",
+    "column_name": "id",
+    "data_type": "bigint",
+    "is_nullable": "NO",
+    "column_default": "nextval('insurance_activity_log_id_seq'::regclass)"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_activity_log",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_activity_log",
+    "column_name": "actor_id",
+    "data_type": "bigint",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_activity_log",
+    "column_name": "entity_type",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_activity_log",
+    "column_name": "entity_id",
+    "data_type": "uuid",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_activity_log",
+    "column_name": "action",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_activity_log",
+    "column_name": "diff",
+    "data_type": "jsonb",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_activity_log",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_clients",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_clients",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_clients",
+    "column_name": "owner_id",
+    "data_type": "bigint",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_clients",
+    "column_name": "contact_id",
+    "data_type": "bigint",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_clients",
+    "column_name": "first_name",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_clients",
+    "column_name": "last_name",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_clients",
+    "column_name": "phones",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": "'{}'::text[]"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_clients",
+    "column_name": "emails",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": "'{}'::text[]"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_clients",
+    "column_name": "street",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_clients",
+    "column_name": "city",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_clients",
+    "column_name": "zip_code",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_clients",
+    "column_name": "pesel_encrypted",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_clients",
+    "column_name": "birth_date",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_clients",
+    "column_name": "gender",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_clients",
+    "column_name": "type",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": "'PERSON'::text"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_clients",
+    "column_name": "businesses",
+    "data_type": "jsonb",
+    "is_nullable": "YES",
+    "column_default": "'[]'::jsonb"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_clients",
+    "column_name": "rodo_consent",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": "false"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_clients",
+    "column_name": "rodo_consent_date",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_clients",
+    "column_name": "source",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": "'manual'::text"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_clients",
+    "column_name": "legacy_id",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_clients",
+    "column_name": "is_fake",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": "false"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_clients",
+    "column_name": "tags",
+    "data_type": "ARRAY",
+    "is_nullable": "YES",
+    "column_default": "'{}'::text[]"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_clients",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_clients",
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_clients",
+    "column_name": "v1_original_id",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_feedback",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_feedback",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_feedback",
+    "column_name": "user_id",
+    "data_type": "uuid",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_feedback",
+    "column_name": "user_email",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_feedback",
+    "column_name": "route",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_feedback",
+    "column_name": "element_selector",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_feedback",
+    "column_name": "element_label",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_feedback",
+    "column_name": "message",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_feedback",
+    "column_name": "severity",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": "'info'::text"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_feedback",
+    "column_name": "screenshot_b64",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_feedback",
+    "column_name": "viewport_w",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_feedback",
+    "column_name": "viewport_h",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_feedback",
+    "column_name": "user_agent",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_feedback",
+    "column_name": "status",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": "'open'::text"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_feedback",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_feedback",
+    "column_name": "resolved_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_feedback",
+    "column_name": "page_key",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_feedback",
+    "column_name": "page_label",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_feedback",
+    "column_name": "page_context",
+    "data_type": "jsonb",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_feedback",
+    "column_name": "admin_reply",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_feedback",
+    "column_name": "admin_reply_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_feedback",
+    "column_name": "admin_reply_by",
+    "data_type": "uuid",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_feedback",
+    "column_name": "priority",
+    "data_type": "smallint",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_login_log",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_login_log",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_login_log",
+    "column_name": "logged_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_login_log",
+    "column_name": "user_id",
+    "data_type": "uuid",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_login_log",
+    "column_name": "user_email",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_login_log",
+    "column_name": "sales_id",
+    "data_type": "bigint",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_login_log",
+    "column_name": "snapshot_id",
+    "data_type": "uuid",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_snapshots",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_snapshots",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_snapshots",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_snapshots",
+    "column_name": "created_by",
+    "data_type": "bigint",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_snapshots",
+    "column_name": "note",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_snapshots",
+    "column_name": "stats",
+    "data_type": "jsonb",
+    "is_nullable": "NO",
+    "column_default": "'{}'::jsonb"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_snapshots",
+    "column_name": "data",
+    "data_type": "jsonb",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_trash",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_trash",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_trash",
+    "column_name": "type",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_trash",
+    "column_name": "data",
+    "data_type": "jsonb",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_trash",
+    "column_name": "deleted_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_trash",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurance_trash",
+    "column_name": "v1_original_id",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurers",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurers",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurers",
+    "column_name": "name",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurers",
+    "column_name": "short_name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurers",
+    "column_name": "contact_name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurers",
+    "column_name": "contact_phone",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurers",
+    "column_name": "contact_email",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurers",
+    "column_name": "is_visible",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": "true"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurers",
+    "column_name": "is_custom",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": "false"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurers",
+    "column_name": "is_global",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": "false"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "insurers",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policies",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policies",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policies",
+    "column_name": "client_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policies",
+    "column_name": "owner_id",
+    "data_type": "bigint",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policies",
+    "column_name": "type",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policies",
+    "column_name": "stage",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": "'of_do_zrobienia'::text"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policies",
+    "column_name": "insurer_id",
+    "data_type": "uuid",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policies",
+    "column_name": "insurer_name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policies",
+    "column_name": "policy_number",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policies",
+    "column_name": "premium",
+    "data_type": "numeric",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policies",
+    "column_name": "commission",
+    "data_type": "numeric",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policies",
+    "column_name": "commission_rate",
+    "data_type": "numeric",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policies",
+    "column_name": "payment_status",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": "'UNPAID'::text"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policies",
+    "column_name": "policy_start_date",
+    "data_type": "date",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policies",
+    "column_name": "policy_end_date",
+    "data_type": "date",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policies",
+    "column_name": "next_contact_date",
+    "data_type": "date",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policies",
+    "column_name": "vehicle_brand",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policies",
+    "column_name": "vehicle_model",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policies",
+    "column_name": "vehicle_reg",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policies",
+    "column_name": "auto_details",
+    "data_type": "jsonb",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policies",
+    "column_name": "home_details",
+    "data_type": "jsonb",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policies",
+    "column_name": "life_details",
+    "data_type": "jsonb",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policies",
+    "column_name": "travel_details",
+    "data_type": "jsonb",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policies",
+    "column_name": "firma_details",
+    "data_type": "jsonb",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policies",
+    "column_name": "original_product_string",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policies",
+    "column_name": "ai_note",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policies",
+    "column_name": "checklist",
+    "data_type": "jsonb",
+    "is_nullable": "YES",
+    "column_default": "'{}'::jsonb"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policies",
+    "column_name": "calculations",
+    "data_type": "jsonb",
+    "is_nullable": "YES",
+    "column_default": "'[]'::jsonb"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policies",
+    "column_name": "termination_id",
+    "data_type": "uuid",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policies",
+    "column_name": "source",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": "'manual'::text"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policies",
+    "column_name": "legacy_id",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policies",
+    "column_name": "is_fake",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": "false"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policies",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policies",
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policies",
+    "column_name": "v1_original_id",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policies",
+    "column_name": "v1_original_client_id",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policy_notes",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policy_notes",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policy_notes",
+    "column_name": "client_id",
+    "data_type": "uuid",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policy_notes",
+    "column_name": "linked_policy_ids",
+    "data_type": "ARRAY",
+    "is_nullable": "YES",
+    "column_default": "'{}'::uuid[]"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policy_notes",
+    "column_name": "content",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policy_notes",
+    "column_name": "tag",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policy_notes",
+    "column_name": "reminder_date",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policy_notes",
+    "column_name": "reminder_status",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policy_notes",
+    "column_name": "history",
+    "data_type": "jsonb",
+    "is_nullable": "YES",
+    "column_default": "'[]'::jsonb"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policy_notes",
+    "column_name": "created_by",
+    "data_type": "bigint",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policy_notes",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policy_notes",
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policy_notes",
+    "column_name": "v1_original_id",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policy_notes",
+    "column_name": "v1_original_client_id",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policy_sub_agent_shares",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policy_sub_agent_shares",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policy_sub_agent_shares",
+    "column_name": "policy_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policy_sub_agent_shares",
+    "column_name": "sub_agent_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policy_sub_agent_shares",
+    "column_name": "rate",
+    "data_type": "numeric",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policy_sub_agent_shares",
+    "column_name": "amount",
+    "data_type": "numeric",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policy_sub_agent_shares",
+    "column_name": "note",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "policy_sub_agent_shares",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "sub_agents",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "sub_agents",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "sub_agents",
+    "column_name": "owner_id",
+    "data_type": "bigint",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "sub_agents",
+    "column_name": "name",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "sub_agents",
+    "column_name": "phone",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "sub_agents",
+    "column_name": "email",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "sub_agents",
+    "column_name": "default_rates",
+    "data_type": "jsonb",
+    "is_nullable": "YES",
+    "column_default": "'{}'::jsonb"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "sub_agents",
+    "column_name": "group_prefix",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "sub_agents",
+    "column_name": "notes",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "sub_agents",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "sub_agents",
+    "column_name": "v1_original_id",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "sync_log",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "sync_log",
+    "column_name": "synced_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "sync_log",
+    "column_name": "synced_by",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "sync_log",
+    "column_name": "rows_per_table",
+    "data_type": "jsonb",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "sync_log",
+    "column_name": "duration_ms",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "tenant_keys",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "tenant_keys",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "tenant_keys",
+    "column_name": "user_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "tenant_keys",
+    "column_name": "wrapped_dek",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "tenant_keys",
+    "column_name": "kdf_salt",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "tenant_keys",
+    "column_name": "kdf_iterations",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "600000"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "tenant_keys",
+    "column_name": "kdf_algorithm",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": "'PBKDF2-SHA256'::text"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "tenant_keys",
+    "column_name": "key_version",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "1"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "tenant_keys",
+    "column_name": "is_recovery",
+    "data_type": "boolean",
+    "is_nullable": "NO",
+    "column_default": "false"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "tenant_keys",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "tenant_keys",
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "tenants",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "tenants",
+    "column_name": "name",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "tenants",
+    "column_name": "slug",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "tenants",
+    "column_name": "business_type",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": "'INSURANCE'::text"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "tenants",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "terminations",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "terminations",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "terminations",
+    "column_name": "policy_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "terminations",
+    "column_name": "sent_date",
+    "data_type": "date",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "terminations",
+    "column_name": "document_date",
+    "data_type": "date",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "terminations",
+    "column_name": "pdf_storage_path",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "terminations",
+    "column_name": "article",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": "'28'::text"
+  },
+  {
+    "table_schema": "public",
+    "table_name": "terminations",
+    "column_name": "created_by",
+    "data_type": "bigint",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "public",
+    "table_name": "terminations",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "activity_log",
+    "column_name": "id",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "activity_log",
+    "column_name": "type",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "activity_log",
+    "column_name": "date",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "activity_log",
+    "column_name": "company_id",
+    "data_type": "bigint",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "activity_log",
+    "column_name": "sales_id",
+    "data_type": "bigint",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "activity_log",
+    "column_name": "company",
+    "data_type": "json",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "activity_log",
+    "column_name": "contact",
+    "data_type": "json",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "activity_log",
+    "column_name": "deal",
+    "data_type": "json",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "activity_log",
+    "column_name": "contact_note",
+    "data_type": "json",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "activity_log",
+    "column_name": "deal_note",
+    "data_type": "json",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "checklist_templates",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "checklist_templates",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "checklist_templates",
+    "column_name": "owner_id",
+    "data_type": "bigint",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "checklist_templates",
+    "column_name": "policy_type",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "checklist_templates",
+    "column_name": "items",
+    "data_type": "jsonb",
+    "is_nullable": "YES",
+    "column_default": "'[]'::jsonb"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "checklist_templates",
+    "column_name": "is_default",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": "false"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "checklist_templates",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "client_attribute_history",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "client_attribute_history",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "client_attribute_history",
+    "column_name": "client_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "client_attribute_history",
+    "column_name": "attribute",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "client_attribute_history",
+    "column_name": "value_old",
+    "data_type": "jsonb",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "client_attribute_history",
+    "column_name": "value_new",
+    "data_type": "jsonb",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "client_attribute_history",
+    "column_name": "valid_from",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "client_attribute_history",
+    "column_name": "valid_to",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "client_attribute_history",
+    "column_name": "source",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": "'manual'::text"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "client_attribute_history",
+    "column_name": "changed_by_user_id",
+    "data_type": "uuid",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "client_attribute_history",
+    "column_name": "reason",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "client_attribute_history",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "client_businesses",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "client_businesses",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "client_businesses",
+    "column_name": "client_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "client_businesses",
+    "column_name": "name",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "client_businesses",
+    "column_name": "nip",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "client_businesses",
+    "column_name": "regon",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "client_businesses",
+    "column_name": "krs",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "client_businesses",
+    "column_name": "role",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": "'owner'::text"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "client_businesses",
+    "column_name": "notes",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "client_businesses",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "client_businesses",
+    "column_name": "status",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": "'ACTIVE'::text"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "client_businesses",
+    "column_name": "acquired_at",
+    "data_type": "date",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "client_businesses",
+    "column_name": "disposed_at",
+    "data_type": "date",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "client_businesses",
+    "column_name": "source",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": "'manual'::text"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "client_businesses",
+    "column_name": "legacy_id",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "client_businesses",
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "companies_summary",
+    "column_name": "id",
+    "data_type": "bigint",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "companies_summary",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "companies_summary",
+    "column_name": "name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "companies_summary",
+    "column_name": "sector",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "companies_summary",
+    "column_name": "size",
+    "data_type": "smallint",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "companies_summary",
+    "column_name": "linkedin_url",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "companies_summary",
+    "column_name": "website",
+    "data_type": "USER-DEFINED",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "companies_summary",
+    "column_name": "phone_number",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "companies_summary",
+    "column_name": "address",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "companies_summary",
+    "column_name": "zipcode",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "companies_summary",
+    "column_name": "city",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "companies_summary",
+    "column_name": "state_abbr",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "companies_summary",
+    "column_name": "sales_id",
+    "data_type": "bigint",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "companies_summary",
+    "column_name": "context_links",
+    "data_type": "json",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "companies_summary",
+    "column_name": "country",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "companies_summary",
+    "column_name": "description",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "companies_summary",
+    "column_name": "revenue",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "companies_summary",
+    "column_name": "tax_identifier",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "companies_summary",
+    "column_name": "logo",
+    "data_type": "jsonb",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "companies_summary",
+    "column_name": "nb_deals",
+    "data_type": "bigint",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "companies_summary",
+    "column_name": "nb_contacts",
+    "data_type": "bigint",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "contacts_summary",
+    "column_name": "id",
+    "data_type": "bigint",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "contacts_summary",
+    "column_name": "first_name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "contacts_summary",
+    "column_name": "last_name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "contacts_summary",
+    "column_name": "gender",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "contacts_summary",
+    "column_name": "title",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "contacts_summary",
+    "column_name": "background",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "contacts_summary",
+    "column_name": "avatar",
+    "data_type": "jsonb",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "contacts_summary",
+    "column_name": "first_seen",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "contacts_summary",
+    "column_name": "last_seen",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "contacts_summary",
+    "column_name": "has_newsletter",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "contacts_summary",
+    "column_name": "status",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "contacts_summary",
+    "column_name": "tags",
+    "data_type": "ARRAY",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "contacts_summary",
+    "column_name": "company_id",
+    "data_type": "bigint",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "contacts_summary",
+    "column_name": "sales_id",
+    "data_type": "bigint",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "contacts_summary",
+    "column_name": "linkedin_url",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "contacts_summary",
+    "column_name": "email_jsonb",
+    "data_type": "jsonb",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "contacts_summary",
+    "column_name": "phone_jsonb",
+    "data_type": "jsonb",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "contacts_summary",
+    "column_name": "email_fts",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "contacts_summary",
+    "column_name": "phone_fts",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "contacts_summary",
+    "column_name": "company_name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "contacts_summary",
+    "column_name": "nb_tasks",
+    "data_type": "bigint",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "flag_resolutions",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "flag_resolutions",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "flag_resolutions",
+    "column_name": "target_type",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "flag_resolutions",
+    "column_name": "target_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "flag_resolutions",
+    "column_name": "flag_type",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "flag_resolutions",
+    "column_name": "resolved_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "flag_resolutions",
+    "column_name": "resolved_by_user_id",
+    "data_type": "uuid",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "flag_resolutions",
+    "column_name": "dismissed_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "flag_resolutions",
+    "column_name": "dismiss_reason",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "flag_resolutions",
+    "column_name": "dismissed_by_user_id",
+    "data_type": "uuid",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "flag_resolutions",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "flag_resolutions",
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "homes",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "homes",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "homes",
+    "column_name": "client_id",
+    "data_type": "uuid",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "homes",
+    "column_name": "address_normalized",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "homes",
+    "column_name": "address_raw",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "homes",
+    "column_name": "city",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "homes",
+    "column_name": "zip_code",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "homes",
+    "column_name": "home_type",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "homes",
+    "column_name": "area_m2",
+    "data_type": "numeric",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "homes",
+    "column_name": "construction_year",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "homes",
+    "column_name": "has_mortgage",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": "false"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "homes",
+    "column_name": "mortgage_bank",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "homes",
+    "column_name": "notes",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "homes",
+    "column_name": "status",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": "'ACTIVE'::text"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "homes",
+    "column_name": "acquired_at",
+    "data_type": "date",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "homes",
+    "column_name": "disposed_at",
+    "data_type": "date",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "homes",
+    "column_name": "source",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": "'manual'::text"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "homes",
+    "column_name": "legacy_id",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "homes",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "homes",
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "init_state",
+    "column_name": "is_initialized",
+    "data_type": "bigint",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_activity_log",
+    "column_name": "id",
+    "data_type": "bigint",
+    "is_nullable": "NO",
+    "column_default": "nextval('test.insurance_activity_log_id_seq'::regclass)"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_activity_log",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_activity_log",
+    "column_name": "actor_id",
+    "data_type": "bigint",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_activity_log",
+    "column_name": "entity_type",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_activity_log",
+    "column_name": "entity_id",
+    "data_type": "uuid",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_activity_log",
+    "column_name": "action",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_activity_log",
+    "column_name": "diff",
+    "data_type": "jsonb",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_activity_log",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_clients",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_clients",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_clients",
+    "column_name": "owner_id",
+    "data_type": "bigint",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_clients",
+    "column_name": "contact_id",
+    "data_type": "bigint",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_clients",
+    "column_name": "first_name",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_clients",
+    "column_name": "last_name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_clients",
+    "column_name": "phones",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_clients",
+    "column_name": "emails",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": "'{}'::text[]"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_clients",
+    "column_name": "street",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_clients",
+    "column_name": "city",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_clients",
+    "column_name": "zip_code",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_clients",
+    "column_name": "pesel_encrypted",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_clients",
+    "column_name": "birth_date",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_clients",
+    "column_name": "gender",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_clients",
+    "column_name": "type",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": "'PERSON'::text"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_clients",
+    "column_name": "businesses",
+    "data_type": "jsonb",
+    "is_nullable": "YES",
+    "column_default": "'[]'::jsonb"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_clients",
+    "column_name": "rodo_consent",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": "false"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_clients",
+    "column_name": "rodo_consent_date",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_clients",
+    "column_name": "source",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": "'manual'::text"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_clients",
+    "column_name": "legacy_id",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_clients",
+    "column_name": "is_fake",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": "false"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_clients",
+    "column_name": "tags",
+    "data_type": "ARRAY",
+    "is_nullable": "YES",
+    "column_default": "'{}'::text[]"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_clients",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_clients",
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_clients",
+    "column_name": "v1_original_id",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_feedback",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_feedback",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_feedback",
+    "column_name": "user_id",
+    "data_type": "uuid",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_feedback",
+    "column_name": "user_email",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_feedback",
+    "column_name": "route",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_feedback",
+    "column_name": "element_selector",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_feedback",
+    "column_name": "element_label",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_feedback",
+    "column_name": "message",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_feedback",
+    "column_name": "severity",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": "'info'::text"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_feedback",
+    "column_name": "screenshot_b64",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_feedback",
+    "column_name": "viewport_w",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_feedback",
+    "column_name": "viewport_h",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_feedback",
+    "column_name": "user_agent",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_feedback",
+    "column_name": "status",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": "'open'::text"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_feedback",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_feedback",
+    "column_name": "resolved_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_feedback",
+    "column_name": "admin_reply",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_feedback",
+    "column_name": "admin_reply_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_feedback",
+    "column_name": "admin_reply_by",
+    "data_type": "uuid",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_login_log",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_login_log",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_login_log",
+    "column_name": "logged_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_login_log",
+    "column_name": "user_id",
+    "data_type": "uuid",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_login_log",
+    "column_name": "user_email",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_login_log",
+    "column_name": "sales_id",
+    "data_type": "bigint",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_login_log",
+    "column_name": "snapshot_id",
+    "data_type": "uuid",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_snapshots",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_snapshots",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_snapshots",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_snapshots",
+    "column_name": "created_by",
+    "data_type": "bigint",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_snapshots",
+    "column_name": "note",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_snapshots",
+    "column_name": "stats",
+    "data_type": "jsonb",
+    "is_nullable": "NO",
+    "column_default": "'{}'::jsonb"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_snapshots",
+    "column_name": "data",
+    "data_type": "jsonb",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_trash",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_trash",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_trash",
+    "column_name": "type",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_trash",
+    "column_name": "data",
+    "data_type": "jsonb",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_trash",
+    "column_name": "deleted_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurance_trash",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insured_persons",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insured_persons",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insured_persons",
+    "column_name": "policy_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insured_persons",
+    "column_name": "relation",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": "'ubezpieczony'::text"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insured_persons",
+    "column_name": "first_name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insured_persons",
+    "column_name": "last_name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insured_persons",
+    "column_name": "pesel_encrypted",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insured_persons",
+    "column_name": "birth_date",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insured_persons",
+    "column_name": "nip",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insured_persons",
+    "column_name": "email",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insured_persons",
+    "column_name": "phone",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insured_persons",
+    "column_name": "notes",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insured_persons",
+    "column_name": "ai_extracted",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": "false"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insured_persons",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurers",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurers",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurers",
+    "column_name": "name",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurers",
+    "column_name": "short_name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurers",
+    "column_name": "contact_name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurers",
+    "column_name": "contact_phone",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurers",
+    "column_name": "contact_email",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurers",
+    "column_name": "is_visible",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": "true"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurers",
+    "column_name": "is_custom",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": "false"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurers",
+    "column_name": "is_global",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": "false"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "insurers",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policies",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policies",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policies",
+    "column_name": "client_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policies",
+    "column_name": "owner_id",
+    "data_type": "bigint",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policies",
+    "column_name": "type",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policies",
+    "column_name": "stage",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": "'of_do_zrobienia'::text"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policies",
+    "column_name": "insurer_id",
+    "data_type": "uuid",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policies",
+    "column_name": "insurer_name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policies",
+    "column_name": "policy_number",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policies",
+    "column_name": "premium",
+    "data_type": "numeric",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policies",
+    "column_name": "commission",
+    "data_type": "numeric",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policies",
+    "column_name": "commission_rate",
+    "data_type": "numeric",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policies",
+    "column_name": "payment_status",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": "'UNPAID'::text"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policies",
+    "column_name": "policy_start_date",
+    "data_type": "date",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policies",
+    "column_name": "policy_end_date",
+    "data_type": "date",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policies",
+    "column_name": "next_contact_date",
+    "data_type": "date",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policies",
+    "column_name": "vehicle_brand",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policies",
+    "column_name": "vehicle_model",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policies",
+    "column_name": "vehicle_reg",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policies",
+    "column_name": "auto_details",
+    "data_type": "jsonb",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policies",
+    "column_name": "home_details",
+    "data_type": "jsonb",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policies",
+    "column_name": "life_details",
+    "data_type": "jsonb",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policies",
+    "column_name": "travel_details",
+    "data_type": "jsonb",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policies",
+    "column_name": "firma_details",
+    "data_type": "jsonb",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policies",
+    "column_name": "original_product_string",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policies",
+    "column_name": "ai_note",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policies",
+    "column_name": "checklist",
+    "data_type": "jsonb",
+    "is_nullable": "YES",
+    "column_default": "'{}'::jsonb"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policies",
+    "column_name": "calculations",
+    "data_type": "jsonb",
+    "is_nullable": "YES",
+    "column_default": "'[]'::jsonb"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policies",
+    "column_name": "termination_id",
+    "data_type": "uuid",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policies",
+    "column_name": "source",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": "'manual'::text"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policies",
+    "column_name": "legacy_id",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policies",
+    "column_name": "is_fake",
+    "data_type": "boolean",
+    "is_nullable": "YES",
+    "column_default": "false"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policies",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policies",
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policies",
+    "column_name": "v1_original_id",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policies",
+    "column_name": "v1_original_client_id",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policies",
+    "column_name": "vehicle_id",
+    "data_type": "uuid",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policies",
+    "column_name": "renewal_of_policy_id",
+    "data_type": "uuid",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policies",
+    "column_name": "referred_by_name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policies",
+    "column_name": "referred_by_client_id",
+    "data_type": "uuid",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policies",
+    "column_name": "asset_kind",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policies",
+    "column_name": "asset_id",
+    "data_type": "uuid",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policies",
+    "column_name": "previous_policy_id",
+    "data_type": "uuid",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policies",
+    "column_name": "version_number",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "1"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policies",
+    "column_name": "superseded_by_policy_id",
+    "data_type": "uuid",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policies",
+    "column_name": "superseded_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policies",
+    "column_name": "supersede_reason",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policy_note_links",
+    "column_name": "note_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policy_note_links",
+    "column_name": "policy_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policy_notes",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policy_notes",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policy_notes",
+    "column_name": "client_id",
+    "data_type": "uuid",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policy_notes",
+    "column_name": "linked_policy_ids",
+    "data_type": "ARRAY",
+    "is_nullable": "YES",
+    "column_default": "'{}'::uuid[]"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policy_notes",
+    "column_name": "content",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policy_notes",
+    "column_name": "tag",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policy_notes",
+    "column_name": "reminder_date",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policy_notes",
+    "column_name": "reminder_status",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policy_notes",
+    "column_name": "history",
+    "data_type": "jsonb",
+    "is_nullable": "YES",
+    "column_default": "'[]'::jsonb"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policy_notes",
+    "column_name": "created_by",
+    "data_type": "bigint",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policy_notes",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policy_notes",
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policy_notes",
+    "column_name": "v1_original_id",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policy_notes",
+    "column_name": "legacy_id",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policy_sub_agent_shares",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policy_sub_agent_shares",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policy_sub_agent_shares",
+    "column_name": "policy_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policy_sub_agent_shares",
+    "column_name": "sub_agent_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policy_sub_agent_shares",
+    "column_name": "rate",
+    "data_type": "numeric",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policy_sub_agent_shares",
+    "column_name": "amount",
+    "data_type": "numeric",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policy_sub_agent_shares",
+    "column_name": "note",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policy_sub_agent_shares",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policy_terminations",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policy_terminations",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policy_terminations",
+    "column_name": "new_policy_id",
+    "data_type": "uuid",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policy_terminations",
+    "column_name": "old_policy_id",
+    "data_type": "uuid",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policy_terminations",
+    "column_name": "old_insurer_id",
+    "data_type": "uuid",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policy_terminations",
+    "column_name": "old_insurer_name",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policy_terminations",
+    "column_name": "old_policy_number",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policy_terminations",
+    "column_name": "old_policy_end_date",
+    "data_type": "date",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policy_terminations",
+    "column_name": "status",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": "'DRAFT'::text"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policy_terminations",
+    "column_name": "termination_basis",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policy_terminations",
+    "column_name": "sent_at",
+    "data_type": "date",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policy_terminations",
+    "column_name": "registered_at",
+    "data_type": "date",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policy_terminations",
+    "column_name": "confirmed_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policy_terminations",
+    "column_name": "confirmed_by_user_id",
+    "data_type": "uuid",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policy_terminations",
+    "column_name": "source_note_id",
+    "data_type": "uuid",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policy_terminations",
+    "column_name": "ai_extracted",
+    "data_type": "boolean",
+    "is_nullable": "NO",
+    "column_default": "false"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policy_terminations",
+    "column_name": "ai_note",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policy_terminations",
+    "column_name": "notes",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policy_terminations",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "policy_terminations",
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_01",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_01",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_01",
+    "column_name": "payload",
+    "data_type": "jsonb",
+    "is_nullable": "NO",
+    "column_default": "'{}'::jsonb"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_01",
+    "column_name": "slot_purpose",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_01",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_01",
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_02",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_02",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_02",
+    "column_name": "payload",
+    "data_type": "jsonb",
+    "is_nullable": "NO",
+    "column_default": "'{}'::jsonb"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_02",
+    "column_name": "slot_purpose",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_02",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_02",
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_03",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_03",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_03",
+    "column_name": "payload",
+    "data_type": "jsonb",
+    "is_nullable": "NO",
+    "column_default": "'{}'::jsonb"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_03",
+    "column_name": "slot_purpose",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_03",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_03",
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_04",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_04",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_04",
+    "column_name": "payload",
+    "data_type": "jsonb",
+    "is_nullable": "NO",
+    "column_default": "'{}'::jsonb"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_04",
+    "column_name": "slot_purpose",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_04",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_04",
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_05",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_05",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_05",
+    "column_name": "payload",
+    "data_type": "jsonb",
+    "is_nullable": "NO",
+    "column_default": "'{}'::jsonb"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_05",
+    "column_name": "slot_purpose",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_05",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_05",
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_06",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_06",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_06",
+    "column_name": "payload",
+    "data_type": "jsonb",
+    "is_nullable": "NO",
+    "column_default": "'{}'::jsonb"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_06",
+    "column_name": "slot_purpose",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_06",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_06",
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_07",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_07",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_07",
+    "column_name": "payload",
+    "data_type": "jsonb",
+    "is_nullable": "NO",
+    "column_default": "'{}'::jsonb"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_07",
+    "column_name": "slot_purpose",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_07",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_07",
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_08",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_08",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_08",
+    "column_name": "payload",
+    "data_type": "jsonb",
+    "is_nullable": "NO",
+    "column_default": "'{}'::jsonb"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_08",
+    "column_name": "slot_purpose",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_08",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_08",
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_09",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_09",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_09",
+    "column_name": "payload",
+    "data_type": "jsonb",
+    "is_nullable": "NO",
+    "column_default": "'{}'::jsonb"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_09",
+    "column_name": "slot_purpose",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_09",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_09",
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_10",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_10",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_10",
+    "column_name": "payload",
+    "data_type": "jsonb",
+    "is_nullable": "NO",
+    "column_default": "'{}'::jsonb"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_10",
+    "column_name": "slot_purpose",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_10",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_10",
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_11",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_11",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_11",
+    "column_name": "payload",
+    "data_type": "jsonb",
+    "is_nullable": "NO",
+    "column_default": "'{}'::jsonb"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_11",
+    "column_name": "slot_purpose",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_11",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_11",
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_12",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_12",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_12",
+    "column_name": "payload",
+    "data_type": "jsonb",
+    "is_nullable": "NO",
+    "column_default": "'{}'::jsonb"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_12",
+    "column_name": "slot_purpose",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_12",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_12",
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_13",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_13",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_13",
+    "column_name": "payload",
+    "data_type": "jsonb",
+    "is_nullable": "NO",
+    "column_default": "'{}'::jsonb"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_13",
+    "column_name": "slot_purpose",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_13",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_13",
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_14",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_14",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_14",
+    "column_name": "payload",
+    "data_type": "jsonb",
+    "is_nullable": "NO",
+    "column_default": "'{}'::jsonb"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_14",
+    "column_name": "slot_purpose",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_14",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_14",
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_15",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_15",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_15",
+    "column_name": "payload",
+    "data_type": "jsonb",
+    "is_nullable": "NO",
+    "column_default": "'{}'::jsonb"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_15",
+    "column_name": "slot_purpose",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_15",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_15",
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_16",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_16",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_16",
+    "column_name": "payload",
+    "data_type": "jsonb",
+    "is_nullable": "NO",
+    "column_default": "'{}'::jsonb"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_16",
+    "column_name": "slot_purpose",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_16",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_16",
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_17",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_17",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_17",
+    "column_name": "payload",
+    "data_type": "jsonb",
+    "is_nullable": "NO",
+    "column_default": "'{}'::jsonb"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_17",
+    "column_name": "slot_purpose",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_17",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_17",
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_18",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_18",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_18",
+    "column_name": "payload",
+    "data_type": "jsonb",
+    "is_nullable": "NO",
+    "column_default": "'{}'::jsonb"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_18",
+    "column_name": "slot_purpose",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_18",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_18",
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_19",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_19",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_19",
+    "column_name": "payload",
+    "data_type": "jsonb",
+    "is_nullable": "NO",
+    "column_default": "'{}'::jsonb"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_19",
+    "column_name": "slot_purpose",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_19",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_19",
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_20",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_20",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_20",
+    "column_name": "payload",
+    "data_type": "jsonb",
+    "is_nullable": "NO",
+    "column_default": "'{}'::jsonb"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_20",
+    "column_name": "slot_purpose",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_20",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_20",
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_21",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_21",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_21",
+    "column_name": "payload",
+    "data_type": "jsonb",
+    "is_nullable": "NO",
+    "column_default": "'{}'::jsonb"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_21",
+    "column_name": "slot_purpose",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_21",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_21",
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_22",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_22",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_22",
+    "column_name": "payload",
+    "data_type": "jsonb",
+    "is_nullable": "NO",
+    "column_default": "'{}'::jsonb"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_22",
+    "column_name": "slot_purpose",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_22",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_22",
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_23",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_23",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_23",
+    "column_name": "payload",
+    "data_type": "jsonb",
+    "is_nullable": "NO",
+    "column_default": "'{}'::jsonb"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_23",
+    "column_name": "slot_purpose",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_23",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_23",
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_24",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_24",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_24",
+    "column_name": "payload",
+    "data_type": "jsonb",
+    "is_nullable": "NO",
+    "column_default": "'{}'::jsonb"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_24",
+    "column_name": "slot_purpose",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_24",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_24",
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_25",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_25",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_25",
+    "column_name": "payload",
+    "data_type": "jsonb",
+    "is_nullable": "NO",
+    "column_default": "'{}'::jsonb"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_25",
+    "column_name": "slot_purpose",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_25",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_25",
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_26",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_26",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_26",
+    "column_name": "payload",
+    "data_type": "jsonb",
+    "is_nullable": "NO",
+    "column_default": "'{}'::jsonb"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_26",
+    "column_name": "slot_purpose",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_26",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_26",
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_27",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_27",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_27",
+    "column_name": "payload",
+    "data_type": "jsonb",
+    "is_nullable": "NO",
+    "column_default": "'{}'::jsonb"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_27",
+    "column_name": "slot_purpose",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_27",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_27",
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_28",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_28",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_28",
+    "column_name": "payload",
+    "data_type": "jsonb",
+    "is_nullable": "NO",
+    "column_default": "'{}'::jsonb"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_28",
+    "column_name": "slot_purpose",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_28",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_28",
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_29",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_29",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_29",
+    "column_name": "payload",
+    "data_type": "jsonb",
+    "is_nullable": "NO",
+    "column_default": "'{}'::jsonb"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_29",
+    "column_name": "slot_purpose",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_29",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_29",
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_30",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_30",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_30",
+    "column_name": "payload",
+    "data_type": "jsonb",
+    "is_nullable": "NO",
+    "column_default": "'{}'::jsonb"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_30",
+    "column_name": "slot_purpose",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_30",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "slot_30",
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "NO",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "sub_agents",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "sub_agents",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "sub_agents",
+    "column_name": "owner_id",
+    "data_type": "bigint",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "sub_agents",
+    "column_name": "name",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "sub_agents",
+    "column_name": "phone",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "sub_agents",
+    "column_name": "email",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "sub_agents",
+    "column_name": "default_rates",
+    "data_type": "jsonb",
+    "is_nullable": "YES",
+    "column_default": "'{}'::jsonb"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "sub_agents",
+    "column_name": "group_prefix",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "sub_agents",
+    "column_name": "notes",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "sub_agents",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "tenant_keys",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "tenant_keys",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "tenant_keys",
+    "column_name": "user_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "tenant_keys",
+    "column_name": "wrapped_dek",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "tenant_keys",
+    "column_name": "kdf_salt",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "tenant_keys",
+    "column_name": "kdf_iterations",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "600000"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "tenant_keys",
+    "column_name": "kdf_algorithm",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": "'PBKDF2-SHA256'::text"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "tenant_keys",
+    "column_name": "key_version",
+    "data_type": "integer",
+    "is_nullable": "NO",
+    "column_default": "1"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "tenant_keys",
+    "column_name": "is_recovery",
+    "data_type": "boolean",
+    "is_nullable": "NO",
+    "column_default": "false"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "tenant_keys",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "tenant_keys",
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "tenants",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "tenants",
+    "column_name": "name",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "tenants",
+    "column_name": "slug",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "tenants",
+    "column_name": "business_type",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": "'INSURANCE'::text"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "tenants",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "terminations",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "terminations",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "terminations",
+    "column_name": "policy_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "terminations",
+    "column_name": "sent_date",
+    "data_type": "date",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "terminations",
+    "column_name": "document_date",
+    "data_type": "date",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "terminations",
+    "column_name": "pdf_storage_path",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "terminations",
+    "column_name": "article",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": "'28'::text"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "terminations",
+    "column_name": "created_by",
+    "data_type": "bigint",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "terminations",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "vehicles",
+    "column_name": "id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": "gen_random_uuid()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "vehicles",
+    "column_name": "tenant_id",
+    "data_type": "uuid",
+    "is_nullable": "NO",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "vehicles",
+    "column_name": "client_id",
+    "data_type": "uuid",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "vehicles",
+    "column_name": "reg",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "vehicles",
+    "column_name": "brand",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "vehicles",
+    "column_name": "model",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "vehicles",
+    "column_name": "year",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "vehicles",
+    "column_name": "engine_cc",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "vehicles",
+    "column_name": "power_kw",
+    "data_type": "integer",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "vehicles",
+    "column_name": "fuel",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "vehicles",
+    "column_name": "vehicle_type",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "vehicles",
+    "column_name": "vin",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "vehicles",
+    "column_name": "first_reg_date",
+    "data_type": "date",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "vehicles",
+    "column_name": "notes",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "vehicles",
+    "column_name": "created_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "vehicles",
+    "column_name": "updated_at",
+    "data_type": "timestamp with time zone",
+    "is_nullable": "YES",
+    "column_default": "now()"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "vehicles",
+    "column_name": "status",
+    "data_type": "text",
+    "is_nullable": "NO",
+    "column_default": "'ACTIVE'::text"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "vehicles",
+    "column_name": "acquired_at",
+    "data_type": "date",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "vehicles",
+    "column_name": "disposed_at",
+    "data_type": "date",
+    "is_nullable": "YES",
+    "column_default": null
+  },
+  {
+    "table_schema": "test",
+    "table_name": "vehicles",
+    "column_name": "source",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": "'manual'::text"
+  },
+  {
+    "table_schema": "test",
+    "table_name": "vehicles",
+    "column_name": "legacy_id",
+    "data_type": "text",
+    "is_nullable": "YES",
+    "column_default": null
+  }
+]

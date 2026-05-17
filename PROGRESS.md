@@ -95,7 +95,7 @@ Implementacja izolacji schematowej (`test`) zamiast osobnego projektu, aby zacho
 ## Faza E — security + UX feedback (sesja 2026-05-04)
 
 ### Sekrety do rrv vault (DOM, opus)
-- [x] `.env.alina.{prod,test}` + `.env.e2e` + `scratch/{probe_supabase,run_migrations}.js` — plaintext Supabase keys → markery `<rrv:CRM_ALINA_*>`
+- [x] `.env.alina.{prod,test}` + `.env.e2e` + `_archive_scratch_2026-05-17/{probe_supabase,run_migrations}.js` — plaintext Supabase keys → markery `<rrv:CRM_ALINA_*>`
 - [x] **`switch_env.ps1` v2** — przy `START_ALINA_*.bat` ekspanduje markery przez `rrv get` i zapisuje plaintext do gitignored `.env.development.local` (Vite to czyta). Tryby: `prod` / `test` / `e2e` / `dev`.
 - [x] Vault: `CRM_ALINA_SB_SECRET`, `CRM_ALINA_SB_PUBLISHABLE`, `CRM_ALINA_SUPABASE_URL`, `CRM_ALINA_E2E_SERVICE_ROLE`, `CRM_ALINA_E2E_SB_PUBLISHABLE`. Usunięte duplikaty `SB_PUBLISHABLE_KEY`, `VITE_SB_PUBLISHABLE_KEY`.
 - [x] `git reset --soft b63466f` cofnął 4 brudne lokalne commity (NIGDY nie pushowane). Czysty stan jako `8e48385` na `origin/main`.
@@ -137,7 +137,7 @@ Login: admin `redroadai@gmail.com` lub agent `alinakwidzinska@gmail.com` / `Test
 
 **Snapshot prod → test** (gdy chcesz odświeżyć piaskownicę realnymi danymi):
 1. SQL Editor Supabase → wklej `supabase/migrations/20260504_feedback_admin_reply.sql` → Run (raz, dodaje admin_reply column w obu schemach)
-2. SQL Editor → wklej `scratch/seed_test_from_prod.sql` → Run (truncate+insert dla `tenants`/`sales`/`clients`/`policies`/`insurance_notes`/`insurance_feedback`, dynamicznie po wspólnych kolumnach, ON CASCADE — bezpieczne, dotyczy tylko schemy `test`)
+2. SQL Editor → wklej `_archive_scratch_2026-05-17/seed_test_from_prod.sql` → Run (truncate+insert dla `tenants`/`sales`/`clients`/`policies`/`insurance_notes`/`insurance_feedback`, dynamicznie po wspólnych kolumnach, ON CASCADE — bezpieczne, dotyczy tylko schemy `test`)
 
 ### ⚠️ Deploy ≠ git push
 

@@ -82,7 +82,7 @@ Pliki `.env.alina.{prod,test}` + `.env.e2e` zawierają tylko **markery** `<rrv:N
 
 ### Snapshot prod → test (gdy chcesz odświeżyć piaskownicę clients/polis)
 1. SQL Editor `xqznrssrlnxqkdvisnck` → wklej `supabase/migrations/20260504_feedback_admin_reply.sql` → Run (raz)
-2. SQL Editor → wklej `scratch/seed_test_from_prod.sql` → Run (truncate+insert dla `tenants/sales/clients/policies/insurance_notes`, dynamicznie po wspólnych kolumnach)
+2. SQL Editor → wklej `_archive_scratch_2026-05-17/seed_test_from_prod.sql` → Run (truncate+insert dla `tenants/sales/clients/policies/insurance_notes`, dynamicznie po wspólnych kolumnach)
 
 > 🟡 `insurance_feedback` **NIE** wymaga snapshotu — czytane zawsze z `public` (zob. Faza E w PROGRESS.md). Tryb test pokazuje realne zgłoszenia Aliny + admin_reply natychmiast.
 
@@ -117,5 +117,5 @@ VITE_BASE_PATH=/alina/ npm run build
 - [scripts/bootstrap_tenant.mjs](./scripts/bootstrap_tenant.mjs) — seed 20 klientów
 - [scripts/deploy_hostido.ps1](./scripts/deploy_hostido.ps1) — legacy, NIE używane (manual deploy)
 - [supabase/migrations/](./supabase/migrations/) — tenant_keys, snapshots, feedback, **20260504_feedback_admin_reply**
-- [scratch/seed_test_from_prod.sql](./scratch/seed_test_from_prod.sql) — snapshot piaskownica
+- [_archive_scratch_2026-05-17/seed_test_from_prod.sql](./_archive_scratch_2026-05-17/seed_test_from_prod.sql) — snapshot piaskownica
 - [`../CONSIS BartsGda/BAZA_WIEDZY/HOSTING/HOSTIDO.md`](../CONSIS BartsGda/BAZA_WIEDZY/HOSTING/HOSTIDO.md) — hosting reference

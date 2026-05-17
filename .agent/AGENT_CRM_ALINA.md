@@ -79,3 +79,72 @@ python C:/BartsGda4/tools/code_md_drift_check.py --scope crm-alina --include-ski
 ---
 
 *Konwencja AGENT_<NAZWA>.md per `<repo>/.agent/`. Inne role: AGENT_REDROAD_DROGOWIEC ✅, AGENT_BIURO ✅, AGENT_KSIEGOWA ✅, AGENT_OCR ✅, AGENT_DEV — TODO.*
+
+---
+
+## 🗺️ MAPA KOMPLET (snapshot 2026-05-17)
+
+### 🟢 TYLKO CRM (moje foldery)
+
+| Folder | Pliki | .py | .md | Co tam siedzi |
+|---|---:|---:|---:|---|
+| `.agent/` | 1 | 0 | 1 | Ten plik — mapa roli agenta |
+| `.claude/` | 5 | 0 | 2 | Hooki CC, settings, skills lokalny CRM |
+| `scripts/` | 47 | 26 | 1 | Narzędzia ops: ftp_deploy, backup Supabase, migrate, audit, crm-crypt — **ma `_INDEX.md`** |
+| `src/` | 593 | 0 | 76 | Cały frontend React+TS+shadcn (atomic-crm ~15k LOC + legacy-v1) |
+| `src/legacy-v1/` | ~72 | 0 | ~38 | Insurance Master CRM Pro — 38 spec MD + full TS stack (dataMapper, supabaseStorage, FinanceView) |
+| `src/_demo_sandbox_ui/` | 6 | 0 | 1 | DesignSahara.tsx + stitch HTML prototypy UI (eksperymentalne, nie prodowe) |
+| `supabase/` | 87 | 0 | 0 | Schemas (declarative) + migrations (auto-gen) + edge functions |
+| `test-data/` | 3 | 0 | 0 | CSV z danymi testowymi do importu |
+| `e2e/` | 4 | 0 | 0 | Playwright testy E2E |
+| `_archive_scratch_2026-05-17/` | 29 | 1 | 0 | **ARCHIWUM** — jednorazowe skrypty debug/probe z sesji dev (JS/MJS/SQL/PY) |
+| `_archive_sandbox_design/` | 15 | 0 | 1 | **ARCHIWUM** — stitch design HTML/PNG prototypy dashboardów Sahara |
+| `_archive_sesje/` | 1 | 0 | 1 | **ARCHIWUM** — wiedza z sesji 2026-05-01 (Supabase API knowledge) |
+| `ftp_backups/` | 393 | 0 | 0 | Operacyjne backupy plików przed FTP deploy (whitelist w canon, `.gitignore`) |
+| `backups/` | 0 | 0 | 0 | Pusty katalog — do usunięcia przy okazji |
+
+### 🔵 WSPÓŁDZIELONE (nie moje)
+
+| Zasób | Skąd | Do czego |
+|---|---|---|
+| `brain.ai_tasks` (project_ref=crm-alina) | CONSIS / Supabase | kolejka zadań CRM |
+| `mcp__RedRoad-Hostido__*` | MCP-SKILLS | FTP deploy, health check |
+| `mcp__claude_ai_Supabase__*` | MCP claude.ai | CRM-ALINA remote Supabase project |
+| `mcp__MCP-CONSIS__*` | CONSIS hub | tasks, memory, messaging |
+| `C:\BartsGda4\tools\*.py` | workspace root | drift check, architecture scan |
+| `C:\BartsGda4-MCP-SKILLS\CONSIS-SKILLS\universal\*.md` | MCP-SKILLS | skille uniwersalne |
+
+### ⚠️ Docelowo zabrane / zreorganizowane
+
+- `backups/` (pusty) → usunąć przy okazji
+- `ftp_backups/` → whitelist w canon ✅ (operacyjne, `.gitignore`)
+- `demo/` — 2 pliki, nie w kanonie CRM-Atomic — sprawdzić co tam jest
+
+### 📊 Stan (snapshot 2026-05-17 — po porządkach)
+
+| Metryka | Wartość |
+|---|---:|
+| Foldery z `.py` | 8 |
+| `_INDEX.md` wygenerowane przez drift check | 8 |
+| Migracje git mv wykonane | 4 |
+| Linki MD naprawione | 5 |
+| Architecture drift po migracji | 0 |
+
+### 🌅 NEXT STEPS (post-inwentaryzacja)
+
+1. **`backups/` (empty)** — usunąć pusty katalog
+2. **`demo/`** — sprawdzić co tam jest, czy nie do archiwum
+3. **Scripts `_recover.py` / `_recover2.py`** — dwa podobne pliki w scripts/, może dedup?
+4. **FTP password rotation** — P0 SECURITY (Hostido hasło w git history od 2026-04-19)
+
+### 🔄 Migracje wykonane dziś (2026-05-17)
+
+| Stara ścieżka | Nowa ścieżka | Metoda | Uzasadnienie |
+|---|---|---|---|
+| `scratch/` | `_archive_scratch_2026-05-17/` | `git mv` | forbidden w canon (jednorazowe skrypty debug) |
+| `sandbox/` | `_archive_sandbox_design/` | `git mv` | forbidden w canon (stitch design prototypy) |
+| `SESJE/` | `_archive_sesje/` | `git mv` | ALL-CAPS niestandardowe, archiwum wiedzy sesji |
+| `src/sandbox/` | `src/_demo_sandbox_ui/` | `git mv` | forbidden w canon (eksperymentalne UI) |
+| import w `App.tsx:43` | `../_demo_sandbox_ui/DesignSahara` | Edit | fix po rename src/sandbox |
+| 5 linków w MD | zaktualizowane | Edit | DOCS_TEST_ENVIRONMENT, NEXT_SESSION (×2), PROGRESS (×2) |
+| `ftp_backups/` | whitelist w canon | Edit | operacyjne backupy, `.gitignore`, legalne |

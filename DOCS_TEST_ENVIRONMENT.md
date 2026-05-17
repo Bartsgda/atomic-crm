@@ -52,7 +52,7 @@ To allow logging in with the same credentials and accessing encrypted data, the 
 
 To verify the test environment is correctly configured and stabilized:
 ```bash
-node scratch/verify_test_schema.mjs
+node _archive_scratch_2026-05-17/verify_test_schema.mjs
 ```
 
 This script checks for the existence of legacy columns and performs a test write/read operation in the `test` schema.

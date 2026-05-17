@@ -128,6 +128,18 @@ interface ChangeEntry {
 
 const CHANGELOG: ChangeEntry[] = [
   {
+    date: "2026-05-17",
+    items: [
+      "Bezpieczeństwo: aplikacja wylogowuje po 30 minutach bezczynności lub po budzeniu kompa ze snu — hasło wymagane ponownie.",
+      "Import XLSX: zduplikowane polisy przy ponownym imporcie już się nie dublują.",
+      "Import XLSX: pośrednicy (Hejka, Beata, Osip…) poprawnie przypisywani przy imporcie.",
+      "Import XLSX: daty notatek pobierane z pliku Excel, nie z daty importu.",
+      'Chmurka "Do uzupełnienia" (prawy dolny róg) — zlicza brakujące dane: rejestracje, NIP, niepełne polisy.',
+      "Flagi TODO przy polisach i klientach — widać co wymaga uzupełnienia bez przeglądania każdej polisy.",
+      "Imieniny na górze Pulpitu wyświetlają się stabilnie.",
+    ],
+  },
+  {
     date: "2026-05-16",
     items: [
       "Import zaszyfrowanego pliku (xlsx.enc) naprawiony — działał niepoprawnie gdy aplikacja była w trybie 'produkcja'.",

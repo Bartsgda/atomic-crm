@@ -1,6 +1,10 @@
 # CLAUDE.md — CRM-Atomic / CRM-ALINA
 
 > **Router AI dla `rr-claude --crm` / `rr-claude --alina`**. Hub agentowy: [`../CONSIS BartsGda/`](../CONSIS%20BartsGda/) — zasady ogólne, mapa MCP, vault, hooks.
+
+> ⚠️ **Drift check obowiązkowy przed `git commit`** (od 2026-05-17):
+> `python C:/BartsGda4/tools/code_md_drift_check.py --scope crm-alina --fix`
+> Auto-generuje/aktualizuje `_INDEX.md` (md5 wszystkich `.py` per folder, skanuje CRM-Atomic + CRM-ALINA). Memory: [[project-drift-detection-system-2026-05-17]]. Workspace kanon: `C:/BartsGda4/CLAUDE.md § Drift detection`.
 >
 > **Hierarchia:** CONSIS = nadrzędny hub · **CRM-Atomic** = framework atomic-crm fork (~15k LOC) · **CRM-ALINA** = production deploy na Hostido (insurance feedback dla Aliny).
 

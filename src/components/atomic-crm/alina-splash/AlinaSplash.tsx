@@ -128,6 +128,15 @@ interface ChangeEntry {
 
 const CHANGELOG: ChangeEntry[] = [
   {
+    date: "2026-05-18",
+    items: [
+      "Tryb testowy: teraz możesz bezpiecznie testować nowe funkcje bez ryzyka — dane produkcyjne są nienaruszone. Żółty banner na górze = jesteś w trybie testowym.",
+      'Tryb testowy: przycisk "Uzupełnij test" kopiuje nowych klientów i polisy z produkcji do testowej — Twoje własne zmiany w teście zostają nienaruszone.',
+      "Tryb testowy: kopiowanie danych nie wylogowuje już z aplikacji.",
+      "Tryb testowy: po wylogowaniu i zalogowaniu wracasz do trybu produkcyjnego (tak jak powinno być).",
+    ],
+  },
+  {
     date: "2026-05-17",
     items: [
       "Bezpieczeństwo: aplikacja wylogowuje po 30 minutach bezczynności lub po budzeniu kompa ze snu — hasło wymagane ponownie.",

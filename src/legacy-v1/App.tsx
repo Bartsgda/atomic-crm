@@ -40,7 +40,7 @@ import {
 } from "./modules/utils/diffEngine";
 import { useAutoWipe } from "./hooks/useAutoWipe";
 import { Lock, ShieldAlert } from "lucide-react";
-import DesignSahara from "../sandbox/DesignSahara";
+import DesignSahara from "../_demo_sandbox_ui/DesignSahara";
 
 type Page =
   | "dashboard"

@@ -1,0 +1,677 @@
+[
+  {
+    "legacy_id": "xlsx_2025_row_1",
+    "client": {
+      "first_name": "Rafał",
+      "last_name": "Gurbowicz",
+      "phones": "[\"509718289\"]",
+      "emails": "[\"olagurbowicz@op.pl\"]",
+      "street": "ul. Na glinach 5",
+      "city": "Somonino",
+      "zip_code": "83-314",
+      "pesel_encrypted": null,
+      "businesses": [],
+      "source": "xlsx_import",
+      "created_at": "2025-05-29T12:00:00+00:00"
+    },
+    "policy": {
+      "type": "OC",
+      "stage": "uciety_kontakt",
+      "policy_number": null,
+      "insurer_id": null,
+      "policy_start_date": "2025-07-02",
+      "policy_end_date": "2026-07-02",
+      "premium": null,
+      "commission": null,
+      "next_contact_date": "2025-05-30",
+      "created_at": "2025-05-29T12:00:00+00:00",
+      "auto_details": {
+        "vehicle_type": "OSOBOWY"
+      },
+      "home_details": {},
+      "travel_details": {},
+      "firma_details": {},
+      "life_details": {},
+      "payment_status": "UNPAID"
+    },
+    "insurer_name": "",
+    "notes": [
+      {
+        "tag": "STATUS",
+        "content": "ubezp na męża kontakt pod danym nr tel z Panią Aleksandrą Gurbiowicz-> 04.06.2025 nie odbiera od 2 dni",
+        "created_at": "2025-05-29",
+        "linked": [
+          "5501e637-0463-48c9-8aba-9007ea17a4a0"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara w HDI",
+        "created_at": "2025-05-29",
+        "linked": [
+          "5501e637-0463-48c9-8aba-9007ea17a4a0"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "[KONTEKST] kontakt do Aleksandry G.",
+        "created_at": "2025-05-29",
+        "linked": [
+          "5501e637-0463-48c9-8aba-9007ea17a4a0"
+        ]
+      }
+    ],
+    "shares": []
+  },
+  {
+    "legacy_id": "xlsx_2025_row_10",
+    "client": {
+      "first_name": "Robert",
+      "last_name": "Stark",
+      "phones": "[\"601617076\"]",
+      "emails": "[\"biuro@parkiet-stark.pl\", \"robert@parkiet-stark.pl\"]",
+      "street": "Krzemienieckiej 9A",
+      "city": "Gdańsk",
+      "zip_code": "80-448",
+      "pesel_encrypted": null,
+      "businesses": [
+        {
+          "nip": null,
+          "name": "Parkiet Stark Sp. z o.o. Sp. K."
+        }
+      ],
+      "source": "xlsx_import",
+      "created_at": "2025-08-05T12:00:00+00:00"
+    },
+    "policy": {
+      "type": "BOTH",
+      "stage": "sprzedaz",
+      "policy_number": "920057463822",
+      "insurer_id": "3e48c183-8bc5-446d-89b3-963765e24451",
+      "policy_start_date": "2025-09-10",
+      "policy_end_date": "2026-09-10",
+      "premium": 3693.0,
+      "commission": 147.72,
+      "next_contact_date": "2025-09-03",
+      "created_at": "2025-09-02T12:00:00+00:00",
+      "auto_details": {
+        "ac": {
+          "ass": null,
+          "kind": "serwis",
+          "opony": false,
+          "szyby": false,
+          "extras": []
+        },
+        "fuel": "diesel",
+        "year": 2017,
+        "power_km": 190,
+        "power_kw": 140,
+        "engine_cc": 1968,
+        "vehicle_type": "OSOBOWY"
+      },
+      "home_details": {},
+      "travel_details": {},
+      "firma_details": {},
+      "life_details": {},
+      "payment_status": "UNPAID"
+    },
+    "insurer_name": "HDI",
+    "notes": [
+      {
+        "tag": "ROZMOWA",
+        "content": "klient ma sprawdzić czy pojazd jest nadal w leasingu",
+        "created_at": "2025-09-02",
+        "linked": [
+          "fa19b725-148c-485b-9f28-25ddb7da38f8"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara PZU nr 1098320345 do umowy generalnej 18737/BUW/AW/2023 pełne serwisowe AC/OC",
+        "created_at": "2025-09-02",
+        "linked": [
+          "fa19b725-148c-485b-9f28-25ddb7da38f8"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "polisa wysłana do podpisu przez klienta",
+        "created_at": "2025-09-08",
+        "linked": [
+          "fa19b725-148c-485b-9f28-25ddb7da38f8"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "wypowiedzenie do PZU zarejestrowane",
+        "created_at": "2025-09-08",
+        "linked": [
+          "fa19b725-148c-485b-9f28-25ddb7da38f8"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "pojazd nie jest w leasingu, przerejestrowany będzie już na krzemenieckiej (mimo tego że na kodzie 83-330 Kartuzy wychodzi 400 zł taniej) i tak musiałam przekalkulować",
+        "created_at": "2025-09-08",
+        "linked": [
+          "fa19b725-148c-485b-9f28-25ddb7da38f8"
+        ]
+      }
+    ],
+    "shares": [
+      {
+        "rate": 4.0,
+        "amount": 147.72,
+        "sub_agent": "Własny",
+        "group": "wlasny",
+        "note": "Import XLSX"
+      }
+    ]
+  },
+  {
+    "legacy_id": "xlsx_2025_row_2",
+    "client": {
+      "first_name": "Marek",
+      "last_name": "Czechowski",
+      "phones": "[\"601611399\"]",
+      "emails": "[]",
+      "street": "ul. Konwaliowa 3",
+      "city": "Pruszcz Gdański",
+      "zip_code": "83-000",
+      "pesel_encrypted": null,
+      "businesses": [],
+      "source": "xlsx_import",
+      "created_at": "2025-06-16T12:00:00+00:00"
+    },
+    "policy": {
+      "type": "OC",
+      "stage": "uciety_kontakt",
+      "policy_number": null,
+      "insurer_id": null,
+      "policy_start_date": null,
+      "policy_end_date": null,
+      "premium": null,
+      "commission": null,
+      "next_contact_date": "2025-06-19",
+      "created_at": "2025-06-16T12:00:00+00:00",
+      "auto_details": {},
+      "home_details": {},
+      "travel_details": {},
+      "firma_details": {},
+      "life_details": {},
+      "payment_status": "UNPAID"
+    },
+    "insurer_name": "",
+    "notes": [
+      {
+        "tag": "STATUS",
+        "content": "i 16.06.2025 nie odbiera",
+        "created_at": "2025-06-11",
+        "linked": [
+          "b931a455-c5ef-45e0-8056-46ae598e74ec"
+        ]
+      }
+    ],
+    "shares": []
+  },
+  {
+    "legacy_id": "xlsx_2025_row_3",
+    "client": {
+      "first_name": "Jędrzej",
+      "last_name": "Machol",
+      "phones": "[\"537004798\"]",
+      "emails": "[]",
+      "street": "ul. Kiełpińska 21D",
+      "city": "Mezowo",
+      "zip_code": "83-332",
+      "pesel_encrypted": null,
+      "businesses": [],
+      "source": "xlsx_import",
+      "created_at": "2025-06-05T12:00:00+00:00"
+    },
+    "policy": {
+      "type": "FIRMA",
+      "stage": "przel_kontakt",
+      "policy_number": null,
+      "insurer_id": null,
+      "policy_start_date": null,
+      "policy_end_date": null,
+      "premium": null,
+      "commission": null,
+      "next_contact_date": "2025-07-21",
+      "created_at": "2025-06-05T12:00:00+00:00",
+      "auto_details": {
+        "vehicle_type": "CIEZAROWY"
+      },
+      "home_details": {},
+      "travel_details": {},
+      "firma_details": {
+        "subType": "FLOTA",
+        "description": "flota 60 pojazdow na 3 rozne firmy",
+        "fleet_count": 60
+      },
+      "life_details": {},
+      "payment_status": "UNPAID"
+    },
+    "insurer_name": "",
+    "notes": [
+      {
+        "tag": "ROZMOWA",
+        "content": "rozmowa z Panią Patrycją -> jutro prześle plik z pojazdami do ubezpieczenia flotowego -> pierwsze kończy się w sierpniu Iweko Plandeka 3,5t rej WGM3815L",
+        "created_at": "2025-06-05",
+        "linked": [
+          "1268e258-2e0b-429a-9a9a-ff2d31dc4de8"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "[KONTEKST] rozmowa z Panią Patrycją",
+        "created_at": "2025-06-05",
+        "linked": [
+          "1268e258-2e0b-429a-9a9a-ff2d31dc4de8"
+        ]
+      }
+    ],
+    "shares": []
+  },
+  {
+    "legacy_id": "xlsx_2025_row_4",
+    "client": {
+      "first_name": "Kamila",
+      "last_name": "Jędrasik",
+      "phones": "[\"607990880\"]",
+      "emails": "[\"kamila.jedrasik@gmail.com\"]",
+      "street": "ul. Jagiełły 4",
+      "city": "Bojano",
+      "zip_code": null,
+      "pesel_encrypted": null,
+      "businesses": [],
+      "source": "xlsx_import",
+      "created_at": "2025-07-29T12:00:00+00:00"
+    },
+    "policy": {
+      "type": "DOM",
+      "stage": "czekam_na_dane",
+      "policy_number": null,
+      "insurer_id": null,
+      "policy_start_date": "2025-07-01",
+      "policy_end_date": "2026-07-01",
+      "premium": null,
+      "commission": null,
+      "next_contact_date": "2025-07-30",
+      "created_at": "2025-07-29T12:00:00+00:00",
+      "auto_details": null,
+      "home_details": {
+        "su": null,
+        "type": "DOM",
+        "extras": [],
+        "address": "Bojano ul. Jagiełły 4",
+        "area_m2": null,
+        "year_built": null
+      },
+      "travel_details": {},
+      "firma_details": {},
+      "life_details": {},
+      "payment_status": "UNPAID"
+    },
+    "insurer_name": "",
+    "notes": [
+      {
+        "tag": "ROZMOWA",
+        "content": "wysłałam sms z przypomnieniem o wysłaniu dokumentów",
+        "created_at": "2025-07-16",
+        "linked": [
+          "ae2e2edf-4916-49b7-9171-4732bacf4e8f"
+        ]
+      },
+      {
+        "tag": "OFERTA",
+        "content": "telefon przypominający, obiecała wysłać dzisiaj, 11.06.2025->ustaliłam z Panią Kamilą że wyślę maila do niej a w odpowiedzi dostanę starą polisę bądź dane do kalkulacji + wspomniałam że mogą dostać 1 - 2 miesiące abonamentu za free",
+        "created_at": "2025-07-16",
+        "linked": [
+          "ae2e2edf-4916-49b7-9171-4732bacf4e8f"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "odpisała że wyśle do końca tygodnia dokumenty i że jest zainteresowana ;)24.06.2025 wysłałam jej wiadomość sms z przypomnieniem",
+        "created_at": "2025-07-16",
+        "linked": [
+          "ae2e2edf-4916-49b7-9171-4732bacf4e8f"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "klientka nie odbiera",
+        "created_at": "2025-07-29",
+        "linked": [
+          "ae2e2edf-4916-49b7-9171-4732bacf4e8f"
+        ]
+      }
+    ],
+    "shares": []
+  },
+  {
+    "legacy_id": "xlsx_2025_row_5",
+    "client": {
+      "first_name": "Aliaksandr",
+      "last_name": "Tron",
+      "phones": "[\"696556097\"]",
+      "emails": "[\"tron.alexbud@gmail.com\"]",
+      "street": "ul. Wspólna 1/1",
+      "city": "Nowy Tuchom",
+      "zip_code": "80-209",
+      "pesel_encrypted": null,
+      "businesses": [],
+      "source": "xlsx_import",
+      "created_at": "2025-07-11T12:00:00+00:00"
+    },
+    "policy": {
+      "type": "FIRMA",
+      "stage": "rez_po_ofercie",
+      "policy_number": null,
+      "insurer_id": null,
+      "policy_start_date": null,
+      "policy_end_date": null,
+      "premium": null,
+      "commission": null,
+      "next_contact_date": "2025-08-20",
+      "created_at": "2025-07-11T12:00:00+00:00",
+      "auto_details": {
+        "vehicle_type": "PRZYCZEPA"
+      },
+      "home_details": {},
+      "travel_details": {},
+      "firma_details": {
+        "coOwners": [
+          {
+            "name": "kl55",
+            "type": "PERSON",
+            "phone": "860801191"
+          }
+        ]
+      },
+      "life_details": {},
+      "payment_status": "UNPAID"
+    },
+    "insurer_name": "",
+    "notes": [
+      {
+        "tag": "OFERTA",
+        "content": "wysłana oferta z PZU za 574 zł SU główna 50 tys, do oferty w Generali (bez gwarancji że będą chcieli ubezpieczyć) trzeba dołączyć jeszcze opis i zdjęcia 881 zł",
+        "created_at": "2025-07-11",
+        "linked": [
+          "b353c0f7-6817-463e-b362-366d36ebede8"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] brak",
+        "created_at": "2025-07-11",
+        "linked": [
+          "b353c0f7-6817-463e-b362-366d36ebede8"
+        ]
+      },
+      {
+        "tag": "DECISION_PRICE",
+        "content": "klient wstrzymuje się z ubezpieczeniem ze względu na wysoki koszt ubezpieczenia samochodu w leasingu GD187YG",
+        "created_at": "2025-07-15",
+        "linked": [
+          "b353c0f7-6817-463e-b362-366d36ebede8"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "86080119155 - prawdopodobnie PESEL klienta (kl=klient)",
+        "created_at": "2026-05-11",
+        "linked": [
+          "b353c0f7-6817-463e-b362-366d36ebede8"
+        ]
+      }
+    ],
+    "shares": []
+  },
+  {
+    "legacy_id": "xlsx_2025_row_6",
+    "client": {
+      "first_name": "Maksymilian",
+      "last_name": "Obrzud",
+      "phones": "[\"691183063\"]",
+      "emails": "[\"obrzudmaks@gmail.com\"]",
+      "street": "36/140B",
+      "city": "Lelewela",
+      "zip_code": "80-442",
+      "pesel_encrypted": null,
+      "businesses": [],
+      "source": "xlsx_import",
+      "created_at": "2025-08-28T12:00:00+00:00"
+    },
+    "policy": {
+      "type": "PODROZ",
+      "stage": "rez_po_ofercie",
+      "policy_number": null,
+      "insurer_id": null,
+      "policy_start_date": "2025-08-30",
+      "policy_end_date": "2026-08-30",
+      "premium": null,
+      "commission": null,
+      "next_contact_date": "2025-08-28",
+      "created_at": "2025-08-28T12:00:00+00:00",
+      "auto_details": null,
+      "home_details": {},
+      "travel_details": {
+        "date_to": "2025-09-05",
+        "persons": null,
+        "date_from": "2025-08-30",
+        "destination": "Malta"
+      },
+      "firma_details": {},
+      "life_details": {},
+      "payment_status": "UNPAID"
+    },
+    "insurer_name": "",
+    "notes": [
+      {
+        "tag": "OFERTA",
+        "content": "oferta z Warty i Generali wysłana na maila, handlowiec Solidu",
+        "created_at": "2025-08-26",
+        "linked": [
+          "c24dfaba-5d29-4efa-a0de-d2d102cd481a"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "ubezpieczył wyjazd gdzie indziej bądz nie pojechał na wakacje",
+        "created_at": "2025-08-28",
+        "linked": [
+          "c24dfaba-5d29-4efa-a0de-d2d102cd481a"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "dzwoniłam, jest w trasie, jeszcze nie zapoznał się z ofertą, ma dać znać dzisiaj",
+        "created_at": "2025-08-28",
+        "linked": [
+          "c24dfaba-5d29-4efa-a0de-d2d102cd481a"
+        ]
+      }
+    ],
+    "shares": []
+  },
+  {
+    "legacy_id": "xlsx_2025_row_7",
+    "client": {
+      "first_name": "Krzysztof",
+      "last_name": "Kazior",
+      "phones": "[\"695928317\"]",
+      "emails": "[]",
+      "street": "ul. Księżycowa 35",
+      "city": "Banino",
+      "zip_code": null,
+      "pesel_encrypted": null,
+      "businesses": [],
+      "source": "xlsx_import",
+      "created_at": "2025-08-22T12:00:00+00:00"
+    },
+    "policy": {
+      "type": "DOM",
+      "stage": "czekam_na_dane",
+      "policy_number": null,
+      "insurer_id": null,
+      "policy_start_date": "2025-06-12",
+      "policy_end_date": "2026-06-12",
+      "premium": null,
+      "commission": null,
+      "next_contact_date": "2025-09-01",
+      "created_at": "2025-08-22T12:00:00+00:00",
+      "auto_details": null,
+      "home_details": {
+        "su": null,
+        "type": "DOM",
+        "extras": [],
+        "address": "Banino ul. Księżycowa 35",
+        "area_m2": null,
+        "year_built": null
+      },
+      "travel_details": {},
+      "firma_details": {},
+      "life_details": {},
+      "payment_status": "UNPAID"
+    },
+    "insurer_name": "",
+    "notes": [
+      {
+        "tag": "ROZMOWA",
+        "content": "rozmowa -> klient wyśle ubiegłoroczną polisę po weekendzie",
+        "created_at": "2025-06-05",
+        "linked": [
+          "4d2a4a02-6b9f-4441-add6-2c676c4527b6"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "umówiono kolejny kontakt na 02.07 klient mówi że szuka starej polisy ale nie moze znaleźć że mam się przypminać i mówi że moje telefony go nie męczą, pytałam czy na pewno jaest zainteresowany i mówił że tak",
+        "created_at": "2025-06-25",
+        "linked": [
+          "4d2a4a02-6b9f-4441-add6-2c676c4527b6"
+        ]
+      }
+    ],
+    "shares": []
+  },
+  {
+    "legacy_id": "xlsx_2025_row_8",
+    "client": {
+      "first_name": "Adam",
+      "last_name": "Zaborowski",
+      "phones": "[\"605293414\"]",
+      "emails": "[\"adam.zaborowski@op.pl\"]",
+      "street": "ul. Rumiankowa 1",
+      "city": "Pszczółki",
+      "zip_code": "83-032",
+      "pesel_encrypted": null,
+      "businesses": [],
+      "source": "xlsx_import",
+      "created_at": "2025-06-06T12:00:00+00:00"
+    },
+    "policy": {
+      "type": "DOM",
+      "stage": "przel_kontakt",
+      "policy_number": null,
+      "insurer_id": null,
+      "policy_start_date": "2025-09-27",
+      "policy_end_date": "2026-09-27",
+      "premium": null,
+      "commission": null,
+      "next_contact_date": "2025-09-01",
+      "created_at": "2025-08-22T12:00:00+00:00",
+      "auto_details": null,
+      "home_details": {
+        "su": null,
+        "type": "DOM",
+        "extras": [],
+        "address": "83-032 Pszczółki ul. Rumiankowa 1",
+        "area_m2": null,
+        "coOwners": [
+          {
+            "name": "Magdalena Zaborowska",
+            "type": "PERSON"
+          }
+        ],
+        "year_built": null
+      },
+      "travel_details": {},
+      "firma_details": {},
+      "life_details": {},
+      "payment_status": "UNPAID"
+    },
+    "insurer_name": "",
+    "notes": [
+      {
+        "tag": "ROZMOWA",
+        "content": "klient jest na urlopie, kontakt umówiony",
+        "created_at": "2025-08-22",
+        "linked": [
+          "d9bd7b74-4c7d-4528-8ac0-d25ec8bbf652"
+        ]
+      }
+    ],
+    "shares": []
+  },
+  {
+    "legacy_id": "xlsx_2025_row_9",
+    "client": {
+      "first_name": "Dominika",
+      "last_name": "(brak nazwiska)",
+      "phones": "[\"663344427\"]",
+      "emails": "[]",
+      "street": "ul. Brzozowa",
+      "city": "Borkowo",
+      "zip_code": null,
+      "pesel_encrypted": null,
+      "businesses": [],
+      "source": "xlsx_import",
+      "created_at": "2025-08-28T12:00:00+00:00"
+    },
+    "policy": {
+      "type": "OC",
+      "stage": "czekam_na_dane",
+      "policy_number": null,
+      "insurer_id": null,
+      "policy_start_date": "2025-09-08",
+      "policy_end_date": "2026-09-08",
+      "premium": null,
+      "commission": null,
+      "next_contact_date": "2025-09-01",
+      "created_at": "2025-08-28T12:00:00+00:00",
+      "auto_details": {
+        "vehicle_type": "OSOBOWY"
+      },
+      "home_details": {},
+      "travel_details": {},
+      "firma_details": {},
+      "life_details": {},
+      "payment_status": "UNPAID"
+    },
+    "insurer_name": "",
+    "notes": [
+      {
+        "tag": "ROZMOWA",
+        "content": "potwierdziłam z klientką że ubezpiecza 3 auta, obecnie jest na urlopie wraca w wtorek i wtedy umówiłam się na kontakt, najbliższe kończy się drugiej połowie września13.05.2025 ubezp 3 samochody i dom",
+        "created_at": "2025-08-22",
+        "linked": [
+          "c92cc547-fa20-4256-870e-056fa2bbf4fc"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "dzwoniłam, abonent niedostępny, dzwonić w poniedziałek",
+        "created_at": "2025-08-28",
+        "linked": [
+          "c92cc547-fa20-4256-870e-056fa2bbf4fc"
+        ]
+      }
+    ],
+    "shares": []
+  }
+]

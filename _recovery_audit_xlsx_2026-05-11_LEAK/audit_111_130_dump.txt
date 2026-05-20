@@ -1,0 +1,321 @@
+================================================================================
+xlsx_2025_row_111 - Siergiej Zaklicki
+  type=ZYCIE, stage=sprzedaz, ins=Generali
+  orig='NNW szkolne'
+  premium=110.0, commission=8.8
+  start=2025-09-06, end=2026-09-06
+  nr=50017891892
+  CLIENT: city='Rumia', street='Kosynierów 79E/117', zip='84-230'
+          phones='["666968210"]', emails='["evimetcom@wp.pl"]'
+          businesses=[]
+  life_details={"kind": "NNW", "description": "NNW szkolne (Siergiej - dziecko 2)", "related_persons": [{"name": "Oleksandr Sokolovskyi", "type": "PERSON", "pesel": "06291213150"}, {"name": "Anhelina Sokolovskyi", "type": "PERSON", "pesel": "10322211921"}]}
+  shares (1):
+    - Firmowy (ogólny) (firmowy) rate=8.0 amount=8.8
+  notes (1):
+    [2025-09-11] tag=ROZMOWA -> 'czekam na odesłanie podpisanej polisy05.09.2025 rozmawiałam z kobietą która podała mi dane, chyba partnerką Pana Siergieja'
+================================================================================
+xlsx_2025_row_112 - Mariola Salamonik
+  type=ZYCIE, stage=sprzedaz, ins=Generali
+  orig='NNW szkolne'
+  premium=190.0, commission=15.2
+  start=2025-09-12, end=2026-09-12
+  nr=50017953176
+  CLIENT: city='Gdańsk', street='ul. Ciechanowska 3b/2', zip='80-180'
+          phones='["509144622"]', emails='["mariola.salamonik@gmail.com"]'
+          businesses=[]
+  life_details={"kind": "NNW", "description": "NNW szkolne (Mariola Salamonik)", "related_persons": [{"name": "Lena", "type": "PERSON", "pesel": "10212201245"}, {"name": "Leon", "type": "PERSON", "pesel": "15250808139"}]}
+  shares (1):
+    - Własny (wlasny) rate=8.0 amount=15.2
+  notes (1):
+    [2025-09-11] tag=ROZMOWA -> 'polisa zawierana zdalnie'
+================================================================================
+xlsx_2025_row_113 - Barbara Bagnucka-Lis
+  type=ZYCIE, stage=sprzedaz, ins=Generali
+  orig='NNW szkolne'
+  premium=190.0, commission=15.2
+  start=2025-09-04, end=2026-09-04
+  nr=50017864102
+  CLIENT: city='Gdańsk', street='Stanisława Dubois 44', zip='80-419'
+          phones='["515096095"]', emails='["barbarabagnuckal@gmail.com"]'
+          businesses=[]
+  life_details={"kind": "NNW", "description": "NNW szkolne (corka Barbary)", "related_persons": [{"name": "ubezpieczone Agnieszka Lis", "type": "PERSON", "pesel": "09231302028"}, {"name": "Małgorzata Lis", "type": "PERSON", "pesel": "10320602523"}]}
+  shares (1):
+    - Własny (wlasny) rate=8.0 amount=15.2
+  notes (2):
+    [2025-09-03] tag=ROZMOWA -> 'ubezpieczenie zawarte NNW szkolne córki, ma odesłać podpisany skan,umówiono kontakt za rok'
+    [2025-09-03] tag=STATUS -> '[STARA POLISA] ubezpieczenie było jednak klientka nie pamięta gdzie i za ile'
+================================================================================
+xlsx_2025_row_114 - Biały Wieszak
+  type=OC, stage=sprzedaz, ins=Generali
+  orig='przyczepa_GD4X797_Temared 8 14B SGV'
+  premium=176.0, commission=7.04
+  start=2025-09-11, end=2026-09-11
+  nr=50017954304
+  CLIENT: city='Gdańsk', street='ul. Ciechanowska 3b/2', zip='80-180'
+          phones='["509144622"]', emails='["mariola.salamonik@gmail.com"]'
+          businesses=[{'nip': None, 'name': 'Mariola Salamonik'}]
+  auto_details={"vehicle_type": "PRZYCZEPA"}
+  shares (1):
+    - Własny (wlasny) rate=4.0 amount=7.04
+  notes (2):
+    [2025-09-11] tag=STATUS -> '[STARA POLISA] pierwsza rejestracja'
+    [2025-09-11] tag=ROZMOWA -> 'przyczepa na Biały Wieszak, polisa zatwierdzana zdalnie'
+================================================================================
+xlsx_2025_row_115 - Łukasz Błaszak
+  type=FIRMA, stage=sprzedaz, ins=Warta
+  orig='majątek_firma_ Morska 162A Hotel + OC'
+  premium=5053.0, commission=202.12
+  start=2025-09-18, end=2026-09-18
+  nr=920057791890
+  CLIENT: city='Gdynia', street='Morska 162A', zip='81-225'
+          phones='["790649111"]', emails='["kosayarspzoo@gmail.com", "lukaszosk17@gmail.com"]'
+          businesses=[{'nip': None, 'name': 'Kosayar Sp. z o.o.'}]
+  home_details={"su": null, "type": "MAJATEK", "extras": ["Hotel"], "address": "81-225 Gdynia Morska 162A", "area_m2": null, "year_built": null}
+  firma_details={"subType": "MIENIE", "description": "majatek firmowy Hotel + OC", "fleet_count": null}
+  shares (1):
+    - z maila Bartka (firmowy) rate=4.0 amount=202.12
+  notes (4):
+    [2025-09-09] tag=OFERTA -> 'klient napisał na maila Bartka z zapytaniem o ofertę na ubezpieczenie Hotelu przy ul. Morskiej, zrobiłam kalkulacje na parametrach takich jak miał w roku ubiegłym i Warta wychodzi najlepiej cenowo, wy'
+    [2025-09-17] tag=ROZMOWA -> 'polisa zdalna, już opłacona, kontakt z klientem via email, pytał się o ubezpieczenie pojazdów w leasingu'
+    [2025-09-17] tag=STATUS -> '[STARA POLISA] stara w PZU 1098641513 w tym roku skalkulowali na około 8350'
+    [2025-09-17] tag=ROZMOWA -> 'napisałam maila do klienta dot podjęcia decyzji'
+================================================================================
+xlsx_2025_row_116 - Kamil Małkowski
+  type=DOM, stage=rez_po_ofercie, ins=?
+  orig='dom_Poniatowskiego 24, 06-230 Różan, 240m2, 1996r, żelbet, dachówka, wartość mury i stałe elementy około 700 000'
+  premium=None, commission=None
+  start=2025-09-16, end=2026-09-16
+  nr=None
+  CLIENT: city='Różan', street='Poniatowskiego 24', zip='06-230'
+          phones='["501945083"]', emails='["malkowski.kamil@gmail.com"]'
+          businesses=[]
+  home_details={"su": 700000, "type": "DOM", "extras": ["żelbet", "dachówka"], "address": "06-230 Różan Poniatowskiego 24", "area_m2": 240, "coOwners": [{"name": "15.09.2025 klient podpisał umowę", "type": "PERSON"}, {"name": "a gdzie indziej", "type": "PERSON"}, {"name": "umówiono kontakt za rok", "type": "PERSON"}], "year_built": 1996}
+  shares (0):
+  notes (3):
+    [2025-09-08] tag=OFERTA -> 'oferta dotyczy domu rodziców'
+    [2025-09-08] tag=ROZMOWA -> 'klient nie zdążył zapoznać się z ofertą przesłaną na maila, zrobi to i jeszcze pojedzie do swojej agentki zobaczyć co mu zaproponuje, umówiono kontakt w poniedziałek'
+    [2026-05-11] tag=DECISION_PRICE -> '15.09.2025 klient podpisal umowe ubezpieczenia gdzie indziej, umowiono kontakt za rok, nie jestem pewna co do daty startu polisy_wlascicielami domu sa rodzice klienta?'
+================================================================================
+xlsx_2025_row_117 - Robert Stark
+  type=AC, stage=sprzedaz, ins=Compensa
+  orig='polisa zastępcza po rekalkulacji w PZU Quad_samochód_GD86S1_CFMOTO CForce 1000 Overland_2025_poj silnika 962 ccm'
+  premium=2136.0, commission=42.72
+  start=2025-09-26, end=2026-09-26
+  nr=4598624
+  CLIENT: city='Gdańsk', street='Krzemienieckiej 9A', zip='80-448'
+          phones='["601617076"]', emails='["biuro@parkiet-stark.pl", "robert@parkiet-stark.pl"]'
+          businesses=[{'nip': None, 'name': 'Parkiet Stark Sp. z o.o. Sp. K.'}]
+  auto_details={"ac": {"ass": null, "kind": null, "opony": false, "szyby": false, "extras": []}, "fuel": "benzyna", "year": 2025, "coOwners": [{"name": "Santander Leasing Spółka Akcyjna Oddział w Gdańsku  80-280 Gdańsk, ul. Cypriana Norwida 4", "type": "LEASING", "notes": "Dane z importu", "regon": "01216226500658"}], "engine_cc": 962, "vehicle_type": "QUAD", "ownershipType": "LEASING"}
+  shares (0):
+  notes (2):
+    [2025-09-26] tag=OFERTA -> 'polisa na samo AC w zamian za polisę z której klient rezygnował(prośba do PZU UW o zgodę na rozwiązanie za porozumieniem stron) po rekalkulacji podnoszącej składkę o prawie 4 tys'
+    [2025-09-26] tag=STATUS -> '[STARA POLISA] nowy pojazd pierwsze ubezpieczenie'
+================================================================================
+xlsx_2025_row_118 - Michał Czarnota
+  type=DOM, stage=sprzedaz, ins=TUZ
+  orig='dom_Wilczy Dół 1/85'
+  premium=1033.0, commission=123.96
+  start=2025-10-01, end=2026-10-01
+  nr=HFS0616361
+  CLIENT: city='Warszawa', street='ul. Wilczy Dół 1/85', zip='02-798'
+          phones='[]', emails='["michal.czarnota@gmail.com"]'
+          businesses=[]
+  home_details={"su": null, "type": "MIESZKANIE", "extras": [], "address": "02-798 Warszawa ul. Wilczy Dół 1/85", "area_m2": null, "coOwners": [{"name": "Alicja Waczyńska", "type": "PERSON", "pesel": "87012909309"}], "year_built": null}
+  shares (0):
+  notes (3):
+    [2025-09-12] tag=OFERTA -> 'oferta wysłana na maila TUZ, Warta i PZU'
+    [2025-09-29] tag=ROZMOWA -> 'klient zaakceptował ofertę zdalnie mailem, dostałam zniżkę ogólną na 55 % pisząc na zniżki (się Paulina zdziwiła)'
+    [2025-09-29] tag=STATUS -> '[STARA POLISA] Uniqa 2860348953'
+================================================================================
+xlsx_2025_row_119 - Agnieszka (brak nazwiska)
+  type=DOM, stage=przel_kontakt, ins=?
+  orig='dom, mieszkanie?'
+  premium=None, commission=None
+  start=None, end=None
+  nr=None
+  CLIENT: city='Żukowo', street='ul. Literacka?', zip=None
+          phones='["531037602"]', emails='[]'
+          businesses=[]
+  home_details={"su": null, "type": null, "extras": [], "address": "Żukowo ul. Literacka", "area_m2": null, "year_built": null}
+  shares (0):
+  notes (1):
+    [2025-12-22] tag=ROZMOWA -> 'kończy się ubezpieczenie auta w maju, miła Pani kontakt na ofertę umówiony,'
+================================================================================
+xlsx_2025_row_120 - Magdalena Brzozowska
+  type=OC, stage=sprzedaz, ins=MTU24
+  orig='samochód_SLUMK91 Volkswagen Caddy 2.0 TDI, dostawczy do 3,5 t, prod 2020, 2 miejsca, poj 1968 cm3, samo'
+  premium=634.0, commission=6.34
+  start=2025-09-10, end=2026-09-10
+  nr=460004710269
+  CLIENT: city='Kamieńskie Młyny', street='ul. Tysiąclecia 73C', zip='42-287'
+          phones='["530607755"]', emails='["bigtrans@onet.pl"]'
+          businesses=[{'nip': None, 'name': 'BigTrans'}]
+  auto_details={"fuel": "diesel", "year": 2020, "engine_cc": 1968, "vehicle_type": "DOSTAWCZY"}
+  shares (1):
+    - z telefonu Bartka (firmowy) rate=1.0 amount=6.34
+  notes (2):
+    [2025-10-02] tag=ROZMOWA -> 'papierowa odesłała podpisaną polisę, klientka potrzebowała polisy tego dnia, zrobiolna na Ani dostępach bo ja byłam na L4,'
+    [2025-10-02] tag=STATUS -> '[STARA POLISA] nowo zakupiony'
+================================================================================
+xlsx_2025_row_121 - Wiesława Bolin
+  type=OC, stage=rez_po_ofercie, ins=?
+  orig='samochód GWE1142V Volkswagen Golf 1598 cm3, 85 kW, olej napędowy, prod 2019, przebieg 184499, pakiet'
+  premium=None, commission=None
+  start=2026-10-02, end=2027-10-02
+  nr=None
+  CLIENT: city='Wejherowo', street='Kochanowskiego 17/31', zip='84-200'
+          phones='["664742324"]', emails='["wiesiabolin@gmail.com"]'
+          businesses=[]
+  auto_details={"fuel": "diesel", "year": 2019, "coOwners": [{"name": "78 Przedstawiciel Volkswagen Financial Services Polska Sp. z o.o. 84-200 Wejherowo, ul. Gdańska 13C", "type": "PERSON"}], "power_km": 115, "power_kw": 85, "engine_cc": 1598, "vehicle_type": "OSOBOWY"}
+  shares (0):
+  notes (2):
+    [2025-09-24] tag=OFERTA -> 'ze względu na opłatę przy zmianie ubezpieczyciela która jest zapisana w umowie leasingu (300 zł) moja oferta nie była konkurencyjna) moja najniższa to około 2 tys Warta. REGON wiesi  firmy 361957818, '
+    [2025-09-24] tag=STATUS -> '[STARA POLISA] Allianz'
+================================================================================
+xlsx_2025_row_122 - Władysław Kolczyński
+  type=BOTH, stage=sprzedaz, ins=Ergo Hestia
+  orig='samochód_WF0597V_Dacia Duster 1.3 TCE FAP Essential_rok prod 2020, pojemność 1333 cm3, 5miejsc_pakiet AC/OC/NNW/ASS'
+  premium=1520.0, commission=60.8
+  start=2025-10-08, end=2026-10-08
+  nr=909014306231
+  CLIENT: city='Warszawa', street='Gen. Bora- Komorowskiego 8/45', zip='03-982'
+          phones='["602248559"]', emails='["carkol@post.pl"]'
+          businesses=[]
+  auto_details={"ac": {"ass": "Standard", "kind": "pakiet", "opony": false, "szyby": false, "extras": ["NNW"]}, "fuel": "benzyna", "year": 2020, "engine_cc": 1333, "vehicle_type": "OSOBOWY"}
+  shares (1):
+    - Osip (firmowy) rate=4.0 amount=60.8
+  notes (4):
+    [2025-09-16] tag=STATUS -> '[STARA POLISA] stara PZU 1074800394'
+    [2025-09-16] tag=ROZMOWA -> 'wypowiedzenie do pzu zarejestrowane'
+    [2025-09-16] tag=ROZMOWA -> 'klient wydzwoniony z Osip, był zainteresowany tańszą ofertą za pakiet AC/OC, mile zaskoczony że to w Ergo Hestii, polisa przesłana mailem jak i wypowiedzenie do podpisania i odesłania'
+    [2025-09-16] tag=ROZMOWA -> 'prowadzi działalność REGON 006943990'
+================================================================================
+xlsx_2025_row_123 - Krzysztof Skonieczny
+  type=OC, stage=rez_po_ofercie, ins=?
+  orig='samochód_WPI2792K_Cadillac Escalade, prod 2015,   benzyna/gaz LPG, 6200m@ 326 MK,239KW, automat, 7 miejsc rej w Polsce 15.10.2020, 193 tys przebiegu'
+  premium=None, commission=None
+  start=2025-09-25, end=2026-09-25
+  nr=None
+  CLIENT: city='Lipno', street='Jagodowa 26', zip=None
+          phones='["660760238"]', emails='["krzysztof_skonieczny@onet.pl"]'
+          businesses=[]
+  auto_details={"fuel": "LPG", "year": 2015, "power_km": 326, "power_kw": 239, "engine_cc": 6200, "vehicle_type": "OSOBOWY"}
+  shares (0):
+  notes (3):
+    [2025-09-10] tag=ROZMOWA -> 'pojazdu nie mogę wprowadzić sama, wysłałam prośbę o wycenę pojazdu do Warty'
+    [2025-09-16] tag=STATUS -> '[STARA POLISA] stara w PZU'
+    [2025-09-16] tag=ROZMOWA -> 'Warta wyceniła pojazd indywidualnie na 128 tys, składka za pakiet okoł 10 tys z HDI, klient ma lepszą ofertę z PZU na wznowieniu'
+================================================================================
+xlsx_2025_row_124 - Jacek Palecki
+  type=OC, stage=rez_po_ofercie, ins=?
+  orig='samochód_GKA2014E_Mercedes- Benz CLA 250'
+  premium=None, commission=None
+  start=2025-10-02, end=2026-10-02
+  nr=None
+  CLIENT: city='Borkowo', street='ul. Widokowa 27', zip='80-180'
+          phones='["574991596"]', emails='["paleckijacek@gmail.com"]'
+          businesses=[]
+  auto_details={"coOwners": [{"name": "stara uniqa 2864320336", "type": "PERSON"}], "vehicle_type": "OSOBOWY"}
+  shares (0):
+  notes (7):
+    [2025-08-12] tag=ROZMOWA -> 'zainteresowany, ma wysłać ubiegłoroczną polisę na maila'
+    [2025-08-13] tag=ROZMOWA -> 'czekam na informacje dot skrzyni biegów i typu auta, wysłałam sms z zapytaniem, TUZ przepuszcza ofertę pomimo że polisa ma startować od 02.10.2025'
+    [2025-08-18] tag=ROZMOWA -> 'poinformoawałam klienta o tym że wiążącą ofertę można złożyć na minimum 30 dni przed rozp ubezpieczenia, i że będę kontaktowała się w połowie września'
+    [2025-09-15] tag=OFERTA -> 'nr niedostępny, oferta ubezpiecznenia wysłana mailem 11.09.2025 Trasti i TUZ'
+    [2025-09-16] tag=STATUS -> 'nie odbiera'
+    [2025-09-18] tag=STATUS -> '[STARA POLISA] Uniqa'
+    [2025-09-23] tag=DECISION_PRICE -> 'dostałam informację w sms od klienta że rezygnuje z ubezpieczebnia'
+================================================================================
+xlsx_2025_row_125 - Robert Stark
+  type=DOM, stage=sprzedaz, ins=TUZ
+  orig='dom_Kochanowskiego 3B'
+  premium=2020.0, commission=242.4
+  start=2025-10-31, end=2026-10-31
+  nr=HFS0631835
+  CLIENT: city='Gdańsk', street='Krzemienieckiej 9A', zip='80-448'
+          phones='["601617076"]', emails='["biuro@parkiet-stark.pl", "robert@parkiet-stark.pl"]'
+          businesses=[{'nip': None, 'name': 'Parkiet Stark Sp. z o.o. Sp. K.'}]
+  home_details={"su": null, "type": "DOM", "extras": [], "address": "83-300 Kartuzy ul. Jana Kochanowskiego 3B", "area_m2": null, "year_built": null}
+  shares (0):
+  notes (2):
+    [2025-10-30] tag=ROZMOWA -> 'zastosowałam znizkę 50 %, polisa zdalna potwierdzona mailem'
+    [2025-10-30] tag=STATUS -> '[STARA POLISA] stara polisa PZU 1082747856'
+================================================================================
+xlsx_2025_row_126 - Łukasz Błaszak
+  type=DOM, stage=sprzedaz, ins=TUZ
+  orig='dom_Dębowa 36/2_dom 650 tys, ruchomości 50 tysOC 100 tys'
+  premium=710.0, commission=28.4
+  start=2025-10-29, end=2026-10-29
+  nr=HFS0630755
+  CLIENT: city='Gdynia', street='Morska 162A', zip='81-225'
+          phones='["790649111"]', emails='["kosayarspzoo@gmail.com", "lukaszosk17@gmail.com"]'
+          businesses=[{'nip': None, 'name': 'Kosayar Sp. z o.o.'}]
+  home_details={"su": 650000, "type": "DOM", "extras": ["ruchomosci 50tys", "OC 100tys"], "address": "84-230 Rumia ul. Dębowa 36/2", "area_m2": null, "year_built": null}
+  shares (0):
+  notes (4):
+    [2025-09-09] tag=OFERTA -> 'klient napisał na maila Bartka z zapytaniem o ofertę na ubezpieczenie Hotelu przy ul. Morskiej, zrobiłam kalkulacje na parametrach takich jak miał w roku ubiegłym i Warta wychodzi najlepiej cenowo, wy'
+    [2025-09-17] tag=ROZMOWA -> 'polisa zdalna, już opłacona, kontakt z klientem via email, pytał się o ubezpieczenie pojazdów w leasingu'
+    [2025-09-17] tag=ROZMOWA -> 'napisałam maila do klienta dot podjęcia decyzji'
+    [2025-10-28] tag=STATUS -> '[STARA POLISA] 29.10.2025 polisa zdalna'
+================================================================================
+xlsx_2025_row_127 - Anna Hołownia
+  type=OC, stage=sprzedaz, ins=InterRisk
+  orig="samochód_GD519KW Kia Cee'd 2007 diesel 1583 cm3 85kw hatchback manual"
+  premium=1483.0, commission=59.32
+  start=2025-10-30, end=2026-10-30
+  nr=VKPA-A/S0020238
+  CLIENT: city='Gdańsk', street='al. Rzeczpospolitej 4B/120', zip='80-369'
+          phones='["691508556"]', emails='["ankakatarzynah@gmail.com"]'
+          businesses=[]
+  auto_details={"fuel": "diesel", "year": 2007, "power_km": 115, "power_kw": 85, "engine_cc": 1583, "vehicle_type": "OSOBOWY"}
+  shares (0):
+  notes (2):
+    [2025-10-28] tag=ROZMOWA -> 'Ania sama się skontaktowała, dowiedziała się że pracuję w ubezpieczeniach z naszego ogłoszenia'
+    [2025-10-29] tag=STATUS -> '[STARA POLISA] nowo kupiony (używany)'
+================================================================================
+xlsx_2025_row_128 - Jakub Elass
+  type=DOM, stage=sprzedaz, ins=TUZ
+  orig='mieszkanie_Leszczynowa 56b/6, 80-175 Gdańsk'
+  premium=448.0, commission=22.4
+  start=2025-05-26, end=2026-05-26
+  nr=HFS0631777
+  CLIENT: city='Bojano', street='ul. Miodowa 3', zip='84-207'
+          phones='["693102646"]', emails='["szymon.e@wp.pl", "kuba.e@wp.pl"]'
+          businesses=[]
+  home_details={"su": null, "type": "MIESZKANIE", "extras": [], "address": "80-175 Gdańsk ul. Leszczynowa 56b/6", "area_m2": null, "year_built": null}
+  shares (1):
+    - Hejka/czy dla Beci też? (firmowy) rate=5.0 amount=22.4
+  notes (3):
+    [2025-10-30] tag=ROZMOWA -> 'klient sam się skontaktował mailowo z zapytaniem o ofertę zrobiłam na wartość rzeczywistą, wcześniejsze ubespieczenie miało SU 100 tys'
+    [2025-10-30] tag=ROZMOWA -> 'polisa zdalna'
+    [2025-10-30] tag=STATUS -> '[STARA POLISA] stara polisa Interrisk DI-K/P 240661'
+================================================================================
+xlsx_2025_row_129 - Hanna Henzler
+  type=DOM, stage=sprzedaz, ins=Compensa
+  orig='majątek_domek letniskowy_ 77-124 Parchowo Parchowski Młyn 354/3_budowa 2015, 25m2, SU 100 tys, ogrodzenie 5 tys, el ruchome 5 tys, OC 100 tys'
+  premium=261.0, commission=7.83
+  start=2025-10-30, end=2026-10-30
+  nr=8077999
+  CLIENT: city='Gdynia', street='ul. Płk. Stanisława Dąbka 241a/105', zip='81-155'
+          phones='["793906170"]', emails='["hania.henzler@gmail.com"]'
+          businesses=[]
+  home_details={"su": 100000, "type": "DOMEK", "extras": ["ogrodzenie 5tys", "el ruchome 5tys", "OC 100tys"], "address": "77-124 Parchowo Parchowski Młyn 354/3", "area_m2": 25, "year_built": 2015}
+  shares (0):
+  notes (2):
+    [2025-10-30] tag=ROZMOWA -> 'klientka Grądziel, zadzwoniła do mnie po nową ofertę'
+    [2025-10-30] tag=STATUS -> '[STARA POLISA] compensa 6748500'
+================================================================================
+xlsx_2025_row_130 - Hanna Henzler
+  type=DOM, stage=sprzedaz, ins=Compensa
+  orig='majątek_domek letniskowy_ 77-124 Parchowo Parchowski Młyn 355/7 D1_budowa 2017 25m2, SU 100 tys, ogrodzenie 5 tys, el ruchome 5 tys'
+  premium=212.0, commission=6.36
+  start=2025-10-30, end=2026-10-30
+  nr=8077999
+  CLIENT: city='Gdynia', street='ul. Płk. Stanisława Dąbka 241a/105', zip='81-155'
+          phones='["793906170"]', emails='["hania.henzler@gmail.com"]'
+          businesses=[]
+  home_details={"su": 100000, "type": "DOMEK", "extras": ["ogrodzenie 5tys", "el ruchome 5tys"], "address": "77-124 Parchowo Parchowski Młyn 355/7 D1", "area_m2": 25, "year_built": 2017}
+  shares (0):
+  notes (2):
+    [2025-10-30] tag=ROZMOWA -> 'klientka Grądziel, zadzwoniła do mnie po nową ofertę'
+    [2025-10-30] tag=STATUS -> '[STARA POLISA] compensa 6748493 wcześniej 1 domki były połączone na polisie, bez wyszczególnnienia za 569zł'

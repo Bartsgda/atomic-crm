@@ -1,0 +1,2313 @@
+[
+  {
+    "legacy_id": "xlsx_2025_row_81",
+    "policy": {
+      "type": "DOM",
+      "stage": "przel_kontakt",
+      "original_product_string": "dom_Południowa 33",
+      "ai_note": "Dowiedziala sie przy okazji samochodu | BRAK W XLSX: area_m2, year_built, su",
+      "policy_number": null,
+      "insurer_id": null,
+      "insurer_name": null,
+      "premium": null,
+      "commission": null,
+      "policy_start_date": "2026-08-10",
+      "policy_end_date": "2027-08-10",
+      "next_contact_date": "2026-07-06",
+      "vehicle_brand": null,
+      "vehicle_model": null,
+      "vehicle_reg": null,
+      "auto_details": null,
+      "home_details": {
+        "su": null,
+        "type": "DOM",
+        "extras": [],
+        "address": "96-515 Granice Południowa 33",
+        "area_m2": null,
+        "year_built": null
+      },
+      "travel_details": {},
+      "firma_details": {},
+      "life_details": {},
+      "created_at": "2025-11-21T12:00:00+00:00"
+    },
+    "client": {
+      "first_name": "Ewa",
+      "last_name": "Zieja",
+      "phones": "[\"516089390\"]",
+      "emails": "[\"ewa.dziurz@poczta.onet.pl\"]",
+      "street": "Południowa 33",
+      "city": "Granice",
+      "zip_code": "96-515",
+      "businesses": [],
+      "source": "xlsx_import",
+      "created_at": "2025-10-08T12:00:00+00:00"
+    },
+    "notes": [
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] TUW nie na to auto_błąd agenta",
+        "created_at": "2025-10-08",
+        "linked": [
+          "344c3237-5a80-423e-95de-d33cff9e87ab"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "przy okazji rozmowy o ubezp samochodu które u mnie robiła dowiedziałam się że polisa na dom kończy się jej w sierpniu, nie wiem dokładnie kiedy, chce ofertę",
+        "created_at": "2025-11-21",
+        "linked": [
+          "7a902269-4b10-4508-a363-d94c73493d1a"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "rozmawiałam z klientką bo dopiero teraz wysyłała wypowiedzenie do TUW, odezwali się do niej że takowego nie dostali. sprawdzałam na mailu i do mnie klientka też nie wysyłała więc na pewno poinformowałam ją  że musi zrobić wypowiedzenie sama 10.10.2025 polisa podpisana zdalnie, zdjęcia pojazdu załącz",
+        "created_at": "2025-11-21",
+        "linked": [
+          "344c3237-5a80-423e-95de-d33cff9e87ab"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "poleciłam jej skontaktować się z agentem i powiedziałam o karze z UFG i o tym że agent powinien skorzystać  ubezpieczeni i opłacić karę za nią",
+        "created_at": "2025-11-21",
+        "linked": [
+          "344c3237-5a80-423e-95de-d33cff9e87ab"
+        ]
+      }
+    ],
+    "shares": [],
+    "insurer_name_lookup": ""
+  },
+  {
+    "legacy_id": "xlsx_2025_row_82",
+    "policy": {
+      "type": "FIRMA",
+      "stage": "sprzedaz",
+      "original_product_string": "OC_przedsiębiorcy",
+      "ai_note": "Kosmetolog z zabiegami - OC szyte na miare | BRAK W XLSX: su",
+      "policy_number": "50017408099",
+      "insurer_id": "b7ede18e-b468-4592-81c8-310c227727ca",
+      "insurer_name": "Generali",
+      "premium": 1379.0,
+      "commission": 55.16,
+      "policy_start_date": "2025-07-25",
+      "policy_end_date": "2026-07-25",
+      "next_contact_date": "2026-07-06",
+      "vehicle_brand": null,
+      "vehicle_model": null,
+      "vehicle_reg": null,
+      "auto_details": null,
+      "home_details": {},
+      "travel_details": {},
+      "firma_details": {
+        "coOwners": [
+          {
+            "name": "kl64",
+            "type": "PERSON",
+            "phone": "920227921"
+          }
+        ]
+      },
+      "life_details": {},
+      "created_at": "2025-07-24T12:00:00+00:00"
+    },
+    "client": {
+      "first_name": "Julia",
+      "last_name": "Kluszczyńska",
+      "phones": "[\"533184221\"]",
+      "emails": "[\"jkbeautyclinic@onet.pl\"]",
+      "street": "ul. ks. Jerzego Popiełuszki 24/3",
+      "city": "Gdańsk",
+      "zip_code": "80-864",
+      "businesses": [],
+      "source": "xlsx_import",
+      "created_at": "2025-07-24T12:00:00+00:00"
+    },
+    "notes": [
+      {
+        "tag": "ROZMOWA",
+        "content": "klientka wie czego chce, ubezpieczenie zrobione na miarę ;) kosmetolog z zabiegami takimi jak botoks, kwas hialuronowy na które chciała OC",
+        "created_at": "2025-07-24",
+        "linked": [
+          "9240c85e-ae72-4dc5-958e-98823757b4af"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] hestia 922001100465",
+        "created_at": "2025-07-24",
+        "linked": [
+          "9240c85e-ae72-4dc5-958e-98823757b4af"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "92022792164 - prawdopodobnie PESEL klienta (kl=klient)",
+        "created_at": "2026-05-11",
+        "linked": [
+          "9240c85e-ae72-4dc5-958e-98823757b4af"
+        ]
+      }
+    ],
+    "shares": [
+      {
+        "rate": 4.0,
+        "amount": 55.16,
+        "sub_agent": "Firmowy (ogólny)",
+        "group": "firmowy"
+      }
+    ],
+    "insurer_name_lookup": "Generali"
+  },
+  {
+    "legacy_id": "xlsx_2025_row_83",
+    "policy": {
+      "type": "BOTH",
+      "stage": "sprzedaz",
+      "original_product_string": "samochód_GD758YK_Mazda CX-5 15-17",
+      "ai_note": "Rocznik z modelu '15-17' = 2015-2017 | BRAK W XLSX: engine_cc, power, year, fuel",
+      "policy_number": "460004482449",
+      "insurer_id": "b21b4bcb-bede-4f98-a61f-dafd6a5283ac",
+      "insurer_name": "MTU",
+      "premium": 2797.0,
+      "commission": 55.94,
+      "policy_start_date": "2025-08-10",
+      "policy_end_date": "2026-08-10",
+      "next_contact_date": "2026-07-13",
+      "vehicle_brand": "Mazda",
+      "vehicle_model": "CX-5 15-17",
+      "vehicle_reg": "GD758YK",
+      "auto_details": {
+        "ac": {
+          "ass": null,
+          "kind": "serwis",
+          "opony": false,
+          "szyby": false,
+          "extras": []
+        },
+        "vehicle_type": "OSOBOWY"
+      },
+      "home_details": {},
+      "travel_details": {},
+      "firma_details": {},
+      "life_details": {},
+      "created_at": "2025-07-13T12:00:00+00:00"
+    },
+    "client": {
+      "first_name": "Bartosz",
+      "last_name": "Waczyński",
+      "phones": "[\"605401803\"]",
+      "emails": "[\"waczynski@gmail.com\"]",
+      "street": "ul. Rytelska 25",
+      "city": "Gdańsk",
+      "zip_code": "80-180",
+      "businesses": [],
+      "source": "xlsx_import",
+      "created_at": "2025-04-22T12:00:00+00:00"
+    },
+    "notes": [
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] TUZ HFS nr 0400076",
+        "created_at": "2025-07-04",
+        "linked": [
+          "aae48a7e-446c-415f-8e2b-bac78fde53dc"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara polisa hestia AC/OC, wypowiedzenie do Hestii zarejestrowane",
+        "created_at": "2025-07-13",
+        "linked": [
+          "fa3eba77-f72c-4e06-9b45-4ae1d60b4444"
+        ]
+      }
+    ],
+    "shares": [
+      {
+        "rate": 2.0,
+        "amount": 55.94,
+        "sub_agent": "Własny",
+        "group": "wlasny"
+      }
+    ],
+    "insurer_name_lookup": "MTU"
+  },
+  {
+    "legacy_id": "xlsx_2025_row_84",
+    "policy": {
+      "type": "OC",
+      "stage": "sprzedaz",
+      "original_product_string": "Przyczepa_GD075YX",
+      "ai_note": "Przyczepa - polisa zdalna, sprawdz UFG | BRAK W XLSX: brand, model, year",
+      "policy_number": "1000357429515",
+      "insurer_id": "b7ede18e-b468-4592-81c8-310c227727ca",
+      "insurer_name": "Generali",
+      "premium": 144.0,
+      "commission": 5.76,
+      "policy_start_date": "2025-08-09",
+      "policy_end_date": "2026-08-09",
+      "next_contact_date": "2026-07-13",
+      "vehicle_brand": null,
+      "vehicle_model": null,
+      "vehicle_reg": "GD075YX",
+      "auto_details": {
+        "vehicle_type": "PRZYCZEPA"
+      },
+      "home_details": {},
+      "travel_details": {},
+      "firma_details": {},
+      "life_details": {},
+      "created_at": "2025-07-16T12:00:00+00:00"
+    },
+    "client": {
+      "first_name": "Mariola",
+      "last_name": "Salamonik",
+      "phones": "[\"509144622\"]",
+      "emails": "[\"mariola.salamonik@gmail.com\"]",
+      "street": "ul. Ciechanowska 3b/2",
+      "city": "Gdańsk",
+      "zip_code": "80-180",
+      "businesses": [],
+      "source": "xlsx_import",
+      "created_at": "2025-06-29T12:00:00+00:00"
+    },
+    "notes": [
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara PZU nr 1063564798",
+        "created_at": "2025-07-16",
+        "linked": [
+          "9dd52fa4-6948-4c59-a688-4610ef835aec"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "polisa zdalna, wypowiedzenie do PZU zarejestrowane",
+        "created_at": "2025-07-16",
+        "linked": [
+          "9dd52fa4-6948-4c59-a688-4610ef835aec"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "klientka kupiła droższą polisę u mnie ze względu na świetną obsługę",
+        "created_at": "2025-07-29",
+        "linked": [
+          "b4cd353e-a139-49bb-b6eb-0c5e66b801b7"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] Insurance JSC Dallborgg Life and Health",
+        "created_at": "2025-07-29",
+        "linked": [
+          "b4cd353e-a139-49bb-b6eb-0c5e66b801b7"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "polisa zawierana zdalnie",
+        "created_at": "2025-09-11",
+        "linked": [
+          "1658622e-d3fd-46c9-9705-f405d670c9d6"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] PZU 1087517615 PIN 5435",
+        "created_at": "2025-10-23",
+        "linked": [
+          "b09b6399-a938-4f86-8fc5-14e6e7de91eb"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "klientka kupiła droższą polisę u mnie ze względu na świetną obsługę",
+        "created_at": "2025-10-23",
+        "linked": [
+          "b09b6399-a938-4f86-8fc5-14e6e7de91eb"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "Mariola mówiła że z PZU na tą samą SU dostała ofertę na około 1400 zł",
+        "created_at": "2025-10-25",
+        "linked": [
+          "b09b6399-a938-4f86-8fc5-14e6e7de91eb"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "klientka zoriętowała się, że niema już ważnego ubezpieczenia",
+        "created_at": "2025-11-17",
+        "linked": [
+          "56ee28b9-53b6-4623-af89-e60e8276b9ee"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "polisa zdalna",
+        "created_at": "2025-11-19",
+        "linked": [
+          "56ee28b9-53b6-4623-af89-e60e8276b9ee"
+        ]
+      }
+    ],
+    "shares": [
+      {
+        "rate": 4.0,
+        "amount": 5.76,
+        "sub_agent": "Własny",
+        "group": "wlasny"
+      }
+    ],
+    "insurer_name_lookup": "Generali"
+  },
+  {
+    "legacy_id": "xlsx_2025_row_85",
+    "policy": {
+      "type": "FIRMA",
+      "stage": "sprzedaz",
+      "original_product_string": "majątek_NZOZ",
+      "ai_note": "Klient nie mial polisy od kilku lat, NZOZ podmiot leczniczy | BRAK W XLSX: area_m2, year_built, su",
+      "policy_number": "920056310592",
+      "insurer_id": "fd582ee0-8956-46b7-b17f-82c958eb87e7",
+      "insurer_name": "Warta",
+      "premium": 912.0,
+      "commission": 72.96,
+      "policy_start_date": "2025-08-06",
+      "policy_end_date": "2026-08-06",
+      "next_contact_date": "2026-07-13",
+      "vehicle_brand": null,
+      "vehicle_model": null,
+      "vehicle_reg": null,
+      "auto_details": null,
+      "home_details": {
+        "su": null,
+        "type": "MAJATEK",
+        "extras": [
+          "NZOZ"
+        ],
+        "address": "87-840 Lubień Kujawski Kłóbka 10",
+        "area_m2": null,
+        "year_built": null
+      },
+      "travel_details": {},
+      "firma_details": {
+        "subType": "MIENIE",
+        "description": "majatek NZOZ Kłóbka 10 - podmiot leczniczy",
+        "fleet_count": null
+      },
+      "life_details": {},
+      "created_at": "2025-08-04T12:00:00+00:00"
+    },
+    "client": {
+      "first_name": "Jarosław",
+      "last_name": "Waczyński",
+      "phones": "[\"608624544\"]",
+      "emails": "[\"lekwaczynski@interia.pl\"]",
+      "street": "Kujawski Kłóbka 10",
+      "city": "Lubień",
+      "zip_code": "87-840",
+      "businesses": [],
+      "source": "xlsx_import",
+      "created_at": "2025-06-26T12:00:00+00:00"
+    },
+    "notes": [
+      {
+        "tag": "ROZMOWA",
+        "content": "klient nie miał polisy od kilku lat, ostatnia 2028 którą z resztą ja przygotowywałam, SU nieadekwatne do obecnych, zostały skorygowane.",
+        "created_at": "2024-08-04",
+        "linked": [
+          "9b72b859-e5a1-4abd-87bc-6e664f2086fd"
+        ]
+      },
+      {
+        "tag": "OFERTA",
+        "content": "wysłana oferta na maila (Warta wznowienie 3559zł) +sms",
+        "created_at": "2025-06-24",
+        "linked": [
+          "09a34ad3-8728-490d-8232-76e23ca9de9b"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "chce zostać w Warcie, zrobić wznowienie",
+        "created_at": "2025-06-24",
+        "linked": [
+          "09a34ad3-8728-490d-8232-76e23ca9de9b"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara polisa Warta_920043429123",
+        "created_at": "2025-06-26",
+        "linked": [
+          "09a34ad3-8728-490d-8232-76e23ca9de9b"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] nie był ubezpieczenia od kilku lat",
+        "created_at": "2025-08-04",
+        "linked": [
+          "9b72b859-e5a1-4abd-87bc-6e664f2086fd"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "wysłałąm ofertę, jednak jest około 400 zł droższa niż ta zaproponowana przez Allianz",
+        "created_at": "2025-12-08",
+        "linked": [
+          "b0590262-bb9d-4895-9697-5df54d4b0270"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] Allianz 459-67634905",
+        "created_at": "2025-12-11",
+        "linked": [
+          "b0590262-bb9d-4895-9697-5df54d4b0270"
+        ]
+      }
+    ],
+    "shares": [
+      {
+        "rate": 8.0,
+        "amount": 72.96,
+        "sub_agent": "Własny",
+        "group": "wlasny"
+      }
+    ],
+    "insurer_name_lookup": "Warta"
+  },
+  {
+    "legacy_id": "xlsx_2025_row_86",
+    "policy": {
+      "type": "OC",
+      "stage": "sprzedaz",
+      "original_product_string": "motocykl_GKAE29L_ Piaggio/ Vespa",
+      "ai_note": "BRAK W XLSX: engine_cc, power, year",
+      "policy_number": "920056387529",
+      "insurer_id": "fd582ee0-8956-46b7-b17f-82c958eb87e7",
+      "insurer_name": "Warta",
+      "premium": 94.0,
+      "commission": 3.76,
+      "policy_start_date": "2025-08-05",
+      "policy_end_date": "2026-08-05",
+      "next_contact_date": "2026-07-13",
+      "vehicle_brand": "Piaggio",
+      "vehicle_model": "Vespa",
+      "vehicle_reg": "GKAE29L",
+      "auto_details": {
+        "fuel": "benzyna",
+        "vehicle_type": "MOTOCYKL"
+      },
+      "home_details": {},
+      "travel_details": {},
+      "firma_details": {},
+      "life_details": {},
+      "created_at": "2025-08-05T12:00:00+00:00"
+    },
+    "client": {
+      "first_name": "Robert",
+      "last_name": "Stark",
+      "phones": "[\"601617076\"]",
+      "emails": "[\"biuro@parkiet-stark.pl\", \"robert@parkiet-stark.pl\"]",
+      "street": "Krzemienieckiej 9A",
+      "city": "Gdańsk",
+      "zip_code": "80-448",
+      "businesses": [
+        {
+          "nip": null,
+          "name": "Parkiet Stark Sp. z o.o. Sp. K."
+        }
+      ],
+      "source": "xlsx_import",
+      "created_at": "2025-08-05T12:00:00+00:00"
+    },
+    "notes": [
+      {
+        "tag": "ROZMOWA",
+        "content": "klient miał polisę OC w PZU która przedłużyłasię 20.07.2025 roku, jednak nie był z niej zadowolony i poprosił o ofertę u mnie. Polisa wystawiona, wypowiedzenie do PZU wysłane z datą 06.08.2025",
+        "created_at": "2025-08-05",
+        "linked": [
+          "78b96644-d00c-428e-b18e-b474d4a7ddd2"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara polisa PZU 1032457358",
+        "created_at": "2025-08-05",
+        "linked": [
+          "78b96644-d00c-428e-b18e-b474d4a7ddd2"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara polisa nr 1097753829 z umowy generalnej nr 18737/BUW/AW/2023",
+        "created_at": "2025-08-07",
+        "linked": [
+          "5c41ab8b-687e-4001-a473-2ccd47eef8e5"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "klient wybrał tańszą opcję AC (kosztorys), auto zrobione w osobnym ubezpieczeniu bo nie zdążyłam przygotować oferty floty, wypowiedzenie wznowienia w PZU zarejestrowane w PZU 07.08.2025",
+        "created_at": "2025-08-07",
+        "linked": [
+          "5c41ab8b-687e-4001-a473-2ccd47eef8e5"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "polisa w PZU serwis zmiana na kosztorys Warta, wypowiedzenie do PZU zarejestrowane",
+        "created_at": "2025-08-08",
+        "linked": [
+          "cfe0deb0-d753-49bb-bdae-18b489670fde"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] PZU polisa 1097753830",
+        "created_at": "2025-08-08",
+        "linked": [
+          "cfe0deb0-d753-49bb-bdae-18b489670fde"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] nowy pojazd pbierwsze ubezpieczenie",
+        "created_at": "2025-08-12",
+        "linked": [
+          "b17b8158-94db-4683-a5e2-d982012250fb"
+        ]
+      },
+      {
+        "tag": "OFERTA",
+        "content": "nowy pojazd klienta, kalkulacje w różnych towarzystwach, najlepiej wychodziło z PZU, wartość pojazdu ustalona przez fakturę zakupu",
+        "created_at": "2025-08-12",
+        "linked": [
+          "b17b8158-94db-4683-a5e2-d982012250fb"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] pierwsza polisa_sprowadzany",
+        "created_at": "2025-08-14",
+        "linked": [
+          "b29f1ea4-e7b4-440c-ba34-494c445e7fb8"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] pierwsza polisa_sprowadzany",
+        "created_at": "2025-08-19",
+        "linked": [
+          "61cdf46b-3c53-4f59-bb5a-58bc297bdf7f"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara polisa PZU 1098320364 samo OC+ASS",
+        "created_at": "2025-08-20",
+        "linked": [
+          "271f19fc-cb1c-4b2d-ab4c-d38e147a0a00"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "na szybko zrobione OC bo pierwsza rejestracja (było wymagane) zarejestrowano wypowiedzenie ze względu na podwójne ubezpieczenie, później kupił pakiet w PZU",
+        "created_at": "2025-08-20",
+        "linked": [
+          "b29f1ea4-e7b4-440c-ba34-494c445e7fb8"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "klient z samego OC w PZU przeszedł na Pakiet w Warcie droższy o zaledwie 500 zł, wypowiedzenie do PZU zarejestrowane",
+        "created_at": "2025-08-20",
+        "linked": [
+          "271f19fc-cb1c-4b2d-ab4c-d38e147a0a00"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "na szybko zrobione OC w Warcie 14.08.2025 później klient zdecydował że chce pakiet AC/OC, do Warty zarejestrowane wypowiedzenie ze względu na podwójne ubezpieczenie",
+        "created_at": "2025-08-20",
+        "linked": [
+          "61cdf46b-3c53-4f59-bb5a-58bc297bdf7f"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara polisa PZU 1098320365 pakiet  SU 51 tys netto +50 % VAT",
+        "created_at": "2025-08-28",
+        "linked": [
+          "594e0f57-7701-4a5a-9a9a-fe0bc47e5271"
+        ]
+      },
+      {
+        "tag": "OFERTA",
+        "content": "wystawiona (na dostępach Jowitki), wysłana do podpisu razem z wypowiedzenie 27.08.2025 wysłałam ofertę HDI III opcje które interesowały klienta oraz informację o możliwość ubezpieczenia AC i OC w różnych TU które wychodzi taniej (bez ryzyka kradzieży) okazało się że na tym w AC klientowi zależy bard",
+        "created_at": "2025-08-28",
+        "linked": [
+          "594e0f57-7701-4a5a-9a9a-fe0bc47e5271"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara PZU nr 1098320345 do umowy generalnej 18737/BUW/AW/2023 pełne serwisowe AC/OC",
+        "created_at": "2025-09-02",
+        "linked": [
+          "fa19b725-148c-485b-9f28-25ddb7da38f8"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "klient ma sprawdzić czy pojazd jest nadal w leasingu",
+        "created_at": "2025-09-02",
+        "linked": [
+          "fa19b725-148c-485b-9f28-25ddb7da38f8"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "polisa wysłana do podpisu przez klienta",
+        "created_at": "2025-09-08",
+        "linked": [
+          "fa19b725-148c-485b-9f28-25ddb7da38f8"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "wypowiedzenie do PZU zarejestrowane",
+        "created_at": "2025-09-08",
+        "linked": [
+          "fa19b725-148c-485b-9f28-25ddb7da38f8"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "pojazd nie jest w leasingu, przerejestrowany będzie już na krzemenieckiej (mimo tego że na kodzie 83-330 Kartuzy wychodzi 400 zł taniej) i tak musiałam przekalkulować",
+        "created_at": "2025-09-08",
+        "linked": [
+          "fa19b725-148c-485b-9f28-25ddb7da38f8"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] nowy pojazd pierwsze ubezpieczenie",
+        "created_at": "2025-09-26",
+        "linked": [
+          "e480d45d-b9bf-45ec-adde-297a7ed9c7c1"
+        ]
+      },
+      {
+        "tag": "OFERTA",
+        "content": "polisa na samo AC w zamian za polisę z której klient rezygnował(prośba do PZU UW o zgodę na rozwiązanie za porozumieniem stron) po rekalkulacji podnoszącej składkę o prawie 4 tys",
+        "created_at": "2025-09-26",
+        "linked": [
+          "e480d45d-b9bf-45ec-adde-297a7ed9c7c1"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "zastosowałam znizkę 50 %, polisa zdalna potwierdzona mailem",
+        "created_at": "2025-10-30",
+        "linked": [
+          "6184c4c9-0ccd-423c-a7e1-9888e67e0fca"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara polisa PZU 1082747856",
+        "created_at": "2025-10-30",
+        "linked": [
+          "6184c4c9-0ccd-423c-a7e1-9888e67e0fca"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara polisa nr 1102355619 PIN 1386 z umowy generalnej nr 18737/BUW/AW/2023",
+        "created_at": "2025-11-25",
+        "linked": [
+          "939df06c-7ea3-45bd-a728-3e04b606f979"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "zarejestrowałam wypowiedzenie do pzu nr 110235561921.11.2025 polisa papierowa, wysłana na maila,klient upewniał się że musi mieć pakiet do tego auta",
+        "created_at": "2025-11-25",
+        "linked": [
+          "939df06c-7ea3-45bd-a728-3e04b606f979"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] PZU 1082747856 PIN 0259",
+        "created_at": "2025-11-26",
+        "linked": [
+          "75d9669b-a069-4130-b4b7-8826334b1eca"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "podpisany papierowo",
+        "created_at": "2025-12-02",
+        "linked": [
+          "7aecbff6-6f36-4602-95c3-0d5ab234544a"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] PZU 1079344806 pin 0011",
+        "created_at": "2025-12-02",
+        "linked": [
+          "7aecbff6-6f36-4602-95c3-0d5ab234544a"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "aneks do polisy na mury",
+        "created_at": "2025-12-02",
+        "linked": [
+          "7aecbff6-6f36-4602-95c3-0d5ab234544a"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "dodanie pkd firm prowadzących działalność w ubezpieczanych budynkach",
+        "created_at": "2025-12-02",
+        "linked": [
+          "7aecbff6-6f36-4602-95c3-0d5ab234544a"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "wyjazd na narty do Włoch",
+        "created_at": "2025-12-04",
+        "linked": [
+          "b6cf4207-bb81-4fa7-a871-0dd81b4025f0"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "przygotowanie oferty wysłałam zapytanie mailem dot. brakujących danych pojazdu+  czy ubezpieczają na wartość kwoty pozostałej do spłaty w leasingu czy na rzeczywistą",
+        "created_at": "2025-12-12",
+        "linked": [
+          "c9e82f17-71de-491e-a5f4-3094c95c6f2c"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "przygotowanie oferty wysłałam zapytanie mailem dot. brakujących danych pojazdu+  czy ubezpieczają na wartość kwoty pozostałej do spłaty w leasingu czy na rzeczywistą",
+        "created_at": "2025-12-12",
+        "linked": [
+          "70587ff6-6fd8-45c4-b3d7-46fa09e71fec"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara PZU 1103211399 PIN4479_ na wartość 56730 netto",
+        "created_at": "2025-12-12",
+        "linked": [
+          "c9e82f17-71de-491e-a5f4-3094c95c6f2c"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "Polisa wystawiona na minimalną wartośc dla pojazdu, klient ma do spłaty 50 tys w leasingu, zobaczymy czy taka wartość SUAC będzie dla leasingu ok, jak nie to aneks?",
+        "created_at": "2025-12-17",
+        "linked": [
+          "78a5e325-b0ea-4f86-8167-535045a8e034"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara PZU AC 1104672494 PIN 0905 netto 85 365 zł, OC 1104836862",
+        "created_at": "2025-12-17",
+        "linked": [
+          "78a5e325-b0ea-4f86-8167-535045a8e034"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "klient zdecydował się na opcje AC serwis z tego powodu, że różnica między kosztorysem a serwisem była niewielka",
+        "created_at": "2025-12-29",
+        "linked": [
+          "663c1330-8968-44e7-bef2-d6ac85f25cf4"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "klient zdecydował się na opcje AC serwis z tego powodu, że różnica między kosztorysem a serwisem była niewielka",
+        "created_at": "2025-12-29",
+        "linked": [
+          "6fcecec1-7685-41a0-8782-f294c8b25904"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara PZU nr 1078646610 PIN 9931",
+        "created_at": "2025-12-29",
+        "linked": [
+          "663c1330-8968-44e7-bef2-d6ac85f25cf4"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "nie ma już leasingu",
+        "created_at": "2025-12-30",
+        "linked": [
+          "70587ff6-6fd8-45c4-b3d7-46fa09e71fec"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara PZU 1103211407 PIN 2264 na wartość netto 54848",
+        "created_at": "2025-12-30",
+        "linked": [
+          "70587ff6-6fd8-45c4-b3d7-46fa09e71fec"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara Allianz nr 58061977",
+        "created_at": "2025-12-31",
+        "linked": [
+          "6fcecec1-7685-41a0-8782-f294c8b25904"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "polisa wysłana do podpisu, trudna ocena ryzyka w PZU, branża najwyższego ryzyka, przy założeniu SU jakie chciał klient składka wychodziła 26 tys (już po zniżkach), klient postanowił że chce obniżyć SU tak żeby składka wynosiła około 10 tys zł. przy okazji oceny ryzyka tej polisy w centrala UW napisa",
+        "created_at": "2026-11-26",
+        "linked": [
+          "75d9669b-a069-4130-b4b7-8826334b1eca"
+        ]
+      }
+    ],
+    "shares": [
+      {
+        "rate": 4.0,
+        "amount": 3.76,
+        "sub_agent": "Własny",
+        "group": "wlasny"
+      }
+    ],
+    "insurer_name_lookup": "Warta"
+  },
+  {
+    "legacy_id": "xlsx_2025_row_87",
+    "policy": {
+      "type": "BOTH",
+      "stage": "sprzedaz",
+      "original_product_string": "samochód_GKA88830_ Volkswagen Caravelle 6.1 2.0 TDI Trendline DSG, z dowodu rej. Kombi, bez podwyższenia i wydłużenia, automat,4 drzwiowy, napęd 4x4",
+      "ai_note": "BRAK W XLSX: power, year",
+      "policy_number": "920056454706",
+      "insurer_id": "fd582ee0-8956-46b7-b17f-82c958eb87e7",
+      "insurer_name": "Warta",
+      "premium": 4531.0,
+      "commission": 181.24,
+      "policy_start_date": "2025-08-09",
+      "policy_end_date": "2026-08-09",
+      "next_contact_date": "2026-07-13",
+      "vehicle_brand": "Volkswagen",
+      "vehicle_model": "Caravelle 6.1 2.0 TDI Trendline DSG",
+      "vehicle_reg": "GKA88830",
+      "auto_details": {
+        "ac": {
+          "ass": null,
+          "kind": "kosztorys",
+          "opony": false,
+          "szyby": false,
+          "extras": [
+            "napęd 4x4"
+          ]
+        },
+        "fuel": "diesel",
+        "engine_cc": 2000,
+        "vehicle_type": "DOSTAWCZY"
+      },
+      "home_details": {},
+      "travel_details": {},
+      "firma_details": {},
+      "life_details": {},
+      "created_at": "2025-08-07T12:00:00+00:00"
+    },
+    "client": {
+      "first_name": "Robert",
+      "last_name": "Stark",
+      "phones": "[\"601617076\"]",
+      "emails": "[\"biuro@parkiet-stark.pl\", \"robert@parkiet-stark.pl\"]",
+      "street": "Krzemienieckiej 9A",
+      "city": "Gdańsk",
+      "zip_code": "80-448",
+      "businesses": [
+        {
+          "nip": null,
+          "name": "Parkiet Stark Sp. z o.o. Sp. K."
+        }
+      ],
+      "source": "xlsx_import",
+      "created_at": "2025-08-05T12:00:00+00:00"
+    },
+    "notes": [
+      {
+        "tag": "ROZMOWA",
+        "content": "klient miał polisę OC w PZU która przedłużyłasię 20.07.2025 roku, jednak nie był z niej zadowolony i poprosił o ofertę u mnie. Polisa wystawiona, wypowiedzenie do PZU wysłane z datą 06.08.2025",
+        "created_at": "2025-08-05",
+        "linked": [
+          "78b96644-d00c-428e-b18e-b474d4a7ddd2"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara polisa PZU 1032457358",
+        "created_at": "2025-08-05",
+        "linked": [
+          "78b96644-d00c-428e-b18e-b474d4a7ddd2"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara polisa nr 1097753829 z umowy generalnej nr 18737/BUW/AW/2023",
+        "created_at": "2025-08-07",
+        "linked": [
+          "5c41ab8b-687e-4001-a473-2ccd47eef8e5"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "klient wybrał tańszą opcję AC (kosztorys), auto zrobione w osobnym ubezpieczeniu bo nie zdążyłam przygotować oferty floty, wypowiedzenie wznowienia w PZU zarejestrowane w PZU 07.08.2025",
+        "created_at": "2025-08-07",
+        "linked": [
+          "5c41ab8b-687e-4001-a473-2ccd47eef8e5"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "polisa w PZU serwis zmiana na kosztorys Warta, wypowiedzenie do PZU zarejestrowane",
+        "created_at": "2025-08-08",
+        "linked": [
+          "cfe0deb0-d753-49bb-bdae-18b489670fde"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] PZU polisa 1097753830",
+        "created_at": "2025-08-08",
+        "linked": [
+          "cfe0deb0-d753-49bb-bdae-18b489670fde"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] nowy pojazd pbierwsze ubezpieczenie",
+        "created_at": "2025-08-12",
+        "linked": [
+          "b17b8158-94db-4683-a5e2-d982012250fb"
+        ]
+      },
+      {
+        "tag": "OFERTA",
+        "content": "nowy pojazd klienta, kalkulacje w różnych towarzystwach, najlepiej wychodziło z PZU, wartość pojazdu ustalona przez fakturę zakupu",
+        "created_at": "2025-08-12",
+        "linked": [
+          "b17b8158-94db-4683-a5e2-d982012250fb"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] pierwsza polisa_sprowadzany",
+        "created_at": "2025-08-14",
+        "linked": [
+          "b29f1ea4-e7b4-440c-ba34-494c445e7fb8"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] pierwsza polisa_sprowadzany",
+        "created_at": "2025-08-19",
+        "linked": [
+          "61cdf46b-3c53-4f59-bb5a-58bc297bdf7f"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara polisa PZU 1098320364 samo OC+ASS",
+        "created_at": "2025-08-20",
+        "linked": [
+          "271f19fc-cb1c-4b2d-ab4c-d38e147a0a00"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "na szybko zrobione OC bo pierwsza rejestracja (było wymagane) zarejestrowano wypowiedzenie ze względu na podwójne ubezpieczenie, później kupił pakiet w PZU",
+        "created_at": "2025-08-20",
+        "linked": [
+          "b29f1ea4-e7b4-440c-ba34-494c445e7fb8"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "klient z samego OC w PZU przeszedł na Pakiet w Warcie droższy o zaledwie 500 zł, wypowiedzenie do PZU zarejestrowane",
+        "created_at": "2025-08-20",
+        "linked": [
+          "271f19fc-cb1c-4b2d-ab4c-d38e147a0a00"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "na szybko zrobione OC w Warcie 14.08.2025 później klient zdecydował że chce pakiet AC/OC, do Warty zarejestrowane wypowiedzenie ze względu na podwójne ubezpieczenie",
+        "created_at": "2025-08-20",
+        "linked": [
+          "61cdf46b-3c53-4f59-bb5a-58bc297bdf7f"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara polisa PZU 1098320365 pakiet  SU 51 tys netto +50 % VAT",
+        "created_at": "2025-08-28",
+        "linked": [
+          "594e0f57-7701-4a5a-9a9a-fe0bc47e5271"
+        ]
+      },
+      {
+        "tag": "OFERTA",
+        "content": "wystawiona (na dostępach Jowitki), wysłana do podpisu razem z wypowiedzenie 27.08.2025 wysłałam ofertę HDI III opcje które interesowały klienta oraz informację o możliwość ubezpieczenia AC i OC w różnych TU które wychodzi taniej (bez ryzyka kradzieży) okazało się że na tym w AC klientowi zależy bard",
+        "created_at": "2025-08-28",
+        "linked": [
+          "594e0f57-7701-4a5a-9a9a-fe0bc47e5271"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara PZU nr 1098320345 do umowy generalnej 18737/BUW/AW/2023 pełne serwisowe AC/OC",
+        "created_at": "2025-09-02",
+        "linked": [
+          "fa19b725-148c-485b-9f28-25ddb7da38f8"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "klient ma sprawdzić czy pojazd jest nadal w leasingu",
+        "created_at": "2025-09-02",
+        "linked": [
+          "fa19b725-148c-485b-9f28-25ddb7da38f8"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "polisa wysłana do podpisu przez klienta",
+        "created_at": "2025-09-08",
+        "linked": [
+          "fa19b725-148c-485b-9f28-25ddb7da38f8"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "wypowiedzenie do PZU zarejestrowane",
+        "created_at": "2025-09-08",
+        "linked": [
+          "fa19b725-148c-485b-9f28-25ddb7da38f8"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "pojazd nie jest w leasingu, przerejestrowany będzie już na krzemenieckiej (mimo tego że na kodzie 83-330 Kartuzy wychodzi 400 zł taniej) i tak musiałam przekalkulować",
+        "created_at": "2025-09-08",
+        "linked": [
+          "fa19b725-148c-485b-9f28-25ddb7da38f8"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] nowy pojazd pierwsze ubezpieczenie",
+        "created_at": "2025-09-26",
+        "linked": [
+          "e480d45d-b9bf-45ec-adde-297a7ed9c7c1"
+        ]
+      },
+      {
+        "tag": "OFERTA",
+        "content": "polisa na samo AC w zamian za polisę z której klient rezygnował(prośba do PZU UW o zgodę na rozwiązanie za porozumieniem stron) po rekalkulacji podnoszącej składkę o prawie 4 tys",
+        "created_at": "2025-09-26",
+        "linked": [
+          "e480d45d-b9bf-45ec-adde-297a7ed9c7c1"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "zastosowałam znizkę 50 %, polisa zdalna potwierdzona mailem",
+        "created_at": "2025-10-30",
+        "linked": [
+          "6184c4c9-0ccd-423c-a7e1-9888e67e0fca"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara polisa PZU 1082747856",
+        "created_at": "2025-10-30",
+        "linked": [
+          "6184c4c9-0ccd-423c-a7e1-9888e67e0fca"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara polisa nr 1102355619 PIN 1386 z umowy generalnej nr 18737/BUW/AW/2023",
+        "created_at": "2025-11-25",
+        "linked": [
+          "939df06c-7ea3-45bd-a728-3e04b606f979"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "zarejestrowałam wypowiedzenie do pzu nr 110235561921.11.2025 polisa papierowa, wysłana na maila,klient upewniał się że musi mieć pakiet do tego auta",
+        "created_at": "2025-11-25",
+        "linked": [
+          "939df06c-7ea3-45bd-a728-3e04b606f979"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] PZU 1082747856 PIN 0259",
+        "created_at": "2025-11-26",
+        "linked": [
+          "75d9669b-a069-4130-b4b7-8826334b1eca"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "podpisany papierowo",
+        "created_at": "2025-12-02",
+        "linked": [
+          "7aecbff6-6f36-4602-95c3-0d5ab234544a"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] PZU 1079344806 pin 0011",
+        "created_at": "2025-12-02",
+        "linked": [
+          "7aecbff6-6f36-4602-95c3-0d5ab234544a"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "aneks do polisy na mury",
+        "created_at": "2025-12-02",
+        "linked": [
+          "7aecbff6-6f36-4602-95c3-0d5ab234544a"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "dodanie pkd firm prowadzących działalność w ubezpieczanych budynkach",
+        "created_at": "2025-12-02",
+        "linked": [
+          "7aecbff6-6f36-4602-95c3-0d5ab234544a"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "wyjazd na narty do Włoch",
+        "created_at": "2025-12-04",
+        "linked": [
+          "b6cf4207-bb81-4fa7-a871-0dd81b4025f0"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "przygotowanie oferty wysłałam zapytanie mailem dot. brakujących danych pojazdu+  czy ubezpieczają na wartość kwoty pozostałej do spłaty w leasingu czy na rzeczywistą",
+        "created_at": "2025-12-12",
+        "linked": [
+          "c9e82f17-71de-491e-a5f4-3094c95c6f2c"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "przygotowanie oferty wysłałam zapytanie mailem dot. brakujących danych pojazdu+  czy ubezpieczają na wartość kwoty pozostałej do spłaty w leasingu czy na rzeczywistą",
+        "created_at": "2025-12-12",
+        "linked": [
+          "70587ff6-6fd8-45c4-b3d7-46fa09e71fec"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara PZU 1103211399 PIN4479_ na wartość 56730 netto",
+        "created_at": "2025-12-12",
+        "linked": [
+          "c9e82f17-71de-491e-a5f4-3094c95c6f2c"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "Polisa wystawiona na minimalną wartośc dla pojazdu, klient ma do spłaty 50 tys w leasingu, zobaczymy czy taka wartość SUAC będzie dla leasingu ok, jak nie to aneks?",
+        "created_at": "2025-12-17",
+        "linked": [
+          "78a5e325-b0ea-4f86-8167-535045a8e034"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara PZU AC 1104672494 PIN 0905 netto 85 365 zł, OC 1104836862",
+        "created_at": "2025-12-17",
+        "linked": [
+          "78a5e325-b0ea-4f86-8167-535045a8e034"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "klient zdecydował się na opcje AC serwis z tego powodu, że różnica między kosztorysem a serwisem była niewielka",
+        "created_at": "2025-12-29",
+        "linked": [
+          "663c1330-8968-44e7-bef2-d6ac85f25cf4"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "klient zdecydował się na opcje AC serwis z tego powodu, że różnica między kosztorysem a serwisem była niewielka",
+        "created_at": "2025-12-29",
+        "linked": [
+          "6fcecec1-7685-41a0-8782-f294c8b25904"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara PZU nr 1078646610 PIN 9931",
+        "created_at": "2025-12-29",
+        "linked": [
+          "663c1330-8968-44e7-bef2-d6ac85f25cf4"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "nie ma już leasingu",
+        "created_at": "2025-12-30",
+        "linked": [
+          "70587ff6-6fd8-45c4-b3d7-46fa09e71fec"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara PZU 1103211407 PIN 2264 na wartość netto 54848",
+        "created_at": "2025-12-30",
+        "linked": [
+          "70587ff6-6fd8-45c4-b3d7-46fa09e71fec"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara Allianz nr 58061977",
+        "created_at": "2025-12-31",
+        "linked": [
+          "6fcecec1-7685-41a0-8782-f294c8b25904"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "polisa wysłana do podpisu, trudna ocena ryzyka w PZU, branża najwyższego ryzyka, przy założeniu SU jakie chciał klient składka wychodziła 26 tys (już po zniżkach), klient postanowił że chce obniżyć SU tak żeby składka wynosiła około 10 tys zł. przy okazji oceny ryzyka tej polisy w centrala UW napisa",
+        "created_at": "2026-11-26",
+        "linked": [
+          "75d9669b-a069-4130-b4b7-8826334b1eca"
+        ]
+      }
+    ],
+    "shares": [
+      {
+        "rate": 4.0,
+        "amount": 181.24,
+        "sub_agent": "Własny",
+        "group": "wlasny"
+      }
+    ],
+    "insurer_name_lookup": "Warta"
+  },
+  {
+    "legacy_id": "xlsx_2025_row_88",
+    "policy": {
+      "type": "BOTH",
+      "stage": "sprzedaz",
+      "original_product_string": "samochód_GKA84750_OC/AC kosztorys/ASS/Szyby_Volkswagen Crafter_ciężarowy_olej napędowy_2012_1968 ccm, wypowiedzenie do PZU zarejestrowane",
+      "ai_note": "BRAK W XLSX: power",
+      "policy_number": "920056520659",
+      "insurer_id": "3e48c183-8bc5-446d-89b3-963765e24451",
+      "insurer_name": "HDI",
+      "premium": 2362.0,
+      "commission": 94.48,
+      "policy_start_date": "2025-08-11",
+      "policy_end_date": "2026-08-11",
+      "next_contact_date": "2026-07-20",
+      "vehicle_brand": "Volkswagen",
+      "vehicle_model": "Crafter",
+      "vehicle_reg": "GKA84750",
+      "auto_details": {
+        "ac": {
+          "ass": "Standard",
+          "kind": "kosztorys",
+          "opony": false,
+          "szyby": true,
+          "extras": []
+        },
+        "fuel": "diesel",
+        "year": 2012,
+        "engine_cc": 1968,
+        "vehicle_type": "CIEZAROWY"
+      },
+      "home_details": {},
+      "travel_details": {},
+      "firma_details": {},
+      "life_details": {},
+      "created_at": "2025-08-08T12:00:00+00:00"
+    },
+    "client": {
+      "first_name": "Robert",
+      "last_name": "Stark",
+      "phones": "[\"601617076\"]",
+      "emails": "[\"biuro@parkiet-stark.pl\", \"robert@parkiet-stark.pl\"]",
+      "street": "Krzemienieckiej 9A",
+      "city": "Gdańsk",
+      "zip_code": "80-448",
+      "businesses": [
+        {
+          "nip": null,
+          "name": "Parkiet Stark Sp. z o.o. Sp. K."
+        }
+      ],
+      "source": "xlsx_import",
+      "created_at": "2025-08-05T12:00:00+00:00"
+    },
+    "notes": [
+      {
+        "tag": "ROZMOWA",
+        "content": "klient miał polisę OC w PZU która przedłużyłasię 20.07.2025 roku, jednak nie był z niej zadowolony i poprosił o ofertę u mnie. Polisa wystawiona, wypowiedzenie do PZU wysłane z datą 06.08.2025",
+        "created_at": "2025-08-05",
+        "linked": [
+          "78b96644-d00c-428e-b18e-b474d4a7ddd2"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara polisa PZU 1032457358",
+        "created_at": "2025-08-05",
+        "linked": [
+          "78b96644-d00c-428e-b18e-b474d4a7ddd2"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara polisa nr 1097753829 z umowy generalnej nr 18737/BUW/AW/2023",
+        "created_at": "2025-08-07",
+        "linked": [
+          "5c41ab8b-687e-4001-a473-2ccd47eef8e5"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "klient wybrał tańszą opcję AC (kosztorys), auto zrobione w osobnym ubezpieczeniu bo nie zdążyłam przygotować oferty floty, wypowiedzenie wznowienia w PZU zarejestrowane w PZU 07.08.2025",
+        "created_at": "2025-08-07",
+        "linked": [
+          "5c41ab8b-687e-4001-a473-2ccd47eef8e5"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "polisa w PZU serwis zmiana na kosztorys Warta, wypowiedzenie do PZU zarejestrowane",
+        "created_at": "2025-08-08",
+        "linked": [
+          "cfe0deb0-d753-49bb-bdae-18b489670fde"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] PZU polisa 1097753830",
+        "created_at": "2025-08-08",
+        "linked": [
+          "cfe0deb0-d753-49bb-bdae-18b489670fde"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] nowy pojazd pbierwsze ubezpieczenie",
+        "created_at": "2025-08-12",
+        "linked": [
+          "b17b8158-94db-4683-a5e2-d982012250fb"
+        ]
+      },
+      {
+        "tag": "OFERTA",
+        "content": "nowy pojazd klienta, kalkulacje w różnych towarzystwach, najlepiej wychodziło z PZU, wartość pojazdu ustalona przez fakturę zakupu",
+        "created_at": "2025-08-12",
+        "linked": [
+          "b17b8158-94db-4683-a5e2-d982012250fb"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] pierwsza polisa_sprowadzany",
+        "created_at": "2025-08-14",
+        "linked": [
+          "b29f1ea4-e7b4-440c-ba34-494c445e7fb8"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] pierwsza polisa_sprowadzany",
+        "created_at": "2025-08-19",
+        "linked": [
+          "61cdf46b-3c53-4f59-bb5a-58bc297bdf7f"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara polisa PZU 1098320364 samo OC+ASS",
+        "created_at": "2025-08-20",
+        "linked": [
+          "271f19fc-cb1c-4b2d-ab4c-d38e147a0a00"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "na szybko zrobione OC bo pierwsza rejestracja (było wymagane) zarejestrowano wypowiedzenie ze względu na podwójne ubezpieczenie, później kupił pakiet w PZU",
+        "created_at": "2025-08-20",
+        "linked": [
+          "b29f1ea4-e7b4-440c-ba34-494c445e7fb8"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "klient z samego OC w PZU przeszedł na Pakiet w Warcie droższy o zaledwie 500 zł, wypowiedzenie do PZU zarejestrowane",
+        "created_at": "2025-08-20",
+        "linked": [
+          "271f19fc-cb1c-4b2d-ab4c-d38e147a0a00"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "na szybko zrobione OC w Warcie 14.08.2025 później klient zdecydował że chce pakiet AC/OC, do Warty zarejestrowane wypowiedzenie ze względu na podwójne ubezpieczenie",
+        "created_at": "2025-08-20",
+        "linked": [
+          "61cdf46b-3c53-4f59-bb5a-58bc297bdf7f"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara polisa PZU 1098320365 pakiet  SU 51 tys netto +50 % VAT",
+        "created_at": "2025-08-28",
+        "linked": [
+          "594e0f57-7701-4a5a-9a9a-fe0bc47e5271"
+        ]
+      },
+      {
+        "tag": "OFERTA",
+        "content": "wystawiona (na dostępach Jowitki), wysłana do podpisu razem z wypowiedzenie 27.08.2025 wysłałam ofertę HDI III opcje które interesowały klienta oraz informację o możliwość ubezpieczenia AC i OC w różnych TU które wychodzi taniej (bez ryzyka kradzieży) okazało się że na tym w AC klientowi zależy bard",
+        "created_at": "2025-08-28",
+        "linked": [
+          "594e0f57-7701-4a5a-9a9a-fe0bc47e5271"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara PZU nr 1098320345 do umowy generalnej 18737/BUW/AW/2023 pełne serwisowe AC/OC",
+        "created_at": "2025-09-02",
+        "linked": [
+          "fa19b725-148c-485b-9f28-25ddb7da38f8"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "klient ma sprawdzić czy pojazd jest nadal w leasingu",
+        "created_at": "2025-09-02",
+        "linked": [
+          "fa19b725-148c-485b-9f28-25ddb7da38f8"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "polisa wysłana do podpisu przez klienta",
+        "created_at": "2025-09-08",
+        "linked": [
+          "fa19b725-148c-485b-9f28-25ddb7da38f8"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "wypowiedzenie do PZU zarejestrowane",
+        "created_at": "2025-09-08",
+        "linked": [
+          "fa19b725-148c-485b-9f28-25ddb7da38f8"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "pojazd nie jest w leasingu, przerejestrowany będzie już na krzemenieckiej (mimo tego że na kodzie 83-330 Kartuzy wychodzi 400 zł taniej) i tak musiałam przekalkulować",
+        "created_at": "2025-09-08",
+        "linked": [
+          "fa19b725-148c-485b-9f28-25ddb7da38f8"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] nowy pojazd pierwsze ubezpieczenie",
+        "created_at": "2025-09-26",
+        "linked": [
+          "e480d45d-b9bf-45ec-adde-297a7ed9c7c1"
+        ]
+      },
+      {
+        "tag": "OFERTA",
+        "content": "polisa na samo AC w zamian za polisę z której klient rezygnował(prośba do PZU UW o zgodę na rozwiązanie za porozumieniem stron) po rekalkulacji podnoszącej składkę o prawie 4 tys",
+        "created_at": "2025-09-26",
+        "linked": [
+          "e480d45d-b9bf-45ec-adde-297a7ed9c7c1"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "zastosowałam znizkę 50 %, polisa zdalna potwierdzona mailem",
+        "created_at": "2025-10-30",
+        "linked": [
+          "6184c4c9-0ccd-423c-a7e1-9888e67e0fca"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara polisa PZU 1082747856",
+        "created_at": "2025-10-30",
+        "linked": [
+          "6184c4c9-0ccd-423c-a7e1-9888e67e0fca"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara polisa nr 1102355619 PIN 1386 z umowy generalnej nr 18737/BUW/AW/2023",
+        "created_at": "2025-11-25",
+        "linked": [
+          "939df06c-7ea3-45bd-a728-3e04b606f979"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "zarejestrowałam wypowiedzenie do pzu nr 110235561921.11.2025 polisa papierowa, wysłana na maila,klient upewniał się że musi mieć pakiet do tego auta",
+        "created_at": "2025-11-25",
+        "linked": [
+          "939df06c-7ea3-45bd-a728-3e04b606f979"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] PZU 1082747856 PIN 0259",
+        "created_at": "2025-11-26",
+        "linked": [
+          "75d9669b-a069-4130-b4b7-8826334b1eca"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "podpisany papierowo",
+        "created_at": "2025-12-02",
+        "linked": [
+          "7aecbff6-6f36-4602-95c3-0d5ab234544a"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] PZU 1079344806 pin 0011",
+        "created_at": "2025-12-02",
+        "linked": [
+          "7aecbff6-6f36-4602-95c3-0d5ab234544a"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "aneks do polisy na mury",
+        "created_at": "2025-12-02",
+        "linked": [
+          "7aecbff6-6f36-4602-95c3-0d5ab234544a"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "dodanie pkd firm prowadzących działalność w ubezpieczanych budynkach",
+        "created_at": "2025-12-02",
+        "linked": [
+          "7aecbff6-6f36-4602-95c3-0d5ab234544a"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "wyjazd na narty do Włoch",
+        "created_at": "2025-12-04",
+        "linked": [
+          "b6cf4207-bb81-4fa7-a871-0dd81b4025f0"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "przygotowanie oferty wysłałam zapytanie mailem dot. brakujących danych pojazdu+  czy ubezpieczają na wartość kwoty pozostałej do spłaty w leasingu czy na rzeczywistą",
+        "created_at": "2025-12-12",
+        "linked": [
+          "c9e82f17-71de-491e-a5f4-3094c95c6f2c"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "przygotowanie oferty wysłałam zapytanie mailem dot. brakujących danych pojazdu+  czy ubezpieczają na wartość kwoty pozostałej do spłaty w leasingu czy na rzeczywistą",
+        "created_at": "2025-12-12",
+        "linked": [
+          "70587ff6-6fd8-45c4-b3d7-46fa09e71fec"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara PZU 1103211399 PIN4479_ na wartość 56730 netto",
+        "created_at": "2025-12-12",
+        "linked": [
+          "c9e82f17-71de-491e-a5f4-3094c95c6f2c"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "Polisa wystawiona na minimalną wartośc dla pojazdu, klient ma do spłaty 50 tys w leasingu, zobaczymy czy taka wartość SUAC będzie dla leasingu ok, jak nie to aneks?",
+        "created_at": "2025-12-17",
+        "linked": [
+          "78a5e325-b0ea-4f86-8167-535045a8e034"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara PZU AC 1104672494 PIN 0905 netto 85 365 zł, OC 1104836862",
+        "created_at": "2025-12-17",
+        "linked": [
+          "78a5e325-b0ea-4f86-8167-535045a8e034"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "klient zdecydował się na opcje AC serwis z tego powodu, że różnica między kosztorysem a serwisem była niewielka",
+        "created_at": "2025-12-29",
+        "linked": [
+          "663c1330-8968-44e7-bef2-d6ac85f25cf4"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "klient zdecydował się na opcje AC serwis z tego powodu, że różnica między kosztorysem a serwisem była niewielka",
+        "created_at": "2025-12-29",
+        "linked": [
+          "6fcecec1-7685-41a0-8782-f294c8b25904"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara PZU nr 1078646610 PIN 9931",
+        "created_at": "2025-12-29",
+        "linked": [
+          "663c1330-8968-44e7-bef2-d6ac85f25cf4"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "nie ma już leasingu",
+        "created_at": "2025-12-30",
+        "linked": [
+          "70587ff6-6fd8-45c4-b3d7-46fa09e71fec"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara PZU 1103211407 PIN 2264 na wartość netto 54848",
+        "created_at": "2025-12-30",
+        "linked": [
+          "70587ff6-6fd8-45c4-b3d7-46fa09e71fec"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara Allianz nr 58061977",
+        "created_at": "2025-12-31",
+        "linked": [
+          "6fcecec1-7685-41a0-8782-f294c8b25904"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "polisa wysłana do podpisu, trudna ocena ryzyka w PZU, branża najwyższego ryzyka, przy założeniu SU jakie chciał klient składka wychodziła 26 tys (już po zniżkach), klient postanowił że chce obniżyć SU tak żeby składka wynosiła około 10 tys zł. przy okazji oceny ryzyka tej polisy w centrala UW napisa",
+        "created_at": "2026-11-26",
+        "linked": [
+          "75d9669b-a069-4130-b4b7-8826334b1eca"
+        ]
+      }
+    ],
+    "shares": [
+      {
+        "rate": 4.0,
+        "amount": 94.48,
+        "sub_agent": "Własny",
+        "group": "wlasny"
+      }
+    ],
+    "insurer_name_lookup": "HDI"
+  },
+  {
+    "legacy_id": "xlsx_2025_row_89",
+    "policy": {
+      "type": "AC",
+      "stage": "sprzedaz",
+      "original_product_string": "samochód_GD86S1_CFMOTO CForce 1000 Overland_2025_poj silnika 962 ccm",
+      "ai_note": "Nowy pojazd, pierwsze ubezpieczenie. Tablica 'GD86S1' nietypowa (5 znakow) - moze GD86S1X w pelnej formie | BRAK W XLSX: power, ac_kind",
+      "policy_number": "1110761546",
+      "insurer_id": "eb046bef-d4a3-4067-a393-049fc72bca6a",
+      "insurer_name": "PZU",
+      "premium": 1743.0,
+      "commission": 69.72,
+      "policy_start_date": "2025-08-12",
+      "policy_end_date": "2026-08-12",
+      "next_contact_date": "2026-07-20",
+      "vehicle_brand": "CFMOTO",
+      "vehicle_model": "CForce 1000 Overland",
+      "vehicle_reg": "GD86S1",
+      "auto_details": {
+        "ac": {
+          "ass": null,
+          "kind": null,
+          "opony": false,
+          "szyby": false,
+          "extras": []
+        },
+        "fuel": "benzyna",
+        "year": 2025,
+        "coOwners": [
+          {
+            "name": "Santander Leasing Spółka Akcyjna Oddział w Gdańsku  80-280 Gdańsk, ul. Cypriana Norwida 4",
+            "type": "LEASING",
+            "notes": "Dane z importu",
+            "regon": "01216226500658"
+          }
+        ],
+        "engine_cc": 962,
+        "vehicle_type": "QUAD",
+        "ownershipType": "LEASING"
+      },
+      "home_details": {},
+      "travel_details": {},
+      "firma_details": {},
+      "life_details": {},
+      "created_at": "2025-08-12T12:00:00+00:00"
+    },
+    "client": {
+      "first_name": "Robert",
+      "last_name": "Stark",
+      "phones": "[\"601617076\"]",
+      "emails": "[\"biuro@parkiet-stark.pl\", \"robert@parkiet-stark.pl\"]",
+      "street": "Krzemienieckiej 9A",
+      "city": "Gdańsk",
+      "zip_code": "80-448",
+      "businesses": [
+        {
+          "nip": null,
+          "name": "Parkiet Stark Sp. z o.o. Sp. K."
+        }
+      ],
+      "source": "xlsx_import",
+      "created_at": "2025-08-05T12:00:00+00:00"
+    },
+    "notes": [
+      {
+        "tag": "ROZMOWA",
+        "content": "klient miał polisę OC w PZU która przedłużyłasię 20.07.2025 roku, jednak nie był z niej zadowolony i poprosił o ofertę u mnie. Polisa wystawiona, wypowiedzenie do PZU wysłane z datą 06.08.2025",
+        "created_at": "2025-08-05",
+        "linked": [
+          "78b96644-d00c-428e-b18e-b474d4a7ddd2"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara polisa PZU 1032457358",
+        "created_at": "2025-08-05",
+        "linked": [
+          "78b96644-d00c-428e-b18e-b474d4a7ddd2"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara polisa nr 1097753829 z umowy generalnej nr 18737/BUW/AW/2023",
+        "created_at": "2025-08-07",
+        "linked": [
+          "5c41ab8b-687e-4001-a473-2ccd47eef8e5"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "klient wybrał tańszą opcję AC (kosztorys), auto zrobione w osobnym ubezpieczeniu bo nie zdążyłam przygotować oferty floty, wypowiedzenie wznowienia w PZU zarejestrowane w PZU 07.08.2025",
+        "created_at": "2025-08-07",
+        "linked": [
+          "5c41ab8b-687e-4001-a473-2ccd47eef8e5"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "polisa w PZU serwis zmiana na kosztorys Warta, wypowiedzenie do PZU zarejestrowane",
+        "created_at": "2025-08-08",
+        "linked": [
+          "cfe0deb0-d753-49bb-bdae-18b489670fde"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] PZU polisa 1097753830",
+        "created_at": "2025-08-08",
+        "linked": [
+          "cfe0deb0-d753-49bb-bdae-18b489670fde"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] nowy pojazd pbierwsze ubezpieczenie",
+        "created_at": "2025-08-12",
+        "linked": [
+          "b17b8158-94db-4683-a5e2-d982012250fb"
+        ]
+      },
+      {
+        "tag": "OFERTA",
+        "content": "nowy pojazd klienta, kalkulacje w różnych towarzystwach, najlepiej wychodziło z PZU, wartość pojazdu ustalona przez fakturę zakupu",
+        "created_at": "2025-08-12",
+        "linked": [
+          "b17b8158-94db-4683-a5e2-d982012250fb"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] pierwsza polisa_sprowadzany",
+        "created_at": "2025-08-14",
+        "linked": [
+          "b29f1ea4-e7b4-440c-ba34-494c445e7fb8"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] pierwsza polisa_sprowadzany",
+        "created_at": "2025-08-19",
+        "linked": [
+          "61cdf46b-3c53-4f59-bb5a-58bc297bdf7f"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara polisa PZU 1098320364 samo OC+ASS",
+        "created_at": "2025-08-20",
+        "linked": [
+          "271f19fc-cb1c-4b2d-ab4c-d38e147a0a00"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "na szybko zrobione OC bo pierwsza rejestracja (było wymagane) zarejestrowano wypowiedzenie ze względu na podwójne ubezpieczenie, później kupił pakiet w PZU",
+        "created_at": "2025-08-20",
+        "linked": [
+          "b29f1ea4-e7b4-440c-ba34-494c445e7fb8"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "klient z samego OC w PZU przeszedł na Pakiet w Warcie droższy o zaledwie 500 zł, wypowiedzenie do PZU zarejestrowane",
+        "created_at": "2025-08-20",
+        "linked": [
+          "271f19fc-cb1c-4b2d-ab4c-d38e147a0a00"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "na szybko zrobione OC w Warcie 14.08.2025 później klient zdecydował że chce pakiet AC/OC, do Warty zarejestrowane wypowiedzenie ze względu na podwójne ubezpieczenie",
+        "created_at": "2025-08-20",
+        "linked": [
+          "61cdf46b-3c53-4f59-bb5a-58bc297bdf7f"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara polisa PZU 1098320365 pakiet  SU 51 tys netto +50 % VAT",
+        "created_at": "2025-08-28",
+        "linked": [
+          "594e0f57-7701-4a5a-9a9a-fe0bc47e5271"
+        ]
+      },
+      {
+        "tag": "OFERTA",
+        "content": "wystawiona (na dostępach Jowitki), wysłana do podpisu razem z wypowiedzenie 27.08.2025 wysłałam ofertę HDI III opcje które interesowały klienta oraz informację o możliwość ubezpieczenia AC i OC w różnych TU które wychodzi taniej (bez ryzyka kradzieży) okazało się że na tym w AC klientowi zależy bard",
+        "created_at": "2025-08-28",
+        "linked": [
+          "594e0f57-7701-4a5a-9a9a-fe0bc47e5271"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara PZU nr 1098320345 do umowy generalnej 18737/BUW/AW/2023 pełne serwisowe AC/OC",
+        "created_at": "2025-09-02",
+        "linked": [
+          "fa19b725-148c-485b-9f28-25ddb7da38f8"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "klient ma sprawdzić czy pojazd jest nadal w leasingu",
+        "created_at": "2025-09-02",
+        "linked": [
+          "fa19b725-148c-485b-9f28-25ddb7da38f8"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "polisa wysłana do podpisu przez klienta",
+        "created_at": "2025-09-08",
+        "linked": [
+          "fa19b725-148c-485b-9f28-25ddb7da38f8"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "wypowiedzenie do PZU zarejestrowane",
+        "created_at": "2025-09-08",
+        "linked": [
+          "fa19b725-148c-485b-9f28-25ddb7da38f8"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "pojazd nie jest w leasingu, przerejestrowany będzie już na krzemenieckiej (mimo tego że na kodzie 83-330 Kartuzy wychodzi 400 zł taniej) i tak musiałam przekalkulować",
+        "created_at": "2025-09-08",
+        "linked": [
+          "fa19b725-148c-485b-9f28-25ddb7da38f8"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] nowy pojazd pierwsze ubezpieczenie",
+        "created_at": "2025-09-26",
+        "linked": [
+          "e480d45d-b9bf-45ec-adde-297a7ed9c7c1"
+        ]
+      },
+      {
+        "tag": "OFERTA",
+        "content": "polisa na samo AC w zamian za polisę z której klient rezygnował(prośba do PZU UW o zgodę na rozwiązanie za porozumieniem stron) po rekalkulacji podnoszącej składkę o prawie 4 tys",
+        "created_at": "2025-09-26",
+        "linked": [
+          "e480d45d-b9bf-45ec-adde-297a7ed9c7c1"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "zastosowałam znizkę 50 %, polisa zdalna potwierdzona mailem",
+        "created_at": "2025-10-30",
+        "linked": [
+          "6184c4c9-0ccd-423c-a7e1-9888e67e0fca"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara polisa PZU 1082747856",
+        "created_at": "2025-10-30",
+        "linked": [
+          "6184c4c9-0ccd-423c-a7e1-9888e67e0fca"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara polisa nr 1102355619 PIN 1386 z umowy generalnej nr 18737/BUW/AW/2023",
+        "created_at": "2025-11-25",
+        "linked": [
+          "939df06c-7ea3-45bd-a728-3e04b606f979"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "zarejestrowałam wypowiedzenie do pzu nr 110235561921.11.2025 polisa papierowa, wysłana na maila,klient upewniał się że musi mieć pakiet do tego auta",
+        "created_at": "2025-11-25",
+        "linked": [
+          "939df06c-7ea3-45bd-a728-3e04b606f979"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] PZU 1082747856 PIN 0259",
+        "created_at": "2025-11-26",
+        "linked": [
+          "75d9669b-a069-4130-b4b7-8826334b1eca"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "podpisany papierowo",
+        "created_at": "2025-12-02",
+        "linked": [
+          "7aecbff6-6f36-4602-95c3-0d5ab234544a"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] PZU 1079344806 pin 0011",
+        "created_at": "2025-12-02",
+        "linked": [
+          "7aecbff6-6f36-4602-95c3-0d5ab234544a"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "aneks do polisy na mury",
+        "created_at": "2025-12-02",
+        "linked": [
+          "7aecbff6-6f36-4602-95c3-0d5ab234544a"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "dodanie pkd firm prowadzących działalność w ubezpieczanych budynkach",
+        "created_at": "2025-12-02",
+        "linked": [
+          "7aecbff6-6f36-4602-95c3-0d5ab234544a"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "wyjazd na narty do Włoch",
+        "created_at": "2025-12-04",
+        "linked": [
+          "b6cf4207-bb81-4fa7-a871-0dd81b4025f0"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "przygotowanie oferty wysłałam zapytanie mailem dot. brakujących danych pojazdu+  czy ubezpieczają na wartość kwoty pozostałej do spłaty w leasingu czy na rzeczywistą",
+        "created_at": "2025-12-12",
+        "linked": [
+          "c9e82f17-71de-491e-a5f4-3094c95c6f2c"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "przygotowanie oferty wysłałam zapytanie mailem dot. brakujących danych pojazdu+  czy ubezpieczają na wartość kwoty pozostałej do spłaty w leasingu czy na rzeczywistą",
+        "created_at": "2025-12-12",
+        "linked": [
+          "70587ff6-6fd8-45c4-b3d7-46fa09e71fec"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara PZU 1103211399 PIN4479_ na wartość 56730 netto",
+        "created_at": "2025-12-12",
+        "linked": [
+          "c9e82f17-71de-491e-a5f4-3094c95c6f2c"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "Polisa wystawiona na minimalną wartośc dla pojazdu, klient ma do spłaty 50 tys w leasingu, zobaczymy czy taka wartość SUAC będzie dla leasingu ok, jak nie to aneks?",
+        "created_at": "2025-12-17",
+        "linked": [
+          "78a5e325-b0ea-4f86-8167-535045a8e034"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara PZU AC 1104672494 PIN 0905 netto 85 365 zł, OC 1104836862",
+        "created_at": "2025-12-17",
+        "linked": [
+          "78a5e325-b0ea-4f86-8167-535045a8e034"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "klient zdecydował się na opcje AC serwis z tego powodu, że różnica między kosztorysem a serwisem była niewielka",
+        "created_at": "2025-12-29",
+        "linked": [
+          "663c1330-8968-44e7-bef2-d6ac85f25cf4"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "klient zdecydował się na opcje AC serwis z tego powodu, że różnica między kosztorysem a serwisem była niewielka",
+        "created_at": "2025-12-29",
+        "linked": [
+          "6fcecec1-7685-41a0-8782-f294c8b25904"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara PZU nr 1078646610 PIN 9931",
+        "created_at": "2025-12-29",
+        "linked": [
+          "663c1330-8968-44e7-bef2-d6ac85f25cf4"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "nie ma już leasingu",
+        "created_at": "2025-12-30",
+        "linked": [
+          "70587ff6-6fd8-45c4-b3d7-46fa09e71fec"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara PZU 1103211407 PIN 2264 na wartość netto 54848",
+        "created_at": "2025-12-30",
+        "linked": [
+          "70587ff6-6fd8-45c4-b3d7-46fa09e71fec"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "[STARA POLISA] stara Allianz nr 58061977",
+        "created_at": "2025-12-31",
+        "linked": [
+          "6fcecec1-7685-41a0-8782-f294c8b25904"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "polisa wysłana do podpisu, trudna ocena ryzyka w PZU, branża najwyższego ryzyka, przy założeniu SU jakie chciał klient składka wychodziła 26 tys (już po zniżkach), klient postanowił że chce obniżyć SU tak żeby składka wynosiła około 10 tys zł. przy okazji oceny ryzyka tej polisy w centrala UW napisa",
+        "created_at": "2026-11-26",
+        "linked": [
+          "75d9669b-a069-4130-b4b7-8826334b1eca"
+        ]
+      }
+    ],
+    "shares": [
+      {
+        "rate": 0.95,
+        "amount": 16.6,
+        "sub_agent": "Własny",
+        "group": "wlasny"
+      }
+    ],
+    "insurer_name_lookup": "PZU SA"
+  },
+  {
+    "legacy_id": "xlsx_2025_row_90",
+    "policy": {
+      "type": "DOM",
+      "stage": "sprzedaz",
+      "original_product_string": "dom_Jeziorna 12, 84-206 Zbychowo",
+      "ai_note": "Wybrala TUZ przez wyzsza kwote ubezp, w Link4 dom drewniany mozna ale niska wartosc | BRAK W XLSX: area_m2, year_built, su",
+      "policy_number": "HFS0592954",
+      "insurer_id": "71aec0c9-538b-45c8-baad-f30a0af6a08b",
+      "insurer_name": "TUZ",
+      "premium": 686.0,
+      "commission": 41.16,
+      "policy_start_date": "2025-08-19",
+      "policy_end_date": "2026-08-19",
+      "next_contact_date": "2026-07-23",
+      "vehicle_brand": null,
+      "vehicle_model": null,
+      "vehicle_reg": null,
+      "auto_details": null,
+      "home_details": {
+        "su": null,
+        "type": "DOM",
+        "extras": [
+          "drewniany"
+        ],
+        "address": "Zbychowo ul. Jeziorna 12 (84-206)",
+        "area_m2": null,
+        "coOwners": [
+          {
+            "name": "nie dopisany do polisy bo mają wpólność majątkową i tak _Jerzy Sowa",
+            "type": "PERSON",
+            "pesel": "69060511750"
+          }
+        ],
+        "year_built": null
+      },
+      "travel_details": {},
+      "firma_details": {},
+      "life_details": {},
+      "created_at": "2025-08-14T12:00:00+00:00"
+    },
+    "client": {
+      "first_name": "Katarzyna",
+      "last_name": "Sowa",
+      "phones": "[\"606492983\"]",
+      "emails": "[\"sowki3@wp.pl\"]",
+      "street": "ul. Okrzeyi 3/18",
+      "city": "Gdynia",
+      "zip_code": "81-228",
+      "businesses": [],
+      "source": "xlsx_import",
+      "created_at": "2025-05-05T12:00:00+00:00"
+    },
+    "notes": [
+      {
+        "tag": "STATUS",
+        "content": "telefon po 17 - tej  nie odbiera",
+        "created_at": "2025-06-25",
+        "linked": [
+          "92fc03b3-2c10-4d51-a01a-e16b0c6e9fa5"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "wysłano ofertę umówiono kontakt na piątek",
+        "created_at": "2025-07-01",
+        "linked": [
+          "92fc03b3-2c10-4d51-a01a-e16b0c6e9fa5"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "Pani Katarzyna wybrała odnowienie w Link4, polisa zdalna, płatność przelewem",
+        "created_at": "2025-07-08",
+        "linked": [
+          "92fc03b3-2c10-4d51-a01a-e16b0c6e9fa5"
+        ]
+      },
+      {
+        "tag": "OFERTA",
+        "content": "skontaktowała się bo dostała ofertę z Link4 (droższą niż w ubiegłym roku-> 731 zł) zrobiłam kalkulację z TUZ->606 zł i Warta -> 698 zł",
+        "created_at": "2025-08-12",
+        "linked": [
+          "51117a0d-fa79-4407-b133-68071e0b966d"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "klientka wybrała TUZ ze względu na wyższą kwotę ubezpieczenia, w link4 dom drewniany mozna ubezp tylko do SU 500 tys",
+        "created_at": "2025-08-14",
+        "linked": [
+          "51117a0d-fa79-4407-b133-68071e0b966d"
+        ]
+      },
+      {
+        "tag": "ROZMOWA",
+        "content": "sprzedaż zdalna, potwierdzona mailem",
+        "created_at": "2025-08-14",
+        "linked": [
+          "51117a0d-fa79-4407-b133-68071e0b966d"
+        ]
+      },
+      {
+        "tag": "STATUS",
+        "content": "Pytanie czy Jerzy Sowa jest wspolwlascicielem - DO POTWIERDZENIA przez agenta",
+        "created_at": "2026-05-11",
+        "linked": [
+          "8afaadc0-86eb-4851-81be-c01eb7e91b1e"
+        ]
+      }
+    ],
+    "shares": [
+      {
+        "rate": 6.0,
+        "amount": 41.16,
+        "sub_agent": "Firmowy (ogólny)",
+        "group": "firmowy"
+      }
+    ],
+    "insurer_name_lookup": "TUZ"
+  }
+]

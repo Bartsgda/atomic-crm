@@ -1,0 +1,2813 @@
+{
+ "policies": [
+  {
+   "id": "0ed72f2a-b7a2-41e2-b9e7-737d68a0fb29",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "5669dd7d-161f-4bed-af09-9b23ea1dc4da",
+   "owner_id": null,
+   "type": "OC",
+   "stage": "sprzedaz",
+   "insurer_id": "3e48c183-8bc5-446d-89b3-963765e24451",
+   "insurer_name": "HDI",
+   "policy_number": "920057060090",
+   "premium": 506.0,
+   "commission": 10.12,
+   "commission_rate": 2.0,
+   "payment_status": "UNPAID",
+   "policy_start_date": "2025-08-29",
+   "policy_end_date": "2026-08-29",
+   "next_contact_date": null,
+   "vehicle_brand": "Toyota",
+   "vehicle_model": "Yaris 1.0 Life",
+   "vehicle_reg": "WN8928L",
+   "auto_details": {
+    "fuel": "benzyna",
+    "year": 2024,
+    "extras": [
+     "ASS podstawowy"
+    ],
+    "power_km": 70,
+    "engine_cc": 998,
+    "vehicle_type": "OSOBOWY"
+   },
+   "home_details": {},
+   "life_details": {},
+   "travel_details": {},
+   "firma_details": {},
+   "original_product_string": "samochód_WN8928L_Toyota Yaris 1.0 Life_2024_benzyna 998 ccm 70KM_manualna_OC i podstawowy ASS",
+   "ai_note": "Polisa zdalna, klientka raty",
+   "checklist": {},
+   "calculations": [],
+   "termination_id": null,
+   "source": "xlsx_import",
+   "legacy_id": "xlsx_2025_row_171",
+   "is_fake": false,
+   "created_at": "2025-08-26T12:00:00+00:00",
+   "updated_at": "2026-05-11T19:21:28.034253+00:00",
+   "v1_original_id": null,
+   "v1_original_client_id": null
+  },
+  {
+   "id": "fbba483b-c1a1-4f0b-8a04-4dacc825d026",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "1d823023-a19d-4c7d-bdc7-45e287fe9f9f",
+   "owner_id": null,
+   "type": "PODROZ",
+   "stage": "sprzedaz",
+   "insurer_id": "fd582ee0-8956-46b7-b17f-82c958eb87e7",
+   "insurer_name": "Warta",
+   "policy_number": "920058013149",
+   "premium": 460.0,
+   "commission": 36.8,
+   "commission_rate": 8.0,
+   "payment_status": "UNPAID",
+   "policy_start_date": "2025-09-27",
+   "policy_end_date": "2026-09-27",
+   "next_contact_date": null,
+   "vehicle_brand": null,
+   "vehicle_model": null,
+   "vehicle_reg": null,
+   "auto_details": null,
+   "home_details": {},
+   "life_details": {},
+   "travel_details": {
+    "date_to": null,
+    "persons": null,
+    "date_from": null,
+    "destination": "Włochy"
+   },
+   "firma_details": {},
+   "original_product_string": "podróżna_Włochy",
+   "ai_note": "Zalezalo na podwyzszeniu ubezp na wypadek smierci - w Generali nie bylo | BRAK W XLSX: date_from, date_to, persons, su",
+   "checklist": {},
+   "calculations": [],
+   "termination_id": null,
+   "source": "xlsx_import",
+   "legacy_id": "xlsx_2025_row_172",
+   "is_fake": false,
+   "created_at": "2025-09-26T12:00:00+00:00",
+   "updated_at": "2026-05-11T18:43:34.666133+00:00",
+   "v1_original_id": null,
+   "v1_original_client_id": null
+  },
+  {
+   "id": "385e4900-9525-48d4-9e3f-9e8d5786f15a",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "ef081e81-9ec4-49b7-8d8d-a49a606a02d5",
+   "owner_id": null,
+   "type": "PODROZ",
+   "stage": "sprzedaz",
+   "insurer_id": "fd582ee0-8956-46b7-b17f-82c958eb87e7",
+   "insurer_name": "Warta",
+   "policy_number": "920058013782",
+   "premium": 278.0,
+   "commission": 11.12,
+   "commission_rate": 4.0,
+   "payment_status": "UNPAID",
+   "policy_start_date": "2025-09-27",
+   "policy_end_date": "2026-09-27",
+   "next_contact_date": null,
+   "vehicle_brand": null,
+   "vehicle_model": null,
+   "vehicle_reg": null,
+   "auto_details": null,
+   "home_details": {},
+   "life_details": {},
+   "travel_details": {
+    "date_to": null,
+    "persons": null,
+    "date_from": null,
+    "destination": "Włochy"
+   },
+   "firma_details": {},
+   "original_product_string": "podróżna_Włochy",
+   "ai_note": "Identyczna notatka jak row 172 (kopiowane?) - Daniel Mikusik | BRAK W XLSX: date_from, date_to, persons, su",
+   "checklist": {},
+   "calculations": [],
+   "termination_id": null,
+   "source": "xlsx_import",
+   "legacy_id": "xlsx_2025_row_173",
+   "is_fake": false,
+   "created_at": "2025-09-26T12:00:00+00:00",
+   "updated_at": "2026-05-11T18:43:34.833869+00:00",
+   "v1_original_id": null,
+   "v1_original_client_id": null
+  },
+  {
+   "id": "d66d2604-da88-44df-981e-e9d6e0e90c99",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "a449135f-e2d3-4d9f-8a4a-e81da24d36a2",
+   "owner_id": null,
+   "type": "PODROZ",
+   "stage": "sprzedaz",
+   "insurer_id": "b7ede18e-b468-4592-81c8-310c227727ca",
+   "insurer_name": "Generali",
+   "policy_number": "50018194119",
+   "premium": 254.0,
+   "commission": 20.32,
+   "commission_rate": 8.0,
+   "payment_status": "UNPAID",
+   "policy_start_date": "2025-10-12",
+   "policy_end_date": "2025-11-02",
+   "next_contact_date": null,
+   "vehicle_brand": null,
+   "vehicle_model": null,
+   "vehicle_reg": null,
+   "auto_details": null,
+   "home_details": {},
+   "life_details": {},
+   "travel_details": {
+    "date_to": "2025-11-02",
+    "persons": null,
+    "date_from": "2025-10-12",
+    "destination": "Włochy"
+   },
+   "firma_details": {},
+   "original_product_string": "podrózna_Włochy 12.10-02.11.2025",
+   "ai_note": "Kamila Figur - sobota, brak tokenu | BRAK W XLSX: persons, su",
+   "checklist": {},
+   "calculations": [],
+   "termination_id": null,
+   "source": "xlsx_import",
+   "legacy_id": "xlsx_2025_row_174",
+   "is_fake": false,
+   "created_at": "2025-10-10T12:00:00+00:00",
+   "updated_at": "2026-05-11T21:27:34.350421+00:00",
+   "v1_original_id": null,
+   "v1_original_client_id": null
+  },
+  {
+   "id": "45f81e2f-86da-436e-a278-6ae92a3e02b9",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "094ebb0b-8180-4365-af3e-665ca6023f01",
+   "owner_id": null,
+   "type": "PODROZ",
+   "stage": "sprzedaz",
+   "insurer_id": "b7ede18e-b468-4592-81c8-310c227727ca",
+   "insurer_name": "Generali",
+   "policy_number": "50018280179",
+   "premium": 557.0,
+   "commission": 44.56,
+   "commission_rate": 8.0,
+   "payment_status": "UNPAID",
+   "policy_start_date": "2025-11-02",
+   "policy_end_date": "2026-11-02",
+   "next_contact_date": null,
+   "vehicle_brand": null,
+   "vehicle_model": null,
+   "vehicle_reg": null,
+   "auto_details": null,
+   "home_details": {},
+   "life_details": {},
+   "travel_details": {
+    "coOwners": [
+     {
+      "name": "Mariola",
+      "type": "PERSON",
+      "pesel": "84062612148"
+     },
+     {
+      "name": "Rafał",
+      "type": "PERSON",
+      "pesel": "79100403550"
+     },
+     {
+      "name": "Lena",
+      "type": "PERSON",
+      "pesel": "10212201245"
+     },
+     {
+      "name": "Leon",
+      "type": "PERSON",
+      "pesel": "15250808139"
+     }
+    ]
+   },
+   "firma_details": {},
+   "original_product_string": "podróż_Emiraty Arabskie, Dubaj 02.11-09.11.2025",
+   "ai_note": "BRAK W XLSX: persons, su",
+   "checklist": {},
+   "calculations": [],
+   "termination_id": null,
+   "source": "xlsx_import",
+   "legacy_id": "xlsx_2025_row_175",
+   "is_fake": false,
+   "created_at": "2025-10-25T12:00:00+00:00",
+   "updated_at": "2026-05-11T20:19:04.495878+00:00",
+   "v1_original_id": null,
+   "v1_original_client_id": null
+  },
+  {
+   "id": "f5e656b4-4700-4fb9-826c-ffb61f50cc49",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "1d823023-a19d-4c7d-bdc7-45e287fe9f9f",
+   "owner_id": null,
+   "type": "PODROZ",
+   "stage": "sprzedaz",
+   "insurer_id": "fd582ee0-8956-46b7-b17f-82c958eb87e7",
+   "insurer_name": "Warta",
+   "policy_number": "920059159886",
+   "premium": 112.0,
+   "commission": 8.96,
+   "commission_rate": 8.0,
+   "payment_status": "UNPAID",
+   "policy_start_date": "2025-11-03",
+   "policy_end_date": "2026-11-03",
+   "next_contact_date": null,
+   "vehicle_brand": null,
+   "vehicle_model": null,
+   "vehicle_reg": null,
+   "auto_details": null,
+   "home_details": {},
+   "life_details": {},
+   "travel_details": {
+    "coOwners": [
+     {
+      "name": "Kamila Figur",
+      "type": "PERSON",
+      "pesel": "75022403863"
+     }
+    ]
+   },
+   "firma_details": {},
+   "original_product_string": "podróżna_Włochy_kontynuacja",
+   "ai_note": "Kontynuacja - klient przedluzyl pobyt | BRAK W XLSX: date_from, date_to, persons, su",
+   "checklist": {},
+   "calculations": [],
+   "termination_id": null,
+   "source": "xlsx_import",
+   "legacy_id": "xlsx_2025_row_176",
+   "is_fake": false,
+   "created_at": "2025-10-31T12:00:00+00:00",
+   "updated_at": "2026-05-11T20:19:04.669169+00:00",
+   "v1_original_id": null,
+   "v1_original_client_id": null
+  },
+  {
+   "id": "fe7fa37c-9cff-4296-9da8-7ddedb6b6740",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "76bdcb36-f6f9-4f0b-b473-efd7ecb72130",
+   "owner_id": null,
+   "type": "PODROZ",
+   "stage": "sprzedaz",
+   "insurer_id": "b7ede18e-b468-4592-81c8-310c227727ca",
+   "insurer_name": "Generali",
+   "policy_number": "50018403554",
+   "premium": 165.0,
+   "commission": 13.2,
+   "commission_rate": 8.0,
+   "payment_status": "UNPAID",
+   "policy_start_date": "2025-11-15",
+   "policy_end_date": "2026-11-15",
+   "next_contact_date": null,
+   "vehicle_brand": null,
+   "vehicle_model": null,
+   "vehicle_reg": null,
+   "auto_details": null,
+   "home_details": {},
+   "life_details": {},
+   "travel_details": {
+    "coOwners": [
+     {
+      "name": "Oleh Veredyn 81-005 Gdynia ul. Kcyńska 5/4",
+      "type": "PERSON",
+      "pesel": "92100412612"
+     }
+    ]
+   },
+   "firma_details": {},
+   "original_product_string": "podróż_Indonezja 15-20.11.2025",
+   "ai_note": "Polisa zdalna podroz sluzbowa | BRAK W XLSX: persons, su",
+   "checklist": {},
+   "calculations": [],
+   "termination_id": null,
+   "source": "xlsx_import",
+   "legacy_id": "xlsx_2025_row_177",
+   "is_fake": false,
+   "created_at": "2025-11-15T12:00:00+00:00",
+   "updated_at": "2026-05-11T20:19:04.863904+00:00",
+   "v1_original_id": null,
+   "v1_original_client_id": null
+  },
+  {
+   "id": "b6cf4207-bb81-4fa7-a871-0dd81b4025f0",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "088f90bd-c097-4265-8185-8cde32ad721c",
+   "owner_id": null,
+   "type": "PODROZ",
+   "stage": "sprzedaz",
+   "insurer_id": "fd582ee0-8956-46b7-b17f-82c958eb87e7",
+   "insurer_name": "Warta",
+   "policy_number": "920060208163",
+   "premium": 440.0,
+   "commission": 35.2,
+   "commission_rate": 8.0,
+   "payment_status": "PAID",
+   "policy_start_date": "2025-12-05",
+   "policy_end_date": "2026-12-05",
+   "next_contact_date": null,
+   "vehicle_brand": null,
+   "vehicle_model": null,
+   "vehicle_reg": null,
+   "auto_details": null,
+   "home_details": {},
+   "life_details": {},
+   "travel_details": {
+    "coOwners": [
+     {
+      "name": "Norbert Stark",
+      "type": "PERSON",
+      "pesel": "13232610873"
+     }
+    ]
+   },
+   "firma_details": {},
+   "original_product_string": "podróż_05-13.12.2025 Włochy_600 tys",
+   "ai_note": "Wyjazd na narty, SU 600 tys | BRAK W XLSX: persons",
+   "checklist": {},
+   "calculations": [],
+   "termination_id": null,
+   "source": "xlsx_import",
+   "legacy_id": "xlsx_2025_row_178",
+   "is_fake": false,
+   "created_at": "2025-12-04T12:00:00+00:00",
+   "updated_at": "2026-05-11T20:19:05.040448+00:00",
+   "v1_original_id": null,
+   "v1_original_client_id": null
+  },
+  {
+   "id": "1e7d5997-4c12-4e15-80cb-2ee5a276db92",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "3067ad6c-09c3-44bf-8e12-fb51762c1469",
+   "owner_id": null,
+   "type": "ZYCIE",
+   "stage": "of_do_zrobienia",
+   "insurer_id": "fd582ee0-8956-46b7-b17f-82c958eb87e7",
+   "insurer_name": "Warta",
+   "policy_number": null,
+   "premium": null,
+   "commission": null,
+   "commission_rate": null,
+   "payment_status": "UNPAID",
+   "policy_start_date": null,
+   "policy_end_date": null,
+   "next_contact_date": null,
+   "vehicle_brand": null,
+   "vehicle_model": null,
+   "vehicle_reg": null,
+   "auto_details": null,
+   "home_details": {},
+   "life_details": {
+    "kind": "ZYCIE",
+    "description": "zycie"
+   },
+   "travel_details": {},
+   "firma_details": {},
+   "original_product_string": "życie",
+   "ai_note": "XLSX tylko 'zycie' - brak detali | BRAK W XLSX: produkt_szczegolowy, su, uposazony",
+   "checklist": {},
+   "calculations": [],
+   "termination_id": null,
+   "source": "xlsx_import",
+   "legacy_id": "xlsx_2025_row_179",
+   "is_fake": false,
+   "created_at": "2025-04-22T12:00:00+00:00",
+   "updated_at": "2026-05-11T18:43:35.933444+00:00",
+   "v1_original_id": null,
+   "v1_original_client_id": null
+  },
+  {
+   "id": "b21b283d-afc7-40de-8cf5-f18b49c6e192",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "da2cd435-deb6-4f31-bea2-3d7f0552365f",
+   "owner_id": null,
+   "type": "FIRMA",
+   "stage": "of_do_zrobienia",
+   "insurer_id": null,
+   "insurer_name": null,
+   "policy_number": null,
+   "premium": null,
+   "commission": null,
+   "commission_rate": null,
+   "payment_status": "UNPAID",
+   "policy_start_date": "2025-07-12",
+   "policy_end_date": "2026-07-12",
+   "next_contact_date": null,
+   "vehicle_brand": null,
+   "vehicle_model": "betonomieszarki x13 + 2 osobowe + 1 motor",
+   "vehicle_reg": null,
+   "auto_details": {
+    "vehicle_type": "CIEZAROWY"
+   },
+   "home_details": {},
+   "life_details": {},
+   "travel_details": {},
+   "firma_details": {
+    "subType": "FLOTA",
+    "description": "flota 13 betonomieszarek + 2 prywatne samochody i motor",
+    "fleet_count": 16
+   },
+   "original_product_string": "flota 13 betono mieszarek_2 prywatne samochody i motor",
+   "ai_note": "Flota mieszana: 13 betoniarek + 2 osobowe + 1 motocykl - brak detali poszczegolnych pojazdow | BRAK W XLSX: poszczegolne_tablice, marki_modele_kazdego_pojazdu",
+   "checklist": {},
+   "calculations": [],
+   "termination_id": null,
+   "source": "xlsx_import",
+   "legacy_id": "xlsx_2025_row_180",
+   "is_fake": false,
+   "created_at": "2025-05-05T12:00:00+00:00",
+   "updated_at": "2026-05-11T18:43:21.273649+00:00",
+   "v1_original_id": null,
+   "v1_original_client_id": null
+  },
+  {
+   "id": "c7d9a49a-a86e-450c-adf7-cd38564ab703",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "faf0f4df-d0f4-49bc-b587-b4f48f68c115",
+   "owner_id": null,
+   "type": "PODROZ",
+   "stage": "rez_po_ofercie",
+   "insurer_id": null,
+   "insurer_name": null,
+   "policy_number": null,
+   "premium": null,
+   "commission": null,
+   "commission_rate": null,
+   "payment_status": "UNPAID",
+   "policy_start_date": "2025-07-06",
+   "policy_end_date": "2026-07-06",
+   "next_contact_date": null,
+   "vehicle_brand": null,
+   "vehicle_model": null,
+   "vehicle_reg": null,
+   "auto_details": null,
+   "home_details": {},
+   "life_details": {},
+   "travel_details": {
+    "coOwners": [
+     {
+      "name": "Anna",
+      "type": "PERSON",
+      "pesel": "78072916785"
+     },
+     {
+      "name": "Jakub",
+      "type": "PERSON",
+      "pesel": "08301710532"
+     },
+     {
+      "name": "Maria",
+      "type": "PERSON",
+      "pesel": "11312204040"
+     }
+    ]
+   },
+   "firma_details": {},
+   "original_product_string": "podróż_Hiszpania_Palma de Mallorca_06-16.07.2025",
+   "ai_note": "Rezygnacja - zalezalo na ubezp rezygnacji z podrozy ktorego nie moglam zaproponowac (daty) | BRAK W XLSX: persons, su",
+   "checklist": {},
+   "calculations": [],
+   "termination_id": null,
+   "source": "xlsx_import",
+   "legacy_id": "xlsx_2025_row_181",
+   "is_fake": false,
+   "created_at": "2025-07-01T12:00:00+00:00",
+   "updated_at": "2026-05-11T20:19:05.199683+00:00",
+   "v1_original_id": null,
+   "v1_original_client_id": null
+  },
+  {
+   "id": "99831a9e-505f-4955-925e-d639ad8cc196",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "cd0b36d2-0063-41ad-bbeb-bf0265d4eb25",
+   "owner_id": null,
+   "type": "OC",
+   "stage": "rez_po_ofercie",
+   "insurer_id": null,
+   "insurer_name": null,
+   "policy_number": null,
+   "premium": null,
+   "commission": null,
+   "commission_rate": null,
+   "payment_status": "UNPAID",
+   "policy_start_date": "2025-11-18",
+   "policy_end_date": "2026-11-18",
+   "next_contact_date": null,
+   "vehicle_brand": "Toyota",
+   "vehicle_model": "Yaris Base hatchback manual",
+   "vehicle_reg": "CTR36929",
+   "auto_details": {
+    "fuel": "benzyna",
+    "power_km": 66,
+    "power_kw": 48,
+    "engine_cc": 998,
+    "vehicle_type": "OSOBOWY"
+   },
+   "home_details": {},
+   "life_details": {},
+   "travel_details": {},
+   "firma_details": {},
+   "original_product_string": "samochód_CTR36929 Toyota Yaris benzyna, 998 cm3, 66 KM 48kW manualna, Yaris Base, hatchback, rejest w polsce 2022-11-18",
+   "ai_note": "Rejest w PL 2022-11-18 (start_pol z XLSX). Klient sprzedal pojazd 13.11.2025 | BRAK W XLSX: year",
+   "checklist": {},
+   "calculations": [],
+   "termination_id": null,
+   "source": "xlsx_import",
+   "legacy_id": "xlsx_2025_row_182",
+   "is_fake": false,
+   "created_at": "2025-10-22T12:00:00+00:00",
+   "updated_at": "2026-05-11T18:43:21.081682+00:00",
+   "v1_original_id": null,
+   "v1_original_client_id": null
+  }
+ ],
+ "clients": {
+  "088f90bd-c097-4265-8185-8cde32ad721c": {
+   "id": "088f90bd-c097-4265-8185-8cde32ad721c",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "owner_id": null,
+   "contact_id": null,
+   "first_name": "Robert",
+   "last_name": "Stark",
+   "phones": "[\"601617076\"]",
+   "emails": "[\"biuro@parkiet-stark.pl\", \"robert@parkiet-stark.pl\"]",
+   "street": "Krzemienieckiej 9A",
+   "city": "Gdańsk",
+   "zip_code": "80-448",
+   "pesel_encrypted": null,
+   "birth_date": null,
+   "gender": null,
+   "type": "PERSON",
+   "businesses": [
+    {
+     "nip": null,
+     "name": "Parkiet Stark Sp. z o.o. Sp. K."
+    }
+   ],
+   "rodo_consent": false,
+   "rodo_consent_date": null,
+   "source": "xlsx_import",
+   "legacy_id": "xlsx_2025_row_10",
+   "is_fake": false,
+   "tags": [],
+   "created_at": "2025-08-05T12:00:00+00:00",
+   "updated_at": "2025-08-05T12:00:00+00:00",
+   "v1_original_id": null
+  },
+  "5669dd7d-161f-4bed-af09-9b23ea1dc4da": {
+   "id": "5669dd7d-161f-4bed-af09-9b23ea1dc4da",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "owner_id": null,
+   "contact_id": null,
+   "first_name": "Monika",
+   "last_name": "Nowak-",
+   "phones": "[\"691890201\"]",
+   "emails": "[\"monika.ciarkowska@autograf.pl\"]",
+   "street": "ul. Hetmańska 17",
+   "city": "Warszawa",
+   "zip_code": "02-791",
+   "pesel_encrypted": null,
+   "birth_date": null,
+   "gender": null,
+   "type": "PERSON",
+   "businesses": [
+    {
+     "nip": null,
+     "name": "Ciarkowska"
+    }
+   ],
+   "rodo_consent": false,
+   "rodo_consent_date": null,
+   "source": "xlsx_import",
+   "legacy_id": "xlsx_2025_row_16",
+   "is_fake": false,
+   "tags": [],
+   "created_at": "2025-08-26T12:00:00+00:00",
+   "updated_at": "2025-08-26T12:00:00+00:00",
+   "v1_original_id": null
+  },
+  "faf0f4df-d0f4-49bc-b587-b4f48f68c115": {
+   "id": "faf0f4df-d0f4-49bc-b587-b4f48f68c115",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "owner_id": null,
+   "contact_id": null,
+   "first_name": "Maciej",
+   "last_name": "Szuba",
+   "phones": "[\"607331177\"]",
+   "emails": "[\"maciej-szuba@o2.pl\"]",
+   "street": "ul. Wesoła 4",
+   "city": "Wilczyce",
+   "zip_code": "51-361",
+   "pesel_encrypted": null,
+   "birth_date": null,
+   "gender": null,
+   "type": "PERSON",
+   "businesses": [],
+   "rodo_consent": false,
+   "rodo_consent_date": null,
+   "source": "xlsx_import",
+   "legacy_id": "xlsx_2025_row_38",
+   "is_fake": false,
+   "tags": [],
+   "created_at": "2025-06-23T12:00:00+00:00",
+   "updated_at": "2025-06-23T12:00:00+00:00",
+   "v1_original_id": null
+  },
+  "1d823023-a19d-4c7d-bdc7-45e287fe9f9f": {
+   "id": "1d823023-a19d-4c7d-bdc7-45e287fe9f9f",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "owner_id": null,
+   "contact_id": null,
+   "first_name": "Bartłomiej",
+   "last_name": "Figur",
+   "phones": "[\"533057058\"]",
+   "emails": "[\"biuro@konfig.pl\"]",
+   "street": "ul. Świętokrzyska 51/4_ Gdańsk ul. Kazimierza Porępskiego 33/1",
+   "city": "Gdańsk",
+   "zip_code": "80-180",
+   "pesel_encrypted": null,
+   "birth_date": null,
+   "gender": null,
+   "type": "PERSON",
+   "businesses": [],
+   "rodo_consent": false,
+   "rodo_consent_date": null,
+   "source": "xlsx_import",
+   "legacy_id": "xlsx_2025_row_51",
+   "is_fake": false,
+   "tags": [],
+   "created_at": "2025-05-11T12:00:00+00:00",
+   "updated_at": "2025-05-11T12:00:00+00:00",
+   "v1_original_id": null
+  },
+  "3067ad6c-09c3-44bf-8e12-fb51762c1469": {
+   "id": "3067ad6c-09c3-44bf-8e12-fb51762c1469",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "owner_id": null,
+   "contact_id": null,
+   "first_name": "Bartosz",
+   "last_name": "Waczyński",
+   "phones": "[\"605401803\"]",
+   "emails": "[\"waczynski@gmail.com\"]",
+   "street": "ul. Rytelska 25",
+   "city": "Gdańsk",
+   "zip_code": "80-180",
+   "pesel_encrypted": null,
+   "birth_date": null,
+   "gender": null,
+   "type": "PERSON",
+   "businesses": [],
+   "rodo_consent": false,
+   "rodo_consent_date": null,
+   "source": "xlsx_import",
+   "legacy_id": "xlsx_2025_row_78",
+   "is_fake": false,
+   "tags": [],
+   "created_at": "2025-04-22T12:00:00+00:00",
+   "updated_at": "2025-04-22T12:00:00+00:00",
+   "v1_original_id": null
+  },
+  "094ebb0b-8180-4365-af3e-665ca6023f01": {
+   "id": "094ebb0b-8180-4365-af3e-665ca6023f01",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "owner_id": null,
+   "contact_id": null,
+   "first_name": "Mariola",
+   "last_name": "Salamonik",
+   "phones": "[\"509144622\"]",
+   "emails": "[\"mariola.salamonik@gmail.com\"]",
+   "street": "ul. Ciechanowska 3b/2",
+   "city": "Gdańsk",
+   "zip_code": "80-180",
+   "pesel_encrypted": null,
+   "birth_date": null,
+   "gender": null,
+   "type": "PERSON",
+   "businesses": [],
+   "rodo_consent": false,
+   "rodo_consent_date": null,
+   "source": "xlsx_import",
+   "legacy_id": "xlsx_2025_row_84",
+   "is_fake": false,
+   "tags": [],
+   "created_at": "2025-06-29T12:00:00+00:00",
+   "updated_at": "2025-06-29T12:00:00+00:00",
+   "v1_original_id": null
+  },
+  "ef081e81-9ec4-49b7-8d8d-a49a606a02d5": {
+   "id": "ef081e81-9ec4-49b7-8d8d-a49a606a02d5",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "owner_id": null,
+   "contact_id": null,
+   "first_name": "Daniel",
+   "last_name": "Mikusik",
+   "phones": "[\"608407263\"]",
+   "emails": "[\"dmikusik@wp.pl\"]",
+   "street": "ul. Anny Jagiellonki 23/17",
+   "city": "Gdańsk",
+   "zip_code": "80-034",
+   "pesel_encrypted": null,
+   "birth_date": null,
+   "gender": null,
+   "type": "PERSON",
+   "businesses": [],
+   "rodo_consent": false,
+   "rodo_consent_date": null,
+   "source": "xlsx_import",
+   "legacy_id": "xlsx_2025_row_173",
+   "is_fake": false,
+   "tags": [],
+   "created_at": "2025-09-26T12:00:00+00:00",
+   "updated_at": "2025-09-26T12:00:00+00:00",
+   "v1_original_id": null
+  },
+  "a449135f-e2d3-4d9f-8a4a-e81da24d36a2": {
+   "id": "a449135f-e2d3-4d9f-8a4a-e81da24d36a2",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "owner_id": null,
+   "contact_id": null,
+   "first_name": "Kamila",
+   "last_name": "Figur",
+   "phones": "[\"533057058\"]",
+   "emails": "[\"figur@onet.pl\"]",
+   "street": "Porębskiego 33/1",
+   "city": "Gdańsk",
+   "zip_code": "80-180",
+   "pesel_encrypted": null,
+   "birth_date": null,
+   "gender": null,
+   "type": "PERSON",
+   "businesses": [],
+   "rodo_consent": false,
+   "rodo_consent_date": null,
+   "source": "xlsx_import",
+   "legacy_id": "xlsx_2025_row_174",
+   "is_fake": false,
+   "tags": [],
+   "created_at": "2025-10-10T12:00:00+00:00",
+   "updated_at": "2025-10-10T12:00:00+00:00",
+   "v1_original_id": null
+  },
+  "76bdcb36-f6f9-4f0b-b473-efd7ecb72130": {
+   "id": "76bdcb36-f6f9-4f0b-b473-efd7ecb72130",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "owner_id": null,
+   "contact_id": null,
+   "first_name": "Paweł",
+   "last_name": "Popczyński",
+   "phones": "[\"573327927\"]",
+   "emails": "[\"pawelpopczynski@gmail.com\"]",
+   "street": "ul. Starogardzka 75/1",
+   "city": "Gdańsk",
+   "zip_code": "80-180",
+   "pesel_encrypted": null,
+   "birth_date": null,
+   "gender": null,
+   "type": "PERSON",
+   "businesses": [],
+   "rodo_consent": false,
+   "rodo_consent_date": null,
+   "source": "xlsx_import",
+   "legacy_id": "xlsx_2025_row_177",
+   "is_fake": false,
+   "tags": [],
+   "created_at": "2025-11-15T12:00:00+00:00",
+   "updated_at": "2025-11-15T12:00:00+00:00",
+   "v1_original_id": null
+  },
+  "da2cd435-deb6-4f31-bea2-3d7f0552365f": {
+   "id": "da2cd435-deb6-4f31-bea2-3d7f0552365f",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "owner_id": null,
+   "contact_id": null,
+   "first_name": "Radosław",
+   "last_name": "Gołębiewski",
+   "phones": "[\"606360150\"]",
+   "emails": "[]",
+   "street": "ul. Przyjazna 13A",
+   "city": "Przyjaźń",
+   "zip_code": "83-331",
+   "pesel_encrypted": null,
+   "birth_date": null,
+   "gender": null,
+   "type": "PERSON",
+   "businesses": [
+    {
+     "nip": null,
+     "name": "Firma Transportowo Budowlana"
+    }
+   ],
+   "rodo_consent": false,
+   "rodo_consent_date": null,
+   "source": "xlsx_import",
+   "legacy_id": "xlsx_2025_row_180",
+   "is_fake": false,
+   "tags": [],
+   "created_at": "2025-05-05T12:00:00+00:00",
+   "updated_at": "2025-05-05T12:00:00+00:00",
+   "v1_original_id": null
+  },
+  "cd0b36d2-0063-41ad-bbeb-bf0265d4eb25": {
+   "id": "cd0b36d2-0063-41ad-bbeb-bf0265d4eb25",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "owner_id": null,
+   "contact_id": null,
+   "first_name": "Dariusz",
+   "last_name": "Kamiński",
+   "phones": "[\"691200001\"]",
+   "emails": "[]",
+   "street": "ul. Młodzieżowa 46",
+   "city": "Głogowo",
+   "zip_code": null,
+   "pesel_encrypted": null,
+   "birth_date": null,
+   "gender": null,
+   "type": "PERSON",
+   "businesses": [],
+   "rodo_consent": false,
+   "rodo_consent_date": null,
+   "source": "xlsx_import",
+   "legacy_id": "xlsx_2025_row_182",
+   "is_fake": false,
+   "tags": [],
+   "created_at": "2025-10-22T12:00:00+00:00",
+   "updated_at": "2025-10-22T12:00:00+00:00",
+   "v1_original_id": null
+  }
+ },
+ "notes": [
+  {
+   "id": "fc38b88e-530e-4344-a320-1383de13c12a",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "1d823023-a19d-4c7d-bdc7-45e287fe9f9f",
+   "linked_policy_ids": [
+    "ed991ca7-e1f0-49da-b5e8-c4f373c8a2d7"
+   ],
+   "content": "przeżucam się ofertami z dealerem",
+   "tag": "OFERTA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-05-11T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:47.902977+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_51_note_1"
+  },
+  {
+   "id": "e90048a1-8c4b-47c8-94ae-1a6c0b4ad78e",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "1d823023-a19d-4c7d-bdc7-45e287fe9f9f",
+   "linked_policy_ids": [
+    "ed991ca7-e1f0-49da-b5e8-c4f373c8a2d7"
+   ],
+   "content": "Zależy mu na jak najniższaj cenie uwzględniając wymogi od leasingodawcy",
+   "tag": "ROZMOWA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-05-11T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:47.902977+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_51_note_0"
+  },
+  {
+   "id": "77571615-8401-447e-a045-068992db399b",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "1d823023-a19d-4c7d-bdc7-45e287fe9f9f",
+   "linked_policy_ids": [
+    "ccdc404c-5bfc-452c-b038-c3d9148ccfb0"
+   ],
+   "content": "[STARA POLISA] stara w PZU 1062715888_SU 400 tys",
+   "tag": "STATUS",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-06-11T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:48.271209+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_67_oldpol"
+  },
+  {
+   "id": "11052b1e-c0ef-4f3f-bfe9-af0242325224",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "faf0f4df-d0f4-49bc-b587-b4f48f68c115",
+   "linked_policy_ids": [
+    "f06efe46-0fc7-4634-84b7-0e8c9b8290ed"
+   ],
+   "content": "rezygnacja bo wspólniczka zajęła się sprawą ubezpieczenia i dostała większą zniżkę u brokera...tak mówił Szuba ...z nim się kontaktowałam od początku w spr ubezpieczenia",
+   "tag": "DECISION_PRICE",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-06-23T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:48.271209+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_62_note_0"
+  },
+  {
+   "id": "2e298257-08dc-4ed8-a54b-c8405b2e1b1e",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "faf0f4df-d0f4-49bc-b587-b4f48f68c115",
+   "linked_policy_ids": [
+    "f06efe46-0fc7-4634-84b7-0e8c9b8290ed"
+   ],
+   "content": "[STARA POLISA] stara Warta_920043387995_3635 zł",
+   "tag": "STATUS",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-06-23T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:48.271209+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_62_oldpol"
+  },
+  {
+   "id": "b7c7c455-3fe4-4582-b21c-3056d4ac42c6",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "faf0f4df-d0f4-49bc-b587-b4f48f68c115",
+   "linked_policy_ids": [
+    "f06efe46-0fc7-4634-84b7-0e8c9b8290ed"
+   ],
+   "content": "leasing na spółkę cywilną NIP6861576377",
+   "tag": "ROZMOWA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-06-23T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:48.271209+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_62_note_1"
+  },
+  {
+   "id": "3b8d1965-5a0b-4164-8e9e-23fa21257f91",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "faf0f4df-d0f4-49bc-b587-b4f48f68c115",
+   "linked_policy_ids": [
+    "c7d9a49a-a86e-450c-adf7-cd38564ab703"
+   ],
+   "content": "oferta wysłana na maila, niestety nie dało się zrobić ubezpieczenia rezygnacji z podróży",
+   "tag": "OFERTA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-06-24T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:49.214909+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_181_note_3"
+  },
+  {
+   "id": "fb791871-604a-4104-9128-0ee2de720f89",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "faf0f4df-d0f4-49bc-b587-b4f48f68c115",
+   "linked_policy_ids": [
+    "c7d9a49a-a86e-450c-adf7-cd38564ab703"
+   ],
+   "content": "oferta wysłana na maila, niestety nie dało się zrobić ubezpieczenia rezygnacji z podróży25.06.2025 oferta omówiona, sprawdzić ile będzie kosztowało ubezp z wyższą SU na kradzież, kontakt ws decyzji w poniedziałek",
+   "tag": "OFERTA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-06-24T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:49.214909+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_181_note_2"
+  },
+  {
+   "id": "0fd42c00-b594-4d78-bc4d-44b9064ac420",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "faf0f4df-d0f4-49bc-b587-b4f48f68c115",
+   "linked_policy_ids": [
+    "c7d9a49a-a86e-450c-adf7-cd38564ab703"
+   ],
+   "content": "oferta omówiona, sprawdzić ile będzie kosztowało ubezp z wyższą SU na kradzież, kontakt ws decyzji w poniedziałek",
+   "tag": "OFERTA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-06-25T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:49.214909+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_181_note_1"
+  },
+  {
+   "id": "6a1aac97-6ab6-47e5-8c2f-7ff1eec6a6d6",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "faf0f4df-d0f4-49bc-b587-b4f48f68c115",
+   "linked_policy_ids": [
+    "0215e100-602e-4669-9b79-25220ee8039f"
+   ],
+   "content": "przy ofercie na travelkę umówiłam kontakt dotyczący przygotowania oferty na ubezpieczenie mieszkania, klient zainteresowany, zadzwonić żeby uzyskać więcej szczegółów co do mieszkania + dane dotyczące doubezpieczenia domu, klient obecnie ma ubezp murów do hipoteki (30 zł miesięcznie) chce doubezpieczyć nieruchomość, ma przygotować niezbędne dane",
+   "tag": "ROZMOWA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-07-01T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:48.583375+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_97_note_1"
+  },
+  {
+   "id": "bd5cfab8-ca23-49e7-ac40-2e1563b7ab55",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "faf0f4df-d0f4-49bc-b587-b4f48f68c115",
+   "linked_policy_ids": [
+    "c7d9a49a-a86e-450c-adf7-cd38564ab703"
+   ],
+   "content": "[STARA POLISA] moja oferta Generali i Warta 425",
+   "tag": "STATUS",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-07-01T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:49.214909+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_181_oldpol"
+  },
+  {
+   "id": "e4a6376a-ddef-4027-ac16-a755ac902b86",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "faf0f4df-d0f4-49bc-b587-b4f48f68c115",
+   "linked_policy_ids": [
+    "c7d9a49a-a86e-450c-adf7-cd38564ab703"
+   ],
+   "content": "rezygnacja, klientowi najbardziej zależało na ubezp rezygnacji z podróży czego ze względu na daty nie mogłam zaproponować, reszty opcji ubezp nie potrzebował bo miał to w pakiecie oferty biura podróżnego",
+   "tag": "DECISION_PRICE",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-07-01T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:49.214909+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_181_note_0"
+  },
+  {
+   "id": "7ec2eda0-ba7a-4a96-9a73-6b846c99fca9",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "3067ad6c-09c3-44bf-8e12-fb51762c1469",
+   "linked_policy_ids": [
+    "aae48a7e-446c-415f-8e2b-bac78fde53dc"
+   ],
+   "content": "[STARA POLISA] TUZ HFS nr 0400076",
+   "tag": "STATUS",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-07-04T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:48.271209+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_78_oldpol"
+  },
+  {
+   "id": "b873f674-6c6e-451b-822c-da11a2d09999",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "3067ad6c-09c3-44bf-8e12-fb51762c1469",
+   "linked_policy_ids": [
+    "fa3eba77-f72c-4e06-9b45-4ae1d60b4444"
+   ],
+   "content": "[STARA POLISA] stara polisa hestia AC/OC, wypowiedzenie do Hestii zarejestrowane",
+   "tag": "STATUS",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-07-13T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:48.271209+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_83_oldpol"
+  },
+  {
+   "id": "93e94fed-79ab-403e-a521-cbb3198bb822",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "094ebb0b-8180-4365-af3e-665ca6023f01",
+   "linked_policy_ids": [
+    "9dd52fa4-6948-4c59-a688-4610ef835aec"
+   ],
+   "content": "polisa zdalna, wypowiedzenie do PZU zarejestrowane",
+   "tag": "ROZMOWA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-07-16T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:48.271209+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_84_note_0"
+  },
+  {
+   "id": "d1df71bf-dc83-4401-8d1a-3543a6af27aa",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "094ebb0b-8180-4365-af3e-665ca6023f01",
+   "linked_policy_ids": [
+    "9dd52fa4-6948-4c59-a688-4610ef835aec"
+   ],
+   "content": "[STARA POLISA] stara PZU nr 1063564798",
+   "tag": "STATUS",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-07-16T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:48.583375+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_84_oldpol"
+  },
+  {
+   "id": "93b78a4e-c69f-4884-923d-684574f65a0a",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "094ebb0b-8180-4365-af3e-665ca6023f01",
+   "linked_policy_ids": [
+    "b4cd353e-a139-49bb-b6eb-0c5e66b801b7"
+   ],
+   "content": "[STARA POLISA] Insurance JSC Dallborgg Life and Health",
+   "tag": "STATUS",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-07-29T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:48.583375+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_92_oldpol"
+  },
+  {
+   "id": "259dd5d9-65df-4199-b149-67d5c9d628ae",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "094ebb0b-8180-4365-af3e-665ca6023f01",
+   "linked_policy_ids": [
+    "b4cd353e-a139-49bb-b6eb-0c5e66b801b7"
+   ],
+   "content": "klientka kupiła droższą polisę u mnie ze względu na świetną obsługę",
+   "tag": "ROZMOWA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-07-29T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:48.583375+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_92_note_0"
+  },
+  {
+   "id": "2affe3cd-a003-454d-8c64-e5a25d42d118",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "088f90bd-c097-4265-8185-8cde32ad721c",
+   "linked_policy_ids": [
+    "78b96644-d00c-428e-b18e-b474d4a7ddd2"
+   ],
+   "content": "klient miał polisę OC w PZU która przedłużyłasię 20.07.2025 roku, jednak nie był z niej zadowolony i poprosił o ofertę u mnie. Polisa wystawiona, wypowiedzenie do PZU wysłane z datą 06.08.2025",
+   "tag": "ROZMOWA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-08-05T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:48.583375+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_86_note_0"
+  },
+  {
+   "id": "21ee9cf8-876e-415e-875e-51dfbf7d7dfa",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "088f90bd-c097-4265-8185-8cde32ad721c",
+   "linked_policy_ids": [
+    "78b96644-d00c-428e-b18e-b474d4a7ddd2"
+   ],
+   "content": "[STARA POLISA] stara polisa PZU 1032457358",
+   "tag": "STATUS",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-08-05T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:48.583375+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_86_oldpol"
+  },
+  {
+   "id": "312a1860-6434-4003-869a-b1c4dbd4ad59",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "088f90bd-c097-4265-8185-8cde32ad721c",
+   "linked_policy_ids": [
+    "5c41ab8b-687e-4001-a473-2ccd47eef8e5"
+   ],
+   "content": "[STARA POLISA] stara polisa nr 1097753829 z umowy generalnej nr 18737/BUW/AW/2023",
+   "tag": "STATUS",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-08-07T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:48.583375+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_87_oldpol"
+  },
+  {
+   "id": "e1ebef56-a6fd-403c-954c-ce24e34d4981",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "088f90bd-c097-4265-8185-8cde32ad721c",
+   "linked_policy_ids": [
+    "5c41ab8b-687e-4001-a473-2ccd47eef8e5"
+   ],
+   "content": "klient wybrał tańszą opcję AC (kosztorys), auto zrobione w osobnym ubezpieczeniu bo nie zdążyłam przygotować oferty floty, wypowiedzenie wznowienia w PZU zarejestrowane w PZU 07.08.2025",
+   "tag": "ROZMOWA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-08-07T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:48.583375+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_87_note_0"
+  },
+  {
+   "id": "2349af7f-bb73-450c-9179-e3168dddf9a0",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "088f90bd-c097-4265-8185-8cde32ad721c",
+   "linked_policy_ids": [
+    "cfe0deb0-d753-49bb-bdae-18b489670fde"
+   ],
+   "content": "[STARA POLISA] PZU polisa 1097753830",
+   "tag": "STATUS",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-08-08T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:48.583375+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_88_oldpol"
+  },
+  {
+   "id": "e5c91f6e-0d20-4cb1-b734-d8caeeb92b8a",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "088f90bd-c097-4265-8185-8cde32ad721c",
+   "linked_policy_ids": [
+    "cfe0deb0-d753-49bb-bdae-18b489670fde"
+   ],
+   "content": "polisa w PZU serwis zmiana na kosztorys Warta, wypowiedzenie do PZU zarejestrowane",
+   "tag": "ROZMOWA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-08-08T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:48.583375+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_88_note_0"
+  },
+  {
+   "id": "8e69e805-4178-48d6-8f3e-4904ea4f9e6b",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "088f90bd-c097-4265-8185-8cde32ad721c",
+   "linked_policy_ids": [
+    "b17b8158-94db-4683-a5e2-d982012250fb"
+   ],
+   "content": "[STARA POLISA] nowy pojazd pbierwsze ubezpieczenie",
+   "tag": "STATUS",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-08-12T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:48.583375+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_89_oldpol"
+  },
+  {
+   "id": "e04efc2f-b903-4dc9-9e24-2cde5a078633",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "088f90bd-c097-4265-8185-8cde32ad721c",
+   "linked_policy_ids": [
+    "b17b8158-94db-4683-a5e2-d982012250fb"
+   ],
+   "content": "nowy pojazd klienta, kalkulacje w różnych towarzystwach, najlepiej wychodziło z PZU, wartość pojazdu ustalona przez fakturę zakupu",
+   "tag": "OFERTA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-08-12T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:48.583375+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_89_note_0"
+  },
+  {
+   "id": "53a0aef1-3ed4-4d4f-a907-afd7ff619ae2",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "088f90bd-c097-4265-8185-8cde32ad721c",
+   "linked_policy_ids": [
+    "b29f1ea4-e7b4-440c-ba34-494c445e7fb8"
+   ],
+   "content": "[STARA POLISA] pierwsza polisa_sprowadzany",
+   "tag": "STATUS",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-08-14T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:49.214909+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_169_oldpol"
+  },
+  {
+   "id": "d0080d8a-5c79-462e-b97a-bdae634b6a51",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "088f90bd-c097-4265-8185-8cde32ad721c",
+   "linked_policy_ids": [
+    "61cdf46b-3c53-4f59-bb5a-58bc297bdf7f"
+   ],
+   "content": "[STARA POLISA] pierwsza polisa_sprowadzany",
+   "tag": "STATUS",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-08-19T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:48.583375+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_91_oldpol"
+  },
+  {
+   "id": "586f47fd-a2c7-457e-849d-f872793ad202",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "5669dd7d-161f-4bed-af09-9b23ea1dc4da",
+   "linked_policy_ids": [
+    "a4347747-9c08-4cb6-999b-825c1ee13d78"
+   ],
+   "content": "kontakt przy okazji oferty na toyotę Yaris",
+   "tag": "ROZMOWA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-08-19T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:47.902977+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_16_note_2"
+  },
+  {
+   "id": "187e9237-ed74-4497-b11b-3df64966f0ca",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "088f90bd-c097-4265-8185-8cde32ad721c",
+   "linked_policy_ids": [
+    "271f19fc-cb1c-4b2d-ab4c-d38e147a0a00"
+   ],
+   "content": "[STARA POLISA] stara polisa PZU 1098320364 samo OC+ASS",
+   "tag": "STATUS",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-08-20T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:48.583375+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_102_oldpol"
+  },
+  {
+   "id": "a67e8a2a-ca00-4ef9-a829-77863bcfefd9",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "088f90bd-c097-4265-8185-8cde32ad721c",
+   "linked_policy_ids": [
+    "b29f1ea4-e7b4-440c-ba34-494c445e7fb8"
+   ],
+   "content": "na szybko zrobione OC bo pierwsza rejestracja (było wymagane) zarejestrowano wypowiedzenie ze względu na podwójne ubezpieczenie, później kupił pakiet w PZU",
+   "tag": "ROZMOWA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-08-20T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:49.214909+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_169_note_0"
+  },
+  {
+   "id": "30175b8a-96d3-49c3-b44a-305002af7df2",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "088f90bd-c097-4265-8185-8cde32ad721c",
+   "linked_policy_ids": [
+    "61cdf46b-3c53-4f59-bb5a-58bc297bdf7f"
+   ],
+   "content": "na szybko zrobione OC w Warcie 14.08.2025 później klient zdecydował że chce pakiet AC/OC, do Warty zarejestrowane wypowiedzenie ze względu na podwójne ubezpieczenie",
+   "tag": "ROZMOWA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-08-20T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:48.583375+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_91_note_0"
+  },
+  {
+   "id": "dae675c4-e50f-437c-8672-c945cc1dcea3",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "5669dd7d-161f-4bed-af09-9b23ea1dc4da",
+   "linked_policy_ids": [
+    "0ed72f2a-b7a2-41e2-b9e7-737d68a0fb29"
+   ],
+   "content": "klientka z Osipu, zrobić kalkulacje, ma inne rzeczy do ubezpieczenia Dom w grudniu kontakt",
+   "tag": "OFERTA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-08-20T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:49.214909+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_171_note_4"
+  },
+  {
+   "id": "9943b7fc-3a4f-46f9-934c-1973a14ad08b",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "088f90bd-c097-4265-8185-8cde32ad721c",
+   "linked_policy_ids": [
+    "271f19fc-cb1c-4b2d-ab4c-d38e147a0a00"
+   ],
+   "content": "klient z samego OC w PZU przeszedł na Pakiet w Warcie droższy o zaledwie 500 zł, wypowiedzenie do PZU zarejestrowane",
+   "tag": "ROZMOWA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-08-20T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:48.583375+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_102_note_0"
+  },
+  {
+   "id": "84192fa2-8cf8-47a5-8578-be75ea35f116",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "5669dd7d-161f-4bed-af09-9b23ea1dc4da",
+   "linked_policy_ids": [
+    "0ed72f2a-b7a2-41e2-b9e7-737d68a0fb29"
+   ],
+   "content": "klientka chciała samo OC w HDI 338 zł, poprawiłam ofertę i przesłałam na maila, oferta przesłana na maila HDI 1065 zł Pakiet",
+   "tag": "OFERTA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-08-21T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:49.214909+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_171_note_3"
+  },
+  {
+   "id": "ea68841a-e02d-4fe7-ba31-b25d6c63466c",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "faf0f4df-d0f4-49bc-b587-b4f48f68c115",
+   "linked_policy_ids": [
+    "0215e100-602e-4669-9b79-25220ee8039f"
+   ],
+   "content": "[STARA POLISA] TUZ",
+   "tag": "STATUS",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-08-22T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:48.583375+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_97_oldpol"
+  },
+  {
+   "id": "c19b7e0c-7677-4f52-a643-c247055eebef",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "faf0f4df-d0f4-49bc-b587-b4f48f68c115",
+   "linked_policy_ids": [
+    "ee97f997-765e-4a8d-bf63-7ac1f6376f71"
+   ],
+   "content": "klient zainteresowany ofertą, może wyśle mi polisę z tego roku do wpisania danych :) przyjazny",
+   "tag": "ROZMOWA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-08-22T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:47.902977+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_38_note_1"
+  },
+  {
+   "id": "faf19aab-72b5-4dc9-8aab-872ac6c4dafe",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "faf0f4df-d0f4-49bc-b587-b4f48f68c115",
+   "linked_policy_ids": [
+    "0215e100-602e-4669-9b79-25220ee8039f"
+   ],
+   "content": "kontaktował się z klientem dział wznowień z TUZ (klient myślał że to ktoś odemnie czyli TUZ kojarzy ze mną :)), klient podpisał już z nimi wznowienie, umówiłam kontakt za rok",
+   "tag": "STATUS",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-08-22T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:48.583375+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_97_note_0"
+  },
+  {
+   "id": "eb6c6d6b-099e-41e3-b551-481a09ab056d",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "5669dd7d-161f-4bed-af09-9b23ea1dc4da",
+   "linked_policy_ids": [
+    "0ed72f2a-b7a2-41e2-b9e7-737d68a0fb29"
+   ],
+   "content": "klientka chce porównać jeszcze z ofertą którą przedstawi jej Allianz, będzie decydowała jutro, dzwonić po 16-tej",
+   "tag": "ROZMOWA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-08-25T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:49.214909+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_171_note_2"
+  },
+  {
+   "id": "1acceb44-cf73-4255-a07d-8f1b56bd8f60",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "5669dd7d-161f-4bed-af09-9b23ea1dc4da",
+   "linked_policy_ids": [
+    "0ed72f2a-b7a2-41e2-b9e7-737d68a0fb29"
+   ],
+   "content": "[STARA POLISA] stara Allianz",
+   "tag": "STATUS",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-08-26T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:49.214909+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_171_oldpol"
+  },
+  {
+   "id": "6be0deaa-c738-4069-99bb-f138faaa8313",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "5669dd7d-161f-4bed-af09-9b23ea1dc4da",
+   "linked_policy_ids": [
+    "0ed72f2a-b7a2-41e2-b9e7-737d68a0fb29"
+   ],
+   "content": "prowizja na raty bo płatność na raty :)",
+   "tag": "ROZMOWA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-08-26T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:49.214909+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_171_note_0"
+  },
+  {
+   "id": "6a4a4e6b-886d-4de4-a36a-44a82181ecfa",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "5669dd7d-161f-4bed-af09-9b23ea1dc4da",
+   "linked_policy_ids": [
+    "0ed72f2a-b7a2-41e2-b9e7-737d68a0fb29"
+   ],
+   "content": "polisa zdalna, sama zgłosi wypowiedzenie OC do Allianz, klientka wybrała HDI z płatnością w 4 ratach dlatego, że planuje niedługo sprzedać samochód",
+   "tag": "ROZMOWA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-08-26T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:49.214909+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_171_note_1"
+  },
+  {
+   "id": "3bb54585-14a9-46d1-92d1-f3a87c7d4427",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "088f90bd-c097-4265-8185-8cde32ad721c",
+   "linked_policy_ids": [
+    "594e0f57-7701-4a5a-9a9a-fe0bc47e5271"
+   ],
+   "content": "wystawiona (na dostępach Jowitki), wysłana do podpisu razem z wypowiedzenie 27.08.2025 wysłałam ofertę HDI III opcje które interesowały klienta oraz informację o możliwość ubezpieczenia AC i OC w różnych TU które wychodzi taniej (bez ryzyka kradzieży) okazało się że na tym w AC klientowi zależy bardziej niż na odszkodowaniu za szkodę na pojeździe",
+   "tag": "OFERTA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-08-28T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:48.583375+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_107_note_0"
+  },
+  {
+   "id": "080932fb-2a3e-4142-8f54-4065edc33fa2",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "faf0f4df-d0f4-49bc-b587-b4f48f68c115",
+   "linked_policy_ids": [
+    "ee97f997-765e-4a8d-bf63-7ac1f6376f71"
+   ],
+   "content": "wysłał starą polisę , umówiono kontakt",
+   "tag": "ROZMOWA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-08-28T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:47.902977+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_38_note_0"
+  },
+  {
+   "id": "99ebf164-47d1-4f09-ae77-2bd2b28e5e61",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "faf0f4df-d0f4-49bc-b587-b4f48f68c115",
+   "linked_policy_ids": [
+    "ee97f997-765e-4a8d-bf63-7ac1f6376f71"
+   ],
+   "content": "[STARA POLISA] stara polisa w HDI nr 920052699255",
+   "tag": "STATUS",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-08-28T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:47.902977+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_38_oldpol"
+  },
+  {
+   "id": "70702506-fe1d-41fc-b8c4-027fff6302ed",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "088f90bd-c097-4265-8185-8cde32ad721c",
+   "linked_policy_ids": [
+    "594e0f57-7701-4a5a-9a9a-fe0bc47e5271"
+   ],
+   "content": "[STARA POLISA] stara polisa PZU 1098320365 pakiet  SU 51 tys netto +50 % VAT",
+   "tag": "STATUS",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-08-28T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:48.583375+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_107_oldpol"
+  },
+  {
+   "id": "6201ff4a-a42b-4222-9125-3a8529881b24",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "088f90bd-c097-4265-8185-8cde32ad721c",
+   "linked_policy_ids": [
+    "fa19b725-148c-485b-9f28-25ddb7da38f8"
+   ],
+   "content": "[STARA POLISA] stara PZU nr 1098320345 do umowy generalnej 18737/BUW/AW/2023 pełne serwisowe AC/OC",
+   "tag": "STATUS",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-09-02T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:47.902977+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_10_oldpol"
+  },
+  {
+   "id": "123be799-5876-466f-9680-bbab8438b818",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "088f90bd-c097-4265-8185-8cde32ad721c",
+   "linked_policy_ids": [
+    "fa19b725-148c-485b-9f28-25ddb7da38f8"
+   ],
+   "content": "klient ma sprawdzić czy pojazd jest nadal w leasingu",
+   "tag": "ROZMOWA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-09-02T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:47.902977+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_10_note_3"
+  },
+  {
+   "id": "b1347271-9a8a-41f3-8052-dd5db6fac0b3",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "088f90bd-c097-4265-8185-8cde32ad721c",
+   "linked_policy_ids": [
+    "fa19b725-148c-485b-9f28-25ddb7da38f8"
+   ],
+   "content": "wypowiedzenie do PZU zarejestrowane",
+   "tag": "ROZMOWA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-09-08T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:47.902977+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_10_note_1"
+  },
+  {
+   "id": "76607a03-2759-4a12-8861-bdf02071d76b",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "088f90bd-c097-4265-8185-8cde32ad721c",
+   "linked_policy_ids": [
+    "fa19b725-148c-485b-9f28-25ddb7da38f8"
+   ],
+   "content": "pojazd nie jest w leasingu, przerejestrowany będzie już na krzemenieckiej (mimo tego że na kodzie 83-330 Kartuzy wychodzi 400 zł taniej) i tak musiałam przekalkulować",
+   "tag": "ROZMOWA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-09-08T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:47.902977+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_10_note_2"
+  },
+  {
+   "id": "f7aa5189-4739-4560-8051-d599e4c66db6",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "088f90bd-c097-4265-8185-8cde32ad721c",
+   "linked_policy_ids": [
+    "fa19b725-148c-485b-9f28-25ddb7da38f8"
+   ],
+   "content": "polisa wysłana do podpisu przez klienta",
+   "tag": "STATUS",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-09-08T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:47.902977+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_10_note_0"
+  },
+  {
+   "id": "f8af90fd-4076-45cf-81ac-bad45df7a032",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "094ebb0b-8180-4365-af3e-665ca6023f01",
+   "linked_policy_ids": [
+    "1658622e-d3fd-46c9-9705-f405d670c9d6"
+   ],
+   "content": "polisa zawierana zdalnie",
+   "tag": "ROZMOWA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-09-11T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:48.583375+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_112_note_0"
+  },
+  {
+   "id": "4e2db45b-d604-4e30-97c8-eb2f6f303225",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "ef081e81-9ec4-49b7-8d8d-a49a606a02d5",
+   "linked_policy_ids": [
+    "385e4900-9525-48d4-9e3f-9e8d5786f15a"
+   ],
+   "content": "papierowaklient miał wcześniej robioną kalkulację gdzie była wybrana oferta z Generali jednak okazało się że zależało mu na podwyższeniu ubezp na wypadek śmiercia a w Generali nie było takiej możliwości",
+   "tag": "OFERTA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-09-24T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:49.214909+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_173_note_0"
+  },
+  {
+   "id": "3f80274a-8a01-408c-ab14-c3e9b15938de",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "1d823023-a19d-4c7d-bdc7-45e287fe9f9f",
+   "linked_policy_ids": [
+    "fbba483b-c1a1-4f0b-8a04-4dacc825d026"
+   ],
+   "content": "papierowa klient miał wcześniej robioną kalkulację gdzie była wybrana oferta z Generali jednak okazało się że zależało mu na podwyższeniu ubezp na wypadek śmiercia a w Generali nie było takiej możliwości",
+   "tag": "OFERTA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-09-24T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:49.214909+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_172_note_0"
+  },
+  {
+   "id": "370db60c-ecc0-4568-9d7b-1b517191cc2c",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "088f90bd-c097-4265-8185-8cde32ad721c",
+   "linked_policy_ids": [
+    "e480d45d-b9bf-45ec-adde-297a7ed9c7c1"
+   ],
+   "content": "polisa na samo AC w zamian za polisę z której klient rezygnował(prośba do PZU UW o zgodę na rozwiązanie za porozumieniem stron) po rekalkulacji podnoszącej składkę o prawie 4 tys",
+   "tag": "OFERTA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-09-26T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:48.583375+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_117_note_0"
+  },
+  {
+   "id": "efd2e656-a83a-4bfc-bd08-8887d1fac044",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "088f90bd-c097-4265-8185-8cde32ad721c",
+   "linked_policy_ids": [
+    "e480d45d-b9bf-45ec-adde-297a7ed9c7c1"
+   ],
+   "content": "[STARA POLISA] nowy pojazd pierwsze ubezpieczenie",
+   "tag": "STATUS",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-09-26T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:48.583375+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_117_oldpol"
+  },
+  {
+   "id": "dfe9d99c-2259-42dc-9caa-3d4383903a72",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "a449135f-e2d3-4d9f-8a4a-e81da24d36a2",
+   "linked_policy_ids": [
+    "d66d2604-da88-44df-981e-e9d6e0e90c99"
+   ],
+   "content": "10.2025 na zlecenie Figura zrobiłam polisę dla Kamili która do niego dołącza we Włoszech :D",
+   "tag": "ROZMOWA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-10-11T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:49.214909+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_174_note_1"
+  },
+  {
+   "id": "5f934ad0-51ef-4074-be1f-b4c98d71b193",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "a449135f-e2d3-4d9f-8a4a-e81da24d36a2",
+   "linked_policy_ids": [
+    "d66d2604-da88-44df-981e-e9d6e0e90c99"
+   ],
+   "content": "kamila nie mogła zaakceptować polisy zdalnej z Warty (nie mogła potwierdzić torzsamości) więc zrobiłam wGenerali, do Warty  się nie dostałam bo była sobota a ja nie miałam tokenu od Ani",
+   "tag": "ROZMOWA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-10-11T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:49.214909+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_174_note_0"
+  },
+  {
+   "id": "f1fa7185-c418-42f2-adf2-78645ecdcde9",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "cd0b36d2-0063-41ad-bbeb-bf0265d4eb25",
+   "linked_policy_ids": [
+    "99831a9e-505f-4955-925e-d639ad8cc196"
+   ],
+   "content": "wznowienie w Warcie 426 w TUZ 405 z pakietem ASS standard, oferta wysyłana do akceptacji zniżki, korzystniejsza niż wznowienie",
+   "tag": "OFERTA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-10-20T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:49.214909+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_182_note_4"
+  },
+  {
+   "id": "7c11082d-3a2a-4fe7-9546-48f46db1d6f0",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "cd0b36d2-0063-41ad-bbeb-bf0265d4eb25",
+   "linked_policy_ids": [
+    "99831a9e-505f-4955-925e-d639ad8cc196"
+   ],
+   "content": "nie odbiera",
+   "tag": "STATUS",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-10-22T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:49.214909+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_182_note_3"
+  },
+  {
+   "id": "134c90cd-734c-4e0a-a7aa-ede769c7894d",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "cd0b36d2-0063-41ad-bbeb-bf0265d4eb25",
+   "linked_policy_ids": [
+    "99831a9e-505f-4955-925e-d639ad8cc196"
+   ],
+   "content": "[STARA POLISA] Warta stara 920047444171",
+   "tag": "STATUS",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-10-22T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:49.214909+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_182_oldpol"
+  },
+  {
+   "id": "a91f2e9e-de19-4eea-bc95-b7678f3b1be7",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "094ebb0b-8180-4365-af3e-665ca6023f01",
+   "linked_policy_ids": [
+    "b09b6399-a938-4f86-8fc5-14e6e7de91eb"
+   ],
+   "content": "klientka kupiła droższą polisę u mnie ze względu na świetną obsługę",
+   "tag": "ROZMOWA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-10-23T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:48.925168+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_137_note_1"
+  },
+  {
+   "id": "ed90dd6b-3adc-4dcd-b1be-1b0e79f5a678",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "094ebb0b-8180-4365-af3e-665ca6023f01",
+   "linked_policy_ids": [
+    "b09b6399-a938-4f86-8fc5-14e6e7de91eb"
+   ],
+   "content": "[STARA POLISA] PZU 1087517615 PIN 5435",
+   "tag": "STATUS",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-10-23T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:48.925168+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_137_oldpol"
+  },
+  {
+   "id": "a7abe108-988a-4103-a3ad-f946c5c56d74",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "cd0b36d2-0063-41ad-bbeb-bf0265d4eb25",
+   "linked_policy_ids": [
+    "99831a9e-505f-4955-925e-d639ad8cc196"
+   ],
+   "content": "kontakt umówiono",
+   "tag": "ROZMOWA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-10-24T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:49.214909+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_182_note_2"
+  },
+  {
+   "id": "474fc4ef-eace-44cc-95fb-8d473aeb1d2c",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "cd0b36d2-0063-41ad-bbeb-bf0265d4eb25",
+   "linked_policy_ids": [
+    "99831a9e-505f-4955-925e-d639ad8cc196"
+   ],
+   "content": "będzie ubezpieczał tuż przed końcem polisy bo liczy że sprzeda samochód do tego czasu",
+   "tag": "ROZMOWA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-10-24T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:49.214909+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_182_note_1"
+  },
+  {
+   "id": "de4047a4-2063-4564-8110-7a9789d5bfae",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "094ebb0b-8180-4365-af3e-665ca6023f01",
+   "linked_policy_ids": [
+    "b09b6399-a938-4f86-8fc5-14e6e7de91eb"
+   ],
+   "content": "Mariola mówiła że z PZU na tą samą SU dostała ofertę na około 1400 zł",
+   "tag": "ROZMOWA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-10-25T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:48.925168+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_137_note_0"
+  },
+  {
+   "id": "79cb623b-4510-4604-be7f-9632efc96e9e",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "088f90bd-c097-4265-8185-8cde32ad721c",
+   "linked_policy_ids": [
+    "6184c4c9-0ccd-423c-a7e1-9888e67e0fca"
+   ],
+   "content": "zastosowałam znizkę 50 %, polisa zdalna potwierdzona mailem",
+   "tag": "ROZMOWA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-10-30T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:48.925168+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_125_note_0"
+  },
+  {
+   "id": "6def72c1-c9c8-465c-b1eb-5d9e90810b5c",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "088f90bd-c097-4265-8185-8cde32ad721c",
+   "linked_policy_ids": [
+    "6184c4c9-0ccd-423c-a7e1-9888e67e0fca"
+   ],
+   "content": "[STARA POLISA] stara polisa PZU 1082747856",
+   "tag": "STATUS",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-10-30T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:48.925168+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_125_oldpol"
+  },
+  {
+   "id": "a75b7b2f-684f-469b-bd98-c41b6feaf38c",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "1d823023-a19d-4c7d-bdc7-45e287fe9f9f",
+   "linked_policy_ids": [
+    "f5e656b4-4700-4fb9-826c-ffb61f50cc49"
+   ],
+   "content": "klient zadzwonił z prośbą o kontynuacje ubezpieczenia, przedłużył pobyt we Włoszech,zrobiłam ubezpieczenie z zaznaczeniem że klient jest za granicą",
+   "tag": "ROZMOWA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-10-31T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:49.214909+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_176_note_0"
+  },
+  {
+   "id": "a2c9a94f-dc37-4638-8190-6ea1ea2ab3af",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "cd0b36d2-0063-41ad-bbeb-bf0265d4eb25",
+   "linked_policy_ids": [
+    "99831a9e-505f-4955-925e-d639ad8cc196"
+   ],
+   "content": "klient sprzedał pojazd",
+   "tag": "ROZMOWA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-11-13T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:49.214909+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_182_note_0"
+  },
+  {
+   "id": "449601ae-e71c-428c-8ddb-673fb3ef8f6e",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "76bdcb36-f6f9-4f0b-b473-efd7ecb72130",
+   "linked_policy_ids": [
+    "fe7fa37c-9cff-4296-9da8-7ddedb6b6740"
+   ],
+   "content": "polisa zdalna podróż służbowa Dżakarta",
+   "tag": "ROZMOWA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-11-15T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:49.214909+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_177_note_0"
+  },
+  {
+   "id": "36250ad4-f6d2-4f9c-9da5-cc1fef1661de",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "094ebb0b-8180-4365-af3e-665ca6023f01",
+   "linked_policy_ids": [
+    "56ee28b9-53b6-4623-af89-e60e8276b9ee"
+   ],
+   "content": "klientka zoriętowała się, że niema już ważnego ubezpieczenia",
+   "tag": "ROZMOWA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-11-17T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:48.925168+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_139_note_1"
+  },
+  {
+   "id": "48aa5617-633b-4a8d-a29c-372e6d204356",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "094ebb0b-8180-4365-af3e-665ca6023f01",
+   "linked_policy_ids": [
+    "56ee28b9-53b6-4623-af89-e60e8276b9ee"
+   ],
+   "content": "polisa zdalna",
+   "tag": "ROZMOWA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-11-19T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:48.925168+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_139_note_0"
+  },
+  {
+   "id": "3a75dc7e-3c3d-42af-9fae-fd8a57d0b7f1",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "088f90bd-c097-4265-8185-8cde32ad721c",
+   "linked_policy_ids": [
+    "939df06c-7ea3-45bd-a728-3e04b606f979"
+   ],
+   "content": "zarejestrowałam wypowiedzenie do pzu nr 110235561921.11.2025 polisa papierowa, wysłana na maila,klient upewniał się że musi mieć pakiet do tego auta",
+   "tag": "ROZMOWA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-11-25T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:48.925168+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_149_note_0"
+  },
+  {
+   "id": "478aa0e6-d2ac-463e-9eac-d672df5931df",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "088f90bd-c097-4265-8185-8cde32ad721c",
+   "linked_policy_ids": [
+    "939df06c-7ea3-45bd-a728-3e04b606f979"
+   ],
+   "content": "[STARA POLISA] stara polisa nr 1102355619 PIN 1386 z umowy generalnej nr 18737/BUW/AW/2023",
+   "tag": "STATUS",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-11-25T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:48.925168+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_149_oldpol"
+  },
+  {
+   "id": "125fd98b-1c77-4971-9d44-b81b1b7897d5",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "088f90bd-c097-4265-8185-8cde32ad721c",
+   "linked_policy_ids": [
+    "75d9669b-a069-4130-b4b7-8826334b1eca"
+   ],
+   "content": "[STARA POLISA] PZU 1082747856 PIN 0259",
+   "tag": "STATUS",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-11-26T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:48.925168+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_140_oldpol"
+  },
+  {
+   "id": "ce84ed4f-2b1e-475f-9385-39c51b7fb83c",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "088f90bd-c097-4265-8185-8cde32ad721c",
+   "linked_policy_ids": [
+    "7aecbff6-6f36-4602-95c3-0d5ab234544a"
+   ],
+   "content": "dodanie pkd firm prowadzących działalność w ubezpieczanych budynkach",
+   "tag": "ROZMOWA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-12-02T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:47.902977+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_22_note_2"
+  },
+  {
+   "id": "e68140b8-bf45-4ee5-94b8-fb30bec72949",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "088f90bd-c097-4265-8185-8cde32ad721c",
+   "linked_policy_ids": [
+    "7aecbff6-6f36-4602-95c3-0d5ab234544a"
+   ],
+   "content": "podpisany papierowo",
+   "tag": "ROZMOWA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-12-02T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:47.902977+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_22_note_0"
+  },
+  {
+   "id": "23fe6c31-cbd3-4af3-87c8-e0acc8c60bd0",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "088f90bd-c097-4265-8185-8cde32ad721c",
+   "linked_policy_ids": [
+    "7aecbff6-6f36-4602-95c3-0d5ab234544a"
+   ],
+   "content": "aneks do polisy na mury",
+   "tag": "ROZMOWA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-12-02T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:47.902977+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_22_note_1"
+  },
+  {
+   "id": "0a6bca21-fe9e-485a-96ec-48e606fd7a9d",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "088f90bd-c097-4265-8185-8cde32ad721c",
+   "linked_policy_ids": [
+    "7aecbff6-6f36-4602-95c3-0d5ab234544a"
+   ],
+   "content": "[STARA POLISA] PZU 1079344806 pin 0011",
+   "tag": "STATUS",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-12-02T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:47.902977+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_22_oldpol"
+  },
+  {
+   "id": "56eb1ff7-826f-4bf4-a710-05a024dabdb6",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "088f90bd-c097-4265-8185-8cde32ad721c",
+   "linked_policy_ids": [
+    "b6cf4207-bb81-4fa7-a871-0dd81b4025f0"
+   ],
+   "content": "wyjazd na narty do Włoch",
+   "tag": "ROZMOWA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-12-04T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:49.214909+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_178_note_0"
+  },
+  {
+   "id": "23cab829-ce8c-430d-b9eb-88d5fe8971c9",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "5669dd7d-161f-4bed-af09-9b23ea1dc4da",
+   "linked_policy_ids": [
+    "a4347747-9c08-4cb6-999b-825c1ee13d78"
+   ],
+   "content": "klientka zainteresowana , rozmowa przełożona na jutro na 14 - tą",
+   "tag": "ROZMOWA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-12-09T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:47.902977+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_16_note_1"
+  },
+  {
+   "id": "0fa61dce-8474-4718-8175-e22833fe1eef",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "5669dd7d-161f-4bed-af09-9b23ea1dc4da",
+   "linked_policy_ids": [
+    "a4347747-9c08-4cb6-999b-825c1ee13d78"
+   ],
+   "content": "nie odbiera, zapomniałam dzwonić o 14 tej, zadzwoniłam dopiero o 16:30",
+   "tag": "STATUS",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-12-10T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:47.902977+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_16_note_0"
+  },
+  {
+   "id": "cf3bc354-ff02-472b-a746-6af8e75a569f",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "088f90bd-c097-4265-8185-8cde32ad721c",
+   "linked_policy_ids": [
+    "70587ff6-6fd8-45c4-b3d7-46fa09e71fec"
+   ],
+   "content": "przygotowanie oferty wysłałam zapytanie mailem dot. brakujących danych pojazdu+  czy ubezpieczają na wartość kwoty pozostałej do spłaty w leasingu czy na rzeczywistą",
+   "tag": "ROZMOWA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-12-12T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:49.214909+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_163_note_1"
+  },
+  {
+   "id": "7d9dd4ea-a299-4034-a4a7-6e959b3b9a89",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "088f90bd-c097-4265-8185-8cde32ad721c",
+   "linked_policy_ids": [
+    "c9e82f17-71de-491e-a5f4-3094c95c6f2c"
+   ],
+   "content": "[STARA POLISA] stara PZU 1103211399 PIN4479_ na wartość 56730 netto",
+   "tag": "STATUS",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-12-12T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:47.902977+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_19_oldpol"
+  },
+  {
+   "id": "4b7e61ef-a997-49ad-9dfb-9eda20c6ba5c",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "088f90bd-c097-4265-8185-8cde32ad721c",
+   "linked_policy_ids": [
+    "c9e82f17-71de-491e-a5f4-3094c95c6f2c"
+   ],
+   "content": "przygotowanie oferty wysłałam zapytanie mailem dot. brakujących danych pojazdu+  czy ubezpieczają na wartość kwoty pozostałej do spłaty w leasingu czy na rzeczywistą",
+   "tag": "ROZMOWA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-12-12T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:47.902977+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_19_note_0"
+  },
+  {
+   "id": "5149b1a8-e99b-4b2a-8d04-c6a36a268cfa",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "088f90bd-c097-4265-8185-8cde32ad721c",
+   "linked_policy_ids": [
+    "78a5e325-b0ea-4f86-8167-535045a8e034"
+   ],
+   "content": "[STARA POLISA] stara PZU AC 1104672494 PIN 0905 netto 85 365 zł, OC 1104836862",
+   "tag": "STATUS",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-12-17T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:49.214909+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_162_oldpol"
+  },
+  {
+   "id": "f2c1b0c4-b9b2-4119-b57d-661b1d588f17",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "088f90bd-c097-4265-8185-8cde32ad721c",
+   "linked_policy_ids": [
+    "78a5e325-b0ea-4f86-8167-535045a8e034"
+   ],
+   "content": "Polisa wystawiona na minimalną wartośc dla pojazdu, klient ma do spłaty 50 tys w leasingu, zobaczymy czy taka wartość SUAC będzie dla leasingu ok, jak nie to aneks?",
+   "tag": "ROZMOWA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-12-17T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:49.214909+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_162_note_0"
+  },
+  {
+   "id": "1914f43e-95dd-4aff-8ba7-9136f70fcbe9",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "088f90bd-c097-4265-8185-8cde32ad721c",
+   "linked_policy_ids": [
+    "663c1330-8968-44e7-bef2-d6ac85f25cf4"
+   ],
+   "content": "[STARA POLISA] stara PZU nr 1078646610 PIN 9931",
+   "tag": "STATUS",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-12-29T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:49.214909+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_164_oldpol"
+  },
+  {
+   "id": "9d2c22a5-6f57-4afa-ae5e-7ec8d412db16",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "088f90bd-c097-4265-8185-8cde32ad721c",
+   "linked_policy_ids": [
+    "663c1330-8968-44e7-bef2-d6ac85f25cf4"
+   ],
+   "content": "klient zdecydował się na opcje AC serwis z tego powodu, że różnica między kosztorysem a serwisem była niewielka",
+   "tag": "ROZMOWA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-12-29T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:49.214909+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_164_note_0"
+  },
+  {
+   "id": "03f44cd9-eeeb-4030-afcf-592f1802d750",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "088f90bd-c097-4265-8185-8cde32ad721c",
+   "linked_policy_ids": [
+    "6fcecec1-7685-41a0-8782-f294c8b25904"
+   ],
+   "content": "klient zdecydował się na opcje AC serwis z tego powodu, że różnica między kosztorysem a serwisem była niewielka",
+   "tag": "ROZMOWA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-12-29T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:49.214909+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_166_note_0"
+  },
+  {
+   "id": "0fd8f554-daf5-47ce-8a76-09f27ff2c7de",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "088f90bd-c097-4265-8185-8cde32ad721c",
+   "linked_policy_ids": [
+    "70587ff6-6fd8-45c4-b3d7-46fa09e71fec"
+   ],
+   "content": "nie ma już leasingu",
+   "tag": "ROZMOWA",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-12-30T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:49.214909+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_163_note_0"
+  },
+  {
+   "id": "c3a859bb-288e-47f5-96bc-46308455e0bd",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "088f90bd-c097-4265-8185-8cde32ad721c",
+   "linked_policy_ids": [
+    "70587ff6-6fd8-45c4-b3d7-46fa09e71fec"
+   ],
+   "content": "[STARA POLISA] stara PZU 1103211407 PIN 2264 na wartość netto 54848",
+   "tag": "STATUS",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-12-30T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:49.214909+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_163_oldpol"
+  },
+  {
+   "id": "effbd492-9270-4f07-8fe0-a3d4e70564aa",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "088f90bd-c097-4265-8185-8cde32ad721c",
+   "linked_policy_ids": [
+    "6fcecec1-7685-41a0-8782-f294c8b25904"
+   ],
+   "content": "[STARA POLISA] stara Allianz nr 58061977",
+   "tag": "STATUS",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2025-12-31T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:49.214909+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_166_oldpol"
+  },
+  {
+   "id": "82c0f9d3-9924-448c-94d7-ee7a993ee59a",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "faf0f4df-d0f4-49bc-b587-b4f48f68c115",
+   "linked_policy_ids": [
+    "0215e100-602e-4669-9b79-25220ee8039f"
+   ],
+   "content": "XLSX wsp=\"?\" - niewiadome, do uzupelnienia przez agenta",
+   "tag": "STATUS",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2026-05-11T20:30:55.473925+00:00",
+   "updated_at": "2026-05-11T20:30:55.473925+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_97_ai_review"
+  },
+  {
+   "id": "700e910a-bac3-4d77-82c2-80575df77d99",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "client_id": "088f90bd-c097-4265-8185-8cde32ad721c",
+   "linked_policy_ids": [
+    "75d9669b-a069-4130-b4b7-8826334b1eca"
+   ],
+   "content": "polisa wysłana do podpisu, trudna ocena ryzyka w PZU, branża najwyższego ryzyka, przy założeniu SU jakie chciał klient składka wychodziła 26 tys (już po zniżkach), klient postanowił że chce obniżyć SU tak żeby składka wynosiła około 10 tys zł. przy okazji oceny ryzyka tej polisy w centrala UW napisała że trzeba zmienić PKD w polisie która obejmuje ochroną mury  1079344806 pin 0011",
+   "tag": "STATUS",
+   "reminder_date": null,
+   "reminder_status": null,
+   "history": [],
+   "created_by": null,
+   "created_at": "2026-11-26T00:00:00+00:00",
+   "updated_at": "2026-05-11T18:09:48.925168+00:00",
+   "v1_original_id": null,
+   "legacy_id": "xlsx_2025_row_140_note_0"
+  }
+ ],
+ "shares": [
+  {
+   "id": "ab263203-dcd4-48b6-9273-a8c4c1e77bc5",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "policy_id": "0ed72f2a-b7a2-41e2-b9e7-737d68a0fb29",
+   "sub_agent_id": "d4b8d88c-3a30-4aa1-9678-2d0583b016af",
+   "rate": 0.51,
+   "amount": 2.56,
+   "note": "Import XLSX",
+   "created_at": "2026-05-11T18:09:49.435185+00:00"
+  },
+  {
+   "id": "d6c0a82e-03aa-46bb-9bff-b0ed71813ab9",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "policy_id": "fbba483b-c1a1-4f0b-8a04-4dacc825d026",
+   "sub_agent_id": "d9d83f33-54b6-469f-907f-10852bcb1719",
+   "rate": 8.0,
+   "amount": 36.8,
+   "note": "Import XLSX",
+   "created_at": "2026-05-11T18:09:49.435185+00:00"
+  },
+  {
+   "id": "4d400760-b9ef-4fee-85ab-52b8b592c738",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "policy_id": "385e4900-9525-48d4-9e3f-9e8d5786f15a",
+   "sub_agent_id": "d9d83f33-54b6-469f-907f-10852bcb1719",
+   "rate": 4.0,
+   "amount": 11.12,
+   "note": "Import XLSX",
+   "created_at": "2026-05-11T18:09:49.435185+00:00"
+  },
+  {
+   "id": "7c73d6d5-6ad4-45fc-ab0f-05b86af5b04e",
+   "tenant_id": "11111111-1111-1111-1111-111111111111",
+   "policy_id": "d66d2604-da88-44df-981e-e9d6e0e90c99",
+   "sub_agent_id": "d9d83f33-54b6-469f-907f-10852bcb1719",
+   "rate": 8.0,
+   "amount": 20.32,
+   "note": "Import XLSX",
+   "created_at": "2026-05-11T18:09:49.435185+00:00"
+  }
+ ],
+ "insurers": {
+  "eb046bef-d4a3-4067-a393-049fc72bca6a": "PZU SA",
+  "fd582ee0-8956-46b7-b17f-82c958eb87e7": "Warta",
+  "943fd3ba-8c85-4891-a770-d1208a4d5da1": "Allianz",
+  "a785853c-90ea-4554-8af3-69bfb4c11cd0": "Ergo Hestia",
+  "b7ede18e-b468-4592-81c8-310c227727ca": "Generali",
+  "3db02416-66a1-4e36-9887-1eeaad8a8389": "Compensa",
+  "6e334ca9-8939-469d-b317-bfc95e27f497": "InterRisk",
+  "9e742ea8-db8a-4e2c-8338-e1c7a4655adf": "Uniqa",
+  "24caaef7-b914-44ad-80b0-7b54d0186968": "Proama",
+  "00e01d8c-d3b4-4995-a9cd-cfc2dcfcf8aa": "Link4",
+  "71aec0c9-538b-45c8-baad-f30a0af6a08b": "TUZ",
+  "76d68a60-57c1-47e1-a48b-4e685694f032": "Wiener",
+  "a523da01-6275-4909-972a-404a72ca823a": "Balcia",
+  "395b9d74-1d51-447a-8a92-19fdca19f435": "Beesafe",
+  "ed89db29-e242-429a-b5a3-adba5b250935": "You Can Drive",
+  "3e48c183-8bc5-446d-89b3-963765e24451": "HDI",
+  "b21b4bcb-bede-4f98-a61f-dafd6a5283ac": "MTU",
+  "d7acf023-75c7-461b-a9b9-64f1cdb6787e": "MTU24",
+  "0b3b5008-ec9a-40aa-b148-8d2508591eed": "Pevno"
+ },
+ "sub_agents": {
+  "13909849-8f5c-4063-89c8-f4f5a6f43ce0": {
+   "id": "13909849-8f5c-4063-89c8-f4f5a6f43ce0",
+   "name": "Firmowy (ogólny)",
+   "group_prefix": "firmowy"
+  },
+  "6dc774e0-7f3f-45bd-b963-009038db95d7": {
+   "id": "6dc774e0-7f3f-45bd-b963-009038db95d7",
+   "name": "Beata",
+   "group_prefix": "firmowy"
+  },
+  "62bd7c89-1d9c-4838-9381-7b2c89b3804f": {
+   "id": "62bd7c89-1d9c-4838-9381-7b2c89b3804f",
+   "name": "Hejka",
+   "group_prefix": "firmowy"
+  },
+  "d9d83f33-54b6-469f-907f-10852bcb1719": {
+   "id": "d9d83f33-54b6-469f-907f-10852bcb1719",
+   "name": "Własny",
+   "group_prefix": "wlasny"
+  },
+  "bedcd0ea-fd2a-4a45-af5d-72505ad95d9a": {
+   "id": "bedcd0ea-fd2a-4a45-af5d-72505ad95d9a",
+   "name": "Osip Jakub Alot",
+   "group_prefix": "firmowy"
+  },
+  "0cdab20b-6bca-44ae-af0e-5187cd5bfb98": {
+   "id": "0cdab20b-6bca-44ae-af0e-5187cd5bfb98",
+   "name": "Osip/Krzysztof Buczyński",
+   "group_prefix": "firmowy"
+  },
+  "281241cc-638c-4bf4-a4a6-c266b9af8ec8": {
+   "id": "281241cc-638c-4bf4-a4a6-c266b9af8ec8",
+   "name": "Osip/Jakub Alot",
+   "group_prefix": "firmowy"
+  },
+  "c5494764-23e8-4dee-a658-5a5ee477f27e": {
+   "id": "c5494764-23e8-4dee-a658-5a5ee477f27e",
+   "name": "Osip/Hejka Władysław",
+   "group_prefix": "firmowy"
+  },
+  "d4b8d88c-3a30-4aa1-9678-2d0583b016af": {
+   "id": "d4b8d88c-3a30-4aa1-9678-2d0583b016af",
+   "name": "Osip/Ewa Wawrzyńczuk",
+   "group_prefix": "firmowy"
+  },
+  "edf89a2c-ed3a-4451-8438-7a01b0560108": {
+   "id": "edf89a2c-ed3a-4451-8438-7a01b0560108",
+   "name": "Osip",
+   "group_prefix": "firmowy"
+  },
+  "53741245-fbf8-4936-8d9e-d08f6b26c227": {
+   "id": "53741245-fbf8-4936-8d9e-d08f6b26c227",
+   "name": "Hejka/Baza od Beci",
+   "group_prefix": "firmowy"
+  },
+  "2077f5ca-e942-47e2-a064-a688c2792364": {
+   "id": "2077f5ca-e942-47e2-a064-a688c2792364",
+   "name": "Zakabłuk/baza od Beci",
+   "group_prefix": "firmowy"
+  },
+  "e1610a56-8d6c-4bc6-a540-2fc28442977d": {
+   "id": "e1610a56-8d6c-4bc6-a540-2fc28442977d",
+   "name": "Jakub Alot",
+   "group_prefix": "firmowy"
+  },
+  "cf5522a7-66e6-45e4-80e1-1ad6d878ca66": {
+   "id": "cf5522a7-66e6-45e4-80e1-1ad6d878ca66",
+   "name": "Zitzman/Baza od Beci",
+   "group_prefix": "firmowy"
+  },
+  "35215768-cd1c-4c1a-83e1-9e35f96d7baf": {
+   "id": "35215768-cd1c-4c1a-83e1-9e35f96d7baf",
+   "name": "Smolarek/Baza od Beci",
+   "group_prefix": "firmowy"
+  },
+  "a9e60cbd-7a44-4216-836d-616deecc3ba9": {
+   "id": "a9e60cbd-7a44-4216-836d-616deecc3ba9",
+   "name": "Zakabłuk Łukasz",
+   "group_prefix": "firmowy"
+  },
+  "ce681bb5-8f6f-4f69-b3d1-26e9e88dbcbd": {
+   "id": "ce681bb5-8f6f-4f69-b3d1-26e9e88dbcbd",
+   "name": "Osip/Jakub Atol",
+   "group_prefix": "firmowy"
+  },
+  "8aa31639-b74a-4555-a369-882718ffb357": {
+   "id": "8aa31639-b74a-4555-a369-882718ffb357",
+   "name": "Ania",
+   "group_prefix": "firmowy"
+  },
+  "1a9e65d6-fb3b-46db-9778-bb2e9d783653": {
+   "id": "1a9e65d6-fb3b-46db-9778-bb2e9d783653",
+   "name": "Nadworska",
+   "group_prefix": "firmowy"
+  },
+  "9189d476-c11b-46ad-9e3d-3afe43a8d44b": {
+   "id": "9189d476-c11b-46ad-9e3d-3afe43a8d44b",
+   "name": "Hejka/czy dla Beci też?",
+   "group_prefix": "firmowy"
+  },
+  "66c7788f-726d-4cd5-b09f-b1045d84ac25": {
+   "id": "66c7788f-726d-4cd5-b09f-b1045d84ac25",
+   "name": "Hereziński",
+   "group_prefix": "firmowy"
+  },
+  "aa3694c8-4f23-4f24-ad41-eb69edbbe212": {
+   "id": "aa3694c8-4f23-4f24-ad41-eb69edbbe212",
+   "name": "Jowita",
+   "group_prefix": "firmowy"
+  },
+  "dc8670e7-f151-4dd0-826c-1644e282d651": {
+   "id": "dc8670e7-f151-4dd0-826c-1644e282d651",
+   "name": "z maila Bartka",
+   "group_prefix": "firmowy"
+  },
+  "9a62757f-8af4-4229-a3a3-866f4bbe4192": {
+   "id": "9a62757f-8af4-4229-a3a3-866f4bbe4192",
+   "name": "z telefonu Bartka",
+   "group_prefix": "firmowy"
+  },
+  "b76c4bae-b506-473f-abcd-529a95619b76": {
+   "id": "b76c4bae-b506-473f-abcd-529a95619b76",
+   "name": "Grądziel",
+   "group_prefix": "firmowy"
+  },
+  "d3637eff-ac98-4683-b570-a05f0223ad76": {
+   "id": "d3637eff-ac98-4683-b570-a05f0223ad76",
+   "name": "baza główna",
+   "group_prefix": "firmowy"
+  },
+  "54d1e2dd-ec43-484b-bd9e-4d60a2cc2323": {
+   "id": "54d1e2dd-ec43-484b-bd9e-4d60a2cc2323",
+   "name": "Becia",
+   "group_prefix": "firmowy"
+  },
+  "2792eb8a-62e8-4d8a-9e8e-ae8b7a4b64d8": {
+   "id": "2792eb8a-62e8-4d8a-9e8e-ae8b7a4b64d8",
+   "name": "z tel Bartka",
+   "group_prefix": "firmowy"
+  }
+ }
+}

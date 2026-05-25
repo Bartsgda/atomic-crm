@@ -110,3 +110,12 @@ The Registry file is kept au to date when files are added or removed:
 ## License
 
 This project is licensed under the MIT License, courtesy of [Marmelab](https://marmelab.com). See the [LICENSE.md](./LICENSE.md) file for details.
+
+## Files (md5 + opis)
+
+- `audit_check_61_110.py` `ef0552b26e2c444c71d06041d70d8d90`: TODO: opis (brak docstringu — uzupełnij ręcznie lub dodaj `"""..."""` na początku pliku)
+- `show_bugs.py` `bc18e18b48ec6816f6085e289ed0a0c5`: TODO: opis (brak docstringu — uzupełnij ręcznie lub dodaj `"""..."""` na początku pliku)
+- `show_details.py` `82b1650a279ec4b372420a6ebd1e9663`: TODO: opis (brak docstringu — uzupełnij ręcznie lub dodaj `"""..."""` na początku pliku)
+- `show_row91_notes.py` `d4102af8e8e1630126846d4a06981652`: TODO: opis (brak docstringu — uzupełnij ręcznie lub dodaj `"""..."""` na początku pliku)
+- `show_warnings.py` `cdb47fc4e213d5bc06a7b7fbbafb431d`: TODO: opis (brak docstringu — uzupełnij ręcznie lub dodaj `"""..."""` na początku pliku)
+

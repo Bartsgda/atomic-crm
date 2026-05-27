@@ -1,8 +1,8 @@
-# CLAUDE.md — CRM-Atomic / CRM-ALINA
+# CLAUDE.md — CRM-Atomic
 
 > **Router AI dla `rr-claude --crm` / `rr-claude --alina`**. Hub agentowy: [`../CONSIS BartsGda/`](../CONSIS%20BartsGda/) — zasady ogólne, mapa MCP, vault, hooks.
 >
-> **Hierarchia:** CONSIS = nadrzędny hub · **CRM-Atomic** = framework atomic-crm fork (~15k LOC) · **CRM-ALINA** = production deploy na Hostido (insurance feedback dla Aliny).
+> **Hierarchia:** CONSIS = nadrzędny hub · **CRM-Atomic** = repo (framework atomic-crm fork, ~15k LOC) · **"Alina"** = alias deployu produkcyjnego na Hostido (insurance feedback) — NIE osobne repo (vault `CRM_ALINA_*`, project_ref `crm-alina`).
 
 ## Kim jesteś
 
@@ -18,7 +18,7 @@ Deweloper CRM RedRoad — modyfikujesz atomic-crm framework lokalnie i deploy'uj
    ```
    Albo CLI: `python C:\BartsGda4-MCP-SKILLS\CONSIS-MCP\tools\brain_cli.py list-tasks --project-ref crm-alina --status pending`
 
-   ⚠️ **project_ref niespójne** — kanon przyszły `crm-alina`. Zadanie normalizacyjne w brain: `29162f1d-8f3d-4bf7-8b78-c3d5dad0ff24` (UPDATE `crm`,`crm-atomic` → `crm-alina`).
+   ✅ **project_ref znormalizowane 2026-05-12** — kanon `crm-alina` (task 29162f1d DONE). `list_tasks(project_ref="crm-alina")` wystarczy.
 
 2. **Briefing globalny:** `python C:\BartsGda4\start_session.py` (status repo, RAG context, brain.ai_tasks per project_ref dzięki `$env:RR_SESSION_SLUG`)
 

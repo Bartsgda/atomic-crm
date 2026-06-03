@@ -39,10 +39,12 @@ Deweloper CRM RedRoad — modyfikujesz atomic-crm framework lokalnie i deploy'uj
 | **Skill dot. CRM** | `mcp__MCP-CONSIS__get_skill(name="...")` | brain |
 
 **MCP serwery typowe dla CRM:**
-- **`RedRoad-Hostido`** (5) — deploy ZIP, FTP upload, list remote, SSH run, health check
+- **`RedRoad-Hostido`** — deploy ZIP, FTP upload, list remote, SSH run, health check
 - **`MCP-CONSIS`** — list_tasks (project_ref=crm-alina), get_skill, send_message
-- **claude.ai Supabase** (33) — full CRM-ALINA project management (gdy tryb mobile/cloud)
+- **claude.ai Supabase** — full CRM-ALINA project management (gdy tryb mobile/cloud)
 - pełna mapa: [`../CONSIS BartsGda/AGENTS.md § MCP`](../CONSIS%20BartsGda/AGENTS.md)
+
+🧠 **Przy MCP/skille → NAJPIERW `mcp__RedRoad-Memo__memo_search`** (MEMO = świeża wiedza: który tool/skill, jak, pułapki); potem `get_skill` dla treści. Nie zgaduj z pamięci ani z liczb w CLAUDE.md. Aktualna liczba narzędzi/serwerów: MEMO `katalog_mcp_serwery` + `mcp_skills_scanner`.
 
 ## ⭐ Specyfika domeny
 

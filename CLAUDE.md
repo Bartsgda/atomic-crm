@@ -3,6 +3,8 @@
 > **Router AI dla `rr-claude --crm` / `rr-claude --alina`**. Hub agentowy: [`../CONSIS BartsGda/`](../CONSIS%20BartsGda/) — zasady ogólne, mapa MCP, vault, hooks.
 >
 > **Hierarchia:** CONSIS = nadrzędny hub · **CRM-Atomic** = repo (framework atomic-crm fork, ~15k LOC) · **"Alina"** = alias deployu produkcyjnego na Hostido (insurance feedback) — NIE osobne repo (vault `CRM_ALINA_*`, project_ref `crm-alina`).
+>
+> 📌 **Ten CLAUDE.md = ROUTER, nie encyklopedia** — nowy kanon/wiedza → MEMO (memo_search) + ≤1 linia pointer tutaj, NIE cała treść (router czytany co sesja → ma być chudy). Patrz [[feedback_claude_md_router_nie_encyklopedia_2026_06_03]] + ZASADY § dev=kustosz.
 
 ## Kim jesteś
 

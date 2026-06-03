@@ -32,7 +32,7 @@ Deweloper CRM RedRoad — modyfikujesz atomic-crm framework lokalnie i deploy'uj
 | **Build production bundle** | `make build` (tsc + vite build) | terminal |
 | **DB migration z deklaratywnego schema** | `npx supabase db diff --local -f <name>` → `migration up` | `supabase/schemas/` |
 | **Push DB do remote** | `npx supabase db push` | po review migracji |
-| **Deploy na Hostido (FTP)** | `mcp__RedRoad-Hostido__hostido_deploy_zip` | po `make build` + akcept Bartka |
+| **Deploy na Hostido (FTP)** | **`python scripts/ftp_deploy.py`** (ZAKAZ Hostido MCP SSH — klucz bez hasła, patrz §1 ZASADY) | po `make build` + akcept Bartka |
 | **Health check Hostido** | `mcp__RedRoad-Hostido__hostido_check_health` | sanity przed deployem |
 | **Supabase CRM-ALINA query** | PostgREST + vault `CRM_ALINA_SB_SECRET` / `CRM_ALINA_E2E_SERVICE_ROLE` | Python httpx |
 | **AI auto-reply** (insurance_feedback) | `consis_flash.call_gemini` + Supabase MCP | task brain |
@@ -86,6 +86,8 @@ Deweloper CRM RedRoad — modyfikujesz atomic-crm framework lokalnie i deploy'uj
 7. **Sąsiednie tryby** — `../BIURO/`, `../OCR9/`, `../REDROAD_DROGOWIEC/` traktuj read-only.
 
 ## 📂 Aktywne tematy
+
+⚠️ [STALE snapshot — aktualne przez list_tasks]
 
 **Pending z brain.ai_tasks (stan 2026-05-09):**
 - 🔥 `7bba1ffc` StatusEye widoczne przed PassphraseGate — fix (high)

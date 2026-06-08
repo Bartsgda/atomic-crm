@@ -1,0 +1,45 @@
+# === MANAGED by tools/graf_matrix.py — rodzina KOD = tylko kod ===
+# Dokumentacja (md/txt/yml) ma wlasny graf DOC (scanner md_index). Tu wykluczona.
+*.md
+*.txt
+*.yml
+*.yaml
+*.json
+*.csv
+*.log
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+*.ico
+*.pdf
+*.docx
+*.xlsx
+*.zip
+*.7z
+# === archiwa / kosz / dane sasiednich grafow ===
+archive/
+_archive/
+**/archive/
+**/_archive/
+archiwum/
+**/archiwum/
+projekty_archiwum/
+.trash/
+SESJE/
+_audit_drift/
+01_projekty_graph/
+ocr9_data/
+redroad_www_backup/
+_tmp_burza/
+_DO_ZBADANIA/
+node_modules/
+dist/
+build/
+__pycache__/
+*.pyc
+.git/
+.claude/
+graphify-out/
+.scanner-cache/

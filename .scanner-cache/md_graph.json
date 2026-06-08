@@ -1,0 +1,1147 @@
+{
+  "built_at": "2026-06-08T21:48:15",
+  "root": "C:/BartsGda4/CRM-Atomic",
+  "duration_sec": 0.07,
+  "stats": {
+    "total_files": 94,
+    "broken_links": 0,
+    "external_links": 8,
+    "orphans": 38,
+    "stale_30d": 68
+  },
+  "files": {
+    "AGENTS.md": {
+      "mtime": 1776897168.2462635,
+      "size": 7895,
+      "links_out": [],
+      "links_in": [
+        "CLAUDE.md"
+      ]
+    },
+    "CLAUDE.md": {
+      "mtime": 1780514366.5617824,
+      "size": 12964,
+      "links_out": [
+        "AGENTS.md",
+        "src/legacy-v1/CLAUDE.md"
+      ],
+      "links_in": []
+    },
+    "CODE_OF_CONDUCT.md": {
+      "mtime": 1776897168.2462635,
+      "size": 5222,
+      "links_out": [],
+      "links_in": []
+    },
+    "DOCS_TEST_ENVIRONMENT.md": {
+      "mtime": 1777962366.405591,
+      "size": 2223,
+      "links_out": [],
+      "links_in": []
+    },
+    "LICENSE.md": {
+      "mtime": 1776897168.2462635,
+      "size": 1105,
+      "links_out": [],
+      "links_in": [
+        "README.md"
+      ]
+    },
+    "NEXT_SESSION.md": {
+      "mtime": 1777962366.4065905,
+      "size": 7498,
+      "links_out": [
+        "PROGRESS.md"
+      ],
+      "links_in": []
+    },
+    "PROGRESS.md": {
+      "mtime": 1777962366.4077876,
+      "size": 10624,
+      "links_out": [],
+      "links_in": [
+        "NEXT_SESSION.md"
+      ]
+    },
+    "README.md": {
+      "mtime": 1779709634.4946563,
+      "size": 5121,
+      "links_out": [
+        "LICENSE.md"
+      ],
+      "links_in": []
+    },
+    "SESSION_2026-04-18.md": {
+      "mtime": 1776897168.2483032,
+      "size": 7766,
+      "links_out": [],
+      "links_in": []
+    },
+    ".github/CODE_OF_CONDUCT.md": {
+      "mtime": 1776897168.2412622,
+      "size": 3216,
+      "links_out": [],
+      "links_in": []
+    },
+    ".github/CONTRIBUTING.md": {
+      "mtime": 1776897168.2412622,
+      "size": 2466,
+      "links_out": [],
+      "links_in": []
+    },
+    ".github/pull_request_template.md": {
+      "mtime": 1776897168.2422967,
+      "size": 576,
+      "links_out": [],
+      "links_in": []
+    },
+    ".github/ISSUE_TEMPLATE/Bug_report.md": {
+      "mtime": 1776897168.2422967,
+      "size": 1129,
+      "links_out": [],
+      "links_in": []
+    },
+    ".github/ISSUE_TEMPLATE/Feature_request.md": {
+      "mtime": 1776897168.2422967,
+      "size": 604,
+      "links_out": [],
+      "links_in": []
+    },
+    "doc/README.md": {
+      "mtime": 1776897168.2512772,
+      "size": 1780,
+      "links_out": [],
+      "links_in": []
+    },
+    "sandbox/stitch_design/stitch_redroad_backfill_monitor_dashboard/sahara/DESIGN.md": {
+      "mtime": 1777962366.4291244,
+      "size": 3779,
+      "links_out": [],
+      "links_in": []
+    },
+    "scripts/FTP_TOOLS.md": {
+      "mtime": 1778050580.8936825,
+      "size": 5299,
+      "links_out": [],
+      "links_in": []
+    },
+    "scripts/_INDEX.md": {
+      "mtime": 1779190713.2576656,
+      "size": 1216,
+      "links_out": [],
+      "links_in": []
+    },
+    "SESJE/2026-05-01_SUPABASE_API_KNOWLEDGE/README.md": {
+      "mtime": 1777962366.4087996,
+      "size": 2248,
+      "links_out": [],
+      "links_in": []
+    },
+    "src/components/admin/Readme.md": {
+      "mtime": 1776897168.3892586,
+      "size": 1449,
+      "links_out": [],
+      "links_in": [
+        "src/components/ui/README.md"
+      ]
+    },
+    "src/components/ui/README.md": {
+      "mtime": 1776897168.5364096,
+      "size": 1179,
+      "links_out": [
+        "src/components/admin/Readme.md"
+      ],
+      "links_in": []
+    },
+    "src/legacy-v1/AI_ARCHITECTURE.md": {
+      "mtime": 1776897168.55241,
+      "size": 2046,
+      "links_out": [],
+      "links_in": [
+        "src/legacy-v1/CLAUDE.md"
+      ]
+    },
+    "src/legacy-v1/AI_CRM_MASTERPLAN.md": {
+      "mtime": 1776897168.55241,
+      "size": 3091,
+      "links_out": [],
+      "links_in": [
+        "src/legacy-v1/CLAUDE.md"
+      ]
+    },
+    "src/legacy-v1/AI_PARSING_RULES.md": {
+      "mtime": 1776897168.55241,
+      "size": 2213,
+      "links_out": [],
+      "links_in": [
+        "src/legacy-v1/CLAUDE.md"
+      ]
+    },
+    "src/legacy-v1/AI_PROGRESS_LOG.md": {
+      "mtime": 1776897168.5534427,
+      "size": 3194,
+      "links_out": [],
+      "links_in": [
+        "src/legacy-v1/CLAUDE.md"
+      ]
+    },
+    "src/legacy-v1/ALGORITHM_RATES.md": {
+      "mtime": 1776897168.5544288,
+      "size": 1801,
+      "links_out": [],
+      "links_in": [
+        "src/legacy-v1/CLAUDE.md"
+      ]
+    },
+    "src/legacy-v1/ARCHITECTURE.md": {
+      "mtime": 1776897168.5544288,
+      "size": 3206,
+      "links_out": [],
+      "links_in": [
+        "src/legacy-v1/CLAUDE.md"
+      ]
+    },
+    "src/legacy-v1/ARCHITECTURE_5_PILLARS.md": {
+      "mtime": 1776897168.5544288,
+      "size": 2112,
+      "links_out": [],
+      "links_in": [
+        "src/legacy-v1/CLAUDE.md"
+      ]
+    },
+    "src/legacy-v1/AUDIT_PLAN.md": {
+      "mtime": 1778784519.8446672,
+      "size": 8172,
+      "links_out": [
+        "src/legacy-v1/AUDIT_ROWS_1_10_2026-05-11.md",
+        "src/legacy-v1/IMPORT_AUDIT_HOWTO.md"
+      ],
+      "links_in": [
+        "src/legacy-v1/CLAUDE.md",
+        "src/legacy-v1/IMPORT_AUDIT_HOWTO.md"
+      ]
+    },
+    "src/legacy-v1/AUDIT_ROWS_111_130_2026-05-11.md": {
+      "mtime": 1778784519.8466995,
+      "size": 39475,
+      "links_out": [
+        "src/legacy-v1/AUDIT_ROWS_81_90_OPUS_GROUND_TRUTH_2026-05-11.md"
+      ],
+      "links_in": []
+    },
+    "src/legacy-v1/AUDIT_ROWS_11_20_2026-05-11.md": {
+      "mtime": 1778784519.8484266,
+      "size": 37483,
+      "links_out": [],
+      "links_in": []
+    },
+    "src/legacy-v1/AUDIT_ROWS_131_150_2026-05-11.md": {
+      "mtime": 1778784519.8519435,
+      "size": 28487,
+      "links_out": [],
+      "links_in": []
+    },
+    "src/legacy-v1/AUDIT_ROWS_151_170_2026-05-11.md": {
+      "mtime": 1778784519.8529508,
+      "size": 40505,
+      "links_out": [],
+      "links_in": []
+    },
+    "src/legacy-v1/AUDIT_ROWS_171_182_2026-05-11.md": {
+      "mtime": 1778784519.8549418,
+      "size": 29868,
+      "links_out": [],
+      "links_in": []
+    },
+    "src/legacy-v1/AUDIT_ROWS_1_10_2026-05-11.md": {
+      "mtime": 1778784519.8570392,
+      "size": 20550,
+      "links_out": [],
+      "links_in": [
+        "src/legacy-v1/AUDIT_PLAN.md",
+        "src/legacy-v1/CLAUDE.md",
+        "src/legacy-v1/IMPORT_AUDIT_HOWTO.md"
+      ]
+    },
+    "src/legacy-v1/AUDIT_ROWS_21_30_2026-05-11.md": {
+      "mtime": 1778784519.8590584,
+      "size": 17550,
+      "links_out": [],
+      "links_in": []
+    },
+    "src/legacy-v1/AUDIT_ROWS_31_40_2026-05-11.md": {
+      "mtime": 1778784519.8610678,
+      "size": 24388,
+      "links_out": [],
+      "links_in": []
+    },
+    "src/legacy-v1/AUDIT_ROWS_41_50_2026-05-11.md": {
+      "mtime": 1778784519.8625236,
+      "size": 24940,
+      "links_out": [],
+      "links_in": []
+    },
+    "src/legacy-v1/AUDIT_ROWS_51_60_2026-05-11.md": {
+      "mtime": 1778784519.8650663,
+      "size": 27968,
+      "links_out": [],
+      "links_in": []
+    },
+    "src/legacy-v1/AUDIT_ROWS_61_70_2026-05-11.md": {
+      "mtime": 1778784519.8660905,
+      "size": 29113,
+      "links_out": [],
+      "links_in": []
+    },
+    "src/legacy-v1/AUDIT_ROWS_71_80_2026-05-11.md": {
+      "mtime": 1778784519.8675988,
+      "size": 21964,
+      "links_out": [],
+      "links_in": []
+    },
+    "src/legacy-v1/AUDIT_ROWS_81_90_2026-05-11.md": {
+      "mtime": 1778784519.869125,
+      "size": 6503,
+      "links_out": [],
+      "links_in": []
+    },
+    "src/legacy-v1/AUDIT_ROWS_81_90_OPUS_GROUND_TRUTH_2026-05-11.md": {
+      "mtime": 1778784519.8696494,
+      "size": 12924,
+      "links_out": [],
+      "links_in": [
+        "src/legacy-v1/AUDIT_ROWS_111_130_2026-05-11.md"
+      ]
+    },
+    "src/legacy-v1/AUDIT_ROWS_91_110_2026-05-11.md": {
+      "mtime": 1778830059.6324742,
+      "size": 29208,
+      "links_out": [],
+      "links_in": []
+    },
+    "src/legacy-v1/BACKUP_SYSTEM.md": {
+      "mtime": 1776897168.5554109,
+      "size": 2096,
+      "links_out": [],
+      "links_in": [
+        "src/legacy-v1/CLAUDE.md",
+        "src/legacy-v1/README.md"
+      ]
+    },
+    "src/legacy-v1/BartsGda.md": {
+      "mtime": 1776897168.5554109,
+      "size": 2751,
+      "links_out": [],
+      "links_in": [
+        "src/legacy-v1/CLAUDE.md",
+        "src/legacy-v1/README.md"
+      ]
+    },
+    "src/legacy-v1/CALENDAR_SPEC.md": {
+      "mtime": 1776897168.55645,
+      "size": 1562,
+      "links_out": [],
+      "links_in": [
+        "src/legacy-v1/CLAUDE.md",
+        "src/legacy-v1/REQUIREMENTS.md"
+      ]
+    },
+    "src/legacy-v1/CHECKLIST_SPECS.md": {
+      "mtime": 1776897168.55645,
+      "size": 2549,
+      "links_out": [],
+      "links_in": [
+        "src/legacy-v1/CLAUDE.md",
+        "src/legacy-v1/REQUIREMENTS.md"
+      ]
+    },
+    "src/legacy-v1/CLAUDE.md": {
+      "mtime": 1778784519.873696,
+      "size": 13025,
+      "links_out": [
+        "src/legacy-v1/IMPORT_AUDIT_HOWTO.md",
+        "src/legacy-v1/XLSX_MAPPING.md",
+        "src/legacy-v1/IMPORT_LOGIC.md",
+        "src/legacy-v1/AUDIT_ROWS_1_10_2026-05-11.md",
+        "src/legacy-v1/AUDIT_PLAN.md",
+        "src/legacy-v1/DATA_MAPPING.md",
+        "src/legacy-v1/LEGACY_DATA_SPEC.md",
+        "src/legacy-v1/REVERSE_ARCH_SPEC.md",
+        "src/legacy-v1/IMPORT_DEBUG_LOG.md",
+        "src/legacy-v1/CLIENTS_SPEC.md",
+        "src/legacy-v1/WYMAGANIA-KLIENT.md",
+        "src/legacy-v1/CLIENT_PANEL_REQUIREMENTS.md",
+        "src/legacy-v1/POLICIES_SPEC.md",
+        "src/legacy-v1/AI_PARSING_RULES.md",
+        "src/legacy-v1/STATE_FLOW.md",
+        "src/legacy-v1/COMMISSIONS_SPEC.md",
+        "src/legacy-v1/SUB_AGENTS_SPEC.md",
+        "src/legacy-v1/ALGORITHM_RATES.md",
+        "src/legacy-v1/NOTES_SPEC.md",
+        "src/legacy-v1/OFFERS_SPEC.md",
+        "src/legacy-v1/OFFERS_REQUIREMENTS.md",
+        "src/legacy-v1/OFFERS_ROADMAP.md",
+        "src/legacy-v1/CALENDAR_SPEC.md",
+        "src/legacy-v1/CHECKLIST_SPECS.md",
+        "src/legacy-v1/DESIGN_SYSTEM.md",
+        "src/legacy-v1/UI_UX_DROPDOWN_FIX.md",
+        "src/legacy-v1/UI_SEARCH_KEYBOARD_RULES.md",
+        "src/legacy-v1/ARCHITECTURE.md",
+        "src/legacy-v1/ARCHITECTURE_5_PILLARS.md",
+        "src/legacy-v1/AI_ARCHITECTURE.md",
+        "src/legacy-v1/REQUIREMENTS.md",
+        "src/legacy-v1/DATA_REPAIR_SPEC.md",
+        "src/legacy-v1/BACKUP_SYSTEM.md",
+        "src/legacy-v1/TIMELINE_ARCHITECTURE.md",
+        "src/legacy-v1/SUPREME_RULES.md",
+        "src/legacy-v1/AI_CRM_MASTERPLAN.md",
+        "src/legacy-v1/ROADMAP.md",
+        "src/legacy-v1/BartsGda.md",
+        "src/legacy-v1/PROJECT_CHRONICLE.md",
+        "src/legacy-v1/AI_PROGRESS_LOG.md",
+        "src/legacy-v1/FAILURE_REPORT.md",
+        "src/legacy-v1/REQUIREMENTS_LEDGER.md",
+        "src/legacy-v1/SUPREME_RULES.md"
+      ],
+      "links_in": [
+        "CLAUDE.md",
+        "src/legacy-v1/IMPORT_AUDIT_HOWTO.md"
+      ]
+    },
+    "src/legacy-v1/CLIENTS_SPEC.md": {
+      "mtime": 1778480705.1159217,
+      "size": 4157,
+      "links_out": [],
+      "links_in": [
+        "src/legacy-v1/CLAUDE.md",
+        "src/legacy-v1/REQUIREMENTS.md"
+      ]
+    },
+    "src/legacy-v1/CLIENT_PANEL_REQUIREMENTS.md": {
+      "mtime": 1776897168.5574112,
+      "size": 2167,
+      "links_out": [],
+      "links_in": [
+        "src/legacy-v1/CLAUDE.md"
+      ]
+    },
+    "src/legacy-v1/COMMISSIONS_SPEC.md": {
+      "mtime": 1776897168.558435,
+      "size": 1681,
+      "links_out": [],
+      "links_in": [
+        "src/legacy-v1/CLAUDE.md",
+        "src/legacy-v1/IMPORT_AUDIT_HOWTO.md"
+      ]
+    },
+    "src/legacy-v1/DATA_MAPPING.md": {
+      "mtime": 1776897168.559409,
+      "size": 1740,
+      "links_out": [],
+      "links_in": [
+        "src/legacy-v1/CLAUDE.md",
+        "src/legacy-v1/README.md"
+      ]
+    },
+    "src/legacy-v1/DATA_REPAIR_SPEC.md": {
+      "mtime": 1776897168.559409,
+      "size": 3467,
+      "links_out": [],
+      "links_in": [
+        "src/legacy-v1/CLAUDE.md"
+      ]
+    },
+    "src/legacy-v1/DESIGN_SYSTEM.md": {
+      "mtime": 1776897168.5604093,
+      "size": 2076,
+      "links_out": [],
+      "links_in": [
+        "src/legacy-v1/CLAUDE.md",
+        "src/legacy-v1/README.md"
+      ]
+    },
+    "src/legacy-v1/FAILURE_REPORT.md": {
+      "mtime": 1776897168.5614352,
+      "size": 841,
+      "links_out": [],
+      "links_in": [
+        "src/legacy-v1/CLAUDE.md"
+      ]
+    },
+    "src/legacy-v1/IMPORT_AUDIT_HOWTO.md": {
+      "mtime": 1778784519.8746958,
+      "size": 11297,
+      "links_out": [
+        "src/legacy-v1/XLSX_FULL_PARSE_PLAN.md",
+        "src/legacy-v1/IMPORT_LOGIC.md",
+        "src/legacy-v1/IMPORT_DEBUG_LOG.md",
+        "src/legacy-v1/CLAUDE.md",
+        "src/legacy-v1/COMMISSIONS_SPEC.md",
+        "src/legacy-v1/TIMELINE_ARCHITECTURE.md",
+        "src/legacy-v1/AUDIT_ROWS_1_10_2026-05-11.md",
+        "src/legacy-v1/AUDIT_PLAN.md"
+      ],
+      "links_in": [
+        "src/legacy-v1/AUDIT_PLAN.md",
+        "src/legacy-v1/CLAUDE.md"
+      ]
+    },
+    "src/legacy-v1/IMPORT_DEBUG_LOG.md": {
+      "mtime": 1776897168.5614352,
+      "size": 1336,
+      "links_out": [],
+      "links_in": [
+        "src/legacy-v1/CLAUDE.md",
+        "src/legacy-v1/IMPORT_AUDIT_HOWTO.md"
+      ]
+    },
+    "src/legacy-v1/IMPORT_LOGIC.md": {
+      "mtime": 1776897168.5614352,
+      "size": 3088,
+      "links_out": [],
+      "links_in": [
+        "src/legacy-v1/CLAUDE.md",
+        "src/legacy-v1/IMPORT_AUDIT_HOWTO.md"
+      ]
+    },
+    "src/legacy-v1/LEGACY_DATA_SPEC.md": {
+      "mtime": 1776897168.5624108,
+      "size": 1862,
+      "links_out": [],
+      "links_in": [
+        "src/legacy-v1/CLAUDE.md"
+      ]
+    },
+    "src/legacy-v1/NOTES_SPEC.md": {
+      "mtime": 1776897168.5624108,
+      "size": 2010,
+      "links_out": [],
+      "links_in": [
+        "src/legacy-v1/CLAUDE.md",
+        "src/legacy-v1/REQUIREMENTS.md"
+      ]
+    },
+    "src/legacy-v1/OFFERS_REQUIREMENTS.md": {
+      "mtime": 1776897168.5634098,
+      "size": 2281,
+      "links_out": [],
+      "links_in": [
+        "src/legacy-v1/CLAUDE.md",
+        "src/legacy-v1/README.md"
+      ]
+    },
+    "src/legacy-v1/OFFERS_ROADMAP.md": {
+      "mtime": 1776897168.5634098,
+      "size": 1295,
+      "links_out": [],
+      "links_in": [
+        "src/legacy-v1/CLAUDE.md"
+      ]
+    },
+    "src/legacy-v1/OFFERS_SPEC.md": {
+      "mtime": 1776897168.5644095,
+      "size": 2263,
+      "links_out": [],
+      "links_in": [
+        "src/legacy-v1/CLAUDE.md",
+        "src/legacy-v1/REQUIREMENTS.md"
+      ]
+    },
+    "src/legacy-v1/POLICIES_SPEC.md": {
+      "mtime": 1776897168.5644095,
+      "size": 5027,
+      "links_out": [],
+      "links_in": [
+        "src/legacy-v1/CLAUDE.md",
+        "src/legacy-v1/REQUIREMENTS.md"
+      ]
+    },
+    "src/legacy-v1/PROJECT_CHRONICLE.md": {
+      "mtime": 1776897168.5654092,
+      "size": 4607,
+      "links_out": [],
+      "links_in": [
+        "src/legacy-v1/CLAUDE.md"
+      ]
+    },
+    "src/legacy-v1/README.md": {
+      "mtime": 1776897168.5654092,
+      "size": 1786,
+      "links_out": [
+        "src/legacy-v1/ROADMAP.md",
+        "src/legacy-v1/BartsGda.md",
+        "src/legacy-v1/REQUIREMENTS.md",
+        "src/legacy-v1/WYMAGANIA-KLIENT.md",
+        "src/legacy-v1/OFFERS_REQUIREMENTS.md",
+        "src/legacy-v1/components/Terminations/TERMINATIONS_SPEC.md",
+        "src/legacy-v1/DESIGN_SYSTEM.md",
+        "src/legacy-v1/BACKUP_SYSTEM.md",
+        "src/legacy-v1/DATA_MAPPING.md",
+        "src/legacy-v1/XLSX_MAPPING.md"
+      ],
+      "links_in": []
+    },
+    "src/legacy-v1/REQUIREMENTS.md": {
+      "mtime": 1776897168.56641,
+      "size": 2363,
+      "links_out": [
+        "src/legacy-v1/CLIENTS_SPEC.md",
+        "src/legacy-v1/POLICIES_SPEC.md",
+        "src/legacy-v1/OFFERS_SPEC.md",
+        "src/legacy-v1/components/Terminations/TERMINATIONS_SPEC.md",
+        "src/legacy-v1/NOTES_SPEC.md",
+        "src/legacy-v1/CALENDAR_SPEC.md",
+        "src/legacy-v1/CHECKLIST_SPECS.md"
+      ],
+      "links_in": [
+        "src/legacy-v1/CLAUDE.md",
+        "src/legacy-v1/README.md"
+      ]
+    },
+    "src/legacy-v1/REQUIREMENTS_LEDGER.md": {
+      "mtime": 1776897168.56641,
+      "size": 9631,
+      "links_out": [],
+      "links_in": [
+        "src/legacy-v1/CLAUDE.md"
+      ]
+    },
+    "src/legacy-v1/REVERSE_ARCH_SPEC.md": {
+      "mtime": 1776897168.5674093,
+      "size": 3118,
+      "links_out": [],
+      "links_in": [
+        "src/legacy-v1/CLAUDE.md"
+      ]
+    },
+    "src/legacy-v1/ROADMAP.md": {
+      "mtime": 1776897168.5674093,
+      "size": 3567,
+      "links_out": [],
+      "links_in": [
+        "src/legacy-v1/CLAUDE.md",
+        "src/legacy-v1/README.md"
+      ]
+    },
+    "src/legacy-v1/STATE_FLOW.md": {
+      "mtime": 1776897168.5714104,
+      "size": 2359,
+      "links_out": [],
+      "links_in": [
+        "src/legacy-v1/CLAUDE.md"
+      ]
+    },
+    "src/legacy-v1/SUB_AGENTS_SPEC.md": {
+      "mtime": 1776897168.5714104,
+      "size": 3158,
+      "links_out": [],
+      "links_in": [
+        "src/legacy-v1/CLAUDE.md"
+      ]
+    },
+    "src/legacy-v1/SUPREME_RULES.md": {
+      "mtime": 1776897168.5724106,
+      "size": 3398,
+      "links_out": [],
+      "links_in": [
+        "src/legacy-v1/CLAUDE.md",
+        "src/legacy-v1/CLAUDE.md"
+      ]
+    },
+    "src/legacy-v1/TIMELINE_ARCHITECTURE.md": {
+      "mtime": 1778784519.875857,
+      "size": 12319,
+      "links_out": [],
+      "links_in": [
+        "src/legacy-v1/CLAUDE.md",
+        "src/legacy-v1/IMPORT_AUDIT_HOWTO.md"
+      ]
+    },
+    "src/legacy-v1/UI_SEARCH_KEYBOARD_RULES.md": {
+      "mtime": 1778784519.8773806,
+      "size": 7808,
+      "links_out": [],
+      "links_in": [
+        "src/legacy-v1/CLAUDE.md"
+      ]
+    },
+    "src/legacy-v1/UI_UX_DROPDOWN_FIX.md": {
+      "mtime": 1776897168.5724106,
+      "size": 1856,
+      "links_out": [],
+      "links_in": [
+        "src/legacy-v1/CLAUDE.md"
+      ]
+    },
+    "src/legacy-v1/WYMAGANIA-KLIENT.md": {
+      "mtime": 1778480705.1159217,
+      "size": 2546,
+      "links_out": [],
+      "links_in": [
+        "src/legacy-v1/CLAUDE.md",
+        "src/legacy-v1/README.md"
+      ]
+    },
+    "src/legacy-v1/XLSX_FULL_PARSE_PLAN.md": {
+      "mtime": 1778784519.8789186,
+      "size": 15044,
+      "links_out": [],
+      "links_in": [
+        "src/legacy-v1/IMPORT_AUDIT_HOWTO.md"
+      ]
+    },
+    "src/legacy-v1/XLSX_MAPPING.md": {
+      "mtime": 1776897168.573439,
+      "size": 2732,
+      "links_out": [],
+      "links_in": [
+        "src/legacy-v1/CLAUDE.md",
+        "src/legacy-v1/README.md"
+      ]
+    },
+    "src/legacy-v1/ai/prompts/CLIENT_MASTER_PROMPT.md": {
+      "mtime": 1776897168.5754325,
+      "size": 2998,
+      "links_out": [],
+      "links_in": []
+    },
+    "src/legacy-v1/components/ReminderSystem/REMINDER_SPEC.md": {
+      "mtime": 1776897168.600416,
+      "size": 1363,
+      "links_out": [],
+      "links_in": []
+    },
+    "src/legacy-v1/components/Terminations/TERMINATIONS_SPEC.md": {
+      "mtime": 1776897168.6049156,
+      "size": 1330,
+      "links_out": [],
+      "links_in": [
+        "src/legacy-v1/README.md",
+        "src/legacy-v1/REQUIREMENTS.md"
+      ]
+    },
+    "src/legacy-v1/data/samples/XLSX_STRUCTURE_REFERENCE.md": {
+      "mtime": 1776897168.6179125,
+      "size": 1418,
+      "links_out": [],
+      "links_in": []
+    },
+    "src/legacy-v1/SPECS/MOD_AUTO.md": {
+      "mtime": 1776897168.5674093,
+      "size": 1956,
+      "links_out": [],
+      "links_in": []
+    },
+    "src/legacy-v1/SPECS/MOD_HOME.md": {
+      "mtime": 1776897168.5684395,
+      "size": 1264,
+      "links_out": [],
+      "links_in": []
+    },
+    "src/legacy-v1/SPECS/MOD_LIFE.md": {
+      "mtime": 1776897168.569409,
+      "size": 792,
+      "links_out": [],
+      "links_in": []
+    },
+    "src/legacy-v1/SPECS/MOD_TRAVEL.md": {
+      "mtime": 1776897168.569409,
+      "size": 988,
+      "links_out": [],
+      "links_in": []
+    },
+    "src/legacy-v1/SPECS/POLICY_AUTO.md": {
+      "mtime": 1776897168.569409,
+      "size": 1268,
+      "links_out": [],
+      "links_in": []
+    },
+    "src/legacy-v1/SPECS/POLICY_HOME.md": {
+      "mtime": 1776897168.5704348,
+      "size": 1070,
+      "links_out": [],
+      "links_in": []
+    },
+    "src/legacy-v1/SPECS/POLICY_LIFE.md": {
+      "mtime": 1776897168.5704348,
+      "size": 665,
+      "links_out": [],
+      "links_in": []
+    },
+    "src/legacy-v1/SPECS/POLICY_TRAVEL.md": {
+      "mtime": 1776897168.5704348,
+      "size": 926,
+      "links_out": [],
+      "links_in": []
+    },
+    "src/legacy-v1/test/icons_proposal.md": {
+      "mtime": 1776897168.6329286,
+      "size": 2065,
+      "links_out": [],
+      "links_in": []
+    },
+    "src/sandbox/stitch/DESIGN.md": {
+      "mtime": 1778050580.898193,
+      "size": 7288,
+      "links_out": [],
+      "links_in": []
+    }
+  },
+  "broken": [],
+  "external": [
+    {
+      "src": "CLAUDE.md",
+      "raw": "../CONSIS%20BartsGda/AGENTS.md",
+      "abs": "C:/BartsGda4/CONSIS BartsGda/AGENTS.md"
+    },
+    {
+      "src": "CLAUDE.md",
+      "raw": "../CONSIS%20BartsGda/ZASADY.md",
+      "abs": "C:/BartsGda4/CONSIS BartsGda/ZASADY.md"
+    },
+    {
+      "src": "CLAUDE.md",
+      "raw": "../CONSIS%20BartsGda/ZASADY.md",
+      "abs": "C:/BartsGda4/CONSIS BartsGda/ZASADY.md"
+    },
+    {
+      "src": "CLAUDE.md",
+      "raw": "../CONSIS%20BartsGda/AGENTS.md",
+      "abs": "C:/BartsGda4/CONSIS BartsGda/AGENTS.md"
+    },
+    {
+      "src": "CLAUDE.md",
+      "raw": "../CONSIS%20BartsGda/.agent/MACHINE_IDENTITY.md",
+      "abs": "C:/BartsGda4/CONSIS BartsGda/.agent/MACHINE_IDENTITY.md"
+    },
+    {
+      "src": "CLAUDE.md",
+      "raw": "../BIURO/CLAUDE.md",
+      "abs": "C:/BartsGda4/BIURO/CLAUDE.md"
+    },
+    {
+      "src": "CLAUDE.md",
+      "raw": "../kpir-automator/CLAUDE.md",
+      "abs": "C:/BartsGda4/kpir-automator/CLAUDE.md"
+    },
+    {
+      "src": "NEXT_SESSION.md",
+      "raw": "../CONSIS BartsGda/BAZA_WIEDZY/HOSTING/HOSTIDO.md",
+      "abs": "C:/BartsGda4/CONSIS BartsGda/BAZA_WIEDZY/HOSTING/HOSTIDO.md"
+    }
+  ],
+  "orphans": [
+    ".github/CODE_OF_CONDUCT.md",
+    ".github/CONTRIBUTING.md",
+    ".github/ISSUE_TEMPLATE/Bug_report.md",
+    ".github/ISSUE_TEMPLATE/Feature_request.md",
+    ".github/pull_request_template.md",
+    "CODE_OF_CONDUCT.md",
+    "DOCS_TEST_ENVIRONMENT.md",
+    "NEXT_SESSION.md",
+    "SESSION_2026-04-18.md",
+    "sandbox/stitch_design/stitch_redroad_backfill_monitor_dashboard/sahara/DESIGN.md",
+    "scripts/FTP_TOOLS.md",
+    "scripts/_INDEX.md",
+    "src/legacy-v1/AUDIT_ROWS_111_130_2026-05-11.md",
+    "src/legacy-v1/AUDIT_ROWS_11_20_2026-05-11.md",
+    "src/legacy-v1/AUDIT_ROWS_131_150_2026-05-11.md",
+    "src/legacy-v1/AUDIT_ROWS_151_170_2026-05-11.md",
+    "src/legacy-v1/AUDIT_ROWS_171_182_2026-05-11.md",
+    "src/legacy-v1/AUDIT_ROWS_21_30_2026-05-11.md",
+    "src/legacy-v1/AUDIT_ROWS_31_40_2026-05-11.md",
+    "src/legacy-v1/AUDIT_ROWS_41_50_2026-05-11.md",
+    "src/legacy-v1/AUDIT_ROWS_51_60_2026-05-11.md",
+    "src/legacy-v1/AUDIT_ROWS_61_70_2026-05-11.md",
+    "src/legacy-v1/AUDIT_ROWS_71_80_2026-05-11.md",
+    "src/legacy-v1/AUDIT_ROWS_81_90_2026-05-11.md",
+    "src/legacy-v1/AUDIT_ROWS_91_110_2026-05-11.md",
+    "src/legacy-v1/SPECS/MOD_AUTO.md",
+    "src/legacy-v1/SPECS/MOD_HOME.md",
+    "src/legacy-v1/SPECS/MOD_LIFE.md",
+    "src/legacy-v1/SPECS/MOD_TRAVEL.md",
+    "src/legacy-v1/SPECS/POLICY_AUTO.md",
+    "src/legacy-v1/SPECS/POLICY_HOME.md",
+    "src/legacy-v1/SPECS/POLICY_LIFE.md",
+    "src/legacy-v1/SPECS/POLICY_TRAVEL.md",
+    "src/legacy-v1/ai/prompts/CLIENT_MASTER_PROMPT.md",
+    "src/legacy-v1/components/ReminderSystem/REMINDER_SPEC.md",
+    "src/legacy-v1/data/samples/XLSX_STRUCTURE_REFERENCE.md",
+    "src/legacy-v1/test/icons_proposal.md",
+    "src/sandbox/stitch/DESIGN.md"
+  ],
+  "stale": [
+    {
+      "file": ".github/CODE_OF_CONDUCT.md",
+      "days": 46.9
+    },
+    {
+      "file": ".github/CONTRIBUTING.md",
+      "days": 46.9
+    },
+    {
+      "file": ".github/pull_request_template.md",
+      "days": 46.9
+    },
+    {
+      "file": ".github/ISSUE_TEMPLATE/Bug_report.md",
+      "days": 46.9
+    },
+    {
+      "file": ".github/ISSUE_TEMPLATE/Feature_request.md",
+      "days": 46.9
+    },
+    {
+      "file": "AGENTS.md",
+      "days": 46.9
+    },
+    {
+      "file": "CODE_OF_CONDUCT.md",
+      "days": 46.9
+    },
+    {
+      "file": "LICENSE.md",
+      "days": 46.9
+    },
+    {
+      "file": "SESSION_2026-04-18.md",
+      "days": 46.9
+    },
+    {
+      "file": "doc/README.md",
+      "days": 46.9
+    },
+    {
+      "file": "src/components/admin/Readme.md",
+      "days": 46.9
+    },
+    {
+      "file": "src/components/ui/README.md",
+      "days": 46.9
+    },
+    {
+      "file": "src/legacy-v1/AI_ARCHITECTURE.md",
+      "days": 46.9
+    },
+    {
+      "file": "src/legacy-v1/AI_CRM_MASTERPLAN.md",
+      "days": 46.9
+    },
+    {
+      "file": "src/legacy-v1/AI_PARSING_RULES.md",
+      "days": 46.9
+    },
+    {
+      "file": "src/legacy-v1/AI_PROGRESS_LOG.md",
+      "days": 46.9
+    },
+    {
+      "file": "src/legacy-v1/ALGORITHM_RATES.md",
+      "days": 46.9
+    },
+    {
+      "file": "src/legacy-v1/ARCHITECTURE.md",
+      "days": 46.9
+    },
+    {
+      "file": "src/legacy-v1/ARCHITECTURE_5_PILLARS.md",
+      "days": 46.9
+    },
+    {
+      "file": "src/legacy-v1/BACKUP_SYSTEM.md",
+      "days": 46.9
+    },
+    {
+      "file": "src/legacy-v1/BartsGda.md",
+      "days": 46.9
+    },
+    {
+      "file": "src/legacy-v1/CALENDAR_SPEC.md",
+      "days": 46.9
+    },
+    {
+      "file": "src/legacy-v1/CHECKLIST_SPECS.md",
+      "days": 46.9
+    },
+    {
+      "file": "src/legacy-v1/CLIENT_PANEL_REQUIREMENTS.md",
+      "days": 46.9
+    },
+    {
+      "file": "src/legacy-v1/COMMISSIONS_SPEC.md",
+      "days": 46.9
+    },
+    {
+      "file": "src/legacy-v1/DATA_MAPPING.md",
+      "days": 46.9
+    },
+    {
+      "file": "src/legacy-v1/DATA_REPAIR_SPEC.md",
+      "days": 46.9
+    },
+    {
+      "file": "src/legacy-v1/DESIGN_SYSTEM.md",
+      "days": 46.9
+    },
+    {
+      "file": "src/legacy-v1/FAILURE_REPORT.md",
+      "days": 46.9
+    },
+    {
+      "file": "src/legacy-v1/IMPORT_DEBUG_LOG.md",
+      "days": 46.9
+    },
+    {
+      "file": "src/legacy-v1/IMPORT_LOGIC.md",
+      "days": 46.9
+    },
+    {
+      "file": "src/legacy-v1/LEGACY_DATA_SPEC.md",
+      "days": 46.9
+    },
+    {
+      "file": "src/legacy-v1/NOTES_SPEC.md",
+      "days": 46.9
+    },
+    {
+      "file": "src/legacy-v1/OFFERS_REQUIREMENTS.md",
+      "days": 46.9
+    },
+    {
+      "file": "src/legacy-v1/OFFERS_ROADMAP.md",
+      "days": 46.9
+    },
+    {
+      "file": "src/legacy-v1/OFFERS_SPEC.md",
+      "days": 46.9
+    },
+    {
+      "file": "src/legacy-v1/POLICIES_SPEC.md",
+      "days": 46.9
+    },
+    {
+      "file": "src/legacy-v1/PROJECT_CHRONICLE.md",
+      "days": 46.9
+    },
+    {
+      "file": "src/legacy-v1/README.md",
+      "days": 46.9
+    },
+    {
+      "file": "src/legacy-v1/REQUIREMENTS.md",
+      "days": 46.9
+    },
+    {
+      "file": "src/legacy-v1/REQUIREMENTS_LEDGER.md",
+      "days": 46.9
+    },
+    {
+      "file": "src/legacy-v1/REVERSE_ARCH_SPEC.md",
+      "days": 46.9
+    },
+    {
+      "file": "src/legacy-v1/ROADMAP.md",
+      "days": 46.9
+    },
+    {
+      "file": "src/legacy-v1/SPECS/MOD_AUTO.md",
+      "days": 46.9
+    },
+    {
+      "file": "src/legacy-v1/SPECS/MOD_HOME.md",
+      "days": 46.9
+    },
+    {
+      "file": "src/legacy-v1/SPECS/MOD_LIFE.md",
+      "days": 46.9
+    },
+    {
+      "file": "src/legacy-v1/SPECS/MOD_TRAVEL.md",
+      "days": 46.9
+    },
+    {
+      "file": "src/legacy-v1/SPECS/POLICY_AUTO.md",
+      "days": 46.9
+    },
+    {
+      "file": "src/legacy-v1/SPECS/POLICY_HOME.md",
+      "days": 46.9
+    },
+    {
+      "file": "src/legacy-v1/SPECS/POLICY_LIFE.md",
+      "days": 46.9
+    },
+    {
+      "file": "src/legacy-v1/SPECS/POLICY_TRAVEL.md",
+      "days": 46.9
+    },
+    {
+      "file": "src/legacy-v1/STATE_FLOW.md",
+      "days": 46.9
+    },
+    {
+      "file": "src/legacy-v1/SUB_AGENTS_SPEC.md",
+      "days": 46.9
+    },
+    {
+      "file": "src/legacy-v1/SUPREME_RULES.md",
+      "days": 46.9
+    },
+    {
+      "file": "src/legacy-v1/UI_UX_DROPDOWN_FIX.md",
+      "days": 46.9
+    },
+    {
+      "file": "src/legacy-v1/XLSX_MAPPING.md",
+      "days": 46.9
+    },
+    {
+      "file": "src/legacy-v1/ai/prompts/CLIENT_MASTER_PROMPT.md",
+      "days": 46.9
+    },
+    {
+      "file": "src/legacy-v1/components/ReminderSystem/REMINDER_SPEC.md",
+      "days": 46.9
+    },
+    {
+      "file": "src/legacy-v1/components/Terminations/TERMINATIONS_SPEC.md",
+      "days": 46.9
+    },
+    {
+      "file": "src/legacy-v1/data/samples/XLSX_STRUCTURE_REFERENCE.md",
+      "days": 46.9
+    },
+    {
+      "file": "src/legacy-v1/test/icons_proposal.md",
+      "days": 46.9
+    },
+    {
+      "file": "DOCS_TEST_ENVIRONMENT.md",
+      "days": 34.6
+    },
+    {
+      "file": "NEXT_SESSION.md",
+      "days": 34.6
+    },
+    {
+      "file": "PROGRESS.md",
+      "days": 34.6
+    },
+    {
+      "file": "SESJE/2026-05-01_SUPABASE_API_KNOWLEDGE/README.md",
+      "days": 34.6
+    },
+    {
+      "file": "sandbox/stitch_design/stitch_redroad_backfill_monitor_dashboard/sahara/DESIGN.md",
+      "days": 34.6
+    },
+    {
+      "file": "scripts/FTP_TOOLS.md",
+      "days": 33.5
+    },
+    {
+      "file": "src/sandbox/stitch/DESIGN.md",
+      "days": 33.5
+    }
+  ]
+}

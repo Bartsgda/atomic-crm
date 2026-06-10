@@ -26,6 +26,14 @@ _archive/
 archiwum/
 **/archiwum/
 projekty_archiwum/
+# "stare"/"nieaktualne" po ludzku (Bartek 09.06) — w repo bez nazw miejscowosci
+stare/
+**/stare/
+nieaktualne/
+**/nieaktualne/
+old/
+**/old/
+**/kopia/
 .trash/
 SESJE/
 _audit_drift/

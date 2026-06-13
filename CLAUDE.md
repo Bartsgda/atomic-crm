@@ -1,6 +1,9 @@
 # CLAUDE.md — CRM-Atomic
 
 > **Router AI dla `rr-claude --crm` / `rr-claude --alina`**. Hub agentowy: [`../CONSIS BartsGda/`](../CONSIS%20BartsGda/) — zasady ogólne, mapa MCP, vault, hooks.
+
+> ⛔ **PRZED JAKĄKOLWIEK ZMIANĄ kodu/plików/infra** (każdy tryb, też „prosta” zmiana) — przeczytaj [`CONSIS BartsGda/REGULY_ZMIAN.md`](../CONSIS%20BartsGda/REGULY_ZMIAN.md) (gate spójności). Kod/architektura/infra/MCP → oddaj `--dev` (`create_task(project_ref="dev")`); gdzie bazy/jak połączone → `_BAZY/README.md` + AGENTS.md. [[feedback_reguly_zmian_gate_kazda_sesja_2026_06_13]]
+
 >
 > **Hierarchia:** CONSIS = nadrzędny hub · **CRM-Atomic** = repo (framework atomic-crm fork, ~15k LOC) · **"Alina"** = alias deployu produkcyjnego na Hostido (insurance feedback) — NIE osobne repo (vault `CRM_ALINA_*`, project_ref `crm-alina`).
 >

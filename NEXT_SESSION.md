@@ -4,6 +4,21 @@
 
 > 📜 **Pełen log sesji 2026-05-04** w `PROGRESS.md § Faza E` (sekrety→rrv, fixy F1/F3/F4, admin_reply feature).
 
+## 🔧 2026-06-18 — Infra/backup (sesja `--dev`, NIE kod aplikacji)
+
+> Robione przez `--dev` przy okazji porządków Supabase. Pliki w `C:\BartsGda4\tools\` (workspace), nie w tym repo. Pełen kontekst: MEMO `reference-backup-alina-supabase-2026-06-18` + `reference-supabase-konta-krajobraz-2026-06-18`.
+
+- ⚠️ **Projekt Aliny `xqznrssrlnxqkdvisnck` był PAUSED** (free tier ~7 dni bez ruchu → DNS NXDOMAIN → front sypał `CORS Failed`/NetworkError na `/auth/v1/token`). **Bartek RESTORE 18.06.** Anti-pauza: keepalive `RedRoad-Alina-Keepalive` (schtask daily 09:17, `tools/alina_supabase_keepalive.py` → `/auth/v1/health`) — projekt już **nie uśnie**.
+- ✅ **Offsite backup SZYFROWANY** (zamyka taski `d369fd42` + `ceb8beeb` — „Bartek nie ufa Supabase"): `tools/backup_alina_supabase.py` → pełny dump 30 tabel przez PostgREST service_role → zip w pamięci → **Fernet** → `Z:\_RR_BACKUP\alina_supabase\alina_<data>.zip.enc` (ZERO plaintextu PII). Klucz `RR_ALINA_BACKUP_KEY` w rrv. **Auto nocą** (`rr-dev backup-bazy`, rrv whitelist sha256). Retencja 14.
+- ✅ **Czytnik lokalny**: `tools/restore_alina_backup.py` — `list` / `table <nazwa>` / `extract` (odszyfrowuje kluczem z rrv).
+- 🗑️ Drugi projekt org CRM-ALINA `dkfksrbkyegijomzidgq` = **MARTWY** „backup-projekt" (porzucony plan, zero replikacji) → kandydat do skasowania w dashboardzie redroadai@.
+
+**Stan kluczy (live test 18.06) — doprecyzowanie tasków rotacji (`64ffac70`/`d3f4d051` + audyt rrv):**
+- `CRM_ALINA_SB_SECRET` (service_role) — **DZIAŁA** (data API).
+- `CRM_ALINA_SB_PUBLISHABLE` (anon) — **HTTP 401 = PRZESTARZAŁY w rrv** (zmiana vs „nadal 200" z maja — mit „1h" nieaktualny w drugą stronę). Front prod działa (build ma swój klucz), ale `scripts/ftp_deploy.py` pobierający anon z rrv dostanie zły → **DO ROTACJI**: dashboard xqzn → API Keys → zaktualizuj `CRM_ALINA_SB_PUBLISHABLE` w rrv. Po rotacji zweryfikuj `ftp_deploy` build.
+- PAT Management — **wygasłe**; dostęp SKRYPTÓW do bazy rozwiązany przez rrv whitelist (service_role), więc PAT potrzebny tylko do operacji Management API (np. AI auto-reply via Management).
+- **Nieużywane** (offsite je zastępuje): `scripts/backup_supabase.ps1` (wymaga DB password/CLI), UI eksporty (BackupManager/exportToJSON, ExportButton).
+
 ## 🎯 Priorytet — Alina ZGŁASZA NA ŻYWO
 
 Status 2026-05-04: **Alina aktywnie używa, ma 3 zgłoszenia w `insurance_feedback`** (nie tylko fake'i).

@@ -140,8 +140,15 @@ end;
 $$;
 
 -- -----------------------------------------------------------------------
--- 5. Grants — RPC tylko dla zalogowanych (anon nie ma czego szukać)
+-- 5. Grants — jawne (future-proof pod wymuszenie 30.10.2026: public bez
+--    auto-GRANT dla anon/authenticated). RLS i tak ogranicza wiersze.
+--    INSERT celowo bez grantu — jedyna droga zapisu usera to RPC
+--    SECURITY DEFINER (wykonuje się z prawami ownera tabeli).
 -- -----------------------------------------------------------------------
+revoke all on table public.passphrase_lockouts from public, anon;
+grant  select, update, delete on table public.passphrase_lockouts to authenticated;
+grant  all on table public.passphrase_lockouts to service_role;
+
 revoke execute on function public.register_passphrase_failure() from public, anon;
 revoke execute on function public.reset_passphrase_lockout()    from public, anon;
 grant  execute on function public.register_passphrase_failure() to authenticated, service_role;

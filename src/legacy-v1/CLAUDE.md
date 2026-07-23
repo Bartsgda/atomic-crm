@@ -135,6 +135,7 @@ Rola `group_prefix` w SubAgents:
     1. `IDLE_TIMEOUT_MS = 30min` — listener `mousedown/keydown/touchstart/scroll` resetuje timer, po idle → `lock()`
     2. `visibilitychange` listener — jeśli gap od ostatniej aktywności >5 min, lock
     3. `pageshow` listener z `e.persisted=true` (bfcache restore) → lock
+- ❌ **Licznik prób PassphraseGate w React state** (do 2026-07-23 F5 = reset = brak limitu zgadywania). Od 2026-07-23 stan blokady jest **server-side**: `public.passphrase_lockouts` + RPC `register_passphrase_failure()`/`reset_passphrase_lockout()` (SECURITY DEFINER; zwykły user nie ma INSERT/UPDATE na tabeli). Progi eskalacji: **3 próby → 1 min, 6 → 5 min, 9 → hard lock** (zdejmuje wyłącznie admin: `node scripts/unlock_passphrase.mjs <email>`; bez arg = lista blokad). Migracja: `supabase/migrations/20260723000001_passphrase_lockout.sql`. NIE wracać do licznika client-side.
 
 ## 🔑 KRYTYCZNE PLIKI (kod, nie spec)
 

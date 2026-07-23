@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { AlertTriangle, Loader2, Lock, LogOut } from "lucide-react";
+import { AlertTriangle, Clock, Loader2, Lock, LogOut } from "lucide-react";
 import { getPublicSupabaseClient } from "../../components/atomic-crm/providers/supabase/supabase";
 import { deriveKEK, unwrapDEK } from "../services/crypto";
 
@@ -16,13 +16,47 @@ interface PassphraseGateProps {
 }
 
 type Phase =
-  | "loading" // pobieranie danych z tenant_keys
+  | "loading" // pobieranie danych z tenant_keys + passphrase_lockouts
   | "no_key" // brak wpisu dla usera
   | "prompt" // czeka na wpisanie hasła
   | "unlocking" // trwa derive+unwrap
-  | "locked_out"; // przekroczono limit prób
+  | "temp_locked" // blokada czasowa (odliczanie do locked_until)
+  | "locked_out"; // hard lock — zdejmuje wyłącznie admin
 
-const MAX_ATTEMPTS = 5;
+// Stan blokady — server-side w public.passphrase_lockouts.
+// Progi (RPC register_passphrase_failure): 3 próby → 1 min, 6 → 5 min,
+// 9 → hard lock. Licznik zeruje RPC reset_passphrase_lockout po sukcesie.
+interface LockState {
+  failed_attempts: number;
+  locked_until: string | null;
+  hard_locked: boolean;
+}
+
+const HARD_LOCK_AT = 9;
+
+/** Następny próg blokady dla danej liczby nieudanych prób. */
+const nextThreshold = (fails: number) => (fails < 3 ? 3 : fails < 6 ? 6 : 9);
+
+/** Lokalna eskalacja — fallback gdy RPC niedostępne (offline itp.). */
+const localEscalation = (fails: number): LockState => ({
+  failed_attempts: fails,
+  hard_locked: fails >= HARD_LOCK_AT,
+  locked_until:
+    fails >= HARD_LOCK_AT
+      ? null
+      : fails >= 6
+        ? new Date(Date.now() + 5 * 60_000).toISOString()
+        : fails >= 3
+          ? new Date(Date.now() + 60_000).toISOString()
+          : null,
+});
+
+const formatCountdown = (ms: number) => {
+  const total = Math.max(0, Math.ceil(ms / 1000));
+  const m = Math.floor(total / 60);
+  const s = total % 60;
+  return `${m}:${String(s).padStart(2, "0")}`;
+};
 
 // ---------------------------------------------------------------------------
 // Component
@@ -37,6 +71,8 @@ export const PassphraseGate: React.FC<PassphraseGateProps> = ({
   const [phase, setPhase] = useState<Phase>("loading");
   const [attempts, setAttempts] = useState(0);
   const [error, setError] = useState<string | null>(null);
+  const [lockedUntil, setLockedUntil] = useState<number | null>(null); // epoch ms
+  const [countdown, setCountdown] = useState("");
 
   // Dane klucza pobrane z DB – trzymamy w refach, nie w state,
   // żeby uniknąć niepotrzebnych re-renderów i wycieków wrażliwych danych.
@@ -47,7 +83,34 @@ export const PassphraseGate: React.FC<PassphraseGateProps> = ({
   const inputRef = useRef<HTMLInputElement>(null);
 
   // -------------------------------------------------------------------------
-  // 1. Pobierz dane klucza z tenant_keys po mount
+  // Zastosuj stan blokady z serwera (lub fallbacku) do UI
+  // -------------------------------------------------------------------------
+  const applyLockState = (state: LockState, afterFail: boolean) => {
+    setAttempts(state.failed_attempts);
+
+    if (state.hard_locked) {
+      setPhase("locked_out");
+      return;
+    }
+
+    const until = state.locked_until ? Date.parse(state.locked_until) : null;
+    if (until && until > Date.now()) {
+      setLockedUntil(until);
+      setPhase("temp_locked");
+      return;
+    }
+
+    if (afterFail) {
+      const left = nextThreshold(state.failed_attempts) - state.failed_attempts;
+      setError(
+        `Błędne hasło. ${left === 1 ? "Została 1 próba" : `Zostały ${left} próby`} do blokady.`,
+      );
+    }
+    setPhase("prompt");
+  };
+
+  // -------------------------------------------------------------------------
+  // 1. Pobierz dane klucza z tenant_keys + stan blokady po mount
   // -------------------------------------------------------------------------
   useEffect(() => {
     let cancelled = false;
@@ -56,34 +119,46 @@ export const PassphraseGate: React.FC<PassphraseGateProps> = ({
       try {
         const sb = getPublicSupabaseClient();
 
-        const { data, error: dbError } = await sb
-          .from("tenant_keys")
-          .select("wrapped_dek, kdf_salt, kdf_iterations, key_version")
-          .eq("user_id", userId)
-          .order("key_version", { ascending: false })
-          .limit(1)
-          .maybeSingle();
+        const [keyRes, lockRes] = await Promise.all([
+          sb
+            .from("tenant_keys")
+            .select("wrapped_dek, kdf_salt, kdf_iterations, key_version")
+            .eq("user_id", userId)
+            .order("key_version", { ascending: false })
+            .limit(1)
+            .maybeSingle(),
+          sb
+            .from("passphrase_lockouts")
+            .select("failed_attempts, locked_until, hard_locked")
+            .eq("user_id", userId)
+            .maybeSingle(),
+        ]);
 
         if (cancelled) return;
 
-        if (dbError) {
-          console.error("[PassphraseGate] DB error:", dbError);
+        if (keyRes.error) {
+          console.error("[PassphraseGate] DB error:", keyRes.error);
           setPhase("no_key");
           return;
         }
 
-        if (!data) {
+        if (!keyRes.data) {
           setPhase("no_key");
           return;
         }
 
         // Odkoduj sól z Base64 → Uint8Array
-        const saltBinary = atob(data.kdf_salt);
+        const saltBinary = atob(keyRes.data.kdf_salt);
         saltRef.current = Uint8Array.from(saltBinary, (c) => c.charCodeAt(0));
-        wrappedDekRef.current = data.wrapped_dek;
-        iterationsRef.current = data.kdf_iterations ?? 310_000;
+        wrappedDekRef.current = keyRes.data.wrapped_dek;
+        iterationsRef.current = keyRes.data.kdf_iterations ?? 310_000;
 
-        setPhase("prompt");
+        // Stan blokady (brak wiersza / błąd = brak blokady)
+        if (lockRes.data) {
+          applyLockState(lockRes.data as LockState, false);
+        } else {
+          setPhase("prompt");
+        }
       } catch (err) {
         if (cancelled) return;
         console.error("[PassphraseGate] Unexpected error:", err);
@@ -95,6 +170,7 @@ export const PassphraseGate: React.FC<PassphraseGateProps> = ({
     return () => {
       cancelled = true;
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
 
   // Fokus po przejściu do fazy "prompt"
@@ -105,7 +181,29 @@ export const PassphraseGate: React.FC<PassphraseGateProps> = ({
   }, [phase]);
 
   // -------------------------------------------------------------------------
-  // 2. Submit passphrase
+  // 2. Odliczanie blokady czasowej — po upływie wraca do prompta
+  // -------------------------------------------------------------------------
+  useEffect(() => {
+    if (phase !== "temp_locked" || !lockedUntil) return;
+
+    const tick = () => {
+      const remaining = lockedUntil - Date.now();
+      if (remaining <= 0) {
+        setLockedUntil(null);
+        setError(null);
+        setPhase("prompt");
+      } else {
+        setCountdown(formatCountdown(remaining));
+      }
+    };
+
+    tick();
+    const id = window.setInterval(tick, 500);
+    return () => window.clearInterval(id);
+  }, [phase, lockedUntil]);
+
+  // -------------------------------------------------------------------------
+  // 3. Submit passphrase
   // -------------------------------------------------------------------------
   const handleSubmit = async () => {
     if (!inputRef.current) return;
@@ -120,6 +218,8 @@ export const PassphraseGate: React.FC<PassphraseGateProps> = ({
     setPhase("unlocking");
     setError(null);
 
+    const sb = getPublicSupabaseClient();
+
     try {
       const kek = await deriveKEK(
         passphrase,
@@ -128,18 +228,31 @@ export const PassphraseGate: React.FC<PassphraseGateProps> = ({
       );
       const dek = await unwrapDEK(wrappedDekRef.current!, kek);
 
-      // Sukces
+      // Sukces — wyzeruj licznik server-side (fire-and-forget)
+      sb.rpc("reset_passphrase_lockout").then(
+        () => undefined,
+        (e: unknown) =>
+          console.warn("[PassphraseGate] reset_passphrase_lockout:", e),
+      );
       onUnlocked(dek);
     } catch {
-      const newAttempts = attempts + 1;
-      setAttempts(newAttempts);
-
-      if (newAttempts >= MAX_ATTEMPTS) {
-        setPhase("locked_out");
-      } else {
-        setError("Błędne hasło. Spróbuj ponownie.");
-        setPhase("prompt");
+      // Nieudana próba → zarejestruj server-side (F5 nie resetuje licznika)
+      let state: LockState | null = null;
+      try {
+        const { data, error: rpcError } = await sb.rpc(
+          "register_passphrase_failure",
+        );
+        if (!rpcError && data) state = data as LockState;
+        else if (rpcError)
+          console.warn("[PassphraseGate] register_passphrase_failure:", rpcError);
+      } catch (e) {
+        console.warn("[PassphraseGate] register_passphrase_failure:", e);
       }
+
+      // Fallback offline: eskalacja lokalna z tymi samymi progami
+      if (!state) state = localEscalation(attempts + 1);
+
+      applyLockState(state, true);
     }
   };
 
@@ -150,7 +263,7 @@ export const PassphraseGate: React.FC<PassphraseGateProps> = ({
   };
 
   // -------------------------------------------------------------------------
-  // 3. Render
+  // 4. Render
   // -------------------------------------------------------------------------
 
   return (
@@ -226,11 +339,6 @@ export const PassphraseGate: React.FC<PassphraseGateProps> = ({
               <p className="text-red-400 text-sm mb-2 self-start flex items-center gap-1.5">
                 <AlertTriangle className="w-4 h-4 flex-shrink-0" />
                 {error}
-                {attempts > 0 && (
-                  <span className="text-gray-500 ml-1">
-                    ({attempts}/{MAX_ATTEMPTS} prób)
-                  </span>
-                )}
               </p>
             )}
 
@@ -272,17 +380,48 @@ export const PassphraseGate: React.FC<PassphraseGateProps> = ({
           </>
         )}
 
-        {/* ── LOCKED OUT ──────────────────────────────────────────────────── */}
+        {/* ── TEMP LOCKED (odliczanie) ────────────────────────────────────── */}
+        {phase === "temp_locked" && (
+          <>
+            <div className="w-16 h-16 bg-orange-500/15 text-orange-400 rounded-full flex items-center justify-center mb-6">
+              <Clock className="w-8 h-8" />
+            </div>
+            <h2 className="text-xl font-semibold mb-2 text-center">
+              Zbyt wiele nieudanych prób
+            </h2>
+            <p className="text-gray-400 text-sm text-center mb-2">
+              Kolejna próba możliwa za
+            </p>
+            <p className="text-3xl font-semibold text-orange-400 mb-6 tabular-nums">
+              {countdown}
+            </p>
+            <p className="text-gray-500 text-xs text-center mb-8">
+              Po {HARD_LOCK_AT} nieudanych próbach dostęp blokuje się na stałe —
+              odblokować może tylko administrator.
+            </p>
+            <button
+              onClick={onLogout}
+              className="w-full py-2 px-4 bg-transparent hover:bg-white/5 text-gray-400 hover:text-white
+                         rounded-xl font-medium transition-all text-sm flex items-center justify-center gap-2"
+            >
+              <LogOut className="w-3.5 h-3.5" />
+              Wyloguj
+            </button>
+          </>
+        )}
+
+        {/* ── LOCKED OUT (hard — tylko admin) ─────────────────────────────── */}
         {phase === "locked_out" && (
           <>
             <div className="w-16 h-16 bg-red-500/15 text-red-400 rounded-full flex items-center justify-center mb-6">
               <AlertTriangle className="w-8 h-8" />
             </div>
             <h2 className="text-xl font-semibold mb-2 text-center">
-              Zbyt wiele nieudanych prób
+              Dostęp zablokowany
             </h2>
             <p className="text-gray-400 text-sm text-center mb-8">
-              Skontaktuj się z administratorem aby odzyskać hasło.
+              Przekroczono limit {HARD_LOCK_AT} nieudanych prób. Skontaktuj się
+              z administratorem — tylko on może odblokować dostęp.
             </p>
             <button
               onClick={onLogout}

@@ -1,12 +1,14 @@
 
 import { GoogleGenAI, Type } from "@google/genai";
+import { apiKeyStore } from "../../services/apiKeyStore";
 
 export class ClientAgent {
     private ai: any;
 
     constructor(apiKey?: string) {
-        if (apiKey) {
-            this.ai = new GoogleGenAI({ apiKey });
+        const key = apiKey || apiKeyStore.get();
+        if (key) {
+            this.ai = new GoogleGenAI({ apiKey: key });
         }
     }
 

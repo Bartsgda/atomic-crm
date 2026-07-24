@@ -1,15 +1,14 @@
 
 import { GoogleGenAI } from "@google/genai";
 import { storage } from '../services/storage';
+import { apiKeyStore } from '../services/apiKeyStore';
 import { Client, Policy } from '../types';
 
 export class KaratekaService {
-    private ai: any;
-
-    constructor() {
-        if (process.env.API_KEY) {
-            this.ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-        }
+    /** Lazy klient Gemini — tworzony z aktualnym kluczem (odszyfrowanym DEK po podaniu hasła). */
+    private getAI(): any | null {
+        const key = apiKeyStore.get();
+        return key ? new GoogleGenAI({ apiKey: key }) : null;
     }
 
     private cleanJsonString(text: string): string {
@@ -24,7 +23,8 @@ export class KaratekaService {
 
     // --- EXECUTION PLANNER ---
     async generateExecutionPlan(userMessage: string, contextData: any): Promise<any> {
-        if (!this.ai) return { reply: "Brak klucza API.", plan: [] };
+        const ai = this.getAI();
+        if (!ai) return { reply: "Brak klucza API.", plan: [] };
 
         const prompt = `
         Jesteś Systemowym Operatorem (CLI) systemu CRM "Insurance Master".
@@ -59,7 +59,7 @@ export class KaratekaService {
         `;
 
         try {
-            const response = await this.ai.models.generateContent({
+            const response = await ai.models.generateContent({
                 model: 'gemini-3.1-flash-lite',
                 contents: prompt,
                 config: { responseMimeType: "application/json", temperature: 0.1 }

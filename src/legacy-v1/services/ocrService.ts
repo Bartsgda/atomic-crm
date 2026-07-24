@@ -1,5 +1,6 @@
 
 import { GoogleGenAI } from "@google/genai";
+import { apiKeyStore } from "./apiKeyStore";
 
 const SYSTEM_PROMPT = `
 Jesteś zaawansowanym systemem OCR i Data Mining dla branży ubezpieczeniowej (InsurTech).
@@ -42,16 +43,16 @@ SCHEMAT DOCELOWY:
 `;
 
 export const processDocument = async (base64Image: string, mimeType: string = 'image/jpeg') => {
-    if (!process.env.API_KEY) {
+    if (!apiKeyStore.get()) {
         console.warn("Brak API_KEY. OCR niedostępny.");
         return null;
     }
 
     try {
-        const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+        const ai = new GoogleGenAI({ apiKey: apiKeyStore.get() ?? undefined });
         
         const response = await ai.models.generateContent({
-            model: 'gemini-3-flash-preview',
+            model: 'gemini-3.1-flash-lite',
             contents: {
                 parts: [
                     { inlineData: { mimeType, data: base64Image } },

@@ -1,13 +1,14 @@
 
 import { GoogleGenAI, Type } from "@google/genai";
 import { NLPResult } from "../types";
+import { apiKeyStore } from "./apiKeyStore";
 
 const parseNaturalLanguage = async (input: string): Promise<NLPResult | null> => {
-  if (!process.env.API_KEY) {
+  if (!apiKeyStore.get()) {
       console.warn(" SECURITY ALERT: Brak API_KEY. Funkcje AI nie będą działać. Sprawdź konfigurację .env");
       return null;
   }
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+  const ai = new GoogleGenAI({ apiKey: apiKeyStore.get() ?? undefined });
   
   try {
     const response = await ai.models.generateContent({
@@ -44,8 +45,8 @@ const parseNaturalLanguage = async (input: string): Promise<NLPResult | null> =>
 };
 
 const fetchCompanyData = async (nip?: string, companyName?: string, krs?: string) => {
-  if (!process.env.API_KEY) return null;
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+  if (!apiKeyStore.get()) return null;
+  const ai = new GoogleGenAI({ apiKey: apiKeyStore.get() ?? undefined });
 
   try {
     const prompt = `Znajdź oficjalne dane podmiotu gospodarczego w polskich rejestrach (KRS, CEIDG, GOV.pl) na podstawie: 
@@ -94,8 +95,8 @@ const fetchCompanyData = async (nip?: string, companyName?: string, krs?: string
 };
 
 const getTravelAdvice = async (destination: string) => {
-    if (!process.env.API_KEY) return null;
-    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+    if (!apiKeyStore.get()) return null;
+    const ai = new GoogleGenAI({ apiKey: apiKeyStore.get() ?? undefined });
 
     try {
         const response = await ai.models.generateContent({

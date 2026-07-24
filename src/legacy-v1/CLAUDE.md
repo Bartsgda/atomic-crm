@@ -1,6 +1,6 @@
 # CLAUDE.md — Mapa dokumentacji `src/legacy-v1/` (Insurance Master CRM Pro)
 
-> **AI: czytaj NAJPIERW. To jest indeks 38 plików `.md` w tym folderze, podzielony na "co czytać kiedy".**
+> **AI: czytaj NAJPIERW. Indeks specyfikacji `.md` tego modułu — utrzymywany aktualny przy KAŻDEJ zmianie logiki (SUPREME_RULES #4). Podzielony na "co czytać kiedy".**
 >
 > **Anti-pattern (lekcja 2026-05-11):** AI zignorował te MD i napisał **własny mapper XLSX od zera w Pythonie** zamiast użyć gotowego `DataMapper.ts` + `DataImporter.tsx`. Efekt: 4 cykle naprawiania błędów (regex pojazdów, BOTH false-positives, dedup klientów po first+last zamiast PESEL/NIP, daty `created_at`, prowizje pośredników niepobierane z `policy_sub_agent_shares`). Wszystko było opisane w `XLSX_MAPPING.md` + `IMPORT_LOGIC.md` + `CLIENTS_SPEC.md` + `COMMISSIONS_SPEC.md`. **Zawsze NAJPIERW spec, potem kod.**
 
@@ -18,6 +18,9 @@
 4. **[LEGACY_DATA_SPEC.md](./LEGACY_DATA_SPEC.md)** — dane historyczne z `data/legacy/*.ts` (hardcoded mapy z `aiNote`)
 5. **[REVERSE_ARCH_SPEC.md](./REVERSE_ARCH_SPEC.md)** — eksport XLSX (Hybrid Excel)
 6. **[IMPORT_DEBUG_LOG.md](./IMPORT_DEBUG_LOG.md)** — historia edge cases (literówki "podroz", "dom?")
+6b. **[data/samples/XLSX_STRUCTURE_REFERENCE.md](./data/samples/XLSX_STRUCTURE_REFERENCE.md)** — referencyjna struktura pliku XLSX (kolumny, przykłady).
+6c. **[XLSX_FULL_PARSE_PLAN.md](./XLSX_FULL_PARSE_PLAN.md)** — plan pełnego parsowania XLSX.
+6d. **Raporty ręcznego audytu importu (11.05.2026):** `AUDIT_ROWS_<N>_<M>_2026-05-11.md` (serie 1-182 + `AUDIT_ROWS_81_90_OPUS_GROUND_TRUTH`) — weryfikacja wiersz-po-wierszu; czytaj gdy diagnozujesz konkretny błąd mapowania.
 7. **Kod (gotowy mapper, NIE pisać od zera):**
    - `services/dataMapper.ts` (671 linii)
    - `services/legacyParser.ts` (174 linii)
@@ -33,6 +36,7 @@
 - **[POLICIES_SPEC.md](./POLICIES_SPEC.md)** — cykl życia, typy (OC/AC/BOTH/DOM/PODROZ/ZYCIE/FIRMA), stage enum (`uciety_kontakt`/`przel_kontakt`/`sprzedaz`/`oferta_wyslana`/`of_do_zrobienia`/`czekam_na_dane`/`rez_po_ofercie` — underscore, no Polish)
 - **[AI_PARSING_RULES.md](./AI_PARSING_RULES.md)** — Deep Analysis dla AI
 - **[STATE_FLOW.md](./STATE_FLOW.md)** — obieg polisy, spójność stanów
+- **Specyfikacje per moduł** (`SPECS/`): formularze [POLICY_AUTO](./SPECS/POLICY_AUTO.md) · [POLICY_HOME](./SPECS/POLICY_HOME.md) · [POLICY_LIFE](./SPECS/POLICY_LIFE.md) · [POLICY_TRAVEL](./SPECS/POLICY_TRAVEL.md); dane/detale [MOD_AUTO](./SPECS/MOD_AUTO.md) · [MOD_HOME](./SPECS/MOD_HOME.md) · [MOD_LIFE](./SPECS/MOD_LIFE.md) · [MOD_TRAVEL](./SPECS/MOD_TRAVEL.md)
 
 ### 💰 Prowizje i pośrednicy (KOMPLET)
 - **[COMMISSIONS_SPEC.md](./COMMISSIONS_SPEC.md)** — ⚠️ **UWAGA**: SPEC opisuje kaskadowy split ("Agent = Całkowita − Pośrednik") ale to STARY/teoretyczny model. **Faktyczny model w `FinanceView.tsx` (production):** **dwie niezależne pule prowizji** (patrz niżej).
@@ -63,7 +67,11 @@ Rola `group_prefix` w SubAgents:
 **`policy_sub_agent_shares`** (tabela: policy_id, sub_agent_id, rate, amount, note). Provider `supabaseStorage.ts` MUSI to pobierać w `init()` i mapować na `subAgentSplits` w `rowToPolicy` (legacy zawiera fallback `subAgentCommission` jako pole na polisie).
 
 ### 📝 Notatki
-- **[NOTES_SPEC.md](./NOTES_SPEC.md)** — oś czasu, tagi, separatory `_` w XLSX (1. wiersz najstarszy, kolejne uzupełniane)
+- **[NOTES_SPEC.md](./NOTES_SPEC.md)** (v2.3, **redesign 2026-07-24**) — oś czasu, tagi, `linkedPolicyIds`. **Zmiany 24.07:** usunięty tryb rozmowy (START/KONIEC) + przyciski statusu OK/W TOKU/ODRZUT (status zmienia się w polisie); notatka z **wyborem daty** (bez godzin); `#`/Hash = lista pojazdów do podpięcia; wskaźnik „Notatka do:"; edycja (treść+data+multi-select przypisania obiektu); licznik rozmów (badge) na kartach produktów; wejście w klienta bez zaznaczonej karty (`productNavIdx=-1`). Panel: [WYMAGANIA-KLIENT.md § 5](./WYMAGANIA-KLIENT.md).
+
+### 🛑 Wypowiedzenia i przypomnienia
+- **[components/Terminations/TERMINATIONS_SPEC.md](./components/Terminations/TERMINATIONS_SPEC.md)** — rejestr wypowiedzeń (`terminationId`, prefiks `wypow_`, Safety Switch, sync statusu na obiekcie).
+- **[components/ReminderSystem/REMINDER_SPEC.md](./components/ReminderSystem/REMINDER_SPEC.md)** — przypomnienia / chłodnia (ReminderWidget, ReminderUtils, „ponów za rok").
 
 ### 🎯 Oferty (Kanban)
 - **[OFFERS_SPEC.md](./OFFERS_SPEC.md)** — Centrum Ofert v2.1
@@ -83,6 +91,7 @@ Rola `group_prefix` w SubAgents:
 - **[ARCHITECTURE.md](./ARCHITECTURE.md)** — system + standardy deweloperskie
 - **[ARCHITECTURE_5_PILLARS.md](./ARCHITECTURE_5_PILLARS.md)** — 5 Filarów Prawdy
 - **[AI_ARCHITECTURE.md](./AI_ARCHITECTURE.md)** — Brain Core v2.0
+- **[ai/prompts/CLIENT_MASTER_PROMPT.md](./ai/prompts/CLIENT_MASTER_PROMPT.md)** — master prompt AI do analizy klienta (Karateka)
 - **[REQUIREMENTS.md](./REQUIREMENTS.md)** — hub wymagań
 
 ### 🛠️ Naprawa / dane

@@ -30,3 +30,13 @@ W celu uniknięcia przypadkowej utraty danych (szczególnie linków do skanów i
 - Każdy przycisk "Usuń" musi otwierać panel z **Przełącznikiem Bezpieczeństwa**.
 - Przełącznik musi zostać przesunięty w pozycję "TAK", aby odblokować akcję niszczącą.
 - Po wykonaniu akcji, widok musi zostać odświeżony bez konieczności przeładowania strony.
+
+## 5. Profil Klienta — Produkty i Rozmowy (v3.7, 2026-07-24)
+Zmiany po uwagach Aliny (`ClientDetails.tsx` + `Notatki.tsx`):
+- **Wejście w profil = czysty widok:** żadna karta produktu nie jest domyślnie zaznaczona (`productNavIdx = -1`), więc od razu widać **wszystkie rozmowy** klienta. Filtr po obiekcie dopiero po kliknięciu karty (1× filtruje notatki, 2× otwiera edycję polisy).
+- **Licznik rozmów na karcie produktu:** każda karta (pojazd/dom/…) ma **badge z liczbą rozmów** dotyczących tego obiektu (liczone z pełnego zbioru `notes.linkedPolicyIds ∋ policy.id`; ukryty przy 0). Np. auto A: 7, auto B: 2.
+- **Notatki/rozmowy — pełna spec:** `NOTES_SPEC.md` (v2.3). Skrót istotnych zmian 2026-07-24:
+    - Usunięto tryb rozmowy (START/KONIEC) i godziny w notatkach — notowanie z **wyborem daty** (kalendarz, domyślnie dziś).
+    - Usunięto przyciski statusu OK/W TOKU/ODRZUT — status zmienia się w polisie, nie w notatce.
+    - `#`/Hash rozwija listę pojazdów do **podpięcia obiektu**; wskaźnik „Notatka do: …" pokazuje do czego Alina pisze.
+    - Edycja notatki: treść + **data** + **przypisanie obiektu** (multi-select „Przypisz do").

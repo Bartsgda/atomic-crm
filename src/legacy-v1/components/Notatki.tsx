@@ -55,6 +55,7 @@ export const Notatki: FC<Props> = ({ clientId, notes, allPolicies, initialResume
   const [editingNoteId, setEditingNoteId] = useState<string | null>(null);
   const [editingContent, setEditingContent] = useState('');
   const [editingLinks, setEditingLinks] = useState<string[]>([]); // #5: przepięcie obiektu w edycji
+  const [editingDate, setEditingDate] = useState<string>(''); // edycja daty notatki (yyyy-MM-dd)
   
   // Smart Action States
   const [showAssetList, setShowAssetList] = useState(false);
@@ -235,12 +236,15 @@ export const Notatki: FC<Props> = ({ clientId, notes, allPolicies, initialResume
       setEditingNoteId(note.id);
       setEditingContent(note.content);
       setEditingLinks(note.linkedPolicyIds || []);
+      const d = new Date(note.createdAt);
+      setEditingDate(isValid(d) ? format(d, 'yyyy-MM-dd') : format(new Date(), 'yyyy-MM-dd'));
   };
 
   const cancelEditing = () => {
       setEditingNoteId(null);
       setEditingContent('');
       setEditingLinks([]);
+      setEditingDate('');
   };
 
   const saveEditing = async () => {
@@ -251,6 +255,7 @@ export const Notatki: FC<Props> = ({ clientId, notes, allPolicies, initialResume
               ...noteToUpdate,
               content: editingContent,
               linkedPolicyIds: editingLinks,
+              createdAt: editingDate ? new Date(`${editingDate}T12:00:00`).toISOString() : noteToUpdate.createdAt,
               history: [...(noteToUpdate.history || []), { text: noteToUpdate.content, createdAt: new Date().toISOString() }]
           };
           await onUpdateNote(updated);
@@ -258,6 +263,7 @@ export const Notatki: FC<Props> = ({ clientId, notes, allPolicies, initialResume
       setEditingNoteId(null);
       setEditingContent('');
       setEditingLinks([]);
+      setEditingDate('');
   };
 
   const handleEditingKeyDown = (e: React.KeyboardEvent) => {

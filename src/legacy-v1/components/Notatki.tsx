@@ -404,6 +404,29 @@ export const Notatki: FC<Props> = ({ clientId, notes, allPolicies, initialResume
                 </button>
             </div>
 
+            {/* Lista pojazdów/polis do podpięcia (klik # albo ikona Hash) */}
+            {showAssetList && (
+                <div className="flex flex-wrap items-center gap-1.5 p-2 bg-blue-50/60 dark:bg-blue-900/10 border-t border-blue-100 dark:border-blue-900/30 animate-in fade-in">
+                    <span className="text-[9px] font-black uppercase text-blue-500 mr-1">Podepnij do:</span>
+                    {clientPolicies.length === 0 ? (
+                        <span className="text-[10px] font-medium text-zinc-400">Ten klient nie ma jeszcze polis/pojazdów.</span>
+                    ) : (
+                        clientPolicies.map(p => {
+                            const on = pendingPolicyLinks.includes(p.id) || activePolicyId === p.id;
+                            return (
+                                <button key={p.id} type="button"
+                                    onClick={() => onAddPendingLink?.(p.id)}
+                                    className={`px-2 py-1 rounded-lg text-[9px] font-bold border transition-colors ${on ? 'bg-blue-600 text-white border-blue-600' : 'bg-white dark:bg-zinc-800 text-zinc-600 border-zinc-200 dark:border-zinc-700 hover:border-blue-300'}`}
+                                >
+                                    {p.vehicleBrand || p.type} {p.vehicleReg || ''}
+                                </button>
+                            );
+                        })
+                    )}
+                    <button onClick={() => setShowAssetList(false)} className="ml-auto text-[9px] font-black uppercase text-zinc-400 hover:text-zinc-600 px-2">Zamknij</button>
+                </div>
+            )}
+
             <div className="flex flex-wrap items-center gap-2 p-2 bg-zinc-50 dark:bg-zinc-900 border-t border-zinc-100 dark:border-zinc-800 rounded-b-3xl">
                 
                 {/* REMINDER WIDGET */}
@@ -568,6 +591,17 @@ export const Notatki: FC<Props> = ({ clientId, notes, allPolicies, initialResume
                                     rows={4}
                                     autoFocus
                                 />
+                                <label className="flex items-center gap-1.5 cursor-pointer w-fit" title="Data notatki">
+                                    <Calendar size={12} className="text-zinc-400" />
+                                    <span className="text-[9px] font-black uppercase text-zinc-400">Data:</span>
+                                    <input
+                                        type="date"
+                                        value={editingDate}
+                                        onChange={(e) => setEditingDate(e.target.value)}
+                                        max={format(new Date(), 'yyyy-MM-dd')}
+                                        className="bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded px-2 py-0.5 text-[11px] font-bold text-zinc-600 dark:text-zinc-300 outline-none focus:ring-2 focus:ring-blue-500"
+                                    />
+                                </label>
                                 {clientPolicies.length > 0 && (
                                     <div className="flex flex-wrap items-center gap-1.5">
                                         <span className="text-[9px] font-black uppercase text-zinc-400 mr-1">Przypisz do:</span>

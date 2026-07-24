@@ -1,0 +1,3357 @@
+{
+  "C:\\BartsGda4\\CRM-Atomic\\audit_check_61_110.py": {
+    "mtime": 1778784519.812112,
+    "ast_hash": "ef0552b26e2c444c71d06041d70d8d90",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\eslint.config.js": {
+    "mtime": 1776897168.3518183,
+    "ast_hash": "5e8cc1957a7a95ed34f3e02391138a27",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\playwright.config.ts": {
+    "mtime": 1776897168.3558419,
+    "ast_hash": "06d7d5be4f143653e3647bef79cf8c4b",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\setup_supabase.ps1": {
+    "mtime": 1776897168.3872528,
+    "ast_hash": "73b7d5f01a8abdd503550f6e3f0c985c",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\show_bugs.py": {
+    "mtime": 1778784519.8380089,
+    "ast_hash": "bc18e18b48ec6816f6085e289ed0a0c5",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\show_details.py": {
+    "mtime": 1778784519.8401237,
+    "ast_hash": "82b1650a279ec4b372420a6ebd1e9663",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\show_row91_notes.py": {
+    "mtime": 1778784519.8421323,
+    "ast_hash": "d4102af8e8e1630126846d4a06981652",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\show_warnings.py": {
+    "mtime": 1778784519.8436608,
+    "ast_hash": "cdb47fc4e213d5bc06a7b7fbbafb431d",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\switch_env.ps1": {
+    "mtime": 1778784519.893582,
+    "ast_hash": "35805dbf8378bc1d4e22269c6e70fcc3",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\vite.config.ts": {
+    "mtime": 1777962366.476071,
+    "ast_hash": "d81b6784b828777cc4a9152df246dfba",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\vite.demo.config.ts": {
+    "mtime": 1776897168.6789393,
+    "ast_hash": "5c9959c56f2a1fec582afb6658a54818",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\vitest-browser.d.ts": {
+    "mtime": 1776897168.679912,
+    "ast_hash": "43da2a4be4355a16957489ad8de435e0",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\vitest.config.ts": {
+    "mtime": 1776897168.679912,
+    "ast_hash": "45fd6896da22ee21e1b1653b024c64fe",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\vitest.functions.config.ts": {
+    "mtime": 1776897168.6809275,
+    "ast_hash": "df78ec02b6af1d32b9a6c3ae3acccf37",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\.husky\\_\\applypatch-msg": {
+    "mtime": 1784790968.5841088,
+    "ast_hash": "0b71c2e7d39daa010985d529f1320b37",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\.husky\\_\\commit-msg": {
+    "mtime": 1784790968.5831082,
+    "ast_hash": "0b71c2e7d39daa010985d529f1320b37",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\.husky\\_\\h": {
+    "mtime": 1778274017.1909356,
+    "ast_hash": "15239a01c5554e56ff745570fb583a91",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\.husky\\_\\husky.sh": {
+    "mtime": 1784790968.5856364,
+    "ast_hash": "13871d2ab13e8423790ecb2c01c78c18",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\.husky\\_\\post-applypatch": {
+    "mtime": 1784790968.5841088,
+    "ast_hash": "0b71c2e7d39daa010985d529f1320b37",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\.husky\\_\\post-checkout": {
+    "mtime": 1784790968.5846176,
+    "ast_hash": "0b71c2e7d39daa010985d529f1320b37",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\.husky\\_\\post-commit": {
+    "mtime": 1784790968.5841088,
+    "ast_hash": "0b71c2e7d39daa010985d529f1320b37",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\.husky\\_\\post-merge": {
+    "mtime": 1784790968.5846176,
+    "ast_hash": "0b71c2e7d39daa010985d529f1320b37",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\.husky\\_\\post-rewrite": {
+    "mtime": 1784790968.5846176,
+    "ast_hash": "0b71c2e7d39daa010985d529f1320b37",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\.husky\\_\\pre-applypatch": {
+    "mtime": 1784790968.5841088,
+    "ast_hash": "0b71c2e7d39daa010985d529f1320b37",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\.husky\\_\\pre-auto-gc": {
+    "mtime": 1784790968.5856364,
+    "ast_hash": "0b71c2e7d39daa010985d529f1320b37",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\.husky\\_\\pre-commit": {
+    "mtime": 1784790968.5831082,
+    "ast_hash": "0b71c2e7d39daa010985d529f1320b37",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\.husky\\_\\pre-merge-commit": {
+    "mtime": 1784790968.5831082,
+    "ast_hash": "0b71c2e7d39daa010985d529f1320b37",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\.husky\\_\\pre-push": {
+    "mtime": 1784790968.5856364,
+    "ast_hash": "0b71c2e7d39daa010985d529f1320b37",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\.husky\\_\\pre-rebase": {
+    "mtime": 1784790968.5846176,
+    "ast_hash": "0b71c2e7d39daa010985d529f1320b37",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\.husky\\_\\prepare-commit-msg": {
+    "mtime": 1784790968.5831082,
+    "ast_hash": "0b71c2e7d39daa010985d529f1320b37",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\.storybook\\main.ts": {
+    "mtime": 1776897168.2452636,
+    "ast_hash": "58cfe03f170876984c9f98cbdf13be07",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\.storybook\\preview.ts": {
+    "mtime": 1776897168.2452636,
+    "ast_hash": "1405a27ea688ebdf8d273d024b5770b5",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\demo\\App.tsx": {
+    "mtime": 1776897168.2492783,
+    "ast_hash": "605cfd3bcddb8a2d0a18d7370f6292b7",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\demo\\main.tsx": {
+    "mtime": 1776897168.2502768,
+    "ast_hash": "853105fa2d27f57edbfed31cf6db0e93",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\doc\\astro.config.mjs": {
+    "mtime": 1776897168.2512772,
+    "ast_hash": "f9f096973a81394526be3dc75cef6edb",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\doc\\src\\content.config.ts": {
+    "mtime": 1776897168.2582774,
+    "ast_hash": "e8a1247dd1c4f76ac0454e6d93f81d34",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\e2e\\bulkContactTags.spec.ts": {
+    "mtime": 1776897168.350822,
+    "ast_hash": "a1850cd750fc3ef95b5f1cf2bfbcaabc",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\e2e\\fixtures.ts": {
+    "mtime": 1776897168.350822,
+    "ast_hash": "d1d1a2d813ab6f77a09dd5b3110d4def",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\e2e\\onboarding.spec.ts": {
+    "mtime": 1776897168.350822,
+    "ast_hash": "e2ee8703911a06d121d69072c0a02081",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\e2e\\userAddingATask.spec.ts": {
+    "mtime": 1776897168.3518183,
+    "ast_hash": "68f447e1d31d52c61f9efb78fbaf1115",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\scratch\\apply_real_google_creds.mjs": {
+    "mtime": 1776897168.3771286,
+    "ast_hash": "573a1d62d694e0e1e4542252a96b955e",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\scratch\\check_auth_config.mjs": {
+    "mtime": 1776897168.378127,
+    "ast_hash": "fd8e92570234377fffb3e855fc86a658",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\scratch\\check_public_columns.js": {
+    "mtime": 1777962366.4377725,
+    "ast_hash": "4cbf6c0606865b233d1bbc44dbcf0c23",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\scratch\\check_rpc.js": {
+    "mtime": 1777962366.438843,
+    "ast_hash": "7d147b4ffb43c57ae7fd90fb21850f3a",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\scratch\\check_schema_cols.js": {
+    "mtime": 1776897168.378127,
+    "ast_hash": "0b2d30e8a8bb64ede61bd0e01765ff6f",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\scratch\\check_supabase_data.js": {
+    "mtime": 1776897168.379216,
+    "ast_hash": "060fe2e7140c275de3254bdeda2e070d",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\scratch\\check_test_columns.js": {
+    "mtime": 1777962366.438843,
+    "ast_hash": "ace383ba3dd5521f71a503b1eba5f698",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\scratch\\check_test_keys.js": {
+    "mtime": 1777962366.438843,
+    "ast_hash": "cb77ed9eaea867ab34cdd835142f591d",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\scratch\\check_test_tenants.js": {
+    "mtime": 1777962366.4398553,
+    "ast_hash": "093d4e2666c75ca04b9ca10d903198e2",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\scratch\\create_test_schema.sql": {
+    "mtime": 1777962366.4398553,
+    "ast_hash": "83cd4e354dc626253bdee55915686189",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\scratch\\db_inspect.py": {
+    "mtime": 1777962366.4408538,
+    "ast_hash": "a288f90b35d5afff264c784e2e489169",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\scratch\\enable_google_auth.mjs": {
+    "mtime": 1776897168.379216,
+    "ast_hash": "1bca13676894a458f3d671258fe6ca40",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\scratch\\invite_redroadai.mjs": {
+    "mtime": 1776897168.3802376,
+    "ast_hash": "60e9c8b71752023ca85f49f92d4b08c5",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\scratch\\invite_users.mjs": {
+    "mtime": 1776897168.3802376,
+    "ast_hash": "fc11f19b4c93ffcb3b10f0ec2fe2daab",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\scratch\\list_all_tables.js": {
+    "mtime": 1776897168.3812592,
+    "ast_hash": "46551dc6da416c520b760c3f6b37ab62",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\scratch\\migrate_v1_columns.mjs": {
+    "mtime": 1776897168.3812592,
+    "ast_hash": "a8451769058b9b8a9803cd8bbe07304a",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\scratch\\migrate_via_mgmt_api.mjs": {
+    "mtime": 1776897168.3812592,
+    "ast_hash": "2d7da5c6fc6016aaa8caa695c6fdaaaa",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\scratch\\migrations_schema_test_safe.sql": {
+    "mtime": 1777962366.4418535,
+    "ast_hash": "98cafe7ba97cee80221aaf96dbba17b8",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\scratch\\probe_column_types.js": {
+    "mtime": 1776897168.3812592,
+    "ast_hash": "0ae982487e3324a7bdc41dc2df3ff3bc",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\scratch\\probe_supabase.js": {
+    "mtime": 1777962366.4418535,
+    "ast_hash": "07b38618ec6c9a2e871c6b4f6a01873e",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\scratch\\run_migrations.js": {
+    "mtime": 1777962366.4428527,
+    "ast_hash": "056cc4f16eea19eebeaf8a4487f8d128",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\scratch\\seed_test_from_prod.sql": {
+    "mtime": 1777962366.4428527,
+    "ast_hash": "c7302a9412211940f6dca2b6672749cc",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\scratch\\supabase_roundtrip_demo.js": {
+    "mtime": 1777962366.4438605,
+    "ast_hash": "bbf5e141d650520e364f056191bb0126",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\scratch\\test_full_sync.mjs": {
+    "mtime": 1776897168.3821278,
+    "ast_hash": "4450146bf352bcee7132a9d6980d8bf5",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\scratch\\test_supabase.js": {
+    "mtime": 1777962366.4448612,
+    "ast_hash": "e7eb835d8b1691e9ceee0723c9835b5f",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\scratch\\test_supabase_e2e.mjs": {
+    "mtime": 1776897168.3832355,
+    "ast_hash": "d0d8149427f633e80d73905fc2c83588",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\scratch\\test_uuid_columns.mjs": {
+    "mtime": 1776897168.3841279,
+    "ast_hash": "1e5b27dcbe11a41d6ffaa7c1a72133ea",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\scratch\\verify_test_schema.mjs": {
+    "mtime": 1777962366.4448612,
+    "ast_hash": "b668ed9d40ffeb461d09e03c8ef870b5",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\scripts\\audit_rows_105_110.py": {
+    "mtime": 1778830059.6324742,
+    "ast_hash": "0d733dc04087d14b5f881101c9f4a5da",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\scripts\\backup_supabase.ps1": {
+    "mtime": 1777962366.4471252,
+    "ast_hash": "75a480a33bf0e1145a7dbee81e4962db",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\scripts\\bootstrap_tenant.mjs": {
+    "mtime": 1776897168.3851843,
+    "ast_hash": "a5931a797aaf25689c0827dc38f81a2a",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\scripts\\check_alina_feedback.py": {
+    "mtime": 1777962366.448372,
+    "ast_hash": "f32e40075378bc7fb2e1961ff732c8ab",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\scripts\\crm-crypt.py": {
+    "mtime": 1778319591.3932104,
+    "ast_hash": "80880b438ff4a54c744b6e80c115e6cc",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\scripts\\crm_alina_reply.py": {
+    "mtime": 1778135972.9167259,
+    "ast_hash": "fa5b44448c8a48e009e73146d5f141cf",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\scripts\\deploy_hostido.ps1": {
+    "mtime": 1776897168.3851843,
+    "ast_hash": "e22a23e05015801613629620cbf495cb",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\scripts\\fix_audit_rows_1_10.py": {
+    "mtime": 1778784519.8380089,
+    "ast_hash": "f00972c24e90761ee752c2ab2b75b27f",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\scripts\\ftp_audit.py": {
+    "mtime": 1778050580.8936825,
+    "ast_hash": "3e30a47fd4004fa03d897681955291e2",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\scripts\\ftp_cleanup.py": {
+    "mtime": 1778050580.8946106,
+    "ast_hash": "a9ddedd1f80989159d3e8f041098c84b",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\scripts\\ftp_deploy.py": {
+    "mtime": 1778480705.1039138,
+    "ast_hash": "3407f81a5f72d16627d15507ca73b517",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\scripts\\generate-registry.mjs": {
+    "mtime": 1776897168.3851843,
+    "ast_hash": "1fde1ec1d84baff574a8a322e8c11502",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\scripts\\ghpages-deploy.mjs": {
+    "mtime": 1776897168.3862376,
+    "ast_hash": "286dc052424b83a50b74af53b262ebca",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\scripts\\show_app.mjs": {
+    "mtime": 1778480705.1139884,
+    "ast_hash": "00cef71f08f32ac8d2b17cb03e000578",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\scripts\\supabase-remote-init.mjs": {
+    "mtime": 1776897168.3862376,
+    "ast_hash": "6daad2b80f7a50c373f47e7a8d8af768",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\scripts\\take_screenshots.mjs": {
+    "mtime": 1778480705.1139884,
+    "ast_hash": "60354638b31b96b615c31a620e3e6e74",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\scripts\\unlock_passphrase.mjs": {
+    "mtime": 1784790819.3588727,
+    "ast_hash": "2c93972349e8be1f407abb2cbc79613c",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\App.tsx": {
+    "mtime": 1776897168.3883736,
+    "ast_hash": "3db41eade2479e574dad9f1949f8b4ad",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\main.tsx": {
+    "mtime": 1776897168.6409192,
+    "ast_hash": "98e65440d74cc277b062553f85398931",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\vite-env.d.ts": {
+    "mtime": 1776897168.641939,
+    "ast_hash": "8f68c27c3fc38817b2726b20e2d4f1ee",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\admin.tsx": {
+    "mtime": 1776897168.3902578,
+    "ast_hash": "b9c4f142424e3130dfda3b847856f5ed",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\app-sidebar.tsx": {
+    "mtime": 1776897168.3902578,
+    "ast_hash": "96b4ee1cd709be00721a0c618db37848",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\array-field.tsx": {
+    "mtime": 1776897168.3912952,
+    "ast_hash": "8939cd9a1154e47239811e3e61c2a65d",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\array-input.tsx": {
+    "mtime": 1776897168.3922613,
+    "ast_hash": "77028e4309a286635a14c3f11bf7ed95",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\authentication.tsx": {
+    "mtime": 1776897168.3922613,
+    "ast_hash": "c672b4e3a158f867c83c09b4f23c77b1",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\autocomplete-array-input.tsx": {
+    "mtime": 1776897168.3922613,
+    "ast_hash": "750b3d331128171fcff9a642806a7182",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\autocomplete-input.tsx": {
+    "mtime": 1776897168.3933363,
+    "ast_hash": "a8413506e98a49ea9f66b8e3a58f374e",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\badge-field.tsx": {
+    "mtime": 1776897168.3933363,
+    "ast_hash": "f47ef08c04a659a1e7172341ae54e233",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\boolean-input.tsx": {
+    "mtime": 1776897168.394388,
+    "ast_hash": "a52eaa47bd83931d5737d06dc4034393",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\breadcrumb.tsx": {
+    "mtime": 1776897168.3952587,
+    "ast_hash": "254558f1ef9df3b1fbefb946b2ef3322",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\bulk-actions-toolbar.tsx": {
+    "mtime": 1776897168.3952587,
+    "ast_hash": "b4ab35237bd5565724caaf3d1667e96b",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\bulk-delete-button.tsx": {
+    "mtime": 1776897168.3952587,
+    "ast_hash": "61eae9af6f29d0930c77a7bc39d7ea99",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\bulk-export-button.tsx": {
+    "mtime": 1776897168.3952587,
+    "ast_hash": "0c0a96f64e9a9afe6d5b82f5bc684488",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\cancel-button.tsx": {
+    "mtime": 1776897168.3962579,
+    "ast_hash": "3c71bf6d0ca4e4f15c763fb212386097",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\columns-button.tsx": {
+    "mtime": 1776897168.3972929,
+    "ast_hash": "8d8fcaa83ca0d2c74347f964bc527ac8",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\confirm.tsx": {
+    "mtime": 1776897168.3972929,
+    "ast_hash": "18a37448df35909d96e98f7fd2069829",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\count.tsx": {
+    "mtime": 1776897168.398258,
+    "ast_hash": "13bc2affb0665fb1e701d07f515afbb8",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\create-button.tsx": {
+    "mtime": 1776897168.3992565,
+    "ast_hash": "ee71d1f9406bf37221f800fd613b0240",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\create.tsx": {
+    "mtime": 1776897168.3992565,
+    "ast_hash": "57e9e800d43e5f270474381bad0810cd",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\data-table.tsx": {
+    "mtime": 1776897168.4002876,
+    "ast_hash": "3e8092cd08ca975070e2a398b90f6be5",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\date-field.tsx": {
+    "mtime": 1776897168.4002876,
+    "ast_hash": "c83c15c6ac16e50655473a860cc286cc",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\date-input.tsx": {
+    "mtime": 1776897168.401258,
+    "ast_hash": "09b779f2c4a3eae0b4ecec1617baa8e0",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\date-time-input.tsx": {
+    "mtime": 1776897168.401258,
+    "ast_hash": "4409530cc0605170963a651d38fa431a",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\delete-button.tsx": {
+    "mtime": 1776897168.4022956,
+    "ast_hash": "f00aa7c6811496f63bcc3ccc1d17073f",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\edit-button.tsx": {
+    "mtime": 1776897168.4022956,
+    "ast_hash": "058cad4f3dcc420a8ef978619750134e",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\edit-guesser.tsx": {
+    "mtime": 1776897168.4028034,
+    "ast_hash": "11905969ad762fa202470dda7f9fa1bc",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\edit.tsx": {
+    "mtime": 1776897168.4028034,
+    "ast_hash": "e0691de77a8052fdcfc0479c8b5fee27",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\email-field.tsx": {
+    "mtime": 1776897168.4028034,
+    "ast_hash": "a7fc664cdcfaf086ba7a72fd8ffe5e1f",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\error.tsx": {
+    "mtime": 1776897168.4038093,
+    "ast_hash": "cbca139c4c11ed7852ee269474a2359f",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\export-button.tsx": {
+    "mtime": 1776897168.4038093,
+    "ast_hash": "aeacfd30b2967dde185ed966533b11a9",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\field-toggle.tsx": {
+    "mtime": 1776897168.4048097,
+    "ast_hash": "11a86d599e9ff3328d1d3ca2d7bf9c89",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\file-field.tsx": {
+    "mtime": 1776897168.4058092,
+    "ast_hash": "3145ce605a6fbc80b44d77cfca6933ef",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\file-input.tsx": {
+    "mtime": 1776897168.4058092,
+    "ast_hash": "435ece261a0e8572baff123e82e32838",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\filter-form.tsx": {
+    "mtime": 1776897168.4058092,
+    "ast_hash": "a221f33f61faecf741dca694f2cf55f0",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\form.tsx": {
+    "mtime": 1776897168.4068117,
+    "ast_hash": "ef77676be29a7b88015df49b0bc07482",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\guesser-empty.tsx": {
+    "mtime": 1776897168.4068117,
+    "ast_hash": "0a87c484c13f9acc867e151de9a5ec8d",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\icon-button-with-tooltip.tsx": {
+    "mtime": 1776897168.4068117,
+    "ast_hash": "1c513685e59b54934a37865a00c2a473",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\image-field.tsx": {
+    "mtime": 1776897168.4068117,
+    "ast_hash": "71c52da892f172c9d11f51786c5133ec",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\index.ts": {
+    "mtime": 1776897168.4068117,
+    "ast_hash": "6315a9649eed7a47b7ac2aff98613feb",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\input-helper-text.tsx": {
+    "mtime": 1776897168.4078095,
+    "ast_hash": "7b9a19c9c9b30b6b3c9a11c88c0d3f20",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\layout.tsx": {
+    "mtime": 1776897168.408846,
+    "ast_hash": "ddff9f3b9ec55b13b127931643c7feb8",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\list-guesser.tsx": {
+    "mtime": 1776897168.408846,
+    "ast_hash": "e97e5e9127a88f21256e654c6c0547fb",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\list-pagination.tsx": {
+    "mtime": 1776897168.409825,
+    "ast_hash": "0b60395d76a3c0339150f35b033e47a0",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\list.tsx": {
+    "mtime": 1776897168.4108245,
+    "ast_hash": "e805b15e9ad1b0fd46d4d4e87a1b6318",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\loading.tsx": {
+    "mtime": 1776897168.4108245,
+    "ast_hash": "3875189b48988482366390b79742d8c4",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\locales-menu-button.tsx": {
+    "mtime": 1776897168.4108245,
+    "ast_hash": "eb0745d3cf7d85277227bf92a4a532c4",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\login-page.tsx": {
+    "mtime": 1776897168.4108245,
+    "ast_hash": "facd1b0720986ca073dcf519b29b037e",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\notification.tsx": {
+    "mtime": 1776897168.4118097,
+    "ast_hash": "e59ffecf6eaaade3ad71e52203da036b",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\number-field.tsx": {
+    "mtime": 1776897168.4128456,
+    "ast_hash": "c23384056471fe428031e5d76fcfda24",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\number-input.tsx": {
+    "mtime": 1776897168.4128456,
+    "ast_hash": "0375f241be7d9f3ebdddf4f28c18cf91",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\radio-button-group-input.tsx": {
+    "mtime": 1776897168.4138093,
+    "ast_hash": "a9deda262f960ddcaf5356741179a1df",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\ready.tsx": {
+    "mtime": 1776897168.4138093,
+    "ast_hash": "6cc6214cca0f6275d09ff1f114097d27",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\record-field.tsx": {
+    "mtime": 1776897168.4138093,
+    "ast_hash": "d22a51171f85caf81438b0a1cd301703",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\reference-array-field.tsx": {
+    "mtime": 1776897168.414809,
+    "ast_hash": "6308fcf92ee6ab854484a1f59a100361",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\reference-array-input.tsx": {
+    "mtime": 1776897168.414809,
+    "ast_hash": "840eda0b68ef2a9e182efef0d1047d95",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\reference-field.tsx": {
+    "mtime": 1776897168.4158123,
+    "ast_hash": "39cf10163d0982970ca017a6095a1b10",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\reference-input.tsx": {
+    "mtime": 1776897168.4158123,
+    "ast_hash": "00caa8ce1d4d21be2a499a82d5fcbccb",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\reference-many-count.tsx": {
+    "mtime": 1776897168.416828,
+    "ast_hash": "47212dc5cc51b1e26ab09a9ca0b3a83b",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\reference-many-field.tsx": {
+    "mtime": 1776897168.4178095,
+    "ast_hash": "e05e1f45780cee1e26f073c00da4d8a7",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\refresh-button.tsx": {
+    "mtime": 1776897168.4178095,
+    "ast_hash": "ecd530ae935852c95a5467665612922d",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\saved-queries.tsx": {
+    "mtime": 1776897168.4178095,
+    "ast_hash": "fad417122b7637e0ab9a0a8f0f67de7f",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\search-input.tsx": {
+    "mtime": 1776897168.4188092,
+    "ast_hash": "041de4d3f346e16ae5bb54dd778e5a84",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\select-all-button.tsx": {
+    "mtime": 1776897168.4188092,
+    "ast_hash": "ae9ead48cbb6ee26b47d0dc3b4ca5315",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\select-field.tsx": {
+    "mtime": 1776897168.4198084,
+    "ast_hash": "71231b9ea5f22669c7146d63fea79ca1",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\select-input.tsx": {
+    "mtime": 1776897168.4198084,
+    "ast_hash": "8752f1f2049b896e8521c5f00318f0c3",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\show-button.tsx": {
+    "mtime": 1776897168.4198084,
+    "ast_hash": "83d115b4ff026389331bec7aa1f2a9f8",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\show-guesser.tsx": {
+    "mtime": 1776897168.4208088,
+    "ast_hash": "990bcee2e83c938371f00a67c115275f",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\show.tsx": {
+    "mtime": 1776897168.4208088,
+    "ast_hash": "0bca9bbc059998a07572fe02637854d5",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\simple-form-iterator.tsx": {
+    "mtime": 1776897168.4218106,
+    "ast_hash": "0df0debd6b375e43ecea49d868004c2b",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\simple-form.tsx": {
+    "mtime": 1776897168.4218106,
+    "ast_hash": "5bbc492a66638afc3f2757060adc87ab",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\simple-show-layout.tsx": {
+    "mtime": 1776897168.4228117,
+    "ast_hash": "01f5342d9797e34e367b31c2ba9721d6",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\single-field-list.tsx": {
+    "mtime": 1776897168.4228117,
+    "ast_hash": "a8cf5cbe26885238277285da13c8968a",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\sort-button.tsx": {
+    "mtime": 1776897168.4228117,
+    "ast_hash": "7c3cc601ac5404c918e48145268dc450",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\spinner.tsx": {
+    "mtime": 1776897168.42381,
+    "ast_hash": "1046c55af34c4daae716fe3595073374",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\text-array-input.tsx": {
+    "mtime": 1776897168.42381,
+    "ast_hash": "e872b798de2d1178f8a074413af2faec",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\text-field.tsx": {
+    "mtime": 1776897168.42381,
+    "ast_hash": "87c2110e1ea7b7c11b2ac4625b1394db",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\text-input.tsx": {
+    "mtime": 1776897168.4248264,
+    "ast_hash": "d79510677a6214a4e44771843a255cbe",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\theme-context.ts": {
+    "mtime": 1776897168.4258282,
+    "ast_hash": "ef08368b05682f04bda5723efec8301e",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\theme-mode-toggle.tsx": {
+    "mtime": 1776897168.4258282,
+    "ast_hash": "6d5421f8938f0838fb0dd00024e46adf",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\theme-provider.tsx": {
+    "mtime": 1776897168.426824,
+    "ast_hash": "4a249285ec42b8f64da6e165c3abf5e3",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\toggle-filter-button.tsx": {
+    "mtime": 1776897168.426824,
+    "ast_hash": "9ee3eda4ad46200ba9a3573076ae04c8",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\url-field.tsx": {
+    "mtime": 1776897168.4278238,
+    "ast_hash": "b6b16e2878217690f1765068d18acb34",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\use-theme.ts": {
+    "mtime": 1776897168.4278238,
+    "ast_hash": "d4108ee69a0738591690148e986dd956",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\admin\\user-menu.tsx": {
+    "mtime": 1776897168.4288116,
+    "ast_hash": "d17249ce8280050a2f671d644e4682cd",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\consts.ts": {
+    "mtime": 1776897168.4408422,
+    "ast_hash": "111add90e806ddaa6b8632384de43f02",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\types.ts": {
+    "mtime": 1776897168.5344095,
+    "ast_hash": "c26979f8518e0c4743f1a5e8dfb36cd5",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\activity\\ActivityLog.tsx": {
+    "mtime": 1776897168.4288116,
+    "ast_hash": "fec210a3734dcfc8a961e6f226b241ec",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\activity\\ActivityLogCompanyCreated.tsx": {
+    "mtime": 1776897168.4298148,
+    "ast_hash": "d40bb6730056c5ee376238fe2ee0d2cc",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\activity\\ActivityLogContactCreated.tsx": {
+    "mtime": 1776897168.4298148,
+    "ast_hash": "b589d776699e39662d3c044d88ae69ec",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\activity\\ActivityLogContactNoteCreated.tsx": {
+    "mtime": 1776897168.4308152,
+    "ast_hash": "f363b357d13bf316a68424e0d6b44fe6",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\activity\\ActivityLogContext.tsx": {
+    "mtime": 1776897168.4308152,
+    "ast_hash": "338045fdbbdd2e26c33412edb6c6440e",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\activity\\ActivityLogDealCreated.tsx": {
+    "mtime": 1776897168.4308152,
+    "ast_hash": "385551073a153729b32ca7cf5d9d75a3",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\activity\\ActivityLogDealNoteCreated.tsx": {
+    "mtime": 1776897168.4318101,
+    "ast_hash": "64a36a240078118396ee6552c56f7433",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\activity\\ActivityLogIterator.tsx": {
+    "mtime": 1776897168.4318101,
+    "ast_hash": "e305dc4bf130f11ba43aba60bab49f11",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\activity\\ActivityLogNote.tsx": {
+    "mtime": 1776897168.4328096,
+    "ast_hash": "007f1241c4e0c066969acc7b9200ae7d",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\admin\\FeedbackConsole.tsx": {
+    "mtime": 1777962366.4533825,
+    "ast_hash": "fe502c5547087f48e5786c029c6bcfc4",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\admin\\SnapshotsPage.tsx": {
+    "mtime": 1777962366.4533825,
+    "ast_hash": "814865dc2e103ba1a5526605b0396d7b",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\alina-splash\\AlinaSplash.tsx": {
+    "mtime": 1784901605.8921754,
+    "ast_hash": "fca0b6dd81e32932c09cee8bb203b3ff",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\alina-splash\\index.ts": {
+    "mtime": 1778326921.4379406,
+    "ast_hash": "1c947df2f60a3c10787f22bbd8ecebd9",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\auth\\AuthBarrier.tsx": {
+    "mtime": 1778326941.2506018,
+    "ast_hash": "b4398df6108c934e91a471be5b9d3a14",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\companies\\AutocompleteCompanyInput.tsx": {
+    "mtime": 1776897168.4338095,
+    "ast_hash": "ee86321a3ced529a37621f71795986f0",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\companies\\CompanyAside.tsx": {
+    "mtime": 1776897168.4348247,
+    "ast_hash": "f36fdeea3a211919496de8313a3cdbf8",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\companies\\CompanyAvatar.tsx": {
+    "mtime": 1776897168.4348247,
+    "ast_hash": "90a1fa2570bf70948d41aa706224b64f",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\companies\\CompanyCard.tsx": {
+    "mtime": 1776897168.4358234,
+    "ast_hash": "ec5ff8dd343ede3a09fe44d73cf8d22a",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\companies\\CompanyCreate.tsx": {
+    "mtime": 1776897168.4358234,
+    "ast_hash": "75bc96c82ae874902131ea08deb0d4f2",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\companies\\CompanyEdit.tsx": {
+    "mtime": 1776897168.4368234,
+    "ast_hash": "cf65fb4df674244ebba79ed8775e7a4f",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\companies\\CompanyEmpty.tsx": {
+    "mtime": 1776897168.4378304,
+    "ast_hash": "f536282165ff743caa1a8b151082a709",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\companies\\CompanyInputs.tsx": {
+    "mtime": 1776897168.4378304,
+    "ast_hash": "4aa22f598f83b54c05ed5ace950bf514",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\companies\\CompanyList.tsx": {
+    "mtime": 1776897168.4378304,
+    "ast_hash": "92f1a8e349c0990f584063c5eb7c0539",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\companies\\CompanyListFilter.tsx": {
+    "mtime": 1776897168.4388356,
+    "ast_hash": "8c6a2f721160028277a987034ab782e2",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\companies\\CompanyShow.tsx": {
+    "mtime": 1776897168.4388356,
+    "ast_hash": "9dbada632884060dd2bdec2c212cc612",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\companies\\getTranslatedCompanySizeLabel.ts": {
+    "mtime": 1776897168.43981,
+    "ast_hash": "b888b0fcc31f7f6a6efd5ae2ce1ed122",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\companies\\GridList.tsx": {
+    "mtime": 1776897168.4388356,
+    "ast_hash": "a0fccfec30d66bf5a249bb51b7a75db9",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\companies\\index.ts": {
+    "mtime": 1776897168.43981,
+    "ast_hash": "55414d1838075677c0897303d4f01bf3",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\companies\\sizes.ts": {
+    "mtime": 1776897168.4408422,
+    "ast_hash": "76f969332d3c75141debfb0f5da077b9",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\contacts\\Avatar.tsx": {
+    "mtime": 1776897168.4418497,
+    "ast_hash": "c1d87c0f44c14368e641e7492788b268",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\contacts\\BulkTagButton.tsx": {
+    "mtime": 1776897168.4418497,
+    "ast_hash": "2bc0a09148cfe9aaf6486ae440c7cbce",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\contacts\\ContactAside.tsx": {
+    "mtime": 1776897168.4428103,
+    "ast_hash": "0083cf2c7d9942a809c658a215410979",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\contacts\\ContactBackgroundInfo.tsx": {
+    "mtime": 1776897168.4428103,
+    "ast_hash": "54080940abee11de6b89dff2b2552a69",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\contacts\\ContactCreate.stories.tsx": {
+    "mtime": 1776897168.443809,
+    "ast_hash": "05ae38f0736dd874ad776a0f1ba5ce5f",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\contacts\\ContactCreate.test.tsx": {
+    "mtime": 1776897168.443809,
+    "ast_hash": "dcbe4df5dab686cc66dd9929ebbdf8dc",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\contacts\\ContactCreate.tsx": {
+    "mtime": 1776897168.4448256,
+    "ast_hash": "1f41dc72572d4a76b55165c181cdb787",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\contacts\\ContactCreateSheet.tsx": {
+    "mtime": 1776897168.445814,
+    "ast_hash": "33ace7be2d5e0a5e5e5a7e31fee7ff4c",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\contacts\\ContactEdit.mobile.stories.tsx": {
+    "mtime": 1776897168.445814,
+    "ast_hash": "fb6e1cdaa53856b2a4b55dc342082a2c",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\contacts\\ContactEdit.stories.tsx": {
+    "mtime": 1776897168.445814,
+    "ast_hash": "a4ba69575f7f4abafa13e6844862f8d5",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\contacts\\ContactEdit.test.tsx": {
+    "mtime": 1776897168.4468086,
+    "ast_hash": "873df5154d32c2d81f3140969b6177b4",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\contacts\\ContactEdit.tsx": {
+    "mtime": 1776897168.4468086,
+    "ast_hash": "43010f4602e8653231173ad84b3d5786",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\contacts\\ContactEditSheet.tsx": {
+    "mtime": 1776897168.4468086,
+    "ast_hash": "cd7d97804266912fcb71ec3bd34f8135",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\contacts\\ContactEmpty.tsx": {
+    "mtime": 1776897168.4478247,
+    "ast_hash": "d040cb0cd51b69856e2c1cb1e24e1be9",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\contacts\\ContactImportButton.tsx": {
+    "mtime": 1776897168.4478247,
+    "ast_hash": "2f1d5fc420da124bffe065b5c028866a",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\contacts\\ContactInputs.tsx": {
+    "mtime": 1776897168.4488099,
+    "ast_hash": "46ecaf62b44654e384a39efbd9d837a4",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\contacts\\ContactList.mobile.stories.tsx": {
+    "mtime": 1776897168.4498081,
+    "ast_hash": "7bce025826240ba88578a3d6c57075db",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\contacts\\ContactList.stories.tsx": {
+    "mtime": 1776897168.4498081,
+    "ast_hash": "30acacf06599be53c34ad163945a97a4",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\contacts\\ContactList.test.tsx": {
+    "mtime": 1776897168.450811,
+    "ast_hash": "734c79140a3e4a2122b60dda7827a0a2",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\contacts\\ContactList.tsx": {
+    "mtime": 1776897168.450811,
+    "ast_hash": "9b745548ce04ae36d3beabe7886c29ca",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\contacts\\ContactListContent.tsx": {
+    "mtime": 1776897168.450811,
+    "ast_hash": "64b264ca3d5181a48ebc89ab168b9c03",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\contacts\\ContactListFilter.tsx": {
+    "mtime": 1776897168.4518096,
+    "ast_hash": "7a0c1bbecb85655729d95991052b4315",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\contacts\\ContactMergeButton.tsx": {
+    "mtime": 1776897168.452844,
+    "ast_hash": "ca3cd425b9f52c31df732ae47d27efe1",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\contacts\\contactModel.ts": {
+    "mtime": 1776897168.457808,
+    "ast_hash": "35c2fff0ea349b0d33d339146cd8f2bc",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\contacts\\ContactPersonalInfo.tsx": {
+    "mtime": 1776897168.452844,
+    "ast_hash": "14b3c196912a9523603ae2a6c0ee5b78",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\contacts\\ContactShow.mobile.stories.tsx": {
+    "mtime": 1776897168.4538102,
+    "ast_hash": "4d6b23592398f8df3aa79fad86354a75",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\contacts\\ContactShow.stories.tsx": {
+    "mtime": 1776897168.4538102,
+    "ast_hash": "2ba599cd574b825346a76dcdd6a17738",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\contacts\\ContactShow.test.tsx": {
+    "mtime": 1776897168.454841,
+    "ast_hash": "40bfd32900c5a005a7dce77fcbed44b3",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\contacts\\ContactShow.tsx": {
+    "mtime": 1776897168.454841,
+    "ast_hash": "2e13d786ef1ec5a615910f95395c4c37",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\contacts\\ContactTasksList.tsx": {
+    "mtime": 1776897168.454841,
+    "ast_hash": "f9e7e445429e00ae911f4e66806c9c1e",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\contacts\\ExportVCardButton.tsx": {
+    "mtime": 1776897168.4558094,
+    "ast_hash": "a08e02eab935874480d7e3bc7eda1082",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\contacts\\index.tsx": {
+    "mtime": 1776897168.457808,
+    "ast_hash": "1fa8613d22e0b4e7b0c62668b8b656b1",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\contacts\\TagsList.tsx": {
+    "mtime": 1776897168.4558094,
+    "ast_hash": "167345e0854ac24ae47915cc3f9c723e",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\contacts\\TagsListEdit.tsx": {
+    "mtime": 1776897168.4568088,
+    "ast_hash": "de899598a91104c4517d8485818357e7",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\contacts\\useContactImport.tsx": {
+    "mtime": 1776897168.4588356,
+    "ast_hash": "11b3d588c9fa76da7e11987dd1488a0e",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\dashboard\\Dashboard.tsx": {
+    "mtime": 1776897168.4588356,
+    "ast_hash": "e1e968227acfba3c63d8339cc0cbd387",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\dashboard\\DashboardActivityLog.tsx": {
+    "mtime": 1776897168.4598358,
+    "ast_hash": "efa846790aa3a5c292cde88a53dab228",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\dashboard\\DashboardStepper.tsx": {
+    "mtime": 1776897168.4598358,
+    "ast_hash": "19bff2a6aacb8783d42b4090f162d938",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\dashboard\\DealsChart.tsx": {
+    "mtime": 1776897168.4608097,
+    "ast_hash": "85ebd120fd54fab077ab20d507f173f5",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\dashboard\\DealsPipeline.tsx": {
+    "mtime": 1776897168.4608097,
+    "ast_hash": "fa89437a1c26ed9e92be4851bc4294a0",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\dashboard\\HotContacts.tsx": {
+    "mtime": 1776897168.4618247,
+    "ast_hash": "fc90a31691959cda37f76e0fdb1b93c6",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\dashboard\\LatestNotes.tsx": {
+    "mtime": 1776897168.4618247,
+    "ast_hash": "937bcc5646a151972152a0b03268f3cd",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\dashboard\\MobileDashboard.tsx": {
+    "mtime": 1776897168.4618247,
+    "ast_hash": "fd34ede81af9dcbc1b2174982d0d003b",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\dashboard\\TasksList.tsx": {
+    "mtime": 1776897168.462837,
+    "ast_hash": "aa2a92f01630834aeb7a637a4bafc3ff",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\dashboard\\Welcome.tsx": {
+    "mtime": 1776897168.462837,
+    "ast_hash": "0c925466a3c0062cf52fd98d668fcf48",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\deals\\ContactList.tsx": {
+    "mtime": 1776897168.4638088,
+    "ast_hash": "685030fc17d86ee813f10d6a51e91432",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\deals\\DealArchivedList.tsx": {
+    "mtime": 1776897168.4638088,
+    "ast_hash": "36c635df5353c8e8bec82226c1d8d712",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\deals\\DealCard.tsx": {
+    "mtime": 1776897168.4638088,
+    "ast_hash": "56bf797a320ae52ab562cfca6ad34225",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\deals\\DealColumn.tsx": {
+    "mtime": 1776897168.4648132,
+    "ast_hash": "4384cdd8ecdd13f2bae6a901c2116b14",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\deals\\DealCreate.tsx": {
+    "mtime": 1776897168.4648132,
+    "ast_hash": "b4c5a28700bc89433cf3ee0a0e986421",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\deals\\DealEdit.tsx": {
+    "mtime": 1776897168.4658346,
+    "ast_hash": "8fbcb342fd2f5894fe55490d9e912795",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\deals\\DealEmpty.tsx": {
+    "mtime": 1776897168.4658346,
+    "ast_hash": "57e5a30aa6509cf66cf709cfe05a4a99",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\deals\\DealInputs.tsx": {
+    "mtime": 1776897168.466829,
+    "ast_hash": "4686a8c7bdcc048d8096857504d8d814",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\deals\\DealList.tsx": {
+    "mtime": 1776897168.466829,
+    "ast_hash": "16b6d1554df7abdae9618d020f850c59",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\deals\\DealListContent.tsx": {
+    "mtime": 1776897168.466829,
+    "ast_hash": "c22f2720fccacf3e182cf2ac0f30cc5a",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\deals\\DealShow.tsx": {
+    "mtime": 1776897168.4678097,
+    "ast_hash": "49c7cbfc45218c7f7fc8c846ef969b46",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\deals\\dealUtils.test.ts": {
+    "mtime": 1776897168.468824,
+    "ast_hash": "8393b84e9631ecfd981aed933b1a6987",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\deals\\dealUtils.ts": {
+    "mtime": 1776897168.468824,
+    "ast_hash": "bb322c9b132e01d3972137dea74645db",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\deals\\index.ts": {
+    "mtime": 1776897168.468824,
+    "ast_hash": "f322d4e35716c14207611972791f802b",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\deals\\OnlyMineInput.tsx": {
+    "mtime": 1776897168.4678097,
+    "ast_hash": "b37727d8579f9610db2547613b7d83e3",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\deals\\stages.ts": {
+    "mtime": 1776897168.468824,
+    "ast_hash": "4ea1f3e4b2e756adc569837cbbc02305",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\filters\\FilterCategory.tsx": {
+    "mtime": 1776897168.4698093,
+    "ast_hash": "62f9e40839c687260b96f22c9847ed2d",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\layout\\FeedbackButton.tsx": {
+    "mtime": 1777962366.4555335,
+    "ast_hash": "82fd1e5c856ba1d19db700e44f55056c",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\layout\\FormToolbar.tsx": {
+    "mtime": 1776897168.4698093,
+    "ast_hash": "5b45c9b77aabed20dad61c3c444e08f7",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\layout\\Header.tsx": {
+    "mtime": 1777962366.4555335,
+    "ast_hash": "fea7c83d4b982a2f1eb108687c2facfc",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\layout\\Layout.tsx": {
+    "mtime": 1777962366.4565437,
+    "ast_hash": "e5dc01c63aeb6e97f07afa9041375281",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\layout\\MobileContent.tsx": {
+    "mtime": 1776897168.4708092,
+    "ast_hash": "564730b407b4bbe752f863b909d06c7a",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\layout\\MobileHeader.tsx": {
+    "mtime": 1776897168.4718418,
+    "ast_hash": "ba2d559bd024bf559486fd4279cec892",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\layout\\MobileLayout.tsx": {
+    "mtime": 1776897168.4718418,
+    "ast_hash": "dd9dea1e498aff753460f5f2f0ab3217",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\layout\\MobileNavigation.tsx": {
+    "mtime": 1776897168.4728334,
+    "ast_hash": "df6683aa473a4d650a1969eacb6c44c5",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\layout\\TopToolbar.tsx": {
+    "mtime": 1776897168.4728334,
+    "ast_hash": "cce8d9c47fe9c3246b9185a32a3629b5",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\login\\ConfirmationRequired.tsx": {
+    "mtime": 1776897168.473809,
+    "ast_hash": "29dd9d8a3eb9d0528891deb05ef4ad2a",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\login\\LoginPage.tsx": {
+    "mtime": 1776897168.473809,
+    "ast_hash": "f24128c3b0297a41cc332f71296e0740",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\login\\LoginSkeleton.tsx": {
+    "mtime": 1776897168.4748087,
+    "ast_hash": "e30e714f01f6817ababcbdad68885d14",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\login\\SignupPage.tsx": {
+    "mtime": 1776897168.4758074,
+    "ast_hash": "1fadc9f909c818311a66b31fbb2b8acb",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\login\\SSOAuthButton.tsx": {
+    "mtime": 1776897168.4748087,
+    "ast_hash": "4274140f18f6c3cee117cb02ef1e934f",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\login\\StartPage.tsx": {
+    "mtime": 1776897168.4758074,
+    "ast_hash": "cc83264c7d761de3705b9e734f5e4674",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\misc\\ActiveFilterButton.tsx": {
+    "mtime": 1776897168.4768367,
+    "ast_hash": "2d45fa477da56e541b4222ebf44d5d58",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\misc\\AsideSection.tsx": {
+    "mtime": 1776897168.4768367,
+    "ast_hash": "eac52b46fd08e8bd48e3c1dd3452a166",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\misc\\ContactOption.tsx": {
+    "mtime": 1776897168.4768367,
+    "ast_hash": "78ec518b3ce50c1791774fdc85427aba",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\misc\\CreateSheet.tsx": {
+    "mtime": 1776897168.4778104,
+    "ast_hash": "82e1923e8ec3e8a822214aa44f68cec4",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\misc\\EditSheet.tsx": {
+    "mtime": 1776897168.4788086,
+    "ast_hash": "cded832c92ce5d60aa6071e00337326b",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\misc\\fetchWithTimeout.ts": {
+    "mtime": 1776897168.4828076,
+    "ast_hash": "3701d2259994125cb2dc40a87c47f630",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\misc\\ImageEditorField.tsx": {
+    "mtime": 1776897168.4788086,
+    "ast_hash": "9059fed2c658c3e1578e0f8043ab35ad",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\misc\\ImportPage.tsx": {
+    "mtime": 1776897168.4798088,
+    "ast_hash": "a9dc3be3d1d37968175451665f467b11",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\misc\\InfinitePagination.tsx": {
+    "mtime": 1776897168.4798088,
+    "ast_hash": "e8fbbbb247ba84ee2dd5ba8a0890d8e2",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\misc\\isLinkedInUrl.ts": {
+    "mtime": 1776897168.483809,
+    "ast_hash": "18eb02fee53893c74a6a480e71307af2",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\misc\\Markdown.tsx": {
+    "mtime": 1776897168.480809,
+    "ast_hash": "bd44eb33886c9c5e36c4e1bfe6973822",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\misc\\MobileBackButton.tsx": {
+    "mtime": 1776897168.480809,
+    "ast_hash": "cd90d4e9f9b41dba189084c8786273e6",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\misc\\RelativeDate.tsx": {
+    "mtime": 1776897168.480809,
+    "ast_hash": "7c935a65285ceaa32808c96274d15f99",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\misc\\ResponsiveFilters.tsx": {
+    "mtime": 1776897168.4818106,
+    "ast_hash": "6f13f2c4d532be0d1dde9e1fb7b0a5a5",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\misc\\Status.tsx": {
+    "mtime": 1776897168.4818106,
+    "ast_hash": "703ab3d390120505387ce3abb3df7a60",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\misc\\unsupportedDomains.const.ts": {
+    "mtime": 1776897168.483809,
+    "ast_hash": "a528c8864a2c414b73a2c9d3b29e2c2c",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\misc\\useAppBarHeight.ts": {
+    "mtime": 1776897168.483809,
+    "ast_hash": "1592b902ef22fcaf7aef023dcb4157c7",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\misc\\useImportFromJson.ts": {
+    "mtime": 1776897168.4848135,
+    "ast_hash": "f8bece9260edc1dd2960892febf0160b",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\misc\\usePapaParse.tsx": {
+    "mtime": 1776897168.4848135,
+    "ast_hash": "c7febe0b92035617e7be119f89f372ea",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\notes\\AttachmentField.tsx": {
+    "mtime": 1776897168.4858131,
+    "ast_hash": "ccb9414aab2a74c406cce07952a5a943",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\notes\\foreignKeyMapping.ts": {
+    "mtime": 1776897168.4938543,
+    "ast_hash": "1fb6bc22da0dcbbd2e17abfa4dfb1e62",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\notes\\index.ts": {
+    "mtime": 1776897168.4938543,
+    "ast_hash": "8200b30a7b485db36f7041aa0e83ad91",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\notes\\Note.tsx": {
+    "mtime": 1776897168.4858131,
+    "ast_hash": "b8b9df2c0aaf076ae8a601b79db22550",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\notes\\NoteAttachments.tsx": {
+    "mtime": 1776897168.4868486,
+    "ast_hash": "618620d4a92eb50effafac3834e500d2",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\notes\\NoteCreate.tsx": {
+    "mtime": 1776897168.4868486,
+    "ast_hash": "09c322c2d1fc34daee55ae0a63d08a48",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\notes\\NoteCreateSheet.tsx": {
+    "mtime": 1776897168.4878528,
+    "ast_hash": "2da7ed5e57206c1f2f09cdaa21afe986",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\notes\\NoteEditSheet.tsx": {
+    "mtime": 1776897168.4878528,
+    "ast_hash": "83e3079baab20b66305490e3be038fbe",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\notes\\NoteInputs.stories.tsx": {
+    "mtime": 1776897168.4888783,
+    "ast_hash": "42166409521f90925b48d61c1578609f",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\notes\\NoteInputs.test.tsx": {
+    "mtime": 1776897168.4888783,
+    "ast_hash": "0f63f9bbd9e6c2adb15e5fdca2460da5",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\notes\\NoteInputs.tsx": {
+    "mtime": 1776897168.4898539,
+    "ast_hash": "433f315e289e66422eda9db4d235c17c",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\notes\\NoteInputsMobile.stories.tsx": {
+    "mtime": 1776897168.4898539,
+    "ast_hash": "00183ed5c6a1d706e289abc61e9fae7a",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\notes\\NoteInputsMobile.test.tsx": {
+    "mtime": 1776897168.4898539,
+    "ast_hash": "58a52bcc8fe987a98cdabb77c5269529",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\notes\\NoteInputsMobile.tsx": {
+    "mtime": 1776897168.4908535,
+    "ast_hash": "668e9b8df0b0f1bfa6494a9245c83ebf",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\notes\\noteModel.ts": {
+    "mtime": 1776897168.4938543,
+    "ast_hash": "62a51923e3bec75722ab53ead350320a",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\notes\\NoteShowPage.tsx": {
+    "mtime": 1776897168.4908535,
+    "ast_hash": "e65a1f912dd49926fc183d05a619312d",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\notes\\NotesIterator.tsx": {
+    "mtime": 1776897168.491853,
+    "ast_hash": "10090d09b83cce9a30fdfc64805f6083",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\notes\\NotesIteratorMobile.stories.tsx": {
+    "mtime": 1776897168.491853,
+    "ast_hash": "19f2608802bdc3ee44f48c499c7a78aa",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\notes\\NotesIteratorMobile.test.tsx": {
+    "mtime": 1776897168.491853,
+    "ast_hash": "acad2e6a6e1750a74ba1109a1625c6e2",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\notes\\NotesIteratorMobile.tsx": {
+    "mtime": 1776897168.4928539,
+    "ast_hash": "9b7e3c18ec246b298e92239af52ef668",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\notes\\StatusSelector.tsx": {
+    "mtime": 1776897168.4928539,
+    "ast_hash": "8758148ebffa818390224e82d297b1f3",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\notes\\utils.ts": {
+    "mtime": 1776897168.4938543,
+    "ast_hash": "77879d51e28d608d8b46d24d576929fb",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\providers\\types.ts": {
+    "mtime": 1776897168.515411,
+    "ast_hash": "1faab2d483202098f91f25fddc2fb311",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\providers\\commons\\activity.ts": {
+    "mtime": 1776897168.494853,
+    "ast_hash": "9ff10a523d48ca79c39f6726a0a48a31",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\providers\\commons\\attachments.ts": {
+    "mtime": 1776897168.4958544,
+    "ast_hash": "3cf3578b3914e778b90fa37dafef06e1",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\providers\\commons\\canAccess.ts": {
+    "mtime": 1776897168.4958544,
+    "ast_hash": "1876597ea9c4472cfcd07c616939643c",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\providers\\commons\\englishCrmMessages.ts": {
+    "mtime": 1776897168.4968555,
+    "ast_hash": "b31017a979aa0e177f9da6f4a9e2b2f9",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\providers\\commons\\frenchCrmMessages.ts": {
+    "mtime": 1776897168.4978535,
+    "ast_hash": "34c45f1f97bd6d62d4e883ffb6b12d28",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\providers\\commons\\getCompanyAvatar.test.ts": {
+    "mtime": 1776897168.4978535,
+    "ast_hash": "ffe1ebd2175ac71a3261980010afeb28",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\providers\\commons\\getCompanyAvatar.ts": {
+    "mtime": 1776897168.4978535,
+    "ast_hash": "3e2ba8636b5861355ea43c4cd6c1f6e5",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\providers\\commons\\getContactAvatar.test.ts": {
+    "mtime": 1776897168.4988868,
+    "ast_hash": "b4d18fe15ca902c2018a38386d565765",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\providers\\commons\\getContactAvatar.ts": {
+    "mtime": 1776897168.4988868,
+    "ast_hash": "a881933165a4ccf1b1a44e61954b9b13",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\providers\\commons\\i18nProvider.test.ts": {
+    "mtime": 1776897168.4998536,
+    "ast_hash": "03e1399544182b0567bcf68bca052121",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\providers\\commons\\i18nProvider.ts": {
+    "mtime": 1776897168.4998536,
+    "ast_hash": "acf21fff25e17dd40fac6be0e7fed462",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\providers\\commons\\mergeContacts.ts": {
+    "mtime": 1776897168.5008695,
+    "ast_hash": "8aa4e3b30b4f92232110662b5a2bd574",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\providers\\fakerest\\authProvider.ts": {
+    "mtime": 1776897168.5023956,
+    "ast_hash": "0bcc235d6fa9dfc7a681e98b3d61898a",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\providers\\fakerest\\dataProvider.ts": {
+    "mtime": 1776897168.50841,
+    "ast_hash": "4cc6c8361a0e55a0b9f6261b8b546e10",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\providers\\fakerest\\index.ts": {
+    "mtime": 1776897168.5094087,
+    "ast_hash": "7d16729345799d3480b5842d4f156e1c",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\providers\\fakerest\\dataGenerator\\companies.ts": {
+    "mtime": 1776897168.503429,
+    "ast_hash": "fae855555cdfbd85b390246ed9f28b5d",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\providers\\fakerest\\dataGenerator\\contactNotes.ts": {
+    "mtime": 1776897168.503429,
+    "ast_hash": "017f1882559212adfdff9b15ded4909d",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\providers\\fakerest\\dataGenerator\\contacts.ts": {
+    "mtime": 1776897168.5044155,
+    "ast_hash": "a943a20583aab2f13adb49cb0788a10a",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\providers\\fakerest\\dataGenerator\\dealNotes.ts": {
+    "mtime": 1776897168.505411,
+    "ast_hash": "3e22343ac5fa8c9d21a5956abd882553",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\providers\\fakerest\\dataGenerator\\deals.ts": {
+    "mtime": 1776897168.505411,
+    "ast_hash": "a9a419519fef04af80c243ccba1401da",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\providers\\fakerest\\dataGenerator\\finalize.ts": {
+    "mtime": 1776897168.505411,
+    "ast_hash": "a3c6804a888db7886e99f78d0fee8de5",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\providers\\fakerest\\dataGenerator\\index.ts": {
+    "mtime": 1776897168.50641,
+    "ast_hash": "35947502af9e9de1bd57bf87612b3278",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\providers\\fakerest\\dataGenerator\\sales.ts": {
+    "mtime": 1776897168.50641,
+    "ast_hash": "f7044bc8166f9797eb6a74d51d4a15bb",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\providers\\fakerest\\dataGenerator\\tags.ts": {
+    "mtime": 1776897168.5074103,
+    "ast_hash": "de3cc6b7fcf69986fcebb4ebcbf8198b",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\providers\\fakerest\\dataGenerator\\tasks.ts": {
+    "mtime": 1776897168.5074103,
+    "ast_hash": "11b48222a767daf6a1036ca989a4eca7",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\providers\\fakerest\\dataGenerator\\types.ts": {
+    "mtime": 1776897168.5074103,
+    "ast_hash": "f7ebba8faf88ad6acf528c892886c084",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\providers\\fakerest\\dataGenerator\\utils.ts": {
+    "mtime": 1776897168.50841,
+    "ast_hash": "85c55f4c829bd333150204e5cb472019",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\providers\\fakerest\\internal\\listParser.ts": {
+    "mtime": 1776897168.5104108,
+    "ast_hash": "8fdb5ab86df76fcc8e66391806166cb6",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\providers\\fakerest\\internal\\supabaseAdapter.test.ts": {
+    "mtime": 1776897168.51145,
+    "ast_hash": "2e90dfd186ac41952ea3a9e57d7249d9",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\providers\\fakerest\\internal\\supabaseAdapter.ts": {
+    "mtime": 1776897168.51145,
+    "ast_hash": "fa9b2d6441c84bdb795d00d27ca34320",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\providers\\fakerest\\internal\\transformContainsFilter.test.ts": {
+    "mtime": 1776897168.512411,
+    "ast_hash": "2933221436aa2417c0965f79ce125c78",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\providers\\fakerest\\internal\\transformContainsFilter.ts": {
+    "mtime": 1776897168.512411,
+    "ast_hash": "22cd4829c963d066d2c3d16a242d7d2f",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\providers\\fakerest\\internal\\transformFilter.ts": {
+    "mtime": 1776897168.5134096,
+    "ast_hash": "dc7f5bf14865f832e1fb8fece0884085",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\providers\\fakerest\\internal\\transformInFilter.test.ts": {
+    "mtime": 1776897168.5134096,
+    "ast_hash": "10889c266359460ee86934f511b0b214",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\providers\\fakerest\\internal\\transformInFilter.ts": {
+    "mtime": 1776897168.5134096,
+    "ast_hash": "3f8d47aa1f05ad2b1d41e170fd090250",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\providers\\fakerest\\internal\\transformOrFilter.test.ts": {
+    "mtime": 1776897168.5134096,
+    "ast_hash": "87aac78dd335560235ddbb552de9c69b",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\providers\\fakerest\\internal\\transformOrFilter.ts": {
+    "mtime": 1776897168.5144398,
+    "ast_hash": "a25f8eaed939bffed0346b0ca145f3a4",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\providers\\supabase\\authProvider.ts": {
+    "mtime": 1776897168.5144398,
+    "ast_hash": "253a5ec0e00750e17926a7beee3f670c",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\providers\\supabase\\dataProvider.ts": {
+    "mtime": 1776897168.515411,
+    "ast_hash": "14c10c43dfba494c030ce51a4e6cb506",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\providers\\supabase\\index.ts": {
+    "mtime": 1776897168.515411,
+    "ast_hash": "ced719cd3bb2e1607c5448692782ea95",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\providers\\supabase\\snapshotService.ts": {
+    "mtime": 1778269763.2114,
+    "ast_hash": "0159335253a6a10537411735d4c984a5",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\providers\\supabase\\supabase.ts": {
+    "mtime": 1784888836.3223333,
+    "ast_hash": "118c0c2efc2dc76dd232848a920ab648",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\root\\ConfigurationContext.tsx": {
+    "mtime": 1776897168.5164104,
+    "ast_hash": "bac750c827defbdc64e8e3e80fd89927",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\root\\CRM.tsx": {
+    "mtime": 1778269775.4846604,
+    "ast_hash": "fcd2e700966349f861e5fbb916eb25d2",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\root\\defaultConfiguration.ts": {
+    "mtime": 1776897168.5164104,
+    "ast_hash": "42d46f267845c9025231668c45cef697",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\root\\useConfigurationLoader.ts": {
+    "mtime": 1776897168.5174103,
+    "ast_hash": "1540bd0db7323364f1f1700fe34ebc0a",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\sales\\index.ts": {
+    "mtime": 1776897168.5194094,
+    "ast_hash": "e87b7226a205511e92f422a896cf9b54",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\sales\\SalesCreate.tsx": {
+    "mtime": 1776897168.5174103,
+    "ast_hash": "f2761f342332e44c5350b1dba0324134",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\sales\\SalesEdit.tsx": {
+    "mtime": 1776897168.5174103,
+    "ast_hash": "a5a7c319da98e7938e25e1c3b81f3a3d",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\sales\\SalesInputs.tsx": {
+    "mtime": 1776897168.5184095,
+    "ast_hash": "c8b72cc226bd91b25158bbdd72a6624a",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\sales\\SalesList.tsx": {
+    "mtime": 1776897168.5184095,
+    "ast_hash": "1c164fb233e32d9098b39fa5e060ccf2",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\sales\\useGetSalesName.ts": {
+    "mtime": 1776897168.5194094,
+    "ast_hash": "2e8dbd1135e53741682239e0f0ddfb39",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\services\\feedbackCapture.ts": {
+    "mtime": 1777962366.4599338,
+    "ast_hash": "3f091b4881a4e94cc39638722db17ab5",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\settings\\ProfilePage.tsx": {
+    "mtime": 1776897168.5194094,
+    "ast_hash": "28403a1bd1e3aeb2d89d3d37ada91056",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\settings\\SettingsPage.test.ts": {
+    "mtime": 1776897168.5204096,
+    "ast_hash": "818e7f003bc1da6fe8a7764b21b063b3",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\settings\\SettingsPage.tsx": {
+    "mtime": 1776897168.5204096,
+    "ast_hash": "7f02e7a08a4f626107cca0f3640f7d9a",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\settings\\SettingsPageMobile.tsx": {
+    "mtime": 1776897168.5204096,
+    "ast_hash": "e80b0fbda9f14f843a9a148f527cc46c",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\simple-list\\ListNoResults.tsx": {
+    "mtime": 1776897168.52141,
+    "ast_hash": "829cb680b44d84bdd28e4cf5b65fd0ee",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\simple-list\\ListPlaceholder.tsx": {
+    "mtime": 1776897168.52141,
+    "ast_hash": "8387b6569046579f581a6f6764c60e23",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\simple-list\\SimpleList.tsx": {
+    "mtime": 1776897168.52141,
+    "ast_hash": "8a60577a3eca1d2e5dd513b276331802",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\simple-list\\SimpleListItem.tsx": {
+    "mtime": 1776897168.52241,
+    "ast_hash": "5f2120496082917360ae4ff22dc4d961",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\simple-list\\SimpleListLoading.tsx": {
+    "mtime": 1776897168.52241,
+    "ast_hash": "af026069958c6349aa85fc6a2bf1d671",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\tags\\colors.ts": {
+    "mtime": 1776897168.5244095,
+    "ast_hash": "0d671b22337cedd48ea7da1e3bfc352e",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\tags\\RoundButton.tsx": {
+    "mtime": 1776897168.5234103,
+    "ast_hash": "a69b0793001e8709d5fc134f1f27a487",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\tags\\TagChip.tsx": {
+    "mtime": 1776897168.5234103,
+    "ast_hash": "f394ee296624f677350b848436ac1b59",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\tags\\TagCreateModal.tsx": {
+    "mtime": 1776897168.5234103,
+    "ast_hash": "d5d95e6cf4feb19b896b090b5e864ea5",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\tags\\TagDialog.tsx": {
+    "mtime": 1776897168.5244095,
+    "ast_hash": "20edd8c4747ca22c2eaf9a5613d903be",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\tags\\TagEditModal.tsx": {
+    "mtime": 1776897168.5244095,
+    "ast_hash": "1b6daae05074dc68fdc936a9abd338da",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\tags\\TagForm.tsx": {
+    "mtime": 1776897168.5244095,
+    "ast_hash": "6cac134456343e7ab7ad05b2d4bc3efc",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\tags\\useCreateTag.ts": {
+    "mtime": 1776897168.5254102,
+    "ast_hash": "58ab329d79cf14807b76a825235942ae",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\tags\\useTags.ts": {
+    "mtime": 1776897168.5254102,
+    "ast_hash": "c17d51079a9d7b75b62f6261480a10d2",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\tasks\\AddTask.tsx": {
+    "mtime": 1776897168.5264113,
+    "ast_hash": "34a8e61488ed5af56e5e34f4d4766fdf",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\tasks\\MobileTasksList.tsx": {
+    "mtime": 1776897168.5264113,
+    "ast_hash": "f2837c436ef7b546ccce880eaedb6924",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\tasks\\Task.tsx": {
+    "mtime": 1776897168.5274096,
+    "ast_hash": "e68951036cbf276e7eb123824a307b99",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\tasks\\TaskCreateSheet.stories.tsx": {
+    "mtime": 1776897168.5274096,
+    "ast_hash": "80db404be25b6a7a9761a404af2e1418",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\tasks\\TaskCreateSheet.test.tsx": {
+    "mtime": 1776897168.5284083,
+    "ast_hash": "44d2f73882663aaed18f2a6cbb4fe7e0",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\tasks\\TaskCreateSheet.tsx": {
+    "mtime": 1776897168.5294254,
+    "ast_hash": "346ce984a668c495479639a5fa7c2e18",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\tasks\\TaskEdit.tsx": {
+    "mtime": 1776897168.5294254,
+    "ast_hash": "3931e9dbc5284baac19943cdbaf5e12c",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\tasks\\TaskEditSheet.tsx": {
+    "mtime": 1776897168.530436,
+    "ast_hash": "43a0553882adebea8d4d5b8f8b44e212",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\tasks\\TaskFormContent.tsx": {
+    "mtime": 1776897168.530436,
+    "ast_hash": "951f4cd8b124e0db7c70d10c5cbfcea5",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\tasks\\TasksIterator.tsx": {
+    "mtime": 1776897168.5314126,
+    "ast_hash": "181a0893bcfff5032ad5831a31385280",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\tasks\\TasksListByDueDate.tsx": {
+    "mtime": 1776897168.5314126,
+    "ast_hash": "cee79d9549c4072b2eba187205482654",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\tasks\\TasksListContent.tsx": {
+    "mtime": 1776897168.5314126,
+    "ast_hash": "116ba7e004bb77e618b3326671e7e1ae",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\tasks\\TasksListFilter.test.tsx": {
+    "mtime": 1776897168.532416,
+    "ast_hash": "55e4d34d2909a4f5f433d5baa7a4c376",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\tasks\\TasksListFilter.tsx": {
+    "mtime": 1776897168.5334406,
+    "ast_hash": "efb8154cc49d47189e38801e35481ae6",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\tasks\\tasksPredicate.test.ts": {
+    "mtime": 1776897168.5334406,
+    "ast_hash": "d6728dc6c8e64c739ae9f0a9e4778ce8",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\atomic-crm\\tasks\\tasksPredicate.ts": {
+    "mtime": 1776897168.5344095,
+    "ast_hash": "2d3078c424e281bb4b0b25b8dcb7082c",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\supabase\\layout.tsx": {
+    "mtime": 1776897168.5354095,
+    "ast_hash": "206ad85555609c6be5767707a535a290",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\supabase\\oauth-consent-page.tsx": {
+    "mtime": 1776897168.5354095,
+    "ast_hash": "2fa9a9a77a2e91c977f5622126fd25f3",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\ui\\accordion.tsx": {
+    "mtime": 1776897168.5364096,
+    "ast_hash": "d757b74492c923b2587ac63d23dba787",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\ui\\alert-dialog.tsx": {
+    "mtime": 1777962366.4609344,
+    "ast_hash": "08a8a6989ae2152e0abcc50bc75023ec",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\ui\\alert.tsx": {
+    "mtime": 1776897168.5364096,
+    "ast_hash": "60a1358bb82344b005cea0eca2cbf275",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\ui\\avatar.tsx": {
+    "mtime": 1776897168.5374105,
+    "ast_hash": "c4c8bb940c9b3e97379a39915aeac9a9",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\ui\\badge.tsx": {
+    "mtime": 1776897168.5374105,
+    "ast_hash": "b18d5e3e077aac3937008f6f09eb12d9",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\ui\\breadcrumb.tsx": {
+    "mtime": 1776897168.5384104,
+    "ast_hash": "908958673b534e7ab8af02a47d450bf3",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\ui\\button.tsx": {
+    "mtime": 1776897168.5384104,
+    "ast_hash": "ec47dd35a37fd626e7911239dedf5f18",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\ui\\card.tsx": {
+    "mtime": 1776897168.5384104,
+    "ast_hash": "bebfbd71eda3d199e2f99ee76acde596",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\ui\\checkbox.tsx": {
+    "mtime": 1776897168.5384104,
+    "ast_hash": "d85da0244c71f72c5e93d8a38da46ca0",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\ui\\command.tsx": {
+    "mtime": 1776897168.5394104,
+    "ast_hash": "262dba34656ff68209943306476af5ef",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\ui\\dialog.tsx": {
+    "mtime": 1776897168.5394104,
+    "ast_hash": "b828c5ad72abd01e4def446ce0754655",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\ui\\drawer.tsx": {
+    "mtime": 1776897168.5394104,
+    "ast_hash": "ecff7b7089152db0bfe3b30e1187ea3f",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\ui\\dropdown-menu.tsx": {
+    "mtime": 1776897168.5404122,
+    "ast_hash": "c48eb8155ec2d545deedf484cce63088",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\ui\\input.tsx": {
+    "mtime": 1776897168.5404122,
+    "ast_hash": "1b3a81be1d5e1d7f26cb34a1b1ca571e",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\ui\\item.tsx": {
+    "mtime": 1776897168.5414102,
+    "ast_hash": "46994786ad9d7ab94104eed15dea5de0",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\ui\\label.tsx": {
+    "mtime": 1776897168.5414102,
+    "ast_hash": "c042c51f28f8abe94a6e96b78d9c1517",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\ui\\navigation-menu.tsx": {
+    "mtime": 1776897168.5414102,
+    "ast_hash": "73bdded0beb1ae417c59c1b7baac1f8f",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\ui\\pagination.tsx": {
+    "mtime": 1776897168.5414102,
+    "ast_hash": "c4a1175870e223fe4af7cf5e89eb410d",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\ui\\popover.tsx": {
+    "mtime": 1776897168.5424454,
+    "ast_hash": "2317bec05535ba76c94f8cd9521ea098",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\ui\\progress.tsx": {
+    "mtime": 1776897168.5424454,
+    "ast_hash": "c7f05d11213f703820bc8c7e3f2aaa3c",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\ui\\radio-group.tsx": {
+    "mtime": 1776897168.5424454,
+    "ast_hash": "d8e5d5b6bcb7347d9d02ebdaf8cfdb1a",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\ui\\select.tsx": {
+    "mtime": 1776897168.543411,
+    "ast_hash": "56275150796100e40a66139824c7cc7d",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\ui\\separator.tsx": {
+    "mtime": 1776897168.543411,
+    "ast_hash": "07f879d29151a20b0b1765a8cbf4a146",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\ui\\sheet.tsx": {
+    "mtime": 1776897168.543411,
+    "ast_hash": "02a0af384847944ce986e789a0fc7336",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\ui\\sidebar.tsx": {
+    "mtime": 1776897168.5444102,
+    "ast_hash": "0999acb60cdd0234c993c5a7e01654f1",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\ui\\skeleton.tsx": {
+    "mtime": 1776897168.5444102,
+    "ast_hash": "cbb09a6a9e8a6f87d3bbe20567e22c6e",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\ui\\sonner.tsx": {
+    "mtime": 1776897168.545444,
+    "ast_hash": "289b1a8d68ededefef9007703a48c9a7",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\ui\\spinner.tsx": {
+    "mtime": 1776897168.545444,
+    "ast_hash": "2525ad08b7b93ebe7944f46f855e729c",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\ui\\switch.tsx": {
+    "mtime": 1776897168.546437,
+    "ast_hash": "35502a845ed266ebe32c56b277aceac2",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\ui\\table.tsx": {
+    "mtime": 1776897168.546437,
+    "ast_hash": "254225709b5cae78c9a128cb102a1628",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\ui\\tabs.tsx": {
+    "mtime": 1776897168.5474102,
+    "ast_hash": "8d47d86f2686e7d50ae96f785a30b720",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\ui\\textarea.tsx": {
+    "mtime": 1776897168.5474102,
+    "ast_hash": "673a89c94cd9a8cbdea3b90368e143e8",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\ui\\toggle-group.tsx": {
+    "mtime": 1776897168.5474102,
+    "ast_hash": "96bba50e3499aaa99e3bfc2525c7dc0e",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\ui\\toggle.tsx": {
+    "mtime": 1776897168.5484097,
+    "ast_hash": "4867c8649c704e273d66ab406d20a5e5",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\components\\ui\\tooltip.tsx": {
+    "mtime": 1776897168.5484097,
+    "ast_hash": "c660b43af1749d010755b523f12d4d96",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\hooks\\saved-queries.tsx": {
+    "mtime": 1776897168.5494096,
+    "ast_hash": "b8d12b2639e7eff3ae577964007329dd",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\hooks\\simple-form-iterator-context.tsx": {
+    "mtime": 1776897168.5494096,
+    "ast_hash": "f9e6400a9d8c595248a9fd3144341e3f",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\hooks\\use-mobile.ts": {
+    "mtime": 1776897168.5504098,
+    "ast_hash": "b427d228366c1d3de5167763495116e3",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\hooks\\useBulkExport.tsx": {
+    "mtime": 1776897168.5504098,
+    "ast_hash": "7e0ff35bb0ced14f0ac715828b91a322",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\hooks\\user-menu-context.tsx": {
+    "mtime": 1776897168.5514097,
+    "ast_hash": "a3370333183bd472cc6ccbd8f10c5973",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\hooks\\useSupportCreateSuggestion.tsx": {
+    "mtime": 1776897168.5514097,
+    "ast_hash": "a250afc98c06e1e3a280547b151d0fad",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\App.tsx": {
+    "mtime": 1778480705.1159217,
+    "ast_hash": "0da7cabcf96af31ff6e71b9a01ceb808",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\constants.ts": {
+    "mtime": 1776897168.6099122,
+    "ast_hash": "b1ab734280fe30125fc977a0a3873555",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\index.tsx": {
+    "mtime": 1776897168.6199117,
+    "ast_hash": "c600a12d3d3fca7760456a0369157f35",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\towarzystwa.ts": {
+    "mtime": 1776897168.6329286,
+    "ast_hash": "44cdfa31eee3aa403a22af3d75c85432",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\types.ts": {
+    "mtime": 1778050580.8971357,
+    "ast_hash": "79c3249d5f14fa006d9df558aee90278",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\types_builder.ts": {
+    "mtime": 1776897168.634912,
+    "ast_hash": "b8c43da8f54bddf9def8c4e0c20cf496",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\vite.config.ts": {
+    "mtime": 1776897168.6360295,
+    "ast_hash": "ce83dcbe1b0f3c0ad07540412502c89b",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\ai\\KaratekaService.ts": {
+    "mtime": 1776897168.5744095,
+    "ast_hash": "069b81340d6bfe96c65968c9028be016",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\ai\\KaratekaTypes.ts": {
+    "mtime": 1776897168.5744095,
+    "ast_hash": "1f442a51fa44d94642d1c6aba4090cc2",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\ai\\agents\\ClientAgent.ts": {
+    "mtime": 1776897168.5754325,
+    "ast_hash": "409c591010b6f37b35bc6fd0a1d92398",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\ActivityLogView.tsx": {
+    "mtime": 1776897168.5774102,
+    "ast_hash": "b1edfbbd5cfffc92fa90f89eb72c0fb8",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\AdvancedFilters.tsx": {
+    "mtime": 1776897168.5774102,
+    "ast_hash": "a6f55c601ab7904b75877a5ef6e1d053",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\ApkGenerator.tsx": {
+    "mtime": 1776897168.57841,
+    "ast_hash": "d39f0c6ae255ad32d405be74ce576611",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\BackupManager.tsx": {
+    "mtime": 1776897168.57841,
+    "ast_hash": "1a15edc714bf0adbed2351c851281960",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\CalendarView.tsx": {
+    "mtime": 1778480705.1179414,
+    "ast_hash": "c121df686f6b3d43e81712cfb4b81168",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\ClientDetails.tsx": {
+    "mtime": 1784903257.119552,
+    "ast_hash": "d2fd0ef625b4b117b119e777d4060382",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\ClientFormModal.tsx": {
+    "mtime": 1777962366.464553,
+    "ast_hash": "e588378826da4663353cf3f673dfc329",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\ClientsList.tsx": {
+    "mtime": 1778784519.8809266,
+    "ast_hash": "8898ce532588dc39ce675a3b7c784923",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\ComplianceChecklist.tsx": {
+    "mtime": 1776897168.5834377,
+    "ast_hash": "d2f31a39f2542822e97dfeef9fd734c6",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\Dashboard.tsx": {
+    "mtime": 1778480705.1179414,
+    "ast_hash": "9f8d8ffd5fa8831841ecab51dc87c3e6",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\DataImporter.tsx": {
+    "mtime": 1778327063.4410317,
+    "ast_hash": "150e6d7dfa3f93bc33166f193af42189",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\DeleteSafetyButton.tsx": {
+    "mtime": 1776897168.5854094,
+    "ast_hash": "2ac71fdc1af770ffe95f6fda91e95a52",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\EncryptionGate.tsx": {
+    "mtime": 1784900426.451323,
+    "ast_hash": "156768075ba3523f866caf42dad637cc",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\InsurerSelect.tsx": {
+    "mtime": 1776897168.5874102,
+    "ast_hash": "c0f204d454e654fb2bce6180f198f9ce",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\LuxuryDashboard.tsx": {
+    "mtime": 1778480705.1199563,
+    "ast_hash": "434e50ef80eab6f5bcbbb4a7ddc9d9f3",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\NLPBar.tsx": {
+    "mtime": 1776897168.5894148,
+    "ast_hash": "5df6cee6e75baf7c87e4bc835cb77f80",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\Notatki.tsx": {
+    "mtime": 1784906152.461964,
+    "ast_hash": "af305c2fda47310e604013d158ea9640",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\NoteSelectors.tsx": {
+    "mtime": 1776897168.591443,
+    "ast_hash": "d659af83d5327207c0b6cf2f6eb69601",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\NotesSection.tsx": {
+    "mtime": 1776897168.592415,
+    "ast_hash": "50051bed0c8181b1650108ccc5aa0dff",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\NoteTagRenderer.tsx": {
+    "mtime": 1776897168.592415,
+    "ast_hash": "72928787a06827377815d8028753906e",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\OffersBoard.tsx": {
+    "mtime": 1778480705.1219695,
+    "ast_hash": "fa4bf15465319cf2d13802e20c660c3f",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\PassphraseGate.tsx": {
+    "mtime": 1784790799.1397872,
+    "ast_hash": "78e917585ac7bcdbadac0196a13f4490",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\PassphraseModal.tsx": {
+    "mtime": 1776897168.5944152,
+    "ast_hash": "baf0fed16e35d24d0daca02582c74a6f",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\PolicyFormModal.tsx": {
+    "mtime": 1778784519.8844645,
+    "ast_hash": "c85ab7b6cab4c80764aa17eeff17e4e6",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\PolicyWindowHost.tsx": {
+    "mtime": 1776897168.598416,
+    "ast_hash": "09a258bc286c14d4491216b7d8e3b5e3",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\QuickViewDrawer.tsx": {
+    "mtime": 1777962366.4675536,
+    "ast_hash": "fb41e5477ee9d13d20e0c41ab4872db0",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\RawDataView.tsx": {
+    "mtime": 1776897168.599416,
+    "ast_hash": "07aea99c9b27131f5b6805e23be00dfa",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\SearchableSelect.tsx": {
+    "mtime": 1776897168.6014154,
+    "ast_hash": "c809ba6d12cb99fdc5168edc428739ee",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\Sidebar.tsx": {
+    "mtime": 1776897168.6014154,
+    "ast_hash": "22e429c7e97a6db454d9e5ec8976681f",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\SnapshotDialog.tsx": {
+    "mtime": 1778480705.1219695,
+    "ast_hash": "f381b7fae0bbe17d5dece1e2eb4342ed",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\StatusEye.tsx": {
+    "mtime": 1778480705.1219695,
+    "ast_hash": "5c1f2187c3c9b9842a1ae2d156afebf3",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\TerminationFormModal.tsx": {
+    "mtime": 1776897168.6039128,
+    "ast_hash": "8cf2fbbab0d12ac256ef0f8bab05a89b",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\TerminationPreview.tsx": {
+    "mtime": 1776897168.6049156,
+    "ast_hash": "b24fef47ef634e3cda550b47e405e4e4",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\TestModeBanner.tsx": {
+    "mtime": 1784900402.6223984,
+    "ast_hash": "8cbd9b4163f617064e9a220979691480",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\ThemeSettings.tsx": {
+    "mtime": 1778050580.8956187,
+    "ast_hash": "05a52fc73c554550e438080e68c3b205",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\VisionBoard.tsx": {
+    "mtime": 1776897168.6099122,
+    "ast_hash": "100730512e8637aadd83f5c15e558416",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\AI\\KaratekaInput.tsx": {
+    "mtime": 1776897168.5764098,
+    "ast_hash": "870a2ca6434737c848ca21f7e2cf63dc",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\AI\\KaratekaTextarea.tsx": {
+    "mtime": 1776897168.5764098,
+    "ast_hash": "a377eb10808779cb7d57a7a6906e1413",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\Builder\\FormArchitect.tsx": {
+    "mtime": 1776897168.5794363,
+    "ast_hash": "cb214d86f99307f93d6dd6cbe7020977",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\Commission\\CommissionCalculator.tsx": {
+    "mtime": 1776897168.5824256,
+    "ast_hash": "42fcff3c11a78ba0174e83e5740b0350",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\Commission\\SubAgentSelect.tsx": {
+    "mtime": 1776897168.5824256,
+    "ast_hash": "0598ccccec03585665bcbc726dff9e5a",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\DataRepair\\DataRepairView.tsx": {
+    "mtime": 1776897168.5844107,
+    "ast_hash": "67945eb0e9ff836d62fe92b719e04b73",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\Finance\\FinanceView.tsx": {
+    "mtime": 1778480705.1199563,
+    "ast_hash": "85961116a503403a0f98f622fd10f4d5",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\GlobalAgent\\AgentKaratekaWindow.tsx": {
+    "mtime": 1776897168.5874102,
+    "ast_hash": "03a6c1c94cc6bb9b8773276042be95c0",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\Insurers\\TowarzystwaView.tsx": {
+    "mtime": 1776897168.588416,
+    "ast_hash": "ca6e6f563fe1c84422fb9095f7799d36",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\Navigation\\NavButton.tsx": {
+    "mtime": 1778313770.452623,
+    "ast_hash": "a340c5f806153ec0d98a7a2f9b39b9d4",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\Navigation\\Sidebar.tsx": {
+    "mtime": 1778480705.1199563,
+    "ast_hash": "258fa7b2f9111f9a04c1f48eee0bf5bc",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\PolicyForms\\AutoForm.tsx": {
+    "mtime": 1778784519.8859863,
+    "ast_hash": "d0b0aca8aed0aef229b0ebea7d015257",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\PolicyForms\\HomeForm.tsx": {
+    "mtime": 1778784519.887999,
+    "ast_hash": "f4da6e19805a0e834e72f258668b814c",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\PolicyForms\\LifeForm.tsx": {
+    "mtime": 1776897168.5974157,
+    "ast_hash": "4eacc2f3d65bde7b0421a32a61bdebf4",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\PolicyForms\\OtherForm.tsx": {
+    "mtime": 1776897168.5974157,
+    "ast_hash": "9b871dcd812ae3dbc53cd76214763695",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\PolicyForms\\TravelForm.tsx": {
+    "mtime": 1776897168.598416,
+    "ast_hash": "19f4a96cd567925c15c52ad8ad01d3c1",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\ReminderSystem\\ReminderUtils.ts": {
+    "mtime": 1776897168.600416,
+    "ast_hash": "fc0c3e4c0339c490837cfc037050dc79",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\ReminderSystem\\ReminderWidget.tsx": {
+    "mtime": 1776897168.6014154,
+    "ast_hash": "00cf10bda42384002c0bfda700631a90",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\SubAgents\\SubAgentsView.tsx": {
+    "mtime": 1776897168.6024158,
+    "ast_hash": "5fff77fd889efd568e2c3610dd4478bb",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\Terminations\\TerminationsView.tsx": {
+    "mtime": 1778480705.1219695,
+    "ast_hash": "286e26b17ec1a592057782670a436e74",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\Tester\\automationUtils.ts": {
+    "mtime": 1776897168.6069126,
+    "ast_hash": "9d540424685b7c7632390b2c79beb1b9",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\Tester\\AutoTester.tsx": {
+    "mtime": 1776897168.6069126,
+    "ast_hash": "cd2eb8a41dde9c949686250087bcf52e",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\Themes\\SectionTitle.tsx": {
+    "mtime": 1776897168.607913,
+    "ast_hash": "5410314dc57b211ec0a440c12f0c5349",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\Tools\\DraggablePanel.tsx": {
+    "mtime": 1776897168.6089132,
+    "ast_hash": "1ac811cae0994cefd7e91307007de4ca",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\Tools\\PropertyInterviewWidget.tsx": {
+    "mtime": 1776897168.6089132,
+    "ast_hash": "88a1f2b0aace6f63c12c34cc3b966ff7",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\components\\Tools\\QuickInterviewWidget.tsx": {
+    "mtime": 1776897168.6099122,
+    "ast_hash": "da7d839cb8f05020337d798aec00afeb",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\data\\brands.ts": {
+    "mtime": 1776897168.610913,
+    "ast_hash": "d61110b7df1a900b6e5c7118ed789451",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\data\\countries.ts": {
+    "mtime": 1776897168.6119134,
+    "ast_hash": "30f78bbe2d9cb9278d1caa0a186ab6a8",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\data\\legacy_recognition.ts": {
+    "mtime": 1776897168.6159134,
+    "ast_hash": "f494d2f9ea37bcb15930b2850b4c69bc",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\data\\normalizationDictionary.ts": {
+    "mtime": 1776897168.6169128,
+    "ast_hash": "b7421b65a75e83acbec9ef02091264ff",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\data\\policyOptions.ts": {
+    "mtime": 1776897168.6169128,
+    "ast_hash": "02a3f36134e414912de4709624084082",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\data\\projectLedger.ts": {
+    "mtime": 1776897168.6169128,
+    "ast_hash": "c71fa4e87b9978fc84776d6ce94e4e95",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\data\\seedData.ts": {
+    "mtime": 1776897168.6179125,
+    "ast_hash": "d4bea3d37cb734d313a7cc7902eeb8f5",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\data\\legacy\\auto.ts": {
+    "mtime": 1776897168.6119134,
+    "ast_hash": "beabe2629dc7de6711b17138ab0ae88a",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\data\\legacy\\business.ts": {
+    "mtime": 1776897168.6129131,
+    "ast_hash": "df0570478e570b6c6091149327ff6358",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\data\\legacy\\index.ts": {
+    "mtime": 1776897168.6129131,
+    "ast_hash": "2a004edac1eb1a93cfd8db84d5e30c42",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\data\\legacy\\life.ts": {
+    "mtime": 1776897168.6129131,
+    "ast_hash": "3c01e5d2bf778185ed92e944fb3f6f89",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\data\\legacy\\property.ts": {
+    "mtime": 1776897168.6129131,
+    "ast_hash": "37b8da670c5e5403b517483d71660c4f",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\data\\legacy\\quad.ts": {
+    "mtime": 1776897168.6139126,
+    "ast_hash": "6ce151262f8a4a93463a005ed131b244",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\data\\legacy\\trailer.ts": {
+    "mtime": 1776897168.6139126,
+    "ast_hash": "aafdfc2f0dc48272fda5c40fbc55e245",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\data\\legacy\\travel.ts": {
+    "mtime": 1776897168.6149178,
+    "ast_hash": "8e61006913329aa584d621cd01c0cf85",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\data\\legacy\\travel_participants.ts": {
+    "mtime": 1776897168.6149178,
+    "ast_hash": "defdc38411b56b340e4d09af4a772d3b",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\data\\legacy\\types.ts": {
+    "mtime": 1776897168.6159134,
+    "ast_hash": "4f31ba58da5d21f8da35283e52ee351b",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\hooks\\useAutoWipe.ts": {
+    "mtime": 1776897168.6189132,
+    "ast_hash": "d4979c1fa0f749b144579c8bc5736a0d",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\modules\\definitions\\def_auto.ts": {
+    "mtime": 1776897168.6209228,
+    "ast_hash": "f34babe85ca2644774efc14f17e68f4f",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\modules\\definitions\\def_home.ts": {
+    "mtime": 1776897168.6209228,
+    "ast_hash": "7fc69d4d8e2ebeab3eb5c31b86e15081",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\modules\\definitions\\def_life.ts": {
+    "mtime": 1776897168.6209228,
+    "ast_hash": "c7ff609b60ea265b41f64ea72cdf54e5",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\modules\\definitions\\def_travel.ts": {
+    "mtime": 1776897168.621915,
+    "ast_hash": "45adfb3bdcbb2d0941386bdd03b2be05",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\modules\\utils\\currencyUtils.ts": {
+    "mtime": 1776897168.621915,
+    "ast_hash": "7915149c1e6e5c83508b7414c0785cff",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\modules\\utils\\diffEngine.ts": {
+    "mtime": 1776897168.6229112,
+    "ast_hash": "4f219037ae54d1f4a635fde30fb77799",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\modules\\utils\\legacyParser.ts": {
+    "mtime": 1776897168.6229112,
+    "ast_hash": "36839d6434d454791f53c361d1993817",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\modules\\utils\\secondaryParsers.ts": {
+    "mtime": 1776897168.6240268,
+    "ast_hash": "22ba0081a071b76643779533b0963cf9",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\modules\\utils\\window_utils.ts": {
+    "mtime": 1776897168.6240268,
+    "ast_hash": "ce786caa0f12580d7d3f3bc36e9083aa",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\modules\\validators\\unifiedValidators.ts": {
+    "mtime": 1776897168.6249125,
+    "ast_hash": "a587c61d111fe34578d534cdf12f2bca",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\services\\crypto.ts": {
+    "mtime": 1776897168.6259117,
+    "ast_hash": "98cec2730dbf322046cd684f448221a1",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\services\\dataMapper.ts": {
+    "mtime": 1778480705.1219695,
+    "ast_hash": "16556b06d88c74800fe839ec24a0973b",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\services\\feedbackCapture.ts": {
+    "mtime": 1778784519.890031,
+    "ast_hash": "3d360fd58ba26dabcb426ffc87e3c394",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\services\\geminiService.ts": {
+    "mtime": 1776897168.6269119,
+    "ast_hash": "c25121a12be05d7d1d31cee33cbf3e79",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\services\\insurerRanking.ts": {
+    "mtime": 1776897168.627912,
+    "ast_hash": "6349cdb8e09d4f24de8a8d39b341eae5",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\services\\legacyRateExtractor.ts": {
+    "mtime": 1776897168.627912,
+    "ast_hash": "b65a1c5182c386e13b44c47e2bed222a",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\services\\ocrService.ts": {
+    "mtime": 1776897168.6290345,
+    "ast_hash": "c27ce33944466d0faf826a0b5feb1ed7",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\services\\policyMerger.ts": {
+    "mtime": 1776897168.6290345,
+    "ast_hash": "12826e8c16275447fe85eca3cf81257b",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\services\\reverseMapper.ts": {
+    "mtime": 1776897168.630059,
+    "ast_hash": "e6376a77df0e4ab1bfa61fb6b1159b2f",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\services\\storage.ts": {
+    "mtime": 1778050580.8971357,
+    "ast_hash": "bca577097bc3824a66aea2253dd35e14",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\services\\supabaseStorage.ts": {
+    "mtime": 1778784519.8915486,
+    "ast_hash": "e1a6f8dccb6c47b9978bcd4bc61e6ff2",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\test\\IconPlayground.tsx": {
+    "mtime": 1776897168.6329286,
+    "ast_hash": "11e0e97381a6ebf504571186291398fd",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\types\\module_types.ts": {
+    "mtime": 1776897168.634912,
+    "ast_hash": "bae61bce5faf89e6c6c40c852c691275",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\lib\\field.type.ts": {
+    "mtime": 1776897168.637052,
+    "ast_hash": "29ab66979810b8cb058388ac8a7641fc",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\lib\\genericMemo.ts": {
+    "mtime": 1776897168.6381528,
+    "ast_hash": "4c486a55429dbe9ea3941d41ab163a87",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\lib\\i18nProvider.ts": {
+    "mtime": 1776897168.6390135,
+    "ast_hash": "69df092000f4e0399b6cc94da657bd92",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\lib\\sanitizeInputRestProps.ts": {
+    "mtime": 1776897168.6390135,
+    "ast_hash": "e0ff3f06409226cc91bdadac2d0aec93",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\lib\\toSlug.ts": {
+    "mtime": 1776897168.639912,
+    "ast_hash": "4ae68bd15d5e78fc5e670a590b4e5a6d",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\lib\\utils.ts": {
+    "mtime": 1776897168.6409192,
+    "ast_hash": "2f7b0f4d04ae3068bd6c02dd5e9ae267",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\sandbox\\DesignSahara.tsx": {
+    "mtime": 1777962366.4705527,
+    "ast_hash": "0d5dc6ec94e907f346fbaa4cb9067310",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\test\\StoryWrapper.tsx": {
+    "mtime": 1776897168.641939,
+    "ast_hash": "c08cd19bb27fca72ed092c14093f4b0c",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\combined_migrations_test.sql": {
+    "mtime": 1777962366.4710598,
+    "ast_hash": "eee0dd3758b3e0813070cdb1b38bc98d",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\FIX_TEST_SCHEMA_LEGACY.sql": {
+    "mtime": 1777962366.4705527,
+    "ast_hash": "e9832a029120eb578157a1ec7be77d12",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\seed.sql": {
+    "mtime": 1776897168.6729186,
+    "ast_hash": "7954c46ea97375462fc7a777c0d9a821",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\functions\\delete_note_attachments\\index.ts": {
+    "mtime": 1776897168.6469467,
+    "ast_hash": "e0b3e07832856e2cb8789e15f88407ee",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\functions\\mcp\\index.ts": {
+    "mtime": 1776897168.6479278,
+    "ast_hash": "d5e80dd4a77df5663a693b0fc2dcf9c8",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\functions\\mcp\\taskListUi.ts": {
+    "mtime": 1776897168.648912,
+    "ast_hash": "9684ee0ae13891b6bd75b1220e4d5398",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\functions\\mcp\\validateSql.test.ts": {
+    "mtime": 1776897168.648912,
+    "ast_hash": "653bfc052ad53a67b6000ec3553f7838",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\functions\\mcp\\validateSql.ts": {
+    "mtime": 1776897168.6499112,
+    "ast_hash": "1c559cea0a9dabea724df55981886a03",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\functions\\merge_contacts\\index.ts": {
+    "mtime": 1776897168.6509264,
+    "ast_hash": "26de970cc226926b04eaa3ceffe44376",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\functions\\postmark\\addNoteToContact.test.ts": {
+    "mtime": 1776897168.6509264,
+    "ast_hash": "5667620c9e31773dc7b0f427315fec35",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\functions\\postmark\\addNoteToContact.ts": {
+    "mtime": 1776897168.6509264,
+    "ast_hash": "d8468f9095cfd1042194c78efc749871",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\functions\\postmark\\extractAndUploadAttachments.ts": {
+    "mtime": 1776897168.65291,
+    "ast_hash": "40b870652af483351af6380768a17682",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\functions\\postmark\\extractMailContactData.test.ts": {
+    "mtime": 1776897168.65291,
+    "ast_hash": "d129a340609f7233ce4f0bb1fb14c4b3",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\functions\\postmark\\extractMailContactData.ts": {
+    "mtime": 1776897168.65291,
+    "ast_hash": "46001fbeddafd5879cff931f108086cc",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\functions\\postmark\\forwardedParser.test.ts": {
+    "mtime": 1776897168.6539414,
+    "ast_hash": "0124f41a32fec983695d99ceadee1c66",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\functions\\postmark\\forwardedParser.ts": {
+    "mtime": 1776897168.6539414,
+    "ast_hash": "45832084b8282a3be2dd96dc4c0cc020",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\functions\\postmark\\getExpectedAuthorization.ts": {
+    "mtime": 1776897168.654912,
+    "ast_hash": "0b7a3233e825647ffdb38320b7e770ea",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\functions\\postmark\\getNoteContent.ts": {
+    "mtime": 1776897168.654912,
+    "ast_hash": "b64ca028705a4756a2785574202ce54f",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\functions\\postmark\\index.ts": {
+    "mtime": 1776897168.654912,
+    "ast_hash": "a1178b703684bbde74886c488de19b37",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\functions\\postmark\\mailProvider.const.ts": {
+    "mtime": 1776897168.6559117,
+    "ast_hash": "bbe30070f866a7c9e80b20c3d0c3c35b",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\functions\\update_password\\index.ts": {
+    "mtime": 1776897168.6569116,
+    "ast_hash": "0c2669f7fb4a49017ceb90983839160f",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\functions\\users\\index.ts": {
+    "mtime": 1776897168.6569116,
+    "ast_hash": "b3ba8280a94d573efbba62335c002ef6",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\functions\\_shared\\authentication.ts": {
+    "mtime": 1776897168.6449182,
+    "ast_hash": "e9957b67fb8a37903fc5dca0bb435cf7",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\functions\\_shared\\cors.ts": {
+    "mtime": 1776897168.6449182,
+    "ast_hash": "f11c8fe710d6a88db4b584244261fa76",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\functions\\_shared\\db.ts": {
+    "mtime": 1776897168.6449182,
+    "ast_hash": "1a50e0236e1d5063aac357c3e87b6357",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\functions\\_shared\\getUserSale.ts": {
+    "mtime": 1776897168.6459117,
+    "ast_hash": "bb4e6cb1a38fd91de92d066173567816",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\functions\\_shared\\supabaseAdmin.ts": {
+    "mtime": 1776897168.6459117,
+    "ast_hash": "d6c8d0200182e6f192cc8b15b2586eb2",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\functions\\_shared\\utils.ts": {
+    "mtime": 1776897168.6459117,
+    "ast_hash": "90afb8e65737c8c3c542d93c923f507b",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\migrations\\20240730075029_init_db.sql": {
+    "mtime": 1777962366.472069,
+    "ast_hash": "6a233babdbe2ee254b4e931bb5294c4c",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\migrations\\20240730075425_init_triggers.sql": {
+    "mtime": 1776897168.658912,
+    "ast_hash": "a3bad9a3f6433a840188571740029b11",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\migrations\\20240806124555_task_sales_id.sql": {
+    "mtime": 1776897168.658912,
+    "ast_hash": "3b3e1cbf3c851de114d29bc277f0b08e",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\migrations\\20240807082449_remove-aquisition.sql": {
+    "mtime": 1776897168.658912,
+    "ast_hash": "fec217939aa937ef0fc52ab43baff9e3",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\migrations\\20240808141826_init_state_configure.sql": {
+    "mtime": 1778272072.4549742,
+    "ast_hash": "f4cdc0874e3d0e6be3feeb9c3e30ddb6",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\migrations\\20240813084010_tags_policy.sql": {
+    "mtime": 1776897168.6599114,
+    "ast_hash": "3c94a6740497c43183cd900c2bb5376a",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\migrations\\20241104153231_sales_policies.sql": {
+    "mtime": 1776897168.6609411,
+    "ast_hash": "803f7c8433ac4edcadab3d8475d321ad",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\migrations\\20250109152531_email_jsonb.sql": {
+    "mtime": 1776897168.6609411,
+    "ast_hash": "b7e4adf6632c4bcd8b7067a0604868fc",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\migrations\\20250113132531_phone_jsonb.sql": {
+    "mtime": 1776897168.6619384,
+    "ast_hash": "a2d1dbce8e85ea454b2db9075d15a052",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\migrations\\20251204172855_merge_contacts_function.sql": {
+    "mtime": 1776897168.6619384,
+    "ast_hash": "c8a40b8a48cda0acab3d9f06367bb5ea",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\migrations\\20251204201317_drop_merge_contacts_function.sql": {
+    "mtime": 1776897168.6619384,
+    "ast_hash": "1b7855a242477eaa08c49d37ff65b3fd",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\migrations\\20260108160722_task_default_sales.sql": {
+    "mtime": 1776897168.662913,
+    "ast_hash": "8f1b2e71b4290b20284975596094b144",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\migrations\\20260115150819_snake_case_renaming.sql": {
+    "mtime": 1776897168.662913,
+    "ast_hash": "8bc348f9805969499aff2ce69f3f3190",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\migrations\\20260127140209_imports.sql": {
+    "mtime": 1776897168.6639118,
+    "ast_hash": "08c41750e773cc7232e1c044dd288ed2",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\migrations\\20260128165057_sso_handling.sql": {
+    "mtime": 1776897168.664942,
+    "ast_hash": "4bd48a7a19d89c47604b0dfcc43a32a4",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\migrations\\20260211194545_app_configuration.sql": {
+    "mtime": 1776897168.664942,
+    "ast_hash": "c946671a4cb7e66dfa3ad9d8f1e8e8c0",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\migrations\\20260226163952_deals_expected_closing_date_date_only.sql": {
+    "mtime": 1776897168.664942,
+    "ast_hash": "430216065da7a22c16cebff1f9cdcfb9",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\migrations\\20260304104600_note_attachments_trigger.sql": {
+    "mtime": 1776897168.6659122,
+    "ast_hash": "64a2d06325d88804d0b6c93429262476",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\migrations\\20260307120000_nb_tasks_pending_only.sql": {
+    "mtime": 1776897168.666911,
+    "ast_hash": "b8bfa148968ff167ec73c7630d241ea1",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\migrations\\20260309112831_fix_security_warnings.sql": {
+    "mtime": 1776897168.666911,
+    "ast_hash": "d74fafc923952d72d8be53f548d438b1",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\migrations\\20260314120000_activity_log_view.sql": {
+    "mtime": 1776897168.666911,
+    "ast_hash": "8dd4212b62787fadd2d88425303b75cc",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\migrations\\20260320120000_lowercase_email_website.sql": {
+    "mtime": 1776897168.666911,
+    "ast_hash": "31381d6a85f4231f979f698ea59a96b5",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\migrations\\20260418_insurance_extension.sql": {
+    "mtime": 1776897168.6679118,
+    "ast_hash": "e5fc14ae03898255ec884924d06d2f88",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\migrations\\20260419_fix_insurance_schema.sql": {
+    "mtime": 1777962366.4730718,
+    "ast_hash": "9cca2302a9cf1fc290ce2188ddc1dcc9",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\migrations\\20260420000001_feedback.sql": {
+    "mtime": 1777962366.4730718,
+    "ast_hash": "f03c9022db09f1462a949db079f1963b",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\migrations\\20260420000002_snapshots.sql": {
+    "mtime": 1777962366.4740708,
+    "ast_hash": "268f8658865ef5d39516a138aa2bfcc5",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\migrations\\20260420000003_tenant_keys.sql": {
+    "mtime": 1777962366.4740708,
+    "ast_hash": "586515309d4cc9752d96975e0adf71b8",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\migrations\\20260504_feedback_admin_reply.sql": {
+    "mtime": 1777962366.4750702,
+    "ast_hash": "20f6436be0835a9824837a54e2f79a5b",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\migrations\\20260508_fix_init_state_security_invoker.sql": {
+    "mtime": 1778272078.6275654,
+    "ast_hash": "14434beb74a9a9dda818c8d581d9ca8d",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\migrations\\20260508_login_log.sql": {
+    "mtime": 1778269746.1425664,
+    "ast_hash": "0dc035c3496ad3b8be232080659cf90c",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\migrations\\20260723000001_passphrase_lockout.sql": {
+    "mtime": 1784791393.365969,
+    "ast_hash": "81f09aa1d3202d22592f07ae8b0fa4fe",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\schemas\\01_tables.sql": {
+    "mtime": 1776897168.6709135,
+    "ast_hash": "fd1bb928f4238e8e20535b42b7187bf9",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\schemas\\02_functions.sql": {
+    "mtime": 1776897168.6709135,
+    "ast_hash": "02fdcbda8862189127fda6038b8d4341",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\schemas\\03_views.sql": {
+    "mtime": 1778272069.3247619,
+    "ast_hash": "9ec7038a236dc3a4afd7c54407d4a929",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\schemas\\04_triggers.sql": {
+    "mtime": 1776897168.671912,
+    "ast_hash": "37ca17de3fc2c115d4b9c35697c8c9e3",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\schemas\\05_policies.sql": {
+    "mtime": 1776897168.671912,
+    "ast_hash": "4384039dea50e14b2aef170e1d5c6863",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\schemas\\06_grants.sql": {
+    "mtime": 1776897168.6729186,
+    "ast_hash": "b58d5ef3700a0853c6d0dc181cff9ed8",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\schemas\\07_storage.sql": {
+    "mtime": 1776897168.6729186,
+    "ast_hash": "bf4e537ebb33b53f5cecd891ed31a145",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\index.html": {
+    "mtime": 1776897168.3528552,
+    "ast_hash": "5beb2fe965b9fab0dddc4eb9082a07b7",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\doc\\src\\content\\docs\\index.mdx": {
+    "mtime": 1776897168.2622626,
+    "ast_hash": "ff959f05da106854766d8a977ceb3ae7",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\doc\\src\\content\\docs\\developers\\architecture-choices.mdx": {
+    "mtime": 1776897168.259263,
+    "ast_hash": "4e16ee08a687237eb504e29837cfd776",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\doc\\src\\content\\docs\\developers\\atomic-crm-api.mdx": {
+    "mtime": 1776897168.259263,
+    "ast_hash": "f0a18a6626422c4943c4fbafa9826d5d",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\doc\\src\\content\\docs\\developers\\custom-fields.mdx": {
+    "mtime": 1776897168.2602623,
+    "ast_hash": "c91417173a22426f5138e5eb63bc03c4",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\doc\\src\\content\\docs\\developers\\customizing.mdx": {
+    "mtime": 1776897168.2602623,
+    "ast_hash": "e2dcd559b52f6611803fc7fd44e6d8c0",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\doc\\src\\content\\docs\\developers\\data-providers.mdx": {
+    "mtime": 1776897168.2602623,
+    "ast_hash": "dc8fa80edbc9dafde78ce4917b6a3f20",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\doc\\src\\content\\docs\\developers\\deploy.mdx": {
+    "mtime": 1776897168.2612624,
+    "ast_hash": "40e1d9be8138cb52c4799e0a31e053b1",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\doc\\src\\content\\docs\\developers\\inbound-email-configuration.mdx": {
+    "mtime": 1776897168.2612624,
+    "ast_hash": "1fcaf0f31ac40dc87af97c6c71ef4bf8",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\doc\\src\\content\\docs\\developers\\migrations.mdx": {
+    "mtime": 1776897168.2612624,
+    "ast_hash": "2f4d03e0276ca8c812a3df247e3dceef",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\doc\\src\\content\\docs\\developers\\sso.mdx": {
+    "mtime": 1776897168.2612624,
+    "ast_hash": "ccbfa03d3f4e4f48cfe0c0ed15023cd9",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\doc\\src\\content\\docs\\developers\\supabase-configuration.mdx": {
+    "mtime": 1776897168.2622626,
+    "ast_hash": "f999c0bb053e5d95b4ca859fc8733b3e",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\doc\\src\\content\\docs\\users\\import-data.mdx": {
+    "mtime": 1776897168.2632844,
+    "ast_hash": "734bb9ccc3d0cb165cabad081d135f30",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\doc\\src\\content\\docs\\users\\inbound-email.mdx": {
+    "mtime": 1776897168.2642777,
+    "ast_hash": "99da1e4743aac6998ebb1807d09176e5",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\doc\\src\\content\\docs\\users\\mcp-server.mdx": {
+    "mtime": 1776897168.2652884,
+    "ast_hash": "deb7c59d016b00d343c2c14ba3d691f2",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\doc\\src\\content\\docs\\users\\merging-contacts.mdx": {
+    "mtime": 1776897168.2652884,
+    "ast_hash": "2935af7aab913e4c42f884ecd2f6d076",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\doc\\src\\content\\docs\\users\\mobile-app.mdx": {
+    "mtime": 1776897168.266292,
+    "ast_hash": "9123896cff02507d46e6b8c0a19e8626",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\doc\\src\\content\\docs\\users\\settings.mdx": {
+    "mtime": 1776897168.266292,
+    "ast_hash": "dd63e99029468b30ca91bebefb0b94c4",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\doc\\src\\content\\docs\\users\\user-management.mdx": {
+    "mtime": 1776897168.266292,
+    "ast_hash": "25122f775db4f5b86ec55a1d67a84111",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\public\\auth-callback.html": {
+    "mtime": 1776897168.3731112,
+    "ast_hash": "2aa2c2f2f8a7d3383df003e99a79e3c5",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\sandbox\\stitch_design\\stitch_redroad_backfill_monitor_dashboard\\dashboard_adowanie\\code.html": {
+    "mtime": 1777962366.4123578,
+    "ast_hash": "cc8eea8e3472288afbe64cce02c0e47d",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\sandbox\\stitch_design\\stitch_redroad_backfill_monitor_dashboard\\dashboard_brak_danych\\code.html": {
+    "mtime": 1777962366.4198902,
+    "ast_hash": "deaae9511261d74d6114b90600047309",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\sandbox\\stitch_design\\stitch_redroad_backfill_monitor_dashboard\\dashboard_b_d_systemu\\code.html": {
+    "mtime": 1777962366.4148922,
+    "ast_hash": "6e91a89f30b94f65ae210485b99b55e6",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\sandbox\\stitch_design\\stitch_redroad_backfill_monitor_dashboard\\redroad_advanced_agent_monitor_desktop\\code.html": {
+    "mtime": 1777962366.4219122,
+    "ast_hash": "6902d86413c4ab0e31231c9fc212fd73",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\sandbox\\stitch_design\\stitch_redroad_backfill_monitor_dashboard\\redroad_dashboard_desktop_sahara\\code.html": {
+    "mtime": 1777962366.426113,
+    "ast_hash": "ee15adf5d5919c91faf11581ccb5aa97",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\sandbox\\stitch_design\\stitch_redroad_backfill_monitor_dashboard\\zaawansowana_konfiguracja_agenta_sahara_ai\\code.html": {
+    "mtime": 1777962366.4301248,
+    "ast_hash": "4291cb0fe4215d0d6471f4f3b715c366",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\sandbox\\stitch_design\\stitch_redroad_backfill_monitor_dashboard\\zaawansowany_monitor_mobilny_redroad\\code.html": {
+    "mtime": 1777962366.4342446,
+    "ast_hash": "0193b98dd9da2af23d96cb509609944b",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\legacy-v1\\index.html": {
+    "mtime": 1776897168.6189132,
+    "ast_hash": "76dbb0658ae5a258ce18eab68002d1b7",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\sandbox\\stitch\\code.html": {
+    "mtime": 1778050580.898193,
+    "ast_hash": "07ee153f5e46a3a754daabf34d6fcae5",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\src\\sandbox\\stitch\\index.html": {
+    "mtime": 1778050580.8992074,
+    "ast_hash": "c6e9f0e10d364490d8d27735f8fe16c7",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\templates\\invite.html": {
+    "mtime": 1776897168.673918,
+    "ast_hash": "18d7ced416f97675b290b97556137bdc",
+    "semantic_hash": ""
+  },
+  "C:\\BartsGda4\\CRM-Atomic\\supabase\\templates\\recovery.html": {
+    "mtime": 1776897168.674912,
+    "ast_hash": "869830e613d8bc01f456c93126b60cba",
+    "semantic_hash": ""
+  }
+}

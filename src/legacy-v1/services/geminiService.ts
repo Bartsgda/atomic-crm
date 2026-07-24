@@ -11,7 +11,7 @@ const parseNaturalLanguage = async (input: string): Promise<NLPResult | null> =>
   
   try {
     const response = await ai.models.generateContent({
-      model: 'gemini-3-flash-preview',
+      model: 'gemini-3.1-flash-lite',
       contents: `Jesteś asystentem w systemie CRM dla agenta ubezpieczeniowego.
       Twoim zadaniem jest przetłumaczenie intencji użytkownika na akcję w systemie.
       Wejście: "${input}"
@@ -63,7 +63,7 @@ const fetchCompanyData = async (nip?: string, companyName?: string, krs?: string
     ZWRÓĆ DOKŁADNY JSON. NIE ZMYŚLAJ. NIE DODAWAJ KOMENTARZY.`;
 
     const response = await ai.models.generateContent({
-      model: 'gemini-3-pro-preview',
+      model: 'gemini-3.1-flash-lite',
       contents: prompt,
       config: {
         tools: [{ googleSearch: {} }],
@@ -99,7 +99,7 @@ const getTravelAdvice = async (destination: string) => {
 
     try {
         const response = await ai.models.generateContent({
-            model: 'gemini-3-flash-preview',
+            model: 'gemini-3.1-flash-lite',
             contents: `Jesteś doświadczonym underwriterem ubezpieczeń turystycznych.
             Krótko (maks 3 zdania) opisz najważniejsze ryzyka ubezpieczeniowe dla wyjazdu do kraju: ${destination}.
             

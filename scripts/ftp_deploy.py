@@ -34,7 +34,7 @@ def get_vault_secret(name):
         return None
 
 
-def build(sb_pub, sb_sec):
+def build(sb_pub, sb_sec, gemini_key):
     """Uruchamia npm run build z kluczami wstrzykniętymi przez env (nie przez plik)."""
     env = os.environ.copy()
     env.update({
@@ -43,6 +43,11 @@ def build(sb_pub, sb_sec):
         "VITE_SB_SECRET_KEY":       sb_sec,
         "VITE_IS_DEMO":             "false",
         "VITE_ATTACHMENTS_BUCKET":  "attachments",
+        # Gemini AI (legacy-v1: pasek NLP + auto-fetch firm). Model: gemini-3.1-flash-lite.
+        # vite.config define mapuje GEMINI_API_KEY -> process.env.API_KEY.
+        # Klucz redroadai z RESTRYKCJĄ HTTP referrer (redroad.pl/*) — trafia do bundla (publiczny).
+        # Pusty = AI wyłączone (kod ma fallback `if (!API_KEY) return null`).
+        "GEMINI_API_KEY":           gemini_key or "",
     })
     print("[*] npm run build (prod) ...")
     subprocess.check_call("npm run build", env=env, shell=True)
@@ -88,11 +93,14 @@ def main():
     if not skip_build:
         sb_pub = get_vault_secret("CRM_ALINA_SB_PUBLISHABLE")
         sb_sec = get_vault_secret("CRM_ALINA_SB_SECRET")
+        gemini_key = get_vault_secret("CRM_ALINA_GEMINI_KEY")  # opcjonalny; brak = AI wyłączone
         if not all([sb_pub, sb_sec]):
             print("[ERR] Brak kluczy Supabase w vault (CRM_ALINA_SB_PUBLISHABLE/SECRET).")
             sys.exit(1)
+        if not gemini_key:
+            print("[!] Brak CRM_ALINA_GEMINI_KEY w vault — funkcje AI (NLP bar, fetch firm) będą wyłączone (fallback).")
         try:
-            build(sb_pub, sb_sec)
+            build(sb_pub, sb_sec, gemini_key)
         except subprocess.CalledProcessError:
             print("[ERR] Build nieudany — przerywam.")
             sys.exit(1)

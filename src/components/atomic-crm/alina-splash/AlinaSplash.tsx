@@ -128,7 +128,7 @@ interface ChangeEntry {
 
 const CHANGELOG: ChangeEntry[] = [
   {
-    date: "2026-07-23",
+    date: "2026-07-24",
     items: [
       "Bezpieczniejsze hasło aplikacji: po 3 błędnych próbach pauza 1 min, po 6 — 5 min, po 9 — blokada do zdjęcia przez administratora",
       "Licznik błędnych prób nie znika już po odświeżeniu strony",

@@ -1,12 +1,9 @@
 
 import React, { useState, useCallback, FC, useEffect, useRef } from 'react';
 import { ClientNote, NoteTag, Policy, SalesStage, PolicyType } from '../types';
-import { 
-  MessageSquare, Trash2, RefreshCcw, Send, Calendar, 
-  CheckCircle2, XCircle, Phone, Mail, FileText, 
-  AlertCircle, Clock, Zap, Shield, Home, Heart, Plane,
-  Hash, DollarSign, Frown, ThumbsUp, HelpCircle, Snowflake, Users,
-  Play, StopCircle, Plus, LayoutGrid, Car, Building2, Timer, Settings2, Edit2, Save, X, ThumbsDown, GitCommit, Eye, EyeOff
+import {
+  MessageSquare, Send, Calendar, CheckCircle2, XCircle, Zap, Home,
+  Hash, DollarSign, Snowflake, Users, Car, Settings2, Edit2, Save, GitCommit, Eye, EyeOff
 } from 'lucide-react';
 import { format, addDays, isValid } from 'date-fns';
 import { pl } from 'date-fns/locale/pl';
@@ -61,15 +58,13 @@ export const Notatki: FC<Props> = ({ clientId, notes, allPolicies, initialResume
   
   // Smart Action States
   const [showAssetList, setShowAssetList] = useState(false);
-  const [rejectionReasonMode, setRejectionReasonMode] = useState(false);
   const [automationToast, setAutomationToast] = useState<string | null>(null);
-  const [pendingOkConfirm, setPendingOkConfirm] = useState(false);
-
-  // --- CALL MODE STATES ---
-  const [isCallActive, setIsCallActive] = useState(false);
-  const [callStartTime, setCallStartTime] = useState<Date | null>(null);
   const [showPropertyWidget, setShowPropertyWidget] = useState(false);
-  
+
+  // #1: data notatki (domyślnie dziś; Alina może zmienić — notuje po fakcie).
+  //     Godzina/minuty usunięte razem z trybem rozmowy (nie ma już call-timera).
+  const [noteDate, setNoteDate] = useState<string>(() => format(new Date(), 'yyyy-MM-dd'));
+
   // --- FLOATING FORM STATE ---
   const [activeFloatingOffer, setActiveFloatingOffer] = useState<{ type: PolicyType, policy: Policy } | null>(null);
 
@@ -82,24 +77,6 @@ export const Notatki: FC<Props> = ({ clientId, notes, allPolicies, initialResume
       const c = storage.getState().clients.find(x => x.id === clientId);
       if(c) setCurrentClientData(c);
   }, [clientId]);
-
-  const handleStartCall = () => {
-      setIsCallActive(true);
-      const now = new Date();
-      setCallStartTime(now);
-      const timeStr = format(now, 'HH:mm');
-      
-      if (!text.trim()) {
-          setText(`[START ROZMOWY ${timeStr}]\n`);
-      } else {
-          setText(prev => prev + `\n\n[START ROZMOWY ${timeStr}]\n`);
-      }
-      
-      if(textareaRef.current) {
-          textareaRef.current.focus();
-          textareaRef.current.selectionStart = textareaRef.current.value.length;
-      }
-  };
 
   const handleLaunchOffer = (type: PolicyType) => {
       const newPolicy: Policy = {
@@ -211,57 +188,48 @@ export const Notatki: FC<Props> = ({ clientId, notes, allPolicies, initialResume
 
     let finalTag = tagToSave;
 
-    if (isCallActive) {
-        const endTime = format(new Date(), 'HH:mm');
-        contentToSave += `\n[KONIEC: ${endTime}]`;
-        setAutomationToast(`Zakończono rozmowę.`);
-        setTimeout(() => setAutomationToast(null), 3000); 
-    }
-
     // REMINDER LOGIC INTEGRATION
     let finalReminderDate: string | undefined = undefined;
     if (reminderDate) {
         finalReminderDate = reminderDate.toISOString();
         contentToSave = ReminderUtils.createContent(contentToSave, reminderDate);
-        if (finalTag === 'ROZMOWA') finalTag = 'STATUS'; 
+        if (finalTag === 'ROZMOWA') finalTag = 'STATUS';
     }
 
     if (contentToSave.includes('[OFERTA')) finalTag = 'OFERTA';
     if (contentToSave.includes('[ST:')) finalTag = 'STATUS';
-    
-    if (rejectionReasonMode || contentToSave.toLowerCase().includes('drogo') || contentToSave.toLowerCase().includes('konkurencj')) {
+
+    if (contentToSave.toLowerCase().includes('drogo') || contentToSave.toLowerCase().includes('konkurencj')) {
         if(contentToSave.toLowerCase().includes('drogo')) finalTag = 'DECISION_PRICE';
         else if(contentToSave.toLowerCase().includes('konkurencj')) finalTag = 'DECISION_OFFER';
     }
+
+    // #1: createdAt z wybranej daty (noteDate = yyyy-MM-dd); południe by uniknąć przesunięć stref.
+    const createdAtIso = new Date(`${noteDate}T12:00:00`).toISOString();
 
     onAddNote({
       id: generateNoteId(),
       clientId,
       content: contentToSave.trim(),
       tag: finalTag,
-      createdAt: new Date().toISOString(),
+      createdAt: createdAtIso,
       reminderDate: finalReminderDate,
       linkedPolicyIds: links
     });
 
-    if (!isCallActive) {
-        // Pass the effective links to automation
-        await handleAutomatedStatusChange(finalTag, contentToSave, links);
-    }
+    await handleAutomatedStatusChange(finalTag, contentToSave, links);
 
     // RESET STATE
     setText('');
     setReminderDate(null);
     setActiveTag('ROZMOWA');
-    setRejectionReasonMode(false);
     setShowPropertyWidget(false);
+    setNoteDate(format(new Date(), 'yyyy-MM-dd'));
     if (onClearPendingLinks) onClearPendingLinks();
-    
-    setIsCallActive(false);
-    setCallStartTime(null);
+
     setIsFocused(false);
 
-  }, [clientId, text, activeTag, reminderDate, pendingPolicyLinks, activePolicyId, onAddNote, onClearPendingLinks, rejectionReasonMode, isCallActive, allPolicies, onUpdatePolicy]);
+  }, [clientId, text, activeTag, reminderDate, pendingPolicyLinks, activePolicyId, onAddNote, onClearPendingLinks, noteDate, allPolicies, onUpdatePolicy]);
 
   const startEditing = (note: ClientNote) => {
       setEditingNoteId(note.id);
@@ -307,37 +275,6 @@ export const Notatki: FC<Props> = ({ clientId, notes, allPolicies, initialResume
       setTimeout(() => handleSave(), 100);
   };
 
-  const handleConfirmOk = async (withReminder: boolean) => {
-      setPendingOkConfirm(false);
-      await handleSave("[ST: OK] Klient zaakceptował ofertę. Prosi o wystawienie.", 'STATUS');
-      if (withReminder) {
-          const reminderAt = addDays(new Date(), 365).toISOString();
-          const reminderNote: ClientNote = {
-              id: `rnote_${Date.now()}`,
-              clientId,
-              content: `[WZNOWIENIE] Kontakt za rok — klient wyraził zgodę przy sprzedaży.`,
-              tag: 'STATUS',
-              createdAt: new Date().toISOString(),
-              linkedPolicyIds: [...pendingPolicyLinks],
-              reminderDate: reminderAt,
-          };
-          onAddNote(reminderNote);
-      }
-  };
-
-  const handleQuickStatus = (type: 'OK' | 'REJECT' | 'PENDING') => {
-      if (type === 'OK') {
-          setPendingOkConfirm(true);
-          return;
-      } else if (type === 'REJECT') {
-          setRejectionReasonMode(true);
-          setText(prev => prev + "Klient odrzuca ofertę. Powód: ");
-          if(textareaRef.current) textareaRef.current.focus();
-          // We set tag to DECISION_OFFER in handleSave based on text/mode
-      } else if (type === 'PENDING') {
-          handleSave("[ST: W TOKU] Klient prosi o czas do namysłu.", 'ROZMOWA');
-      }
-  };
 
   const handleToggleReminderStatus = async (note: ClientNote) => {
       if (!onUpdateNote) return;
@@ -402,94 +339,31 @@ export const Notatki: FC<Props> = ({ clientId, notes, allPolicies, initialResume
           />
       )}
 
-      <div className={`relative z-20 transition-all duration-300 ${isFocused || text.length > 0 || isCallActive ? 'mb-8' : 'mb-6'}`}>
-        
-        {isCallActive && (
-            <div className="absolute -top-10 left-0 right-0 flex justify-center z-0 animate-in slide-in-from-bottom-2 fade-in pointer-events-none">
-                <div className="bg-emerald-600 text-white px-4 py-1.5 rounded-t-xl shadow-lg flex items-center gap-3 pointer-events-auto">
-                    <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse shadow-[0_0_10px_red]"></div>
-                    <span className="text-xs font-black uppercase tracking-widest flex items-center gap-2">
-                        <Timer size={14} /> Rozmowa Trwa
-                    </span>
-                    {callStartTime && (
-                        <span className="font-mono text-xs opacity-80 border-l border-emerald-500/50 pl-3">
-                            {format(callStartTime, 'HH:mm')}
-                        </span>
-                    )}
-                </div>
-            </div>
-        )}
+      <div className={`relative z-20 transition-all duration-300 ${isFocused || text.length > 0 ? 'mb-8' : 'mb-6'}`}>
 
-        <div className={`bg-white dark:bg-zinc-900 border-2 rounded-3xl shadow-sm overflow-visible transition-all duration-200 relative ${isCallActive ? 'border-emerald-500 ring-4 ring-emerald-50 dark:ring-emerald-900/30' : (isFocused ? 'border-zinc-900 ring-4 ring-zinc-100 dark:border-zinc-700 dark:ring-zinc-800' : 'border-zinc-200 dark:border-zinc-800')}`}>
-            
+        <div className={`bg-white dark:bg-zinc-900 border-2 rounded-3xl shadow-sm overflow-visible transition-all duration-200 relative ${isFocused ? 'border-zinc-900 ring-4 ring-zinc-100 dark:border-zinc-700 dark:ring-zinc-800' : 'border-zinc-200 dark:border-zinc-800'}`}>
+
+            {/* TOOLBAR: szybkie oferty (zawsze dostępne) + data rozmowy */}
             <div className="flex items-center gap-2 p-2 bg-zinc-50/50 dark:bg-zinc-950/30 border-b border-zinc-100 dark:border-zinc-800 overflow-x-auto scrollbar-hide justify-between">
-                
+
                 <div className="flex items-center gap-2">
-                    {!isCallActive ? (
-                        <button 
-                            onClick={handleStartCall}
-                            className="flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-[9px] font-black uppercase transition-all bg-emerald-600 text-white border-emerald-600 hover:bg-emerald-700 shadow-lg shadow-emerald-100 dark:shadow-none animate-pulse"
-                        >
-                            <Phone size={12} fill="currentColor" /> START ROZMOWY
-                        </button>
-                    ) : (
-                        <>
-                            <button onClick={() => handleLaunchOffer('OC')} className="flex items-center gap-1 px-2 py-1 bg-blue-100 text-blue-700 rounded-lg text-[9px] font-bold hover:bg-blue-200 border border-blue-200"><Car size={10}/> +Auto</button>
-                            <button onClick={() => handleLaunchOffer('DOM')} className="flex items-center gap-1 px-2 py-1 bg-emerald-100 text-emerald-700 rounded-lg text-[9px] font-bold hover:bg-emerald-200 border border-emerald-200"><Home size={10}/> +Dom</button>
-                            <button onClick={() => setShowPropertyWidget(!showPropertyWidget)} className={`flex items-center gap-1 px-2 py-1 rounded-lg text-[9px] font-bold border ${showPropertyWidget ? 'bg-zinc-800 text-white border-zinc-800' : 'bg-white text-zinc-600 border-zinc-200'}`}><Settings2 size={10}/> Asystent</button>
-                        </>
-                    )}
+                    <button onClick={() => handleLaunchOffer('OC')} className="flex items-center gap-1 px-2 py-1 bg-blue-100 text-blue-700 rounded-lg text-[9px] font-bold hover:bg-blue-200 border border-blue-200"><Car size={10}/> +Auto</button>
+                    <button onClick={() => handleLaunchOffer('DOM')} className="flex items-center gap-1 px-2 py-1 bg-emerald-100 text-emerald-700 rounded-lg text-[9px] font-bold hover:bg-emerald-200 border border-emerald-200"><Home size={10}/> +Dom</button>
+                    <button onClick={() => setShowPropertyWidget(!showPropertyWidget)} className={`flex items-center gap-1 px-2 py-1 rounded-lg text-[9px] font-bold border ${showPropertyWidget ? 'bg-zinc-800 text-white border-zinc-800' : 'bg-white text-zinc-600 border-zinc-200'}`}><Settings2 size={10}/> Asystent</button>
                 </div>
 
-                <div className="flex items-center gap-1">
-                    <button onClick={() => handleQuickStatus('OK')} className="px-3 py-1.5 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-lg text-[9px] font-black uppercase hover:bg-emerald-100 flex items-center gap-1">
-                        <CheckCircle2 size={12} /> OK
-                    </button>
-                    <button onClick={() => handleQuickStatus('PENDING')} className="px-3 py-1.5 bg-blue-50 text-blue-700 border border-blue-200 rounded-lg text-[9px] font-black uppercase hover:bg-blue-100 flex items-center gap-1">
-                        <Clock size={12} /> W TOKU
-                    </button>
-                    <button onClick={() => handleQuickStatus('REJECT')} className="px-3 py-1.5 bg-red-50 text-red-700 border border-red-200 rounded-lg text-[9px] font-black uppercase hover:bg-red-100 flex items-center gap-1">
-                        <ThumbsDown size={12} /> ODRZUT
-                    </button>
-                </div>
+                {/* DATA ROZMOWY — domyślnie dziś; klik = kalendarz, można też wpisać z klawiatury */}
+                <label className="flex items-center gap-1.5 flex-shrink-0 cursor-pointer" title="Data rozmowy (domyślnie dziś)">
+                    <Calendar size={13} className="text-zinc-400" />
+                    <input
+                        type="date"
+                        value={noteDate}
+                        onChange={(e) => setNoteDate(e.target.value)}
+                        max={format(new Date(), 'yyyy-MM-dd')}
+                        className="bg-transparent text-[11px] font-bold text-zinc-600 dark:text-zinc-300 outline-none cursor-pointer"
+                    />
+                </label>
             </div>
-
-            {pendingOkConfirm && (
-                <div className="bg-emerald-50 dark:bg-emerald-900/10 border-t border-emerald-200 dark:border-emerald-800 p-3 flex flex-col gap-2 animate-in fade-in">
-                    <p className="text-[10px] font-black text-emerald-700 uppercase tracking-wide">Klient zaakceptował ofertę — co dalej?</p>
-                    <div className="flex gap-2 flex-wrap">
-                        <button
-                            onClick={() => handleConfirmOk(true)}
-                            className="flex items-center gap-1.5 px-3 py-1.5 bg-emerald-600 text-white rounded-lg text-[9px] font-black uppercase hover:bg-emerald-700 transition-all"
-                        >
-                            <Calendar size={11} /> Zaznacz + przypomnienie za rok
-                        </button>
-                        <button
-                            onClick={() => handleConfirmOk(false)}
-                            className="flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-zinc-800 border border-emerald-300 text-emerald-700 rounded-lg text-[9px] font-black uppercase hover:bg-emerald-50 transition-all"
-                        >
-                            <CheckCircle2 size={11} /> Tylko zaznacz
-                        </button>
-                        <button
-                            onClick={() => setPendingOkConfirm(false)}
-                            className="flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-zinc-800 border border-zinc-200 text-zinc-500 rounded-lg text-[9px] font-black uppercase hover:bg-zinc-100 transition-all"
-                        >
-                            <X size={11} /> Anuluj
-                        </button>
-                    </div>
-                </div>
-            )}
-
-            {rejectionReasonMode && (
-                <div className="bg-red-50 dark:bg-red-900/10 p-2 flex gap-2 animate-in fade-in">
-                    <span className="text-[9px] font-bold text-red-600 uppercase self-center ml-2">Powód:</span>
-                    {['Za drogo', 'Konkurencja', 'Sprzedał Auto', 'Brak Kontaktu'].map(reason => (
-                        <button key={reason} onClick={() => { setText(prev => prev + reason + ". "); setRejectionReasonMode(false); }} className="px-2 py-1 bg-white dark:bg-zinc-800 border border-red-200 dark:border-red-800 rounded text-[9px] hover:bg-red-100 transition-colors">
-                            {reason}
-                        </button>
-                    ))}
-                </div>
-            )}
 
             {showPropertyWidget && (
                 <div className="absolute right-0 top-12 z-40 transform translate-x-[105%] md:translate-x-0 md:relative md:float-right md:ml-2 md:mb-2 animate-in slide-in-from-right-4 fade-in">
@@ -507,27 +381,20 @@ export const Notatki: FC<Props> = ({ clientId, notes, allPolicies, initialResume
                     value={text}
                     onChange={(e) => setText(e.target.value)}
                     onFocus={() => setIsFocused(true)}
-                    onBlur={() => !text && !isCallActive && setIsFocused(false)}
+                    onBlur={() => !text && setIsFocused(false)}
                     onKeyDown={handleKeyDown}
                     placeholder={`Wpisz notatkę... Użyj # aby oznaczyć pojazd.`}
                     className="w-full p-4 min-h-[120px] max-h-[400px] resize-none outline-none bg-transparent text-lg font-medium text-zinc-900 dark:text-white placeholder-zinc-400 leading-relaxed"
                 />
-                
-                <button 
+
+                <button
                     onClick={() => handleSave()}
-                    disabled={!text.trim() && !isCallActive}
-                    className={`absolute bottom-3 right-3 p-3 text-white rounded-xl hover:scale-105 active:scale-95 transition-all shadow-lg disabled:opacity-50 disabled:scale-100 disabled:shadow-none group ${isCallActive ? 'bg-red-600 hover:bg-red-700 w-32 flex items-center justify-center gap-2' : 'bg-zinc-900 dark:bg-white dark:text-zinc-900 px-6'}`}
+                    disabled={!text.trim()}
+                    className="absolute bottom-3 right-3 p-3 text-white rounded-xl hover:scale-105 active:scale-95 transition-all shadow-lg disabled:opacity-50 disabled:scale-100 disabled:shadow-none group bg-zinc-900 dark:bg-white dark:text-zinc-900 px-6"
                 >
-                    {isCallActive ? (
-                        <>
-                            <StopCircle size={18} fill="currentColor" />
-                            <span className="text-[10px] font-black uppercase">KONIEC</span>
-                        </>
-                    ) : (
-                        <span className="text-[10px] font-black uppercase flex items-center gap-2">
-                            ZATWIERDŹ WPIS <Send size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                        </span>
-                    )}
+                    <span className="text-[10px] font-black uppercase flex items-center gap-2">
+                        ZATWIERDŹ WPIS <Send size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                    </span>
                 </button>
             </div>
 

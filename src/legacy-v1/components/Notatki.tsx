@@ -57,6 +57,7 @@ export const Notatki: FC<Props> = ({ clientId, notes, allPolicies, initialResume
   // INLINE EDIT STATE
   const [editingNoteId, setEditingNoteId] = useState<string | null>(null);
   const [editingContent, setEditingContent] = useState('');
+  const [editingLinks, setEditingLinks] = useState<string[]>([]); // #5: przepięcie obiektu w edycji
   
   // Smart Action States
   const [showAssetList, setShowAssetList] = useState(false);
@@ -265,11 +266,13 @@ export const Notatki: FC<Props> = ({ clientId, notes, allPolicies, initialResume
   const startEditing = (note: ClientNote) => {
       setEditingNoteId(note.id);
       setEditingContent(note.content);
+      setEditingLinks(note.linkedPolicyIds || []);
   };
 
   const cancelEditing = () => {
       setEditingNoteId(null);
       setEditingContent('');
+      setEditingLinks([]);
   };
 
   const saveEditing = async () => {
@@ -279,12 +282,14 @@ export const Notatki: FC<Props> = ({ clientId, notes, allPolicies, initialResume
           const updated: ClientNote = {
               ...noteToUpdate,
               content: editingContent,
+              linkedPolicyIds: editingLinks,
               history: [...(noteToUpdate.history || []), { text: noteToUpdate.content, createdAt: new Date().toISOString() }]
           };
           await onUpdateNote(updated);
       }
       setEditingNoteId(null);
       setEditingContent('');
+      setEditingLinks([]);
   };
 
   const handleEditingKeyDown = (e: React.KeyboardEvent) => {
@@ -550,14 +555,26 @@ export const Notatki: FC<Props> = ({ clientId, notes, allPolicies, initialResume
                     <Snowflake size={14} /> URWANY KONTAKT
                 </button>
 
-                {/* SHOW AUTO-LINKED POLICY */}
-                {(pendingPolicyLinks.length > 0 || activePolicyId) && (
-                    <div className="flex items-center gap-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-xl border border-blue-100 text-[9px] font-black uppercase animate-in fade-in">
-                        <Zap size={12} />
-                        {pendingPolicyLinks.length > 0 ? pendingPolicyLinks.length : 1}
-                        {pendingPolicyLinks.length > 0 && <button onClick={onClearPendingLinks} className="hover:text-red-500 ml-1"><XCircle size={12}/></button>}
-                    </div>
-                )}
+                {/* WSKAŹNIK OBIEKTU — Alina widzi do czego pisze notatkę */}
+                {(() => {
+                    const linkedIds = Array.from(new Set([...pendingPolicyLinks, ...(activePolicyId ? [activePolicyId] : [])]));
+                    if (linkedIds.length === 0) return null;
+                    const labels = linkedIds
+                        .map(id => {
+                            const p = allPolicies.find(x => x.id === id);
+                            return p ? `${p.vehicleBrand || p.type} ${p.vehicleReg || ''}`.trim() : null;
+                        })
+                        .filter(Boolean);
+                    return (
+                        <div className="flex items-center gap-2 px-3 py-1.5 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 rounded-xl border border-blue-200 dark:border-blue-800 text-[10px] font-black uppercase animate-in fade-in">
+                            <Zap size={12} />
+                            <span className="normal-case font-bold">Notatka do: {labels.join(', ')}</span>
+                            {pendingPolicyLinks.length > 0 && onClearPendingLinks && (
+                                <button onClick={onClearPendingLinks} className="hover:text-red-500 ml-1" title="Odepnij obiekt"><XCircle size={12}/></button>
+                            )}
+                        </div>
+                    );
+                })()}
             </div>
         </div>
       </div>
@@ -678,6 +695,22 @@ export const Notatki: FC<Props> = ({ clientId, notes, allPolicies, initialResume
                                     rows={4}
                                     autoFocus
                                 />
+                                {clientPolicies.length > 0 && (
+                                    <div className="flex flex-wrap items-center gap-1.5">
+                                        <span className="text-[9px] font-black uppercase text-zinc-400 mr-1">Przypisz do:</span>
+                                        {clientPolicies.map(p => {
+                                            const on = editingLinks.includes(p.id);
+                                            return (
+                                                <button key={p.id} type="button"
+                                                    onClick={() => setEditingLinks(prev => on ? prev.filter(x => x !== p.id) : [...prev, p.id])}
+                                                    className={`px-2 py-1 rounded-lg text-[9px] font-bold border transition-colors ${on ? 'bg-blue-600 text-white border-blue-600' : 'bg-white dark:bg-zinc-800 text-zinc-500 border-zinc-200 dark:border-zinc-700 hover:border-blue-300'}`}
+                                                >
+                                                    {p.vehicleBrand || p.type} {p.vehicleReg || ''}
+                                                </button>
+                                            );
+                                        })}
+                                    </div>
+                                )}
                                 <div className="flex gap-2 justify-end">
                                     <button onClick={cancelEditing} className="px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase bg-white border border-zinc-200 text-zinc-500 hover:bg-zinc-50">Anuluj</button>
                                     <button onClick={saveEditing} className="px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase bg-blue-600 text-white hover:bg-blue-700 flex items-center gap-1">

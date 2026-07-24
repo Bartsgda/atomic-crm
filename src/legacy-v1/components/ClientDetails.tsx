@@ -64,7 +64,7 @@ const SectionHeader = ({ icon: Icon, title }: { icon: any, title: string }) => (
 );
 
 // --- NEW REDESIGNED POLICY CARD (PRODUCT CENTER STYLE) ---
-const PolicyCardItem = ({ policy, client, statusConfig, isFiltered, isHovered, daysToExpiry, onClick, onEdit, onAction, onToggleDocs, onDoubleClick }: any) => {
+const PolicyCardItem = ({ policy, client, statusConfig, isFiltered, isHovered, daysToExpiry, onClick, onEdit, onAction, onToggleDocs, onDoubleClick, noteCount = 0 }: any) => {
     let TypeIcon = FileText;
     
     let rawTitle = policy.originalProductString || '';
@@ -129,8 +129,16 @@ const PolicyCardItem = ({ policy, client, statusConfig, isFiltered, isHovered, d
             title="Kliknij 1x aby filtrować notatki, 2x aby edytować"
         >
             <div className="p-5 pb-3 flex justify-between items-start">
-                <div className={`w-10 h-10 rounded-2xl flex items-center justify-center shadow-sm ${isFiltered ? 'bg-red-600 text-white' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-500'}`}>
+                <div className={`relative w-10 h-10 rounded-2xl flex items-center justify-center shadow-sm ${isFiltered ? 'bg-red-600 text-white' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-500'}`}>
                     <TypeIcon size={20} />
+                    {noteCount > 0 && (
+                        <span
+                            className="absolute -top-1.5 -right-1.5 min-w-[18px] h-[18px] px-1 bg-blue-600 text-white text-[9px] font-black rounded-full flex items-center justify-center border-2 border-white dark:border-zinc-900 shadow-sm"
+                            title={`${noteCount} ${noteCount === 1 ? 'rozmowa' : 'rozmów'} o tym obiekcie`}
+                        >
+                            {noteCount}
+                        </span>
+                    )}
                 </div>
                 
                 {isSold ? (
@@ -273,7 +281,9 @@ export const ClientDetails: React.FC<Props> = ({ client, policies, notes, termin
   const [filterPolicyId, setFilterPolicyId] = useState<string | null>(null);
 
   // --- NAWIGACJA PRODUKTÓW (prawa kolumna, strzałki lewo/prawo) ---
-  const [productNavIdx, setProductNavIdx] = useState(0);
+  // -1 = nic niezaznaczone przy wejściu w klienta (widać wszystkie rozmowy).
+  // Strzałki/Enter zaczynają wybór od pierwszej karty.
+  const [productNavIdx, setProductNavIdx] = useState(-1);
   const productNavRef = useRef<HTMLDivElement>(null);
 
   const handleProductNavKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
@@ -673,6 +683,7 @@ export const ClientDetails: React.FC<Props> = ({ client, policies, notes, termin
                                         isFiltered={filterPolicyId === policy.id}
                                         isHovered={hoveredPolicyId === policy.id}
                                         daysToExpiry={differenceInDays(new Date(policy.policyEndDate), new Date())}
+                                        noteCount={notes.filter((n: any) => n.clientId === client.id && n.linkedPolicyIds?.includes(policy.id)).length}
                                         onMouseOver={() => {
                                             const relatedNotes = filteredNotes.filter(n => n.linkedPolicyIds?.includes(policy.id)).map(n => n.id);
                                             setHoveredNoteIds(relatedNotes);

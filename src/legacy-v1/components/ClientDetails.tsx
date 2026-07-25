@@ -1,6 +1,6 @@
 
 import React, { useState, useMemo, useEffect, useRef } from 'react';
-import { Client, Policy, ClientNote, TerminationRecord, PolicyType, SalesStage } from '../types';
+import { Client, Policy, ClientNote, TerminationRecord, PolicyType } from '../types';
 import { 
   Car, Home, Heart, Briefcase, Phone, MapPin, ArrowLeft, Trash2, 
   Plane, Link as LinkIcon, PlusCircle, FileText, Building2, Mail, 
@@ -18,9 +18,9 @@ import { TerminationFormModal } from './TerminationFormModal';
 import { PolicyFormModal } from './PolicyFormModal';
 import { ApkGenerator } from './ApkGenerator';
 import { ClientFormModal } from './ClientFormModal';
-import { STATUS_CONFIG } from '../constants';
 import { DraggablePanel } from './Tools/DraggablePanel';
 import { isRenewable } from '../services/clientInsights';
+import { getStatusDisplay } from '../services/statusDisplay';
 
 interface Props {
   client: Client;
@@ -125,7 +125,10 @@ const PolicyCardItem = ({ policy, client, statusConfig, isFiltered, isHovered, d
             renewalBadge = <span className="text-[9px] font-black text-amber-600 bg-amber-50 px-2 py-0.5 rounded border border-amber-100">ZA {daysToExpiry} DNI</span>;
         }
     } else if (isSold && policy.stage === 'sprzedany') {
-        renewalBadge = <span className="text-[9px] font-black text-violet-700 dark:text-violet-300 bg-violet-50 dark:bg-violet-900/20 px-2 py-0.5 rounded border border-violet-200 dark:border-violet-800">AUTO SPRZEDANE</span>;
+        // Jedyne miejsce na karcie sygnalizujące 'sprzedany' (blok isSold pokazuje składkę
+        // zamiast badge'a statusu) — kolor honoruje ewentualny override Aliny (Edytor Statusów).
+        const soldDisplay = getStatusDisplay('sprzedany');
+        renewalBadge = <span className={`text-[9px] font-black px-2 py-0.5 rounded border ${soldDisplay.color} ${soldDisplay.bg} ${soldDisplay.border}`} style={soldDisplay.style}>AUTO SPRZEDANE</span>;
     }
 
     return (
@@ -161,7 +164,7 @@ const PolicyCardItem = ({ policy, client, statusConfig, isFiltered, isHovered, d
                         <span className="text-[8px] font-bold text-zinc-400 uppercase">Składka roczna</span>
                     </div>
                 ) : (
-                    <div className={`px-2.5 py-1 rounded-lg text-[9px] font-black uppercase tracking-wide ${statusConfig.color} ${statusConfig.bg} border ${statusConfig.border}`}>
+                    <div className={`px-2.5 py-1 rounded-lg text-[9px] font-black uppercase tracking-wide ${statusConfig.color} ${statusConfig.bg} border ${statusConfig.border}`} style={statusConfig.style}>
                         {statusConfig.label}
                     </div>
                 )}
@@ -691,7 +694,7 @@ export const ClientDetails: React.FC<Props> = ({ client, policies, notes, termin
                                     <PolicyCardItem
                                         policy={policy}
                                         client={client}
-                                        statusConfig={STATUS_CONFIG[policy.stage as SalesStage] || STATUS_CONFIG['inne']}
+                                        statusConfig={getStatusDisplay(policy.stage)}
                                         isFiltered={filterPolicyId === policy.id}
                                         isHovered={hoveredPolicyId === policy.id}
                                         daysToExpiry={differenceInDays(new Date(policy.policyEndDate), new Date())}
@@ -742,7 +745,7 @@ export const ClientDetails: React.FC<Props> = ({ client, policies, notes, termin
                                 <PolicyCardItem
                                     policy={policy}
                                     client={client}
-                                    statusConfig={STATUS_CONFIG[policy.stage as SalesStage] || STATUS_CONFIG['inne']}
+                                    statusConfig={getStatusDisplay(policy.stage)}
                                     isFiltered={filterPolicyId === policy.id}
                                     isHovered={hoveredPolicyId === policy.id}
                                     daysToExpiry={differenceInDays(new Date(policy.policyEndDate), new Date())}

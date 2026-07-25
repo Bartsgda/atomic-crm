@@ -17,12 +17,13 @@ import { getSupabaseClient } from '../../components/atomic-crm/providers/supabas
 import type {
   AppState, Client, Policy, ClientNote, Notification,
   TerminationRecord, SubAgent, ChecklistTemplates,
-  InsurerConfig, DeletedItem, UiPreferences
+  InsurerConfig, DeletedItem, UiPreferences, StatusCustomization
 } from '../types';
 import { encryptField, decryptField, encryptJsonField, decryptJsonField, looksEncrypted } from './crypto';
 
 const TENANT_ID = (typeof import.meta !== 'undefined' && (import.meta as any).env?.VITE_SUPABASE_TENANT_ID) || '11111111-1111-1111-1111-111111111111';
 const PREFS_KEY = 'InsuranceMaster_UI_Prefs_v2';
+const STATUS_CONFIG_KEY = 'InsuranceMaster_StatusConfig';
 
 // ─── UUID Conversion ──────────────────────────────────────────────────────────
 
@@ -370,6 +371,24 @@ class SupabaseStorageManager {
 
   saveUiPrefs(prefs: UiPreferences) {
     localStorage.setItem(PREFS_KEY, JSON.stringify(prefs));
+  }
+
+  // --- EDYTOR STATUSÓW (2026-07-25) ---
+  // Warstwa nadpisania label/kolor nad domyślnym STATUS_CONFIG (constants.ts).
+  // Klucz obiektu = stały `stage` (np. "rez po ofercie_kont za rok"), NIGDY nie
+  // zmieniany przez ten mechanizm — to mapowanie do importu XLSX/bazy.
+  // TODO (przyszłość): przenieść do Supabase `tenant_config` dla trwałości
+  // cross-device (na razie localStorage, jak `getUiPrefs`/`saveUiPrefs` powyżej).
+  getStatusOverrides(): StatusCustomization {
+    try {
+      const s = localStorage.getItem(STATUS_CONFIG_KEY);
+      if (s) return JSON.parse(s);
+    } catch { /* ignore */ }
+    return {};
+  }
+
+  saveStatusOverrides(overrides: StatusCustomization) {
+    localStorage.setItem(STATUS_CONFIG_KEY, JSON.stringify(overrides));
   }
 
   extendSession() {}

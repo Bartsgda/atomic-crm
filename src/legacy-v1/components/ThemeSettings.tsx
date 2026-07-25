@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { UiPreferences } from "../types";
 import { FONT_FAMILY_OPTIONS } from "../constants";
+import { StatusEditor } from "./Settings/StatusEditor";
 
 interface Props {
   prefs: UiPreferences;
@@ -432,6 +433,11 @@ export const ThemeSettings: React.FC<Props> = ({ prefs, onUpdate }) => {
           </button>
         </div>
       </div>
+
+      <div className="h-px bg-zinc-900 w-full"></div>
+
+      {/* EDYTOR STATUSÓW (2026-07-25) — Twoje nazwy i kolory statusów polis */}
+      <StatusEditor />
     </div>
   );
 };

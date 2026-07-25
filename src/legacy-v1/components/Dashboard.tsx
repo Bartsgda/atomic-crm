@@ -6,7 +6,7 @@ import { format, differenceInDays, isWithinInterval, isValid, addDays, endOfMont
 import { pl } from 'date-fns/locale/pl';
 import { AdvancedFilters } from './AdvancedFilters'; 
 import { QuickViewDrawer } from './QuickViewDrawer';
-import { STATUS_CONFIG } from '../constants';
+import { getStatusDisplay } from '../services/statusDisplay';
 
 interface Props {
   state: AppState;
@@ -488,20 +488,20 @@ export const Dashboard: React.FC<Props> = ({ state, onNavigate, onDeletePolicy, 
                         'rez po ofercie_kont za rok',
                         'sprzedaż'
                     ].map(stKey => {
-                        const st = STATUS_CONFIG[stKey as SalesStage];
+                        const st = getStatusDisplay(stKey);
                         const isActive = selectedStages.includes(stKey as SalesStage);
-                        
+
                         return (
                             <button
                                 key={stKey}
                                 onClick={() => toggleStage(stKey as SalesStage)}
                                 className={`px-4 py-2 rounded-xl text-[10px] font-black uppercase border transition-all flex items-center gap-2 whitespace-nowrap ${
-                                    isActive 
-                                    ? `bg-zinc-900 text-white border-zinc-900` 
+                                    isActive
+                                    ? `bg-zinc-900 text-white border-zinc-900`
                                     : `bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 text-zinc-500 hover:border-zinc-400`
                                 }`}
                             >
-                                <st.icon size={12} className={isActive ? 'text-white' : st.color.split(' ')[0].replace('bg-','text-')} />
+                                <st.icon size={12} className={isActive ? 'text-white' : st.color.split(' ')[0].replace('bg-','text-')} style={isActive ? undefined : st.colorStyle} />
                                 {st.label}
                             </button>
                         )
@@ -600,7 +600,7 @@ export const Dashboard: React.FC<Props> = ({ state, onNavigate, onDeletePolicy, 
                 const isValidDate = isValid(end);
                 const days = isValidDate ? differenceInDays(end, today) : 0;
                 
-                const statusConfig = STATUS_CONFIG[policy.stage as SalesStage] || STATUS_CONFIG['inne'];
+                const statusConfig = getStatusDisplay(policy.stage);
                 
                 const displayData = getPolicyDisplayData(policy);
                 const TypeIcon = displayData.icon;
@@ -678,7 +678,7 @@ export const Dashboard: React.FC<Props> = ({ state, onNavigate, onDeletePolicy, 
                     </td>
 
                     <td className={`px-4 ${paddingClass} text-center`}>
-                      <div className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[11px] font-black uppercase border shadow-sm ${statusConfig.color} ${statusConfig.bg} ${statusConfig.border}`}>
+                      <div className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[11px] font-black uppercase border shadow-sm ${statusConfig.color} ${statusConfig.bg} ${statusConfig.border}`} style={statusConfig.style}>
                         <statusConfig.icon size={12} />
                         {statusConfig.label}
                       </div>

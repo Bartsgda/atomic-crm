@@ -81,6 +81,19 @@ Zasada kontrastu (Prawo Czytelności Statusów): jasne tła (yellow/lime/cyan/sl
 
 Drugi, zsynchronizowany zestaw kolorów (solid pill, nie pastelowy): `NoteSelectors.tsx` → `SALES_STAGES` (selektor "Etap Sprzedaży" w pasku narzędzi notatek).
 
+## 7. Edytor Statusów — Alina personalizuje nazwy/kolory (2026-07-25)
+
+Zmiana podejścia: zamiast jednej sztywnej palety (§ 6) dobieranej przez nas, Alina ma w Ustawieniach (`ThemeSettings.tsx`, sekcja pod "Designer Czcionek") panel **`components/Settings/StatusEditor.tsx`** — dla KAŻDEGO statusu ustawia własną wyświetlaną nazwę i dwa kolory (tło + tekst, `<input type="color">`), z podglądem na żywo i przyciskiem "Reset" (powrót do domyślnego).
+
+**Twardy niezmiennik:** klucz `stage` (np. `"rez po ofercie_kont za rok"`) **NIGDY** się nie zmienia — to mapowanie do importu XLSX/bazy. Edytor operuje WYŁĄCZNIE na warstwie nadpisania label/kolor, nigdy na kluczu.
+
+**Architektura (analogiczna do `UiPreferences`/Designer Czcionek — nie równoległy mechanizm):**
+- Model: `StatusCustomization = Record<string, {label?, bg?, fg?}>` (`types.ts`), hex kolory.
+- Storage: `storage.getStatusOverrides()` / `saveStatusOverrides()` — **oba providery** (`services/storage.ts` `StorageManager` — legacy/local, ORAZ `services/supabaseStorage.ts` `SupabaseStorageManager` — **ten faktycznie używany w runtime** przez `export const storage = supabaseStorage`). Klucz localStorage: `InsuranceMaster_StatusConfig`. TODO (przyszłość): Supabase `tenant_config` dla trwałości cross-device — na razie localStorage wystarcza (jak `InsuranceMaster_UI_Prefs_v2`).
+- Helper: **`services/statusDisplay.ts` → `getStatusDisplay(stage)`** — merguje domyślny `STATUS_CONFIG` (§ 6) z override. Zwraca domyślne klasy Tailwind (`color`/`bg`/`border`, bez zmian w JSX) PLUS `style`/`colorStyle`/`bgStyle`/`borderStyle` (inline hex, puste `{}` gdy brak override). Inline `style` ma pierwszeństwo nad klasą Tailwind dla tej samej właściwości CSS — więc istniejący JSX z `${x.color} ${x.bg} ${x.border}` zostaje NIETKNIĘTY, dokłada się tylko `style={x.style}` (jeden element z 3 klasami naraz) lub `style={x.colorStyle}`/`bgStyle`/`borderStyle` osobno (layouty rozbite na wiele elementów, np. kolumny Kanban w `OffersBoard.tsx`).
+- **WSZYSTKIE miejsca renderujące status** czytają przez `getStatusDisplay()`, NIE bezpośrednio `STATUS_CONFIG[stage]`: `ClientDetails.tsx` (badge karty polisy + badge "AUTO SPRZEDANE"), `Dashboard.tsx` (filter chips + kolumna Status w tabeli), `OffersBoard.tsx` (dropdown zmiany etapu, notatka systemowa zmiany etapu, kolumny Kanban), `PolicyFormModal.tsx` (badge w `ReadOnlyView` + notatka systemowa), `QuickViewDrawer.tsx` (lista "Procesowane Oferty"), `AdvancedFilters.tsx` (chipy filtra etapu — wcześniej pokazywały SUROWY klucz stage jako label, teraz custom/domyślny label), `NoteSelectors.tsx` (`SALES_STAGES` — label only, kolory zostają solid/hardcoded, inny styl niż pastelowe badge). `ClientsList.tsx`/`Notatki.tsx` sprawdzone — nie renderują badge'a statusu (tylko liczą etapy do `_offers`/`_upcoming`), więc nic do zmiany.
+- `Object.keys(STATUS_CONFIG)` nadal jedyne źródło **listy kluczy** stage (struktura się nie zmienia edytorem) — tylko label/kolor per klucz idzie przez `getStatusDisplay`.
+
 ## 5. Terminarz — kolorystyka i czytelność (redesign 2026-07-25)
 
 `components/CalendarView.tsx` był zbudowany na sztywnym `red-600`/`red-50` dla WSZYSTKIEGO — nagłówka, przycisku "Dzisiaj", oznaczenia "dziś" w siatce i każdego wznowienia niezależnie od terminu. Efekt: ekran "krzyczał czerwienią" i tekst tonął w kolorze. Naprawione zgodnie z zasadami z sekcji 1-3 tego dokumentu:

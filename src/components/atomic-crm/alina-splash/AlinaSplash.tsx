@@ -135,6 +135,7 @@ const CHANGELOG: ChangeEntry[] = [
       "Terminarz ma teraz spokojniejsze kolory i większe napisy — łatwiej zobaczyć klientów. Czerwony zostaje tylko przy sprawach naprawdę pilnych (dziś / po terminie)",
       "Statusy polis mają teraz Twoje kolory z Excela — zielony sprzedaż, fioletowy sprzedany itd.",
       "Status »sprzedany« (klient sprzedał auto) nie proponuje już wznowienia; dodano status »pierwszy kontakt«.",
+      "Możesz teraz sama ustawić nazwy i kolory statusów w Ustawieniach — Twoje nazwy, Twoje kolory.",
     ],
   },
   {

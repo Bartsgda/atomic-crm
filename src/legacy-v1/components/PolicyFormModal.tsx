@@ -18,7 +18,7 @@ import { ComplianceChecklist } from './ComplianceChecklist';
 import { TerminationFormModal } from './TerminationFormModal'; 
 import { storage } from '../services/storage';
 import { addYears, addDays, format, differenceInDays } from 'date-fns';
-import { STATUS_CONFIG } from '../constants';
+import { getStatusDisplay } from '../services/statusDisplay';
 import { STANDARD_INPUT_CLASS, STANDARD_SELECT_CLASS } from '../modules/utils/window_utils';
 import { getSortedInsurers } from '../services/insurerRanking';
 
@@ -245,7 +245,7 @@ const OfferComparator = ({ calculations, onUpdate, onSelect, activeList, onAddIn
 
 // --- KOMPONENT WIDOKU (READ-ONLY DASHBOARD) ---
 const ReadOnlyView = ({ policy, onEdit, onAction }: any) => {
-    const statusConfig = STATUS_CONFIG[policy.stage] || STATUS_CONFIG['inne'];
+    const statusConfig = getStatusDisplay(policy.stage);
     
     let Icon = FileText;
     if(['OC','AC','BOTH'].includes(policy.type)) Icon = Car;
@@ -289,7 +289,7 @@ const ReadOnlyView = ({ policy, onEdit, onAction }: any) => {
                 
                 <div className="relative z-10">
                     <div className="flex items-center gap-3 mb-4">
-                        <span className={`px-3 py-1 rounded-lg text-[10px] font-black uppercase border ${statusConfig.bg} ${statusConfig.color} ${statusConfig.border}`}>
+                        <span className={`px-3 py-1 rounded-lg text-[10px] font-black uppercase border ${statusConfig.bg} ${statusConfig.color} ${statusConfig.border}`} style={statusConfig.style}>
                             {statusConfig.label}
                         </span>
                         <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest bg-zinc-50 dark:bg-zinc-800 px-2 py-1 rounded">
@@ -805,8 +805,8 @@ export const PolicyFormModal: React.FC<Props> = ({ isOpen, onClose, initialClien
       const newStage = policyToSave.stage;
 
       if (oldStage && oldStage !== newStage) {
-          const oldLabel = STATUS_CONFIG[oldStage]?.label || oldStage;
-          const newLabel = STATUS_CONFIG[newStage]?.label || newStage;
+          const oldLabel = getStatusDisplay(oldStage).label;
+          const newLabel = getStatusDisplay(newStage).label;
           statusNote = `Zmiana etapu: "${oldLabel}" -> "${newLabel}".`;
       } else {
           statusNote = "Aktualizacja danych.";
@@ -1019,14 +1019,15 @@ export const PolicyFormModal: React.FC<Props> = ({ isOpen, onClose, initialClien
                             <div>
                                 <label className={LABEL_CLASS}>Etap Sprzedaży</label>
                                 <select {...register('stage')} className={STANDARD_SELECT_CLASS}>
-                                    <option value="of_do zrobienia">1. Do zrobienia (Lead)</option>
-                                    <option value="pierwszy kontakt">2. Pierwszy Kontakt</option>
-                                    <option value="przeł kontakt">3. W toku / Kalkulacja</option>
-                                    <option value="czekam na dane/dokum">4. Czekam na Dane</option>
-                                    <option value="oferta_wysłana">5. Oferta Wysłana</option>
-                                    <option value="sprzedaż">6. Sprzedaż (Polisa)</option>
-                                    <option value="ucięty kontakt">7. Odrzucona</option>
-                                    <option value="rez po ofercie_kont za rok">8. Chłodnia (Za rok)</option>
+                                    <option value="czekam na dane/dokum">czekam na dane/dokum</option>
+                                    <option value="przeł kontakt">przeł kontakt</option>
+                                    <option value="of_przedst">of_przedst</option>
+                                    <option value="sprzedaż">sprzedaż</option>
+                                    <option value="rez po ofercie_kont za rok">rez po ofercie_kont za rok</option>
+                                    <option value="of_do zrobienia">of_do zrobienia</option>
+                                    <option value="pierwszy kontakt">pierwszy kontakt</option>
+                                    <option value="ucięty kontakt">ucięty kontakt</option>
+                                    <option value="sprzedany">sprzedany</option>
                                 </select>
                             </div>
                             

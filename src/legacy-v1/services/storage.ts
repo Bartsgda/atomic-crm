@@ -13,6 +13,7 @@ import {
   ChecklistTemplates,
   InsurerConfig,
   DeletedItem,
+  StatusCustomization,
 } from "../types";
 import { format } from "date-fns";
 import { INSURERS } from "@/legacy-v1/towarzystwa";
@@ -20,6 +21,7 @@ import { INSURERS } from "@/legacy-v1/towarzystwa";
 const STORAGE_KEY = "InsuranceMaster_Core_V4_Final";
 const SESSION_KEY = "InsuranceMaster_Session_Expiry";
 const PREFS_KEY = "InsuranceMaster_UI_Prefs";
+const STATUS_CONFIG_KEY = "InsuranceMaster_StatusConfig";
 const SESSION_DURATION = 365 * 24 * 60 * 60 * 1000;
 
 const DEFAULT_PREFS: UiPreferences = {
@@ -105,6 +107,25 @@ class StorageManager {
 
   saveUiPrefs(prefs: UiPreferences) {
     localStorage.setItem(PREFS_KEY, JSON.stringify(prefs));
+  }
+
+  // --- EDYTOR STATUSÓW (2026-07-25) ---
+  // Warstwa nadpisania label/kolor nad domyślnym STATUS_CONFIG (constants.ts).
+  // Klucz obiektu = stały `stage`, NIGDY nie zmieniany przez ten mechanizm.
+  // TODO (przyszłość): przenieść do Supabase `tenant_config` dla trwałości
+  // cross-device (na razie localStorage, jak reszta UiPreferences - wystarczające).
+  getStatusOverrides(): StatusCustomization {
+    const stored = localStorage.getItem(STATUS_CONFIG_KEY);
+    if (stored) {
+      try {
+        return JSON.parse(stored);
+      } catch (e) {}
+    }
+    return {};
+  }
+
+  saveStatusOverrides(overrides: StatusCustomization) {
+    localStorage.setItem(STATUS_CONFIG_KEY, JSON.stringify(overrides));
   }
 
   // --- SESSION MANAGEMENT ---

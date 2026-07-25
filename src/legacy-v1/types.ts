@@ -470,3 +470,22 @@ export interface UiPreferences {
   /** Globalne pogrubienie tekstu (przełącznik dostępności) */
   fontBold: boolean;
 }
+
+/**
+ * Edytor Statusów (2026-07-25) — Alina personalizuje WYŚWIETLANĄ nazwę i kolory
+ * każdego statusu polisy (`SalesStage`). Klucz obiektu = stały `stage` (np.
+ * `"rez po ofercie_kont za rok"`) — NIGDY nie zmienia się, to mapowanie do importu
+ * XLSX i bazy danych (zob. STATUS_CONFIG w constants.ts, POLICIES_SPEC.md § 6-8).
+ * Wartości (label/bg/fg) to WARSTWA NADPISANIA nad domyślnym STATUS_CONFIG —
+ * brak wpisu lub puste pole = używany jest domyślny label/kolor.
+ */
+export interface StatusCustomizationEntry {
+  /** Własna nazwa wyświetlana (Alina wpisuje co chce). Puste/brak = domyślny label. */
+  label?: string;
+  /** Kolor tła (hex, np. "#26C6DA"). Puste/brak = domyślne klasy Tailwind. */
+  bg?: string;
+  /** Kolor tekstu (hex). Puste/brak = domyślne klasy Tailwind. */
+  fg?: string;
+}
+
+export type StatusCustomization = Record<string, StatusCustomizationEntry>;

@@ -90,9 +90,9 @@ Pola Składka (`premium`), Prowizja kwotowa (`commission`) i Stopa procentowa (`
 - **Brak Wznowień:** Polisy te są z definicji jednorazowe. System **MUSI** wykluczać typ `PODROZ` z wszelkich widoków "Wznowienia" (Renewals) oraz liczników na Sidebarze.
 - **Brak Chłodni:** Nie istnieje status "Chłodnia / Ponów za rok" dla wyjazdów turystycznych. Po zakończeniu okresu ochrony polisa staje się historyczna i nie wymaga dalszych akcji.
 
-## 6. Paleta Kolorów Statusów (`stage`) — ujednolicona 2026-07-25
+## 6. Paleta Kolorów Statusów (`stage`) — domyślna, ujednolicona 2026-07-25 (edytowalna od § 8)
 
-Jedyne źródło prawdy dla kolorów: `STATUS_CONFIG` w `constants.ts`. Kolorystyka 1:1 z oryginalnego dropdownu statusów Aliny w Excelu (kolumna 2 "etap" → `stage`, zob. `XLSX_MAPPING.md`).
+Domyślne (fallback) źródło prawdy dla kolorów/nazw: `STATUS_CONFIG` w `constants.ts`. Kolorystyka domyślna 1:1 z oryginalnego dropdownu statusów Aliny w Excelu (kolumna 2 "etap" → `stage`, zob. `XLSX_MAPPING.md`). **Od § 8 (Edytor Statusów) Alina może nadpisać label/kolor KAŻDEGO wiersza tej tabeli w Ustawieniach** — poniższa tabela to nadal DOMYŚLNY punkt startowy (i to, co widać zanim cokolwiek nadpisze), nie sztywny stan końcowy.
 
 | `stage` (kod) | Etykieta UI | Kolor | Uwaga |
 |---|---|---|---|
@@ -124,3 +124,16 @@ Dwa oddzielne pojęcia w `services/clientInsights.ts` (eksportowane, jedyne źr�
 - `components/ClientsList.tsx` → `_upcoming` (kolumna "Wznowienia" na liście klientów) filtruje przez `isRenewable`, nie przez wszystkie `SOLD_STAGES`.
 
 **NIE dotyczy** (świadomie, zostają na `isSold`): `coverageGaps()`/`missingData()` w `clientInsights.ts`, liczniki `_v`/`_p`/`_l` (typy sprzedanych polis) w `ClientsList.tsx`, wszystkie widoki finansowe/prowizyjne.
+
+## 8. Edytor Statusów — Alina ustawia własne nazwy/kolory (2026-07-25)
+
+Zamiast sztywnej palety z § 6 dobieranej przez nas, Alina personalizuje **wyświetlaną nazwę i kolory** (tło + tekst) każdego statusu w Ustawieniach → panel `components/Settings/StatusEditor.tsx` (wpięty w `ThemeSettings.tsx` obok "Designer Czcionek"). Podgląd na żywo + przycisk "Reset" per status.
+
+**Twardy niezmiennik (nie do naruszenia):** klucz `stage` (np. `"rez po ofercie_kont za rok"`) — mapowanie do importu XLSX (§ „XLSX_MAPPING.md") i bazy — **NIGDY się nie zmienia**. Edytor nadpisuje WYŁĄCZNIE `label`/kolory, nigdy klucz.
+
+**Model i przepływ:**
+- `StatusCustomization = Record<stage, {label?, bg?, fg?}>` (hex) — `types.ts`.
+- Zapis: `storage.getStatusOverrides()` / `saveStatusOverrides()` (localStorage, klucz `InsuranceMaster_StatusConfig`) — analogicznie do `UiPreferences`/Designer Czcionek, NIE równoległy mechanizm. Zaimplementowane w **obu** providerach (`services/storage.ts` legacy `StorageManager` + `services/supabaseStorage.ts` `SupabaseStorageManager` — **ten drugi jest faktycznie używany w runtime**, `export const storage = supabaseStorage`). TODO (przyszłość, nie teraz): Supabase `tenant_config` dla trwałości cross-device.
+- Odczyt/merge: `services/statusDisplay.ts` → `getStatusDisplay(stage)` — jedyny poprawny sposób odczytu statusu do wyświetlenia (label + kolor). Merguje `STATUS_CONFIG[stage]` (§ 6, fallback) z override. Zwraca zarówno domyślne klasy Tailwind (`color`/`bg`/`border`, dark-mode aware, bez zmian) jak i `style`/`colorStyle`/`bgStyle`/`borderStyle` (inline hex — wygrywa nad klasą Tailwind dla tej samej właściwości CSS, więc jest to bezpieczny dodatek, nie przebudowa istniejącego JSX).
+- **Wszystkie miejsca renderujące status w aplikacji przepięte na `getStatusDisplay()`** (zamiast bezpośrednio `STATUS_CONFIG[stage]`): `ClientDetails.tsx` (badge karty polisy + badge "AUTO SPRZEDANE" z § 7), `Dashboard.tsx` (filter chips + kolumna Status), `OffersBoard.tsx` (dropdown zmiany etapu, tekst notatki systemowej `[SYSTEM] Zmiana etapu`, nagłówki kolumn Kanban), `PolicyFormModal.tsx` (badge w `ReadOnlyView` + notatka systemowa zmiany etapu), `QuickViewDrawer.tsx` (lista "Procesowane Oferty"), `AdvancedFilters.tsx` (chipy filtra — wcześniej pokazywały surowy klucz `stage` jako etykietę), `NoteSelectors.tsx` → `SALES_STAGES` (tylko label — kolory tam zostają solid/hardcoded, inny styl niż pastelowe badge, celowo nieobjęte edytorem). `ClientsList.tsx`/`Notatki.tsx` sprawdzone — nie renderują badge'a statusu (tylko liczą etapy), nic do zmiany.
+- `Object.keys(STATUS_CONFIG)` nadal jedyne źródło **listy kluczy** `stage` (struktura nie zmienia się edytorem — dochodzi/ubywa statusów tylko przez zmianę `SalesStage` w kodzie, zob. § pierwszy kontakt wyżej) — Edytor Statusów iteruje po tej liście.

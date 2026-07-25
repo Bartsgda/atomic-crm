@@ -27,6 +27,7 @@ import {
 } from 'lucide-react';
 import { storage } from '../services/storage';
 import { STATUS_CONFIG } from '../constants';
+import { getStatusDisplay } from '../services/statusDisplay';
 import { QuickViewDrawer } from './QuickViewDrawer';
 import { InsurerSelect } from './InsurerSelect';
 import { getSortedInsurers } from '../services/insurerRanking';
@@ -211,7 +212,7 @@ const OfferRow = ({
                         className="p-2 bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-[10px] font-black uppercase outline-none cursor-pointer hover:border-zinc-300"
                     >
                         {Object.keys(STATUS_CONFIG).filter(k => !['sprzedaż', 'ucięty kontakt'].includes(k)).map(key => (
-                            <option key={key} value={key}>{STATUS_CONFIG[key].label}</option>
+                            <option key={key} value={key}>{getStatusDisplay(key).label}</option>
                         ))}
                         <option value="sprzedaż">✅ SPRZEDAJ</option>
                         <option value="ucięty kontakt">❌ ODRZUĆ</option>
@@ -545,8 +546,8 @@ export const OffersBoard: React.FC<Props> = ({ state, onNavigate, onRefresh }) =
         }
     }
 
-    const oldStageLabel = STATUS_CONFIG[policy.stage]?.label || policy.stage;
-    const newStageLabel = STATUS_CONFIG[newStage]?.label || newStage;
+    const oldStageLabel = getStatusDisplay(policy.stage).label;
+    const newStageLabel = getStatusDisplay(newStage).label;
 
     const lastSystemNote = state.notes
         .filter(n => n.linkedPolicyIds?.includes(policyId) && n.tag === 'STATUS')
@@ -859,20 +860,21 @@ export const OffersBoard: React.FC<Props> = ({ state, onNavigate, onRefresh }) =
                     <div className="flex gap-4 h-full min-w-[1200px]">
                     {Object.entries(activeColumns).map(([stageKey, data]) => {
                         const colData = data as ColumnData;
-                        const config = STATUS_CONFIG[stageKey as SalesStage] || STATUS_CONFIG['inne'];
+                        const config = getStatusDisplay(stageKey);
                         const isOver = dragOverColumn === stageKey;
-                        
+
                         return (
-                        <div 
-                            key={stageKey} 
-                            className={`flex-1 flex flex-col min-w-[280px] h-full transition-all duration-300 rounded-[2rem] border-2 
+                        <div
+                            key={stageKey}
+                            className={`flex-1 flex flex-col min-w-[280px] h-full transition-all duration-300 rounded-[2rem] border-2
                                 ${isOver ? 'bg-zinc-100 dark:bg-zinc-800 border-red-400 scale-[1.01] shadow-2xl' : `bg-white dark:bg-zinc-900 ${config.border} dark:border-zinc-800 shadow-sm`}`}
+                            style={isOver ? undefined : config.borderStyle}
                             onDragOver={(e) => onDragOver(e, stageKey)}
                             onDrop={(e) => onDrop(e, stageKey)}
                         >
-                            <div className={`p-4 rounded-t-[2rem] border-b flex flex-col gap-2 ${config.bg} dark:bg-zinc-800/50 border-opacity-50 ${config.border} dark:border-zinc-700`}>
+                            <div className={`p-4 rounded-t-[2rem] border-b flex flex-col gap-2 ${config.bg} dark:bg-zinc-800/50 border-opacity-50 ${config.border} dark:border-zinc-700`} style={{ ...config.bgStyle, ...config.borderStyle }}>
                                 <div className="flex justify-between items-center">
-                                    <div className={`flex items-center gap-2 font-black uppercase tracking-widest text-[10px] ${config.color} dark:text-zinc-200`}>
+                                    <div className={`flex items-center gap-2 font-black uppercase tracking-widest text-[10px] ${config.color} dark:text-zinc-200`} style={config.colorStyle}>
                                         <config.icon size={16} />
                                         {config.label}
                                     </div>

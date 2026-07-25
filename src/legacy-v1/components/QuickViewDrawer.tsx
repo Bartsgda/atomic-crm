@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { Client, Policy, AppState, SalesStage } from "../types";
+import { Client, Policy, AppState } from "../types";
 import {
   X,
   Phone,
@@ -14,7 +14,7 @@ import {
   Zap,
 } from "lucide-react";
 import { differenceInDays, format } from "date-fns";
-import { STATUS_CONFIG } from "../constants";
+import { getStatusDisplay } from "../services/statusDisplay";
 
 interface Props {
   client: Client | null;
@@ -135,9 +135,7 @@ export const QuickViewDrawer: React.FC<Props> = ({
               </h4>
               <div className="space-y-2">
                 {pipeline.map((p) => {
-                  const config =
-                    STATUS_CONFIG[p.stage as SalesStage] ||
-                    STATUS_CONFIG["inne"];
+                  const config = getStatusDisplay(p.stage);
                   return (
                     <div
                       key={p.id}
@@ -147,7 +145,10 @@ export const QuickViewDrawer: React.FC<Props> = ({
                         <p className="text-xs font-black text-zinc-900 dark:text-white uppercase">
                           {p.type}
                         </p>
-                        <p className={`text-[10px] font-bold ${config.color}`}>
+                        <p
+                          className={`text-[10px] font-bold ${config.color}`}
+                          style={config.colorStyle}
+                        >
                           {config.label}
                         </p>
                       </div>

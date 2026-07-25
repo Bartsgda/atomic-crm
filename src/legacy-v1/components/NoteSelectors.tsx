@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FileText, Mail, Sparkles, Clock, RefreshCcw } from "lucide-react";
 import { SalesStage } from "../types";
+import { getStatusDisplay } from "../services/statusDisplay";
 
 export const STATUS_OPTS = [
   {
@@ -243,7 +244,8 @@ export const NoteSelectors: React.FC<Props> = (props) => {
           onClick={() => toggle("stage")}
           className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-[10px] font-bold uppercase transition-all shadow-sm border ${curStage ? curStage.color + " border-transparent" : "bg-zinc-900 text-zinc-400 hover:text-white border-zinc-900"}`}
         >
-          <RefreshCcw size={12} /> {curStage ? curStage.label : "Etap"}
+          <RefreshCcw size={12} />{" "}
+          {curStage ? getStatusDisplay(curStage.val).label : "Etap"}
         </button>
         {openMenu === "stage" && (
           <div className="absolute bottom-full left-0 mb-2 w-48 bg-white border border-zinc-200 rounded-xl shadow-xl z-[90] py-1 overflow-hidden ring-1 ring-black/5">
@@ -257,7 +259,7 @@ export const NoteSelectors: React.FC<Props> = (props) => {
                 }}
                 className="w-full text-left px-4 py-2.5 text-xs font-medium hover:bg-zinc-50 text-zinc-700"
               >
-                {s.label}
+                {getStatusDisplay(s.val).label}
               </button>
             ))}
           </div>

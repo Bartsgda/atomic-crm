@@ -77,91 +77,91 @@ export const STATUS_CONFIG: Record<
 > = {
   // 1. LEAD (DO ZROBIENIA) -> YELLOW (paleta Aliny)
   "of_do zrobienia": {
-    label: "Do Zrobienia",
-    color: "text-yellow-800 dark:text-yellow-300",
-    bg: "bg-yellow-50 dark:bg-yellow-900/20",
-    border: "border-yellow-300 dark:border-yellow-800",
+    label: "of_do zrobienia",
+    color: "text-yellow-950",
+    bg: "bg-yellow-400 dark:bg-yellow-500",
+    border: "border-yellow-500 dark:border-yellow-600",
     icon: AlertCircle,
-    shadow: "shadow-yellow-100",
+    shadow: "shadow-yellow-200",
   },
 
   // 1b. PIERWSZY KONTAKT -> ROSE (paleta Aliny: różowy/łososiowy)
   "pierwszy kontakt": {
-    label: "Pierwszy Kontakt",
-    color: "text-rose-700 dark:text-rose-300",
-    bg: "bg-rose-50 dark:bg-rose-900/20",
-    border: "border-rose-200 dark:border-rose-800",
+    label: "pierwszy kontakt",
+    color: "text-rose-950",
+    bg: "bg-rose-300 dark:bg-rose-400",
+    border: "border-rose-400 dark:border-rose-500",
     icon: PhoneCall,
-    shadow: "shadow-rose-100",
+    shadow: "shadow-rose-200",
   },
 
   // 2. W TOKU (KALKULACJA) -> BLUE (paleta Aliny)
   "przeł kontakt": {
-    label: "Kalkulacja / W toku",
-    color: "text-blue-700 dark:text-blue-300",
-    bg: "bg-blue-50 dark:bg-blue-900/20",
-    border: "border-blue-200 dark:border-blue-800",
+    label: "przeł kontakt",
+    color: "text-white",
+    bg: "bg-blue-500 dark:bg-blue-600",
+    border: "border-blue-600 dark:border-blue-700",
     icon: Clock,
-    shadow: "shadow-blue-100",
+    shadow: "shadow-blue-200",
   },
 
   // 2b. CZEKAM NA DANE -> CYAN (paleta Aliny)
   "czekam na dane/dokum": {
-    label: "Czekam na Dane",
-    color: "text-cyan-700 dark:text-cyan-300",
-    bg: "bg-cyan-50 dark:bg-cyan-900/20",
-    border: "border-cyan-200 dark:border-cyan-800",
+    label: "czekam na dane/dokum",
+    color: "text-cyan-950",
+    bg: "bg-cyan-400 dark:bg-cyan-500",
+    border: "border-cyan-500 dark:border-cyan-600",
     icon: FileQuestion,
-    shadow: "shadow-cyan-100",
+    shadow: "shadow-cyan-200",
   },
 
   // 3. OFERTA WYSŁANA -> LIME (paleta Aliny: limonkowy/jasnozielony)
   oferta_wysłana: {
-    label: "Oferta Wysłana",
-    color: "text-lime-800 dark:text-lime-300",
-    bg: "bg-lime-50 dark:bg-lime-900/20",
-    border: "border-lime-200 dark:border-lime-800",
+    label: "oferta_wysłana",
+    color: "text-lime-950",
+    bg: "bg-lime-400 dark:bg-lime-500",
+    border: "border-lime-500 dark:border-lime-600",
     icon: Send,
-    shadow: "shadow-lime-100",
+    shadow: "shadow-lime-200",
   },
   // Legacy mapping (of_przedst = "oferta przedstawiona", ten sam realny etap co oferta_wysłana)
   of_przedst: {
-    label: "Oferta Wysłana",
-    color: "text-lime-800 dark:text-lime-300",
-    bg: "bg-lime-50 dark:bg-lime-900/20",
-    border: "border-lime-200 dark:border-lime-800",
+    label: "of_przedst",
+    color: "text-lime-950",
+    bg: "bg-lime-400 dark:bg-lime-500",
+    border: "border-lime-500 dark:border-lime-600",
     icon: Send,
-    shadow: "shadow-lime-100",
+    shadow: "shadow-lime-200",
   },
 
   // 4. CHŁODNIA (ZAMROŻONE) -> SLATE (paleta Aliny: szary jasny)
   "rez po ofercie_kont za rok": {
-    label: "Chłodnia (Za rok)",
-    color: "text-slate-600 dark:text-slate-300",
-    bg: "bg-slate-100 dark:bg-slate-800/40",
-    border: "border-slate-300 dark:border-slate-700",
+    label: "rez po ofercie_kont za rok",
+    color: "text-slate-900",
+    bg: "bg-slate-300 dark:bg-slate-400",
+    border: "border-slate-400 dark:border-slate-500",
     icon: Snowflake,
-    shadow: "shadow-slate-100",
+    shadow: "shadow-slate-200",
   },
 
   // 5. ODRZUCONE / UCIĘTE -> AMBER/BRĄZ (paleta Aliny: brązowy/ochra)
   "ucięty kontakt": {
-    label: "Odrzucone / Ucięte",
-    color: "text-amber-800 dark:text-amber-300",
-    bg: "bg-amber-50 dark:bg-amber-900/20",
-    border: "border-amber-300 dark:border-amber-800",
+    label: "ucięty kontakt",
+    color: "text-white",
+    bg: "bg-amber-600 dark:bg-amber-700",
+    border: "border-amber-700 dark:border-amber-800",
     icon: XCircle,
-    shadow: "shadow-amber-100",
+    shadow: "shadow-amber-200",
   },
 
   // 6. SUKCES (SPRZEDAŻ) -> GREEN (paleta Aliny: zielony - sukces sprzedaży)
   sprzedaż: {
-    label: "Sprzedane",
-    color: "text-green-700 dark:text-green-300",
-    bg: "bg-green-50 dark:bg-green-900/20",
-    border: "border-green-200 dark:border-green-800",
+    label: "sprzedaż",
+    color: "text-white",
+    bg: "bg-green-500 dark:bg-green-600",
+    border: "border-green-600 dark:border-green-700",
     icon: CheckCircle2,
-    shadow: "shadow-green-100",
+    shadow: "shadow-green-200",
   },
   // UWAGA: "sprzedany" != "sprzedaż" w palecie Aliny (dwa różne statusy, nie zlewać):
   // "sprzedaż"  = polisa sprzedana (sukces Aliny)              -> ZIELONY
@@ -169,7 +169,7 @@ export const STATUS_CONFIG: Record<
   // Logika isSold (ClientDetails/Dashboard/ClientsList) nadal grupuje oba stany razem
   // do liczenia "sprzedanych polis" - to NIE jest zmieniane tutaj (tylko kolorystyka).
   sprzedany: {
-    label: "Sprzedany (Auto)",
+    label: "sprzedany",
     color: "text-white dark:text-white",
     bg: "bg-violet-700 dark:bg-violet-600",
     border: "border-violet-800 dark:border-violet-500",

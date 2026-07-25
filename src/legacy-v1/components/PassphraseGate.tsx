@@ -235,11 +235,12 @@ export const PassphraseGate: React.FC<PassphraseGateProps> = ({
       try {
         const { data: cfg } = await sb
           .from("tenant_config")
-          .select("encrypted_api_key")
+          .select("encrypted_ai_config")
           .eq("tenant_id", tenantId)
           .maybeSingle();
-        if (cfg?.encrypted_api_key) {
-          apiKeyStore.set(await decryptField(cfg.encrypted_api_key, dek));
+        if (cfg?.encrypted_ai_config) {
+          const json = await decryptField(cfg.encrypted_ai_config, dek);
+          apiKeyStore.setConfig(JSON.parse(json));
         }
       } catch (e) {
         console.warn("[PassphraseGate] Nie udało się załadować klucza AI:", e);

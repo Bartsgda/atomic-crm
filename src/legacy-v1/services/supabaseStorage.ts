@@ -349,6 +349,7 @@ class SupabaseStorageManager {
 
   setDEK(dek: CryptoKey | null) { this.dek = dek; }
   hasDEK() { return !!this.dek; }
+  getDEK(): CryptoKey | null { return this.dek; }
 
   // Legacy API — nie używane w nowym flow, zostawione dla kompatybilności wywołań
   setPassphrase(_pw: string | null) { /* noop: envelope encryption używa setDEK */ }

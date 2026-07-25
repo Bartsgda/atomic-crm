@@ -60,7 +60,7 @@ export class KaratekaService {
 
         try {
             const response = await ai.models.generateContent({
-                model: 'gemini-3.1-flash-lite',
+                model: apiKeyStore.getModel(),
                 contents: prompt,
                 config: { responseMimeType: "application/json", temperature: 0.1 }
             });

@@ -39,6 +39,7 @@ import { AppState, PolicyType, UiPreferences } from "../../types";
 import { NavButton } from "./NavButton";
 import { BackupManager } from "../BackupManager";
 import { ThemeSettings } from "../ThemeSettings";
+import { AiKeysPanel } from "../Settings/AiKeysPanel";
 import { differenceInDays } from "date-fns";
 import { storage, supabaseStorage } from "../../services/storage";
 import { PassphraseModal } from "../PassphraseModal";
@@ -750,6 +751,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             {showThemeSettings && (
               <div style={{ borderTop: "1px solid rgba(212,175,55,0.08)", marginTop: "8px" }}>
                 <ThemeSettings prefs={uiPrefs} onUpdate={onUpdateUiPrefs} />
+                <AiKeysPanel />
               </div>
             )}
           </nav>
@@ -947,6 +949,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 }
               >
                 <ThemeSettings prefs={uiPrefs} onUpdate={onUpdateUiPrefs} />
+                <AiKeysPanel />
               </div>
             )}
             {isAdmin && (

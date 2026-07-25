@@ -11,9 +11,9 @@
 -- =====================================================================
 
 create table if not exists public.tenant_config (
-  tenant_id         uuid        primary key references public.tenants(id) on delete cascade,
-  encrypted_api_key text,        -- Base64( IV || ciphertext ) klucza Gemini, zaszyfrowany DEK
-  updated_at        timestamptz  default now()
+  tenant_id           uuid        primary key references public.tenants(id) on delete cascade,
+  encrypted_ai_config text,        -- JSON {keys:[{purpose,label,key,model}]} zaszyfrowany DEK (envelope)
+  updated_at          timestamptz  default now()
 );
 
 -- Trigger updated_at — istniejąca funkcja z 20260418

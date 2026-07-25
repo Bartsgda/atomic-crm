@@ -164,14 +164,20 @@ async function main() {
     process.exit(1);
   }
 
-  // zaszyfruj klucz DEK-iem
-  const encrypted = await encryptField(apiKey, dek);
+  // Konfiguracja multi-key (spójna z panelem): {keys:[{purpose,label,key,model}]}.
+  // CLI-backup zapisuje jeden wpis "main"; panel w Ustawieniach może dodać więcej (np. "ocr").
+  const config = {
+    keys: [
+      { purpose: "main", label: "Główny (CLI)", key: apiKey, model: "gemini-3.1-flash-lite" },
+    ],
+  };
+  const encrypted = await encryptField(JSON.stringify(config), dek);
 
   // upsert tenant_config (service_role omija RLS)
   const res = await fetch(`${URL_BASE}/rest/v1/tenant_config`, {
     method: "POST",
     headers: { ...headers, prefer: "resolution=merge-duplicates,return=representation" },
-    body: JSON.stringify({ tenant_id: TENANT_ID, encrypted_api_key: encrypted }),
+    body: JSON.stringify({ tenant_id: TENANT_ID, encrypted_ai_config: encrypted }),
   });
   if (!res.ok) {
     console.error("Upsert tenant_config nieudany:", res.status, await res.text());

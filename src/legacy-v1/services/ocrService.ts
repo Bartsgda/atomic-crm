@@ -43,16 +43,16 @@ SCHEMAT DOCELOWY:
 `;
 
 export const processDocument = async (base64Image: string, mimeType: string = 'image/jpeg') => {
-    if (!apiKeyStore.get()) {
+    if (!apiKeyStore.get('ocr')) {
         console.warn("Brak API_KEY. OCR niedostępny.");
         return null;
     }
 
     try {
-        const ai = new GoogleGenAI({ apiKey: apiKeyStore.get() ?? undefined });
+        const ai = new GoogleGenAI({ apiKey: apiKeyStore.get('ocr') ?? undefined });
         
         const response = await ai.models.generateContent({
-            model: 'gemini-3.1-flash-lite',
+            model: apiKeyStore.getModel('ocr'),
             contents: {
                 parts: [
                     { inlineData: { mimeType, data: base64Image } },

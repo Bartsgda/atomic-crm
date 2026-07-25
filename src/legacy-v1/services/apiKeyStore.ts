@@ -1,29 +1,67 @@
 /**
- * Runtime store klucza Gemini API — CRM-ALINA.
+ * apiKeyStore — konfiguracja AI (klucze + modele) w pamięci sesji (CRM-ALINA).
  *
- * ARCHITEKTURA (Bartek 2026-07-24): klucz API NIE trafia do bundla (byłby publiczny).
- * Jest przechowywany ZASZYFROWANY tym samym DEK co dane klientów (tenant_keys.encrypted_api_key)
- * i odszyfrowywany client-side dopiero gdy Alina poda hasło aplikacji (PassphraseGate → DEK →
- * decryptField → apiKeyStore.set). Klucz żyje TYLKO w pamięci sesji przeglądarki — nigdy w
- * localStorage, nigdy w buildzie. Czyszczony przy lock/logout (razem z DEK).
+ * ARCHITEKTURA (Bartek 2026-07-24/25): klucze AI NIE są w bundlu ani w rrv-runtime frontu.
+ * Cała konfiguracja (dowolna liczba kluczy: główny AI, OCR, itd. + model per zastosowanie)
+ * jest zaszyfrowana DEK w public.tenant_config.encrypted_ai_config i odszyfrowywana
+ * client-side po podaniu hasła aplikacji (PassphraseGate → apiKeyStore.setConfig).
+ * Żyje tylko w pamięci sesji; czyszczona przy lock/logout.
  *
- * Dev (localhost, START_ALINA_TEST): fallback do process.env.API_KEY z .env (vite.config define).
- * Produkcja: process.env.API_KEY pusty → używany wyłącznie klucz odszyfrowany z DEK.
+ * Zarządzana z panelu Ustawienia → „Klucze AI" (admin): dodawanie kluczy per przeznaczenie
+ * + wybór modelu (Flash / Gemma / …). Zapis: encryptField(JSON, DEK) → tenant_config.
+ *
+ * Dev (localhost): fallback do process.env.API_KEY z .env dla purpose bez klucza.
  */
 
-let _apiKey: string | null = null;
+export interface AiKeyEntry {
+  /** Przeznaczenie: "main" (czat/Karateka), "ocr" (skany), lub dowolne własne. */
+  purpose: string;
+  /** Opis dla UI (opcjonalny). */
+  label?: string;
+  /** Klucz API (Gemini/AI Studio). */
+  key: string;
+  /** Model dla tego przeznaczenia, np. "gemini-3.1-flash-lite", "gemma-3-27b-it". */
+  model: string;
+}
+
+export interface AiConfig {
+  keys: AiKeyEntry[];
+}
+
+export const DEFAULT_MODEL = "gemini-3.1-flash-lite";
+
+/** Katalog modeli do wyboru w panelu (label → id). Rozszerzalny. */
+export const MODEL_OPTIONS: { id: string; label: string }[] = [
+  {
+    id: "gemini-3.1-flash-lite",
+    label: "Gemini 3.1 Flash-Lite (szybki, tani)",
+  },
+  { id: "gemini-3.1-flash", label: "Gemini 3.1 Flash" },
+  { id: "gemini-3.5-flash", label: "Gemini 3.5 Flash (jakość)" },
+  { id: "gemma-3-27b-it", label: "Gemma 3 27B" },
+];
+
+let _config: AiConfig = { keys: [] };
 
 export const apiKeyStore = {
-  /** Ustaw klucz odszyfrowany DEK-iem (wywoływane z PassphraseGate po unlock). */
-  set(key: string | null): void {
-    _apiKey = key && key.trim() ? key.trim() : null;
+  /** Ustaw całą konfigurację (z PassphraseGate po odszyfrowaniu DEK). */
+  setConfig(cfg: AiConfig | null): void {
+    _config =
+      cfg && Array.isArray(cfg.keys) ? { keys: cfg.keys } : { keys: [] };
   },
 
-  /** Pobierz klucz: runtime (odszyfrowany) lub — tylko w dev — fallback z .env. */
-  get(): string | null {
-    if (_apiKey) return _apiKey;
+  /** Cała konfiguracja (do panelu Ustawień). */
+  getConfig(): AiConfig {
+    return { keys: [..._config.keys] };
+  },
+
+  /** Klucz dla przeznaczenia; fallback: pierwszy dostępny, potem .env (dev). */
+  get(purpose = "main"): string | null {
+    const exact = _config.keys.find((k) => k.purpose === purpose && k.key);
+    if (exact) return exact.key;
+    const any = _config.keys.find((k) => k.key);
+    if (any) return any.key;
     try {
-      // Dev fallback (.env → vite define). Na produkcji puste → zwraca null.
       if (
         typeof process !== "undefined" &&
         process.env &&
@@ -32,13 +70,20 @@ export const apiKeyStore = {
         return process.env.API_KEY;
       }
     } catch {
-      /* process niedostępny — ignoruj */
+      /* process niedostępny */
     }
     return null;
   },
 
-  /** Czyść klucz z pamięci (lock/logout — razem z DEK). */
+  /** Model dla przeznaczenia (z konfiguracji lub domyślny). */
+  getModel(purpose = "main"): string {
+    return (
+      _config.keys.find((k) => k.purpose === purpose)?.model || DEFAULT_MODEL
+    );
+  },
+
+  /** Czyść (lock/logout — razem z DEK). */
   clear(): void {
-    _apiKey = null;
+    _config = { keys: [] };
   },
 };

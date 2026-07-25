@@ -24,6 +24,12 @@ LOCAL_DIST       = "dist"
 
 
 def get_vault_secret(name):
+    # env-first: rr-claude wstrzykuje sekrety z vault do env procesu (rrv export-env).
+    # Gdy są w env — użyj ich i NIE wołaj `rrv get` (który w sesji AI/agenta wisi na
+    # interaktywnym master-password). Fallback na `rrv get` dla czystego terminala.
+    env_val = os.environ.get(name)
+    if env_val and env_val.strip():
+        return env_val.strip()
     try:
         val = subprocess.check_output(
             f'powershell -Command "rrv get {name}"', shell=True

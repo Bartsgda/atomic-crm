@@ -1,13 +1,13 @@
 {
-  "built_at": "2026-07-24T04:31:54",
+  "built_at": "2026-07-25T04:30:58",
   "root": "C:/BartsGda4/CRM-Atomic",
-  "duration_sec": 2.31,
+  "duration_sec": 2.25,
   "stats": {
-    "total_files": 94,
+    "total_files": 95,
     "broken_links": 0,
     "external_links": 9,
-    "orphans": 38,
-    "stale_30d": 93
+    "orphans": 28,
+    "stale_30d": 91
   },
   "files": {
     "AGENTS.md": {
@@ -110,6 +110,12 @@
     "doc/README.md": {
       "mtime": 1776897168.2512772,
       "size": 1780,
+      "links_out": [],
+      "links_in": []
+    },
+    "graphify-out/GRAPH_REPORT.md": {
+      "mtime": 1784914040.5394487,
+      "size": 37345,
       "links_out": [],
       "links_in": []
     },
@@ -356,8 +362,8 @@
       ]
     },
     "src/legacy-v1/CLAUDE.md": {
-      "mtime": 1784790858.2489471,
-      "size": 13605,
+      "mtime": 1784913781.605821,
+      "size": 15475,
       "links_out": [
         "src/legacy-v1/IMPORT_AUDIT_HOWTO.md",
         "src/legacy-v1/XLSX_MAPPING.md",
@@ -368,16 +374,29 @@
         "src/legacy-v1/LEGACY_DATA_SPEC.md",
         "src/legacy-v1/REVERSE_ARCH_SPEC.md",
         "src/legacy-v1/IMPORT_DEBUG_LOG.md",
+        "src/legacy-v1/data/samples/XLSX_STRUCTURE_REFERENCE.md",
+        "src/legacy-v1/XLSX_FULL_PARSE_PLAN.md",
         "src/legacy-v1/CLIENTS_SPEC.md",
         "src/legacy-v1/WYMAGANIA-KLIENT.md",
         "src/legacy-v1/CLIENT_PANEL_REQUIREMENTS.md",
         "src/legacy-v1/POLICIES_SPEC.md",
         "src/legacy-v1/AI_PARSING_RULES.md",
         "src/legacy-v1/STATE_FLOW.md",
+        "src/legacy-v1/SPECS/POLICY_AUTO.md",
+        "src/legacy-v1/SPECS/POLICY_HOME.md",
+        "src/legacy-v1/SPECS/POLICY_LIFE.md",
+        "src/legacy-v1/SPECS/POLICY_TRAVEL.md",
+        "src/legacy-v1/SPECS/MOD_AUTO.md",
+        "src/legacy-v1/SPECS/MOD_HOME.md",
+        "src/legacy-v1/SPECS/MOD_LIFE.md",
+        "src/legacy-v1/SPECS/MOD_TRAVEL.md",
         "src/legacy-v1/COMMISSIONS_SPEC.md",
         "src/legacy-v1/SUB_AGENTS_SPEC.md",
         "src/legacy-v1/ALGORITHM_RATES.md",
         "src/legacy-v1/NOTES_SPEC.md",
+        "src/legacy-v1/WYMAGANIA-KLIENT.md",
+        "src/legacy-v1/components/Terminations/TERMINATIONS_SPEC.md",
+        "src/legacy-v1/components/ReminderSystem/REMINDER_SPEC.md",
         "src/legacy-v1/OFFERS_SPEC.md",
         "src/legacy-v1/OFFERS_REQUIREMENTS.md",
         "src/legacy-v1/OFFERS_ROADMAP.md",
@@ -389,6 +408,7 @@
         "src/legacy-v1/ARCHITECTURE.md",
         "src/legacy-v1/ARCHITECTURE_5_PILLARS.md",
         "src/legacy-v1/AI_ARCHITECTURE.md",
+        "src/legacy-v1/ai/prompts/CLIENT_MASTER_PROMPT.md",
         "src/legacy-v1/REQUIREMENTS.md",
         "src/legacy-v1/DATA_REPAIR_SPEC.md",
         "src/legacy-v1/BACKUP_SYSTEM.md",
@@ -513,8 +533,8 @@
       ]
     },
     "src/legacy-v1/NOTES_SPEC.md": {
-      "mtime": 1776897168.5624108,
-      "size": 2010,
+      "mtime": 1784912117.1548905,
+      "size": 3950,
       "links_out": [],
       "links_in": [
         "src/legacy-v1/CLAUDE.md",
@@ -674,10 +694,11 @@
       ]
     },
     "src/legacy-v1/WYMAGANIA-KLIENT.md": {
-      "mtime": 1778480705.1159217,
-      "size": 2546,
+      "mtime": 1784912161.831746,
+      "size": 3688,
       "links_out": [],
       "links_in": [
+        "src/legacy-v1/CLAUDE.md",
         "src/legacy-v1/CLAUDE.md",
         "src/legacy-v1/README.md"
       ]
@@ -687,6 +708,7 @@
       "size": 15044,
       "links_out": [],
       "links_in": [
+        "src/legacy-v1/CLAUDE.md",
         "src/legacy-v1/IMPORT_AUDIT_HOWTO.md"
       ]
     },
@@ -703,19 +725,24 @@
       "mtime": 1776897168.5754325,
       "size": 2998,
       "links_out": [],
-      "links_in": []
+      "links_in": [
+        "src/legacy-v1/CLAUDE.md"
+      ]
     },
     "src/legacy-v1/components/ReminderSystem/REMINDER_SPEC.md": {
       "mtime": 1776897168.600416,
       "size": 1363,
       "links_out": [],
-      "links_in": []
+      "links_in": [
+        "src/legacy-v1/CLAUDE.md"
+      ]
     },
     "src/legacy-v1/components/Terminations/TERMINATIONS_SPEC.md": {
       "mtime": 1776897168.6049156,
       "size": 1330,
       "links_out": [],
       "links_in": [
+        "src/legacy-v1/CLAUDE.md",
         "src/legacy-v1/README.md",
         "src/legacy-v1/REQUIREMENTS.md"
       ]
@@ -724,55 +751,73 @@
       "mtime": 1776897168.6179125,
       "size": 1418,
       "links_out": [],
-      "links_in": []
+      "links_in": [
+        "src/legacy-v1/CLAUDE.md"
+      ]
     },
     "src/legacy-v1/SPECS/MOD_AUTO.md": {
       "mtime": 1776897168.5674093,
       "size": 1956,
       "links_out": [],
-      "links_in": []
+      "links_in": [
+        "src/legacy-v1/CLAUDE.md"
+      ]
     },
     "src/legacy-v1/SPECS/MOD_HOME.md": {
       "mtime": 1776897168.5684395,
       "size": 1264,
       "links_out": [],
-      "links_in": []
+      "links_in": [
+        "src/legacy-v1/CLAUDE.md"
+      ]
     },
     "src/legacy-v1/SPECS/MOD_LIFE.md": {
       "mtime": 1776897168.569409,
       "size": 792,
       "links_out": [],
-      "links_in": []
+      "links_in": [
+        "src/legacy-v1/CLAUDE.md"
+      ]
     },
     "src/legacy-v1/SPECS/MOD_TRAVEL.md": {
       "mtime": 1776897168.569409,
       "size": 988,
       "links_out": [],
-      "links_in": []
+      "links_in": [
+        "src/legacy-v1/CLAUDE.md"
+      ]
     },
     "src/legacy-v1/SPECS/POLICY_AUTO.md": {
       "mtime": 1776897168.569409,
       "size": 1268,
       "links_out": [],
-      "links_in": []
+      "links_in": [
+        "src/legacy-v1/CLAUDE.md"
+      ]
     },
     "src/legacy-v1/SPECS/POLICY_HOME.md": {
       "mtime": 1776897168.5704348,
       "size": 1070,
       "links_out": [],
-      "links_in": []
+      "links_in": [
+        "src/legacy-v1/CLAUDE.md"
+      ]
     },
     "src/legacy-v1/SPECS/POLICY_LIFE.md": {
       "mtime": 1776897168.5704348,
       "size": 665,
       "links_out": [],
-      "links_in": []
+      "links_in": [
+        "src/legacy-v1/CLAUDE.md"
+      ]
     },
     "src/legacy-v1/SPECS/POLICY_TRAVEL.md": {
       "mtime": 1776897168.5704348,
       "size": 926,
       "links_out": [],
-      "links_in": []
+      "links_in": [
+        "src/legacy-v1/CLAUDE.md"
+      ]
     },
     "src/legacy-v1/test/icons_proposal.md": {
       "mtime": 1776897168.6329286,
@@ -845,6 +890,7 @@
     "DOCS_TEST_ENVIRONMENT.md",
     "NEXT_SESSION.md",
     "SESSION_2026-04-18.md",
+    "graphify-out/GRAPH_REPORT.md",
     "sandbox/stitch_design/stitch_redroad_backfill_monitor_dashboard/sahara/DESIGN.md",
     "scripts/FTP_TOOLS.md",
     "scripts/_INDEX.md",
@@ -861,392 +907,373 @@
     "src/legacy-v1/AUDIT_ROWS_71_80_2026-05-11.md",
     "src/legacy-v1/AUDIT_ROWS_81_90_2026-05-11.md",
     "src/legacy-v1/AUDIT_ROWS_91_110_2026-05-11.md",
-    "src/legacy-v1/SPECS/MOD_AUTO.md",
-    "src/legacy-v1/SPECS/MOD_HOME.md",
-    "src/legacy-v1/SPECS/MOD_LIFE.md",
-    "src/legacy-v1/SPECS/MOD_TRAVEL.md",
-    "src/legacy-v1/SPECS/POLICY_AUTO.md",
-    "src/legacy-v1/SPECS/POLICY_HOME.md",
-    "src/legacy-v1/SPECS/POLICY_LIFE.md",
-    "src/legacy-v1/SPECS/POLICY_TRAVEL.md",
-    "src/legacy-v1/ai/prompts/CLIENT_MASTER_PROMPT.md",
-    "src/legacy-v1/components/ReminderSystem/REMINDER_SPEC.md",
-    "src/legacy-v1/data/samples/XLSX_STRUCTURE_REFERENCE.md",
     "src/legacy-v1/test/icons_proposal.md",
     "src/sandbox/stitch/DESIGN.md"
   ],
   "stale": [
     {
       "file": ".github/CODE_OF_CONDUCT.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": ".github/CONTRIBUTING.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": ".github/pull_request_template.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": ".github/ISSUE_TEMPLATE/Bug_report.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": ".github/ISSUE_TEMPLATE/Feature_request.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "AGENTS.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "CODE_OF_CONDUCT.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "LICENSE.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "SESSION_2026-04-18.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "doc/README.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "src/components/admin/Readme.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "src/components/ui/README.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "src/legacy-v1/AI_ARCHITECTURE.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "src/legacy-v1/AI_CRM_MASTERPLAN.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "src/legacy-v1/AI_PARSING_RULES.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "src/legacy-v1/AI_PROGRESS_LOG.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "src/legacy-v1/ALGORITHM_RATES.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "src/legacy-v1/ARCHITECTURE.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "src/legacy-v1/ARCHITECTURE_5_PILLARS.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "src/legacy-v1/BACKUP_SYSTEM.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "src/legacy-v1/BartsGda.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "src/legacy-v1/CALENDAR_SPEC.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "src/legacy-v1/CHECKLIST_SPECS.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "src/legacy-v1/CLIENT_PANEL_REQUIREMENTS.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "src/legacy-v1/COMMISSIONS_SPEC.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "src/legacy-v1/DATA_MAPPING.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "src/legacy-v1/DATA_REPAIR_SPEC.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "src/legacy-v1/DESIGN_SYSTEM.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "src/legacy-v1/FAILURE_REPORT.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "src/legacy-v1/IMPORT_DEBUG_LOG.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "src/legacy-v1/IMPORT_LOGIC.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "src/legacy-v1/LEGACY_DATA_SPEC.md",
-      "days": 92.2
-    },
-    {
-      "file": "src/legacy-v1/NOTES_SPEC.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "src/legacy-v1/OFFERS_REQUIREMENTS.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "src/legacy-v1/OFFERS_ROADMAP.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "src/legacy-v1/OFFERS_SPEC.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "src/legacy-v1/POLICIES_SPEC.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "src/legacy-v1/PROJECT_CHRONICLE.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "src/legacy-v1/README.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "src/legacy-v1/REQUIREMENTS.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "src/legacy-v1/REQUIREMENTS_LEDGER.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "src/legacy-v1/REVERSE_ARCH_SPEC.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "src/legacy-v1/ROADMAP.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "src/legacy-v1/SPECS/MOD_AUTO.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "src/legacy-v1/SPECS/MOD_HOME.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "src/legacy-v1/SPECS/MOD_LIFE.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "src/legacy-v1/SPECS/MOD_TRAVEL.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "src/legacy-v1/SPECS/POLICY_AUTO.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "src/legacy-v1/SPECS/POLICY_HOME.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "src/legacy-v1/SPECS/POLICY_LIFE.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "src/legacy-v1/SPECS/POLICY_TRAVEL.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "src/legacy-v1/STATE_FLOW.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "src/legacy-v1/SUB_AGENTS_SPEC.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "src/legacy-v1/SUPREME_RULES.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "src/legacy-v1/UI_UX_DROPDOWN_FIX.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "src/legacy-v1/XLSX_MAPPING.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "src/legacy-v1/ai/prompts/CLIENT_MASTER_PROMPT.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "src/legacy-v1/components/ReminderSystem/REMINDER_SPEC.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "src/legacy-v1/components/Terminations/TERMINATIONS_SPEC.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "src/legacy-v1/data/samples/XLSX_STRUCTURE_REFERENCE.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "src/legacy-v1/test/icons_proposal.md",
-      "days": 92.2
+      "days": 93.2
     },
     {
       "file": "DOCS_TEST_ENVIRONMENT.md",
-      "days": 79.8
+      "days": 80.8
     },
     {
       "file": "PROGRESS.md",
-      "days": 79.8
+      "days": 80.8
     },
     {
       "file": "SESJE/2026-05-01_SUPABASE_API_KNOWLEDGE/README.md",
-      "days": 79.8
+      "days": 80.8
     },
     {
       "file": "sandbox/stitch_design/stitch_redroad_backfill_monitor_dashboard/sahara/DESIGN.md",
-      "days": 79.8
+      "days": 80.8
     },
     {
       "file": "scripts/FTP_TOOLS.md",
-      "days": 78.8
+      "days": 79.8
     },
     {
       "file": "src/sandbox/stitch/DESIGN.md",
-      "days": 78.8
+      "days": 79.8
     },
     {
       "file": "src/legacy-v1/CLIENTS_SPEC.md",
-      "days": 73.8
-    },
-    {
-      "file": "src/legacy-v1/WYMAGANIA-KLIENT.md",
-      "days": 73.8
+      "days": 74.8
     },
     {
       "file": "src/legacy-v1/AUDIT_PLAN.md",
-      "days": 70.3
+      "days": 71.3
     },
     {
       "file": "src/legacy-v1/AUDIT_ROWS_111_130_2026-05-11.md",
-      "days": 70.3
+      "days": 71.3
     },
     {
       "file": "src/legacy-v1/AUDIT_ROWS_11_20_2026-05-11.md",
-      "days": 70.3
+      "days": 71.3
     },
     {
       "file": "src/legacy-v1/AUDIT_ROWS_131_150_2026-05-11.md",
-      "days": 70.3
+      "days": 71.3
     },
     {
       "file": "src/legacy-v1/AUDIT_ROWS_151_170_2026-05-11.md",
-      "days": 70.3
+      "days": 71.3
     },
     {
       "file": "src/legacy-v1/AUDIT_ROWS_171_182_2026-05-11.md",
-      "days": 70.3
+      "days": 71.3
     },
     {
       "file": "src/legacy-v1/AUDIT_ROWS_1_10_2026-05-11.md",
-      "days": 70.3
+      "days": 71.3
     },
     {
       "file": "src/legacy-v1/AUDIT_ROWS_21_30_2026-05-11.md",
-      "days": 70.3
+      "days": 71.3
     },
     {
       "file": "src/legacy-v1/AUDIT_ROWS_31_40_2026-05-11.md",
-      "days": 70.3
+      "days": 71.3
     },
     {
       "file": "src/legacy-v1/AUDIT_ROWS_41_50_2026-05-11.md",
-      "days": 70.3
+      "days": 71.3
     },
     {
       "file": "src/legacy-v1/AUDIT_ROWS_51_60_2026-05-11.md",
-      "days": 70.3
+      "days": 71.3
     },
     {
       "file": "src/legacy-v1/AUDIT_ROWS_61_70_2026-05-11.md",
-      "days": 70.3
+      "days": 71.3
     },
     {
       "file": "src/legacy-v1/AUDIT_ROWS_71_80_2026-05-11.md",
-      "days": 70.3
+      "days": 71.3
     },
     {
       "file": "src/legacy-v1/AUDIT_ROWS_81_90_2026-05-11.md",
-      "days": 70.3
+      "days": 71.3
     },
     {
       "file": "src/legacy-v1/AUDIT_ROWS_81_90_OPUS_GROUND_TRUTH_2026-05-11.md",
-      "days": 70.3
+      "days": 71.3
     },
     {
       "file": "src/legacy-v1/IMPORT_AUDIT_HOWTO.md",
-      "days": 70.3
+      "days": 71.3
     },
     {
       "file": "src/legacy-v1/TIMELINE_ARCHITECTURE.md",
-      "days": 70.3
+      "days": 71.3
     },
     {
       "file": "src/legacy-v1/UI_SEARCH_KEYBOARD_RULES.md",
-      "days": 70.3
+      "days": 71.3
     },
     {
       "file": "src/legacy-v1/XLSX_FULL_PARSE_PLAN.md",
-      "days": 70.3
+      "days": 71.3
     },
     {
       "file": "src/legacy-v1/AUDIT_ROWS_91_110_2026-05-11.md",
-      "days": 69.8
+      "days": 70.8
     },
     {
       "file": "scripts/_INDEX.md",
-      "days": 65.6
+      "days": 66.6
     },
     {
       "file": "README.md",
-      "days": 59.6
+      "days": 60.6
     },
     {
       "file": "CLAUDE.md",
-      "days": 40.7
+      "days": 41.7
     },
     {
       "file": "NEXT_SESSION.md",
-      "days": 35.5
+      "days": 36.5
     }
   ]
 }

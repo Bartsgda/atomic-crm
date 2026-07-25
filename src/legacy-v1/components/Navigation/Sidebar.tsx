@@ -709,17 +709,17 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 <FileDown size={14} style={{ flexShrink: 0 }} />
                 {!isCollapsed && " Import XLSX"}
               </button>
-              {isAdmin && (
-                <button
-                  onClick={onToggleTheme}
-                  title="Wyglad"
-                  className={`w-full flex items-center ${isCollapsed ? 'justify-center py-2' : 'gap-2 px-2 py-1.5'} rounded-lg text-xs font-bold transition-all text-left`}
-                  style={{ color: "#5a5950" }}
-                >
-                  <Palette size={14} style={{ flexShrink: 0 }} />
-                  {!isCollapsed && " Wyglad"}
-                </button>
-              )}
+              {/* Wyglad (personalizacja: motyw, czcionki, kolory statusow) — dostepne dla WSZYSTKICH,
+                  zeby Alina (agent, nie-admin) tez mogla ustawic swoj wyglad. Klucze AI zostaja admin-only. */}
+              <button
+                onClick={onToggleTheme}
+                title="Wyglad"
+                className={`w-full flex items-center ${isCollapsed ? 'justify-center py-2' : 'gap-2 px-2 py-1.5'} rounded-lg text-xs font-bold transition-all text-left`}
+                style={{ color: "#5a5950" }}
+              >
+                <Palette size={14} style={{ flexShrink: 0 }} />
+                {!isCollapsed && " Wyglad"}
+              </button>
             </div>
 
             {/* Admin section — tylko dla admina */}
@@ -753,7 +753,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             {showThemeSettings && (
               <div style={{ borderTop: "1px solid rgba(212,175,55,0.08)", marginTop: "8px" }}>
                 <ThemeSettings prefs={uiPrefs} onUpdate={onUpdateUiPrefs} />
-                <AiKeysPanel />
+                {isAdmin && <AiKeysPanel />}
               </div>
             )}
           </nav>
@@ -951,7 +951,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 }
               >
                 <ThemeSettings prefs={uiPrefs} onUpdate={onUpdateUiPrefs} />
-                <AiKeysPanel />
+                {isAdmin && <AiKeysPanel />}
               </div>
             )}
             {isAdmin && (

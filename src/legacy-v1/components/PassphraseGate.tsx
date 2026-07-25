@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { AlertTriangle, Clock, Loader2, Lock, LogOut } from "lucide-react";
 import { getPublicSupabaseClient } from "../../components/atomic-crm/providers/supabase/supabase";
-import { deriveKEK, unwrapDEK } from "../services/crypto";
+import { deriveKEK, unwrapDEK, decryptField } from "../services/crypto";
+import { apiKeyStore } from "../services/apiKeyStore";
 
 // ---------------------------------------------------------------------------
 // Types
@@ -64,6 +65,7 @@ const formatCountdown = (ms: number) => {
 
 export const PassphraseGate: React.FC<PassphraseGateProps> = ({
   userId,
+  tenantId,
   userEmail,
   onUnlocked,
   onLogout,
@@ -228,6 +230,21 @@ export const PassphraseGate: React.FC<PassphraseGateProps> = ({
       );
       const dek = await unwrapDEK(wrappedDekRef.current!, kek);
 
+      // Klucz AI (Gemini) — jeśli admin zapisał w tenant_config, odszyfruj DEK → apiKeyStore.
+      // Żyje tylko w pamięci sesji; czyszczony przy lock/logout (EncryptionGate).
+      try {
+        const { data: cfg } = await sb
+          .from("tenant_config")
+          .select("encrypted_api_key")
+          .eq("tenant_id", tenantId)
+          .maybeSingle();
+        if (cfg?.encrypted_api_key) {
+          apiKeyStore.set(await decryptField(cfg.encrypted_api_key, dek));
+        }
+      } catch (e) {
+        console.warn("[PassphraseGate] Nie udało się załadować klucza AI:", e);
+      }
+
       // Sukces — wyzeruj licznik server-side (fire-and-forget)
       sb.rpc("reset_passphrase_lockout").then(
         () => undefined,
@@ -244,7 +261,10 @@ export const PassphraseGate: React.FC<PassphraseGateProps> = ({
         );
         if (!rpcError && data) state = data as LockState;
         else if (rpcError)
-          console.warn("[PassphraseGate] register_passphrase_failure:", rpcError);
+          console.warn(
+            "[PassphraseGate] register_passphrase_failure:",
+            rpcError,
+          );
       } catch (e) {
         console.warn("[PassphraseGate] register_passphrase_failure:", e);
       }

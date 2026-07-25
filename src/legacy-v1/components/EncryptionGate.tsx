@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Loader2 } from "lucide-react";
 import { getSupabaseClient } from "../../components/atomic-crm/providers/supabase/supabase";
 import { supabaseStorage } from "../services/supabaseStorage";
+import { apiKeyStore } from "../services/apiKeyStore";
 import PassphraseGate from "./PassphraseGate";
 import StatusEye from "./StatusEye";
 import { TestModeBanner } from "./TestModeBanner";
@@ -31,6 +32,7 @@ export const EncryptionGate: React.FC<EncryptionGateProps> = ({ children }) => {
   const lock = () => {
     setUnlocked(false);
     supabaseStorage.setDEK(null);
+    apiKeyStore.clear();
   };
 
   useEffect(() => {
@@ -99,6 +101,7 @@ export const EncryptionGate: React.FC<EncryptionGateProps> = ({ children }) => {
         setUser(null);
         setUnlocked(false);
         supabaseStorage.setDEK(null);
+        apiKeyStore.clear();
       }
     });
 
@@ -113,6 +116,7 @@ export const EncryptionGate: React.FC<EncryptionGateProps> = ({ children }) => {
   const handleLogout = async () => {
     const sb = getSupabaseClient();
     supabaseStorage.setDEK(null);
+    apiKeyStore.clear();
     await sb.auth.signOut();
     window.location.reload();
   };

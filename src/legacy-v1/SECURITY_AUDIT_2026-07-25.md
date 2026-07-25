@@ -8,6 +8,26 @@
 
 ---
 
+## STATUS NAPRAW (2026-07-25, po decyzjach Bartka)
+
+**✅ Naprawione:**
+- **K3+W3** (footgun buildu): `vite.config.ts` (root + legacy-v1) nie inline'uje już klucza Gemini (stała `""` zamiast `process.env.GEMINI_API_KEY`); `ftp_deploy.py` czyści env buildu z sekretów (GEMINI/AISTUDIO/CRM_ALINA/service_role) i **nie przekazuje `VITE_SB_SECRET_KEY`** (service_role) do frontu.
+- **S1+W1** (tokenizer): walidacja sumy kontrolnej PESEL (telefon `48…` nie łapany jako PESEL), indeksowane tokeny per wystąpienie, sanityzacja tel/e-mail/kodów w notatkach.
+- **S2** (chatService): re-tokenizacja `history` przed wysłaniem do modelu (helper `detokenize`).
+- **S5** (apiKeyStore): `get('ocr')` bez fallbacku do klucza `main` (twardy `null`).
+- **S4** (Dokumenty): limit 20 MB, whitelist MIME + twarde odrzucenie SVG, `sandbox="allow-same-origin"` na iframe PDF.
+- **N5** (docstring `set_ai_key.mjs`).
+- **K1 częściowo**: docstring `supabaseStorage.ts` sprostowany (deklarował fałszywie szyfrowanie notatek). Samo szyfrowanie NIE wdrożone — patrz decyzja niżej.
+
+**🟡 Decyzja Bartka (świadomie zaakceptowane ryzyko RODO):**
+- **K1** (szyfrowanie `content`/`life_details`): **ODŁOŻONE**. W bazie znikomo danych medycznych; granica = RLS Supabase. Wrócić gdy dojdą ankiety ŻYCIE.
+- **K2** (OCR chmurowy do Gemini): **DOPUSZCZONE**. Uzasadnienie: skany i tak są na Google Drive agentów; płatny (paid-tier) klucz API Gemini = brak trenowania na danych; API lepsze niż wklejanie do losowej strony/czatu.
+- **W2** (surowe PII w Karateka/ClientAgent/fetchCompanyData): nie priorytetyzowane teraz. Tokenizacja czatu (`chatService`) zostaje jako defense-in-depth.
+
+**⏳ Do rozważenia później:** W4 (CSP, TTL sesji Supabase, wymóg silnego hasła), W2 (ograniczenie payloadów fetchCompanyData → tylko NIP).
+
+---
+
 ## Podsumowanie liczbowe
 
 | Severity | Liczba |

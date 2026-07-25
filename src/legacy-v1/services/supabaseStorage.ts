@@ -1,9 +1,14 @@
 /**
  * SupabaseStorageManager — V2 backend dla V1 island.
  * Envelope encryption: DEK (AES-GCM CryptoKey) ustawiany raz w sesji po unwrap hasłem.
- * Szyfrowane są TYLKO wrażliwe pola (PESEL, telefony, maile, adres, data ur.,
- * szczegóły pojazdu/domu, treść notatek). Imiona, nazwiska, nazwy firm
- * ubezpieczeniowych, kwoty i daty pozostają w plaintext — żeby wyszukiwanie działało.
+ * Szyfrowane DEK: PESEL, telefony, maile, adres zamieszkania, nr polisy,
+ * nr rejestracyjny auta, adres nieruchomości (home_details). Imiona, nazwiska,
+ * nazwy firm ubezpieczeniowych, kwoty i daty pozostają plaintext — żeby wyszukiwanie działało.
+ *
+ * ⚠️ ŚWIADOMIE PLAINTEXT (audyt 2026-07-25 K1, decyzja Bartka): treść notatek (content)
+ * oraz life_details/auto_details/travel_details NIE są szyfrowane DEK — granicą jest RLS
+ * Supabase, nie DEK. W bazie obecnie znikomo danych medycznych; gdyby doszły wrażliwe
+ * ankiety ŻYCIE (RODO art. 9) — wrócić do szyfrowania content/life_details tak jak home_details.
  *
  * Tenant: Alina Insurance (11111111-1111-1111-1111-111111111111)
  */
@@ -121,7 +126,8 @@ function toArray(val: any): string[] {
 // ─── Row mappers ──────────────────────────────────────────────────────────────
 // Wrażliwe (szyfrowane): pesel, phones, emails, adres zamieszkania (street/city/zipCode),
 //   nr polisy, nr rejestracyjny auta, adres nieruchomości (home_details)
-// Plaintext: wszystko inne (imię, nazwisko, data ur., businesses, kwoty, daty, notatki)
+// Plaintext (świadomie — audyt K1): wszystko inne (imię, nazwisko, data ur., businesses,
+//   kwoty, daty, treść notatek, life_details/auto_details/travel_details)
 
 async function clientToRow(c: Client, dek: CryptoKey | null) {
   const isFake = c.id.includes('demo') || (c as any).isFake;

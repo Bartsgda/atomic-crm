@@ -418,7 +418,7 @@ export const Notatki: FC<Props> = ({ clientId, notes, allPolicies, initialResume
                                     onClick={() => onAddPendingLink?.(p.id)}
                                     className={`px-2 py-1 rounded-lg text-[9px] font-bold border transition-colors ${on ? 'bg-blue-600 text-white border-blue-600' : 'bg-white dark:bg-zinc-800 text-zinc-600 border-zinc-200 dark:border-zinc-700 hover:border-blue-300'}`}
                                 >
-                                    {p.vehicleBrand || p.type} {p.vehicleReg || ''}
+                                    {p.vehicleBrand || p.type}{p.vehicleReg && <span className="text-[11px] font-black tabular-nums ml-1">{p.vehicleReg}</span>}
                                 </button>
                             );
                         })
@@ -612,7 +612,7 @@ export const Notatki: FC<Props> = ({ clientId, notes, allPolicies, initialResume
                                                     onClick={() => setEditingLinks(prev => on ? prev.filter(x => x !== p.id) : [...prev, p.id])}
                                                     className={`px-2 py-1 rounded-lg text-[9px] font-bold border transition-colors ${on ? 'bg-blue-600 text-white border-blue-600' : 'bg-white dark:bg-zinc-800 text-zinc-500 border-zinc-200 dark:border-zinc-700 hover:border-blue-300'}`}
                                                 >
-                                                    {p.vehicleBrand || p.type} {p.vehicleReg || ''}
+                                                    {p.vehicleBrand || p.type}{p.vehicleReg && <span className="text-[11px] font-black tabular-nums ml-1">{p.vehicleReg}</span>}
                                                 </button>
                                             );
                                         })}
@@ -659,7 +659,8 @@ export const Notatki: FC<Props> = ({ clientId, notes, allPolicies, initialResume
                                     if (!p) return null;
                                     return (
                                         <div key={p.id} className="text-[9px] font-bold text-blue-600 bg-blue-50 dark:bg-blue-900/20 px-2 py-1 rounded border border-blue-100 dark:border-blue-800 uppercase flex items-center gap-1 cursor-pointer hover:bg-blue-100" onClick={() => onHoverNote?.([p.id])}>
-                                            <Zap size={10} /> {p.vehicleBrand || p.type} {p.vehicleReg}
+                                            <Zap size={10} /> {p.vehicleBrand || p.type}{' '}
+                                            {p.vehicleReg && <span className="text-xs font-black tabular-nums normal-case">{p.vehicleReg}</span>}
                                         </div>
                                     )
                                 })}

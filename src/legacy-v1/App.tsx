@@ -32,6 +32,7 @@ import {
   ClientNote,
   UiPreferences,
 } from "./types";
+import { FONT_FAMILY_OPTIONS } from "./constants";
 import { Loader2, Wallet, TrendingUp, Cloud } from "lucide-react";
 import { AgentKaratekaWindow } from "./components/GlobalAgent/AgentKaratekaWindow";
 import {
@@ -128,6 +129,9 @@ function App() {
     primaryColor: "#6366f1",
     fontScale: 1.0,
     skin: "luxury-gold",
+    fontFamily: "system",
+    fontColor: "",
+    fontBold: false,
   });
 
   const [activeCategory, setActiveCategory] = useState<string>("all");
@@ -155,6 +159,19 @@ function App() {
     const resolvedSkin =
       !prefs.skin || prefs.skin === "premium" ? "luxury-gold" : prefs.skin;
     root.setAttribute("data-v1-skin", resolvedSkin);
+
+    // --- DESIGNER CZCIONEK (2026-07-25) ---
+    const familyKey = prefs.fontFamily || "system";
+    const familyStack =
+      FONT_FAMILY_OPTIONS[familyKey]?.stack || FONT_FAMILY_OPTIONS.system.stack;
+    root.style.setProperty("--app-font-family", familyStack);
+    root.style.setProperty("--app-font-weight", prefs.fontBold ? "700" : "400");
+    root.setAttribute("data-app-font-bold", prefs.fontBold ? "true" : "false");
+    if (prefs.fontColor) {
+      root.style.setProperty("--app-font-color", prefs.fontColor);
+    } else {
+      root.style.removeProperty("--app-font-color");
+    }
   }, []);
 
   const refreshData = useCallback(async () => {
@@ -539,6 +556,10 @@ function App() {
   return (
     <div
       className={`min-h-screen bg-zinc-100 dark:bg-zinc-950 flex flex-col md:flex-row print:block font-sans overflow-hidden transition-colors duration-300 ${uiPrefs.theme}`}
+      style={{
+        fontFamily: "var(--app-font-family)",
+        fontWeight: "var(--app-font-weight)",
+      }}
     >
       <style>{`
         :root {
@@ -661,7 +682,7 @@ function App() {
       />
 
       <main
-        className={`flex-1 overflow-auto h-screen print:h-auto print:overflow-visible relative ${uiPrefs.skin !== "luxury-gold" ? "bg-zinc-50/50 dark:bg-zinc-900/50" : ""}`}
+        className={`app-content-font flex-1 overflow-auto h-screen print:h-auto print:overflow-visible relative ${uiPrefs.skin !== "luxury-gold" ? "bg-zinc-50/50 dark:bg-zinc-900/50" : ""}`}
         style={
           uiPrefs.skin === "luxury-gold" ? { background: "#121317" } : undefined
         }

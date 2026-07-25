@@ -128,6 +128,13 @@ interface ChangeEntry {
 
 const CHANGELOG: ChangeEntry[] = [
   {
+    date: "2026-07-25",
+    items: [
+      "Możesz teraz wybrać rodzaj, wielkość, kolor i pogrubienie czcionki w Ustawieniach (nowa sekcja 'Designer Czcionek' pod suwakiem skali)",
+      "PESEL i numery rejestracyjne pojazdów są teraz wyraźnie większe — łatwiej je odczytać na pierwszy rzut oka",
+    ],
+  },
+  {
     date: "2026-07-24",
     items: [
       "Nowy tryb testowy (żółty przycisk 🧪 w rogu) — bezpieczny podgląd danych, zmiany nie ruszają prawdziwej bazy",

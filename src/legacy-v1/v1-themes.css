@@ -282,3 +282,25 @@
   background: var(--v1-hover-bg);
   color: var(--v1-text);
 }
+
+/* =========================================================
+   Designer czcionek — 2026-07-25
+   Zmienne ustawiane z App.tsx (applyTheme) na document.documentElement,
+   analogicznie do --primary-color / data-v1-skin powyżej.
+   ========================================================= */
+
+/* Rodzina czcionki + pogrubienie: GLOBALNE (całość aplikacji, w tym
+   Sidebar/chrome) — czytane przez inline style na kontenerze root w App.tsx. */
+[data-app-font-bold="true"],
+[data-app-font-bold="true"] * {
+  font-weight: var(--app-font-weight, 700) !important;
+}
+
+/* Kolor czcionki: TYLKO treść (.app-content-font = <main>), NIE Sidebar/chrome.
+   Bez !important i bez selektora potomków — elementy z własnym jawnym
+   kolorem Tailwind (np. text-red-600 na statusach) zachowują swój kolor;
+   dziedziczenie koloru z .app-content-font dotyczy tylko tekstu bez
+   własnej klasy koloru, więc nie psuje kontrastu/semantyki badge'y. */
+.app-content-font {
+  color: var(--app-font-color, inherit);
+}

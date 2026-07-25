@@ -11,8 +11,13 @@ import {
   Zap,
   Leaf,
   LayoutTemplate,
+  Bold,
+  Droplet,
+  CaseSensitive,
+  RotateCcw,
 } from "lucide-react";
 import { UiPreferences } from "../types";
+import { FONT_FAMILY_OPTIONS } from "../constants";
 
 interface Props {
   prefs: UiPreferences;
@@ -39,6 +44,37 @@ export const ThemeSettings: React.FC<Props> = ({ prefs, onUpdate }) => {
   const handleScaleChange = (scale: number) => {
     onUpdate({ ...prefs, fontScale: scale });
     document.documentElement.style.fontSize = `${16 * scale}px`;
+  };
+
+  // --- DESIGNER CZCIONEK (2026-07-25) ---
+  const handleFontFamilyChange = (key: UiPreferences["fontFamily"]) => {
+    onUpdate({ ...prefs, fontFamily: key });
+    document.documentElement.style.setProperty(
+      "--app-font-family",
+      FONT_FAMILY_OPTIONS[key].stack,
+    );
+  };
+
+  const handleFontColorChange = (color: string) => {
+    onUpdate({ ...prefs, fontColor: color });
+    document.documentElement.style.setProperty("--app-font-color", color);
+  };
+
+  const handleResetFontColor = () => {
+    onUpdate({ ...prefs, fontColor: "" });
+    document.documentElement.style.removeProperty("--app-font-color");
+  };
+
+  const handleFontBoldToggle = (bold: boolean) => {
+    onUpdate({ ...prefs, fontBold: bold });
+    document.documentElement.style.setProperty(
+      "--app-font-weight",
+      bold ? "700" : "400",
+    );
+    document.documentElement.setAttribute(
+      "data-app-font-bold",
+      bold ? "true" : "false",
+    );
   };
 
   const applySkin = (skin: "default" | "warm" | "midnight" | "luxury-gold") => {
@@ -268,17 +304,131 @@ export const ThemeSettings: React.FC<Props> = ({ prefs, onUpdate }) => {
           <input
             type="range"
             min="0.85"
-            max="1.15"
+            max="1.3"
             step="0.05"
             value={prefs.fontScale}
             onChange={(e) => handleScaleChange(parseFloat(e.target.value))}
             className="flex-1 h-1 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-white"
           />
           <button
-            onClick={() => handleScaleChange(1.15)}
+            onClick={() => handleScaleChange(1.3)}
             className="p-1 text-zinc-500 hover:text-white"
           >
             <ZoomIn size={14} />
+          </button>
+        </div>
+      </div>
+
+      <div className="h-px bg-zinc-900 w-full"></div>
+
+      {/* DESIGNER CZCIONEK (2026-07-25) — rozszerzenie ustawień, stosowane globalnie */}
+      <div>
+        <p className="text-[9px] uppercase font-black text-zinc-500 mb-3 tracking-wider flex items-center gap-2 px-1">
+          <CaseSensitive size={10} /> Designer Czcionek
+        </p>
+
+        {/* Rodzina czcionki */}
+        <p className="text-[9px] font-bold text-zinc-500 mb-2 px-1">
+          RODZAJ CZCIONKI
+        </p>
+        <div className="grid grid-cols-2 gap-2 mb-4">
+          {(
+            Object.keys(FONT_FAMILY_OPTIONS) as Array<
+              keyof typeof FONT_FAMILY_OPTIONS
+            >
+          ).map((key) => {
+            const opt = FONT_FAMILY_OPTIONS[key];
+            const active = (prefs.fontFamily || "system") === key;
+            return (
+              <button
+                key={key}
+                onClick={() => handleFontFamilyChange(key)}
+                title={opt.description}
+                className={`flex flex-col items-start gap-0.5 p-2 rounded-xl border text-left transition-all ${active ? "border-white bg-zinc-800" : "border-zinc-800 bg-zinc-900/50 hover:border-zinc-700"}`}
+              >
+                <span
+                  className={`text-xs ${active ? "text-white" : "text-zinc-300"}`}
+                  style={{ fontFamily: opt.stack }}
+                >
+                  Aa Bb 123
+                </span>
+                <span className="text-[9px] font-black uppercase text-zinc-500">
+                  {opt.label}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Pogrubienie */}
+        <p className="text-[9px] font-bold text-zinc-500 mb-2 px-1 flex items-center gap-2">
+          <Bold size={10} /> POGRUBIENIE TEKSTU
+        </p>
+        <div className="flex bg-zinc-900 rounded-lg p-1 border border-zinc-800 mb-4">
+          <button
+            onClick={() => handleFontBoldToggle(false)}
+            className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-md text-[10px] font-black uppercase transition-all ${!prefs.fontBold ? "bg-zinc-800 text-white" : "text-zinc-500 hover:text-zinc-300"}`}
+          >
+            Normalna
+          </button>
+          <button
+            onClick={() => handleFontBoldToggle(true)}
+            className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-md text-[10px] font-black uppercase transition-all ${prefs.fontBold ? "bg-zinc-100 text-zinc-900" : "text-zinc-500 hover:text-zinc-300"}`}
+          >
+            Pogrubiona
+          </button>
+        </div>
+
+        {/* Kolor czcionki */}
+        <p className="text-[9px] font-bold text-zinc-500 mb-2 px-1 flex items-center gap-2">
+          <Droplet size={10} /> KOLOR TEKSTU (TREŚĆ)
+        </p>
+        <div className="flex items-center gap-2 mb-4">
+          <input
+            type="color"
+            value={prefs.fontColor || "#e4e4e7"}
+            onChange={(e) => handleFontColorChange(e.target.value)}
+            className="w-9 h-9 rounded-lg border border-zinc-800 bg-zinc-900 cursor-pointer p-0.5"
+            title="Kolor tekstu treści"
+          />
+          <span className="text-[10px] font-bold text-zinc-400 flex-1">
+            {prefs.fontColor
+              ? prefs.fontColor.toUpperCase()
+              : "Automatyczny (kolor motywu)"}
+          </span>
+          {prefs.fontColor && (
+            <button
+              onClick={handleResetFontColor}
+              title="Przywróć kolor motywu"
+              className="p-1.5 rounded-lg text-zinc-500 hover:text-white hover:bg-zinc-800 transition-colors"
+            >
+              <RotateCcw size={14} />
+            </button>
+          )}
+        </div>
+
+        {/* Rozmiar bazowy — skróty do SKALA INTERFEJSU powyżej */}
+        <p className="text-[9px] font-bold text-zinc-500 mb-2 px-1">
+          ROZMIAR BAZOWY
+        </p>
+        <div className="grid grid-cols-3 gap-2">
+          <button
+            onClick={() => handleScaleChange(1.0)}
+            className={`py-2 rounded-lg text-[9px] font-black uppercase transition-all border ${prefs.fontScale === 1.0 ? "border-white bg-zinc-800 text-white" : "border-zinc-800 text-zinc-500 hover:text-zinc-300"}`}
+          >
+            Normalny
+          </button>
+          <button
+            onClick={() => handleScaleChange(1.15)}
+            className={`py-2 rounded-lg text-[9px] font-black uppercase transition-all border ${prefs.fontScale === 1.15 ? "border-white bg-zinc-800 text-white" : "border-zinc-800 text-zinc-500 hover:text-zinc-300"}`}
+          >
+            Duży
+          </button>
+          <button
+            onClick={() => handleScaleChange(1.3)}
+            className={`py-2 rounded-lg text-[9px] font-black uppercase transition-all border ${prefs.fontScale === 1.3 ? "border-white bg-zinc-800 text-white" : "border-zinc-800 text-zinc-500 hover:text-zinc-300"}`}
+          >
+            Bardzo Duży
           </button>
         </div>
       </div>

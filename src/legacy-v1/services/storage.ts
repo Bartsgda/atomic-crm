@@ -28,6 +28,9 @@ const DEFAULT_PREFS: UiPreferences = {
   primaryColor: "#d4af37",
   fontScale: 1.0,
   skin: "luxury-gold",
+  fontFamily: "system",
+  fontColor: "",
+  fontBold: false,
 };
 
 const DEFAULT_CHECKLISTS: ChecklistTemplates = {

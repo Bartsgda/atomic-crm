@@ -52,3 +52,21 @@ placeholder:text-zinc-400               /* Placeholder: Szary */
 
 ### B. Wybór Daty (Date Pickers)
 Pola daty muszą posiadać `cursor-pointer` i otwierać natywny kalendarz systemowy po kliknięciu w dowolny obszar pola (`onClick={e => e.currentTarget.showPicker()}`).
+
+## 4. Personalizacja czcionki — "Designer Czcionek" (2026-07-25)
+
+Rozszerzenie istniejącego systemu motywów (Sekcja 1-2), NIE równoległy system. Panel `ThemeSettings.tsx` (sekcja pod "Skalowanie Czcionki") pozwala Alinie ustawić globalnie:
+
+1. **Rodzaj czcionki** (`UiPreferences.fontFamily`) — 4 opcje z `constants.ts` → `FONT_FAMILY_OPTIONS`:
+   - `system` (domyślna) — natywna czcionka systemu (`ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif`)
+   - `humanist` — **Inter** (`"Inter Variable"`, już samo-hostowana w projekcie przez `@fontsource-variable/inter`, ZERO CDN)
+   - `serif` — **Georgia** (systemowa szeryfowa)
+   - `accessible` — **Tahoma** (szerokie znaki, wysoka czytelność — accessibility/dysleksja-friendly)
+   - Wszystkie 4 opcje działają offline — brak zależności od zewnętrznego CDN (zgodnie z zasadą CSP/offline tego modułu; istniejący import Google Fonts w `src/index.css` dla EB Garamond/Manrope jest osobną, wcześniejszą sprawą i nie jest przez Designer Czcionek wykorzystywany).
+2. **Pogrubienie** (`UiPreferences.fontBold`) — globalny przełącznik, wymusza `font-weight: 700` na CAŁEJ aplikacji (w tym Sidebar/chrome) przez atrybut `[data-app-font-bold="true"]` w `v1-themes.css`.
+3. **Kolor tekstu** (`UiPreferences.fontColor`) — `<input type="color">`, stosowany TYLKO do treści (`<main>`, klasa `.app-content-font`), NIE do Sidebar/chrome. Pusty string = automatyczny (kolor motywu). Bez `!important` — elementy z własną jawną klasą koloru Tailwind (np. status "sprzedaż" = zielony, "wygasa" = czerwony) zachowują swój kolor; nadpisywane jest tylko dziedziczone tło tekstu.
+4. **Rozmiar bazowy** — reużywa istniejące `UiPreferences.fontScale` (root `font-size` w px, rem-based skaluje całą appkę) — 3 szybkie przyciski Normalny (1.0) / Duży (1.15) / Bardzo Duży (1.3), spięte z istniejącym suwakiem "SKALA INTERFEJSU" (zakres rozszerzony z 0.85–1.15 na 0.85–1.3).
+
+**Mechanizm (spójny z istniejącym `--primary-color`/`data-v1-skin`):** `App.tsx` → `applyTheme()` ustawia CSS custom properties (`--app-font-family`, `--app-font-weight`, `--app-font-color`) oraz atrybut `data-app-font-bold` na `document.documentElement`, identycznie jak dla `--primary-color`. Zapis do localStorage przez ten sam `storage.saveUiPrefs()`/`PREFS_KEY = "InsuranceMaster_UI_Prefs"` co reszta `UiPreferences` — przetrwa reload, ładowany przy starcie w `refreshData()`.
+
+**Czytelność (PESEL / nr rejestracyjny):** niezależnie od Designera, PESEL (nagłówek `ClientDetails.tsx`, `QuickViewDrawer.tsx`) i numer rejestracyjny pojazdu (badge na karcie polisy w `ClientDetails.tsx`, chipy w `Notatki.tsx`) są renderowane z wyraźnie większą czcionką (`text-sm`/`text-xs` `font-black tabular-nums` zamiast `text-[9-10px]`) — to są najważniejsze dane operacyjne dla Aliny.

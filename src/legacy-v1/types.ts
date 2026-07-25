@@ -462,4 +462,10 @@ export interface UiPreferences {
   primaryColor: string;
   fontScale: number;
   skin: "default" | "warm" | "midnight" | "luxury-gold" | "premium";
+  /** Designer czcionek (2026-07-25) — rodzina czcionki stosowana globalnie */
+  fontFamily: "system" | "humanist" | "serif" | "accessible";
+  /** Kolor tekstu treści (hex). Pusty string = automatyczny (kolor motywu) */
+  fontColor: string;
+  /** Globalne pogrubienie tekstu (przełącznik dostępności) */
+  fontBold: boolean;
 }

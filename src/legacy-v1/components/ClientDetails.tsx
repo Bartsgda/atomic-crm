@@ -93,6 +93,9 @@ const PolicyCardItem = ({ policy, client, statusConfig, isFiltered, isHovered, d
         badgeText = policy.destinationCountry || 'ŚWIAT';
     }
 
+    // Nr rejestracyjny = kluczowa dana dla Aliny -> wyraźnie większa czcionka na karcie
+    const isVehicleRegBadge = ['OC', 'AC', 'BOTH'].includes(policy.type);
+
     const isSold = policy.stage === 'sprzedaż' || policy.stage === 'sprzedany';
     const areDocsSent = policy.documentsStatus === 'WYSŁANO';
 
@@ -164,7 +167,7 @@ const PolicyCardItem = ({ policy, client, statusConfig, isFiltered, isHovered, d
                 </div>
                 
                 <div className="flex items-center gap-2 mb-3 flex-wrap">
-                    <span className="bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 font-mono font-bold text-[10px] px-2 py-0.5 rounded truncate max-w-[150px]">
+                    <span className={`bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 font-mono truncate max-w-[180px] ${isVehicleRegBadge ? 'font-black text-sm tabular-nums tracking-wide px-2.5 py-1 rounded-lg' : 'font-bold text-[10px] px-2 py-0.5 rounded'}`}>
                         {badgeText}
                     </span>
                     {policy.isTerminationSent && (
@@ -489,7 +492,7 @@ export const ClientDetails: React.FC<Props> = ({ client, policies, notes, termin
                         </div>
 
                         <div className="flex items-center gap-3 mt-1.5">
-                            <span className="bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 text-[10px] font-mono px-2 py-0.5 rounded font-bold">{client.pesel || 'BRAK PESEL'}</span>
+                            <span className="bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-200 text-sm font-mono font-black tabular-nums tracking-wide px-2.5 py-1 rounded-lg">{client.pesel || 'BRAK PESEL'}</span>
                             {isVip && <span className="text-[9px] font-black text-amber-600 bg-amber-50 dark:bg-amber-900/20 px-2 py-0.5 rounded uppercase tracking-wider">Kluczowy Klient</span>}
                         </div>
                     </div>

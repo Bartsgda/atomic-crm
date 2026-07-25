@@ -525,6 +525,10 @@ function mapPolicyLegacy(
   else if (rawStage.includes("rez po ofercie") || rawStage.includes("za rok"))
     stage = "rez po ofercie_kont za rok";
   else if (rawStage.includes("wysłana")) stage = "oferta_wysłana";
+  // Dodane 2026-07-25 (na wyraźne polecenie Bartka) - nowa baza może zawierać ten etap
+  // zarówno w formie "ze spacją" (jak reszta tego pliku), jak i "z podkreślnikiem" (DB-style).
+  else if (rawStage === "pierwszy kontakt" || rawStage === "pierwszy_kontakt")
+    stage = "pierwszy kontakt";
 
   const policyId = `p_imp_${Date.now()}_${Math.random().toString(36).substr(2, 5)}`;
   const start = travelStart ? date(travelStart) : date(row[9]);

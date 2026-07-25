@@ -10,6 +10,7 @@ import {
   BadgeHelp,
   XCircle,
   PauseCircle,
+  PhoneCall,
 } from "lucide-react";
 
 export const LEGAL_TEXTS = {
@@ -55,13 +56,13 @@ export const LEGAL_TEXTS = {
 // 4. 'sprzedaż'                        -> GREEN   (sprzedaż / "sprzed" - SUKCES)
 // 5. 'rez po ofercie_kont za rok'      -> SLATE   (rez_po_ofercie / "rez po")
 // 6. 'of_do zrobienia'                 -> YELLOW  (of_do_zrobienia / "of_do")
-// 7. 'ucięty kontakt'                  -> AMBER   (uciety_kontakt / "ucięty" - brąz/ochra)
-// 8. 'sprzedany'                       -> VIOLET, biały tekst (klient sprzedał AUTO,
-//    polisa NIEAKTUALNA - to jest INNY status niż 'sprzedaż'! Nie mylić kolorów.)
-// UWAGA (doubt): w Excelu Aliny był jeszcze wiersz "pierwszy kontakt" (różowy/łososiowy),
-// który NIE MA odpowiednika w obecnym enumie SalesStage/kodzie (najbliższy kandydat to
-// fallback 'inne', ale nie ma na to dowodu w kodzie/imporcie) - nieprzemapowany,
-// do potwierdzenia z Bartkiem. `inne`/`zbycie_pojazdu` to fallbacki spoza jej listy.
+// 7. 'pierwszy kontakt'                -> ROSE    (dodane 2026-07-25, wcześniej brak w enumie;
+//    Bartek: "przy nowej bazie takie pozycje się pojawią" - lead świeży, jeszcze niedzwoniony)
+// 8. 'ucięty kontakt'                  -> AMBER   (uciety_kontakt / "ucięty" - brąz/ochra)
+// 9. 'sprzedany'                       -> VIOLET, biały tekst (klient sprzedał AUTO,
+//    polisa NIEAKTUALNA - to jest INNY status niż 'sprzedaż'! Nie mylić kolorów.
+//    NIE proponujemy wznowienia dla 'sprzedany' - patrz `isRenewable` w clientInsights.ts.)
+// `inne`/`zbycie_pojazdu` to fallbacki spoza oryginalnej 9-elementowej listy Aliny.
 
 export const STATUS_CONFIG: Record<
   string,
@@ -82,6 +83,16 @@ export const STATUS_CONFIG: Record<
     border: "border-yellow-300 dark:border-yellow-800",
     icon: AlertCircle,
     shadow: "shadow-yellow-100",
+  },
+
+  // 1b. PIERWSZY KONTAKT -> ROSE (paleta Aliny: różowy/łososiowy)
+  "pierwszy kontakt": {
+    label: "Pierwszy Kontakt",
+    color: "text-rose-700 dark:text-rose-300",
+    bg: "bg-rose-50 dark:bg-rose-900/20",
+    border: "border-rose-200 dark:border-rose-800",
+    icon: PhoneCall,
+    shadow: "shadow-rose-100",
   },
 
   // 2. W TOKU (KALKULACJA) -> BLUE (paleta Aliny)

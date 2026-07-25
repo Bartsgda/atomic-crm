@@ -15,6 +15,7 @@ import {
   Car, Truck, Bike, Tractor, Bus, Container, Home, Heart, Plane, Building2, ChevronDown, ChevronUp, Ghost, Check, User, Calculator
 } from 'lucide-react';
 import { storage } from '../services/storage';
+import { isRenewable } from '../services/clientInsights';
 
 interface Props {
   state: AppState;
@@ -310,8 +311,9 @@ export const CalendarView: React.FC<Props> = ({ state, onNavigate, onDeleteNote,
         const assetInfo = policy.vehicleBrand || policy.propertyAddress || policy.type;
         const regInfo = policy.vehicleReg || '';
 
-        // 1. WZNOWIENIA (Sprzedane polisy - Data końca)
-        if (policy.stage === 'sprzedaż' || policy.stage === 'sprzedany') {
+        // 1. WZNOWIENIA (Sprzedane polisy - Data końca). 'sprzedany' (klient sprzedał auto)
+        // pomijamy - nie ma czego wznawiać (przychód historyczny zostaje, patrz isSold).
+        if (isRenewable(policy)) {
             const endDate = new Date(policy.policyEndDate);
             if (endDate.getUTCHours() === 0 && endDate.getUTCMinutes() === 0) endDate.setHours(9, 0, 0, 0);
             if (isValid(endDate)) {

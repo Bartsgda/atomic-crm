@@ -71,6 +71,16 @@ Rozszerzenie istniejącego systemu motywów (Sekcja 1-2), NIE równoległy syste
 
 **Czytelność (PESEL / nr rejestracyjny):** niezależnie od Designera, PESEL (nagłówek `ClientDetails.tsx`, `QuickViewDrawer.tsx`) i numer rejestracyjny pojazdu (badge na karcie polisy w `ClientDetails.tsx`, chipy w `Notatki.tsx`) są renderowane z wyraźnie większą czcionką (`text-sm`/`text-xs` `font-black tabular-nums` zamiast `text-[9-10px]`) — to są najważniejsze dane operacyjne dla Aliny.
 
+## 6. Paleta Kolorów Statusów Polisy (`stage`) — 2026-07-25
+
+Ujednolicona wg oryginalnej palety Aliny z dropdownu statusów w Excelu (nie dobierana dowolnie). Jedyne źródło prawdy: `STATUS_CONFIG` w `constants.ts` (pełna tabela mapowania → `POLICIES_SPEC.md § 6`).
+
+Skrót: `czekam na dane` = cyan · `przeł kontakt` = blue · `oferta` (`of_przedst`/`oferta_wysłana`) = lime · `sprzedaż` = green · `rez po ofercie` (chłodnia) = slate (jasny szary) · `of_do zrobienia` = yellow · `ucięty kontakt` = amber (brąz) · `sprzedany` = violet z **białym tekstem** (jedyny status z ciemnym solid tłem zamiast pastelowego — INNY status niż `sprzedaż`, nie mylić).
+
+Zasada kontrastu (Prawo Czytelności Statusów): jasne tła (yellow/lime/cyan/slate) → ciemny tekst danego koloru (np. `text-yellow-800`); ciemne/nasycone tła (tylko `sprzedany` na `bg-violet-700`) → `text-white`. Tryb ciemny: każdy wpis ma warianty `dark:bg-*-900/20` / `dark:text-*-300` / `dark:border-*-800`, poza `sprzedany` który zostaje solidny (`dark:bg-violet-600`) żeby biały tekst zawsze miał kontrast.
+
+Drugi, zsynchronizowany zestaw kolorów (solid pill, nie pastelowy): `NoteSelectors.tsx` → `SALES_STAGES` (selektor "Etap Sprzedaży" w pasku narzędzi notatek).
+
 ## 5. Terminarz — kolorystyka i czytelność (redesign 2026-07-25)
 
 `components/CalendarView.tsx` był zbudowany na sztywnym `red-600`/`red-50` dla WSZYSTKIEGO — nagłówka, przycisku "Dzisiaj", oznaczenia "dziś" w siatce i każdego wznowienia niezależnie od terminu. Efekt: ekran "krzyczał czerwienią" i tekst tonął w kolorze. Naprawione zgodnie z zasadami z sekcji 1-3 tego dokumentu:

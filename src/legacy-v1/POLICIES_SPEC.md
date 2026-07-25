@@ -15,8 +15,9 @@ Polisa jest głównym aktywem (asset) w systemie. Może być na etapie "Oferty" 
 Każda polisa posiada:
 - **Typ**: `OC`, `AC`, `DOM`, `ZYCIE`, `PODROZ`, `FIRMA`.
 - **Etap (`stage`)**: 
-  - `of_do zrobienia`, `przeł kontakt`, `oferta_wysłana` (LEADY).
-  - `sprzedaż` (ZAAKCEPTOWANA/SPRZEDANA).
+  - `of_do zrobienia`, `pierwszy kontakt`, `przeł kontakt`, `oferta_wysłana` (LEADY).
+  - `sprzedaż` (ZAAKCEPTOWANA/SPRZEDANA — aktualna, propozycja wznowienia OK).
+  - `sprzedany` (SPRZEDANA, ale klient **sprzedał auto** — przychód/prowizja zostają, ale NIE proponujemy wznowienia, zob. § 6 `isRenewable`).
   - `ucięty kontakt` (ODRZUCONA).
 - **Finanse**: `premium` (składka), `commission` (prowizja), `commissionRate` (stopa %), `paymentStatus` (status płatności).
 - **Daty**: `policyStartDate` (Start), `policyEndDate` (Koniec - kluczowe dla wznowień).
@@ -88,3 +89,38 @@ Pola Składka (`premium`), Prowizja kwotowa (`commission`) i Stopa procentowa (`
 ### A. Polisy Turystyczne (`PODROZ`)
 - **Brak Wznowień:** Polisy te są z definicji jednorazowe. System **MUSI** wykluczać typ `PODROZ` z wszelkich widoków "Wznowienia" (Renewals) oraz liczników na Sidebarze.
 - **Brak Chłodni:** Nie istnieje status "Chłodnia / Ponów za rok" dla wyjazdów turystycznych. Po zakończeniu okresu ochrony polisa staje się historyczna i nie wymaga dalszych akcji.
+
+## 6. Paleta Kolorów Statusów (`stage`) — ujednolicona 2026-07-25
+
+Jedyne źródło prawdy dla kolorów: `STATUS_CONFIG` w `constants.ts`. Kolorystyka 1:1 z oryginalnego dropdownu statusów Aliny w Excelu (kolumna 2 "etap" → `stage`, zob. `XLSX_MAPPING.md`).
+
+| `stage` (kod) | Etykieta UI | Kolor | Uwaga |
+|---|---|---|---|
+| `czekam na dane/dokum` | Czekam na Dane | **Cyan** | |
+| `przeł kontakt` | Kalkulacja / W toku | **Blue** | |
+| `of_przedst` / `oferta_wysłana` | Oferta Wysłana | **Lime** | dwa klucze, ten sam realny etap |
+| `sprzedaż` | Sprzedane | **Green** | sukces — polisa sprzedana |
+| `rez po ofercie_kont za rok` | Chłodnia (Za rok) | **Slate** (jasny szary) | |
+| `of_do zrobienia` | Do Zrobienia | **Yellow** | |
+| `pierwszy kontakt` | Pierwszy Kontakt | **Rose** (różowy/łososiowy) | ⭐ Dodane 2026-07-25 (wcześniej brakowało w enumie). Lead świeży, jeszcze niedzwoniony. Rozpoznawane przy imporcie XLSX jako `"pierwszy kontakt"` lub `"pierwszy_kontakt"` (`dataMapper.ts`). W `PolicyFormModal.tsx` w dropdownie "Etap Sprzedaży" zaraz po "Do zrobienia". |
+| `ucięty kontakt` | Odrzucone / Ucięte | **Amber** (brąz/ochra) | |
+| `sprzedany` | Sprzedany (Auto) | **Violet**, biały tekst | ⚠️ INNY status niż `sprzedaż` — klient sprzedał auto, polisa nieaktualna. Logika `isSold` (ClientDetails/Dashboard/ClientsList) nadal grupuje `sprzedaż`+`sprzedany`+`sprzedaz` razem do liczenia "sprzedanych polis"/przychodu (ZASADY_CRM §3, **bez zmian** — przychód historyczny zostaje). Ale **nie proponujemy wznowienia** dla `sprzedany` — zob. § 7 `isRenewable`. |
+| `zbycie_pojazdu` | Zbycie | **Orange** | fallback, spoza oryginalnej listy Aliny |
+| `inne` | Inne | **Zinc** (szary neutralny) | fallback / catch-all przy imporcie nierozpoznanych wartości |
+
+Zastosowanie: `ClientDetails.tsx`, `Dashboard.tsx`, `PolicyFormModal.tsx`, `QuickViewDrawer.tsx`, `OffersBoard.tsx` (kolumny Kanban + strefy drop "Odrzuć"/"Sprzedaj") czerpią kolor wyłącznie z `STATUS_CONFIG`. Osobny, zsynchronizowany hardcoded zestaw: `NoteSelectors.tsx` → `SALES_STAGES` (selektor "Etap Sprzedaży" w toolbarze notatek — pełne solidne tło zamiast pastelowego, więc kolory dobrane osobno, ale z tej samej rodziny barw).
+
+## 7. `isSold` vs `isRenewable` — sprzedaż zostaje, wznowienie nie zawsze (2026-07-25)
+
+Dwa oddzielne pojęcia w `services/clientInsights.ts` (eksportowane, jedyne źródło prawdy — nie duplikować logiki lokalnie tam, gdzie chodzi o wznowienie):
+
+- **`isSold(policy)`** — `stage` ∈ {`sprzedaż`, `sprzedany`, `sprzedaz`}. Polisa wygenerowała przychód/prowizję. Używane wszędzie tam, gdzie liczy się **finanse** (Dashboard, FinanceView, liczniki `_v`/`_p`/`_l` w `ClientsList.tsx`) — **BEZ ZMIAN**, `sprzedany` nadal się liczy jako sprzedana polisa.
+- **`isRenewable(policy)`** = `isSold(policy) && stage !== 'sprzedany'` — polisa sprzedana i **nadal aktualna** (jest co wznawiać). `sprzedany` oznacza: agent dzwonił w sprawie wznowienia i dowiedział się, że klient **sprzedał auto** — nie ma sensu dalej proponować wznowienia nieistniejącego już pojazdu, ale historyczny przychód z tamtej sprzedaży pozostaje w finansach.
+
+**Gdzie `isRenewable` jest używane** (wznowienie/kontakt telefoniczny, NIE finanse):
+- `services/clientInsights.ts` → `upcomingRenewals()` — sygnał "Wznowienie" dla proaktywnego okienka.
+- `components/ClientDetails.tsx` → `PolicyCardItem`: `renewalBadge` ("ZA X DNI"/"PO TERMINIE") i przycisk "Wznowienie" (RefreshCcw) pokazują się tylko dla `isRenewable`. Dla `sprzedany` w miejscu przycisku wznowienia jest neutralny przycisk "Kalkulacja" (ten sam co dla niesprzedanych — Alina może dopisać notatkę) + mały badge "AUTO SPRZEDANE" (fiolet, zamiast licznika dni).
+- `components/CalendarView.tsx` → generowanie eventu "WZNOWIENIA" (koniec ochrony) w `events` (`useMemo`) — pomija polisy `sprzedany`.
+- `components/ClientsList.tsx` → `_upcoming` (kolumna "Wznowienia" na liście klientów) filtruje przez `isRenewable`, nie przez wszystkie `SOLD_STAGES`.
+
+**NIE dotyczy** (świadomie, zostają na `isSold`): `coverageGaps()`/`missingData()` w `clientInsights.ts`, liczniki `_v`/`_p`/`_l` (typy sprzedanych polis) w `ClientsList.tsx`, wszystkie widoki finansowe/prowizyjne.

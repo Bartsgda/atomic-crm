@@ -12,6 +12,7 @@ export type SalesStage =
   | "sprzedaż"
   | "sprzedany"
   | "of_do zrobienia"
+  | "pierwszy kontakt"
   | "przeł kontakt"
   | "czekam na dane/dokum"
   | "of_przedst"

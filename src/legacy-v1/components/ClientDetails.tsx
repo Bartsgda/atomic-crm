@@ -20,6 +20,7 @@ import { ApkGenerator } from './ApkGenerator';
 import { ClientFormModal } from './ClientFormModal';
 import { STATUS_CONFIG } from '../constants';
 import { DraggablePanel } from './Tools/DraggablePanel';
+import { isRenewable } from '../services/clientInsights';
 
 interface Props {
   client: Client;
@@ -100,6 +101,9 @@ const PolicyCardItem = ({ policy, client, statusConfig, isFiltered, isHovered, d
     const isVehicleRegBadge = ['OC', 'AC', 'BOTH'].includes(policy.type);
 
     const isSold = policy.stage === 'sprzedaż' || policy.stage === 'sprzedany' || policy.stage === 'sprzedaz';
+    // renewable = sprzedana i NADAL AKTUALNA (jest co wznawiać). 'sprzedany' = klient sprzedał
+    // auto -> przychód/prowizja zostają (isSold bez zmian), ale nie proponujemy wznowienia.
+    const renewable = isRenewable(policy);
     const areDocsSent = policy.documentsStatus === 'WYSŁANO';
 
     // UNIFIED LIST: Co-Owners (Auto/Home) + Participants (Travel)
@@ -110,9 +114,9 @@ const PolicyCardItem = ({ policy, client, statusConfig, isFiltered, isHovered, d
         ...(policy.travelDetails?.participants?.map((p: any) => ({ name: p.fullName })) || [])
     ];
 
-    // Renewal Badge Logic
+    // Renewal Badge Logic — tylko dla polis, które NADAL są aktualne (nie 'sprzedany')
     let renewalBadge = null;
-    if (isSold && daysToExpiry !== undefined) {
+    if (renewable && daysToExpiry !== undefined) {
         if (daysToExpiry < 0) {
             renewalBadge = <span className="text-[9px] font-black text-zinc-400 bg-zinc-100 px-2 py-0.5 rounded">PO TERMINIE ({Math.abs(daysToExpiry)} dni)</span>;
         } else if (daysToExpiry <= 30) {
@@ -120,6 +124,8 @@ const PolicyCardItem = ({ policy, client, statusConfig, isFiltered, isHovered, d
         } else if (daysToExpiry <= 60) {
             renewalBadge = <span className="text-[9px] font-black text-amber-600 bg-amber-50 px-2 py-0.5 rounded border border-amber-100">ZA {daysToExpiry} DNI</span>;
         }
+    } else if (isSold && policy.stage === 'sprzedany') {
+        renewalBadge = <span className="text-[9px] font-black text-violet-700 dark:text-violet-300 bg-violet-50 dark:bg-violet-900/20 px-2 py-0.5 rounded border border-violet-200 dark:border-violet-800">AUTO SPRZEDANE</span>;
     }
 
     return (
@@ -244,8 +250,8 @@ const PolicyCardItem = ({ policy, client, statusConfig, isFiltered, isHovered, d
                     <span className="text-[8px] font-black uppercase tracking-tight">Pełne Info</span>
                 </button>
                 
-                {isSold ? (
-                    <button 
+                {renewable ? (
+                    <button
                         onClick={(e) => { e.stopPropagation(); onAction('clone_renewal', policy); }}
                         className="flex flex-col items-center justify-center gap-1 py-2 rounded-xl bg-blue-50/50 hover:bg-blue-100 dark:hover:bg-blue-900/20 text-blue-600 dark:text-blue-400 transition-colors group/btn border border-blue-100 dark:border-blue-900/30"
                         title="Przygotuj ofertę wznowienia na kolejny rok"

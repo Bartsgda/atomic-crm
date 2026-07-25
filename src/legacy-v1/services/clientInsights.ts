@@ -19,6 +19,15 @@ import { Client, Policy } from "../types";
 const SOLD = ["sprzedaż", "sprzedany", "sprzedaz"];
 export const isSold = (p: Policy): boolean => SOLD.includes(String(p.stage));
 
+// isRenewable — polisa SPRZEDANA i NADAL AKTUALNA (jest co wznawiać).
+// 'sprzedany' = agent dzwonił o wznowienie i dowiedział się, że klient sprzedał auto —
+// przychód/prowizja z tamtej sprzedaży ZOSTAJE (patrz isSold — to się NIE zmienia), ale
+// nie ma sensu dzwonić o wznowienie nieistniejącego już pojazdu. Używaj tego helpera
+// wszędzie, gdzie chodzi o WZNOWIENIE/kontakt telefoniczny (nie o finanse/prowizje —
+// tam nadal isSold).
+export const isRenewable = (p: Policy): boolean =>
+  isSold(p) && p.stage !== "sprzedany";
+
 const AUTO_TYPES = ["OC", "AC", "BOTH"];
 const isAuto = (p: Policy): boolean => AUTO_TYPES.includes(String(p.type));
 
@@ -49,7 +58,7 @@ export function upcomingRenewals(
 ): Insight[] {
   const out: Insight[] = [];
   for (const p of policies) {
-    if (!isSold(p)) continue;
+    if (!isRenewable(p)) continue;
     const d = daysUntil(p.policyEndDate);
     if (d == null || d < 0 || d > withinDays) continue;
     // priorytet: baza 55 + pilność (im bliżej, tym wyżej) + składka

@@ -1020,12 +1020,13 @@ export const PolicyFormModal: React.FC<Props> = ({ isOpen, onClose, initialClien
                                 <label className={LABEL_CLASS}>Etap Sprzedaży</label>
                                 <select {...register('stage')} className={STANDARD_SELECT_CLASS}>
                                     <option value="of_do zrobienia">1. Do zrobienia (Lead)</option>
-                                    <option value="przeł kontakt">2. W toku / Kalkulacja</option>
-                                    <option value="czekam na dane/dokum">3. Czekam na Dane</option>
-                                    <option value="oferta_wysłana">4. Oferta Wysłana</option>
-                                    <option value="sprzedaż">5. Sprzedaż (Polisa)</option>
-                                    <option value="ucięty kontakt">6. Odrzucona</option>
-                                    <option value="rez po ofercie_kont za rok">7. Chłodnia (Za rok)</option>
+                                    <option value="pierwszy kontakt">2. Pierwszy Kontakt</option>
+                                    <option value="przeł kontakt">3. W toku / Kalkulacja</option>
+                                    <option value="czekam na dane/dokum">4. Czekam na Dane</option>
+                                    <option value="oferta_wysłana">5. Oferta Wysłana</option>
+                                    <option value="sprzedaż">6. Sprzedaż (Polisa)</option>
+                                    <option value="ucięty kontakt">7. Odrzucona</option>
+                                    <option value="rez po ofercie_kont za rok">8. Chłodnia (Za rok)</option>
                                 </select>
                             </div>
                             

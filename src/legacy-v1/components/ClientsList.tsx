@@ -6,6 +6,7 @@ import { ClientFormModal } from './ClientFormModal';
 import { format, differenceInDays, isValid } from 'date-fns';
 import { DeleteSafetyButton } from './DeleteSafetyButton';
 import { Archive, RotateCcw, Trash, AlertCircle } from 'lucide-react';
+import { isRenewable } from '../services/clientInsights';
 
 interface Props {
   state: AppState;
@@ -199,7 +200,7 @@ export const ClientsList: React.FC<Props> = ({
           
           // Oferty (wszystkie etapy sprzedażowe z wyjątkiem sprzedanych)
           const SOLD_STAGES = ['sprzedaż', 'sprzedany', 'sprzedaz'];
-          const OFFER_STAGES = ['of_do zrobienia', 'przeł kontakt', 'czekam na dane/dokum', 'of_przedst', 'oferta_wysłana', 'ucięty kontakt', 'rez po ofercie_kont za rok', 'inne'];
+          const OFFER_STAGES = ['of_do zrobienia', 'pierwszy kontakt', 'przeł kontakt', 'czekam na dane/dokum', 'of_przedst', 'oferta_wysłana', 'ucięty kontakt', 'rez po ofercie_kont za rok', 'inne'];
           const offers = pols.filter(p => OFFER_STAGES.includes(p.stage));
           const soldPols = pols.filter(p => SOLD_STAGES.includes(p.stage));
           
@@ -220,9 +221,10 @@ export const ClientsList: React.FC<Props> = ({
           const propCount = soldPols.filter(p => ['DOM', 'FIRMA'].includes(p.type)).length;
           const l = soldPols.filter(p => ['ZYCIE', 'PODROZ', 'INNE'].includes(p.type)).length;
 
-          // Wznowienia — sprzedane polisy kończące się w ciągu 30 dni (lub do 7 dni po terminie)
+          // Wznowienia — sprzedane i NADAL AKTUALNE polisy (nie 'sprzedany' - auto zbyte,
+          // nie ma czego wznawiać) kończące się w ciągu 30 dni (lub do 7 dni po terminie)
           const todayMs = new Date();
-          const upcoming = soldPols.filter(pol => {
+          const upcoming = pols.filter(isRenewable).filter(pol => {
               if (!pol.policyEndDate) return false;
               try {
                   const endDate = new Date(pol.policyEndDate);

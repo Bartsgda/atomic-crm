@@ -38,12 +38,12 @@ Google widzi tokeny, Alina (użytkowniczka) widzi prawdziwe dane — podmiana za
    podmienia każdy token na prawdziwą wartość (`text.split(token).join(value)`).
 
 ### Format tokenów
-`<TYP:id>` lub `<TYP:id:idx>` (idx dla list — telefony/e-maile/firmy):
+`<TYP:id>` lub `<TYP:id:idx>` (idx dla list — telefony/e-maile/firmy/wystąpienia w wolnym tekście):
 
 | Typ | Przykład | Źródło |
 |---|---|---|
 | `IMIE`, `NAZWISKO` | `<NAZWISKO:c1>` | `client.firstName/lastName`, id = `client.id` |
-| `PESEL` | `<PESEL:c1>` | `client.pesel` (też podmienia PESEL wykryty regexem w notatkach) |
+| `PESEL` | `<PESEL:c1>` | `client.pesel` (pole strukturalne, bez idx) |
 | `DUR` | `<DUR:c1>` | `client.birthDate` |
 | `TEL` | `<TEL:c1:0>` | `client.phones[]`, indeksowane |
 | `EMAIL` | `<EMAIL:c1:0>` | `client.emails[]`, indeksowane |
@@ -51,10 +51,26 @@ Google widzi tokeny, Alina (użytkowniczka) widzi prawdziwe dane — podmiana za
 | `NIP`, `REGON`, `ADRES_FIRMA` | `<NIP:c1:0>` | `client.businesses[]`, indeksowane per firma (bi) |
 | `REJ`, `VIN` | `<REJ:p3>` | `policy.vehicleReg/vehicleVin`, id = `policy.id` |
 | `ADRES_NIER` | `<ADRES_NIER:p3>` | `policy.propertyAddress` |
+| `PESEL`, `TEL`, `EMAIL`, `KOD` (w notatkach) | `<PESEL:c1:0>`, `<TEL:c1:0>` | wykryte regexem w wolnym tekście notatki, indeksowane PER WYSTĄPIENIE (nie per klient) |
 
-**Sanityzacja notatek:** wolny tekst notatki przeszukiwany regexem `PESEL_RE = /\b\d{11}\b/g` — każde
-wystąpienie 11 cyfr zamieniane na `<PESEL:{clientId}>` (nawet jeśli PESEL wpisany ręcznie w treści rozmowy,
-poza polem `client.pesel`).
+**Sanityzacja notatek (zaktualizowana 2026-07-25, naprawa S1/W1):** `sanitizeNoteContent()` przeszukuje wolny
+tekst notatki czterema regexami, w kolejności PESEL → TEL → EMAIL → KOD (kolejność ważna — kod pocztowy na
+końcu, żeby nie złapać fragmentu telefonu z myślnikami, np. „601-202-303" → false-positive „01-202"):
+
+- **PESEL** — kandydat `\b\d{11}\b`, ale tokenizowany TYLKO gdy przejdzie `isValidPesel()` (suma kontrolna,
+  wagi 1,3,7,9,1,3,7,9,1,3). Odsiewa telefony z prefiksem kraju (`48601202303`, 11 cyfr) i inne przypadkowe
+  11-cyfrowe ciągi (nr polis), które wcześniej były błędnie łapane jako PESEL.
+- **TEL** — `\b(?:\+?48[\s-]?)?\d{3}[\s-]?\d{3}[\s-]?\d{3}\b`, łapie telefony PL z/bez prefiksu kraju i
+  z/bez separatorów (9 cyfr — wcześniej NIEsanityzowane, W1).
+- **EMAIL** — standardowy regex `local@domain.tld` (nowe, W1).
+- **KOD** — kod pocztowy PL `\b\d{2}-\d{3}\b` (nowe, W1).
+
+Każde OSOBNE wystąpienie (nie tylko per typ) dostaje WŁASNY indeksowany token i WŁASNĄ wartość w `map`
+(liczniki `pesel/tel/email/kod` współdzielone przez wszystkie notatki jednego klienta, nie resetowane per
+notatka). To naprawia S1: wcześniej WSZYSTKIE 11-cyfrowe ciągi w notatkach klienta mapowały na JEDEN token
+`<PESEL:{clientId}>` z wartością `client.pesel` — PESEL osoby trzeciej (współmałżonek) wpisany w notatce
+byłby przy rehydrate podmieniony na PESEL głównego klienta (przekłamanie/wyciek). Teraz wartość tokenu to
+zawsze dokładnie ten tekst, który faktycznie wystąpił w notatce — nie `client.pesel`.
 
 ### Co zostaje JAWNE (nie identyfikuje osoby, AI tego potrzebuje merytorycznie)
 Typ polisy, marka/model pojazdu, towarzystwo (`insurerName`), składka (`premium`), daty
@@ -115,6 +131,13 @@ Spina trzy gotowe fundamenty (konsumuje, nie modyfikuje): `piiTokenizer` (RODO),
 Wspólny szkielet: `connect()` → `apiKeyStore.get("main")` + `apiKeyStore.getModel("main")` → `null` jeśli
 brak klucza. `run(conn, systemInstruction, contents, map)` → `generateContent()` → `rehydrate(response.text, map)`.
 
+**S2 fix (2026-07-25):** `askAboutClient` re-tokenizuje `history` przez `detokenize(text, map)`
+(`piiTokenizer.ts`, odwrotność `rehydrate`) TUŻ PRZED wysłaniem do modelu. Powód: odpowiedzi zwracane przez
+`chatService` są już PO `rehydrate` (prawdziwe PII, do wyświetlenia Alinie); gdyby UI zapisało taką
+odpowiedź w `history` i podało do kolejnego wywołania, `run()` wysłałby ją verbatim (z prawdziwym PII) do
+Google w następnym turze. `detokenize` zamienia prawdziwe wartości z powrotem na tokeny tą samą `map` przed
+wysyłką — `rehydrate` zostaje wyłącznie do pokazania odpowiedzi.
+
 | # | Metoda | Sygnatura | Co robi | Tokenizer/rehydrate |
 |---|---|---|---|---|
 | 1 | `askAboutClient` | `(client, policies, notes, history: ChatTurn[], userMessage)` | Konwersacyjny czat — pełny kontekst klienta + historia rozmowy + nowe pytanie użytkowniczki | `buildClientContext` → `context+map`; `rehydrate` na odpowiedzi |
@@ -138,6 +161,13 @@ do UI (na razie nie ma UI, patrz § 5).
 dwa realnie używane: `"main"` (czat/Karateka) i `"ocr"` (skany). `get(purpose="main")` — fallback: dokładne
 dopasowanie purpose → pierwszy dostępny klucz → `process.env.API_KEY` (dev/localhost). `getModel(purpose)`
 — fallback do `DEFAULT_MODEL = "gemini-3.1-flash-lite"`.
+
+**S5 fix (2026-07-25):** fallback „pierwszy dostępny klucz" jest teraz wyłączony dla `purpose="ocr"` —
+brak dedykowanego wpisu `"ocr"` zwraca `null` twardo (bez próby `"any"` ani `process.env.API_KEY`), zamiast
+po cichu pożyczać klucz `"main"`. Powód: skany dokumentów tożsamości nie powinny mieszać limitów/rozliczeń
+z kluczem główny, i musi być da się audytować „co poszło którym kluczem". Fallback „any" zostaje bez zmian
+dla wszystkich innych `purpose` (w tym `"main"`). `getModel(purpose)` bez zmian — model ma sensowny
+`DEFAULT_MODEL`, klucz nie.
 
 | Konsument | Purpose | Woła tokenizer? | Charakter danych wysyłanych do Google |
 |---|---|---|---|

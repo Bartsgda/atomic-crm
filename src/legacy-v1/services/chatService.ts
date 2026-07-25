@@ -15,6 +15,14 @@
  * przepuszczamy przez rehydrate(odpowiedź, map) PRZED zwróceniem. Nigdy nie
  * logujemy prawdziwych danych osobowych.
  *
+ * ⚠️ WYMÓG (S2, Bartek 2026-07-25): `askAboutClient` zwraca odpowiedź PO
+ * rehydrate (prawdziwe PII — do wyświetlenia Alinie). Jeśli UI zapisze tę
+ * odpowiedź w `history` i przekaże ją do kolejnego wywołania, prawdziwe dane
+ * osobowe wróciłyby do Google w następnym turze. Dlatego `history` przekazywana
+ * do modelu jest ZAWSZE re-tokenizowana przez `detokenize(text, map)` (odwrotność
+ * rehydrate) tuż przed wysłaniem — patrz `askAboutClient` niżej. NIE zapisywać
+ * skrótu/optymalizacji, która ominie ten krok.
+ *
  * Każda metoda jest async i zwraca `string` (rehydrated) albo `null` gdy brak
  * klucza AI (lub błąd wywołania modelu).
  */
@@ -24,6 +32,7 @@ import { Client, Policy, ClientNote } from "../types";
 import {
   buildClientContext,
   rehydrate,
+  detokenize,
   PII_SYSTEM_INSTRUCTION,
 } from "./piiTokenizer";
 import type { TokenMap } from "./piiTokenizer";
@@ -99,8 +108,15 @@ async function askAboutClient(
   const { context, map } = buildClientContext(client, policies, notes);
   const systemInstruction = `${ASSISTANT_ROLE}\n\n${PII_SYSTEM_INSTRUCTION}\n\n## DANE KLIENTA (tokenizowane)\n${context}`;
 
+  // ⚠️ RODO: `history` może zawierać ODPOWIEDZI zwrócone wcześniej przez ten
+  // moduł, czyli już rehydrated (z prawdziwym PII, patrz nagłówek pliku).
+  // Re-tokenizujemy ją tą samą mapą przed wysłaniem — inaczej prawdziwe dane
+  // osobowe z poprzedniego tury wróciłyby do Google w tym zapytaniu.
   const contents = [
-    ...history.map((h) => ({ role: h.role, parts: [{ text: h.text }] })),
+    ...history.map((h) => ({
+      role: h.role,
+      parts: [{ text: detokenize(h.text, map) }],
+    })),
     { role: "user" as const, parts: [{ text: userMessage }] },
   ];
 

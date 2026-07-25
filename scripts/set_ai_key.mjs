@@ -4,7 +4,7 @@
  *
  * Szyfruje klucz TYM SAMYM mechanizmem co dane klientów (envelope DEK) — hasłem
  * aplikacji, którego Alina używa do odszyfrowania tabel. Zaszyfrowany blob ląduje
- * w public.tenant_config.encrypted_api_key. Klucz NIE jest w bundlu, NIE w rrv.
+ * w public.tenant_config.encrypted_ai_config. Klucz NIE jest w bundlu, NIE w rrv.
  * Przy logowaniu PassphraseGate odszyfrowuje go DEK-iem → apiKeyStore (pamięć sesji).
  *
  * URUCHOM W SWOIM TERMINALU (hasło + klucz podajesz interaktywnie — NIE trafiają

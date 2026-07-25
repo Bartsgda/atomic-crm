@@ -17,6 +17,7 @@ import {
   Layers,
   Car,
   Home,
+  AlertTriangle,
 } from "lucide-react";
 import { Client, Policy } from "../../types";
 import { ClientDocument } from "./types";
@@ -37,6 +38,18 @@ const uid = (): string =>
   typeof crypto !== "undefined" && "randomUUID" in crypto
     ? crypto.randomUUID()
     : `doc_${Date.now()}_${Math.random().toString(36).slice(2)}`;
+
+// --- limity bezpieczeństwa (audyt S4 2026-07-25) ---
+/** Twardy limit rozmiaru pojedynczego pliku — chroni pamięć karty (object-URL + canvas resize). */
+const MAX_FILE_BYTES = 20 * 1024 * 1024; // 20 MB
+/** Whitelist MIME dla obrazów — NIE polegamy na `startsWith("image/")`, które łapie też `image/svg+xml`. */
+const ALLOWED_IMAGE_MIME_TYPES = new Set([
+  "image/jpeg",
+  "image/png",
+  "image/webp",
+  "image/heic",
+  "image/heif",
+]);
 
 /** Krótka etykieta polisy dla kontekstu dokumentu. */
 function policyLabel(p: Policy): string {
@@ -63,6 +76,7 @@ export const DocumentCenter: React.FC<Props> = ({
   const [contextPolicyId, setContextPolicyId] = useState<string | null>(null);
   const [docs, setDocs] = useState<ClientDocument[]>([]);
   const [preview, setPreview] = useState<ClientDocument | null>(null);
+  const [fileWarning, setFileWarning] = useState<string | null>(null);
 
   // --- czyszczenie object URL-i przy odmontowaniu (unikamy wycieków pamięci) ---
   const docsRef = useRef(docs);
@@ -76,6 +90,19 @@ export const DocumentCenter: React.FC<Props> = ({
         if (d.pdfUrl) URL.revokeObjectURL(d.pdfUrl);
       });
     };
+  }, []);
+
+  // --- toast ostrzegawczy przy odrzuceniu pliku (limit rozmiaru / typ) ---
+  const warningTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  useEffect(() => {
+    return () => {
+      if (warningTimerRef.current) clearTimeout(warningTimerRef.current);
+    };
+  }, []);
+  const showFileWarning = useCallback((message: string) => {
+    setFileWarning(message);
+    if (warningTimerRef.current) clearTimeout(warningTimerRef.current);
+    warningTimerRef.current = setTimeout(() => setFileWarning(null), 5000);
   }, []);
 
   const selectedClient = useMemo(
@@ -132,6 +159,27 @@ export const DocumentCenter: React.FC<Props> = ({
         const isPdf =
           file.type === "application/pdf" || /\.pdf$/i.test(file.name);
 
+        // Whitelist MIME zamiast `startsWith("image/")` — ten łapał też
+        // `image/svg+xml` (SVG może nieść skrypty). Drag&drop omija ACCEPT
+        // z DropZone, więc ta walidacja jest jedyną linią obrony.
+        if (!isPdf && !ALLOWED_IMAGE_MIME_TYPES.has(file.type)) {
+          showFileWarning(
+            file.type === "image/svg+xml"
+              ? `Pominięto „${file.name}” — pliki SVG są niedozwolone (mogą zawierać skrypty).`
+              : `Pominięto „${file.name}” — nieobsługiwany typ pliku${file.type ? ` (${file.type})` : ""}.`,
+          );
+          continue;
+        }
+
+        // Twardy limit rozmiaru — duży plik zapycha pamięć (object-URL +
+        // canvas resize) i potrafi zawiesić kartę przeglądarki.
+        if (file.size > MAX_FILE_BYTES) {
+          showFileWarning(
+            `Pominięto „${file.name}” — plik za duży (${formatBytes(file.size)}, limit ${formatBytes(MAX_FILE_BYTES)}).`,
+          );
+          continue;
+        }
+
         if (isPdf) {
           const pdfUrl = URL.createObjectURL(file);
           setDocs((prev) => [
@@ -151,11 +199,6 @@ export const DocumentCenter: React.FC<Props> = ({
             ...prev,
           ]);
           // TODO storage: upload oryginału PDF do Supabase Storage (bucket per klient) / Cloudflare.
-          continue;
-        }
-
-        if (!file.type.startsWith("image/")) {
-          // pomijamy nieobsługiwane typy
           continue;
         }
 
@@ -197,7 +240,13 @@ export const DocumentCenter: React.FC<Props> = ({
         }
       }
     },
-    [selectedClientId, contextPolicyId, clientPolicies, updateDoc],
+    [
+      selectedClientId,
+      contextPolicyId,
+      clientPolicies,
+      updateDoc,
+      showFileWarning,
+    ],
   );
 
   // --- ręczny obrót o 90° (re-render z oryginału, spójnie z korekcją EXIF) ---
@@ -248,6 +297,16 @@ export const DocumentCenter: React.FC<Props> = ({
 
   return (
     <div className="p-4 md:p-8 max-w-6xl mx-auto text-zinc-900 dark:text-zinc-100">
+      {/* Toast ostrzegawczy — plik odrzucony (limit rozmiaru / niedozwolony typ) */}
+      {fileWarning && (
+        <div className="fixed top-4 left-0 right-0 z-[550] flex justify-center px-4 animate-in slide-in-from-top-4 fade-in duration-300 pointer-events-none">
+          <div className="flex items-center gap-2 max-w-md rounded-full bg-amber-600 text-white px-4 py-2 shadow-xl text-xs font-bold pointer-events-auto">
+            <AlertTriangle className="w-3.5 h-3.5 shrink-0" />
+            <span className="truncate">{fileWarning}</span>
+          </div>
+        </div>
+      )}
+
       {/* Nagłówek */}
       <header className="mb-6">
         <div className="flex items-center gap-3">
@@ -487,7 +546,9 @@ export const DocumentCenter: React.FC<Props> = ({
               </p>
               <div className="flex items-center gap-2">
                 <a
-                  href={preview.kind === "pdf" ? preview.pdfUrl : preview.displayUrl}
+                  href={
+                    preview.kind === "pdf" ? preview.pdfUrl : preview.displayUrl
+                  }
                   target="_blank"
                   rel="noreferrer"
                   className="flex items-center gap-1 text-xs font-bold text-white bg-white/10 hover:bg-white/20 px-3 py-1.5 rounded-lg transition-colors"
@@ -504,9 +565,18 @@ export const DocumentCenter: React.FC<Props> = ({
               </div>
             </div>
             {preview.kind === "pdf" ? (
+              // sandbox="allow-same-origin" (BEZ allow-scripts): blokuje
+              // wykonanie JS/skryptów osadzonych w PDF. Samo `sandbox=""`
+              // (opaque origin) uniemożliwiłoby wczytanie blob: URL — blob
+              // jest związany z origin strony, a sandboxowany iframe bez
+              // allow-same-origin dostaje origin "null" i traci do niego
+              // dostęp. allow-same-origin bez allow-scripts NIE jest
+              // niebezpieczną kombinacją (niebezpieczna jest dopiero z
+              // allow-scripts razem — tego tu nie ma).
               <iframe
                 title={preview.name}
                 src={preview.pdfUrl}
+                sandbox="allow-same-origin"
                 className="w-full h-[80vh] rounded-xl bg-white"
               />
             ) : (

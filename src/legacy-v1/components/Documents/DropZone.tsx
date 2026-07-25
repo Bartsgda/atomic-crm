@@ -6,8 +6,12 @@ interface Props {
   disabled?: boolean;
 }
 
-// jpg/png/webp dla zdjęć + pdf (polisy, załączniki)
-const ACCEPT = "image/jpeg,image/png,image/webp,application/pdf";
+// jpg/png/webp/heic/heif dla zdjęć + pdf (polisy, załączniki).
+// Spójne z whiteliste w DocumentCenter.handleFiles (audyt S4 2026-07-25) —
+// to tylko hint dla natywnego file pickera (drag&drop go omija), realna
+// walidacja typu jest zawsze w handleFiles, nie tu.
+const ACCEPT =
+  "image/jpeg,image/png,image/webp,image/heic,image/heif,application/pdf";
 
 export const DropZone: React.FC<Props> = ({ onFiles, disabled = false }) => {
   const [dragging, setDragging] = useState(false);

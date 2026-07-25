@@ -55,10 +55,19 @@ export const apiKeyStore = {
     return { keys: [..._config.keys] };
   },
 
-  /** Klucz dla przeznaczenia; fallback: pierwszy dostępny, potem .env (dev). */
+  /**
+   * Klucz dla przeznaczenia.
+   * Fallback "pierwszy dostępny klucz, potem .env (dev)" dotyczy TYLKO purpose
+   * inny niż "ocr". Dla "ocr" fallback jest CELOWO wyłączony (S5, Bartek
+   * 2026-07-25): skany dokumentów tożsamości nie mogą po cichu polecieć
+   * kluczem "main" (miesza limity/rozliczenia i audyt „co poszło którym
+   * kluczem"). Brak skonfigurowanego klucza "ocr" = twardy `null` — konsument
+   * (`ocrService.ts`) pokazuje komunikat „skonfiguruj klucz OCR".
+   */
   get(purpose = "main"): string | null {
     const exact = _config.keys.find((k) => k.purpose === purpose && k.key);
     if (exact) return exact.key;
+    if (purpose === "ocr") return null;
     const any = _config.keys.find((k) => k.key);
     if (any) return any.key;
     try {

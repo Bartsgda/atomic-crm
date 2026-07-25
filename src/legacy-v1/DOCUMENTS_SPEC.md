@@ -168,7 +168,35 @@ renderowania stron PDF, brak `pdf.js`).
 - Brak trwałości między odświeżeniami strony (czysty `React.useState`).
 - Brak uploadu do jakiegokolwiek backendu — `originalFile`/`pdfFile` siedzą w
   pamięci przeglądarki tylko na czas sesji.
-- Brak limitu liczby/wielkości plików poza naturalnym ograniczeniem pamięci
-  przeglądarki.
+- Brak limitu liczby plików naraz (limit *rozmiaru* pojedynczego pliku jest —
+  patrz §9).
 - Brak testów jednostkowych dla `imageProcessing.ts` (kandydat, bo logika jest
   czysta/bez JSX — łatwa do przetestowania w Vitest).
+
+## 9. Zabezpieczenia dodane (naprawa finding S4, 2026-07-25)
+
+Audyt `SECURITY_AUDIT_2026-07-25.md` § S4 wskazał trzy luki w `handleFiles`
+(`DocumentCenter.tsx`) i podglądzie PDF — naprawione tą samą sesją:
+
+- **Twardy limit rozmiaru pliku** — `MAX_FILE_BYTES = 20 * 1024 * 1024` (20 MB)
+  w `DocumentCenter.tsx`. Plik większy jest odrzucany (nie trafia do `docs`),
+  z czytelnym komunikatem w toaście (`fileWarning` state, `showFileWarning()`,
+  auto-znika po 5 s) zamiast cichego pominięcia.
+- **Whitelist MIME zamiast `startsWith("image/")`** — `ALLOWED_IMAGE_MIME_TYPES`
+  (`image/jpeg`, `image/png`, `image/webp`, `image/heic`, `image/heif`).
+  `image/svg+xml` jest jawnie odrzucany z dedykowanym komunikatem (SVG może
+  nieść skrypty) zamiast przechodzić przez `startsWith("image/")`, które go
+  łapało. `DropZone.tsx` ACCEPT rozszerzony do tej samej listy (to tylko hint
+  dla natywnego file pickera — drag&drop i tak omija ACCEPT, realna walidacja
+  jest wyłącznie w `handleFiles`).
+- **`sandbox="allow-same-origin"` na `<iframe>` podglądu PDF** — blokuje
+  wykonanie JS osadzonego w PDF (brak `allow-scripts`). Świadomie NIE
+  `sandbox=""` (pusty) — blob: URL jest związany z origin strony, a w pełni
+  sandboxowany iframe (bez `allow-same-origin`) dostaje opaque origin `"null"`
+  i traci dostęp do blob: URL, więc podgląd by nie działał. Kombinacja
+  `allow-same-origin` + `allow-scripts` razem byłaby niebezpieczna (embedded
+  doc mógłby zdjąć sandbox) — tu `allow-scripts` nie jest ustawione, więc to
+  bezpieczne.
+
+Bez zmian: sprzątanie object-URL (poprawne od początku), brak uploadu
+(TODO storage/OCR nietknięte).

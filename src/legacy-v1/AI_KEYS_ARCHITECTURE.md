@@ -133,6 +133,15 @@ schemacie `public`**, nawet gdy Alina pracuje w trybie danych `test`
     (fallback "any"); jeśli i tego brak → `process.env.API_KEY` (**tylko dev/
     localhost**, w buildzie przeglądarki `process` zwykle nie istnieje —
     otoczone `try/catch`).
+  - **Wyjątek (S5, naprawa audytu bezpieczeństwa 2026-07-25):** dla
+    `purpose="ocr"` fallback "any"/`process.env.API_KEY` jest CELOWO wyłączony
+    — brak dokładnego dopasowania `purpose="ocr"` zwraca `null` twardo. Powód:
+    OCR (skany dowodów/dokumentów tożsamości) nie może po cichu polecieć
+    kluczem `"main"` — miesza limity/rozliczenia i utrudnia audyt „co poszło
+    którym kluczem". Konsument (`ocrService.ts`) już dziś obsługuje `null`
+    (pokazuje `console.warn` + zwraca `null`, UI ma pokazać „skonfiguruj klucz
+    OCR"). Fallback "any" zostaje bez zmian dla wszystkich pozostałych
+    `purpose` (w tym `"main"`).
   - `apiKeyStore.getModel(purpose="main")` — model z wpisu o danym `purpose`
     albo `DEFAULT_MODEL`.
 - **Konsumenci** (5 miejsc, wszystkie w pamięci sesji, żaden nie czyta bazy

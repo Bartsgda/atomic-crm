@@ -43,13 +43,23 @@ def build(sb_pub, sb_sec):
     używa process.env.API_KEY z .env przez vite.config define.
     """
     env = os.environ.copy()
+    # BEZPIECZEŃSTWO (audyt 2026-07-25 K3/W3): usuń z env buildu wszystko, co mogłoby
+    # wyciec do publicznego bundla przez `vite define` albo prefiks VITE_. Frontend NIE
+    # potrzebuje service_role ani klucza Gemini — build dostaje wyłącznie allowlistę niżej.
+    for _k in list(env):
+        if _k.startswith((
+            "GEMINI_API_KEY", "AISTUDIO", "AISTUDI_", "CRM_ALINA_",
+            "SUPABASE_SECRET", "GH_TOKEN", "VITE_SB_SECRET",
+        )):
+            env.pop(_k, None)
     env.update({
         "VITE_SUPABASE_URL":        SB_URL,
         "VITE_SB_PUBLISHABLE_KEY":  sb_pub,
-        "VITE_SB_SECRET_KEY":       sb_sec,
         "VITE_IS_DEMO":             "false",
         "VITE_ATTACHMENTS_BUCKET":  "attachments",
     })
+    # UWAGA: sb_sec (service_role) świadomie NIE trafia do env FE (audyt W3) — Vite
+    # eksponuje każdą zmienną VITE_*, a jedno odwołanie = publiczny bypass RLS.
     print("[*] npm run build (prod) ...")
     subprocess.check_call("npm run build", env=env, shell=True)
     print("[OK] Build zakończony.")

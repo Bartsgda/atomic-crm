@@ -83,7 +83,7 @@ Drugi, zsynchronizowany zestaw kolorów (solid pill, nie pastelowy): `NoteSelect
 
 ## 7. Edytor Statusów — Alina personalizuje nazwy/kolory (2026-07-25)
 
-Zmiana podejścia: zamiast jednej sztywnej palety (§ 6) dobieranej przez nas, Alina ma w Ustawieniach (`ThemeSettings.tsx`, sekcja pod "Designer Czcionek") panel **`components/Settings/StatusEditor.tsx`** — dla KAŻDEGO statusu ustawia własną wyświetlaną nazwę i dwa kolory (tło + tekst, `<input type="color">`), z podglądem na żywo i przyciskiem "Reset" (powrót do domyślnego).
+Zmiana podejścia: zamiast jednej sztywnej palety (§ 6) dobieranej przez nas, Alina ma w Ustawieniach (`ThemeSettings.tsx`, sekcja pod "Designer Czcionek" — od 2026-07-25 wewnątrz `SettingsModal.tsx`, zob. § 8) panel **`components/Settings/StatusEditor.tsx`** — dla KAŻDEGO statusu ustawia własną wyświetlaną nazwę i dwa kolory (tło + tekst, `<input type="color">`), z podglądem na żywo i przyciskiem "Reset" (powrót do domyślnego).
 
 **Twardy niezmiennik:** klucz `stage` (np. `"rez po ofercie_kont za rok"`) **NIGDY** się nie zmienia — to mapowanie do importu XLSX/bazy. Edytor operuje WYŁĄCZNIE na warstwie nadpisania label/kolor, nigdy na kluczu.
 
@@ -94,7 +94,15 @@ Zmiana podejścia: zamiast jednej sztywnej palety (§ 6) dobieranej przez nas, A
 - **WSZYSTKIE miejsca renderujące status** czytają przez `getStatusDisplay()`, NIE bezpośrednio `STATUS_CONFIG[stage]`: `ClientDetails.tsx` (badge karty polisy + badge "AUTO SPRZEDANE"), `Dashboard.tsx` (filter chips + kolumna Status w tabeli), `OffersBoard.tsx` (dropdown zmiany etapu, notatka systemowa zmiany etapu, kolumny Kanban), `PolicyFormModal.tsx` (badge w `ReadOnlyView` + notatka systemowa), `QuickViewDrawer.tsx` (lista "Procesowane Oferty"), `AdvancedFilters.tsx` (chipy filtra etapu — wcześniej pokazywały SUROWY klucz stage jako label, teraz custom/domyślny label), `NoteSelectors.tsx` (`SALES_STAGES` — label only, kolory zostają solid/hardcoded, inny styl niż pastelowe badge). `ClientsList.tsx`/`Notatki.tsx` sprawdzone — nie renderują badge'a statusu (tylko liczą etapy do `_offers`/`_upcoming`), więc nic do zmiany.
 - `Object.keys(STATUS_CONFIG)` nadal jedyne źródło **listy kluczy** stage (struktura się nie zmienia edytorem) — tylko label/kolor per klucz idzie przez `getStatusDisplay`.
 
-## 5. Terminarz — kolorystyka i czytelność (redesign 2026-07-25)
+## 8. Panel Ustawień jako modal na pełny ekran (2026-07-25)
+
+Wcześniej `ThemeSettings` (+ `StatusEditor` z § 7, + `AiKeysPanel`) renderowały się **inline wciśnięte w wąski Sidebar**, zdublowane w DWÓCH miejscach kodu (osobno dla skinu `luxury-gold` i pozostałych). Po dojściu Designer Czcionek + Edytora Statusów treści zrobiło się za dużo na sidebar. Zamienione na **jeden fullscreen modal**: nowy plik `components/Settings/SettingsModal.tsx`, renderowany RAZ w `Sidebar.tsx` (poza `<nav>`, na końcu `<aside>`), sterowany tym samym propem `showThemeSettings`/`onToggleTheme` co wcześniej (bez zmian logiki przełącznika — `onToggleTheme` to `setShowThemeSettings(!showThemeSettings)`, więc bezpiecznie użyty też jako `onClose`).
+
+**Konwencja modala** — 1:1 skopiowana z `ClientFormModal.tsx` (NIE nowa estetyka): `fixed inset-0 z-[100]` + backdrop `bg-zinc-950/80 backdrop-blur-md` (klik zamyka) + karta `max-w-4xl max-h-[90vh] rounded-[1.75rem] shadow-2xl` + header (tytuł "Ustawienia / Wygląd" + podtytuł + przycisk `X`) + `flex-1 overflow-y-auto` na treść. Esc zamyka (`useEffect` + `keydown` listener — wzorzec, którego wcześniej NIE było w żadnym innym modalu tego modułu, dodany tu jako nowy standard).
+
+**Ciemne tło treści (świadoma decyzja, nie przeoczenie):** `ThemeSettings`/`StatusEditor`/`AiKeysPanel` mają kolorystykę na sztywno ciemną (zero klas `dark:` w tamtych plikach — projektowane pod ciemny Sidebar). Żeby nie przerabiać ich stylów, obszar treści modala ma **stałe** ciemne tło (`bg-zinc-950`, nie `dark:bg-zinc-950`) — wygląda identycznie jak wcześniej w sidebarze, niezależnie od jasnego/ciemnego motywu aplikacji. Header modala JEST theme-aware (`bg-zinc-50 dark:bg-zinc-950`), jak reszta chrome modali w module.
+
+`AiKeysPanel` nadal renderowany tylko dla `isAdmin` (bez zmian warunku).
 
 `components/CalendarView.tsx` był zbudowany na sztywnym `red-600`/`red-50` dla WSZYSTKIEGO — nagłówka, przycisku "Dzisiaj", oznaczenia "dziś" w siatce i każdego wznowienia niezależnie od terminu. Efekt: ekran "krzyczał czerwienią" i tekst tonął w kolorze. Naprawione zgodnie z zasadami z sekcji 1-3 tego dokumentu:
 - **"Dziś" w siatce** (kółko dnia, tło komórki) → `bg-primary`/neutralny `zinc`, NIE czerwień (to nawigacja, nie alarm).

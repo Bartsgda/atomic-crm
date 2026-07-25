@@ -39,8 +39,7 @@ import {
 import { AppState, PolicyType, UiPreferences } from "../../types";
 import { NavButton } from "./NavButton";
 import { BackupManager } from "../BackupManager";
-import { ThemeSettings } from "../ThemeSettings";
-import { AiKeysPanel } from "../Settings/AiKeysPanel";
+import { SettingsModal } from "../Settings/SettingsModal";
 import { differenceInDays } from "date-fns";
 import { storage, supabaseStorage } from "../../services/storage";
 import { PassphraseModal } from "../PassphraseModal";
@@ -749,13 +748,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 ))}
               </div>
             )}
-
-            {showThemeSettings && (
-              <div style={{ borderTop: "1px solid rgba(212,175,55,0.08)", marginTop: "8px" }}>
-                <ThemeSettings prefs={uiPrefs} onUpdate={onUpdateUiPrefs} />
-                {isAdmin && <AiKeysPanel />}
-              </div>
-            )}
           </nav>
         );
       })()}
@@ -941,19 +933,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
               </button>
             ))}
 
-            {showThemeSettings && (
-              <div
-                className={`pl-3 ml-3 ${skin === "default" ? "border-l border-zinc-800" : ""}`}
-                style={
-                  skin !== "default"
-                    ? { borderLeft: "1px solid var(--v1-sep)" }
-                    : {}
-                }
-              >
-                <ThemeSettings prefs={uiPrefs} onUpdate={onUpdateUiPrefs} />
-                {isAdmin && <AiKeysPanel />}
-              </div>
-            )}
             {isAdmin && (
               <div
                 className="mt-2 pt-2"
@@ -965,6 +944,16 @@ export const Sidebar: React.FC<SidebarProps> = ({
           </div>
         )}
       </nav>}
+
+      {/* Ustawienia / Wygląd — modal na pełny ekran (2026-07-25), zamiast inline w sidebarze */}
+      {showThemeSettings && (
+        <SettingsModal
+          prefs={uiPrefs}
+          onUpdate={onUpdateUiPrefs}
+          isAdmin={isAdmin}
+          onClose={onToggleTheme}
+        />
+      )}
     </aside>
   );
 };

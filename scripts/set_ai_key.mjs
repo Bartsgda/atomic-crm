@@ -101,14 +101,25 @@ function ask(question, hidden = false) {
 }
 
 async function main() {
-  const email = await ask(
-    "Email usera, którego hasłem szyfrujemy (np. redroadai@gmail.com): ",
+  // Email + klucz z env (są w sesji vault). Podajesz TYLKO hasło aplikacji.
+  const email = process.env.CRM_AI_KEY_EMAIL || "redroadai@gmail.com";
+  const apiKey =
+    process.env.CRM_ALINA_GEMINI_KEY ||
+    process.env.GEMINI_API_KEY_1 ||
+    process.env.GEMINI_API_KEY_2;
+  if (!apiKey) {
+    console.error(
+      "Brak klucza Gemini w env (CRM_ALINA_GEMINI_KEY / GEMINI_API_KEY_1/2). Odpal przez SET_AI_KEY.bat (ładuje vault).",
+    );
+    process.exit(1);
+  }
+  console.log(`User do zaszyfrowania: ${email}`);
+  const passphrase = await ask(
+    "Hasło aplikacji Aliny (jedyne co podajesz): ",
+    true,
   );
-  const passphrase = await ask("Hasło aplikacji (do odszyfrowania DEK): ", true);
-  const apiKey = await ask("Klucz Gemini API: ", true);
-
-  if (!passphrase || !apiKey) {
-    console.error("Hasło i klucz są wymagane.");
+  if (!passphrase) {
+    console.error("Hasło jest wymagane.");
     process.exit(1);
   }
 

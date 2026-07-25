@@ -34,6 +34,7 @@ import {
   TableProperties,
   Camera,
   Zap,
+  FolderOpen,
 } from "lucide-react";
 import { AppState, PolicyType, UiPreferences } from "../../types";
 import { NavButton } from "./NavButton";
@@ -593,11 +594,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
           { id: "insurers",    label: "Towarzystwa",  Icon: Building2,  count: getCategoryCount("insurers"), onClick: () => onNavigate("insurers") },
           { id: "finance",     label: "Finanse",      Icon: Banknote,   count: 0, onClick: () => onNavigate("finance") },
           { id: "sub-agents",  label: "Pośrednicy",   Icon: Handshake,  count: state.subAgents?.length ?? 0, onClick: () => onNavigate("sub-agents") },
+          { id: "documents",   label: "Dokumenty",    Icon: FolderOpen, count: 0, onClick: () => onNavigate("documents") },
         ] as const;
 
         const isActiveTile = (id: string) => {
           if (id === "clients") return ["clients","client-details"].includes(currentPage);
-          if (["insurers","finance","calendar","offers","terminations","sub-agents"].includes(id)) return currentPage === id;
+          if (["insurers","finance","calendar","offers","terminations","sub-agents","documents"].includes(id)) return currentPage === id;
           return currentPage === "dashboard" && activeCategory === id;
         };
 

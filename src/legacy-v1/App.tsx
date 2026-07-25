@@ -23,6 +23,7 @@ import { Sidebar, MENU_CATEGORIES } from "./components/Navigation/Sidebar";
 import { storage, supabaseStorage } from "./services/storage";
 import { SnapshotDialog } from "./components/SnapshotDialog";
 import StatusEye from "./components/StatusEye";
+import { DocumentCenter } from "./components/Documents/DocumentCenter";
 import {
   AppState,
   Client,
@@ -53,6 +54,7 @@ type Page =
   | "terminations"
   | "vision"
   | "sub-agents"
+  | "documents"
   | "insurers"
   | "form-builder"
   | "raw-data"
@@ -699,6 +701,13 @@ function App() {
             )}
 
           {currentPage === "vision" && <VisionBoard />}
+          {currentPage === "documents" && (
+            <DocumentCenter
+              clients={state.clients}
+              policies={state.policies}
+              initialClientId={currentData?.client?.id}
+            />
+          )}
           {currentPage === "sandbox" && <DesignSahara />}
 
           {currentPage === "raw-data" && <RawDataView state={state} />}

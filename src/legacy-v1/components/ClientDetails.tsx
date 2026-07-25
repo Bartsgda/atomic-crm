@@ -1,6 +1,6 @@
 
 import React, { useState, useMemo, useEffect, useRef } from 'react';
-import { Client, Policy, ClientNote, TerminationRecord, PolicyType } from '../types';
+import { Client, Policy, ClientNote, TerminationRecord, PolicyType, TerminationBasis } from '../types';
 import { 
   Car, Home, Heart, Briefcase, Phone, MapPin, ArrowLeft, Trash2, 
   Plane, Link as LinkIcon, PlusCircle, FileText, Building2, Mail, 
@@ -14,7 +14,7 @@ import { pl } from 'date-fns/locale/pl';
 import { Notatki } from './Notatki';
 import { storage } from '../services/storage';
 import { DeleteSafetyButton } from './DeleteSafetyButton';
-import { TerminationFormModal } from './TerminationFormModal';
+import { TerminationFormModal, TerminationConfirmPayload } from './TerminationFormModal';
 import { PolicyFormModal } from './PolicyFormModal';
 import { ApkGenerator } from './ApkGenerator';
 import { ClientFormModal } from './ClientFormModal';
@@ -43,6 +43,19 @@ interface Props {
 }
 
 const generateTrId = () => `wypow_${Date.now().toString().slice(-8)}`;
+
+// Powód wypowiedzenia (TerminationRecord.reason) -> podstawa prawna (Policy.terminationBasis),
+// żeby TerminationPreview.tsx (PDF) automatycznie dobrał właściwy artykuł (2026-07-25).
+// Wcześniej terminationBasis nigdy się nie zmieniało po utworzeniu polisy (zawsze domyślne
+// Art. 28) - to pierwsze realne miejsce, gdzie użytkownik faktycznie je ustawia.
+const terminationBasisFromReason = (reason: TerminationConfirmPayload['reason']): TerminationBasis => {
+    switch (reason) {
+        case 'zbycie_pojazdu': return TerminationBasis.ART_31;
+        case 'podwojne_oc': return TerminationBasis.ART_28A;
+        case 'koniec_okresu': return TerminationBasis.ART_28;
+        default: return TerminationBasis.OTHER;
+    }
+};
 
 // Helper Components
 const StatBadge = ({ icon: Icon, label, value, color }: { icon: any, label: string, value: string, color: string }) => (
@@ -420,7 +433,9 @@ export const ClientDetails: React.FC<Props> = ({ client, policies, notes, termin
     return baseNotes.filter(n => n.linkedPolicyIds?.includes(filterPolicyId));
   }, [notes, client.id, filterPolicyId]);
 
-  const handleRegisterTermination = async (policy: Policy, actualDate: string) => {
+  const handleRegisterTermination = async (policy: Policy, payload: TerminationConfirmPayload) => {
+    const { actualDate, reason, saleDate, commissionCorrection } = payload;
+    const isVehicleSale = reason === 'zbycie_pojazdu';
     const trId = generateTrId();
     const record: TerminationRecord = {
         id: trId,
@@ -430,23 +445,40 @@ export const ClientDetails: React.FC<Props> = ({ client, policies, notes, termin
         policyType: policy.type,
         itemDescription: `${policy.vehicleBrand || policy.type} ${policy.vehicleReg || ''}`.trim(),
         sentAt: new Date().toISOString(),
-        actualDate: actualDate
+        actualDate: actualDate,
+        reason,
+        ...(isVehicleSale && saleDate ? { saleDate } : {}),
     };
     await storage.addTerminationRecord(record);
-    
+
     const noteId = `sys_term_${Date.now()}`;
+    const noteContent = isVehicleSale
+        ? `[STATUS] Wypowiedzenie zarejestrowane (zbycie pojazdu). Data pisma: ${actualDate}. Data sprzedaży auta: ${saleDate || '-'}. ID: ${trId}`
+        : `[STATUS] Wypowiedzenie zarejestrowane. Data pisma: ${actualDate}. ID: ${trId}`;
     const newNote = {
         id: noteId,
         clientId: client.id,
-        content: `[STATUS] Wypowiedzenie zarejestrowane. Data pisma: ${actualDate}. ID: ${trId}`,
+        content: noteContent,
         tag: 'STATUS' as any,
         createdAt: new Date().toISOString(),
         linkedPolicyIds: [policy.id]
     };
     await storage.addNote(newNote);
-    onAddNote(newNote); 
+    onAddNote(newNote);
 
-    onUpdatePolicy({ ...policy, isTerminationSent: true, terminationId: trId });
+    // Zbycie pojazdu (decyzja Bartka, twarda): auto-status 'sprzedany' + korekta prowizji.
+    // Dla pozostałych powodów: zachowanie jak dotąd (stage bez zmian). terminationBasis
+    // (podstawa prawna dla PDF) synchronizowana zawsze - zob. terminationBasisFromReason.
+    onUpdatePolicy({
+        ...policy,
+        isTerminationSent: true,
+        terminationId: trId,
+        terminationBasis: terminationBasisFromReason(reason),
+        ...(isVehicleSale ? {
+            stage: 'sprzedany',
+            commissionCorrection,
+        } : {}),
+    });
     setTerminationModalPolicy(null);
   };
 
@@ -779,7 +811,7 @@ export const ClientDetails: React.FC<Props> = ({ client, policies, notes, termin
           <TerminationFormModal 
             policy={terminationModalPolicy}
             client={client}
-            onConfirm={(actualDate) => handleRegisterTermination(terminationModalPolicy, actualDate)}
+            onConfirm={(payload) => handleRegisterTermination(terminationModalPolicy, payload)}
             onCancel={() => setTerminationModalPolicy(null)}
           />
       )}

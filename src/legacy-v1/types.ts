@@ -344,6 +344,15 @@ export interface Policy {
   premium: number;
   commission: number;
   commissionRate?: number;
+  /**
+   * Skorygowana prowizja agenta (2026-07-25) — używana gdy klient sprzedał auto
+   * (wypowiedzenie z powodem 'zbycie_pojazdu') i towarzystwo rozliczyło prowizję
+   * proporcjonalnie do wykorzystanego okresu ochrony. `undefined`/`null` = brak
+   * korekty, liczy się pełna `commission` bez zmian (wszędzie: `p.commissionCorrection
+   * ?? p.commission`). NIE dotyczy `subAgentCommission` (osobna, niezależna pula —
+   * zob. CLAUDE.md "Model prowizji").
+   */
+  commissionCorrection?: number;
   paymentStatus?: PaymentStatus;
   installments?: Installment[];
 
@@ -378,6 +387,10 @@ export interface TerminationRecord {
   localPath?: string;
   cloudLink?: string;
   fileName?: string;
+  /** Powód wypowiedzenia (2026-07-25). Brak = stare rekordy sprzed tej zmiany. */
+  reason?: "koniec_okresu" | "zbycie_pojazdu" | "podwojne_oc" | "inne";
+  /** Data sprzedaży pojazdu (ISO date). Wypełniane tylko gdy reason='zbycie_pojazdu'. */
+  saleDate?: string;
 }
 
 export type LogAction =

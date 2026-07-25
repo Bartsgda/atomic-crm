@@ -951,16 +951,16 @@ export const OffersBoard: React.FC<Props> = ({ state, onNavigate, onRefresh }) =
                 {/* --- DROP ZONES FOR DECISION (Visible only when dragging) --- */}
                 {draggedPolicyId && (
                     <div className="flex gap-6 h-24 animate-in slide-in-from-bottom-10 fade-in duration-300">
-                        <div 
-                            className={`flex-1 rounded-[2rem] border-2 border-dashed flex items-center justify-center gap-4 transition-all ${dragOverColumn === 'ucięty kontakt' ? 'bg-red-500 border-red-600 text-white scale-105 shadow-xl' : 'bg-red-50 border-red-200 text-red-400 opacity-80'}`}
+                        <div
+                            className={`flex-1 rounded-[2rem] border-2 border-dashed flex items-center justify-center gap-4 transition-all ${dragOverColumn === 'ucięty kontakt' ? 'bg-amber-600 border-amber-700 text-white scale-105 shadow-xl' : 'bg-amber-50 border-amber-300 text-amber-500 opacity-80'}`}
                             onDragOver={(e) => onDragOver(e, 'ucięty kontakt')}
                             onDrop={(e) => onDrop(e, 'ucięty kontakt')}
                         >
                             <XCircle size={32} />
                             <span className="text-lg font-black uppercase tracking-widest">Odrzuć (Kosz)</span>
                         </div>
-                        <div 
-                            className={`flex-1 rounded-[2rem] border-2 border-dashed flex items-center justify-center gap-4 transition-all ${dragOverColumn === 'sprzedaż' ? 'bg-emerald-500 border-emerald-600 text-white scale-105 shadow-xl' : 'bg-emerald-50 border-emerald-200 text-emerald-400 opacity-80'}`}
+                        <div
+                            className={`flex-1 rounded-[2rem] border-2 border-dashed flex items-center justify-center gap-4 transition-all ${dragOverColumn === 'sprzedaż' ? 'bg-green-600 border-green-700 text-white scale-105 shadow-xl' : 'bg-green-50 border-green-200 text-green-500 opacity-80'}`}
                             onDragOver={(e) => onDragOver(e, 'sprzedaż')}
                             onDrop={(e) => onDrop(e, 'sprzedaż')}
                         >

@@ -70,3 +70,14 @@ Rozszerzenie istniejącego systemu motywów (Sekcja 1-2), NIE równoległy syste
 **Mechanizm (spójny z istniejącym `--primary-color`/`data-v1-skin`):** `App.tsx` → `applyTheme()` ustawia CSS custom properties (`--app-font-family`, `--app-font-weight`, `--app-font-color`) oraz atrybut `data-app-font-bold` na `document.documentElement`, identycznie jak dla `--primary-color`. Zapis do localStorage przez ten sam `storage.saveUiPrefs()`/`PREFS_KEY = "InsuranceMaster_UI_Prefs"` co reszta `UiPreferences` — przetrwa reload, ładowany przy starcie w `refreshData()`.
 
 **Czytelność (PESEL / nr rejestracyjny):** niezależnie od Designera, PESEL (nagłówek `ClientDetails.tsx`, `QuickViewDrawer.tsx`) i numer rejestracyjny pojazdu (badge na karcie polisy w `ClientDetails.tsx`, chipy w `Notatki.tsx`) są renderowane z wyraźnie większą czcionką (`text-sm`/`text-xs` `font-black tabular-nums` zamiast `text-[9-10px]`) — to są najważniejsze dane operacyjne dla Aliny.
+
+## 5. Terminarz — kolorystyka i czytelność (redesign 2026-07-25)
+
+`components/CalendarView.tsx` był zbudowany na sztywnym `red-600`/`red-50` dla WSZYSTKIEGO — nagłówka, przycisku "Dzisiaj", oznaczenia "dziś" w siatce i każdego wznowienia niezależnie od terminu. Efekt: ekran "krzyczał czerwienią" i tekst tonął w kolorze. Naprawione zgodnie z zasadami z sekcji 1-3 tego dokumentu:
+- **"Dziś" w siatce** (kółko dnia, tło komórki) → `bg-primary`/neutralny `zinc`, NIE czerwień (to nawigacja, nie alarm).
+- **Branding/chrome** (nagłówek, przycisk "Dzisiaj", ikona modala, focus ring) → `text-primary`/`focus:ring-primary`, zgodnie z "Prawo Jednego Inputa" (§ 3.A powyżej).
+- **Czerwień jako akcent** — zarezerwowana dla zdarzeń realnie pilnych (dziś / po terminie); wznowienia w przyszłości dostają neutralne tło + `border-primary`. Szczegóły reguły: `CALENDAR_SPEC.md § 4`.
+- **Rozmiar czcionek** kafelków dnia i list w Agendzie podniesiony (`text-[8px]` → `text-[10-11px]` w siatce; nazwisko klienta wyodrębnione jako osobna, pogrubiona linia `text-sm font-black` zamiast ginąć w tle jako `text-[10px]` obok tytułu zdarzenia).
+- Dark mode dodany do wariantów kolorów zdarzeń (`getEventStyle`) i popovera hover — wcześniej brakowało `dark:` wariantów dla rose/amber/purple/blue.
+
+Nie jest to równoległy system — reużywa istniejące `--primary-color`/`.text-primary`/`.bg-primary`/`.border-primary` (App.tsx) ustawiane per motyw (Exec/Onyx/Forest), zgodnie z sekcją 1-2 wyżej.

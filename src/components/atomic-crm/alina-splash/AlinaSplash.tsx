@@ -132,6 +132,7 @@ const CHANGELOG: ChangeEntry[] = [
     items: [
       "Możesz teraz wybrać rodzaj, wielkość, kolor i pogrubienie czcionki w Ustawieniach (nowa sekcja 'Designer Czcionek' pod suwakiem skali)",
       "PESEL i numery rejestracyjne pojazdów są teraz wyraźnie większe — łatwiej je odczytać na pierwszy rzut oka",
+      "Terminarz ma teraz spokojniejsze kolory i większe napisy — łatwiej zobaczyć klientów. Czerwony zostaje tylko przy sprawach naprawdę pilnych (dziś / po terminie)",
     ],
   },
   {

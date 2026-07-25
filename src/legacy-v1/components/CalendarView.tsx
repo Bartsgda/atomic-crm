@@ -222,9 +222,17 @@ const EventPopover = ({ event, position }: { event: EnhancedCalendarEvent, posit
         top = position.y - POPOVER_HEIGHT - 10;
     }
 
-    let badgeColor = 'bg-blue-50 text-blue-600';
-    if (event.type === 'RENEWAL' && event.isSoldRenewal) badgeColor = 'bg-red-50 text-red-600';
-    if (event.isCalculation) badgeColor = 'bg-amber-50 text-amber-600';
+    // Czerwień TYLKO dla realnie pilnych (dziś / po terminie) - nie dla każdego wznowienia
+    const now = new Date();
+    const isUrgent = isBefore(event.date, startOfDay(now)) || isSameDay(event.date, now);
+
+    let badgeColor = 'bg-blue-50 text-blue-600 dark:bg-blue-950/40 dark:text-blue-300';
+    if (event.type === 'RENEWAL' && event.isSoldRenewal) {
+        badgeColor = isUrgent
+            ? 'bg-rose-50 text-rose-600 dark:bg-rose-950/40 dark:text-rose-300'
+            : 'bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300';
+    }
+    if (event.isCalculation) badgeColor = 'bg-amber-50 text-amber-600 dark:bg-amber-950/40 dark:text-amber-300';
 
     return (
         <div 
@@ -253,9 +261,9 @@ const EventPopover = ({ event, position }: { event: EnhancedCalendarEvent, posit
                     {event.title}
                 </p>
 
-                <div className="flex items-center gap-2 bg-zinc-50 dark:bg-zinc-800 p-2 rounded-lg">
-                    <User size={12} className="text-zinc-400" />
-                    <span className="text-xs font-bold text-zinc-600 dark:text-zinc-400 truncate">{event.clientName}</span>
+                <div className="flex items-center gap-2 bg-zinc-50 dark:bg-zinc-800 p-2.5 rounded-lg">
+                    <User size={14} className="text-zinc-400 shrink-0" />
+                    <span className="text-sm font-black text-zinc-800 dark:text-zinc-100 truncate">{event.clientName}</span>
                 </div>
 
                 {event.isCompleted && (
@@ -427,27 +435,39 @@ export const CalendarView: React.FC<Props> = ({ state, onNavigate, onDeleteNote,
   const nextDisplayEvents = isNextExpanded ? futureEvents.slice(0, 20) : futureEvents.slice(0, 3);
   const hiddenCount = Math.max(0, futureEvents.length - 3);
 
+  // Czerwień = TYLKO realnie pilne (dziś lub po terminie), nie każde wznowienie.
+  // Zob. CALENDAR_SPEC.md / DESIGN_SYSTEM.md - redesign 2026-07-25.
+  const isEventUrgent = (event: EnhancedCalendarEvent) =>
+    isBefore(event.date, startOfToday) || isSameDay(event.date, today);
+
   const getEventStyle = (event: EnhancedCalendarEvent) => {
     // 1. COMPLETED (Szary, przekreślony, najniższy priorytet wizualny)
     if (event.isCompleted) {
         return 'bg-zinc-100 dark:bg-zinc-800 text-zinc-400 border-zinc-200 dark:border-zinc-700 line-through opacity-70 border-l-4 border-l-zinc-300';
     }
 
-    // 2. RENEWALS (Active Policies Ending)
+    // 2. RENEWALS (Koniec ochrony polisy sprzedanej)
     if (event.type === 'RENEWAL' && event.isSoldRenewal) {
-        return 'bg-rose-50 text-rose-700 border-rose-200 border-l-4 border-l-rose-500 shadow-sm font-bold';
+        // Pilne (dziś / po terminie): czytelny czerwono-różowy akcent
+        if (isEventUrgent(event)) {
+            return 'bg-rose-50 dark:bg-rose-950/40 text-rose-800 dark:text-rose-300 border-rose-200 dark:border-rose-900 border-l-4 border-l-rose-500 shadow-sm font-bold';
+        }
+        // Jeszcze nie pilne: spokojne neutralne tło + akcent koloru motywu
+        // (border-primary, nie border-l-primary: tylko ten pierwszy jest nadpisany
+        // przez --primary-color motywu w App.tsx; lewa krawędź i tak jedyna z grubością)
+        return 'bg-white dark:bg-zinc-900 text-zinc-800 dark:text-zinc-100 border-zinc-200 dark:border-zinc-700 border-l-4 border-primary font-bold';
     }
-    
+
     // 3. CALCULATIONS / LEADS (To Do)
     if (event.isCalculation) {
-        return 'bg-amber-50 text-amber-700 border-amber-200 border-l-4 border-l-amber-500 border-dashed';
+        return 'bg-amber-50 dark:bg-amber-950/30 text-amber-800 dark:text-amber-300 border-amber-200 dark:border-amber-900 border-l-4 border-l-amber-500 border-dashed';
     }
-    
+
     // 4. MEETINGS / TASKS
-    if (event.type === 'MEETING') return 'bg-purple-50 text-purple-700 border-purple-200 border-l-4 border-l-purple-500';
-    
+    if (event.type === 'MEETING') return 'bg-purple-50 dark:bg-purple-950/30 text-purple-800 dark:text-purple-300 border-purple-200 dark:border-purple-900 border-l-4 border-l-purple-500';
+
     // Default Task
-    return 'bg-blue-50 text-blue-700 border-blue-200 border-l-4 border-l-blue-500';
+    return 'bg-blue-50 dark:bg-blue-950/30 text-blue-800 dark:text-blue-300 border-blue-200 dark:border-blue-900 border-l-4 border-l-blue-500';
   };
 
   // ... [DRAG & DROP HANDLERS KEEP SAME AS PREVIOUS] ...
@@ -577,21 +597,24 @@ export const CalendarView: React.FC<Props> = ({ state, onNavigate, onDeleteNote,
 
   const renderEventBadge = (event: EnhancedCalendarEvent) => {
     const EventIcon = getEventIcon(event);
+    // Pokaż nazwisko klienta PRZED tytułem - dla wznowień/kalkulacji tytuł to dane pojazdu/adresu,
+    // klient bywał zupełnie niewidoczny w kratce dnia. "Nieznany"/systemowe zadania pomijamy.
+    const showClient = !!event.clientId && event.clientId !== 'SYSTEM_GLOBAL' && !!event.clientName && event.clientName !== 'Nieznany';
     return (
-        <div 
+        <div
             key={event.id}
             draggable={!event.isSoldRenewal} // Sold renewals cannot be dragged, others can
             onDragStart={(e) => handleDragStart(e, event.id)}
             onMouseEnter={(e) => handleEventMouseEnter(e, event)}
             onMouseLeave={handleEventMouseLeave}
-            className={`px-1.5 py-1 rounded text-[8px] font-bold truncate leading-tight flex items-center gap-1 mb-1 cursor-pointer transition-transform hover:scale-105 active:opacity-50 ${getEventStyle(event).replace('border-l-4', 'border-l-2')}`}
+            className={`px-1.5 py-1 rounded text-[10px] sm:text-[11px] font-bold truncate leading-snug flex items-center gap-1 mb-1 cursor-pointer transition-transform hover:scale-105 active:opacity-50 ${getEventStyle(event).replace('border-l-4', 'border-l-2')}`}
             onClick={(e) => {
                 e.stopPropagation();
                 if(event.clientId && event.clientId !== 'SYSTEM_GLOBAL') {
                     const client = state.clients.find(c => c.id === event.clientId);
                     if(client) {
-                        onNavigate('client-details', { 
-                            client, 
+                        onNavigate('client-details', {
+                            client,
                             highlightPolicyId: event.type === 'RENEWAL' || event.isCalculation ? event.relatedId : undefined
                         });
                     }
@@ -600,8 +623,16 @@ export const CalendarView: React.FC<Props> = ({ state, onNavigate, onDeleteNote,
         >
             {/* Show time for meetings/tasks/calculations */}
             {!event.isSoldRenewal && <span className="opacity-75 font-mono mr-1">{isValid(event.date) ? format(event.date, 'HH:mm') : ''}</span>}
-            <EventIcon size={10} className="shrink-0" />
-            <span className={`truncate ${event.isCompleted ? 'line-through' : ''}`}>{event.title}</span>
+            <EventIcon size={11} className="shrink-0" />
+            <span className={`truncate ${event.isCompleted ? 'line-through' : ''}`}>
+                {showClient ? (
+                    <>
+                        <span className="font-black">{event.clientName}</span>
+                        <span className="opacity-60"> · </span>
+                        {event.title}
+                    </>
+                ) : event.title}
+            </span>
         </div>
     );
 };
@@ -627,13 +658,13 @@ export const CalendarView: React.FC<Props> = ({ state, onNavigate, onDeleteNote,
             const isCur = isToday(day);
             const imieninyKey = format(day, 'MM-dd');
             return (
-              <div key={day.toISOString()} className={`p-2 text-center border-r border-zinc-100 dark:border-zinc-800 last:border-r-0 ${isCur ? 'bg-red-50/50 dark:bg-red-900/10' : ''}`}>
-                <div className="text-[9px] font-bold text-zinc-400 uppercase">{format(day, 'EEEEEE', { locale: pl })}</div>
-                <div className={`text-sm font-black mx-auto w-7 h-7 flex items-center justify-center rounded-full ${isCur ? 'bg-red-600 text-white' : 'text-zinc-700 dark:text-zinc-300'}`}>
+              <div key={day.toISOString()} className={`p-2 text-center border-r border-zinc-100 dark:border-zinc-800 last:border-r-0 ${isCur ? 'bg-zinc-100 dark:bg-zinc-800/60' : ''}`}>
+                <div className="text-[10px] font-bold text-zinc-400 uppercase">{format(day, 'EEEEEE', { locale: pl })}</div>
+                <div className={`text-sm font-black mx-auto w-7 h-7 flex items-center justify-center rounded-full ${isCur ? 'bg-primary text-white' : 'text-zinc-700 dark:text-zinc-300'}`}>
                   {format(day, 'd')}
                 </div>
                 {IMIENINY[imieninyKey] && (
-                  <div className="text-[7px] text-rose-400 font-bold truncate" title={IMIENINY[imieninyKey]}>{IMIENINY[imieninyKey]}</div>
+                  <div className="text-[9px] text-zinc-400 dark:text-zinc-500 font-bold truncate italic" title={IMIENINY[imieninyKey]}>{IMIENINY[imieninyKey]}</div>
                 )}
               </div>
             );
@@ -646,7 +677,7 @@ export const CalendarView: React.FC<Props> = ({ state, onNavigate, onDeleteNote,
             return (
               <div key={day.toISOString()} onDragOver={handleDragOver} onDrop={(e) => handleDropOnDay(e, day)}
                 onClick={() => handleDayClick(day)}
-                className={`border-r border-zinc-100 dark:border-zinc-800 last:border-r-0 p-1 min-h-[200px] cursor-pointer hover:bg-zinc-50 dark:hover:bg-zinc-800/50 ${isToday(day) ? 'bg-red-50/20 dark:bg-red-900/5' : ''}`}>
+                className={`border-r border-zinc-100 dark:border-zinc-800 last:border-r-0 p-1 min-h-[200px] cursor-pointer hover:bg-zinc-50 dark:hover:bg-zinc-800/50 ${isToday(day) ? 'bg-zinc-50 dark:bg-zinc-800/30' : ''}`}>
                 {dayEvents.map(renderEventBadge)}
               </div>
             );
@@ -662,11 +693,11 @@ export const CalendarView: React.FC<Props> = ({ state, onNavigate, onDeleteNote,
     return (
       <div className="flex flex-col h-full bg-white dark:bg-zinc-900 rounded-3xl border border-zinc-200 dark:border-zinc-800 shadow-sm overflow-hidden">
         {/* Day header */}
-        <div className={`p-4 border-b border-zinc-100 dark:border-zinc-800 ${isToday(currentDate) ? 'bg-red-50/30 dark:bg-red-900/10' : 'bg-zinc-50 dark:bg-zinc-950'}`}>
+        <div className={`p-4 border-b border-zinc-100 dark:border-zinc-800 ${isToday(currentDate) ? 'bg-zinc-100 dark:bg-zinc-800/60' : 'bg-zinc-50 dark:bg-zinc-950'}`}>
           <div className="text-xs font-bold text-zinc-400 uppercase">{format(currentDate, 'EEEE', { locale: pl })}</div>
           <div className="text-2xl font-black text-zinc-800 dark:text-white">{format(currentDate, 'd MMMM yyyy', { locale: pl })}</div>
           {IMIENINY[imieninyKey] && (
-            <div className="text-xs text-rose-400 font-bold mt-0.5">Imieniny: {IMIENINY[imieninyKey]}</div>
+            <div className="text-xs text-zinc-400 dark:text-zinc-500 font-bold mt-0.5 italic">Imieniny: {IMIENINY[imieninyKey]}</div>
           )}
         </div>
         {/* Events list */}
@@ -690,8 +721,10 @@ export const CalendarView: React.FC<Props> = ({ state, onNavigate, onDeleteNote,
                     <span className="text-xs font-mono opacity-60 w-10 shrink-0">{isValid(e.date) && !e.isSoldRenewal ? format(e.date, 'HH:mm') : '——'}</span>
                     <EventIcon size={14} className="shrink-0" />
                     <div className="flex-1 min-w-0">
-                      <div className={`text-xs font-bold truncate ${e.isCompleted ? 'line-through opacity-50' : ''}`}>{e.title}</div>
-                      {e.clientName && <div className="text-[10px] opacity-60 truncate">{e.clientName}</div>}
+                      {e.clientName && e.clientId !== 'SYSTEM_GLOBAL' && (
+                        <div className={`text-sm font-black truncate ${e.isCompleted ? 'line-through opacity-50' : ''}`}>{e.clientName}</div>
+                      )}
+                      <div className={`text-xs font-bold truncate ${e.clientName && e.clientId !== 'SYSTEM_GLOBAL' ? 'opacity-70 mt-0.5' : ''} ${e.isCompleted ? 'line-through opacity-50' : ''}`}>{e.title}</div>
                     </div>
                   </div>
                 );
@@ -743,11 +776,11 @@ export const CalendarView: React.FC<Props> = ({ state, onNavigate, onDeleteNote,
                 const isMonth = isSameMonth(day, currentDate);
                 const isSelected = selectedDay ? isSameDay(day, selectedDay) : false;
 
-                // Mobile dot color: first event color hint
+                // Mobile dot color: first event color hint (czerwień tylko gdy realnie pilne)
                 const dotColorClass = dayEvents.length === 0
                   ? ''
                   : dayEvents[0].isSoldRenewal
-                    ? 'bg-rose-500'
+                    ? (isEventUrgent(dayEvents[0]) ? 'bg-rose-500' : 'bg-primary')
                     : dayEvents[0].isCalculation
                       ? 'bg-amber-500'
                       : dayEvents[0].type === 'MEETING'
@@ -766,22 +799,22 @@ export const CalendarView: React.FC<Props> = ({ state, onNavigate, onDeleteNote,
                     onClick={() => handleDayClick(day)}
                     className={`border-b border-r border-zinc-100 dark:border-zinc-800 p-1 sm:p-2 flex flex-col gap-1 transition-all cursor-pointer hover:bg-zinc-50 dark:hover:bg-zinc-800 relative
                         ${!isMonth ? 'bg-zinc-50/30 dark:bg-zinc-950/50 text-zinc-300 dark:text-zinc-700' : 'bg-white dark:bg-zinc-900'}
-                        ${isCurrent ? 'bg-red-50/30 dark:bg-red-900/10' : ''}
+                        ${isCurrent ? 'bg-zinc-100/70 dark:bg-zinc-800/50' : ''}
                         ${isSelected ? 'ring-2 ring-inset ring-blue-400' : ''}
                     `}
                 >
                     {/* Day number + day-of-week abbreviation */}
                     <div className="flex flex-col items-start">
                         <div className="flex items-center gap-1">
-                            <span className={`text-xs font-bold w-6 h-6 flex items-center justify-center rounded-full ${isCurrent ? 'bg-red-600 text-white' : 'text-zinc-500 dark:text-zinc-400'}`}>
+                            <span className={`text-sm font-bold w-6 h-6 flex items-center justify-center rounded-full ${isCurrent ? 'bg-primary text-white' : 'text-zinc-500 dark:text-zinc-400'}`}>
                                 {format(day, 'd')}
                             </span>
-                            <span className="text-[9px] font-bold text-zinc-300 dark:text-zinc-600 uppercase">
+                            <span className="text-[10px] font-bold text-zinc-300 dark:text-zinc-600 uppercase">
                                 {format(day, 'EEEEEE', { locale: pl })}
                             </span>
                         </div>
                         {imieninyText && (
-                            <span className="text-[7px] text-rose-400 font-bold leading-tight truncate max-w-full px-0.5 mt-0.5 block" title={`Imieniny: ${imieninyText}`}>
+                            <span className="text-[9px] text-zinc-400 dark:text-zinc-500 font-bold leading-tight truncate max-w-full px-0.5 mt-0.5 block italic" title={`Imieniny: ${imieninyText}`}>
                                 {imieninyText}
                             </span>
                         )}
@@ -857,7 +890,7 @@ export const CalendarView: React.FC<Props> = ({ state, onNavigate, onDeleteNote,
         <div className="flex flex-col xl:flex-row items-start xl:items-center justify-between mb-6 gap-4">
             <div className="flex items-center gap-4">
                 <h1 className="text-3xl font-black text-zinc-900 dark:text-white flex items-center gap-3 tracking-tight">
-                    <CalendarIcon className="text-red-600" /> Terminarz
+                    <CalendarIcon className="text-primary" /> Terminarz
                 </h1>
                 
                 <div className="flex items-center bg-white dark:bg-zinc-800 rounded-xl p-1 shadow-sm border border-zinc-200 dark:border-zinc-700">
@@ -869,7 +902,7 @@ export const CalendarView: React.FC<Props> = ({ state, onNavigate, onDeleteNote,
                     </span>
                     <button onClick={() => changePeriod('next')} className="p-2 hover:bg-zinc-100 dark:hover:bg-zinc-700 rounded-lg text-zinc-500"><ChevronRight size={18}/></button>
                 </div>
-                <button onClick={() => setCurrentDate(new Date())} className="text-xs font-black text-red-600 uppercase hover:underline">Dzisiaj</button>
+                <button onClick={() => setCurrentDate(new Date())} className="text-xs font-black text-primary uppercase hover:underline">Dzisiaj</button>
             </div>
 
             <div className="flex gap-4">
@@ -905,7 +938,7 @@ export const CalendarView: React.FC<Props> = ({ state, onNavigate, onDeleteNote,
                         </div>
                         
                         <div className="bg-zinc-50 dark:bg-zinc-800/50 p-3 rounded-xl mb-4 flex items-center gap-3 border border-zinc-100 dark:border-zinc-700">
-                            <CalendarIcon size={18} className="text-red-600" />
+                            <CalendarIcon size={18} className="text-primary" />
                             <div>
                                 <p className="text-[10px] font-black text-zinc-400 uppercase">Planowana data</p>
                                 <p className="text-sm font-bold text-zinc-900 dark:text-white capitalize">
@@ -918,7 +951,7 @@ export const CalendarView: React.FC<Props> = ({ state, onNavigate, onDeleteNote,
                             <p className="text-[10px] font-black uppercase text-zinc-500">Co robimy?</p>
                             <textarea 
                                 autoFocus
-                                className="w-full p-4 bg-zinc-50 dark:bg-zinc-800 rounded-xl border border-zinc-200 dark:border-zinc-700 text-sm font-medium focus:ring-4 focus:ring-red-50 outline-none text-zinc-900 dark:text-white"
+                                className="w-full p-4 bg-zinc-50 dark:bg-zinc-800 rounded-xl border border-zinc-200 dark:border-zinc-700 text-sm font-medium focus:ring-2 focus:ring-primary outline-none text-zinc-900 dark:text-white"
                                 placeholder="Wpisz treść... "
                                 rows={3}
                                 value={newTaskContent}
@@ -948,7 +981,7 @@ export const CalendarView: React.FC<Props> = ({ state, onNavigate, onDeleteNote,
                  {format(today, 'EEEE, d MMMM', { locale: pl })}
              </p>
              {IMIENINY[format(today, 'MM-dd')] && (
-                 <p className="text-[9px] text-rose-400 font-bold mt-0.5">
+                 <p className="text-[10px] text-zinc-400 dark:text-zinc-500 font-bold mt-0.5 italic">
                      Imieniny: {IMIENINY[format(today, 'MM-dd')]}
                  </p>
              )}
@@ -963,17 +996,19 @@ export const CalendarView: React.FC<Props> = ({ state, onNavigate, onDeleteNote,
                      </h3>
                      <div className="space-y-2">
                          {overdueEvents.map(e => (
-                             <div key={e.id} className="p-3 bg-red-50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30 rounded-xl group cursor-pointer hover:bg-white transition-colors">
+                             <div key={e.id} className="p-3 bg-rose-50 dark:bg-rose-950/30 border border-rose-100 dark:border-rose-900/40 rounded-xl group cursor-pointer hover:bg-white dark:hover:bg-rose-950/50 transition-colors">
                                  <div className="flex justify-between items-start">
-                                     <div className="flex-1">
-                                         <p className="text-xs font-black text-red-800 dark:text-red-400 line-clamp-1">{e.title}</p>
-                                         <p className="text-[10px] text-red-600/70 font-medium truncate">{e.clientName}</p>
-                                         <p className="text-[9px] text-red-400 mt-1 font-mono">{format(e.date, 'dd.MM')} • {format(e.date, 'HH:mm')}</p>
+                                     <div className="flex-1 min-w-0">
+                                         {e.clientName && e.clientId !== 'SYSTEM_GLOBAL' && (
+                                             <p className="text-sm font-black text-rose-900 dark:text-rose-200 truncate">{e.clientName}</p>
+                                         )}
+                                         <p className="text-xs font-bold text-rose-700/90 dark:text-rose-300/90 line-clamp-1 mt-0.5">{e.title}</p>
+                                         <p className="text-[10px] text-rose-500 dark:text-rose-400/80 mt-1 font-mono">{format(e.date, 'dd.MM')} • {format(e.date, 'HH:mm')}</p>
                                      </div>
                                      {!e.isSoldRenewal && (
-                                         <button 
+                                         <button
                                             onClick={() => { toggleCompletion(e.relatedId || e.id); }}
-                                            className="text-red-300 hover:text-red-600 p-1 bg-white rounded-full shadow-sm"
+                                            className="text-rose-300 hover:text-rose-600 p-1 bg-white dark:bg-zinc-900 rounded-full shadow-sm shrink-0"
                                             title="Oznacz jako wykonane"
                                          >
                                              <Check size={14} />
@@ -1013,16 +1048,19 @@ export const CalendarView: React.FC<Props> = ({ state, onNavigate, onDeleteNote,
                                                      highlightPolicyId: (e.type === 'RENEWAL' || e.isCalculation) ? e.relatedId : undefined
                                                  });
                                              }
-                                         }} className="flex-1">
+                                         }} className="flex-1 min-w-0">
                                              <div className="flex items-center gap-2 mb-1">
-                                                 <span className="text-[10px] font-black bg-white/50 px-1.5 rounded">{format(e.date, 'HH:mm')}</span>
-                                                 <span className="text-[9px] font-black uppercase opacity-70 flex items-center gap-1">
-                                                     {isGhost ? <Ghost size={10} /> : <EventIcon size={10} />}
+                                                 <span className="text-[11px] font-black bg-white/60 dark:bg-black/20 px-1.5 py-0.5 rounded">{format(e.date, 'HH:mm')}</span>
+                                                 <span className="text-[10px] font-black uppercase opacity-70 flex items-center gap-1">
+                                                     {isGhost ? <Ghost size={11} /> : <EventIcon size={11} />}
                                                      {e.isCalculation ? 'Kalkulacja' : (e.type === 'RENEWAL' ? 'Koniec Polisy' : 'Zadanie')}
                                                  </span>
                                              </div>
-                                             <p className={`text-xs font-black leading-tight ${isGhost || e.isCompleted ? 'opacity-60' : ''} ${e.isCompleted ? 'line-through' : ''}`}>{e.title}</p>
-                                             <p className="text-[10px] opacity-80 mt-0.5 truncate max-w-[180px]">{e.details || e.clientName}</p>
+                                             {e.clientName && e.clientId !== 'SYSTEM_GLOBAL' && (
+                                                 <p className={`text-sm font-black leading-tight truncate ${isGhost || e.isCompleted ? 'opacity-60' : ''} ${e.isCompleted ? 'line-through' : ''}`}>{e.clientName}</p>
+                                             )}
+                                             <p className={`text-xs font-bold leading-tight truncate mt-0.5 ${e.clientName && e.clientId !== 'SYSTEM_GLOBAL' ? 'opacity-80' : (isGhost || e.isCompleted ? 'opacity-60' : '')} ${e.isCompleted && !(e.clientName && e.clientId !== 'SYSTEM_GLOBAL') ? 'line-through' : ''}`}>{e.title}</p>
+                                             {e.details && <p className="text-[10px] opacity-70 mt-0.5 truncate max-w-[200px]">{e.details}</p>}
                                          </div>
                                          {!e.isSoldRenewal && (
                                              <button onClick={() => { toggleCompletion(e.relatedId || e.id); }} className={`p-1 rounded-full border transition-colors ${e.isCompleted ? 'bg-zinc-200 text-zinc-500 border-zinc-300' : 'bg-white border-zinc-200 text-zinc-300 hover:text-emerald-500 hover:border-emerald-500'}`}>
@@ -1050,12 +1088,18 @@ export const CalendarView: React.FC<Props> = ({ state, onNavigate, onDeleteNote,
                  <div className="space-y-2 opacity-80 hover:opacity-100 transition-opacity">
                      {futureEvents.length === 0 ? <p className="text-[10px] text-zinc-300 italic pl-1">Brak planów.</p> : nextDisplayEvents.map(e => (
                          <div key={e.id} className="flex items-center gap-3 p-2 border-b border-zinc-100 dark:border-zinc-800">
-                             <div className={`w-1.5 h-1.5 rounded-full ${e.isSoldRenewal ? 'bg-red-500' : (e.isCalculation ? 'bg-amber-500' : 'bg-zinc-300')}`}></div>
+                             {/* Przyszłe wznowienia (poza dziś) nie są jeszcze "pilne" - kolor motywu, nie czerwień */}
+                             <div className={`w-1.5 h-1.5 rounded-full shrink-0 ${e.isSoldRenewal ? 'bg-primary' : (e.isCalculation ? 'bg-amber-500' : 'bg-zinc-300')}`}></div>
                              <div className="flex-1 min-w-0">
-                                 <div className="flex justify-between">
-                                    <p className="text-[10px] font-bold text-zinc-600 dark:text-zinc-300 truncate">{e.title}</p>
-                                    <p className="text-[9px] text-zinc-400 font-mono ml-2">{format(e.date, 'dd.MM')}</p>
+                                 <div className="flex justify-between items-baseline gap-2">
+                                    <p className="text-xs font-black text-zinc-700 dark:text-zinc-200 truncate">
+                                        {e.clientName && e.clientId !== 'SYSTEM_GLOBAL' ? e.clientName : e.title}
+                                    </p>
+                                    <p className="text-[10px] text-zinc-400 font-mono ml-2 shrink-0">{format(e.date, 'dd.MM')}</p>
                                  </div>
+                                 {e.clientName && e.clientId !== 'SYSTEM_GLOBAL' && (
+                                    <p className="text-[10px] text-zinc-500 dark:text-zinc-400 truncate mt-0.5">{e.title}</p>
+                                 )}
                              </div>
                          </div>
                      ))}

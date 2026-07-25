@@ -60,11 +60,14 @@ export const FinanceView: React.FC<Props> = ({ state }) => {
       let countOpen = 0;
 
       policiesInMonth.forEach((p) => {
+        // effectiveCommission (2026-07-25): korekta po zbyciu pojazdu (jeśli jest) zamiast
+        // pełnej prowizji. Bez korekty (undefined/null) = p.commission, bez zmian.
+        const effectiveCommission = p.commissionCorrection ?? p.commission;
         // Konwersja bezpieczna
         const commission = roundCurrency(
-          typeof p.commission === "number"
-            ? p.commission
-            : parseFloat(String(p.commission)) || 0,
+          typeof effectiveCommission === "number"
+            ? effectiveCommission
+            : parseFloat(String(effectiveCommission)) || 0,
         );
         const premium = roundCurrency(
           typeof p.premium === "number"

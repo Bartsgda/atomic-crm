@@ -1,6 +1,6 @@
 
 import React, { useState, useMemo, useEffect, useRef } from 'react';
-import { Client, Policy, ClientNote, TerminationRecord, PolicyType, TerminationBasis } from '../types';
+import { Client, Policy, ClientNote, TerminationRecord, PolicyType } from '../types';
 import { 
   Car, Home, Heart, Briefcase, Phone, MapPin, ArrowLeft, Trash2, 
   Plane, Link as LinkIcon, PlusCircle, FileText, Building2, Mail, 
@@ -14,7 +14,7 @@ import { pl } from 'date-fns/locale/pl';
 import { Notatki } from './Notatki';
 import { storage } from '../services/storage';
 import { DeleteSafetyButton } from './DeleteSafetyButton';
-import { TerminationFormModal, TerminationConfirmPayload } from './TerminationFormModal';
+import { TerminationFormModal, TerminationConfirmPayload, terminationBasisFromReason } from './TerminationFormModal';
 import { PolicyFormModal } from './PolicyFormModal';
 import { ApkGenerator } from './ApkGenerator';
 import { ClientFormModal } from './ClientFormModal';
@@ -43,19 +43,6 @@ interface Props {
 }
 
 const generateTrId = () => `wypow_${Date.now().toString().slice(-8)}`;
-
-// Powód wypowiedzenia (TerminationRecord.reason) -> podstawa prawna (Policy.terminationBasis),
-// żeby TerminationPreview.tsx (PDF) automatycznie dobrał właściwy artykuł (2026-07-25).
-// Wcześniej terminationBasis nigdy się nie zmieniało po utworzeniu polisy (zawsze domyślne
-// Art. 28) - to pierwsze realne miejsce, gdzie użytkownik faktycznie je ustawia.
-const terminationBasisFromReason = (reason: TerminationConfirmPayload['reason']): TerminationBasis => {
-    switch (reason) {
-        case 'zbycie_pojazdu': return TerminationBasis.ART_31;
-        case 'podwojne_oc': return TerminationBasis.ART_28A;
-        case 'koniec_okresu': return TerminationBasis.ART_28;
-        default: return TerminationBasis.OTHER;
-    }
-};
 
 // Helper Components
 const StatBadge = ({ icon: Icon, label, value, color }: { icon: any, label: string, value: string, color: string }) => (

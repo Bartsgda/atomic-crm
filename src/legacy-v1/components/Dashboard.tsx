@@ -176,9 +176,12 @@ export const Dashboard: React.FC<Props> = ({ state, onNavigate, onDeletePolicy, 
 
   const stats = useMemo(() => {
     return state.policies.reduce((acc, p) => {
-      const isSold = p.stage === 'sprzedaż' || p.stage === 'sprzedany'; 
+      const isSold = p.stage === 'sprzedaż' || p.stage === 'sprzedany';
       const isLead = ['of_do zrobienia', 'przeł kontakt', 'czekam na dane/dokum', 'of_przedst', 'oferta_wysłana'].includes(p.stage);
-      const commission = isSold ? p.commission : 0;
+      // effectiveCommission (2026-07-25): jeśli polisa dostała korektę prowizji (np. po zbyciu
+      // pojazdu), liczy się skorygowana kwota zamiast pełnej `commission`. Bez korekty = bez zmian.
+      const effectiveCommission = p.commissionCorrection ?? p.commission;
+      const commission = isSold ? effectiveCommission : 0;
       
       // Update stage counts
       const stageCounts = { ...acc.stageCounts };

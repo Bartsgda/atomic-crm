@@ -137,6 +137,7 @@ const CHANGELOG: ChangeEntry[] = [
       "Status »sprzedany« (klient sprzedał auto) nie proponuje już wznowienia; dodano status »pierwszy kontakt«.",
       "Możesz teraz sama ustawić nazwy i kolory statusów w Ustawieniach — Twoje nazwy, Twoje kolory.",
       "Ustawienia otwierają się teraz na pełny ekran — wygodniej.",
+      "Wypowiedzenie ma teraz powód (m.in. sprzedaż auta) — przy sprzedaży auta polisa od razu dostaje status »sprzedany«, a prowizję możesz skorygować, program podpowiada kwotę z proporcji.",
     ],
   },
   {

@@ -283,6 +283,29 @@ async function rowToNote(r: any, dek: CryptoKey | null, policyUuidToV1?: Map<str
   };
 }
 
+// ─── Powód wypowiedzenia <-> kolumna `terminations.article` ───────────────────
+// Kolumna już istniała w schemacie (wcześniej zawsze hardcoded '28') - reużyta
+// zamiast dodawania nowej (2026-07-25). Kody spójne z TerminationBasis (types.ts).
+function reasonToArticleCode(reason: TerminationRecord['reason']): string {
+  switch (reason) {
+    case 'zbycie_pojazdu': return 'art31';
+    case 'podwojne_oc': return 'art28a';
+    case 'koniec_okresu': return 'art28';
+    case 'inne': return 'other';
+    default: return 'art28'; // brak reason (nowy rekord bez wyboru / stary format)
+  }
+}
+
+function articleCodeToReason(code: string | null | undefined): TerminationRecord['reason'] {
+  switch (code) {
+    case 'art31': return 'zbycie_pojazdu';
+    case 'art28a': return 'podwojne_oc';
+    case 'art28': return 'koniec_okresu';
+    case 'other': return 'inne';
+    default: return undefined; // stare rekordy sprzed 2026-07-25 ('28' itp.) - nieznane
+  }
+}
+
 // Trash: cały bundle szyfrowany JSON-em
 async function trashToItem(r: any, dek: CryptoKey | null): Promise<DeletedItem> {
   let data = r.data;
@@ -652,6 +675,11 @@ class SupabaseStorageManager {
       sentAt: r.sent_date ?? r.created_at,
       actualDate: r.document_date ?? r.created_at,
       localPath: r.pdf_storage_path ?? undefined,
+      // Best-effort z kolumny `article` (zob. reasonToArticleCode). `saleDate`/
+      // `commissionCorrection` NIE mają kolumn w DB - nie przetrwają reloadu (jak
+      // isTerminationSent/terminationId/terminationBasis na Policy - ten sam,
+      // wcześniejszy gap w policyToRow/rowToPolicy, nie tylko mój nowy kod).
+      reason: articleCodeToReason(r.article),
     };
   }
 
@@ -663,7 +691,9 @@ class SupabaseStorageManager {
       sent_date: record.sentAt ? record.sentAt.split('T')[0] : null,
       document_date: record.actualDate ? record.actualDate.split('T')[0] : null,
       pdf_storage_path: record.localPath ?? null,
-      article: '28',
+      // Kolumna już istniała (wcześniej hardcoded '28' zawsze) - teraz odzwierciedla
+      // realny powód wypowiedzenia (2026-07-25). Zero zmian schematu.
+      article: reasonToArticleCode(record.reason),
     });
     return this.init();
   }

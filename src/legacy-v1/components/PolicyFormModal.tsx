@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { POLICY_CATEGORIES } from '../data/policyOptions';
-import { Client, Policy, PolicyType, ClientNote, PolicyCalculation } from '../types';
+import { Client, Policy, PolicyType, ClientNote, PolicyCalculation, TerminationRecord } from '../types';
 import { 
   Car, Home, Heart, Plane, Building2, FileText, 
   Save, Search, Shield, 
@@ -15,7 +15,7 @@ import {
 import { InsurerSelect } from './InsurerSelect';
 import { CommissionCalculator } from './Commission/CommissionCalculator';
 import { ComplianceChecklist } from './ComplianceChecklist';
-import { TerminationFormModal } from './TerminationFormModal'; 
+import { TerminationFormModal, TerminationConfirmPayload, terminationBasisFromReason } from './TerminationFormModal';
 import { storage } from '../services/storage';
 import { addYears, addDays, format, differenceInDays } from 'date-fns';
 import { getStatusDisplay } from '../services/statusDisplay';
@@ -686,12 +686,56 @@ export const PolicyFormModal: React.FC<Props> = ({ isOpen, onClose, initialClien
       setValue('oldPremium', asset.premium);
   };
 
-  const handleTerminationConfirm = async (actualDate: string) => {
+  const handleTerminationConfirm = async (payload: TerminationConfirmPayload) => {
       if (!selectedClient || !initialPolicy) return;
+      const { actualDate, reason, saleDate, commissionCorrection } = payload;
+      const isVehicleSale = reason === 'zbycie_pojazdu';
+      const trId = `wypow_${Date.now().toString().slice(-8)}`;
+
+      const record: TerminationRecord = {
+          id: trId,
+          clientId: selectedClient.id,
+          clientName: `${selectedClient.lastName} ${selectedClient.firstName}`,
+          policyId: initialPolicy.id,
+          policyType: initialPolicy.type,
+          itemDescription: `${initialPolicy.vehicleBrand || initialPolicy.type} ${initialPolicy.vehicleReg || ''}`.trim(),
+          sentAt: new Date().toISOString(),
+          actualDate,
+          reason,
+          ...(isVehicleSale && saleDate ? { saleDate } : {}),
+      };
+      await storage.addTerminationRecord(record);
+
+      const noteContent = isVehicleSale
+          ? `[STATUS] Wypowiedzenie zarejestrowane (zbycie pojazdu). Data pisma: ${actualDate}. Data sprzedaży auta: ${saleDate || '-'}. ID: ${trId}`
+          : `[STATUS] Wypowiedzenie zarejestrowane. Data pisma: ${actualDate}. ID: ${trId}`;
+      await storage.addNote({
+          id: `sys_term_${Date.now()}`,
+          clientId: selectedClient.id,
+          content: noteContent,
+          tag: 'STATUS' as any,
+          createdAt: new Date().toISOString(),
+          linkedPolicyIds: [initialPolicy.id],
+      });
+
+      // Zbycie pojazdu (decyzja Bartka, twarda): auto-status 'sprzedany' + korekta prowizji.
+      // Dla pozostałych powodów: stage bez zmian. terminationBasis (podstawa prawna PDF)
+      // synchronizowana zawsze - zob. terminationBasisFromReason (TerminationFormModal.tsx).
+      await onSave(selectedClient, {
+          ...initialPolicy,
+          isTerminationSent: true,
+          terminationId: trId,
+          terminationBasis: terminationBasisFromReason(reason),
+          ...(isVehicleSale ? {
+              stage: 'sprzedany',
+              commissionCorrection,
+          } : {}),
+      });
+
       setShowTerminationModal(false);
       onClose();
   };
-  
+
   const toggleTargetInsurer = (name: string) => {
       const current = getValues('targetInsurers') || [];
       if (current.includes(name)) {

@@ -9,5 +9,5 @@
 - `fix_audit_rows_1_10.py` `f00972c24e90761ee752c2ab2b75b27f`: Fix audit rows 1-10 — quick cleanup po audycie 2026-05-11.
 - `ftp_audit.py` `3e30a47fd4004fa03d897681955291e2`: ftp_audit.py — Read-only diagnostyka serwera Hostido FTP
 - `ftp_cleanup.py` `a9ddedd1f80989159d3e8f041098c84b`: ftp_cleanup.py — Usuwa pomyłkowe pliki z serwera Hostido FTP
-- `ftp_deploy.py` `e5ff88ca14bdfdeff1747ca8ddd3daa6`: ftp_deploy.py — Build produkcyjny + deploy CRM-Alina na Hostido FTP
+- `ftp_deploy.py` `37297ed8b2b9a7e81b64cfbfff52bb74`: ftp_deploy.py — Build produkcyjny + deploy CRM-Alina na Hostido FTP
 

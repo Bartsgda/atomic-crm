@@ -57,12 +57,13 @@ Pola daty muszą posiadać `cursor-pointer` i otwierać natywny kalendarz system
 
 Rozszerzenie istniejącego systemu motywów (Sekcja 1-2), NIE równoległy system. Panel `ThemeSettings.tsx` (sekcja pod "Skalowanie Czcionki") pozwala Alinie ustawić globalnie:
 
-1. **Rodzaj czcionki** (`UiPreferences.fontFamily`) — 4 opcje z `constants.ts` → `FONT_FAMILY_OPTIONS`:
+1. **Rodzaj czcionki** (`UiPreferences.fontFamily`) — 5 opcji z `constants.ts` → `FONT_FAMILY_OPTIONS` (od 2026-07-27 dołożona 5., wcześniej było 4):
    - `system` (domyślna) — natywna czcionka systemu (`ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif`)
    - `humanist` — **Inter** (`"Inter Variable"`, już samo-hostowana w projekcie przez `@fontsource-variable/inter`, ZERO CDN)
    - `serif` — **Georgia** (systemowa szeryfowa)
    - `accessible` — **Tahoma** (szerokie znaki, wysoka czytelność — accessibility/dysleksja-friendly)
-   - Wszystkie 4 opcje działają offline — brak zależności od zewnętrznego CDN (zgodnie z zasadą CSP/offline tego modułu; istniejący import Google Fonts w `src/index.css` dla EB Garamond/Manrope jest osobną, wcześniejszą sprawą i nie jest przez Designer Czcionek wykorzystywany).
+   - `comic` — **Comic Sans MS** (`"Comic Sans MS", "Comic Sans", "Chalkboard SE", cursive` — zaokrąglona, nieformalna, "lżejsza w odbiorze"; systemowa/fallback stack, zero CDN jak reszta)
+   - Wszystkie 5 opcji działa offline — brak zależności od zewnętrznego CDN (zgodnie z zasadą CSP/offline tego modułu; istniejący import Google Fonts w `src/index.css` dla EB Garamond/Manrope jest osobną, wcześniejszą sprawą i nie jest przez Designer Czcionek wykorzystywany).
 2. **Pogrubienie** (`UiPreferences.fontBold`) — globalny przełącznik, wymusza `font-weight: 700` na CAŁEJ aplikacji (w tym Sidebar/chrome) przez atrybut `[data-app-font-bold="true"]` w `v1-themes.css`.
 3. **Kolor tekstu** (`UiPreferences.fontColor`) — `<input type="color">`, stosowany TYLKO do treści (`<main>`, klasa `.app-content-font`), NIE do Sidebar/chrome. Pusty string = automatyczny (kolor motywu). Bez `!important` — elementy z własną jawną klasą koloru Tailwind (np. status "sprzedaż" = zielony, "wygasa" = czerwony) zachowują swój kolor; nadpisywane jest tylko dziedziczone tło tekstu.
 4. **Rozmiar bazowy** — reużywa istniejące `UiPreferences.fontScale` (root `font-size` w px, rem-based skaluje całą appkę) — 3 szybkie przyciski Normalny (1.0) / Duży (1.15) / Bardzo Duży (1.3), spięte z istniejącym suwakiem "SKALA INTERFEJSU" (zakres rozszerzony z 0.85–1.15 na 0.85–1.3).
@@ -114,6 +115,10 @@ Treść tego modala zapisuje się NA BIEŻĄCO (live), nie na "Zapisz": `ThemeSe
 - **Spójna semantyka (jedna, celowa):** X w rogu, klawisz **Esc** i **klik w backdrop** = to samo co „Anuluj" (cofają + zamykają). Jedyny sposób wyjścia BEZ cofania to jawny przycisk „Zatwierdź". Uzasadnienie w komentarzu na górze `SettingsModal.tsx`: przypadkowy Esc/klik-obok podczas eksperymentowania z kolorami ma cofać, nie zostawiać niechcianych zmian — to najbardziej intuicyjny odruch przy "cancel dialog".
 - **Odświeżenie widoku po cofnięciu statusów:** nie wymagało dodatkowego `key`/licznika. `StatusEditor` (i `getStatusDisplay()` używane wszędzie indziej) czyta `storage.getStatusOverrides()` świeżo przy KAŻDYM mouncie/wywołaniu (brak cache'u) — a ponieważ „Anuluj" zawsze kończy się `onClose()`, `SettingsModal`+`StatusEditor` unmountują się w całości (`{showThemeSettings && <SettingsModal/>}` w `Sidebar.tsx`). Przy następnym otwarciu `StatusEditor` mountuje się od nowa i czyta już cofnięte dane.
 - `AiKeysPanel` (admin) świadomie pominięty w snapshot/rollback — ma własny, osobny explicit Save.
+
+## 9. Terminarz — kolorystyka i czytelność (redesign 2026-07-25)
+
+> Nota porządkowa (2026-07-27): ta sekcja straciła nagłówek w trakcie wcześniejszych edycji tego dnia (kolizja z równoległymi zmianami § 6-8a) — treść merytoryczna bez zmian, tylko przywrócony nagłówek/numeracja.
 
 `components/CalendarView.tsx` był zbudowany na sztywnym `red-600`/`red-50` dla WSZYSTKIEGO — nagłówka, przycisku "Dzisiaj", oznaczenia "dziś" w siatce i każdego wznowienia niezależnie od terminu. Efekt: ekran "krzyczał czerwienią" i tekst tonął w kolorze. Naprawione zgodnie z zasadami z sekcji 1-3 tego dokumentu:
 - **"Dziś" w siatce** (kółko dnia, tło komórki) → `bg-primary`/neutralny `zinc`, NIE czerwień (to nawigacja, nie alarm).

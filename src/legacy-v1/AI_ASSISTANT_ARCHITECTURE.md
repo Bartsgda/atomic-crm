@@ -97,13 +97,19 @@ merytorycznych. Karmi warstwę AI (zachęty, mail, mini-ocena) oraz przyszłe pr
 
 | Kind | Funkcja | Reguła | Priorytet (baza) |
 |---|---|---|---|
-| `renewal` | `upcomingRenewals(client, policies, withinDays=30)` | polisa `isSold()` z `policyEndDate` w oknie `[0, withinDays]` dni | `55 + urgency(0-25) + value(0-20)` — urgency rośnie im bliżej terminu, value z `premium/150` |
+| `renewal` | `upcomingRenewals(client, policies, withinDays=30)` | polisa `isRenewable()` z `policyEndDate` w oknie `[0, withinDays]` dni | `55 + urgency(0-25) + value(0-20)` — urgency rośnie im bliżej terminu, value z `premium/150` |
 | `gap` | `coverageGaps(client, policies)` | cross-sell: auto+OC bez AC (50) / auto bez DOM (45) / (auto lub dom) bez ZYCIE (40) / firma w kartotece bez polisy FIRMA (48) | 40-50 stałe |
 | `missing` | `missingData(client, policies)` | brak PESEL/telefonu/adresu (30) / sprzedana polisa bez `policyNumber` (35) | 30-35 |
 | `followup` | `followUps(client, policies)` | `policy.nextContactDate` ≤ 3 dni; zaległy (`d<0`) = 65, zaplanowany = 55 | 55-65 |
 
 Pomocnicze: `isSold(p)` = `stage ∈ {sprzedaż, sprzedany, sprzedaz}` (3 formy — konwencja legacy localStorage,
 patrz `CRM-Atomic/CLAUDE.md § 3` w root repo). `isAuto(p)` = `type ∈ {OC, AC, BOTH}`.
+
+**Aktualizacja 2026-07-27 (nie w oryginalnym audycie 24/25.07):** dodano `isRenewable(p) = isSold(p) &&
+stage !== 'sprzedany'` — `sprzedany` (klient sprzedał auto) liczy się nadal jako sprzedana polisa
+(`isSold`, przychód/prowizja zostają), ale NIE jest już proponowana do wznowienia. `upcomingRenewals()`
+(tabela wyżej) przepięte na `isRenewable()`, `coverageGaps()`/`missingData()` zostały na `isSold()`
+świadomie (finanse/dane, nie kontakt telefoniczny). Pełny opis: `POLICIES_SPEC.md § 7`.
 
 ### Priorytet 0-100 wg WARTOŚCI, nie daty
 Świadoma decyzja (docstring pliku): proaktywne okienko ma podawać **najcenniejsze**, nie **najbliższe
@@ -214,4 +220,4 @@ nawigacja/CRUD po `plan[]`), nie ma połączenia z `chatService`.
 - `ai/prompts/CLIENT_MASTER_PROMPT.md` — system prompt zakazu PESEL dla `ClientAgent`
 - `components/GlobalAgent/AgentKaratekaWindow.tsx` — obecny UI panel (na starym `KaratekaService`, nie na `chatService`)
 - MEMO: `[[project_crm_ai_gemini_client_side]]`, `[[kanon_router_polityka_modeli]]`
-- `src/legacy-v1/CLAUDE.md` — indeks dokumentacji modułu (ten plik NIE jest tam jeszcze wpięty — scalenie po stronie Bartka)
+- `src/legacy-v1/CLAUDE.md` — indeks dokumentacji modułu (wpięty 2026-07-27, sekcja „🤖 AI Asystent i bezpieczeństwo”)

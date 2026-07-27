@@ -2,7 +2,7 @@
 
 > Audyt dokumentacyjny 2026-07-25 (Bartek). Opisuje jak klucze API (Gemini) są
 > przechowywane, szyfrowane i udostępniane frontowi CRM-ALINA. Read-only — nie
-> zmienia kodu. Wpięcie do indeksu `src/legacy-v1/CLAUDE.md` robi Bartek osobno.
+> zmienia kodu. Wpięty do indeksu `src/legacy-v1/CLAUDE.md` 2026-07-27 (sekcja „🤖 AI Asystent i bezpieczeństwo”).
 
 ## 1. Cel i zasada
 

@@ -55,7 +55,8 @@ async function toUUID(v1Id: string): Promise<string> {
 
 const STAGE_TO_DB: Record<string, string> = {
   'sprzedaż':                   'sprzedaz',
-  'sprzedany':                  'sprzedaz',
+  'sprzedany':                  'sprzedany',
+  'pierwszy kontakt':           'pierwszy_kontakt',
   'of_do zrobienia':            'of_do_zrobienia',
   'przeł kontakt':              'przel_kontakt',
   'czekam na dane/dokum':       'czekam_na_dane',
@@ -69,6 +70,8 @@ const STAGE_TO_DB: Record<string, string> = {
 
 const STAGE_FROM_DB: Record<string, string> = {
   'sprzedaz':        'sprzedaż',
+  'sprzedany':       'sprzedany',
+  'pierwszy_kontakt':'pierwszy kontakt',
   'of_do_zrobienia': 'of_do zrobienia',
   'przel_kontakt':   'przeł kontakt',
   'czekam_na_dane':  'czekam na dane/dokum',
@@ -189,6 +192,8 @@ async function policyToRow(p: Policy, dek: CryptoKey | null) {
     premium: p.premium ?? null,
     commission: p.commission ?? null,
     commission_rate: p.commissionRate ?? null,
+    commission_correction: p.commissionCorrection ?? null,
+    sale_date: p.saleDate ?? null,
     payment_status: (p.paymentStatus ?? 'UNPAID') as any,
     policy_start_date: p.policyStartDate || null,
     policy_end_date: p.policyEndDate || null,
@@ -221,6 +226,8 @@ async function rowToPolicy(r: any, dek: CryptoKey | null): Promise<Policy> {
     premium: Number(r.premium ?? 0),
     commission: Number(r.commission ?? 0),
     commissionRate: r.commission_rate ?? undefined,
+    commissionCorrection: r.commission_correction ?? undefined,
+    saleDate: r.sale_date ?? undefined,
     paymentStatus: r.payment_status ?? 'UNPAID',
     policyStartDate: r.policy_start_date ?? '',
     policyEndDate: r.policy_end_date ?? '',

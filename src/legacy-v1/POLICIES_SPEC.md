@@ -125,6 +125,8 @@ Dwa oddzielne pojęcia w `services/clientInsights.ts` (eksportowane, jedyne źr�
 
 **NIE dotyczy** (świadomie, zostają na `isSold`): `coverageGaps()`/`missingData()` w `clientInsights.ts`, liczniki `_v`/`_p`/`_l` (typy sprzedanych polis) w `ClientsList.tsx`, wszystkie widoki finansowe/prowizyjne.
 
+**Kafelek sprzedanej polisy — badge statusu zamiast statusu płatności (2026-07-27):** w dolnym rzędzie akcji karty (`ClientDetails.tsx` → `PolicyCardItem`, widoczny tylko gdy `isSold`) obok przycisku "WYŚLIJ DOKI"/"WYSŁANO" był wcześniej status płatności (Opłacona/Nieopłacona, z pola `policy.paymentStatus`). Zamieniony na badge **stanu polisy** (`stage`, kolory z Edytora Statusów przez `getStatusDisplay` — § 8) — czyli na kafelku sprzedanej polisy od razu widać `sprzedaż` (zielony) vs `sprzedany` (fioletowy, "auto sprzedane") bez rozwijania karty. ⚠️ Pole `paymentStatus` samo w sobie NIE zniknęło z modelu danych (dalej ustawiane/zapisywane), ale po tej zmianie **nie ma już żadnego miejsca na tej karcie**, gdzie Alina widzi status płatności na pierwszy rzut oka — zweryfikowane grepem (`paymentStatus`/"Nieopłacona"/"Opłacona" nie występują nigdzie indziej w `ClientDetails.tsx`). Jeśli to nieświadoma regresja (nie duplikacja) — do potwierdzenia z Bartkiem, czy status płatności ma wrócić w innym miejscu karty.
+
 ## 8. Edytor Statusów — Alina ustawia własne nazwy/kolory (2026-07-25)
 
 Zamiast sztywnej palety z § 6 dobieranej przez nas, Alina personalizuje **wyświetlaną nazwę i kolory** (tło + tekst) każdego statusu w Ustawieniach → panel `components/Settings/StatusEditor.tsx` (wpięty w `ThemeSettings.tsx` obok "Designer Czcionek"). Podgląd na żywo + przycisk "Reset" per status.

@@ -57,6 +57,23 @@ const generateId = () => {
 
 const LABEL_CLASS = "text-[10px] font-bold uppercase text-zinc-500 dark:text-zinc-400 pl-1 tracking-wide mb-1 block";
 
+// Etapy sprzedaży wybieralne w combo "Etap Sprzedaży" — 9-elementowa lista Aliny
+// (kolejność jak w jej oryginalnym dropdownie Excela, zob. constants.ts § "GLOBALNA
+// PALETA KOLORÓW STATUSÓW"). Celowo BEZ fallbacków `inne`/`zbycie_pojazdu` z
+// STATUS_CONFIG — to nie są realne etapy do ręcznego wyboru, tylko wewnętrzne
+// fallbacki wyświetlania dla nierozpoznanych wartości.
+const STAGE_SELECT_OPTIONS = [
+    'of_do zrobienia',
+    'pierwszy kontakt',
+    'przeł kontakt',
+    'czekam na dane/dokum',
+    'of_przedst',
+    'sprzedaż',
+    'rez po ofercie_kont za rok',
+    'ucięty kontakt',
+    'sprzedany',
+] as const;
+
 // --- KOMPONENT NOTATEK (READ-WRITE WIDGET) ---
 const PolicyNotesWidget = ({ policyId, clientId, notes = [] }: { policyId: string, clientId: string, notes?: ClientNote[] }) => {
     const [newNote, setNewNote] = useState('');
@@ -1074,17 +1091,31 @@ export const PolicyFormModal: React.FC<Props> = ({ isOpen, onClose, initialClien
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-4 bg-zinc-50 dark:bg-zinc-900/50 rounded-2xl border border-zinc-200 dark:border-zinc-800">
                             <div>
                                 <label className={LABEL_CLASS}>Etap Sprzedaży</label>
-                                <select {...register('stage')} className={STANDARD_SELECT_CLASS}>
-                                    <option value="czekam na dane/dokum">czekam na dane/dokum</option>
-                                    <option value="przeł kontakt">przeł kontakt</option>
-                                    <option value="of_przedst">of_przedst</option>
-                                    <option value="sprzedaż">sprzedaż</option>
-                                    <option value="rez po ofercie_kont za rok">rez po ofercie_kont za rok</option>
-                                    <option value="of_do zrobienia">of_do zrobienia</option>
-                                    <option value="pierwszy kontakt">pierwszy kontakt</option>
-                                    <option value="ucięty kontakt">ucięty kontakt</option>
-                                    <option value="sprzedany">sprzedany</option>
-                                </select>
+                                {/* Kolory statusów (Edytor Statusów w Ustawieniach) — combo pokazuje na żywo
+                                    tło/tekst aktualnie wybranego etapu + każda opcja w rozwinięciu ma własny
+                                    kolor, żeby wybór był rozpoznawalny po kolorze tak jak plakietki w reszcie
+                                    apki (badge na kafelku polisy, kolumny Kanban Ofert). Ten sam wzorzec co
+                                    wszędzie indziej: domyślne klasy Tailwind (`getStatusDisplay().color/.bg`)
+                                    + `style` (override Aliny z Edytora Statusów) na wierzchu. Zob. DESIGN_SYSTEM.md § 8. */}
+                                {(() => {
+                                    const stageDisplay = getStatusDisplay(currentStage);
+                                    return (
+                                        <select
+                                            {...register('stage')}
+                                            className={`${STANDARD_SELECT_CLASS} font-bold transition-colors ${stageDisplay.color} ${stageDisplay.bg}`}
+                                            style={stageDisplay.style}
+                                        >
+                                            {STAGE_SELECT_OPTIONS.map(value => {
+                                                const d = getStatusDisplay(value);
+                                                return (
+                                                    <option key={value} value={value} className={`${d.color} ${d.bg}`} style={d.style}>
+                                                        {d.label}
+                                                    </option>
+                                                );
+                                            })}
+                                        </select>
+                                    );
+                                })()}
                             </div>
                             
                             <div>

@@ -49,6 +49,17 @@ Sekcja boczna pełni rolę "Asystenta Dnia".
 - **Tydzień/Dzień:** Precyzyjny plan godzinowy.
 - **Drag & Drop:** Przesunięcie klocka zmienia datę w treści notatki (zmienia string w bazie).
 
+### Ręczna kolejność zadań — WIDOK DZIENNY (2026-07-27)
+
+Lista wydarzeń w widoku dziennym (`renderDayView`) da się ręcznie przestawiać — strzałki **↑/↓** przy każdej pozycji (nie drag&drop).
+
+- **Dlaczego strzałki, nie drag:** lista dnia już ma `draggable={!e.isSoldRenewal}` + `onDragStart` — TEN SAM mechanizm co przenoszenie wydarzeń MIĘDZY dniami (`handleDragStart`/`handleDropOnDay`, zmienia realną datę/`nextContactDate`). Dorzucenie drugiego, konkurencyjnego znaczenia do tego samego `draggable` (reorder w miejscu vs zmiana dnia) byłoby ryzykowne i niejednoznaczne dla użytkownika. Strzałki to osobny, równoległy mechanizm — zero kolizji, zero zmian w `handleDragStart`/`handleDropOnDay`/`draggable`.
+- **Perzystencja:** `DayTaskOrder = Record<eventId, number>` (`types.ts`) w localStorage, klucz `InsuranceMaster_DayTaskOrder`, przez `storage.getDayTaskOrder()`/`saveDayTaskOrder()` (ten sam wzorzec co `getStatusOverrides` — **oba** providery, `services/storage.ts` i `services/supabaseStorage.ts`, ten drugi żywy w runtime). `eventId` jest już globalnie unikalny (id notatki / `end_<policyId>` / `calc_<policyId>`), więc mapa jest płaska (bez zagnieżdżenia po dacie).
+- **Sortowanie (`sortDayEvents`):** wydarzenia z ustawionym `order` sortowane rosnąco wg `order`, reszta (bez `order`) sortowana po godzinie jak dotąd, doklejona NA KONIEC. Żadne wydarzenie nie "ginie" bez ręcznej kolejności.
+- **Zapis przy kliknięciu strzałki (`moveDayTask`):** pierwsze użycie strzałki na dany dzień "zasiewa" `order` dla WSZYSTKICH wydarzeń tego dnia naraz (0..N-1, wg aktualnie widocznej kolejności) — kolejne kliknięcia tylko przestawiają w już zasianym zbiorze. Gwarantuje spójność bez dziur/kolizji numeracji.
+- **Zakres:** dotyczy WYŁĄCZNIE listy widoku dziennego. Widok miesiąc/tydzień i Agenda boczna (§ 2) — sortowanie bez zmian (chronologiczne).
+- **Renewals (koniec polisy):** reorder działa też na nich (mają realną datę, ale strzałki zmieniają TYLKO kolejność wyświetlania w liście — nie datę wydarzenia ani nic w polisie/`nextContactDate`).
+
 ## 4. Redesign kolorystyki i czcionek (2026-07-25)
 
 Zgłoszenie: ekran wyglądał "nachalnie czerwono" i był nieczytelny na laptopie 14" — nazwiska klientów praktycznie niewidoczne. Zmiana WYŁĄCZNIE wizualna (`components/CalendarView.tsx`), logika eventów/nawigacji/powiązań z polisami i przypomnieniami niezmieniona.

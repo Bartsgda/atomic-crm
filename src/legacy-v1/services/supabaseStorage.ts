@@ -17,13 +17,14 @@ import { getSupabaseClient } from '../../components/atomic-crm/providers/supabas
 import type {
   AppState, Client, Policy, ClientNote, Notification,
   TerminationRecord, SubAgent, ChecklistTemplates,
-  InsurerConfig, DeletedItem, UiPreferences, StatusCustomization
+  InsurerConfig, DeletedItem, UiPreferences, StatusCustomization, DayTaskOrder
 } from '../types';
 import { encryptField, decryptField, encryptJsonField, decryptJsonField, looksEncrypted } from './crypto';
 
 const TENANT_ID = (typeof import.meta !== 'undefined' && (import.meta as any).env?.VITE_SUPABASE_TENANT_ID) || '11111111-1111-1111-1111-111111111111';
 const PREFS_KEY = 'InsuranceMaster_UI_Prefs_v2';
 const STATUS_CONFIG_KEY = 'InsuranceMaster_StatusConfig';
+const DAY_TASK_ORDER_KEY = 'InsuranceMaster_DayTaskOrder';
 
 // ─── UUID Conversion ──────────────────────────────────────────────────────────
 
@@ -423,6 +424,22 @@ class SupabaseStorageManager {
 
   saveStatusOverrides(overrides: StatusCustomization) {
     localStorage.setItem(STATUS_CONFIG_KEY, JSON.stringify(overrides));
+  }
+
+  // --- KOLEJNOŚĆ ZADAŃ W WIDOKU DZIENNYM (2026-07-27) ---
+  // Ręczny reorder listy dnia w CalendarView.tsx (strzałki ↑/↓). Klucz = eventId
+  // (globalnie unikalny), wartość = pozycja 0..N-1. NIE dotyczy daty wydarzenia/polisy -
+  // wyłącznie kolejność wyświetlania. Ten sam wzorzec co getStatusOverrides powyżej.
+  getDayTaskOrder(): DayTaskOrder {
+    try {
+      const s = localStorage.getItem(DAY_TASK_ORDER_KEY);
+      if (s) return JSON.parse(s);
+    } catch { /* ignore */ }
+    return {};
+  }
+
+  saveDayTaskOrder(order: DayTaskOrder) {
+    localStorage.setItem(DAY_TASK_ORDER_KEY, JSON.stringify(order));
   }
 
   extendSession() {}

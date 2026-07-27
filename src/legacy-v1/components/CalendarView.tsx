@@ -1,6 +1,6 @@
 
 import React, { useMemo, useState, useRef, useEffect } from 'react';
-import { AppState, CalendarEvent, CalendarEventType, ClientNote, PolicyType, Client } from '../types';
+import { AppState, CalendarEvent, CalendarEventType, ClientNote, PolicyType, Client, DayTaskOrder } from '../types';
 import { 
   format, endOfMonth, eachDayOfInterval, isSameMonth, 
   isSameDay, addMonths, isToday, endOfWeek, 
@@ -280,6 +280,14 @@ const EventPopover = ({ event, position }: { event: EnhancedCalendarEvent, posit
 export const CalendarView: React.FC<Props> = ({ state, onNavigate, onDeleteNote, onRefresh }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [viewMode, setViewMode] = useState<ViewMode>('month');
+
+  // --- RĘCZNA KOLEJNOŚĆ ZADAŃ W WIDOKU DZIENNYM (2026-07-27) ---
+  // Osobny mechanizm od cross-day drag&drop (handleDragStart/handleDropOnDay
+  // niżej) - reorder w obrębie listy dnia używa strzałek ↑/↓, nie draggable,
+  // żeby zerowo kolidować z istniejącym przenoszeniem wydarzeń między dniami
+  // (to samo draggable={!e.isSoldRenewal}/onDragStart zostaje nietknięte).
+  const [dayTaskOrder, setDayTaskOrder] = useState<DayTaskOrder>(() => storage.getDayTaskOrder());
+
   const [isQuickAddOpen, setIsQuickAddOpen] = useState(false);
   const [quickAddDate, setQuickAddDate] = useState<Date | null>(null);
   const [newTaskContent, setNewTaskContent] = useState('');
@@ -770,8 +778,41 @@ export const CalendarView: React.FC<Props> = ({ state, onNavigate, onDeleteNote,
     );
   };
 
+  // Sortowanie listy dnia: najpierw wydarzenia z ręcznym order (rosnąco wg order),
+  // potem reszta (bez ustawionego order) po godzinie - jak dotąd. "Nie gubi" wydarzeń
+  // bez order - trafiają na koniec, chronologicznie.
+  const sortDayEvents = (list: EnhancedCalendarEvent[]): EnhancedCalendarEvent[] => {
+      const ordered = list
+          .filter(e => dayTaskOrder[e.id] !== undefined)
+          .sort((a, b) => dayTaskOrder[a.id] - dayTaskOrder[b.id]);
+      const unordered = list
+          .filter(e => dayTaskOrder[e.id] === undefined)
+          .sort((a, b) => a.date.getTime() - b.date.getTime());
+      return [...ordered, ...unordered];
+  };
+
+  // Przesuwa wydarzenie o jedną pozycję w PODANEJ (już posortowanej) liście dnia i
+  // zapisuje pełną, świeżą kolejność (0..N-1) dla WSZYSTKICH wydarzeń tego dnia -
+  // pierwsze użycie strzałek na dany dzień "zasiewa" order dla całej listy naraz
+  // (spójne, bez dziur), kolejne użycia tylko przestawiają w obrębie już zasianego
+  // zbioru. Zmienia WYŁĄCZNIE kolejność wyświetlania - nie datę wydarzenia/polisy.
+  const moveDayTask = (sortedList: EnhancedCalendarEvent[], index: number, direction: -1 | 1) => {
+      const targetIndex = index + direction;
+      if (targetIndex < 0 || targetIndex >= sortedList.length) return;
+      const reordered = [...sortedList];
+      const tmp = reordered[index];
+      reordered[index] = reordered[targetIndex];
+      reordered[targetIndex] = tmp;
+
+      const newOrderForDay: DayTaskOrder = {};
+      reordered.forEach((e, i) => { newOrderForDay[e.id] = i; });
+      const merged = { ...dayTaskOrder, ...newOrderForDay };
+      setDayTaskOrder(merged);
+      storage.saveDayTaskOrder(merged);
+  };
+
   const renderDayView = () => {
-    const dayEvents = events.filter(e => isSameDay(e.date, currentDate)).sort((a, b) => a.date.getTime() - b.date.getTime());
+    const dayEvents = sortDayEvents(events.filter(e => isSameDay(e.date, currentDate)));
     const imieninyKey = format(currentDate, 'MM-dd');
     return (
       <div className="flex flex-col h-full bg-white dark:bg-zinc-900 rounded-3xl border border-zinc-200 dark:border-zinc-800 shadow-sm overflow-hidden">
@@ -789,7 +830,7 @@ export const CalendarView: React.FC<Props> = ({ state, onNavigate, onDeleteNote,
             <p className="text-zinc-400 text-sm text-center mt-8">Brak wydarzeń na ten dzień</p>
           ) : (
             <div className="space-y-1">
-              {dayEvents.map(e => {
+              {dayEvents.map((e, idx) => {
                 const EventIcon = getEventIcon(e);
                 return (
                   <div key={e.id} draggable={!e.isSoldRenewal} onDragStart={(ev) => handleDragStart(ev, e.id)}
@@ -808,6 +849,28 @@ export const CalendarView: React.FC<Props> = ({ state, onNavigate, onDeleteNote,
                         <div className={`text-sm font-black truncate ${e.isCompleted ? 'line-through opacity-50' : ''}`}>{e.clientName}</div>
                       )}
                       <div className={`text-xs font-bold truncate ${e.clientName && e.clientId !== 'SYSTEM_GLOBAL' ? 'opacity-70 mt-0.5' : ''} ${e.isCompleted ? 'line-through opacity-50' : ''}`}>{e.title}</div>
+                    </div>
+                    {/* Ręczna kolejność (2026-07-27) — strzałki, NIE drag, żeby zero kolizji
+                        z draggable powyżej (przenoszenie między dniami, osobny mechanizm). */}
+                    <div className="flex flex-col shrink-0 -my-1">
+                      <button
+                        type="button"
+                        onClick={(ev) => { ev.stopPropagation(); moveDayTask(dayEvents, idx, -1); }}
+                        disabled={idx === 0}
+                        title="Przesuń wyżej"
+                        className="p-0.5 rounded text-current opacity-50 hover:opacity-100 disabled:opacity-0 disabled:pointer-events-none transition-opacity"
+                      >
+                        <ChevronUp size={14} />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={(ev) => { ev.stopPropagation(); moveDayTask(dayEvents, idx, 1); }}
+                        disabled={idx === dayEvents.length - 1}
+                        title="Przesuń niżej"
+                        className="p-0.5 rounded text-current opacity-50 hover:opacity-100 disabled:opacity-0 disabled:pointer-events-none transition-opacity"
+                      >
+                        <ChevronDown size={14} />
+                      </button>
                     </div>
                   </div>
                 );

@@ -14,6 +14,7 @@ import {
   InsurerConfig,
   DeletedItem,
   StatusCustomization,
+  DayTaskOrder,
 } from "../types";
 import { format } from "date-fns";
 import { INSURERS } from "@/legacy-v1/towarzystwa";
@@ -22,6 +23,7 @@ const STORAGE_KEY = "InsuranceMaster_Core_V4_Final";
 const SESSION_KEY = "InsuranceMaster_Session_Expiry";
 const PREFS_KEY = "InsuranceMaster_UI_Prefs";
 const STATUS_CONFIG_KEY = "InsuranceMaster_StatusConfig";
+const DAY_TASK_ORDER_KEY = "InsuranceMaster_DayTaskOrder";
 const SESSION_DURATION = 365 * 24 * 60 * 60 * 1000;
 
 const DEFAULT_PREFS: UiPreferences = {
@@ -126,6 +128,24 @@ class StorageManager {
 
   saveStatusOverrides(overrides: StatusCustomization) {
     localStorage.setItem(STATUS_CONFIG_KEY, JSON.stringify(overrides));
+  }
+
+  // --- KOLEJNOŚĆ ZADAŃ W WIDOKU DZIENNYM (2026-07-27) ---
+  // Ręczny reorder listy dnia w CalendarView.tsx (strzałki ↑/↓). Klucz = eventId
+  // (globalnie unikalny), wartość = pozycja 0..N-1. NIE dotyczy daty wydarzenia/polisy -
+  // wyłącznie kolejność wyświetlania. Ten sam wzorzec co getStatusOverrides powyżej.
+  getDayTaskOrder(): DayTaskOrder {
+    const stored = localStorage.getItem(DAY_TASK_ORDER_KEY);
+    if (stored) {
+      try {
+        return JSON.parse(stored);
+      } catch (e) {}
+    }
+    return {};
+  }
+
+  saveDayTaskOrder(order: DayTaskOrder) {
+    localStorage.setItem(DAY_TASK_ORDER_KEY, JSON.stringify(order));
   }
 
   // --- SESSION MANAGEMENT ---

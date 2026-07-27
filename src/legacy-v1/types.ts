@@ -502,3 +502,12 @@ export interface StatusCustomizationEntry {
 }
 
 export type StatusCustomization = Record<string, StatusCustomizationEntry>;
+
+/**
+ * Ręczna kolejność zadań w widoku DZIENNYM terminarza (2026-07-27, CalendarView.tsx).
+ * Klucz = `EnhancedCalendarEvent.id` (globalnie unikalny - id notatki / `end_<policyId>` /
+ * `calc_<policyId>`), wartość = pozycja (0..N-1) w obrębie DNIA, do którego wydarzenie
+ * należy w danym momencie. NIE zmienia rzeczywistej daty wydarzenia/polisy - to WYŁĄCZNIE
+ * kolejność wyświetlania. Osobny mechanizm od cross-day drag&drop (handleDropOnDay).
+ */
+export type DayTaskOrder = Record<string, number>;

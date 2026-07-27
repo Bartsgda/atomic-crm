@@ -142,6 +142,7 @@ const CHANGELOG: ChangeEntry[] = [
       "Na tablicy możesz filtrować oferty po terminie: dziś / 3 dni / 7 dni / wszystko.",
       "Szybkie zadania są już widoczne w terminarzu; w treści wpisz @nazwisko żeby przypiąć zadanie do klienta — pokaże się u niego w notatkach.",
       "Strzałka wstecz wraca teraz do poprzedniego okna, a Esc zamyka każde okno.",
+      "W widoku dziennym możesz przestawiać kolejność zadań.",
     ],
   },
   {

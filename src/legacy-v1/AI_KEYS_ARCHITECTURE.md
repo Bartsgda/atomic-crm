@@ -73,7 +73,7 @@ klientów), nie osobny system.
 
 ┌─────────────────────────── LOCK / LOGOUT ────────────────────────────┐
 │  EncryptionGate.lock() — wywoływane przez:                           │
-│    • idle timeout 30 min (mousedown/keydown/touchstart/scroll)       │
+│    • idle timeout 20 min (mousedown/keydown/touchstart/scroll)       │
 │    • sleep/hibernate detection (visibilitychange, gap > 5 min)       │
 │    • bfcache restore (pageshow, e.persisted)                         │
 │    • auth state change → brak sesji / handleLogout()                 │

@@ -33,7 +33,8 @@
 - **Dedup:** po PESEL/NIP (col[7]), nie po first+last. Bartek 2026-05-11: "Stark = 1 klient z 20 polisami".
 
 ### 📋 Polisa
-- **[POLICIES_SPEC.md](./POLICIES_SPEC.md)** — cykl życia, typy (OC/AC/BOTH/DOM/PODROZ/ZYCIE/FIRMA), stage enum (`uciety_kontakt`/`przel_kontakt`/`sprzedaz`/`oferta_wyslana`/`of_do_zrobienia`/`czekam_na_dane`/`rez_po_ofercie` — underscore, no Polish)
+- **[POLICIES_SPEC.md](./POLICIES_SPEC.md)** — cykl życia, typy (OC/AC/BOTH/DOM/PODROZ/ZYCIE/FIRMA), stage enum **app-level** (Polish/spacje, `SalesStage` w `types.ts`): `of_do zrobienia` / `pierwszy kontakt` / `przeł kontakt` / `czekam na dane/dokum` / `of_przedst` (=`oferta_wysłana`) / `sprzedaż` / `rez po ofercie_kont za rok` / `ucięty kontakt` / `sprzedany` (9 wartości, kolejność = oryginalny dropdown Aliny w Excelu, zob. `constants.ts` § "GLOBALNA PALETA KOLORÓW STATUSÓW"). DB-level (underscore, `policies.stage`) mapowane przez `STAGE_TO_DB`/`STAGE_FROM_DB` w `supabaseStorage.ts` — ✅ `pierwszy_kontakt` i `sprzedany` dodane do DB CHECK constraint 2026-07-27 (migracja live, task `94fb705e`, plik `20260727000001_policies_stage_commission.sql`).
+- **Kolory/nazwy statusów** — Alina personalizuje sama (`components/Settings/StatusEditor.tsx` w Ustawieniach); odczyt zawsze przez `services/statusDisplay.ts` → `getStatusDisplay(stage)`, NIGDY bezpośrednio `STATUS_CONFIG[stage]`. Pełny opis: `DESIGN_SYSTEM.md § 6-8` + `POLICIES_SPEC.md § 6-8`.
 - **[AI_PARSING_RULES.md](./AI_PARSING_RULES.md)** — Deep Analysis dla AI
 - **[STATE_FLOW.md](./STATE_FLOW.md)** — obieg polisy, spójność stanów
 - **Specyfikacje per moduł** (`SPECS/`): formularze [POLICY_AUTO](./SPECS/POLICY_AUTO.md) · [POLICY_HOME](./SPECS/POLICY_HOME.md) · [POLICY_LIFE](./SPECS/POLICY_LIFE.md) · [POLICY_TRAVEL](./SPECS/POLICY_TRAVEL.md); dane/detale [MOD_AUTO](./SPECS/MOD_AUTO.md) · [MOD_HOME](./SPECS/MOD_HOME.md) · [MOD_LIFE](./SPECS/MOD_LIFE.md) · [MOD_TRAVEL](./SPECS/MOD_TRAVEL.md)
@@ -87,6 +88,12 @@ Rola `group_prefix` w SubAgents:
 - **[UI_UX_DROPDOWN_FIX.md](./UI_UX_DROPDOWN_FIX.md)** — Smart Dropdowns
 - **[UI_SEARCH_KEYBOARD_RULES.md](./UI_SEARCH_KEYBOARD_RULES.md)** — ⭐ pasek wyszukiwania + autofocus + nawigacja ↓↑Enter/Esc + ikony sortowania ArrowUpDown (kanon: Dashboard pojazdów; ClientsList zsynchronizowany 2026-05-11)
 
+### 🤖 AI Asystent i bezpieczeństwo
+- **[AI_ASSISTANT_ARCHITECTURE.md](./AI_ASSISTANT_ARCHITECTURE.md)** — dwie warstwy AI, NIE mylić: (1) starsza `geminiService.ts`/`KaratekaService.ts`/`ClientAgent.ts`/`ocrService.ts` — BEZ tokenizacji PII; (2) nowsza "Karateka v3" (`services/piiTokenizer.ts` + `services/clientInsights.ts` + `services/chatService.ts`, 2026-07-24/25) — RODO-safe, tokenizuje dane osobowe przed wysyłką do modelu, jeszcze NIE spięta z UI.
+- **[AI_KEYS_ARCHITECTURE.md](./AI_KEYS_ARCHITECTURE.md)** — envelope-encryption kluczy AI (`components/Settings/AiKeysPanel.tsx` + `apiKeyStore.ts` + tabela `tenant_config`), panel widoczny tylko dla `isAdmin` w `SettingsModal.tsx`.
+- **[DOCUMENTS_SPEC.md](./DOCUMENTS_SPEC.md)** — Centrum Dokumentów (`components/Documents/*`: `DocumentCenter.tsx`, `DropZone.tsx`, `ImageThumb.tsx`, `imageProcessing.ts`), model `ClientDocument`, limit 20MB + MIME whitelist + PDF iframe sandboxing (§ 9, naprawa finding S4).
+- **[SECURITY_AUDIT_2026-07-25.md](./SECURITY_AUDIT_2026-07-25.md)** — pełny audyt bezpieczeństwa (17 findingów KRYTYCZNY/WYSOKI/ŚREDNI/NISKI) + sekcja "STATUS NAPRAW" na górze (co naprawione/zdecydowane/odłożone). Czytaj PRZED zmianami w warstwie bezpieczeństwa (build/klucze/PII/dokumenty).
+
 ### 🏛️ Architektura
 - **[ARCHITECTURE.md](./ARCHITECTURE.md)** — system + standardy deweloperskie
 - **[ARCHITECTURE_5_PILLARS.md](./ARCHITECTURE_5_PILLARS.md)** — 5 Filarów Prawdy
@@ -134,6 +141,7 @@ Rola `group_prefix` w SubAgents:
 - ❌ **Odejmować prowizję pośrednika od prowizji agenta** — to DWIE niezależne pule od towarzystwa (`commission` i `rozl` w XLSX są niezależne, często równe np. 4% i 4%). Agent dostaje swoje 4% na czysto, pośrednik osobno 4%. `incomeNet = commission` (NIE `commission − partner`). Patrz § "Model prowizji" wyżej
 - ❌ **`PolicyFormModal` w `useEffect [isOpen]` nie czyścił `selectedClient` gdy plus `+` z Sidebar dla nowej polisy** (Pojazdy/Majątek/Życie/Turystyczne) — `key={policy-modal-${dataVersion}}` nie wymusza remountu między otwarciami, więc `selectedClient` z poprzedniego użycia pozostawał ("ostatni klient"). Fix 2026-05-11: dodano `else { setSelectedClient(null); setSearchClientTerm(''); setIsClientDropdownOpen(true); }` w branchach `initialClient | initialPolicy | renewalSource | ELSE`.
 - ❌ **DB enum CHECK constraints** (przed insertem sprawdź): `policies.stage`, `policies.type`, `sub_agents.group_prefix`, `insurance_clients.source` — wszystko underscore + no Polish chars
+- ✅ **ROZWIĄZANE 2026-07-27** (task `94fb705e` DONE — migracja live przez Bartka w SQL Editor rozszerzyła constraint o `sprzedany`/`pierwszy_kontakt` + dodała kolumny `commission_correction`/`sale_date`; kod `supabaseStorage.ts` zmapowany; deploy `index-BUyRlPxB`; plik `supabase/migrations/20260727000001_policies_stage_commission.sql`). Kontekst historyczny: `policies.stage` CHECK constraint w `supabase/migrations/20260418_insurance_extension.sql` (linia 71) zezwalał TYLKO na `('of_do_zrobienia','przel_kontakt','czekam_na_dane','oferta_wyslana','sprzedaz','uciety_kontakt','rez_po_ofercie')` — **7 wartości**. Ale `STAGE_TO_DB` w `services/supabaseStorage.ts` mapuje app-level `'pierwszy kontakt'` → `'pierwszy_kontakt'` i `'sprzedany'` → `'sprzedany'`, **żadna z nich nie jest w constraint**. Żadna migracja tego nie rozszerza (`grep -rl "pierwszy_kontakt\|sprzedany" supabase/migrations/` = 0 wyników). Efekt: `addPolicy()`/`updatePolicy()` (`supabaseStorage.ts`) **rzucają widoczny błąd** (`{error}` jest sprawdzany, NIE cichy fail) za każdym razem, gdy ktoś ustawi polisę na `pierwszy kontakt` lub `sprzedany` — czyli **dwie funkcje zbudowane 2026-07-25 (status "pierwszy kontakt" jako lead + auto-status "sprzedany" przy zgłoszeniu zbycia pojazdu w `TerminationFormModal`) mogą nie działać na produkcji**. Nie naprawione w tej sesji (poza zakresem "tylko MD", zmiana schematu produkcyjnej bazy z danymi klientów wymaga jawnej zgody) — wymaga migracji `ALTER TABLE policies DROP CONSTRAINT ... ADD CONSTRAINT ... CHECK (stage IN (..., 'pierwszy_kontakt', 'sprzedany'))` PO potwierdzeniu przez Bartka.
 - ❌ **`START_ALINA_TEST.bat` bez `switch_env.ps1 test`** — vite ładuje stary `.env.development.local` (schema=public) zamiast test. Naprawione 2026-05-11.
 - ❌ **Sesja przeżywająca Sleep/Hibernate kompa** (security bug 2026-05-11):
   - `createClient()` bez `auth: { storage }` → defaults `persistSession=true` w localStorage, JWT na rok
@@ -141,7 +149,7 @@ Rola `group_prefix` w SubAgents:
   - React state `unlocked=true` w `EncryptionGate` przeżywa suspend (Chrome nie killuje procesu)
   - Po wybudzeniu = pełen dostęp bez passphrase
   - **Fix:** `EncryptionGate` dodano:
-    1. `IDLE_TIMEOUT_MS = 30min` — listener `mousedown/keydown/touchstart/scroll` resetuje timer, po idle → `lock()`
+    1. `IDLE_TIMEOUT_MS = 20min` (obniżone z 30min 2026-07-25, zob. DESIGN_SYSTEM.md/SECURITY_AUDIT_2026-07-25.md) — listener `mousedown/keydown/touchstart/scroll` resetuje timer, po idle → `lock()`
     2. `visibilitychange` listener — jeśli gap od ostatniej aktywności >5 min, lock
     3. `pageshow` listener z `e.persisted=true` (bfcache restore) → lock
 - ❌ **Licznik prób PassphraseGate w React state** (do 2026-07-23 F5 = reset = brak limitu zgadywania). Od 2026-07-23 stan blokady jest **server-side**: `public.passphrase_lockouts` + RPC `register_passphrase_failure()`/`reset_passphrase_lockout()` (SECURITY DEFINER; zwykły user nie ma INSERT/UPDATE na tabeli). Progi eskalacji: **3 próby → 1 min, 6 → 5 min, 9 → hard lock** (zdejmuje wyłącznie admin: `node scripts/unlock_passphrase.mjs <email>`; bez arg = lista blokad). Migracja: `supabase/migrations/20260723000001_passphrase_lockout.sql`. NIE wracać do licznika client-side.
@@ -160,11 +168,19 @@ Rola `group_prefix` w SubAgents:
 | `components/Finance/FinanceView.tsx` | Per-miesiąc raport (grupuje po `p.createdAt`) | 426 |
 | `components/Commission/CommissionCalculator.tsx` | Kaskadowy split prowizji | 245 |
 | `components/SubAgents/SubAgentsView.tsx` | Centrum Pośredników | 623 |
+| `services/statusDisplay.ts` | `getStatusDisplay(stage)` — merge `STATUS_CONFIG` + override Aliny (jedyny poprawny odczyt statusu) | 60 |
+| `components/Settings/StatusEditor.tsx` | Panel Ustawień: Alina ustawia label/kolor per status | 146 |
+| `components/Settings/SettingsModal.tsx` | Panel Ustawień jako fullscreen modal (Anuluj/Zatwierdź, snapshot/rollback) | 148 |
+| `components/Settings/AiKeysPanel.tsx` | Panel kluczy AI (envelope-encryption), tylko `isAdmin` | 331 |
+| `components/Documents/DocumentCenter.tsx` (+ `DropZone.tsx`/`ImageThumb.tsx`/`imageProcessing.ts`) | Centrum Dokumentów klienta — upload/podgląd/limit 20MB/MIME whitelist | 605 |
+| `services/piiTokenizer.ts` | Tokenizacja PII (Karateka v3, RODO-safe) przed wysyłką do AI | 269 |
+| `services/clientInsights.ts` | `isSold`/`isRenewable`/`upcomingRenewals`/`coverageGaps`/`missingData` — jedyne źródło logiki insightów klienta | 218 |
+| `services/chatService.ts` | Warstwa czatu AI (Karateka v3), jeszcze niespięta z UI | 248 |
 
 ## 🗂️ Per-tabela DB (Supabase `test` schema)
 
 - **`insurance_clients`** — `source ∈ {'manual','xlsx_import',...}`, `tenant_id='11111111-1111-1111-1111-111111111111'`, `phones`/`emails` = JSON list, `businesses` = JSON list
-- **`policies`** — `type ∈ {'OC','AC','BOTH','DOM','PODROZ','ZYCIE','FIRMA'}`, `stage` = underscore_no_polish, `auto_details`/`home_details`/`travel_details`/`firma_details`/`life_details` = JSONB, `legacy_id` = `'xlsx_2025_row_N'`
+- **`policies`** — `type ∈ {'OC','AC','BOTH','DOM','PODROZ','ZYCIE','FIRMA'}`, `stage` = underscore_no_polish, ⚠️ **CHECK constraint DB (`20260418_insurance_extension.sql`) ma tylko 7/9 wartości — brak `pierwszy_kontakt`/`sprzedany`, zob. ANTI-PATTERNS**, `auto_details`/`home_details`/`travel_details`/`firma_details`/`life_details` = JSONB, `legacy_id` = `'xlsx_2025_row_N'`. Pola app-level BEZ kolumny DB (NIE persystują, `policyToRow`/`rowToPolicy` ich nie mapują): `commissionCorrection`, `saleDate`, `isTerminationSent`, `terminationId`, `terminationBasis` (zob. `components/Terminations/TERMINATIONS_SPEC.md § 6`).
 - **`policy_notes`** — `tag ∈ {'STATUS','OFERTA','DECISION_PRICE','ROZMOWA'}`, `linked_policy_ids` = JSON array, `created_at` dziedziczy datę z notatki (chronologia)
 - **`sub_agents`** — `group_prefix ∈ {'firmowy','wlasny','partner',null}`, `default_rates` = JSONB `{OC: N, AC: N}`
 - **`policy_sub_agent_shares`** — relacja N:M policy↔sub_agent z `rate`/`amount`/`note`. **Provider musi to query'ować w init().**

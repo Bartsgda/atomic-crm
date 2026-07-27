@@ -168,7 +168,7 @@
 - Envelope encryption solidny: AES-256-GCM, IV per operacja, PBKDF2-SHA256 600k, per-user wrapped DEK, wspólny DEK tenanta (`crypto.ts`, `tenant_keys` migracja).
 - Server-side lockout z **poprawnym RLS**: user nie ma INSERT/UPDATE na `passphrase_lockouts` (`20260723000001:148-155`), zapis tylko przez RPC `SECURITY DEFINER` z `set search_path=''`; eskalacja 3/6/9 poprawna. F5 nie resetuje licznika (przepływ UI).
 - RLS helpers `current_tenant_id()`/`is_insurance_admin()` czytają z `public.sales` po `auth.uid()` (`20260418:196-203`) — **nie da się ich sfałszować z klienta**. `tenant_config` szyfrowany DEK, więc szeroki SELECT nie ujawnia klucza bez hasła.
-- Auto-lock: idle 30 min + suspend >5 min + bfcache (`EncryptionGate.tsx`), `apiKeyStore.clear()` + `setDEK(null)` na lock/logout/wylogowanie (`:32-36, 100-122`).
+- Auto-lock: idle 20 min (obniżone z 30 min tego samego dnia, po tym audycie) + suspend >5 min + bfcache (`EncryptionGate.tsx`), `apiKeyStore.clear()` + `setDEK(null)` na lock/logout/wylogowanie (`:32-36, 100-122`).
 - Object-URL cleanup w Documents; `.env.*` (poza local) używają `<rrv:>`; `set_ai_key.mjs` nie loguje sekretów; `sourcemap:false` w prod buildzie.
 
 ---

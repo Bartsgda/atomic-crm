@@ -57,19 +57,22 @@ const generateId = () => {
 
 const LABEL_CLASS = "text-[10px] font-bold uppercase text-zinc-500 dark:text-zinc-400 pl-1 tracking-wide mb-1 block";
 
-// Etapy sprzedaży wybieralne w combo "Etap Sprzedaży" — 9-elementowa lista Aliny
-// (kolejność jak w jej oryginalnym dropdownie Excela, zob. constants.ts § "GLOBALNA
-// PALETA KOLORÓW STATUSÓW"). Celowo BEZ fallbacków `inne`/`zbycie_pojazdu` z
-// STATUS_CONFIG — to nie są realne etapy do ręcznego wyboru, tylko wewnętrzne
+// Etapy sprzedaży wybieralne w combo "Etap Sprzedaży" — 9-elementowa lista Aliny,
+// KOLEJNOŚĆ 1:1 z jej oryginalnego dropdownu w Excelu (zob. constants.ts § "GLOBALNA
+// PALETA KOLORÓW STATUSÓW" — "SŁOWNIK KANONICZNY... kolejność jak w dropdownie Aliny,
+// nie dobierana dowolnie"). NIE zmieniać kolejności bez pytania Aliny — to była
+// dotychczasowa kolejność tego selecta (przeniesiona 1:1 z wcześniejszej hardcodowanej
+// listy `<option>`, tylko dołożono kolory). Celowo BEZ fallbacków `inne`/`zbycie_pojazdu`
+// z STATUS_CONFIG — to nie są realne etapy do ręcznego wyboru, tylko wewnętrzne
 // fallbacki wyświetlania dla nierozpoznanych wartości.
 const STAGE_SELECT_OPTIONS = [
-    'of_do zrobienia',
-    'pierwszy kontakt',
-    'przeł kontakt',
     'czekam na dane/dokum',
+    'przeł kontakt',
     'of_przedst',
     'sprzedaż',
     'rez po ofercie_kont za rok',
+    'of_do zrobienia',
+    'pierwszy kontakt',
     'ucięty kontakt',
     'sprzedany',
 ] as const;
@@ -1096,7 +1099,7 @@ export const PolicyFormModal: React.FC<Props> = ({ isOpen, onClose, initialClien
                                     kolor, żeby wybór był rozpoznawalny po kolorze tak jak plakietki w reszcie
                                     apki (badge na kafelku polisy, kolumny Kanban Ofert). Ten sam wzorzec co
                                     wszędzie indziej: domyślne klasy Tailwind (`getStatusDisplay().color/.bg`)
-                                    + `style` (override Aliny z Edytora Statusów) na wierzchu. Zob. DESIGN_SYSTEM.md § 8. */}
+                                    + `style` (override Aliny z Edytora Statusów) na wierzchu. Zob. DESIGN_SYSTEM.md § 7. */}
                                 {(() => {
                                     const stageDisplay = getStatusDisplay(currentStage);
                                     return (

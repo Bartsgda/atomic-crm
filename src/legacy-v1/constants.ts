@@ -199,7 +199,7 @@ export const STATUS_CONFIG: Record<
 // Wyłącznie czcionki systemowe / już samo-hostowane w projekcie (@fontsource-variable/inter)
 // — ŻADNYCH zewnętrznych CDN (offline/CSP), zgodnie z DESIGN_SYSTEM.md.
 export const FONT_FAMILY_OPTIONS: Record<
-  "system" | "humanist" | "serif" | "accessible",
+  "system" | "humanist" | "serif" | "accessible" | "comic",
   { label: string; description: string; stack: string }
 > = {
   system: {
@@ -222,5 +222,10 @@ export const FONT_FAMILY_OPTIONS: Record<
     label: "Duża czytelność",
     description: "Tahoma — szerokie znaki, wysoka czytelność",
     stack: 'Tahoma, Verdana, "Segoe UI", sans-serif',
+  },
+  comic: {
+    label: "Comic Sans",
+    description: "Zaokrąglona, nieformalna — lżejsza w odbiorze",
+    stack: '"Comic Sans MS", "Comic Sans", "Chalkboard SE", cursive',
   },
 };

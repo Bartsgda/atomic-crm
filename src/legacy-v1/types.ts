@@ -477,7 +477,7 @@ export interface UiPreferences {
   fontScale: number;
   skin: "default" | "warm" | "midnight" | "luxury-gold" | "premium";
   /** Designer czcionek (2026-07-25) — rodzina czcionki stosowana globalnie */
-  fontFamily: "system" | "humanist" | "serif" | "accessible";
+  fontFamily: "system" | "humanist" | "serif" | "accessible" | "comic";
   /** Kolor tekstu treści (hex). Pusty string = automatyczny (kolor motywu) */
   fontColor: string;
   /** Globalne pogrubienie tekstu (przełącznik dostępności) */

@@ -17,7 +17,7 @@ interface EncryptionGateProps {
 }
 
 // Idle timeout: po jakim czasie bezczynności wymusić ponowne podanie passphrase
-const IDLE_TIMEOUT_MS = 30 * 60 * 1000; // 30 min
+const IDLE_TIMEOUT_MS = 20 * 60 * 1000; // 20 min bezczynności → auto-lock (wymaga ponownego hasła)
 // Sleep/hibernate threshold: jeśli minęło >5 min od ostatniej widoczności, lock
 const SUSPEND_LOCK_THRESHOLD_MS = 5 * 60 * 1000;
 

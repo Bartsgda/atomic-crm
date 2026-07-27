@@ -580,7 +580,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
         const TILE_BORDER_ACTIVE = "rgba(212,175,55,0.40)";
 
         const luxTiles = [
-          { id: "all",         label: "Pulpit",       Icon: Zap,        count: getCategoryCount("all"), onClick: () => { onCategorySelect("all", undefined, false); onNavigate("dashboard"); } },
+          // Pulpit wygaszony na razie (decyzja Bartka 2026-07-25) — kafelek ukryty z menu:
+          // { id: "all", label: "Pulpit", Icon: Zap, count: getCategoryCount("all"), onClick: () => { onCategorySelect("all", undefined, false); onNavigate("dashboard"); } },
           { id: "clients",     label: "Klienci",      Icon: Users,      count: state.clients?.length ?? 0, onAdd: () => onAddClient(), onClick: () => { onNavigate("clients"); } },
           { id: "offers",      label: "Tablica",      Icon: Trello,     count: getCategoryCount("offers"), onClick: () => { onCategorySelect("offers", undefined, false); onNavigate("offers"); } },
           { id: "calendar",    label: "Terminarz",    Icon: CalendarIcon, count: 0, onClick: () => onNavigate("calendar") },
@@ -757,7 +758,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         className="px-3 space-y-0.5 flex-1 overflow-y-auto pb-10"
         style={{ scrollbarWidth: "none" }}
       >
-        {renderNavBtn("all", "Pulpit")}
+        {/* Pulpit wygaszony na razie (decyzja Bartka 2026-07-25) */}
 
         {/* Baza Klientów + quick add */}
         <div className="relative group/btn-container flex items-center gap-1">

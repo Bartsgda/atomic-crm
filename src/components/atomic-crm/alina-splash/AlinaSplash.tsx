@@ -138,6 +138,8 @@ const CHANGELOG: ChangeEntry[] = [
       "Możesz teraz sama ustawić nazwy i kolory statusów w Ustawieniach — Twoje nazwy, Twoje kolory.",
       "Ustawienia otwierają się teraz na pełny ekran — wygodniej.",
       "Wypowiedzenie ma teraz powód (m.in. sprzedaż auta) — przy sprzedaży auta polisa od razu dostaje status »sprzedany«, a prowizję możesz skorygować, program podpowiada kwotę z proporcji.",
+      "W oknie Ustawień są teraz przyciski Zatwierdź i Anuluj (Anuluj cofa zmiany).",
+      "Na tablicy możesz filtrować oferty po terminie: dziś / 3 dni / 7 dni / wszystko.",
     ],
   },
   {

@@ -386,6 +386,41 @@ const extractPriceValue = (notes: string[]): number => {
     return 0;
 };
 
+// --- FILTR CZASOWY KANBANA (2026-07-27) ---
+// Po nextContactDate (data kolejnego kontaktu — najsensowniejsza "kiedy się tym
+// zająć"; polisa MA to pole, zob. types.ts). Ten sam wzorzec liczenia dni co
+// clientInsights.ts (daysUntil, używane tam też dla nextContactDate):
+// Math.ceil((target-now)/86_400_000) - dziś=0, przyszłość dodatnia, przeterminowane ujemne.
+export type OffersDateFilter = 'today' | '3d' | '7d' | 'all';
+
+const daysUntilContact = (iso?: string): number | null => {
+    if (!iso) return null;
+    const d = new Date(iso).getTime();
+    if (isNaN(d)) return null;
+    return Math.ceil((d - Date.now()) / 86_400_000);
+};
+
+// Oferty BEZ nextContactDate pokazujemy TYLKO w trybie 'all' (nie znikają bez śladu,
+// ale nie zaśmiecają wąskich przedziałów). 'today' = dziś LUB przeterminowane (<=0).
+// '3d'/'7d' = okno [dziś, dziś+N] (przeterminowane widoczne w 'today', nie duplikujemy
+// ich automatycznie w szerszych oknach — Bartek dostroi jeśli chce inaczej).
+const matchesDateFilter = (policy: Policy, filter: OffersDateFilter): boolean => {
+    if (filter === 'all') return true;
+    const days = daysUntilContact(policy.nextContactDate);
+    if (days === null) return false;
+    if (filter === 'today') return days <= 0;
+    if (filter === '3d') return days >= 0 && days <= 3;
+    if (filter === '7d') return days >= 0 && days <= 7;
+    return true;
+};
+
+const DATE_FILTER_OPTIONS: { key: OffersDateFilter; label: string; title: string }[] = [
+    { key: 'today', label: 'Dziś', title: 'Kontakt dziś lub przeterminowany' },
+    { key: '3d', label: '3 dni', title: 'Kontakt w ciągu najbliższych 3 dni' },
+    { key: '7d', label: '7 dni', title: 'Kontakt w ciągu najbliższych 7 dni' },
+    { key: 'all', label: 'Wszystko', title: 'Bez filtra — wszystkie oferty (w tym bez ustawionej daty kontaktu)' },
+];
+
 // --- HOVER POPOVER COMPONENT ---
 interface OfferPopoverProps {
     policy: Policy;
@@ -496,6 +531,9 @@ export const OffersBoard: React.FC<Props> = ({ state, onNavigate, onRefresh }) =
   
   const [filterInsurer, setFilterInsurer] = useState('');
   const [filterTerm, setFilterTerm] = useState('');
+  // Filtr czasowy tablicy KANBAN (2026-07-27) — domyślnie '7d' (Bartek: "nie wszystko"),
+  // nie dotyczy widoku TABLE (zob. matchesDateFilter powyżej).
+  const [dateFilter, setDateFilter] = useState<OffersDateFilter>('7d');
 
   const handleCardEnter = (e: React.MouseEvent, policy: Policy, client: Client, notes: ClientNote[]) => {
       if (viewMode === 'TABLE') return;
@@ -660,15 +698,19 @@ export const OffersBoard: React.FC<Props> = ({ state, onNavigate, onRefresh }) =
 
       if (key in cols) {
         if (matchFilter) {
-            cols[key].items.push(p);
-            const clientNotes = state.notes
-                .filter(n => n.linkedPolicyIds?.includes(p.id) || n.clientId === p.clientId)
-                .map(n => n.content);
-            const val = extractPriceValue(clientNotes);
-            cols[key].totalValue += val;
+            // TABLE list = tylko wyszukiwarka (jak dotąd). Kolumny KANBAN dodatkowo
+            // przez filtr czasowy (nextContactDate) - zob. matchesDateFilter powyżej.
             tableItems.push(p);
+            if (matchesDateFilter(p, dateFilter)) {
+                cols[key].items.push(p);
+                const clientNotes = state.notes
+                    .filter(n => n.linkedPolicyIds?.includes(p.id) || n.clientId === p.clientId)
+                    .map(n => n.content);
+                const val = extractPriceValue(clientNotes);
+                cols[key].totalValue += val;
+            }
         }
-      } 
+      }
       else if (['sprzedaż', 'sprzedany', 'ucięty kontakt', 'rez po ofercie_kont za rok'].includes(key)) {
           const lastNote = state.notes
             .filter(n => n.linkedPolicyIds?.includes(p.id))
@@ -697,7 +739,7 @@ export const OffersBoard: React.FC<Props> = ({ state, onNavigate, onRefresh }) =
     tableItems.sort((a,b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 
     return { activeColumns: cols, doneList: done, grandTotal: total, tableList: tableItems };
-  }, [state.policies, state.notes, filterTerm]);
+  }, [state.policies, state.notes, filterTerm, dateFilter]);
 
   const activeInsurersList = useMemo(() => {
       return getSortedInsurers(state.policies, 'OC').map(i => i.name);
@@ -807,6 +849,22 @@ export const OffersBoard: React.FC<Props> = ({ state, onNavigate, onRefresh }) =
                     onChange={e => setFilterTerm(e.target.value)}
                     className="pl-4 pr-4 py-3 bg-zinc-100 dark:bg-zinc-800 border-transparent focus:bg-white dark:focus:bg-zinc-700 border-2 focus:border-blue-500 rounded-xl text-xs font-bold outline-none transition-all w-48"
                 />
+
+                {/* DATE FILTER (tylko widok KANBAN — zob. matchesDateFilter) */}
+                {viewMode === 'KANBAN' && (
+                    <div className="flex bg-zinc-200 dark:bg-zinc-800 p-1 rounded-xl">
+                        {DATE_FILTER_OPTIONS.map(opt => (
+                            <button
+                                key={opt.key}
+                                onClick={() => setDateFilter(opt.key)}
+                                title={opt.title}
+                                className={`px-3 py-2.5 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all whitespace-nowrap ${dateFilter === opt.key ? 'bg-white dark:bg-zinc-600 shadow-sm text-zinc-900 dark:text-white' : 'text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200'}`}
+                            >
+                                {opt.label}
+                            </button>
+                        ))}
+                    </div>
+                )}
 
                 {/* VIEW SWITCHER */}
                 <div className="flex bg-zinc-200 dark:bg-zinc-800 p-1 rounded-xl">

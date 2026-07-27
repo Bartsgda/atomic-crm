@@ -1,6 +1,6 @@
 
 import React, { useMemo, useState, useRef, useEffect } from 'react';
-import { AppState, CalendarEvent, CalendarEventType, ClientNote, PolicyType } from '../types';
+import { AppState, CalendarEvent, CalendarEventType, ClientNote, PolicyType, Client } from '../types';
 import { 
   format, endOfMonth, eachDayOfInterval, isSameMonth, 
   isSameDay, addMonths, isToday, endOfWeek, 
@@ -283,6 +283,23 @@ export const CalendarView: React.FC<Props> = ({ state, onNavigate, onDeleteNote,
   const [isQuickAddOpen, setIsQuickAddOpen] = useState(false);
   const [quickAddDate, setQuickAddDate] = useState<Date | null>(null);
   const [newTaskContent, setNewTaskContent] = useState('');
+
+  // --- @MENTION (podpięcie klienta do szybkiego zadania, 2026-07-27) ---
+  // mentionQuery=null -> dropdown zamknięty; '' lub tekst po "@" -> otwarty i filtrujący.
+  const [mentionQuery, setMentionQuery] = useState<string | null>(null);
+  const [mentionActiveIndex, setMentionActiveIndex] = useState(0);
+  const [taskClientId, setTaskClientId] = useState<string | null>(null);
+  const taskTextareaRef = useRef<HTMLTextAreaElement>(null);
+
+  // Reset stanu @mention przy zamknięciu modala (nie przy każdej zmianie treści) - żeby
+  // ponowne otwarcie (inny dzień/inne zadanie) nie dziedziczyło klienta z poprzedniego.
+  useEffect(() => {
+    if (!isQuickAddOpen) {
+      setMentionQuery(null);
+      setMentionActiveIndex(0);
+      setTaskClientId(null);
+    }
+  }, [isQuickAddOpen]);
 
   // UI State
   const [hoveredEventData, setHoveredEventData] = useState<{ event: EnhancedCalendarEvent, pos: {x:number, y:number} } | null>(null);

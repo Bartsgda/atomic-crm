@@ -248,7 +248,18 @@ async function noteToRow(n: ClientNote, dek: CryptoKey | null) {
     reminderStatus = n.isCompleted ? 'UKONCZONE' : 'PRZYPOMNIENIE';
   }
   const dbId = await toUUID(n.id);
-  const dbClientId = await toUUID(n.clientId);
+  // BUGFIX 2026-07-27: policy_notes.client_id ma FK -> insurance_clients(id).
+  // "Szybkie zadania" z terminarza (CalendarView.tsx saveQuickTask) używają sentinela
+  // clientId='SYSTEM_GLOBAL' (zadanie bez przypisanego klienta) - toUUID() go hashuje
+  // na WYGLĄDAJĄCY jak prawdziwy UUID, którego oczywiście nie ma w insurance_clients,
+  // więc INSERT wywalał się na naruszeniu FK. Ponieważ kolumna jest nullable (brak
+  // `not null` w schemas/05_policies.sql), dla sentinela/pustego clientId piszemy
+  // NULL zamiast fałszywego UUID - to jedyna poprawna wartość niewymagająca
+  // dopasowania do realnego wiersza. `v1_original_client_id` niżej nadal zapisuje
+  // literalne 'SYSTEM_GLOBAL' (bo nie jest to valid UUID), więc rowToNote() poprawnie
+  // odtwarza clientId='SYSTEM_GLOBAL' po odczycie.
+  const isGlobalOrMissingClient = !n.clientId || n.clientId === 'SYSTEM_GLOBAL';
+  const dbClientId = isGlobalOrMissingClient ? null : await toUUID(n.clientId);
   return {
     id: dbId,
     tenant_id: TENANT_ID,
@@ -648,13 +659,20 @@ class SupabaseStorageManager {
   }
 
   async addNote(note: ClientNote): Promise<AppState> {
-    await this.sb().from('policy_notes').insert(await noteToRow(note, this.dek));
+    // Supabase JS nie rzuca na błąd insertu (zwraca {error} w odpowiedzi) - wcześniej
+    // wynik był całkowicie ignorowany, więc np. naruszenie FK (zob. noteToRow) failowało
+    // PO CICHU: nota "znikała" bez śladu, bez wyjątku do złapania gdziekolwiek wyżej.
+    // Log na konsolę (nie throw - nie zmieniamy zachowania dla wołających, którzy dziś
+    // nie obsługują odrzuconej promisy) żeby taki bug był widoczny przy następnej okazji.
+    const { error } = await this.sb().from('policy_notes').insert(await noteToRow(note, this.dek));
+    if (error) console.error('[SupabaseStorage] addNote insert failed:', error, note);
     return this.init();
   }
 
   async updateNote(note: ClientNote): Promise<AppState> {
     const dbId = await toUUID(note.id);
-    await this.sb().from('policy_notes').upsert(await noteToRow(note, this.dek)).eq('id', dbId);
+    const { error } = await this.sb().from('policy_notes').upsert(await noteToRow(note, this.dek)).eq('id', dbId);
+    if (error) console.error('[SupabaseStorage] updateNote upsert failed:', error, note);
     return this.init();
   }
 

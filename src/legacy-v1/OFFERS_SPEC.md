@@ -44,3 +44,12 @@ Dolna 1/3 ekranu to log operacyjny ("Ostatnio Zakończone").
 - **Hover Popover:** Najechanie na kartę pokazuje dymek z ostatnimi notatkami.
 - **Filtr Popovera:** Dymek ukrywa notatki techniczne (`[SYSTEM]`, `STATUS`) pokazując tylko wpisy ręczne Agenta ("mięso").
 - **Celebracja:** Animacja przy sukcesie (Rocket/Party).
+
+## 7. Filtr Czasowy Kanbana (2026-07-27)
+
+W headerze (obok wyszukiwarki i przełącznika KANBAN/TABLE), **tylko dla widoku KANBAN**, segmented control 4 przycisków: **Dziś / 3 dni / 7 dni / Wszystko** (`dateFilter`, domyślnie `'7d'` — decyzja Bartka, żeby domyślnie NIE pokazywać wszystkiego).
+
+- **Pole filtrowane:** `Policy.nextContactDate` (data kolejnego kontaktu — jedyne pole reprezentujące "kiedy się tym zająć"; te same dane co `clientInsights.ts` używa dla sygnału `followup`).
+- **Reguła:** `today` = kontakt dziś LUB przeterminowany (`daysUntil <= 0`). `3d`/`7d` = okno `[dziś, dziś+N]` (`daysUntil` w zakresie `0..N`) — **przeterminowane NIE dublują się automatycznie w 3d/7d**, widoczne tylko przez `today` lub `all` (świadoma decyzja, do dostrojenia jeśli Bartek wolałby inaczej). `all` = bez filtra, w tym oferty **bez** `nextContactDate` (te widoczne WYŁĄCZNIE w `all`, żeby nie znikały bez śladu ale nie zaśmiecały wąskich okien).
+- **Zakres:** filtruje tylko `items`/`totalValue` kolumn Active Pipeline (§ 2) — licznik `colData.items.length` i "Potencjał: X PLN" w nagłówku odzwierciedlają przefiltrowany zestaw. Widok TABLE, licznik "W toku" w nagłówku i Strefa Historii (§ 5) — **bez zmian**, nadal tylko wyszukiwarka tekstowa.
+- Kod: `matchesDateFilter()`/`daysUntilContact()`/`DATE_FILTER_OPTIONS` w `OffersBoard.tsx`.

@@ -232,12 +232,13 @@ const PolicyCardItem = ({ policy, client, statusConfig, isFiltered, isHovered, d
                             {areDocsSent ? 'WYSŁANO' : 'WYŚLIJ DOKI'}
                         </button>
 
-                        <div className={`flex items-center justify-center gap-2 py-2 rounded-lg text-[10px] font-black uppercase ${
-                            policy.paymentStatus === 'PAID'
-                            ? 'text-zinc-400'
-                            : 'text-red-600'
-                        }`}>
-                            {policy.paymentStatus === 'PAID' ? 'Opłacona' : 'Nieopłacona'}
+                        {/* Zamiast statusu płatności — STAN polisy (stage) w kolorach z Edytora Statusów */}
+                        <div
+                            className={`flex items-center justify-center gap-2 py-2 rounded-lg text-[10px] font-black uppercase border ${statusConfig.color} ${statusConfig.bg} ${statusConfig.border}`}
+                            style={statusConfig.style}
+                            title={`Status: ${statusConfig.label}`}
+                        >
+                            {statusConfig.label}
                         </div>
                     </div>
                 </div>

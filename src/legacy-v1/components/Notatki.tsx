@@ -3,7 +3,7 @@ import React, { useState, useCallback, FC, useEffect, useRef } from 'react';
 import { ClientNote, NoteTag, Policy, SalesStage, PolicyType } from '../types';
 import {
   MessageSquare, Send, Calendar, CheckCircle2, XCircle, Zap, Home,
-  Hash, DollarSign, Snowflake, Users, Car, Settings2, Edit2, Save, GitCommit, Eye, EyeOff
+  Hash, DollarSign, Snowflake, Users, Car, Settings2, Edit2, Save, GitCommit, Eye, EyeOff, Clock
 } from 'lucide-react';
 import { format, addDays, isValid } from 'date-fns';
 import { pl } from 'date-fns/locale/pl';
@@ -636,6 +636,12 @@ export const Notatki: FC<Props> = ({ clientId, notes, allPolicies, initialResume
                                             {isCompleted && <CheckCircle2 size={14} />}
                                         </button>
                                         <div>
+                                            {/* Wyraźne oznaczenie że to pozycja z Terminarza (2026-07-27) — każda notatka
+                                                z reminderDate (format [data]_PRZYPOMNIENIE_...) pojawia się w kalendarzu,
+                                                niezależnie czy powstała tu, czy jako "Szybkie Zadanie" w CalendarView.tsx. */}
+                                            <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[8px] font-black uppercase tracking-widest mb-1 ${isCompleted ? 'bg-emerald-100 text-emerald-700' : 'bg-blue-100 text-blue-700'}`}>
+                                                <Clock size={9} /> Terminarz
+                                            </span>
                                             <p className={`text-xs font-bold ${isCompleted ? 'text-emerald-700 line-through decoration-2' : 'text-red-700'}`}>
                                                 {reminderInfo.text}
                                             </p>

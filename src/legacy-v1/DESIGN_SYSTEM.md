@@ -98,11 +98,22 @@ Zmiana podejścia: zamiast jednej sztywnej palety (§ 6) dobieranej przez nas, A
 
 Wcześniej `ThemeSettings` (+ `StatusEditor` z § 7, + `AiKeysPanel`) renderowały się **inline wciśnięte w wąski Sidebar**, zdublowane w DWÓCH miejscach kodu (osobno dla skinu `luxury-gold` i pozostałych). Po dojściu Designer Czcionek + Edytora Statusów treści zrobiło się za dużo na sidebar. Zamienione na **jeden fullscreen modal**: nowy plik `components/Settings/SettingsModal.tsx`, renderowany RAZ w `Sidebar.tsx` (poza `<nav>`, na końcu `<aside>`), sterowany tym samym propem `showThemeSettings`/`onToggleTheme` co wcześniej (bez zmian logiki przełącznika — `onToggleTheme` to `setShowThemeSettings(!showThemeSettings)`, więc bezpiecznie użyty też jako `onClose`).
 
-**Konwencja modala** — 1:1 skopiowana z `ClientFormModal.tsx` (NIE nowa estetyka): `fixed inset-0 z-[100]` + backdrop `bg-zinc-950/80 backdrop-blur-md` (klik zamyka) + karta `max-w-4xl max-h-[90vh] rounded-[1.75rem] shadow-2xl` + header (tytuł "Ustawienia / Wygląd" + podtytuł + przycisk `X`) + `flex-1 overflow-y-auto` na treść. Esc zamyka (`useEffect` + `keydown` listener — wzorzec, którego wcześniej NIE było w żadnym innym modalu tego modułu, dodany tu jako nowy standard).
+**Konwencja modala** — 1:1 skopiowana z `ClientFormModal.tsx` (NIE nowa estetyka): `fixed inset-0 z-[100]` + backdrop `bg-zinc-950/80 backdrop-blur-md` + karta `max-w-4xl max-h-[90vh] rounded-[1.75rem] shadow-2xl` + header (tytuł "Ustawienia / Wygląd" + podtytuł + przycisk `X`) + `flex-1 overflow-y-auto` na treść + **stopka `shrink-0` z dwoma przyciskami (dodane 2026-07-27, patrz niżej)**.
 
 **Ciemne tło treści (świadoma decyzja, nie przeoczenie):** `ThemeSettings`/`StatusEditor`/`AiKeysPanel` mają kolorystykę na sztywno ciemną (zero klas `dark:` w tamtych plikach — projektowane pod ciemny Sidebar). Żeby nie przerabiać ich stylów, obszar treści modala ma **stałe** ciemne tło (`bg-zinc-950`, nie `dark:bg-zinc-950`) — wygląda identycznie jak wcześniej w sidebarze, niezależnie od jasnego/ciemnego motywu aplikacji. Header modala JEST theme-aware (`bg-zinc-50 dark:bg-zinc-950`), jak reszta chrome modali w module.
 
 `AiKeysPanel` nadal renderowany tylko dla `isAdmin` (bez zmian warunku).
+
+### 8a. Anuluj / Zatwierdź — snapshot i rollback (2026-07-27)
+
+Treść tego modala zapisuje się NA BIEŻĄCO (live), nie na "Zapisz": `ThemeSettings` → `onUpdate(prefs)` (natychmiast do App+localStorage), `StatusEditor` → `storage.saveStatusOverrides(...)` na każdą zmianę koloru/nazwy statusu. Dodano stopkę z dwoma przyciskami, żeby dało się cofnąć eksperymentowanie:
+
+- **Snapshot przy otwarciu** (`useRef`, raz na mount): `prefs` z propa + `storage.getStatusOverrides()`.
+- **„Anuluj"** — przywraca oba snapshoty (`onUpdate(snapshot)` + `saveStatusOverrides(snapshot)`), potem zamyka.
+- **„Zatwierdź"** — po prostu zamyka (zmiany już zapisane live, nic do zrobienia).
+- **Spójna semantyka (jedna, celowa):** X w rogu, klawisz **Esc** i **klik w backdrop** = to samo co „Anuluj" (cofają + zamykają). Jedyny sposób wyjścia BEZ cofania to jawny przycisk „Zatwierdź". Uzasadnienie w komentarzu na górze `SettingsModal.tsx`: przypadkowy Esc/klik-obok podczas eksperymentowania z kolorami ma cofać, nie zostawiać niechcianych zmian — to najbardziej intuicyjny odruch przy "cancel dialog".
+- **Odświeżenie widoku po cofnięciu statusów:** nie wymagało dodatkowego `key`/licznika. `StatusEditor` (i `getStatusDisplay()` używane wszędzie indziej) czyta `storage.getStatusOverrides()` świeżo przy KAŻDYM mouncie/wywołaniu (brak cache'u) — a ponieważ „Anuluj" zawsze kończy się `onClose()`, `SettingsModal`+`StatusEditor` unmountują się w całości (`{showThemeSettings && <SettingsModal/>}` w `Sidebar.tsx`). Przy następnym otwarciu `StatusEditor` mountuje się od nowa i czyta już cofnięte dane.
+- `AiKeysPanel` (admin) świadomie pominięty w snapshot/rollback — ma własny, osobny explicit Save.
 
 `components/CalendarView.tsx` był zbudowany na sztywnym `red-600`/`red-50` dla WSZYSTKIEGO — nagłówka, przycisku "Dzisiaj", oznaczenia "dziś" w siatce i każdego wznowienia niezależnie od terminu. Efekt: ekran "krzyczał czerwienią" i tekst tonął w kolorze. Naprawione zgodnie z zasadami z sekcji 1-3 tego dokumentu:
 - **"Dziś" w siatce** (kółko dnia, tło komórki) → `bg-primary`/neutralny `zinc`, NIE czerwień (to nawigacja, nie alarm).

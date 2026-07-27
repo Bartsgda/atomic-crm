@@ -79,6 +79,17 @@ export const DataImporter: React.FC<Props> = ({
     }
   }, [logs]);
 
+  // Esc zamyka (2026-07-27) — respektuje isProcessing tak samo jak istniejący klik
+  // w backdrop (linia z onClick={!isProcessing ? onClose : undefined} niżej).
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && !isProcessing) onClose();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [isOpen, onClose, isProcessing]);
+
   if (!isOpen) return null;
 
   const log = (msg: string) => {

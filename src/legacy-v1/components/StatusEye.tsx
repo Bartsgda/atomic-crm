@@ -93,6 +93,16 @@ export default function StatusEye({ isUnlocked = false }: { isUnlocked?: boolean
   const [severity, setSeverity] = useState<Severity>('bug');
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+
+  // Esc zamyka modal "Zgłoś problem" (2026-07-27)
+  useEffect(() => {
+    if (!feedbackOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') { setFeedbackOpen(false); setCaptured(null); }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [feedbackOpen]);
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
   // lista zgloszen (sesja 2026-05-04)

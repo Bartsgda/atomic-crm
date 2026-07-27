@@ -362,6 +362,18 @@ export const PolicyFormModal: React.FC<Props> = ({ isOpen, onClose, initialClien
   const [showDateWarning, setShowDateWarning] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [sourceVerified, setSourceVerified] = useState(false);
+
+  // Esc zamyka modal (2026-07-27) — ale NIE gdy nad nim jest otwarty zagnieżdżony
+  // dialog (TerminationFormModal ma WŁASNY Esc -> zamyka tylko siebie; showDateWarning
+  // to prosty inline confirm). "Zamknij wewnętrzny najpierw, dopiero potem okno".
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && !showTerminationModal && !showDateWarning) onClose();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [isOpen, onClose, showTerminationModal, showDateWarning]);
   
   // TIME TRACKING REF (WORK SESSION)
   const openTimeRef = useRef<Date | null>(null);

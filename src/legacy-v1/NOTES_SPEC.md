@@ -50,3 +50,7 @@ Tryb edycji (ikona ołówka na karcie notatki) pozwala zmienić:
 - **Formatowanie:** Tekst notatki obsługuje proste tagi renderowane jako kolorowe „pastylki" (`NoteTagRenderer`).
 - **Filtr Popover (Dashboard/Kanban):** Dymki podglądu (Hover) **MUSZĄ** ukrywać notatki techniczne (`[SYSTEM]`, `AUDYT`, `STATUS`), pokazując tylko wpisy ręczne Agenta.
 - **Filtr Listy (Clients List):** Kolumna „Ostatnia notatka" w tabeli klientów również pomija logi systemowe, prezentując ostatnią merytoryczną interakcję.
+
+## 8. Oznaczenie „Terminarz" na notatkach-przypomnieniach (2026-07-27)
+
+Każda notatka z `reminderDate` (treść w formacie `[YYYY-MM-DD HH:mm]_PRZYPOMNIENIE_...`, zob. `ReminderUtils`) — niezależnie czy powstała lokalnie w `Notatki.tsx` (widget przypomnień), czy jako „Szybkie Zadanie" z `CalendarView.tsx` (`saveQuickTask`, ew. z `@mention` — zob. `CALENDAR_SPEC.md § C`) — **zawsze pojawia się też w Terminarzu** (ta sama notatka, jedno źródło danych). Żeby było to od razu widoczne w profilu klienta, karta takiej notatki (`Notatki.tsx`, sekcja renderu `isReminder`) dostała mały badge nad treścią: ikona zegarka (`Clock`) + etykieta **„TERMINARZ"** (niebieski gdy aktywne, zielony gdy oznaczone jako ukończone — spójnie z istniejącym kolorem karty). Poniżej, bez zmian, nadal widoczna linia „Termin: {data}".

@@ -112,7 +112,36 @@ function App() {
     stateRef.current = state;
   }, [state]);
 
+  // --- NAVIGATION HISTORY (2026-07-27) ---
+  // Stos poprzednio odwiedzonych stron (nie modali - "new"/"edit-policy" nie zmieniają
+  // currentPage, więc nigdy nie trafiają na stos). "Wstecz" (ClientDetails i przyszłe
+  // widoki) ma wracać tam skąd faktycznie przyszedł użytkownik, nie na sztywno 'clients'.
+  // currentPageRef czyta AKTUALNĄ stronę wewnątrz stabilnego (useCallback []) `navigate`
+  // - ten sam wzorzec co currentDataRef/stateRef powyżej.
+  const [navHistory, setNavHistory] = useState<
+    Array<{ page: Page; data: typeof currentData }>
+  >([]);
+  const currentPageRef = useRef<Page>(currentPage);
+  useEffect(() => {
+    currentPageRef.current = currentPage;
+  }, [currentPage]);
+
   const [showNotifications, setShowNotifications] = useState(false);
+
+  // Esc zamyka panel powiadomień (2026-07-27). Pozostałe modale globalne
+  // (PolicyFormModal/ClientFormModal/SnapshotDialog/DataImporter/ActivityLogView/
+  // AutoTester) mają WŁASNY Esc dodany w swoich plikach. `isLocked` (sesja wygasła,
+  // RODO 8h auto-wipe) i `isSyncing` (trwająca synchronizacja) świadomie NIE dostają
+  // Esc - to nie są zamykalne dialogi, tylko blokujące ekrany bez akcji "anuluj".
+  useEffect(() => {
+    if (!showNotifications) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setShowNotifications(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [showNotifications]);
+
   const [isImporterOpen, setIsImporterOpen] = useState(false);
   const [showThemeSettings, setShowThemeSettings] = useState(false);
   const [showActivityLog, setShowActivityLog] = useState(false);
@@ -227,8 +256,37 @@ function App() {
       return;
     }
 
+    // Push AKTUALNĄ (jeszcze nieopuszczoną) stronę na stos historii, żeby "Wstecz"
+    // wiedział skąd przyszliśmy. Pomijamy no-op nawigacje do tej samej strony (np.
+    // klik w Sidebar na stronę już aktywną) - nie tworzy to fałszywego przystanku.
+    if (currentPageRef.current !== page) {
+      setNavHistory((prev) => [
+        ...prev,
+        { page: currentPageRef.current, data: currentDataRef.current },
+      ]);
+    }
+
     setCurrentData(data);
     setCurrentPage(page);
+    window.scrollTo(0, 0);
+  }, []);
+
+  // "Wstecz" — zdejmuje ostatni wpis ze stosu historii (faktycznie poprzedni widok,
+  // niezależnie skąd nawigacja przyszła: lista klientów, terminarz, kanban, agent AI
+  // przez AGENT_NAVIGATE - wszystko przechodzi przez `navigate` powyżej). Pusty stos
+  // (pierwsze wejście / historia wyczerpana) -> sensowny fallback: lista klientów.
+  const navigateBack = useCallback(() => {
+    setNavHistory((prev) => {
+      if (prev.length === 0) {
+        setCurrentData(undefined);
+        setCurrentPage("clients");
+        return prev;
+      }
+      const last = prev[prev.length - 1];
+      setCurrentData(last.data);
+      setCurrentPage(last.page);
+      return prev.slice(0, -1);
+    });
     window.scrollTo(0, 0);
   }, []);
 
@@ -805,6 +863,7 @@ function App() {
               highlightPolicyId={currentData.highlightPolicyId}
               autoOpenPolicyId={currentData.autoOpenPolicyId}
               onNavigate={navigate}
+              onBack={navigateBack}
               onDeletePolicy={handleDeletePolicy}
               onUpdatePolicy={handleUpdatePolicy}
               onAddNote={handleAddNote}

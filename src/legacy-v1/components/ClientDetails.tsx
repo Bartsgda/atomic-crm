@@ -28,6 +28,10 @@ interface Props {
   notes: ClientNote[];
   terminations: TerminationRecord[];
   onNavigate: (page: string, data?: any) => void;
+  /** Wraca do faktycznie poprzedniego widoku (stos historii w App.tsx) — 2026-07-27.
+   *  Opcjonalny z fallbackiem na onNavigate('clients') dla bezpieczeństwa, gdyby
+   *  ktoś kiedyś wyrenderował ten komponent bez podpięcia stosu historii. */
+  onBack?: () => void;
   onDeletePolicy: (id: string) => void;
   onUpdatePolicy: (policy: Policy) => void;
   onAddNote: (note: ClientNote) => void;
@@ -287,7 +291,7 @@ const PolicyCardItem = ({ policy, client, statusConfig, isFiltered, isHovered, d
     );
 };
 
-export const ClientDetails: React.FC<Props> = ({ client, policies, notes, terminations, onNavigate, onDeletePolicy, onUpdatePolicy, onAddNote, onUpdateNote, onDeleteNote, onUpdateClient, onDeleteClient, onRefresh, resumeNoteId, highlightPolicyId, autoOpenPolicyId }) => {
+export const ClientDetails: React.FC<Props> = ({ client, policies, notes, terminations, onNavigate, onBack, onDeletePolicy, onUpdatePolicy, onAddNote, onUpdateNote, onDeleteNote, onUpdateClient, onDeleteClient, onRefresh, resumeNoteId, highlightPolicyId, autoOpenPolicyId }) => {
 
   const [hoveredPolicyId, setHoveredPolicyId] = useState<string | null>(null);
   const [hoveredNoteIds, setHoveredNoteIds] = useState<string[]>([]);
@@ -495,7 +499,7 @@ export const ClientDetails: React.FC<Props> = ({ client, policies, notes, termin
       <header className="flex-shrink-0 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800 z-20 sticky top-0 px-6 py-4 shadow-sm">
         <div className="flex items-center justify-between max-w-[1920px] mx-auto w-full">
             <div className="flex items-center gap-6">
-                <button onClick={() => onNavigate('clients')} className="p-2 rounded-xl hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-all">
+                <button onClick={() => (onBack ? onBack() : onNavigate('clients'))} title="Wstecz" className="p-2 rounded-xl hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-all">
                     <ArrowLeft size={20} />
                 </button>
                 

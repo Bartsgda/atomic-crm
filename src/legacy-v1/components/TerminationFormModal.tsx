@@ -117,6 +117,16 @@ export const TerminationFormModal: React.FC<Props> = ({
   const [correctionTouched, setCorrectionTouched] = useState(false);
   const Icon = getIcon(policy.type);
 
+  // Esc zamyka (2026-07-27) — ten modal bywa zagnieżdżony w PolicyFormModal (który
+  // ma WŁASNY Esc wyłączony dopóki ten jest otwarty), więc tu wystarczy zamknąć siebie.
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onCancel();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onCancel]);
+
   const suggestedCommission = useMemo(
     () => suggestProportionalCommission(policy, saleDate),
     [policy.commission, policy.policyStartDate, policy.policyEndDate, saleDate],

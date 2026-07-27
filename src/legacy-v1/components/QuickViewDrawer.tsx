@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useEffect } from "react";
 import { Client, Policy, AppState } from "../types";
 import {
   X,
@@ -30,6 +30,17 @@ export const QuickViewDrawer: React.FC<Props> = ({
   onNavigate,
 }) => {
   if (!client) return null;
+
+  // Esc zamyka (2026-07-27). Zgodnie z istniejącym wzorcem tego pliku (hooki po
+  // wczesnym return - zob. useMemo niżej), nie zmieniam tej (odrębnej od tego zadania)
+  // konwencji.
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onClose]);
 
   const clientPolicies = state.policies.filter((p) => p.clientId === client.id);
 

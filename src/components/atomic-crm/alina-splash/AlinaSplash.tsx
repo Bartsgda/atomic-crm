@@ -140,6 +140,8 @@ const CHANGELOG: ChangeEntry[] = [
       "Wypowiedzenie ma teraz powód (m.in. sprzedaż auta) — przy sprzedaży auta polisa od razu dostaje status »sprzedany«, a prowizję możesz skorygować, program podpowiada kwotę z proporcji.",
       "W oknie Ustawień są teraz przyciski Zatwierdź i Anuluj (Anuluj cofa zmiany).",
       "Na tablicy możesz filtrować oferty po terminie: dziś / 3 dni / 7 dni / wszystko.",
+      "Szybkie zadania są już widoczne w terminarzu; w treści wpisz @nazwisko żeby przypiąć zadanie do klienta — pokaże się u niego w notatkach.",
+      "Strzałka wstecz wraca teraz do poprzedniego okna, a Esc zamyka każde okno.",
     ],
   },
   {

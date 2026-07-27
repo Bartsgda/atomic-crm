@@ -301,6 +301,18 @@ export const CalendarView: React.FC<Props> = ({ state, onNavigate, onDeleteNote,
     }
   }, [isQuickAddOpen]);
 
+  // Esc zamyka modal Szybkiego Zadania (2026-07-27) — TYLKO gdy dropdown mentiona jest
+  // zamknięty (ten ma WŁASNY Esc w onKeyDown textarea, z e.stopPropagation() - "zamknij
+  // wewnętrzny dropdown najpierw" zamiast rozwalać istniejącą obsługę).
+  useEffect(() => {
+    if (!isQuickAddOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && mentionQuery === null) setIsQuickAddOpen(false);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [isQuickAddOpen, mentionQuery]);
+
   // UI State
   const [hoveredEventData, setHoveredEventData] = useState<{ event: EnhancedCalendarEvent, pos: {x:number, y:number} } | null>(null);
   const [isNextExpanded, setIsNextExpanded] = useState(false); 
@@ -581,6 +593,54 @@ export const CalendarView: React.FC<Props> = ({ state, onNavigate, onDeleteNote,
       setHoveredEventData(null);
   };
   
+  // --- @MENTION helpers (2026-07-27) ---
+  // Zwraca aktualnie wpisywany fragment po ostatnim "@" (do pozycji kursora), albo null
+  // gdy kursor nie jest w trakcie pisania mention (brak "@" przed nim, albo przerwane spacją).
+  const getMentionQuery = (text: string, cursorPos: number): string | null => {
+      const upToCursor = text.slice(0, cursorPos);
+      const atIndex = upToCursor.lastIndexOf('@');
+      if (atIndex === -1) return null;
+      const between = upToCursor.slice(atIndex + 1);
+      if (/\s/.test(between)) return null; // spacja = koniec mention
+      return between;
+  };
+
+  const mentionMatches = useMemo(() => {
+      if (mentionQuery === null) return [];
+      const q = mentionQuery.toLowerCase();
+      return (state.clients || [])
+          .filter(c =>
+              (c.lastName || '').toLowerCase().startsWith(q) ||
+              (c.firstName || '').toLowerCase().startsWith(q)
+          )
+          .sort((a, b) => (a.lastName || '').localeCompare(b.lastName || '', 'pl'))
+          .slice(0, 8);
+  }, [mentionQuery, state.clients]);
+
+  useEffect(() => { setMentionActiveIndex(0); }, [mentionQuery]);
+
+  const selectMentionClient = (client: Client) => {
+      const el = taskTextareaRef.current;
+      const cursorPos = el ? (el.selectionStart ?? newTaskContent.length) : newTaskContent.length;
+      const upToCursor = newTaskContent.slice(0, cursorPos);
+      const atIndex = upToCursor.lastIndexOf('@');
+      if (atIndex === -1) return;
+      const before = newTaskContent.slice(0, atIndex);
+      const after = newTaskContent.slice(cursorPos);
+      const insertion = `@${client.lastName} `;
+      const newText = `${before}${insertion}${after}`;
+
+      setNewTaskContent(newText);
+      setTaskClientId(client.id);
+      setMentionQuery(null);
+
+      requestAnimationFrame(() => {
+          el?.focus();
+          const newCursor = before.length + insertion.length;
+          el?.setSelectionRange(newCursor, newCursor);
+      });
+  };
+
   // ... [KEEP SAVEQUICKTASK FROM PREVIOUS] ...
   const saveQuickTask = async () => {
     if (!newTaskContent.trim() || !quickAddDate) return;
@@ -593,25 +653,29 @@ export const CalendarView: React.FC<Props> = ({ state, onNavigate, onDeleteNote,
         const minutes = timeMatch[2] ? parseInt(timeMatch[2], 10) : 0;
         if (hours >= 0 && hours < 24) {
             finalDate.setHours(hours, minutes, 0, 0);
-            finalContent = finalContent.replace(timeMatch[0], ''); 
+            finalContent = finalContent.replace(timeMatch[0], '');
         }
     }
     // NEW: FORMAT TEXT
     const formattedContent = `[${format(finalDate, 'yyyy-MM-dd HH:mm')}]_PRZYPOMNIENIE_${finalContent.trim()}`;
 
+    // @mention (2026-07-27): jeśli podpięto klienta, notatka wiąże się z jego prawdziwym
+    // clientId (widoczna też w jego profilu, zob. Notatki.tsx) zamiast sentinela
+    // SYSTEM_GLOBAL (zadanie "luźne", bez przypisania - dalej wspierane).
     const newNote: ClientNote = {
         id: `quick_task_${Date.now()}`,
-        clientId: 'SYSTEM_GLOBAL', 
+        clientId: taskClientId || 'SYSTEM_GLOBAL',
         content: formattedContent,
         tag: 'ROZMOWA',
         createdAt: new Date().toISOString(),
         reminderDate: finalDate.toISOString(),
-        duration: 60 
+        duration: 60
     };
     await storage.addNote(newNote);
     setNewTaskContent('');
+    setTaskClientId(null);
     setIsQuickAddOpen(false);
-    onRefresh(); 
+    onRefresh();
   };
 
   const renderEventBadge = (event: EnhancedCalendarEvent) => {
@@ -966,20 +1030,62 @@ export const CalendarView: React.FC<Props> = ({ state, onNavigate, onDeleteNote,
                             </div>
                         </div>
 
-                        <div className="space-y-2 mb-6">
-                            <p className="text-[10px] font-black uppercase text-zinc-500">Co robimy?</p>
-                            <textarea 
+                        <div className="space-y-2 mb-6 relative">
+                            <div className="flex items-center justify-between gap-2">
+                                <p className="text-[10px] font-black uppercase text-zinc-500">Co robimy?</p>
+                                <p className="text-[9px] font-bold text-zinc-400">@nazwisko podpina klienta</p>
+                            </div>
+                            <textarea
+                                ref={taskTextareaRef}
                                 autoFocus
                                 className="w-full p-4 bg-zinc-50 dark:bg-zinc-800 rounded-xl border border-zinc-200 dark:border-zinc-700 text-sm font-medium focus:ring-2 focus:ring-primary outline-none text-zinc-900 dark:text-white"
-                                placeholder="Wpisz treść... "
+                                placeholder="Wpisz treść... np. @Kowalski zadzwonić w sprawie OC"
                                 rows={3}
                                 value={newTaskContent}
-                                onChange={e => setNewTaskContent(e.target.value)}
-                                onKeyDown={e => e.key === 'Enter' && !e.shiftKey && saveQuickTask()}
+                                onChange={e => {
+                                    setNewTaskContent(e.target.value);
+                                    setMentionQuery(getMentionQuery(e.target.value, e.target.selectionStart ?? e.target.value.length));
+                                }}
+                                onKeyDown={e => {
+                                    if (mentionQuery !== null && mentionMatches.length > 0) {
+                                        if (e.key === 'ArrowDown') { e.preventDefault(); setMentionActiveIndex(i => (i + 1) % mentionMatches.length); return; }
+                                        if (e.key === 'ArrowUp') { e.preventDefault(); setMentionActiveIndex(i => (i - 1 + mentionMatches.length) % mentionMatches.length); return; }
+                                        if (e.key === 'Enter' || e.key === 'Tab') { e.preventDefault(); selectMentionClient(mentionMatches[mentionActiveIndex]); return; }
+                                        // stopPropagation: żeby Esc zamknął TYLKO dropdown mentiona, nie od razu
+                                        // cały modal Szybkiego Zadania (window-level listener niżej w pliku).
+                                        if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); setMentionQuery(null); return; }
+                                    }
+                                    if (e.key === 'Enter' && !e.shiftKey) saveQuickTask();
+                                }}
                             />
+
+                            {/* @MENTION DROPDOWN — dopasowanie po nazwisku/imieniu (prefix, case-insensitive) */}
+                            {mentionQuery !== null && mentionMatches.length > 0 && (
+                                <div className="absolute left-0 right-0 top-full mt-1 z-20 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl shadow-xl overflow-hidden max-h-48 overflow-y-auto">
+                                    {mentionMatches.map((c, idx) => (
+                                        <button
+                                            type="button"
+                                            key={c.id}
+                                            onClick={() => selectMentionClient(c)}
+                                            onMouseEnter={() => setMentionActiveIndex(idx)}
+                                            className={`w-full flex items-center gap-2 px-3 py-2 text-left text-xs font-bold transition-colors ${idx === mentionActiveIndex ? 'bg-zinc-100 dark:bg-zinc-700 text-primary' : 'text-zinc-700 dark:text-zinc-200 hover:bg-zinc-50 dark:hover:bg-zinc-700'}`}
+                                        >
+                                            <User size={12} className="text-zinc-400 shrink-0" />
+                                            {c.lastName} {c.firstName}
+                                        </button>
+                                    ))}
+                                </div>
+                            )}
+
+                            {taskClientId && (
+                                <div className="flex items-center gap-1.5 text-[10px] font-bold text-primary">
+                                    <User size={11} /> Zadanie zostanie przypięte do klienta
+                                    <button type="button" onClick={() => setTaskClientId(null)} className="text-zinc-400 hover:text-red-500 underline">(odepnij)</button>
+                                </div>
+                            )}
                         </div>
 
-                        <button 
+                        <button
                             onClick={saveQuickTask}
                             disabled={!newTaskContent.trim()}
                             className="w-full py-4 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 rounded-xl font-black text-xs uppercase tracking-widest hover:scale-[1.02] transition-transform shadow-xl"

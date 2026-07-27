@@ -106,6 +106,16 @@ export const ClientFormModal: React.FC<Props> = ({ isOpen, onClose, onSave, init
 
   const peselValue = watch('pesel');
 
+  // Esc zamyka (2026-07-27)
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [isOpen, onClose]);
+
   // Auto-fill DOB & Gender from PESEL
   useEffect(() => {
     if (peselValue && Validators.isPeselValid(peselValue)) {

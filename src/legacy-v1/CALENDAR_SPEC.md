@@ -19,6 +19,14 @@ System musi wizualnie odróżniać koniec ochrony polisy, którą obsługujemy (
 *   Źródło: Notatki zawierające znacznik `[YYYY-MM-DD HH:mm]_PRZYPOMNIENIE_...`.
 *   Styl: Niebieski (Zadanie) / Fioletowy (Spotkanie).
 
+### C. Szybkie Zadanie (Quick Add) — persystencja i @mention (2026-07-27)
+
+**Bug naprawiony:** szybkie zadania (`saveQuickTask`, modal "Szybkie Zadanie") w ogóle nie pojawiały się w terminarzu po zapisie. Przyczyna: `ClientNote.clientId = 'SYSTEM_GLOBAL'` (sentinel dla zadań bez przypisanego klienta) był hashowany przez `toUUID()` w `noteToRow()` (`services/supabaseStorage.ts`) na losowo-wyglądający, ale **nieistniejący** UUID. Kolumna `policy_notes.client_id` ma FK do `insurance_clients(id)` — INSERT z takim UUID-em łamał klucz obcy i **failował po cichu** (Supabase JS nie rzuca wyjątku na błąd zapytania, zwraca `{error}` w odpowiedzi — kod go wcześniej w ogóle nie sprawdzał). Notatka nigdy nie trafiała do bazy, więc po `onRefresh()`/przeładowaniu po prostu nie istniała.
+
+**Fix:** `noteToRow()` pisze `client_id: null` (kolumna jest nullable) gdy `clientId` to `'SYSTEM_GLOBAL'` lub puste — `v1_original_client_id` nadal zapisuje literalny string `'SYSTEM_GLOBAL'`, więc `rowToNote()` poprawnie go odtwarza po odczycie. `addNote`/`updateNote` dodatkowo logują błąd Supabase na konsolę (nie throw, żeby nie zmieniać istniejącego zachowania wołających) — taki błąd nie zniknie już bez śladu.
+
+**@mention — podpięcie zadania do klienta:** w polu treści (Quick Add) wpisanie `@` + litery (np. `@wa`) otwiera podręczny dropdown klientów pasujących **nazwiskiem lub imieniem** (prefix, case-insensitive, max 8 wyników, alfabetycznie). Nawigacja strzałkami/Enter/Tab (wybiera), Escape (zamyka dropdown). Po wyborze: nazwisko wstawia się w treść (`@Nazwisko `), a prawdziwe `client.id` zapamiętywane jest osobno (`taskClientId`) i używane w `saveQuickTask` **zamiast** `SYSTEM_GLOBAL` — dzięki temu notatka trwale wiąże się z klientem (i przy okazji nie ma już problemu z FK, bo to prawdziwy istniejący klient). Zadanie bez `@mention` nadal zapisuje się jako `SYSTEM_GLOBAL` (zadanie "luźne"). Notatka z zadania terminarza widoczna jest potem w profilu klienta z wyraźnym oznaczeniem „Terminarz" — zob. `NOTES_SPEC.md`.
+
 ## 2. Agenda (Sidebar Prawy)
 
 Sekcja boczna pełni rolę "Asystenta Dnia".

@@ -257,6 +257,15 @@ const getIcon = (policy: Policy) => {
 
 // --- MISSING DATA MODAL ---
 const MissingDataModal = ({ policy, fields, onClose, onNavigate }: { policy: Policy, fields: string[], onClose: () => void, onNavigate: any }) => {
+    // Esc zamyka (2026-07-27)
+    useEffect(() => {
+        const onKey = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') onClose();
+        };
+        window.addEventListener('keydown', onKey);
+        return () => window.removeEventListener('keydown', onKey);
+    }, [onClose]);
+
     return (
         <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-zinc-950/60 backdrop-blur-sm animate-in fade-in duration-200">
             <div className="bg-white dark:bg-zinc-900 w-full max-w-md rounded-2xl shadow-2xl border-4 border-amber-400 overflow-hidden flex flex-col relative animate-in zoom-in-95 duration-200">
@@ -518,6 +527,16 @@ export const OffersBoard: React.FC<Props> = ({ state, onNavigate, onRefresh }) =
   const [previewClient, setPreviewClient] = useState<any | null>(null);
   const [quickNotePolicy, setQuickNotePolicy] = useState<Policy | null>(null);
   const [noteContent, setNoteContent] = useState('');
+
+  // Esc zamyka "Szybka Notatka" (2026-07-27)
+  useEffect(() => {
+    if (!quickNotePolicy) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setQuickNotePolicy(null);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [quickNotePolicy]);
 
   const [viewMode, setViewMode] = useState<'KANBAN' | 'TABLE'>(() => {
       const saved = localStorage.getItem('CRM_OFFERS_VIEW_MODE');

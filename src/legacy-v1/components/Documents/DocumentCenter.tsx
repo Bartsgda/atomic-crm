@@ -78,6 +78,17 @@ export const DocumentCenter: React.FC<Props> = ({
   const [preview, setPreview] = useState<ClientDocument | null>(null);
   const [fileWarning, setFileWarning] = useState<string | null>(null);
 
+  // Esc zamyka lightbox podglądu (2026-07-27). DocumentCenter to strona, nie modal -
+  // efekt dotyczy TYLKO wewnętrznego podglądu dokumentu (`preview`).
+  useEffect(() => {
+    if (!preview) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setPreview(null);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [preview]);
+
   // --- czyszczenie object URL-i przy odmontowaniu (unikamy wycieków pamięci) ---
   const docsRef = useRef(docs);
   useEffect(() => {

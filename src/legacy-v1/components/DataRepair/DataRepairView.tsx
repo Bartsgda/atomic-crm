@@ -1,5 +1,5 @@
 
-import React, { useMemo, useState, useRef } from 'react';
+import React, { useMemo, useState, useRef, useEffect } from 'react';
 import { AppState, Policy, ClientNote } from '../../types';
 import { Stethoscope, CheckCircle2, AlertTriangle, Plane, CalendarClock, MailWarning, Trash2, ArrowRight, Database, MessageSquare, StickyNote, Type, Wand2, Heart, PenTool, FileWarning, Smartphone, Mail, Fingerprint, Merge, Split, Car, XCircle, User, X } from 'lucide-react';
 import { differenceInDays, isValid, format } from 'date-fns';
@@ -100,6 +100,15 @@ const MergePreviewModal = ({ target, others, onClose, onConfirm }: { target: Pol
     others.forEach(other => {
         result = PolicyMerger.merge(result, other);
     });
+
+    // Esc zamyka (2026-07-27)
+    useEffect(() => {
+        const onKey = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') onClose();
+        };
+        window.addEventListener('keydown', onKey);
+        return () => window.removeEventListener('keydown', onKey);
+    }, [onClose]);
 
     return (
         <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-zinc-950/80 backdrop-blur-sm animate-in fade-in">

@@ -1,4 +1,4 @@
-# Skrypt do manualnego backupu bazy Supabase (ALINA PROD)
+﻿# Skrypt do manualnego backupu bazy Supabase (ALINA PROD)
 # Wymaga: Supabase CLI (npx) oraz hasla do bazy danych.
 
 $ProjectRef = "xqznrssrlnxqkdvisnck"

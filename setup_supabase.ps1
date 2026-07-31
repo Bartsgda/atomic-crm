@@ -1,4 +1,4 @@
-# CRM-Atomic: Supabase Setup Script
+﻿# CRM-Atomic: Supabase Setup Script
 # Ten skrypt bezpiecznie pobierze od Ciebie klucze i zapisze je do pliku .env
 
 $ErrorActionPreference = "Stop"

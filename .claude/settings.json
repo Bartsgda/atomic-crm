@@ -20,6 +20,14 @@
             "timeout": 30
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File C:/BartsGda4/.claude/hooks/scan-secret-output.ps1"
+          }
+        ]
       }
     ],
     "UserPromptSubmit": [
@@ -28,6 +36,21 @@
           {
             "type": "command",
             "command": "python C:/BartsGda4/tools/szyna_hook_inject.py check"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File C:/BartsGda4/.claude/hooks/block-rrv-leak.ps1"
+          },
+          {
+            "type": "command",
+            "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File C:/BartsGda4/.claude/hooks/block-raw-delete.ps1"
           }
         ]
       }

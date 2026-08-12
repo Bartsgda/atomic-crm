@@ -26,6 +26,14 @@
           {
             "type": "command",
             "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File C:/BartsGda4/.claude/hooks/scan-secret-output.ps1"
+          },
+          {
+            "type": "command",
+            "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File C:/BartsGda4/.claude/hooks/m1-log-tool.ps1"
+          },
+          {
+            "type": "command",
+            "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File C:/BartsGda4/.claude/hooks/drift-watchdog.ps1 notice"
           }
         ]
       }
@@ -36,6 +44,26 @@
           {
             "type": "command",
             "command": "python C:/BartsGda4/tools/szyna_hook_inject.py check"
+          },
+          {
+            "type": "command",
+            "command": "python C:/BartsGda4/.claude/hooks/ai-brief.py"
+          },
+          {
+            "type": "command",
+            "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File C:/BartsGda4/.claude/hooks/drift-watchdog.ps1 check"
+          },
+          {
+            "type": "command",
+            "command": "python C:/BartsGda4/tools/session_douczanie_watchdog.py check"
+          },
+          {
+            "type": "command",
+            "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File C:/BartsGda4/.claude/hooks/session-board.ps1"
+          },
+          {
+            "type": "command",
+            "command": "python C:/BartsGda4/.claude/hooks/preflight-kanon.py"
           }
         ]
       }
@@ -51,6 +79,36 @@
           {
             "type": "command",
             "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File C:/BartsGda4/.claude/hooks/block-raw-delete.ps1"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File C:/BartsGda4/.claude/session-start.ps1"
+          }
+        ]
+      }
+    ],
+    "StopFailure": [
+      {
+        "matcher": "server_error|overloaded|rate_limit|unknown",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File C:/BartsGda4/.claude/hooks/api_error_marker.ps1 -ErrorType przejsciowy"
+          }
+        ]
+      },
+      {
+        "matcher": "authentication_failed|billing_error|max_output_tokens",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File C:/BartsGda4/.claude/hooks/api_error_marker.ps1 -ErrorType wymaga-czlowieka"
           }
         ]
       }

@@ -21,16 +21,6 @@
           }
         ]
       }
-    ],
-    "UserPromptSubmit": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "python C:/BartsGda4/tools/szyna_hook_inject.py check"
-          }
-        ]
-      }
     ]
   }
 }

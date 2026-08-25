@@ -19,7 +19,7 @@ Repo ma **dwa niezależne pokolenia** integracji z Gemini, które współistniej
 
 Wspólny mianownik: wszystko woła Google Gemini **bezpośrednio z przeglądarki** przez `@google/genai`
 (klucz `apiKeyStore`), **NIE** przez LiteLLM router :4000 — to świadomie równoległy setup client-side.
-[[project_crm_ai_gemini_client_side]] [[kanon_router_polityka_modeli]]
+[[project_crm_ai_gemini_client_side_2026_07_24]] [[kanon_router_polityka_modeli]]
 
 ---
 
@@ -219,5 +219,5 @@ nawigacja/CRUD po `plan[]`), nie ma połączenia z `chatService`.
 - `services/geminiService.ts`, `ai/KaratekaService.ts`, `ai/agents/ClientAgent.ts`, `services/ocrService.ts`
 - `ai/prompts/CLIENT_MASTER_PROMPT.md` — system prompt zakazu PESEL dla `ClientAgent`
 - `components/GlobalAgent/AgentKaratekaWindow.tsx` — obecny UI panel (na starym `KaratekaService`, nie na `chatService`)
-- MEMO: `[[project_crm_ai_gemini_client_side]]`, `[[kanon_router_polityka_modeli]]`
+- MEMO: `[[project_crm_ai_gemini_client_side_2026_07_24]]`, `[[kanon_router_polityka_modeli]]`
 - `src/legacy-v1/CLAUDE.md` — indeks dokumentacji modułu (wpięty 2026-07-27, sekcja „🤖 AI Asystent i bezpieczeństwo”)

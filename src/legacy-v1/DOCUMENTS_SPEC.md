@@ -146,7 +146,7 @@ renderowania stron PDF, brak `pdf.js`).
   `// TODO ocr: tu wpłynie rozpoznanie VIN / nr polisy (Flash/Gemma) na p.blob → metadane dokumentu.`
 - **`types.ts`** komentarz: metadane OCR jak `ocrVin`, `ocrPolicyNumber`
   wyciągane przez **Flash/Gemma**.
-- Zgodnie z `[[project_crm_ai_gemini_client_side]]` (MEMO) — AI w tym repo działa
+- Zgodnie z `[[project_crm_ai_gemini_client_side_2026_07_24]]` (MEMO) — AI w tym repo działa
   **client-side, bezpośrednio z przeglądarki** przez `@google/genai`
   (`gemini-3.1-flash-lite`, klucz `CRM_ALINA_GEMINI_KEY`), **NIE** przez LiteLLM
   router `:4000` (server-side/localhost, niedostępny dla przeglądarki Aliny). OCR

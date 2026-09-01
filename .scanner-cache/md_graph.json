@@ -1,7 +1,7 @@
 {
-  "built_at": "2026-08-31T04:31:55",
+  "built_at": "2026-09-01T04:31:21",
   "root": "C:/BartsGda4/CRM-Atomic",
-  "duration_sec": 3.36,
+  "duration_sec": 3.22,
   "stats": {
     "total_files": 99,
     "broken_links": 0,
@@ -949,391 +949,391 @@
   "stale": [
     {
       "file": ".github/CODE_OF_CONDUCT.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": ".github/CONTRIBUTING.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": ".github/pull_request_template.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": ".github/ISSUE_TEMPLATE/Bug_report.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": ".github/ISSUE_TEMPLATE/Feature_request.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": "AGENTS.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": "CODE_OF_CONDUCT.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": "LICENSE.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": "SESSION_2026-04-18.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": "doc/README.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": "src/components/admin/Readme.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": "src/components/ui/README.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": "src/legacy-v1/AI_ARCHITECTURE.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": "src/legacy-v1/AI_CRM_MASTERPLAN.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": "src/legacy-v1/AI_PARSING_RULES.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": "src/legacy-v1/AI_PROGRESS_LOG.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": "src/legacy-v1/ALGORITHM_RATES.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": "src/legacy-v1/ARCHITECTURE.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": "src/legacy-v1/ARCHITECTURE_5_PILLARS.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": "src/legacy-v1/BACKUP_SYSTEM.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": "src/legacy-v1/BartsGda.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": "src/legacy-v1/CHECKLIST_SPECS.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": "src/legacy-v1/CLIENT_PANEL_REQUIREMENTS.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": "src/legacy-v1/COMMISSIONS_SPEC.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": "src/legacy-v1/DATA_MAPPING.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": "src/legacy-v1/DATA_REPAIR_SPEC.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": "src/legacy-v1/FAILURE_REPORT.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": "src/legacy-v1/IMPORT_DEBUG_LOG.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": "src/legacy-v1/IMPORT_LOGIC.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": "src/legacy-v1/LEGACY_DATA_SPEC.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": "src/legacy-v1/OFFERS_REQUIREMENTS.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": "src/legacy-v1/OFFERS_ROADMAP.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": "src/legacy-v1/PROJECT_CHRONICLE.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": "src/legacy-v1/README.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": "src/legacy-v1/REQUIREMENTS.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": "src/legacy-v1/REQUIREMENTS_LEDGER.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": "src/legacy-v1/REVERSE_ARCH_SPEC.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": "src/legacy-v1/ROADMAP.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": "src/legacy-v1/SPECS/MOD_AUTO.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": "src/legacy-v1/SPECS/MOD_HOME.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": "src/legacy-v1/SPECS/MOD_LIFE.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": "src/legacy-v1/SPECS/MOD_TRAVEL.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": "src/legacy-v1/SPECS/POLICY_AUTO.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": "src/legacy-v1/SPECS/POLICY_HOME.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": "src/legacy-v1/SPECS/POLICY_LIFE.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": "src/legacy-v1/SPECS/POLICY_TRAVEL.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": "src/legacy-v1/STATE_FLOW.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": "src/legacy-v1/SUB_AGENTS_SPEC.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": "src/legacy-v1/SUPREME_RULES.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": "src/legacy-v1/UI_UX_DROPDOWN_FIX.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": "src/legacy-v1/XLSX_MAPPING.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": "src/legacy-v1/ai/prompts/CLIENT_MASTER_PROMPT.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": "src/legacy-v1/components/ReminderSystem/REMINDER_SPEC.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": "src/legacy-v1/data/samples/XLSX_STRUCTURE_REFERENCE.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": "src/legacy-v1/test/icons_proposal.md",
-      "days": 130.2
+      "days": 131.2
     },
     {
       "file": "DOCS_TEST_ENVIRONMENT.md",
-      "days": 117.8
+      "days": 118.8
     },
     {
       "file": "PROGRESS.md",
-      "days": 117.8
+      "days": 118.8
     },
     {
       "file": "SESJE/2026-05-01_SUPABASE_API_KNOWLEDGE/README.md",
-      "days": 117.8
+      "days": 118.8
     },
     {
       "file": "sandbox/stitch_design/stitch_redroad_backfill_monitor_dashboard/sahara/DESIGN.md",
-      "days": 117.8
+      "days": 118.8
     },
     {
       "file": "scripts/FTP_TOOLS.md",
-      "days": 116.8
+      "days": 117.8
     },
     {
       "file": "src/sandbox/stitch/DESIGN.md",
-      "days": 116.8
+      "days": 117.8
     },
     {
       "file": "src/legacy-v1/CLIENTS_SPEC.md",
-      "days": 111.8
+      "days": 112.8
     },
     {
       "file": "src/legacy-v1/AUDIT_PLAN.md",
-      "days": 108.3
+      "days": 109.3
     },
     {
       "file": "src/legacy-v1/AUDIT_ROWS_111_130_2026-05-11.md",
-      "days": 108.3
+      "days": 109.3
     },
     {
       "file": "src/legacy-v1/AUDIT_ROWS_11_20_2026-05-11.md",
-      "days": 108.3
+      "days": 109.3
     },
     {
       "file": "src/legacy-v1/AUDIT_ROWS_131_150_2026-05-11.md",
-      "days": 108.3
+      "days": 109.3
     },
     {
       "file": "src/legacy-v1/AUDIT_ROWS_151_170_2026-05-11.md",
-      "days": 108.3
+      "days": 109.3
     },
     {
       "file": "src/legacy-v1/AUDIT_ROWS_171_182_2026-05-11.md",
-      "days": 108.3
+      "days": 109.3
     },
     {
       "file": "src/legacy-v1/AUDIT_ROWS_1_10_2026-05-11.md",
-      "days": 108.3
+      "days": 109.3
     },
     {
       "file": "src/legacy-v1/AUDIT_ROWS_21_30_2026-05-11.md",
-      "days": 108.3
+      "days": 109.3
     },
     {
       "file": "src/legacy-v1/AUDIT_ROWS_31_40_2026-05-11.md",
-      "days": 108.3
+      "days": 109.3
     },
     {
       "file": "src/legacy-v1/AUDIT_ROWS_41_50_2026-05-11.md",
-      "days": 108.3
+      "days": 109.3
     },
     {
       "file": "src/legacy-v1/AUDIT_ROWS_51_60_2026-05-11.md",
-      "days": 108.3
+      "days": 109.3
     },
     {
       "file": "src/legacy-v1/AUDIT_ROWS_61_70_2026-05-11.md",
-      "days": 108.3
+      "days": 109.3
     },
     {
       "file": "src/legacy-v1/AUDIT_ROWS_71_80_2026-05-11.md",
-      "days": 108.3
+      "days": 109.3
     },
     {
       "file": "src/legacy-v1/AUDIT_ROWS_81_90_2026-05-11.md",
-      "days": 108.3
+      "days": 109.3
     },
     {
       "file": "src/legacy-v1/AUDIT_ROWS_81_90_OPUS_GROUND_TRUTH_2026-05-11.md",
-      "days": 108.3
+      "days": 109.3
     },
     {
       "file": "src/legacy-v1/IMPORT_AUDIT_HOWTO.md",
-      "days": 108.3
+      "days": 109.3
     },
     {
       "file": "src/legacy-v1/TIMELINE_ARCHITECTURE.md",
-      "days": 108.3
+      "days": 109.3
     },
     {
       "file": "src/legacy-v1/UI_SEARCH_KEYBOARD_RULES.md",
-      "days": 108.3
+      "days": 109.3
     },
     {
       "file": "src/legacy-v1/XLSX_FULL_PARSE_PLAN.md",
-      "days": 108.3
+      "days": 109.3
     },
     {
       "file": "src/legacy-v1/AUDIT_ROWS_91_110_2026-05-11.md",
-      "days": 107.8
+      "days": 108.8
     },
     {
       "file": "README.md",
-      "days": 97.6
+      "days": 98.6
     },
     {
       "file": "CLAUDE.md",
-      "days": 78.7
+      "days": 79.7
     },
     {
       "file": "NEXT_SESSION.md",
-      "days": 73.5
+      "days": 74.5
     },
     {
       "file": "src/legacy-v1/WYMAGANIA-KLIENT.md",
-      "days": 37.4
+      "days": 38.4
     },
     {
       "file": "graphify-out/GRAPH_REPORT.md",
-      "days": 37.4
+      "days": 38.4
     },
     {
       "file": "src/legacy-v1/components/Terminations/TERMINATIONS_SPEC.md",
-      "days": 36.3
+      "days": 37.3
     },
     {
       "file": "scripts/_INDEX.md",
-      "days": 36.0
+      "days": 37.0
     },
     {
       "file": "src/legacy-v1/OFFERS_SPEC.md",
-      "days": 34.9
+      "days": 35.9
     },
     {
       "file": "src/legacy-v1/NOTES_SPEC.md",
-      "days": 34.8
+      "days": 35.8
     },
     {
       "file": "src/legacy-v1/CALENDAR_SPEC.md",
-      "days": 34.8
+      "days": 35.8
     },
     {
       "file": "src/legacy-v1/DESIGN_SYSTEM.md",
-      "days": 34.7
+      "days": 35.7
     },
     {
       "file": "src/legacy-v1/POLICIES_SPEC.md",
-      "days": 34.7
+      "days": 35.7
     },
     {
       "file": "src/legacy-v1/AI_KEYS_ARCHITECTURE.md",
-      "days": 34.7
+      "days": 35.7
     },
     {
       "file": "src/legacy-v1/SECURITY_AUDIT_2026-07-25.md",
-      "days": 34.7
+      "days": 35.7
     },
     {
       "file": "src/legacy-v1/CLAUDE.md",
-      "days": 34.7
+      "days": 35.7
     }
   ]
 }

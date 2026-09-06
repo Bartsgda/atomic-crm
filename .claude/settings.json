@@ -64,6 +64,10 @@
           {
             "type": "command",
             "command": "python C:/BartsGda4/.claude/hooks/preflight-kanon.py"
+          },
+          {
+            "type": "command",
+            "command": "python C:/BartsGda4/tools/session_memo_watchdog.py check"
           }
         ]
       }

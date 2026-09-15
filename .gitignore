@@ -56,3 +56,6 @@ node_modules/
 .q.json
 
 dev.log
+
+# graf graphify (graphify-out/graph.json) — nocny artefakt >100 MB blokowal push na GitHub (GH001) 15.09.2026, karta 4bb0b360
+graphify-out/graph.json

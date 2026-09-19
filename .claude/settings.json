@@ -83,6 +83,10 @@
           {
             "type": "command",
             "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File C:/BartsGda4/.claude/hooks/block-raw-delete.ps1"
+          },
+          {
+            "type": "command",
+            "command": "python C:/BartsGda4/tools/znane_wpadki_check.py check"
           }
         ]
       }
